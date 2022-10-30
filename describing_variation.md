@@ -15,3 +15,7 @@ kernelspec:
 
 # Describing variation
 
+```{note}
+- use sequence masks (0/1) encoded gz files to enable quick calculations of feature-based stats (e.g. 4d-degenerate sites)
+- 
+```
