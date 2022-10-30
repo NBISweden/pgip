@@ -303,7 +303,7 @@ class DemesModel:
 
     @property
     def popdict(self):
-        return dict((p.name, p.size) for p in self.populations)
+        return {p.name: p.size for p in self.populations}
 
     # FIXME: should be agnostic to msprime / SLiM
     def simulate(

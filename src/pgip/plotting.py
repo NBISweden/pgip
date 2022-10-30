@@ -1,14 +1,16 @@
 # NB: https://speciationgenomics.github.io/pca/ calculates explained
 # variance from sums of plink eigenvals, although not all components
 # have been calculated
-import re
-from bokeh.io import output_file
-from bokeh.layouts import gridplot
-from bokeh.plotting import figure
-
-from bokeh.models import ColumnDataSource
 import itertools
 import math
+import re
+
+from bokeh.io import output_file
+from bokeh.layouts import gridplot
+from bokeh.models import ColumnDataSource
+from bokeh.plotting import figure
+from bokeh.plotting import show
+
 
 def bokeh_plot_pca_coords(df, explained, *, pc1=1, pc2=2, **kw):
     """Plot pca coordinates with bokeh"""
@@ -56,4 +58,3 @@ def bokeh_plot_pca(df, eigenvals, ncomp=6, filename=None, **kw):
         show(gp)
     else:
         return gp
-

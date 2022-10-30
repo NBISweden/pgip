@@ -7,12 +7,18 @@ repos:
       - id: mixed-line-ending
       - id: check-case-conflict
       - id: check-yaml
+      - id: trailing-whitespace
   - repo: https://github.com/asottile/reorder_python_imports
     rev: v3.0.1
     hooks:
       - id: reorder-python-imports
         args: [--application-directories=python,
                --unclassifiable-application-module=_tskit]
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.31.1
+    hooks:
+      - id: pyupgrade
+        args: [--py3-plus, --py37-plus]
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:
@@ -31,3 +37,8 @@ repos:
         args: [--skip-errors]
         additional_dependencies: [black==22.3.0]
         language_version: python3
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.32.2
+    hooks:
+      - id: markdownlint
+        args: ["-i=*.md", "*.qmd"]

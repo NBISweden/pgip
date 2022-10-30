@@ -1,29 +1,10 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13.2
-    jupytext_version: 1.13.8
-kernelspec:
-  display_name: bash
-  language: bash
-  name: bash
----
-
-```{code-cell} bash
-:"tags": ["remove-output", "remove-input"]
-bind 'set enable-bracketed-paste off'
-```
 
 
+# Nucleotide diversity {#sec-nucleotide-diversity}
 
-(sec_nucleotide_diversity)=
-
-# Nucleotide diversity
 The nucleotide diversity is defined as the average number of pairwise
 differences per site for a number of sequences
-{cite}`nei_MolecularEvolutionPhylogenetics_2000`, p. 251:
+[@nei_MolecularEvolutionPhylogenetics_2000, p. 251]:
 
 $$
  \pi = \sum_{ij} x_i x_j \pi_{ij}

@@ -1,40 +1,33 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13.2
-    jupytext_version: 1.13.8
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: pgip
----
-
-
-```{code-cell} pgip
-:"tags": ["hide-output"]
+```{python }
+#| label: ld-pruning-pca-setup
+#| echo: false
+#| eval: true
 from bokeh.plotting import figure, show, output_notebook
 from pgip import utils
 output_notebook()
+
 ```
 
+# Principal component analysis {#sec-ld-pruning-pca}
 
-```{note}
-- We assume that the input data has already been filtered and pre-processed to obtain a high-quality variant call set. See [](sec_variantfiltering).
+::: {.callout-note}
+
+- We assume that the input data has already been filtered and
+  pre-processed to obtain a high-quality variant call set. See
+  [](@sec-variantfiltering).
 - sgkit pca method does not support missing data - add example?
-```
 
-(sec_ld_pruning_pca)=
 
-# Principal component analysis
+:::
+
 
 Variant data is high-dimensional and some sort of dimensionality
 reduction is often employed to provide a condensed overview of the
 data and as a means to identify potential population structure.
 Principal component analysis (PCA) is one common technique usually
 applied to genetic variation data (e.g.
-{cite}`patterson_PopulationStructureEigenanalysis_2006`).
+[@patterson_PopulationStructureEigenanalysis_2006]).
+
 
 For large data sets, it is common practice to first prune the data to
 remove correlation between data points. In this exercise, you will
@@ -43,17 +36,23 @@ prune the data using either [plink](sec_pca_with_plink) or
 
 ## Data preparation
 
-```{admonition} FIXME
-:class: warning
+::: {.callout-warning}
+
+## FIXME
+
 sgkit is likely too cumbersome? Keep as reference for now, use EIGENSOFT or plink for pruning and pca.
 
-```
+:::
 
-```{code-cell} pgip
+```{python }
+#| label: ld-pruning-pca-sgkit
+#| echo: true
+#| eval: true
 import os
 import sgkit as sg
 from sgkit.io import vcf as sgvcf
 ```
+
 Then make output directories and convert vcf to the zarr format.
 
 ```{code-cell} pgip

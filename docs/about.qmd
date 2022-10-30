@@ -1,29 +1,20 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13.2
-    jupytext_version: 1.13.8
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: pgip
----
+# Population genomics in practice
 
-(sec_exercises_about)=
+Welcome to the Population Genomics in Practice homepage!
 
-# About the exercises
+## About the course
 
 As the focus of the course is on hands-on work, the topics have been
 designed to cover the fundamental analyses that are common in many
-population genomics studies. In principle, you could imagine the
-course structure to follow that of a manuscript (e.g
-{cite}`fuller_PopulationGeneticsCoral_2020`).
+population genomics studies. The course consists of lectures and
+exercises, with a focus on the practical aspects of analyses. Whereas
+lectures introduce some background theory, their primary aim is to set
+the stage for accompanying exercises.
 
-(sec_exercises_about_manuscript_route)=
+## The manuscript route {#sec-manuscript-route}
 
-## The manuscript route
+In principle, you could imagine the course structure to follow that of
+a manuscript [@fuller_PopulationGeneticsCoral_2020]
 
 High-throughput DNA sequencing has now made it possible to generate
 whole-genome resequencing data for multiple individuals and
@@ -32,7 +23,7 @@ perform variant calling and variant filtering.
 
 Once a high-quality variant set has been obtained, a common task is to
 describe variation, either in terms of summary statistics such as
-nucleotide diversity $\pi$ or site-frequency spectra, or as
+nucleotide diversity ($\pi$) or site-frequency spectra (sfs), or as
 descriptions of population structure in terms of admixture or pca
 plots.
 
@@ -45,22 +36,20 @@ end selection tests and scans can be performed. The tests are designed
 to detect signals of selection, either via direct selection on loci,
 or by looking at haplotype structures to detect linked selection.
 
-(sec_exercises_about_baseline)=
-
 ## The baseline model
 
 Much of what has been described in [The manuscript
-route](sec_exercises_about_manuscript_route) has recently been treated
-in an article on statistical inference in population genomics
-{cite}`johri_StatisticalInferencePopulation_2021`. In it, the authors
-point out that whereas historically theoretical advances outpaced data
-production, that is no longer true due to the advent of
-next-generation sequencing. In particular, they caution researchers to
-attach too much faith to a test that explains the data well, as there
-are many alternative hypotheses with equal explanatory power, but with
-drastically different conclusions. At the very least, a population
-genomics study should aim at first generating a baseline model
-consisting of all or several of the following components:
+ route](#sec-manuscript-route) has recently been treated in an article
+on statistical inference in population genomics
+@johri_StatisticalInferencePopulation_2021. In it, the authors
+point out that whereas historically theoretical advances outpaced
+data production, that is no longer true due to the advent of
+next-generation sequencing. In particular, they caution researchers
+to attach too much faith to a test that explains the data well, as
+there are many alternative hypotheses with equal explanatory power,
+but with drastically different conclusions. At the very least, a
+population genomics study should aim at first generating a baseline
+model consisting of all or several of the following components:
 
 1. mutation
 2. recombination
@@ -74,21 +63,26 @@ The exercises are designed to address many of the points above, and to
 highlight cases where competing hypotheses may actually explain data
 to equal degrees.
 
-(sec_exercises_about_additional_material)=
 
 ## Additional material
 
-```{admonition} FIXME
-:class: warning
+::: {.callout-warning}
+
+## FIXME
+
 Rewrite/restructure and add more additional topics
-```
+:::
 
 
-```{note}
+
+::: {.callout-note}
+
 NB: with time we could use repo to collect all kinds of exercises
 (even those that don't fit current curriculum), providing the
 possibility to create optional course plans
-``` 
+
+:::
+
 
 A five day course cannot but provide an overview of possible analyses
 and topics. Among the things we won't have time to cover are
@@ -103,3 +97,10 @@ and topics. Among the things we won't have time to cover are
 8. ancient DNA
 9. spatial genetics
 10. ...
+
+
+### Additional courses
+
+1. machine learning and AI for population genomics
+2. simulation (focus on msprime and SLiM)
+3. ancestral recombination graphs and tree sequence inference

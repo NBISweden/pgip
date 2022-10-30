@@ -1,0 +1,12 @@
+# Admixture
+
+::: {.callout-note}
+
+Follow tutorial [@liu_ExploringPopulationStructure_2020]
+
+:::
+
+- admixtools (convert vcf via vcftools to ped)
+- run admixture (STRUCTURE?)
+
+

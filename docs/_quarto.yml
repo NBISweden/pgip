@@ -1,0 +1,34 @@
+project:
+  type: website
+
+bibliography: resources/bibliography.bib
+
+website:
+  title: "Population genomics in practice"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+  sidebar:
+    contents: auto
+  page-footer:
+    left: "Copyright NBIS"
+  favicon: https://nbis.se/assets/img/logos/nbislogo-green.svg
+
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - nbis.scss
+    css: styles.css
+    toc: true
+
+
+jupyter:
+  kernelspec:
+    name: "pgip"
+    language: "python"
+    display_name: "Python 3"

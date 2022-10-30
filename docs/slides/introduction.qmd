@@ -1,0 +1,99 @@
+---
+title: "Population genomics in practice"
+subtitle: "Introduction"
+author:
+    - "Per Unneberg"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+institute: NBIS
+from: markdown+emoji
+format:
+  revealjs:
+    theme:
+      - white
+      - ../nbis.scss
+    self-contained: true
+    toc: true
+    toc-depth: 1
+    slide-level: 3
+    slide-number: true
+    preview-links: true
+    chalkboard: false
+    footer: Introduction
+    logo: https://nbis.se/assets/img/logos/nbislogo-green.svg
+    smaller: true
+    highlight-style: gruvbox
+    fig-height: 12
+    fig-width: 10
+    navigation-mode: vertical
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+# bibliography: ../resources/bibliography.bib
+execute:
+  echo: true
+  warning: false
+  cache: true
+  include: true
+  autodep: true
+  eval: true
+  error: true
+opts:
+  knitr:
+    code-fold: true
+    tidy: true
+    fig-format: svg
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(knitr)
+library(ggplot2)
+library(viridis)
+library(dotenv)
+bw <- theme_bw(base_size=18) %+replace% theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+theme_set(bw)
+knitr::knit_hooks$set(inline = function(x) {
+                      prettyNum(x, big.mark=" ")
+                  })
+```
+```{r }
+#| label: utility-functions
+#| echo: false
+#| eval: true
+#| cache: false
+read.benchmark <- function(indir, fmt, params) {
+    df <- cbind(indir, params)
+    benchmark <- apply(df, 1, FUN=function(x) {
+        fn <- do.call(sprintf, c(fmt, as.list(x[2:length(x)])))
+        infile <- file.path(x[1], fn)
+        y <- read.table(infile, header=TRUE)
+        y <- cbind(y, as.data.frame(t(x[2:length(x)])))
+        y
+    })
+    do.call(rbind, benchmark)
+}
+href <- function(link, name=NULL) {
+    if (is.null(name))
+        name <- link
+    sprintf("<a href=\"%s\">%s</a>", link, name)
+}
+```
+
+
+# Welcome
+
+
+### Welcome to population genomics in practice
+
+[@johri_StatisticalInferencePopulation_2021]
+
+
+### Schedule
+
+
+### Refs {.unnumbered .unlisted}
+
+::: { #refs }
+:::

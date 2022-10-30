@@ -1,0 +1,37 @@
+# Preparation {#sec-preparation}
+
+::: {.callout-warning}
+
+## FIXME
+
+Student preparatory information, including:
+
+- howto setup compute environment
+- howto work on uppmax
+- suggested reading
+
+:::
+
+
+## Compute environment {#sec-preparation-compute-environment}
+
+Add instructions on packages to install, or provide a docker image.
+
+
+
+## Command line {#sec-preparation-command-line}
+
+Add basics of working in a CLI.
+
+## UPPMAX {#sec-preparation-uppmax}
+
+Add instructions on how to work on uppmax. Prerecorded video would be nice.
+
+## Population genetics basics {#sec-preparation-population-genetics-basics}
+
+Add short summary of basic concepts? Glossary-like?
+
+## Suggested readings {#sec-preparation-suggested-readings}
+
+@johri_StatisticalInferencePopulation_2021 on Statistical Inference in
+Population Genetics.
