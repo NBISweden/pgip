@@ -1,6 +1,6 @@
 ---
-title: "Population genomics in practice"
-subtitle: "Welcome and information"
+title: "What is population genomics?"
+subtitle: "Data and analyses"
 author:
     - "Per Unneberg"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
@@ -18,7 +18,7 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: false
-    footer: Wellcome
+    footer: What is PGIP?
     logo: https://nbis.se/assets/img/logos/nbislogo-green.svg
     smaller: true
     highlight-style: gruvbox
@@ -70,41 +70,4 @@ href <- function(link, name=NULL) {
 ```
 
 
-### Welcome to population genomics in practice
-
-[@johri_StatisticalInferencePopulation_2021]
-
-### Who are we?
-
-### Who are you?
-
-::: {.callout-warning}
-
-:::
-
-
-# Schedule
-
-### Schedule - overview
-
-
-### Monday 8 May
-
-### Tuesday 9 May
-
-### Wednesday 10 May
-
-### Thursday 11 May
-
-### Friday 12 May
-
-# Exercises
-
-### Monday 8 May
-
-
-
-### Refs {.unnumbered .unlisted}
-
-::: { #refs }
-:::
+### What is population genomics?

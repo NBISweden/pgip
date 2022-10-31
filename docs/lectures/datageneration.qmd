@@ -1,0 +1,27 @@
+# Data generation
+
+## Sequencing protocols
+
+What are the goals? To compile variation data for individuals. What are the issues?
+
+- sampling
+- sequencing cost
+- lack of reference genomes (soon outdated)
+
+
+
+
+### Individual sequencing
+
+  - high-coverage sequencing
+    - pros: comprehensive coverage
+    - cons: until recently expensive, time-consuming
+  - low-coverage sequencing @lou_BeginnerGuideLowcoverage_2021
+	- pros: cost-efficient, better to sample many sites
+	- cons: needs alternative analysis methods (likelihoods)
+
+### pool sequencing
+
+  - pool-seq @schlotterer_SequencingPoolsIndividuals_2014
+  - RADSeq [@davey_RADSeqNextgenerationPopulation_2010; @baird_RapidSNPDiscovery_2008]
+

@@ -22,6 +22,7 @@ classifiers = [
 ]
 dependencies = [
     'importlib-metadata; python_version>="3.7"',
+    "datasources @ git+https://github.com/percyfal/datasources-smk@main",
 ]
 dynamic = ["version"]
 

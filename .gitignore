@@ -5,3 +5,5 @@ _site
 .ipynb_checkpoints
 *_cache
 /.quarto/
+/_environment.local
+/docs/_freeze/

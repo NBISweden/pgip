@@ -6,6 +6,11 @@ all:
 	#./build.sh
 	quarto render docs --execute-dir docs
 
+production:
+	# Use the local build wrapper to automate writing the report log to stdout.
+	#./build.sh
+	quarto render docs --execute-dir docs --profile production
+
 clean-build:
 	rm -fR _build
 

@@ -1,5 +1,10 @@
 project:
   type: website
+  title: "Population genomics in practice"
+
+execute:
+  freeze: auto
+  cache: true
 
 bibliography: resources/bibliography.bib
 
@@ -7,14 +12,56 @@ website:
   title: "Population genomics in practice"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Home"
+        file: index.qmd
+      - text: "Information"
+        file: about.qmd
+      - text: "Lecture notes"
+        file: "lectures/index.qmd"
+      - text: "Slides"
+        file: "slides/index.qmd"
+      - text: "Exercises"
+        file: "exercises/index.qmd"
   sidebar:
-    contents: auto
+    - title: "Information"
+      contents:
+        - index.qmd
+        - about.qmd
+        - references.qmd
+
+    - title: "Lecture notes"
+      style: "docked"
+      contents:
+        - "lectures/index.qmd"
+        - section: "Monday 8 May"
+          contents:
+            - "lectures/datageneration.qmd"
+
+    - title: "Slides"
+      contents:
+        - "slides/index.qmd"
+        - section: "Monday 8 May"
+          contents:
+            - "slides/introduction.qmd"
+            - "slides/datageneration.qmd"
+
+    - title: "Exercises"
+      contents:
+        - "exercises/index.qmd"
+        - "exercises/data.qmd"
+        - section: "Monday 8 May"
+          contents:
+            - "exercises/variantfiltering.qmd"
+        - section: "Tuesday 9 May"
+        - section: "Wednesday 10 May"
+          contents:
+            - "exercises/ld_pruning_pca.qmd"
+
   page-footer:
     left: "Copyright NBIS"
-  favicon: https://nbis.se/assets/img/logos/nbislogo-green.svg
+    # right: |
+    #   ![](/img/nbislogo-green.svg)
+  favicon: img/nbislogo-green.svg
 
 
 

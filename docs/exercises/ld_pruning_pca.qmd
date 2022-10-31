@@ -1,14 +1,15 @@
+# Principal component analysis {#sec-ld-pruning-pca}
+
+
 ```{python }
 #| label: ld-pruning-pca-setup
 #| echo: false
 #| eval: true
 from bokeh.plotting import figure, show, output_notebook
 from pgip import utils
-output_notebook()
-
+from IPython.display import display, Markdown
+output_notebook(hide_banner=True)
 ```
-
-# Principal component analysis {#sec-ld-pruning-pca}
 
 ::: {.callout-note}
 
@@ -40,7 +41,8 @@ prune the data using either [plink](sec_pca_with_plink) or
 
 ## FIXME
 
-sgkit is likely too cumbersome? Keep as reference for now, use EIGENSOFT or plink for pruning and pca.
+sgkit is likely too cumbersome? Keep as reference for now, use
+EIGENSOFT or plink for pruning and pca.
 
 :::
 
@@ -55,8 +57,11 @@ from sgkit.io import vcf as sgvcf
 
 Then make output directories and convert vcf to the zarr format.
 
-```{code-cell} pgip
-outdir = "exercises/ld_pruning"
+```{python }
+#| label: ld-pruning-sgkit-make-zarr
+#| echo: true
+#| eval: true
+outdir = "output/ld_pruning"
 os.makedirs(outdir, exist_ok=True)
 vcf = "data/ooa/ooa.gatk.vcf.gz"
 zarr = os.path.join(outdir, "ooa.gatk.zarr")
@@ -67,13 +72,14 @@ sgvcf.vcf_to_zarr(vcf, zarr)
 We load the data and remember the original chunk size (needed
 internally for sgkit):
 
-```{code-cell} pgip
-from myst_nb import glue
+```{python }
+#| label: ld-pruning-sgkit-load-data
+#| echo: true
+#| eval: true
 ds = sg.load_dataset(zarr)
 original_chunk_size = ds.chunks["variants"][0]
-glue("nvar", len(ds.variants))
-```
 
+```
 
 ## Linkage disequilibrium structure
 
@@ -83,18 +89,30 @@ use `python` for plotting and first load the necessary libraries:
 ## Linkage disequilibrium pruning
 
 Depending on the number of variants, it may be necessary to work on a
-subset of variants. Here with only {glue:}`nvar` variants we skip this
-step.
+subset of variants. Here with only ```{python}
+#| echo: false
+display(Markdown("""{nvar}""".format(nvar = len(ds.variants))))
+``` variants we skip this step.
 
 For pruning, we first need to calculate the dosage:
-```{code-cell} pgip
+
+```{python }
+#| label: ld-pruning-sgkit-dosage
+#| echo: true
+#| eval: true
 ds['dosage'] = ds['call_genotype'].sum(dim='ploidy')
 ```
+
 and then divide into windows by variants:
-```{code-cell} pgip
-# ds = sg.window_by_variant(ds, size=200)
-# print(ds)
+```{python }
+#| label: ld-pruning-sgkit-windows
+#| echo: true
+#| eval: true
+ds = sg.window_by_variant(ds, size=200)
+print(ds)
+
 ```
+
 
 ## PCA
 
@@ -105,7 +123,10 @@ filtering on allele frequencies.
 <!-- See https://github.com/pystatgen/sgkit/issues/752 -->
 <!-- All the pca code is based on that example -->
 
-```{code-cell} pgip
+```{python }
+#| label: ld-pruning-sgkit-qc
+#| echo: true
+#| eval: true
 ds = sg.variant_stats(ds)
 
 ds = ds.assign(**ds[["variant_allele_frequency"]].compute()).pipe(
@@ -114,9 +135,13 @@ lambda ds: ds.sel(variants=(ds.variant_allele_frequency[:, 1] > 0.01))
 ds = ds.chunk(original_chunk_size)
 ```
 
+
 Now we can perform pca.
 
-```{code-cell} pgip
+```{python }
+#| label: ld-pruning-sgkit-do-pca
+#| echo: true
+#| eval: true
 # Transform genotype call into number of non-reference alleles
 ds_pca = sg.stats.pca.count_call_alternate_alleles(ds)
 # Ensure data has positive variance across samples
@@ -132,10 +157,14 @@ ds_pca = sg.pca(ds_pca, n_components=10)
 ```
 
 
+
 We convert the data structure to a pandas dataframe and add various
 metadata, such as sample and population names.
 
-```{code-cell} pgip
+```{python }
+#| label: ld-pruning-sgkit-add-metadata
+#| echo: true
+#| eval: true
 explained = ds_pca.sample_pca_explained_variance_ratio.values * 100
 df = (
 ds_pca.sample_pca_projection.to_dataframe()
@@ -151,10 +180,15 @@ colors = dict(zip(set(df["population"]), utils._get_palette(n=3)))
 df["color"] = [colors[x] for x in df["population"]]
 ```
 
+
+
 For the purpose of this exercise, we want to also investigate the
 effect of sequencing coverage.
 
-```{code-cell} pgip
+```{python }
+#| label: ld-pruning-sgkit-sequencing-coverage
+#| echo: true
+#| eval: true
 import io
 import pandas as pd
 import subprocess
@@ -163,8 +197,13 @@ coverage = pd.read_table(io.StringIO(output.decode()), header=None).mean(axis=0)
 df["coverage"] = coverage[1:]
 ```
 
+
+
 Finally, we can plot the pca with bokeh.
-```{code-cell} pgip
+```{python }
+#| label: fig-ld-pruning-sgkit-plot-pca
+#| echo: true
+#| eval: true
 from pgip.plotting import bokeh_plot_pca
 p = bokeh_plot_pca(df, explained, ncomp=3, ncols=2, width=400, height=400)
 show(p)

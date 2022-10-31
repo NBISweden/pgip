@@ -88,7 +88,7 @@ specification](https://popsim-consortium.github.io/stdpopsim-docs/stable/catalog
 #| fig-cap: "[demesdraw](https://grahamgower.github.io/demesdraw/latest/quickstart.html) illustration of out of Africa model."
 import demes
 import demesdraw
-ooa = demes.load("exercises/data/ooa/ooa.demes.yaml")
+ooa = demes.load("data/ooa/ooa.demes.yaml")
 ax = demesdraw.tubes(ooa, num_lines_per_migration=6, seed=32)
 ```
 
@@ -107,6 +107,6 @@ chimpanzee, gorilla and orangutan
 #| fig-cap: "[demesdraw](https://grahamgower.github.io/demesdraw/latest/quickstart.html) illustration of out of Africa model, including outgroups chimpanzee, gorilla, and orangutan. Note that the time scale is in log units."
 import demes
 import demesdraw
-ooa = demes.load("exercises/data/ooa-outgroups/ooa_with_outgroups.demes.yaml")
+ooa = demes.load("data/ooa-outgroups/ooa_with_outgroups.demes.yaml")
 ax = demesdraw.tubes(ooa, num_lines_per_migration=6, log_time=True, seed=32)
 ```
