@@ -6,7 +6,7 @@ on:
     branches: [main]
     tags:
       - '*'
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
+
 jobs:
   build:
     name: Build site
@@ -41,13 +41,15 @@ jobs:
         environment-file: environment.yaml
         use-only-tar-bz2: true
 
-    - name: actions/setup-python@v4
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.9'
         cache: 'pip'
+
     - name: Install python dependencies
       run: |
         python -m 'pip' install -r requirements.txt
+        python -m 'pip' install -e .
 
     - name: Install pgip and bash jupyter kernels
       run: |
