@@ -38,3 +38,12 @@ calculating stuff by hand.
 
 Want also to relate the allele frequencies to branch lengths; cf
 @peter_AdmixturePopulationStructure_2016
+
+
+```{bash }
+#| label: col4
+#| echo: true
+#| eval: true
+pwd
+ls
+```

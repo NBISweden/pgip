@@ -22,6 +22,7 @@ classifiers = [
 ]
 dependencies = [
     'importlib-metadata; python_version>="3.7"',
+    'click>="8.0"',
 ]
 dynamic = ["version"]
 
@@ -31,6 +32,9 @@ version = {attr = "pgip.__version__"}
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[project.scripts]
+pgip-slim = "pgip.tools.slim:cli"
+pgip-tsstat = "pgip.tools.tsstat:cli"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
@@ -44,3 +48,28 @@ testpaths = [
 filterwarnings = [
     "ignore::DeprecationWarning",
 ]
+
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py39
+isolated_build = true
+
+[gh-actions]
+python =
+    3.9: py39
+
+[testenv:test]
+changedir = tests
+deps =
+    pytest
+    pytest-coverage
+    pytest-shutil
+    pytest-git
+    pytest-runner
+    pip>=22.1.0
+    wheel
+commands =
+	 pytest --basetemp="{envtmpdir}" {posargs}
+"""

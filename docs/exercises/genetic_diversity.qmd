@@ -1,0 +1,13 @@
+# Genetic diversity {#sec-ex-genetic-diversity}
+
+## Nucleotide diversity {#sec-ex-nucleotide-diversity}
+
+::: {.callout-warning}
+
+FIXME: pen-and-paper exercise to calculate diversity based on "fixed"
+genotype calls and genotype likelihoods to highlight differences; the
+latter requires GLs for **all** sites. Use Table 4.1 in
+[@hartl1997principles, p.173] and/or Figure 3.1 in
+[@hahn_MolecularPopulationGenetics_2019, p. 45]
+
+:::

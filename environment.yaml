@@ -4,6 +4,7 @@ channels:
   - defaults
 dependencies:
   - bcftools
+  - click
   - demes
   - demesdraw
   - gatk4
@@ -18,11 +19,18 @@ dependencies:
   - numpy
   - pip
   - plink
+  - pyslim
+  - r-codetools
+  - r-dotenv
+  - r-ggplot2
   - r-irkernel
   - r-reticulate
+  - r-rmarkdown
+  - r-viridis
   - samtools
   - scikit-learn
   - scikit-allel
+  - slim
   - sphinx
   - tskit>=0.4
   - tqdm

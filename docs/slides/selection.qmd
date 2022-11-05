@@ -1,0 +1,111 @@
+---
+title: "What is population genomics?"
+subtitle: "Population genomics - data and analyses"
+author:
+    - "Per Unneberg"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+institute: NBIS
+from: markdown+emoji
+format:
+  revealjs:
+    theme:
+      - white
+      - ../nbis.scss
+    self-contained: true
+    toc: true
+    toc-depth: 1
+    slide-level: 3
+    slide-number: true
+    preview-links: true
+    chalkboard: false
+    footer: Population genomics - data and analyses
+    logo: https://nbis.se/assets/img/logos/nbislogo-green.svg
+    smaller: true
+    highlight-style: gruvbox
+    fig-height: 12
+    fig-width: 10
+    navigation-mode: vertical
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+execute:
+  echo: true
+  warning: false
+  cache: true
+  include: true
+  autodep: true
+  eval: true
+  error: true
+opts:
+  knitr:
+    code-fold: true
+    tidy: true
+    fig-format: svg
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(knitr)
+library(ggplot2)
+library(viridisLite)
+library(dotenv)
+library(tidyr)
+library(dplyr)
+bw <- theme_bw(base_size=18) %+replace% theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+theme_set(bw)
+knitr::knit_hooks$set(inline = function(x) {
+                      prettyNum(x, big.mark=" ")
+                  })
+```
+```{r }
+#| label: utility-functions
+#| echo: false
+#| eval: true
+#| cache: false
+```
+
+
+# Selection
+
+# Linked selection
+
+### Selective sweep
+
+Use [Figure 2 @charlesworth_EffectsOfSelection_2021]
+
+
+### Selective sweep
+
+```{bash }
+#| label: pgip-slim-sweep-command
+#| echo: true
+#| eval: false
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 5e-8 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -x 500 --threads 10 | gzip -v - > results/slim/selective_sweep.csv.gz
+```
+
+
+```{r }
+#| label: fig-pgip-slim-sweep-plot
+#| echo: false
+#| eval: true
+data <- read.csv("results/slim/selective_sweep.csv.gz", header=TRUE)
+TajD_mean <- data %>% select(windows, TajD) %>% group_by(windows) %>% summarise(TajD=mean(TajD, na.rm=TRUE)) %>% mutate(fn="mean")
+L <- 1e6
+xi <- L / 2
+ggplot(subset(data, fn %in% levels(factor(data$fn))[1:50]), aes(windows, TajD, group=fn)) +
+    geom_line(color="lightgray", size=0.5) + geom_line(data=TajD_mean, color="red", size=1.5) +
+    xlab("Chromosomal position") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
+    geom_segment(aes(x=xi, y=-2, xend=xi, yend=-2.5), arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
+    scale_y_continuous(expand = c(0, 0), limits = c(-2.5, 2.1))  + xlim(0, L)
+```
+
+::: {.notes }
+
+N=1e4, mu=5e-8, pi=4*N*mu=0.004, seek S=a*pi=0.01, so a=S/pi which
+gives n. Need to ramp up recombination rate to see the dip in TajD
+clearly.
+
+:::

@@ -1,32 +1,38 @@
 project:
   type: website
+  #type: book
   title: "Population genomics in practice"
+  output-dir: _site
 
 execute:
   freeze: auto
   cache: true
 
 bibliography: resources/bibliography.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
 website:
+#book:
   title: "Population genomics in practice"
+  # chapters:
+  #   - index.qmd
   navbar:
+    logo: img/nbislogo-green.svg
     left:
-      - text: "Home"
-        file: index.qmd
-      - text: "Information"
-        file: about.qmd
       - text: "Lecture notes"
         file: "lectures/index.qmd"
       - text: "Slides"
         file: "slides/index.qmd"
       - text: "Exercises"
         file: "exercises/index.qmd"
+      - text: "Code recipes"
+        file: "recipes/index.qmd"
   sidebar:
     - title: "Information"
       contents:
         - index.qmd
         - about.qmd
+        - schedule.qmd
         - references.qmd
 
     - title: "Lecture notes"
@@ -43,11 +49,16 @@ website:
         - section: "Monday 8 May"
           contents:
             - "slides/introduction.qmd"
+            - "slides/population_genomics_in_practice.qmd"
             - "slides/datageneration.qmd"
+        - section: "Tuesday 9 May"
+          contents:
+            - "slides/genetic_diversity.qmd"
 
     - title: "Exercises"
       contents:
         - "exercises/index.qmd"
+        - "exercises/preparation.qmd"
         - "exercises/data.qmd"
         - section: "Monday 8 May"
           contents:
@@ -58,9 +69,11 @@ website:
             - "exercises/ld_pruning_pca.qmd"
 
   page-footer:
-    left: "Copyright NBIS"
-    # right: |
-    #   ![](/img/nbislogo-green.svg)
+    left: |
+      Copyright NBIS
+    right: |
+      This book was built with <a
+      href="https://quarto.org/">Quarto</a>.
   favicon: img/nbislogo-green.svg
 
 
@@ -72,6 +85,8 @@ format:
       - nbis.scss
     css: styles.css
     toc: true
+  # pdf:
+  #   documentclass: scrreport
 
 
 jupyter:

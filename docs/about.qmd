@@ -1,8 +1,4 @@
-# Population genomics in practice
-
-Welcome to the Population Genomics in Practice homepage!
-
-## About the course
+# About the course
 
 As the focus of the course is on hands-on work, the topics have been
 designed to cover the fundamental analyses that are common in many
@@ -40,10 +36,10 @@ or by looking at haplotype structures to detect linked selection.
 
 Much of what has been described in [The manuscript
  route](#sec-manuscript-route) has recently been treated in an article
-on statistical inference in population genomics
-@johri_StatisticalInferencePopulation_2021. In it, the authors
-point out that whereas historically theoretical advances outpaced
-data production, that is no longer true due to the advent of
+on recommendations for improving statistical inference in population
+genomics [@johri_RecommendationsImprovingStatistical_2022]. In it, the
+authors point out that whereas historically theoretical advances
+outpaced data production, that is no longer true due to the advent of
 next-generation sequencing. In particular, they caution researchers
 to attach too much faith to a test that explains the data well, as
 there are many alternative hypotheses with equal explanatory power,

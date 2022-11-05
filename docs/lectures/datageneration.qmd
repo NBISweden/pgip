@@ -1,15 +1,14 @@
 # Data generation
 
-## Sequencing protocols
-
 What are the goals? To compile variation data for individuals. What are the issues?
 
 - sampling
+- library preparation cost
 - sequencing cost
 - lack of reference genomes (soon outdated)
 
 
-
+## Sequencing protocols
 
 ### Individual sequencing
 
@@ -25,3 +24,33 @@ What are the goals? To compile variation data for individuals. What are the issu
   - pool-seq @schlotterer_SequencingPoolsIndividuals_2014
   - RADSeq [@davey_RADSeqNextgenerationPopulation_2010; @baird_RapidSNPDiscovery_2008]
 
+
+## Reference genome
+
+Once individual re-sequencing data has been obtained, it is mapped to
+a reference genome. For non-model organisms, reference genomes are
+often lacking[^genome-projects], for which reason many studies include
+sequencing and genome assembly of a reference individual. In other
+cases, a solution is to map to a closely related species. That comes
+with issues of its own, such as reads primarily mapping to conserved
+regions, thereby biasing population genomic statistics, or structural
+rearrangements between species hampering inferences. A final option is
+to map reads to a reference transcriptome. However, given the drop in
+sequencing cost and advances in long-read technologies, new projects
+could be complemented with *de novo* assembly of a reference
+individual.
+
+
+## Low-coverage whole genome sequencing
+
+
+## Filtering data
+
+cf Table 3 [@lou_BeginnerGuideLowcoverage_2021 p. 5974]
+
+
+
+[^genome-projects]: This is likely to change soon as ongoing efforts
+	to generate genome assemblies over a large range of taxa, for
+	instance [@_GenomeAtlasEuropean_] and
+	[@_VertebrateGenomesProject_], are completed.

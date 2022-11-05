@@ -18,7 +18,7 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: false
-    footer: Wellcome
+    footer: Welcome
     logo: https://nbis.se/assets/img/logos/nbislogo-green.svg
     smaller: true
     highlight-style: gruvbox
@@ -62,17 +62,12 @@ knitr::knit_hooks$set(inline = function(x) {
 #| echo: false
 #| eval: true
 #| cache: false
-href <- function(link, name=NULL) {
-    if (is.null(name))
-        name <- link
-    sprintf("<a href=\"%s\">%s</a>", link, name)
-}
 ```
 
 
 ### Welcome to population genomics in practice
 
-[@johri_StatisticalInferencePopulation_2021]
+[@johri_RecommendationsImprovingStatistical_2022]
 
 ### Who are we?
 

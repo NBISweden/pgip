@@ -1,0 +1,23 @@
+---
+knitr:
+  opts_chunk:
+    collapse: true
+---
+# Code recipes
+
+## SLiM recipes
+
+Collection of SLiM recipes [@hallerben_MesserLabSLiM_2016] used to
+generate figures and examples. SLiM recipes can be run with wrapper
+`pgip-slim` to generate multiple simulations.
+
+```{bash }
+#| label: pgip-slim-help
+#| echo: true
+#| eval: true
+pgip-slim --help
+```
+
+
+[selective_sweep.slim](slim/selective_sweep.slim)
+: Recipe to simulate a selective sweep
