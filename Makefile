@@ -1,10 +1,10 @@
 # Simple makefile for dev.
 
 all:
-	quarto render docs --execute-dir docs
+	quarto render docs
 
 production:
-	quarto render docs --execute-dir docs --profile production
+	quarto render docs --profile production
 
 clean-build:
 	rm -fR _build

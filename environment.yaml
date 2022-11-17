@@ -20,10 +20,18 @@ dependencies:
   - pip
   - plink
   - pyslim
+  - r-animation
   - r-codetools
   - r-dotenv
+  - r-gganimate
   - r-ggplot2
+  - r-gifski
+  - r-igraph
   - r-irkernel
+  - r-jsonlite
+  - r-magick
+  - r-patchwork
+  - r-pdftools
   - r-reticulate
   - r-rmarkdown
   - r-viridis

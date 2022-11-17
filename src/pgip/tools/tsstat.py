@@ -104,7 +104,7 @@ def make_windows(ts, num_windows, window_size):
 )
 @click.option(
     "--num-windows",
-    "-x",
+    "-w",
     help="Number of windows",
     type=click.IntRange(
         1,
@@ -112,7 +112,7 @@ def make_windows(ts, num_windows, window_size):
 )
 @click.option(
     "--window_size",
-    "-w",
+    "-W",
     help="Window size",
     type=click.IntRange(
         1,
