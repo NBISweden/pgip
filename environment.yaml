@@ -1,45 +1,48 @@
+name: pgip
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - bcftools
+  # - bcftools
+  - bokeh>=3.0
+  - ca-certificates
   - click
-  - demes
+  - cyvcf2
   - demesdraw
-  - gatk4
-  - ipykernel
-  - bash_kernel
+  # - gatk4
+  # - ipykernel
+  # - bash_kernel
   - jupyter
-  - jupytext==1.13.8
-  - matplotlib
+  # - matplotlib
   - msprime>=1.0
-  - nbformat
-  - networkx
-  - numpy
-  - pip
-  - plink
+  # - networkx
+  - openssl
+  - pandas
+  # - pip
+  # - plink
   - pyslim
-  - r-animation
-  - r-codetools
-  - r-dotenv
-  - r-gganimate
-  - r-ggplot2
-  - r-gifski
-  - r-igraph
-  - r-irkernel
-  - r-jsonlite
-  - r-magick
-  - r-patchwork
-  - r-pdftools
-  - r-reticulate
-  - r-rmarkdown
-  - r-viridis
+  - python=3.10
+  # - r-animation
+  # - r-codetools
+  # - r-dotenv
+  # - r-gganimate
+  # - r-ggplot2
+  # - r-gifski
+  # - r-igraph
+  # - r-irkernel
+  # - r-jsonlite
+  # - r-magick
+  # - r-patchwork
+  # - r-pdftools
+  # - r-reticulate
+  # - r-rmarkdown
+  # - r-viridis
   - samtools
-  - scikit-learn
-  - scikit-allel
-  - slim
-  - sphinx
-  - tskit>=0.4
-  - tqdm
-  - yarl
+  # - scikit-learn
+  # - scikit-allel
+  - sgkit
+  - slim>=4.0
+  - tskit>=0.5.0
+  # - tqdm
+  # - yarl

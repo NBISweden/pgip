@@ -23,7 +23,7 @@ Please make sure you have completed the preparatory material!
 #|   - "Thursday 11 May, 2023"
 #|   - "Friday 12 May, 2023"
 library(knitr)
-schedule <- read.table("schedule.tsv", sep="\t", header=TRUE)
+schedule <- read.table("schedule.tsv", sep="\t", header=TRUE, fill=TRUE)
 colnames(schedule)[5] <- "Lecturer / TA"
 days <- c("Monday", "Monday (alt)", "Tuesday", "Wednesday", "Thursday", "Friday")
 i <- unlist(lapply(days, function(x) {grep(x, schedule$Day)}))

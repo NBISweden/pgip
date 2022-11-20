@@ -3,6 +3,9 @@ project:
   #type: book
   title: "Population genomics in practice"
   output-dir: _site
+  execute-dir: file
+  post-render:
+    - rsync-tikz.py
 
 execute:
   freeze: auto

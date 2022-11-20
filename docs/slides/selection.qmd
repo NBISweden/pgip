@@ -124,7 +124,7 @@ ggplot(data_mean %>% pivot_longer(
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
-data <- read.csv("results/slim/selective_sweep.w500.csv.gz", header=TRUE)
+data <- read.csv("../results/slim/selective_sweep.w500.csv.gz", header=TRUE)
 a <- sum(1/seq(10))
 data$thetaW <- data$S / a
 data_mean <- data %>% select(windows, TajD, pi, S, thetaW) %>% group_by(windows) %>% summarise(TajD=mean(TajD, na.rm=TRUE), pi=mean(pi, na.rm=TRUE), S=mean(S, na.rm=TRUE), thetaW=mean(thetaW, na.rm=TRUE)) %>% mutate(fn="mean", pi_minus_thetaW=pi - thetaW)

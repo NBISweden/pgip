@@ -23,6 +23,11 @@ classifiers = [
 dependencies = [
     'importlib-metadata; python_version>="3.7"',
     'click>="8.0"',
+    'bokeh>="3.0"',
+    'pandas',
+    'pyslim',
+    'slim>="4.0"',
+    'tskit>="0.5.0"',
 ]
 dynamic = ["version"]
 

@@ -63,7 +63,7 @@ Then make output directories and convert vcf to the zarr format.
 #| eval: true
 outdir = "output/ld_pruning"
 os.makedirs(outdir, exist_ok=True)
-vcf = "data/ooa/ooa.gatk.vcf.gz"
+vcf = "../data/ooa/ooa.gatk.vcf.gz"
 zarr = os.path.join(outdir, "ooa.gatk.zarr")
 sgvcf.vcf_to_zarr(vcf, zarr)
 ```
@@ -192,7 +192,7 @@ effect of sequencing coverage.
 import io
 import pandas as pd
 import subprocess
-output = subprocess.check_output("samtools depth -a data/ooa/*.bam", shell=True)
+output = subprocess.check_output("samtools depth -a ../data/ooa/*.bam", shell=True)
 coverage = pd.read_table(io.StringIO(output.decode()), header=None).mean(axis=0)
 df["coverage"] = coverage[1:]
 ```
