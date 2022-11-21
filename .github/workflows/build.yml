@@ -18,6 +18,7 @@ jobs:
       run:
         shell: bash -l {0}
     steps:
+
     - name: Cancel Previous Runs
       if: ${{ !env.ACT }}
       uses: styfle/cancel-workflow-action@0.11.0
@@ -43,7 +44,12 @@ jobs:
         use-only-tar-bz2: true
 
     - name: Install test dependencies
-      run: conda install -c conda-forge pytest pip gh
+      run: conda install -c conda-forge pytest pip
+
+    - name: test conda
+      run: |
+        which gh
+        gh --version
 
     - name: Install pgip package
       run: |

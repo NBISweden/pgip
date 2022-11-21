@@ -30,12 +30,12 @@ dependencies:
   # - r-gifski
   # - r-igraph
   # - r-irkernel
-  # - r-jsonlite
+  - r-jsonlite
   # - r-magick
   # - r-patchwork
   # - r-pdftools
-  # - r-reticulate
-  # - r-rmarkdown
+  - r-reticulate
+  - r-rmarkdown
   # - r-viridis
   - samtools
   # - scikit-learn
