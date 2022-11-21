@@ -7,6 +7,9 @@ on:
     tags:
       - '*'
 
+env:
+  PARTICIPANT_DATA:
+
 jobs:
   build:
     name: Build site
