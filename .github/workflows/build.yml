@@ -60,6 +60,11 @@ jobs:
       with:
         tinytex: true
 
+    - name: Add miniconda path
+      run: |
+        echo "$(dirname $(which R))" >> $GITHUB_PATH
+        quarto check
+
     - name: Publish to GitHub Pages
       uses: quarto-dev/quarto-actions/publish@v2
       with:
