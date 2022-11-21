@@ -53,6 +53,10 @@ jobs:
 
     - name: Install pgip package
       run: |
+        pip install ipykernel
+        pip install bash_kernel
+        python -m bash_kernel.install
+        python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
         python -m 'pip' install --no-deps -e .
 
     - name: Setup Quarto
