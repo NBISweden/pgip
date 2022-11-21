@@ -61,7 +61,7 @@ jobs:
 
     - name: Install dotenv
       run: |
-        R -e "install.packages('dotenv')"
+        R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 
     - name: Setup Quarto
       uses: quarto-dev/quarto-actions/setup@v2
