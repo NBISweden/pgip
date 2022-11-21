@@ -40,16 +40,12 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         miniconda-version: "latest"
+        activate-environment: pgip
         environment-file: conda-linux-64.lock
         use-only-tar-bz2: true
 
     - name: Install test dependencies
       run: conda install -c conda-forge pytest pip
-
-    - name: test conda
-      run: |
-        which gh
-        gh --version
 
     - name: Install pgip package
       run: |
