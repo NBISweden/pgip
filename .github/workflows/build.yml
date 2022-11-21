@@ -59,6 +59,10 @@ jobs:
         python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
         python -m 'pip' install --no-deps -e .
 
+    - name: Install dotenv
+      run: |
+        R -e "install.packages('dotenv')"
+
     - name: Setup Quarto
       uses: quarto-dev/quarto-actions/setup@v2
       with:

@@ -53,6 +53,7 @@ website:
           contents:
             - "slides/introduction.qmd"
             - "slides/population_genomics_in_practice.qmd"
+            - "slides/population_genetics_foundations.qmd"
             - "slides/datageneration.qmd"
         - section: "Tuesday 9 May"
           contents:

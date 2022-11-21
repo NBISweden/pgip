@@ -54,6 +54,7 @@ library(dotenv)
 library(igraph)
 library(gganimate)
 library(patchwork)
+library(tidyr)
 bw <- theme_bw(base_size=18) %+replace% theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 theme_set(bw)
 knitr::knit_hooks$set(inline = function(x) {
@@ -457,7 +458,7 @@ p0 <- 0.2
 N <- rep(10, 5)
 
 wf <- as.data.frame(do.call("cbind", lapply(N, function(n) {wright_fisher(p0, n, iter)})))
-colnames(wf) <- makeN
+colnames(wf) <- N
 wf$generation <- seq(1, iter)
 data <- pivot_longer(wf, cols=as.character(N))
 colnames(data) <- c("generation", "N", "frequency")

@@ -11,8 +11,6 @@ dependencies:
   - cyvcf2
   - demesdraw
   # - gatk4
-  # - ipykernel
-  # - bash_kernel
   - jupyter
   - jupyter-cache
   # - matplotlib
@@ -25,19 +23,20 @@ dependencies:
   - python=3.10
   # - r-animation
   - r-codetools
-  # - r-dotenv
-  # - r-gganimate
-  # - r-ggplot2
+  # - r-dotenv # Must be install via R
+  - r-gganimate
+  - r-ggplot2
   # - r-gifski
-  # - r-igraph
+  - r-igraph
   # - r-irkernel
   - r-jsonlite
   # - r-magick
-  # - r-patchwork
+  - r-patchwork
   # - r-pdftools
   - r-reticulate
   - r-rmarkdown
-  # - r-viridis
+  - r-tidyr
+  - r-viridis
   - samtools
   # - scikit-learn
   # - scikit-allel
