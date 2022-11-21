@@ -1,4 +1,3 @@
-name: pgip
 channels:
   - conda-forge
   - bioconda

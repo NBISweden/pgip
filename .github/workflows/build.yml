@@ -19,7 +19,8 @@ jobs:
         shell: bash -l {0}
     steps:
     - name: Cancel Previous Runs
-      uses: styfle/cancel-workflow-action@0.9.1
+      if: ${{ !env.ACT }}
+      uses: styfle/cancel-workflow-action@0.11.0
       with:
         access_token: ${{ github.token }}
 
@@ -37,25 +38,16 @@ jobs:
     - name: install miniconda
       uses: conda-incubator/setup-miniconda@v2
       with:
-        mamba-version: "*"
-        channels: conda-forge,bioconda,defaults
-        channel-priority: true
+        miniconda-version: "latest"
         environment-file: conda-linux-64.lock
         use-only-tar-bz2: true
 
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-        cache: 'pip'
+    - name: Install test dependencies
+      run: conda install -c conda-forge pytest pip gh
 
-    - name: Install python dependencies
+    - name: Install pgip package
       run: |
         python -m 'pip' install --no-deps -e .
-
-    # - name: Install pgip and bash jupyter kernels
-    #   run: |
-    #     python -m bash_kernel.install
-    #     python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
 
     - name: Set up Quarto
       uses: quarto-dev/quarto-actions/setup@v2
