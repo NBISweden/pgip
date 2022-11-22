@@ -6,8 +6,6 @@ project:
   execute-dir: file
   pre-render:
     - prepare.py
-  post-render:
-    - rsync-tikz.py
 
 execute:
   freeze: auto
@@ -60,6 +58,9 @@ website:
         - section: "Tuesday 9 May"
           contents:
             - "slides/genetic_diversity.qmd"
+        - section: "Thursday 11 May"
+          contents:
+            - "slides/selection.qmd"
 
     - title: "Exercises"
       contents:
