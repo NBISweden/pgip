@@ -4,6 +4,8 @@ project:
   title: "Population genomics in practice"
   output-dir: _site
   execute-dir: file
+  pre-render:
+    - prepare.py
   post-render:
     - rsync-tikz.py
 
