@@ -1,0 +1,184 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Welcome to the Population Genomics in Practice homepage!"
+  },
+  {
+    "objectID": "index.html#uppmax-account",
+    "href": "index.html#uppmax-account",
+    "title": "Population genomics in practice",
+    "section": "UPPMAX account",
+    "text": "UPPMAX account\nRegistration details"
+  },
+  {
+    "objectID": "index.html#readings",
+    "href": "index.html#readings",
+    "title": "Population genomics in practice",
+    "section": "Readings",
+    "text": "Readings\n\nFuller et al. (2020)\nJohri et al. (2022)"
+  },
+  {
+    "objectID": "index.html#tutorials",
+    "href": "index.html#tutorials",
+    "title": "Population genomics in practice",
+    "section": "Tutorials",
+    "text": "Tutorials\n\nLook at https://www.uppmax.uu.se/support/user-guides/, in particular https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/"
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Schedule\n\n\n\n\n\n\nFIXME\n\n\n\n\nlink to canvas schedule which should be more complete\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nPlease make sure you have completed the preparatory material!\n\n\n\n\nTable 1: Tentative schedule\n\n\n\n\n(a) Monday 8 May, 2023\n\n\n\n\n\n\n\n\nTime\nTopic\nLecturer / TA\nType\n\n\n\n\n\nModels of evolution\n\n\n\n\n09:00-09:30\nCoffee and welcome\n\n\n\n\n09:30-10:00\nIntroduction and practical information\nTBA\n\n\n\n09:45-10:15\nPopulation genomics in practice\nTBA\nLecture\n\n\n10:15-10:30\nModels of evolution\nTBA\nLecture\n\n\n10:30-11:30\nWright-Fisher model\nTBA\nPractical\n\n\n11:30-12:00\nWright-Fisher, worked examples\nTBA\nLecture\n\n\n12:00-13:00\nLunch\n\n\n\n\n13:00-13:30\nThe coalescent\nTBA\nLecture\n\n\n13:30-14:30\nThe coalescent\nTBA\nPractical\n\n\n14:30-15:00\nSimulation with msprime\nTBA\nPractical\n\n\n15:00-15:30\nCoffee\n\n\n\n\n15:30-16:00\n\n\nLecture\n\n\n16:00-17:00\n\n\nPractical\n\n\n\n\n\n\n\n\n(b) Monday 8 May, 2023\n\n\n\n\n\n\n\n\nTime\nTopic\nLecturer / TA\nType\n\n\n\n\n\nVariant calling\n\n\n\n\n09:00-09:30\nCoffee and welcome\n\n\n\n\n09:30-10:00\nIntroduction and practical information\nTBA\n\n\n\n09:45-10:15\nPopulation genomics in practice\nTBA\nLecture\n\n\n10:15-10:30\nVariant calling, best practice\nTBA\nLecture\n\n\n10:30-11:30\nVariant calling\nTBA\nPractical\n\n\n11:30-12:00\nVariant filtering\nTBA\nLecture\n\n\n12:00-13:00\nLunch\n\n\n\n\n13:00-14:00\nVariant filtering\nTBA\nPractical\n\n\n14:00-14:30\nGenotype likelihoods, low-coverage data\nTBA\nLecture\n\n\n14:30-15:00\nGenotype likelihoods\nTBA\nPractical\n\n\n15:00-15:30\nCoffee\n\n\n\n\n15:30-16:00\n\n\nLecture\n\n\n16:00-17:00\n\n\nPractical\n\n\n\n\n\n\n\n\n(c) Tuesday 9 May, 2023\n\n\n\n\n\n\n\n\nTime\nTopic\nLecturer / TA\nType\n\n\n\n\n\nDescribing diversity\n\n\n\n\n09:00-09:30\nRecap\n\n\n\n\n09:30-10:00\nMeasures of diversity - \\(\\pi\\), \\(\\theta\\), \\(F_{ST}\\)\nTBA\nLecture\n\n\n10:00-10:15\nCoffee\n\n\n\n\n10:15-11:00\nCalculating diversity (manually?)\nTBA\nPractical\n\n\n11:00-11:20\n\nTBA\nLecture\n\n\n11:30-12:00\nVariant filtering\nTBA\nPractical\n\n\n12:00-13:00\nLunch\n\n\n\n\n13:00-13:30\nPrincipal component analysis\nTBA\nLecture\n\n\n13:30-14:30\nLD pruning and PCA\nTBA\nPractical\n\n\n14:30-15:00\nAdmixture\nTBA\nLecture\n\n\n15:00-15:30\nCoffee\n\n\n\n\n15:30-17:00\nAdmixture\nTBA\nPractical\n\n\n\n\n\n\n\n\n(d) Wednesday 10 May, 2023\n\n\n\n\n\n\n\n\nTime\nTopic\nLecturer / TA\nType\n\n\n\n\n\nDemographic inference\n\n\n\n\n09:00-09:30\nRecap\n\n\n\n\n09:30-10:00\nDemography and population history\nTBA\nLecture\n\n\n10:00-10:15\nCoffee\n\n\n\n\n10:15-11:00\nstdpopsim simulation?\nTBA\nPractical\n\n\n11:00-11:20\npsmc/msmc\nTBA\nLecture\n\n\n11:30-12:00\npsmc/msmc\nTBA\nPractical\n\n\n12:00-13:00\nLunch\n\n\n\n\n13:00-13:30\nD/f statistics\nTBA\nLecture\n\n\n13:30-14:30\nD/f statistics\nTBA\nPractical\n\n\n14:30-15:00\nCoalescent modelling?\nTBA\nLecture\n\n\n15:00-15:30\nCoffee\n\n\n\n\n15:30-17:00\nfastsimcoal2?\nTBA\nPractical\n\n\n\n\n\n\n\n\n(e) Thursday 11 May, 2023\n\n\n\n\n\n\n\n\nTime\nTopic\nLecturer / TA\nType\n\n\n\n\n\nSelection\n\n\n\n\n09:00-09:30\nRecap\n\n\n\n\n09:30-10:00\nDirect selection\nTBA\nLecture\n\n\n10:00-10:15\nCoffee\n\n\n\n\n10:15-11:00\nSelection scans (TajD, \\(F_{ST}\\) outliers\nTBA\nPractical\n\n\n11:00-11:20\nDiversity and polymorphism\nTBA\nLecture\n\n\n11:30-12:00\nMcDonald-Kreitman tests? dn/ds, pn/ps tests?\nTBA\nPractical\n\n\n12:00-13:00\nLunch\n\n\n\n\n13:00-13:30\nLinked selection\nTBA\nLecture\n\n\n13:30-14:30\nHKA tests?\nTBA\nPractical\n\n\n14:30-15:00\nHaplotype structure\nTBA\nLecture\n\n\n15:00-15:30\nCoffee\n\n\n\n\n15:30-17:00\nHaplotype-based tests (e.g. EHH)\nTBA\nPractical\n\n\n\n\n\n\n\n\n(f) Friday 12 May, 2023\n\n\n\n\n\n\n\n\nTime\nTopic\nLecturer / TA\nType\n\n\n\n\n\nInspirational lectures / BYOD\n\n\n\n\n09:00-09:30\nRecap\n\n\n\n\n09:30-10:30\nA large-scale popgenome project\nTBA\nLecture\n\n\n10:30-11:00\nCoffee\n\n\n\n\n11:00-12:00\nA methodology (e.g. tree sequencing, ML/AI)\nTBA\nLecture\n\n\n12:00-13:00\nLunch\n\n\n\n\n13:00-15:00\nOwn data / project feedback session?\nTBA\nLecture\n\n\n15:00-15:30\nSummary"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "References\n\n\nA genome atlas of european biodiversity. (n.d.). https://www.erga-biodiversity.eu. https://www.erga-biodiversity.eu\n\n\nBaird, N. A., Etter, P. D., Atwood, T. S., Currey, M. C., Shiver, A. L., Lewis, Z. A., Selker, E. U., Cresko, W. A., & Johnson, E. A. (2008). Rapid SNP Discovery and Genetic Mapping Using Sequenced RAD Markers. PLOS ONE, 3(10), e3376. https://doi.org/10.1371/journal.pone.0003376\n\n\nChan, A. H., Jenkins, P. A., & Song, Y. S. (2012). Genome-Wide Fine-Scale Recombination Rate Variation in Drosophila melanogaster. PLOS Genetics, 8(12), e1003090. https://doi.org/10.1371/journal.pgen.1003090\n\n\nCharlesworth, B., & Jensen, J. D. (2021). Effects of selection at linked sites on patterns of genetic variability. Annual Review of Ecology, Evolution, and Systematics, 52(1), 177–197. https://doi.org/10.1146/annurev-ecolsys-010621-044528\n\n\nDavey, J. W., & Blaxter, M. L. (2010). RADSeq: Next-generation population genetics. Briefings in Functional Genomics, 9(5-6), 416–423. https://doi.org/10.1093/bfgp/elq031\n\n\nFerretti, L., Ledda, A., Wiehe, T., Achaz, G., & Ramos-Onsins, S. E. (2017). Decomposing the Site Frequency Spectrum: The Impact of Tree Topology on Neutrality Tests. Genetics, 207(1), 229–240. https://doi.org/10.1534/genetics.116.188763\n\n\nFuller, Z. L., Mocellin, V. J. L., Morris, L. A., Cantin, N., Shepherd, J., Sarre, L., Peng, J., Liao, Y., Pickrell, J., Andolfatto, P., Matz, M., Bay, L. K., & Przeworski, M. (2020). Population genetics of the coral Acropora millepora: Toward genomic prediction of bleaching. Science, 369(6501), eaba4674. https://doi.org/10.1126/science.aba4674\n\n\nGillespie, J. H. (2004). Population Genetics: A Concise Guide (2nd edition). Johns Hopkins University Press.\n\n\nGutenkunst, R. N., Hernandez, R. D., Williamson, S. H., & Bustamante, C. D. (2009). Inferring the joint demographic history of multiple populations from multidimensional SNP frequency data. PLoS Genetics, 5(10), e1000695. https://doi.org/10.1371/journal.pgen.1000695\n\n\nHahn, M. (2019). Molecular Population Genetics (First). Oxford University Press.\n\n\nHaller, Ben. (2016). Messer Lab SLiM. In Messer Lab. https://messerlab.org/slim/\n\n\nHartl, D. L., & Clark, A. G. (1997). Principles of population genetics. Sinauer Associates.\n\n\nJohri, P., Aquadro, C. F., Beaumont, M., Charlesworth, B., Excoffier, L., Eyre-Walker, A., Keightley, P. D., Lynch, M., McVean, G., Payseur, B. A., Pfeifer, S. P., Stephan, W., & Jensen, J. D. (2022). Recommendations for improving statistical inference in population genomics. PLOS Biology, 20(5), e3001669. https://doi.org/10.1371/journal.pbio.3001669\n\n\nLiu, C.-C., Shringarpure, S., Lange, K., & Novembre, J. (2020). Exploring Population Structure with Admixture Models and Principal Component Analysis. In J. Y. Dutheil (Ed.), Statistical Population Genomics (pp. 67–86). Springer US. https://doi.org/10.1007/978-1-0716-0199-0_4\n\n\nLou, R. N., Jacobs, A., Wilder, A. P., & Therkildsen, N. O. (2021). A beginner’s guide to low-coverage whole genome sequencing for population genomics. Molecular Ecology, 30(23), 5966–5993. https://doi.org/10.1111/mec.16077\n\n\nNei, M., & Kumar, S. (2000). Molecular Evolution and Phylogenetics. Oxford University Press.\n\n\nPatterson, N., Price, A. L., & Reich, D. (2006). Population Structure and Eigenanalysis. PLOS Genetics, 2(12), e190. https://doi.org/10.1371/journal.pgen.0020190\n\n\nPeter, B. M. (2016). Admixture, Population Structure, and F-Statistics. Genetics, 202(4), 1485–1501. https://doi.org/10.1534/genetics.115.183913\n\n\nSchlötterer, C., Tobler, R., Kofler, R., & Nolte, V. (2014). Sequencing pools of individuals - mining genome-wide polymorphism data without big funding. Nature Reviews. Genetics, 15(11), 749–763. https://doi.org/10.1038/nrg3803\n\n\nTalla, V., Soler, L., Kawakami, T., Dincă, V., Vila, R., Friberg, M., Wiklund, C., & Backström, N. (2019). Dissecting the Effects of Selection and Mutation on Genetic Diversity in Three Wood White (Leptidea) Butterfly Species. Genome Biology and Evolution, 11(10), 2875–2886. https://doi.org/10.1093/gbe/evz212\n\n\nVertebrate Genomes Project. (n.d.). https://vertebrategenomesproject.org. https://vertebrategenomesproject.org\n\n\nWetterstrand, KA. DNA Sequencing Costs: Data from the NHGRI Genome Sequencing Program (GSP). www.genome.gov/sequencingcostsdata"
+  },
+  {
+    "objectID": "recipes/index.html",
+    "href": "recipes/index.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Collection of SLiM recipes (Haller, Ben, 2016) used to generate figures and examples. SLiM recipes can be run with wrapper pgip-slim to generate multiple simulations.\n\npgip-slim --help\n## Usage: pgip-slim [OPTIONS] SLIM\n## \n##   pgip slim simulator CLI.\n## \n##   Wrapper that runs slim on SLIM controlfile.\n## \n## Options:\n##   -o, --outdir PATH               Output directory\n##   -N, --population-size INTEGER   Population size\n##   -r, --recombination_rate FLOAT  Recombination rate\n##   -m, --mutation_rate FLOAT       Mutation rate\n##   -l, --sequence_length INTEGER   Sequence length\n##   -n, --repetitions INTEGER RANGE\n##                                   Number of repetitions  [x>=1]\n##   --seed TEXT                     Random seed\n##   --threads INTEGER RANGE         Number of parallel threads to run  [x>=1]\n##   --prefix TEXT                   File output prefix\n##   --no-recapitate                 Don't do recapitation\n##   --debug                         Print debugging info\n##   --help                          Show this message and exit.\n\n\nselective_sweep.slim\n\nRecipe to simulate a selective sweep"
+  },
+  {
+    "objectID": "exercises/index.html",
+    "href": "exercises/index.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Exercises\nExercises in population genomics in practice."
+  },
+  {
+    "objectID": "exercises/wrightfisher.html",
+    "href": "exercises/wrightfisher.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Wright-Fisher model"
+  },
+  {
+    "objectID": "exercises/ld_pruning_pca.html",
+    "href": "exercises/ld_pruning_pca.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Note\n\n\n\n\nWe assume that the input data has already been filtered and pre-processed to obtain a high-quality variant call set. See .\nsgkit pca method does not support missing data - add example?\n\n\n\nVariant data is high-dimensional and some sort of dimensionality reduction is often employed to provide a condensed overview of the data and as a means to identify potential population structure. Principal component analysis (PCA) is one common technique usually applied to genetic variation data (e.g. (Patterson et al., 2006)).\nFor large data sets, it is common practice to first prune the data to remove correlation between data points. In this exercise, you will prune the data using either plink or sgkit code snippets.\n\n\n\n\n\n\n\n\nFIXME\n\n\n\nsgkit is likely too cumbersome? Keep as reference for now, use EIGENSOFT or plink for pruning and pca.\n\n\n\nimport os\nimport sgkit as sg\nfrom sgkit.io import vcf as sgvcf\n\nThen make output directories and convert vcf to the zarr format.\n\noutdir = \"output/ld_pruning\"\nos.makedirs(outdir, exist_ok=True)\nvcf = \"../data/ooa/ooa.gatk.vcf.gz\"\nzarr = os.path.join(outdir, \"ooa.gatk.zarr\")\nsgvcf.vcf_to_zarr(vcf, zarr)\n\nWe load the data and remember the original chunk size (needed internally for sgkit):\n\nds = sg.load_dataset(zarr)\noriginal_chunk_size = ds.chunks[\"variants\"][0]\n\n\n\n\nBefore pruning the data, we make a plot of the LD structure. We will use python for plotting and first load the necessary libraries:\n\n\n\nDepending on the number of variants, it may be necessary to work on a subset of variants. Here with only {python} #| echo: false display(Markdown(\"\"\"{nvar}\"\"\".format(nvar = len(ds.variants)))) variants we skip this step.\nFor pruning, we first need to calculate the dosage:\n\nds['dosage'] = ds['call_genotype'].sum(dim='ploidy')\n\nand then divide into windows by variants:\n\nds = sg.window_by_variant(ds, size=200)\nprint(ds)\n\n<xarray.Dataset>\nDimensions:               (windows: 4, variants: 648, samples: 10, ploidy: 2,\n                           alleles: 4, filters: 2)\nDimensions without coordinates: windows, variants, samples, ploidy, alleles,\n                                filters\nData variables: (12/15)\n    window_contig         (windows) int64 0 0 0 0\n    window_start          (windows) int64 0 200 400 600\n    window_stop           (windows) int64 200 400 600 648\n    call_genotype         (variants, samples, ploidy) int8 dask.array<chunksize=(648, 10, 2), meta=np.ndarray>\n    call_genotype_mask    (variants, samples, ploidy) bool dask.array<chunksize=(648, 10, 2), meta=np.ndarray>\n    call_genotype_phased  (variants, samples) bool dask.array<chunksize=(648, 10), meta=np.ndarray>\n    ...                    ...\n    variant_filter        (variants, filters) bool dask.array<chunksize=(648, 2), meta=np.ndarray>\n    variant_id            (variants) object dask.array<chunksize=(648,), meta=np.ndarray>\n    variant_id_mask       (variants) bool dask.array<chunksize=(648,), meta=np.ndarray>\n    variant_position      (variants) int32 dask.array<chunksize=(648,), meta=np.ndarray>\n    variant_quality       (variants) float32 dask.array<chunksize=(648,), meta=np.ndarray>\n    dosage                (variants, samples) int64 dask.array<chunksize=(648, 10), meta=np.ndarray>\nAttributes:\n    contigs:               ['tsk_6-CEU-3-0']\n    filters:               ['PASS', 'LowQual']\n    max_alt_alleles_seen:  1\n    source:                sgkit-0.5.0\n    vcf_header:            ##fileformat=VCFv4.2\\n##FILTER=<ID=PASS,Descriptio...\n    vcf_zarr_version:      0.1\n\n\n\n\n\nBefore proceeding with the pca, we need to compute quality control variant statistics from genotype calls followed by calculation of and filtering on allele frequencies.\n\n\n\nds = sg.variant_stats(ds)\n\nds = ds.assign(**ds[[\"variant_allele_frequency\"]].compute()).pipe(\nlambda ds: ds.sel(variants=(ds.variant_allele_frequency[:, 1] > 0.01))\n)\nds = ds.chunk(original_chunk_size)\n\nNow we can perform pca.\n\n# Transform genotype call into number of non-reference alleles\nds_pca = sg.stats.pca.count_call_alternate_alleles(ds)\n# Ensure data has positive variance across samples\nvariant_mask = ((ds_pca.call_alternate_allele_count < 0).any(dim=\"samples\")) | (\nds_pca.call_alternate_allele_count.std(dim=\"samples\") <= 0.0\n)\n\nds_pca = ds_pca.sel(variants=~variant_mask)\nds_pca[\"call_alternate_allele_count\"] = ds_pca.call_alternate_allele_count.chunk(\n(None, -1)\n)\nds_pca = sg.pca(ds_pca, n_components=10)\n\nWe convert the data structure to a pandas dataframe and add various metadata, such as sample and population names.\n\nexplained = ds_pca.sample_pca_explained_variance_ratio.values * 100\ndf = (\nds_pca.sample_pca_projection.to_dataframe()\n.reset_index()\n.pivot(index=\"samples\", columns=\"components\")\n)\ndf.index.names = [\"sample\"]\ndf.columns = [f\"PC{i+1}\" for _, i in df.columns]\ndf.reset_index(inplace=True)\ndf[\"sample\"] = ds_pca.sample_id[df[\"sample\"].values].values\ndf[\"population\"] = df[\"sample\"].str.slice(0, 3)\ncolors = dict(zip(set(df[\"population\"]), utils._get_palette(n=3)))\ndf[\"color\"] = [colors[x] for x in df[\"population\"]]\n\nFor the purpose of this exercise, we want to also investigate the effect of sequencing coverage.\n\nimport io\nimport pandas as pd\nimport subprocess\noutput = subprocess.check_output(\"samtools depth -a ../data/ooa/*.bam\", shell=True)\ncoverage = pd.read_table(io.StringIO(output.decode()), header=None).mean(axis=0)\ndf[\"coverage\"] = coverage[1:]\n\n/tmp/ipykernel_7522/4118459200.py:5: FutureWarning: The default value of numeric_only in DataFrame.mean is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.\n  coverage = pd.read_table(io.StringIO(output.decode()), header=None).mean(axis=0)\n/tmp/ipykernel_7522/4118459200.py:6: FutureWarning: The behavior of `series[i:j]` with an integer-dtype index is deprecated. In a future version, this will be treated as *label-based* indexing, consistent with e.g. `series[i]` lookups. To retain the old behavior, use `series.iloc[i:j]`. To get the future behavior, use `series.loc[i:j]`.\n  df[\"coverage\"] = coverage[1:]\n\n\nFinally, we can plot the pca with bokeh.\n\n\nfrom pgip.plotting import bokeh_plot_pca\np = bokeh_plot_pca(df, explained, ncomp=3, ncols=2, width=400, height=400)\nshow(p)\n\n\n\n  \n(a) ?(caption)\n\n\n\n\n\n(b) ?(caption)\n\n\nFigure 1: ?(caption)"
+  },
+  {
+    "objectID": "exercises/describing_variation.html",
+    "href": "exercises/describing_variation.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Describing variation\n\n\n\n\n\n\nNote\n\n\n\n\nuse sequence masks (0/1) encoded gz files to enable quick calculations of feature-based stats (e.g. 4d-degenerate sites)"
+  },
+  {
+    "objectID": "exercises/admixture.html",
+    "href": "exercises/admixture.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Admixture\n\n\n\n\n\n\nNote\n\n\n\nFollow tutorial (Liu et al., 2020)\n\n\n\nadmixtools (convert vcf via vcftools to ped)\nrun admixture (STRUCTURE?)\n\n\n\n\n\n\nReferences\n\nLiu, C.-C., Shringarpure, S., Lange, K., & Novembre, J. (2020). Exploring Population Structure with Admixture Models and Principal Component Analysis. In J. Y. Dutheil (Ed.), Statistical Population Genomics (pp. 67–86). Springer US. https://doi.org/10.1007/978-1-0716-0199-0_4"
+  },
+  {
+    "objectID": "exercises/genotype_likelihoods.html",
+    "href": "exercises/genotype_likelihoods.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Genotype likelihoods and low-coverage data\nIntroduce genotype likelihoods. Exercise: calculate likelihoods by writing a function, or doing a simple worked example"
+  },
+  {
+    "objectID": "exercises/data.html",
+    "href": "exercises/data.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Note\n\n\n\nDatasets are presumably of three types:\n\nsimulated data\nexperimental data\nprecomputed results\n\nDatasets 1 and 2 will be used for analyses. Datasets of type 3 are results that take a long time to compute (e.g. on a HPC) and will be needed to enable compilation of jupyter book examples\nOnly small datasets are committed to this repo. In the case we need larger datasets, setup an independent data repo.\n\n\nDatasets reside in the data subdirectory Table 1 . Simulated datasets have been generated with the script data/make_test_data.py.\n\n\nTable 1: Simulated dataset\n\n\nDataset\nDescription\nLocation\n\n\n\n\nooa\nOut of Africa\ndata/ooa\n\n\nooa-outgroups\nOut of Africa with outgroups\ndata/ooa-outgroups\n\n\n\n\n\n\nThe script data/make_test_data.py has subcommands to simulate genealogies, mutations, and read data from a demographic model. Demographic models are defined using the Demes specification. For neutral models, genealogies and mutations are simulated with msprime and saved as succinct tree sequences that can be converted to standard variant call format (vcf) files.\nThe variant data represents the true state of the model. In addition, we can assign haplotypes to each individual from which sequence reads can be simulated. One simulated individual is chosen as reference and a reference sequence is generated, either from experimental data or randomly, for that individual. Given the reference and the variant data, haplotype sequences are generated for each individual in the model. The haplotype sequences are then used as templates to generate sequencing reads with realistic error profiles. Currently insilicoseq is used to simulate reads.\nSimulated reads are mapped with bwa to the reference and saved to bam files. The raw data reads and haplotype sequences are finally discarded to save space. Variant calling is done with GATK.\n\n\n\n\n\n\nFIXME\n\n\n\nDesired improvements:\n\ncurrent datasets are based on randomly generated sequences. There is now a subcommand to download ucsc data from hg38 that would better represent GC content, repeats etc\nbase mutations are random; model realistic ti/tv ratios better\n\n\n\n\n\nThe out of Africa dataset is based on the Gutenkunst et al. (2009) demographic model (Figure 1; see also Population tree example and the stdpopsim out of Africa model specification).\n\n\n\n\n\nFigure 1: demesdraw illustration of out of Africa model.\n\n\n\n\n\n\n\nThe out of Africa with outgroups is an extension of the previous data set (Figure 2). In addition to simulating human data, the model has been expanded to include three outgroups chimpanzee, gorilla and orangutan\n\n\n\n\n\nFigure 2: demesdraw illustration of out of Africa model, including outgroups chimpanzee, gorilla, and orangutan. Note that the time scale is in log units."
+  },
+  {
+    "objectID": "exercises/variantfiltering.html",
+    "href": "exercises/variantfiltering.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Variantfiltering\n\n\n\n\n\n\nFIXME\n\n\n\nDiscuss different types of relevant filters, e.g.\n\nfiltering on read depth, both high to eliminate collapsed repeats, and low for mappability issues. This is particularly important for incomplete assemblies"
+  },
+  {
+    "objectID": "exercises/selection.html",
+    "href": "exercises/selection.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Selection"
+  },
+  {
+    "objectID": "exercises/demographic_inference.html",
+    "href": "exercises/demographic_inference.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Demographic inference"
+  },
+  {
+    "objectID": "exercises/fstatistics.html",
+    "href": "exercises/fstatistics.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "f-statistics\n\n\nExercises\n\n\n\n1 + 1\n\n2\n\n\n\npwd\n\n/home/runner/work/pgip-exercises/pgip-exercises/docs/exercises\n\n\n\n\n\ngetwd()\n\n[1] \"/home/runner/work/pgip-exercises/pgip-exercises/docs/exercises\"\n\n\nNOTE: Dsuite uses allele frequency estimates. Start example by calculating stuff by hand.\nWant also to relate the allele frequencies to branch lengths; cf Peter (2016)\n\npwd\nls\n\n/home/runner/work/pgip-exercises/pgip-exercises/docs/exercises\nadmixture.html\nadmixture.qmd\ndata.html\ndata.qmd\ndata_files\ndemographic_inference.html\ndemographic_inference.qmd\ndescribing_variation.html\ndescribing_variation.qmd\nfstatistics.qmd\nfstatistics.rmarkdown\nfstatistics_cache\ngenetic_diversity.qmd\ngenotype_likelihoods.html\ngenotype_likelihoods.qmd\nindex.html\nindex.qmd\nld_pruning_pca.html\nld_pruning_pca.qmd\noutput\npreparation.qmd\nselection.html\nselection.qmd\nvariantcalling.qmd\nvariantfiltering.html\nvariantfiltering.qmd\nwrightfisher.html\nwrightfisher.qmd\n\n\n\n\n\n\n\nReferences\n\nPeter, B. M. (2016). Admixture, Population Structure, and F-Statistics. Genetics, 202(4), 1485–1501. https://doi.org/10.1534/genetics.115.183913"
+  },
+  {
+    "objectID": "exercises/preparation.html",
+    "href": "exercises/preparation.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "FIXME\n\n\n\nStudent preparatory information, including:\n\nhowto setup compute environment\nhowto work on uppmax\nsuggested reading\n\n\n\n\n\nAdd instructions on packages to install, or provide a docker image.\n\n\n\nAdd basics of working in a CLI.\n\n\n\nAdd instructions on how to work on uppmax. Prerecorded video would be nice.\n\n\n\nAdd short summary of basic concepts? Glossary-like?\n\n\n\nJohri et al. (2022) on recommendations for improving statistical inference in population genomics."
+  },
+  {
+    "objectID": "exercises/genetic_diversity.html",
+    "href": "exercises/genetic_diversity.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Warning\n\n\n\nFIXME: pen-and-paper exercise to calculate diversity based on “fixed” genotype calls and genotype likelihoods to highlight differences; the latter requires GLs for all sites. Use Table 4.1 in (Hartl & Clark, 1997, p. 173) and/or Figure 3.1 in (Hahn, 2019, p. 45)"
+  },
+  {
+    "objectID": "exercises/variantcalling.html",
+    "href": "exercises/variantcalling.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Briefly describe best practice pipeline (e.g. GATK, bcftools, freebayes), highlighting some of the problems with natural populations: - many workflows are human-centric and don’t scale to non-model organisms (e.g. chromosome numbers in GATK)\n\n\n\n\n```{code-block} shell\n:name: bcftools\nbcftools | head -2\n```\n\n```{code-block} shell\n:name: gatk\ngatk HaplotypeCaller\n```\n\nOptional: run bcftools / HaplotypeCaller / freebayes on data set or at least show commands how files were generated"
+  },
+  {
+    "objectID": "lectures/datageneration.html",
+    "href": "lectures/datageneration.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "What are the goals? To compile variation data for individuals. What are the issues?\n\nsampling\nlibrary preparation cost\nsequencing cost\nlack of reference genomes (soon outdated)\n\n\n\n\n\n\nhigh-coverage sequencing\n\npros: comprehensive coverage\ncons: until recently expensive, time-consuming\n\nlow-coverage sequencing Lou et al. (2021)\n\npros: cost-efficient, better to sample many sites\ncons: needs alternative analysis methods (likelihoods)\n\n\n\n\n\n\npool-seq Schlötterer et al. (2014)\nRADSeq (Baird et al., 2008; Davey & Blaxter, 2010)\n\n\n\n\n\nOnce individual re-sequencing data has been obtained, it is mapped to a reference genome. For non-model organisms, reference genomes are often lacking1, for which reason many studies include sequencing and genome assembly of a reference individual. In other cases, a solution is to map to a closely related species. That comes with issues of its own, such as reads primarily mapping to conserved regions, thereby biasing population genomic statistics, or structural rearrangements between species hampering inferences. A final option is to map reads to a reference transcriptome. However, given the drop in sequencing cost and advances in long-read technologies, new projects could be complemented with de novo assembly of a reference individual.\n\n\n\n\n\n\ncf Table 3 (Lou et al., 2021, p. 5974)"
+  },
+  {
+    "objectID": "lectures/index.html",
+    "href": "lectures/index.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Lecture notes\nCollection of lecture notes."
+  },
+  {
+    "objectID": "lectures/genetic_diversity.html",
+    "href": "lectures/genetic_diversity.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "The nucleotide diversity is defined as the average number of pairwise differences per site for a number of sequences (Nei & Kumar, 2000, p. 251):\n\\[\n\\pi = \\sum_{ij} x_i x_j \\pi_{ij}\n\\]\nHere \\(x_i\\) is the population frequency of sequence \\(i\\). It is unclear whether it means the number of occurrences or the fraction of sequence \\(i\\) in a population of \\(n\\) samples.\nSince \\(\\pi_{ii} = 0\\) and \\(\\pi_{ij} = \\pi_{ji}\\), the equation can be rewritten as\n\\[\n\\pi = \\sum_{ij} x_i x_j \\pi_{ij} = \\sum_{i<j} x_i x_j \\pi_{ij} + \\sum_{j<i} x_j x_i \\pi_{ji} + \\sum_{i} x_i x_i \\pi_{ii} = 2\\sum_{ij} x_i x_j \\pi_{ij}\n\\]\nThe (second) summation has \\(n(n-1)/2\\) terms.\nThe nucleotide diversity can also be expressed as a function of the allele frequency spectrum (afs) \\(p = (p_1,p_2,...,p_q)\\), where \\(p_i\\) is the frequency of sites with \\(i\\) minor alleles, and \\(q\\) is the number of possible non-monomorphic allele configurations. For diploid organisms, \\(q = 2k - 1\\). \\(p\\) is the unfolded afs. There is a folded version \\(p^* = (p^*_1, p^*_2, p^*_{\\lceil(q+1)/2\\rceil})\\), where \\(p^*_i = p_i + p_{q-i}\\) for \\(i \\neq \\lceil(q+1)/2\\rceil\\) and \\(p^*_i = p_i\\) otherwise.\nNow, for a given site \\(s\\) with \\(i\\) minor alleles, there are \\(i(q-i)\\) different combinations where \\(\\pi_{ij} \\neq 0\\). Moreover, \\(x_i = x_j =  1\\), such that\n\\[\n\\pi_s = \\sum_{i<j} x_i x_j \\pi_{ij} = i(q - i)\n\\]\nGeneralizing to \\(S = \\sum_{i=1}^{q} p_i\\) sites, there are \\(p_i\\) sites with allele configuration \\(i, (q-i)\\), such that\n\\[\n\\pi = \\sum_{i=1}^{q} p_i i (q-i)\n\\]\nNormalizing by the number of terms for each site, \\(n(n-1)/2\\) gives the average pairwise nucleotide diversity per site.\nLetting \\(k = \\lceil(q+1)/2\\rceil\\), we can further rewrite \\(\\pi\\) as\n\\[\n\\pi = \\sum_{i=1}^{q} p_i i (q-i) = p_k k (q-k) +  \\sum_{i=1}^{k - 1} p_i i (q-i) + p_{q-i} (q-i) i = \\sum_{i=1}^{k} p^*_i i (k - i)\n\\]"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "As the focus of the course is on hands-on work, the topics have been designed to cover the fundamental analyses that are common in many population genomics studies. The course consists of lectures and exercises, with a focus on the practical aspects of analyses. Whereas lectures introduce some background theory, their primary aim is to set the stage for accompanying exercises.\n\n\nIn principle, you could imagine the course structure to follow that of a manuscript (Fuller et al., 2020)\nHigh-throughput DNA sequencing has now made it possible to generate whole-genome resequencing data for multiple individuals and populations, and a first step is to map sequence data to a reference, perform variant calling and variant filtering.\nOnce a high-quality variant set has been obtained, a common task is to describe variation, either in terms of summary statistics such as nucleotide diversity (\\(\\pi\\)) or site-frequency spectra (sfs), or as descriptions of population structure in terms of admixture or pca plots.\nGenetic diversity is also affected by population history and demographic processes such as population expansion, bottlenecks, migration events and hybridizations.\nFinally, it is often of interest to identify adaptive traits, to which end selection tests and scans can be performed. The tests are designed to detect signals of selection, either via direct selection on loci, or by looking at haplotype structures to detect linked selection.\n\n\n\nMuch of what has been described in The manuscript route has recently been treated in an article on recommendations for improving statistical inference in population genomics (Johri et al., 2022). In it, the authors point out that whereas historically theoretical advances outpaced data production, that is no longer true due to the advent of next-generation sequencing. In particular, they caution researchers to attach too much faith to a test that explains the data well, as there are many alternative hypotheses with equal explanatory power, but with drastically different conclusions. At the very least, a population genomics study should aim at first generating a baseline model consisting of all or several of the following components:\n\nmutation\nrecombination\nreassortment\ngene conversion\npurifying selection acting on functional regions and its effects on linked variants (background selection)\ngenetic drift with demographic history and geographic structure\n\nThe exercises are designed to address many of the points above, and to highlight cases where competing hypotheses may actually explain data to equal degrees.\n\n\n\n\n\n\n\n\n\nFIXME\n\n\n\nRewrite/restructure and add more additional topics\n\n\n\n\n\n\n\n\nNote\n\n\n\nNB: with time we could use repo to collect all kinds of exercises (even those that don’t fit current curriculum), providing the possibility to create optional course plans\n\n\nA five day course cannot but provide an overview of possible analyses and topics. Among the things we won’t have time to cover are\n\nmachine learning and AI for population genomics\nrecombination landscape estimation\ngene conversion\nexperimental design\ncoalescent and Wright-Fisher simulations\nABC methods\nancestral recombination graphs and tree sequence inference\nancient DNA\nspatial genetics\n…\n\n\n\n\nmachine learning and AI for population genomics\nsimulation (focus on msprime and SLiM)\nancestral recombination graphs and tree sequence inference"
+  },
+  {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Population genomics in practice",
+    "section": "",
+    "text": "Slides\nLecture slides that go along with the lecture notes."
+  }
+]

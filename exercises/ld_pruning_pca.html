@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Population genomics in practice – ld_pruning_pca</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../img/nbislogo-green.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/nbislogo-green.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Population genomics in practice</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../lectures/index.html">
+ <span class="menu-text">Lecture notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../slides/index.html">
+ <span class="menu-text">Slides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../exercises/index.html" aria-current="page">
+ <span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../recipes/index.html">
+ <span class="menu-text">Code recipes</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">Exercises</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/preparation.html" class="sidebar-item-text sidebar-link">Preparation</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/data.html" class="sidebar-item-text sidebar-link">Data</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Monday 8 May</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/variantfiltering.html" class="sidebar-item-text sidebar-link">Variantfiltering</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Tuesday 9 May</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Wednesday 10 May</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ld_pruning_pca.html" class="sidebar-item-text sidebar-link active">Principal component analysis</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-ld-pruning-pca" id="toc-sec-ld-pruning-pca" class="nav-link active" data-scroll-target="#sec-ld-pruning-pca">Principal component analysis</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data preparation</a></li>
+  <li><a href="#linkage-disequilibrium-structure" id="toc-linkage-disequilibrium-structure" class="nav-link" data-scroll-target="#linkage-disequilibrium-structure">Linkage disequilibrium structure</a></li>
+  <li><a href="#linkage-disequilibrium-pruning" id="toc-linkage-disequilibrium-pruning" class="nav-link" data-scroll-target="#linkage-disequilibrium-pruning">Linkage disequilibrium pruning</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="sec-ld-pruning-pca" class="level1">
+<h1>Principal component analysis</h1>
+<div class="cell" data-execution_count="1">
+<div id="ld-pruning-pca-setup" class="cell-output cell-output-display">
+
+<script type="application/javascript">
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    const script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    const cell = handle.cell;
+
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
+    // Clean up Bokeh references
+    if (id != null && id in Bokeh.index) {
+      Bokeh.index[id].model.document.clear();
+      delete Bokeh.index[id];
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
+        iopub: {
+          output: function(msg) {
+            const id = msg.content.text.trim();
+            if (id in Bokeh.index) {
+              Bokeh.index[id].model.document.clear();
+              delete Bokeh.index[id];
+            }
+          }
+        }
+      });
+      // Destroy server and session
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    const output_area = handle.output_area;
+    const output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      const bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      const toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  const NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded() {
+    const el = document.getElementById(null);
+    if (el != null) {
+      el.textContent = "BokehJS is loading...";
+    }
+    if (root.Bokeh !== undefined) {
+      if (el != null) {
+        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(display_loaded, 100)
+    }
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-3.0.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.0.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.0.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.0.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.0.2.min.js"];
+  const css_urls = [];
+
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {
+    }
+  ];
+
+  function run_inline_js() {
+    if (root.Bokeh !== undefined || force === true) {
+          for (let i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      const cell = $(document.getElementById(null)).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>We assume that the input data has already been filtered and pre-processed to obtain a high-quality variant call set. See <a href="@sec-variantfiltering"></a>.</li>
+<li>sgkit pca method does not support missing data - add example?</li>
+</ul>
+</div>
+</div>
+<p>Variant data is high-dimensional and some sort of dimensionality reduction is often employed to provide a condensed overview of the data and as a means to identify potential population structure. Principal component analysis (PCA) is one common technique usually applied to genetic variation data (e.g. <span class="citation" data-cites="patterson_PopulationStructureEigenanalysis_2006">(<a href="#ref-patterson_PopulationStructureEigenanalysis_2006" role="doc-biblioref">Patterson et al., 2006</a>)</span>).</p>
+<p>For large data sets, it is common practice to first prune the data to remove correlation between data points. In this exercise, you will prune the data using either <a href="sec_pca_with_plink">plink</a> or <a href="sec_pca_with_sgkit">sgkit</a> code snippets.</p>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data preparation</h2>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+FIXME
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>sgkit is likely too cumbersome? Keep as reference for now, use EIGENSOFT or plink for pruning and pca.</p>
+</div>
+</div>
+<div id="ld-pruning-pca-sgkit" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sgkit <span class="im">as</span> sg</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sgkit.io <span class="im">import</span> vcf <span class="im">as</span> sgvcf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then make output directories and convert vcf to the zarr format.</p>
+<div id="ld-pruning-sgkit-make-zarr" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>outdir <span class="op">=</span> <span class="st">"output/ld_pruning"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>os.makedirs(outdir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>vcf <span class="op">=</span> <span class="st">"../data/ooa/ooa.gatk.vcf.gz"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>zarr <span class="op">=</span> os.path.join(outdir, <span class="st">"ooa.gatk.zarr"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sgvcf.vcf_to_zarr(vcf, zarr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We load the data and remember the original chunk size (needed internally for sgkit):</p>
+<div id="ld-pruning-sgkit-load-data" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> sg.load_dataset(zarr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>original_chunk_size <span class="op">=</span> ds.chunks[<span class="st">"variants"</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="linkage-disequilibrium-structure" class="level2">
+<h2 class="anchored" data-anchor-id="linkage-disequilibrium-structure">Linkage disequilibrium structure</h2>
+<p>Before pruning the data, we make a plot of the LD structure. We will use <code>python</code> for plotting and first load the necessary libraries:</p>
+</section>
+<section id="linkage-disequilibrium-pruning" class="level2">
+<h2 class="anchored" data-anchor-id="linkage-disequilibrium-pruning">Linkage disequilibrium pruning</h2>
+<p>Depending on the number of variants, it may be necessary to work on a subset of variants. Here with only <code>{python} #| echo: false display(Markdown("""{nvar}""".format(nvar = len(ds.variants))))</code> variants we skip this step.</p>
+<p>For pruning, we first need to calculate the dosage:</p>
+<div id="ld-pruning-sgkit-dosage" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds[<span class="st">'dosage'</span>] <span class="op">=</span> ds[<span class="st">'call_genotype'</span>].<span class="bu">sum</span>(dim<span class="op">=</span><span class="st">'ploidy'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and then divide into windows by variants:</p>
+<div id="ld-pruning-sgkit-windows" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> sg.window_by_variant(ds, size<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.Dataset&gt;
+Dimensions:               (windows: 4, variants: 648, samples: 10, ploidy: 2,
+                           alleles: 4, filters: 2)
+Dimensions without coordinates: windows, variants, samples, ploidy, alleles,
+                                filters
+Data variables: (12/15)
+    window_contig         (windows) int64 0 0 0 0
+    window_start          (windows) int64 0 200 400 600
+    window_stop           (windows) int64 200 400 600 648
+    call_genotype         (variants, samples, ploidy) int8 dask.array&lt;chunksize=(648, 10, 2), meta=np.ndarray&gt;
+    call_genotype_mask    (variants, samples, ploidy) bool dask.array&lt;chunksize=(648, 10, 2), meta=np.ndarray&gt;
+    call_genotype_phased  (variants, samples) bool dask.array&lt;chunksize=(648, 10), meta=np.ndarray&gt;
+    ...                    ...
+    variant_filter        (variants, filters) bool dask.array&lt;chunksize=(648, 2), meta=np.ndarray&gt;
+    variant_id            (variants) object dask.array&lt;chunksize=(648,), meta=np.ndarray&gt;
+    variant_id_mask       (variants) bool dask.array&lt;chunksize=(648,), meta=np.ndarray&gt;
+    variant_position      (variants) int32 dask.array&lt;chunksize=(648,), meta=np.ndarray&gt;
+    variant_quality       (variants) float32 dask.array&lt;chunksize=(648,), meta=np.ndarray&gt;
+    dosage                (variants, samples) int64 dask.array&lt;chunksize=(648, 10), meta=np.ndarray&gt;
+Attributes:
+    contigs:               ['tsk_6-CEU-3-0']
+    filters:               ['PASS', 'LowQual']
+    max_alt_alleles_seen:  1
+    source:                sgkit-0.5.0
+    vcf_header:            ##fileformat=VCFv4.2\n##FILTER=&lt;ID=PASS,Descriptio...
+    vcf_zarr_version:      0.1</code></pre>
+</div>
+</div>
+</section>
+<section id="pca" class="level2">
+<h2 class="anchored" data-anchor-id="pca">PCA</h2>
+<p>Before proceeding with the pca, we need to compute quality control variant statistics from genotype calls followed by calculation of and filtering on allele frequencies.</p>
+<!-- See https://github.com/pystatgen/sgkit/issues/752 -->
+<!-- All the pca code is based on that example -->
+<div id="ld-pruning-sgkit-qc" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> sg.variant_stats(ds)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> ds.assign(<span class="op">**</span>ds[[<span class="st">"variant_allele_frequency"</span>]].compute()).pipe(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">lambda</span> ds: ds.sel(variants<span class="op">=</span>(ds.variant_allele_frequency[:, <span class="dv">1</span>] <span class="op">&gt;</span> <span class="fl">0.01</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> ds.chunk(original_chunk_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can perform pca.</p>
+<div id="ld-pruning-sgkit-do-pca" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform genotype call into number of non-reference alleles</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ds_pca <span class="op">=</span> sg.stats.pca.count_call_alternate_alleles(ds)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure data has positive variance across samples</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>variant_mask <span class="op">=</span> ((ds_pca.call_alternate_allele_count <span class="op">&lt;</span> <span class="dv">0</span>).<span class="bu">any</span>(dim<span class="op">=</span><span class="st">"samples"</span>)) <span class="op">|</span> (</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ds_pca.call_alternate_allele_count.std(dim<span class="op">=</span><span class="st">"samples"</span>) <span class="op">&lt;=</span> <span class="fl">0.0</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ds_pca <span class="op">=</span> ds_pca.sel(variants<span class="op">=~</span>variant_mask)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ds_pca[<span class="st">"call_alternate_allele_count"</span>] <span class="op">=</span> ds_pca.call_alternate_allele_count.chunk(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>(<span class="va">None</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ds_pca <span class="op">=</span> sg.pca(ds_pca, n_components<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We convert the data structure to a pandas dataframe and add various metadata, such as sample and population names.</p>
+<div id="ld-pruning-sgkit-add-metadata" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>explained <span class="op">=</span> ds_pca.sample_pca_explained_variance_ratio.values <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> (</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ds_pca.sample_pca_projection.to_dataframe()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>.reset_index()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>.pivot(index<span class="op">=</span><span class="st">"samples"</span>, columns<span class="op">=</span><span class="st">"components"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>df.index.names <span class="op">=</span> [<span class="st">"sample"</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> [<span class="ss">f"PC</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> _, i <span class="kw">in</span> df.columns]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>df.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"sample"</span>] <span class="op">=</span> ds_pca.sample_id[df[<span class="st">"sample"</span>].values].values</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"population"</span>] <span class="op">=</span> df[<span class="st">"sample"</span>].<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(<span class="bu">set</span>(df[<span class="st">"population"</span>]), utils._get_palette(n<span class="op">=</span><span class="dv">3</span>)))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"color"</span>] <span class="op">=</span> [colors[x] <span class="cf">for</span> x <span class="kw">in</span> df[<span class="st">"population"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For the purpose of this exercise, we want to also investigate the effect of sequencing coverage.</p>
+<div id="ld-pruning-sgkit-sequencing-coverage" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> subprocess.check_output(<span class="st">"samtools depth -a ../data/ooa/*.bam"</span>, shell<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> pd.read_table(io.StringIO(output.decode()), header<span class="op">=</span><span class="va">None</span>).mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"coverage"</span>] <span class="op">=</span> coverage[<span class="dv">1</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_7522/4118459200.py:5: FutureWarning: The default value of numeric_only in DataFrame.mean is deprecated. In a future version, it will default to False. In addition, specifying 'numeric_only=None' is deprecated. Select only valid columns or specify the value of numeric_only to silence this warning.
+  coverage = pd.read_table(io.StringIO(output.decode()), header=None).mean(axis=0)
+/tmp/ipykernel_7522/4118459200.py:6: FutureWarning: The behavior of `series[i:j]` with an integer-dtype index is deprecated. In a future version, this will be treated as *label-based* indexing, consistent with e.g. `series[i]` lookups. To retain the old behavior, use `series.iloc[i:j]`. To get the future behavior, use `series.loc[i:j]`.
+  df["coverage"] = coverage[1:]</code></pre>
+</div>
+</div>
+<p>Finally, we can plot the pca with bokeh.</p>
+<div id="fig-ld-pruning-sgkit-plot-pca" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pgip.plotting <span class="im">import</span> bokeh_plot_pca</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh_plot_pca(df, explained, ncomp<span class="op">=</span><span class="dv">3</span>, ncols<span class="op">=</span><span class="dv">2</span>, width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-ld-pruning-sgkit-plot-pca-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+  <div id="1288df74-364c-4b0c-aca2-654a3e522f7f" data-root-id="p1288" style="display: contents;"></div>
+<p></p><figcaption class="figure-caption">(a) <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+<div id="fig-ld-pruning-sgkit-plot-pca-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"81b83e80-5015-45bc-8e0a-c49cd94e4893":{"version":"3.0.2","title":"Bokeh Application","defs":[],"roots":[{"type":"object","name":"GridPlot","id":"p1288","attributes":{"toolbar":{"type":"object","name":"Toolbar","id":"p1287","attributes":{"tools":[{"type":"object","name":"ToolProxy","id":"p1280","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1036"},{"type":"object","name":"PanTool","id":"p1114"},{"type":"object","name":"PanTool","id":"p1192"}]}},{"type":"object","name":"ToolProxy","id":"p1281","attributes":{"tools":[{"type":"object","name":"WheelZoomTool","id":"p1037"},{"type":"object","name":"WheelZoomTool","id":"p1115"},{"type":"object","name":"WheelZoomTool","id":"p1193"}]}},{"type":"object","name":"ToolProxy","id":"p1282","attributes":{"tools":[{"type":"object","name":"BoxZoomTool","id":"p1038","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1039","attributes":{"syncable":false,"level":"overlay","visible":false,"left_units":"canvas","right_units":"canvas","bottom_units":"canvas","top_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"BoxZoomTool","id":"p1116","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1117","attributes":{"syncable":false,"level":"overlay","visible":false,"left_units":"canvas","right_units":"canvas","bottom_units":"canvas","top_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"BoxZoomTool","id":"p1194","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1195","attributes":{"syncable":false,"level":"overlay","visible":false,"left_units":"canvas","right_units":"canvas","bottom_units":"canvas","top_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}}]}},{"type":"object","name":"SaveTool","id":"p1283"},{"type":"object","name":"ToolProxy","id":"p1284","attributes":{"tools":[{"type":"object","name":"ResetTool","id":"p1041"},{"type":"object","name":"ResetTool","id":"p1119"},{"type":"object","name":"ResetTool","id":"p1197"}]}},{"type":"object","name":"ToolProxy","id":"p1285","attributes":{"tools":[{"type":"object","name":"HelpTool","id":"p1042"},{"type":"object","name":"HelpTool","id":"p1120"},{"type":"object","name":"HelpTool","id":"p1198"}]}},{"type":"object","name":"ToolProxy","id":"p1286","attributes":{"tools":[{"type":"object","name":"HoverTool","id":"p1044","attributes":{"renderers":"auto","tooltips":[["sample","@sample"],["population","@population"],["coverage","@coverage"]]}},{"type":"object","name":"HoverTool","id":"p1122","attributes":{"renderers":"auto","tooltips":[["sample","@sample"],["population","@population"],["coverage","@coverage"]]}},{"type":"object","name":"HoverTool","id":"p1200","attributes":{"renderers":"auto","tooltips":[["sample","@sample"],["population","@population"],["coverage","@coverage"]]}}]}}]}},"children":[[{"type":"object","name":"Figure","id":"p1004","attributes":{"width":400,"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1005"},"y_range":{"type":"object","name":"DataRange1d","id":"p1006"},"x_scale":{"type":"object","name":"LinearScale","id":"p1018"},"y_scale":{"type":"object","name":"LinearScale","id":"p1020"},"title":{"type":"object","name":"Title","id":"p1007","attributes":{"text":"PC1 vs PC2"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1059","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1001","attributes":{"selected":{"type":"object","name":"Selection","id":"p1003","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1002"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAA=="},"shape":[10],"dtype":"int32","order":"little"}],["sample",{"type":"ndarray","array":["CEU-0","CEU-1","CEU-2","CEU-3","CHB-0","CHB-1","CHB-2","YRI-0","YRI-1","YRI-2"],"shape":[10],"dtype":"object","order":"little"}],["PC1",{"type":"ndarray","array":{"type":"bytes","data":"mNRFQc92BkHJxztBEM2gwQPUWcGQDa3ANvIXwXT0Az/Tet9A+NYJQQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC2",{"type":"ndarray","array":{"type":"bytes","data":"ponNwJVKhsBmvqu+ZzLQwIT1BcE8vL5BBus7QLU7dcB6rpjAdxP1QA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC3",{"type":"ndarray","array":{"type":"bytes","data":"xN3BwKCKT79fjDJAQb01vgm43cCL9SrBkT+WQfueqsD8jJG/8u4YQQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC4",{"type":"ndarray","array":{"type":"bytes","data":"bzNWwZ3Di8BQ7VC/pE4bwR4exEDLaR7ABV5LvybagUEe2KJACyeDQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC5",{"type":"ndarray","array":{"type":"bytes","data":"KcsiQH2PpUA4U/u/CPcSwe745LzK1UZABogzQaYkBkBZquU/rCJswQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC6",{"type":"ndarray","array":{"type":"bytes","data":"M73dQHzSIj9VUVHAA8edvxBA8b6ro7G/r+XnP6b1D0HWdHLBzglJQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC7",{"type":"ndarray","array":{"type":"bytes","data":"IteRwL3MRkE2GXjANzqQwCi7CEFiRI++ycbPvz690MDeBHPAqTOGQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC8",{"type":"ndarray","array":{"type":"bytes","data":"Km58wDyzjr+3v3NBtjcgv6pOekDHm4E8Quo/vyyDsL/8iODAJ5aKwA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC9",{"type":"ndarray","array":{"type":"bytes","data":"ZTjeQJzyHcEZI0q/NGfOwDJrGUF4NT++rOcVQHjgq8BPMF8/0AQ7QA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC10",{"type":"ndarray","array":{"type":"bytes","data":"xVr1tfZgAbZijRe2Yq0mtvaAH7bsAdm1Yq0ytvagErZijQq2Yo0Jtg=="},"shape":[10],"dtype":"float32","order":"little"}],["population",{"type":"ndarray","array":["CEU","CEU","CEU","CEU","CHB","CHB","CHB","YRI","YRI","YRI"],"shape":[10],"dtype":"object","order":"little"}],["color",{"type":"ndarray","array":["#ffed6f","#ffed6f","#ffed6f","#ffed6f","#d6ca66","#d6ca66","#d6ca66","#8dd3c7","#8dd3c7","#8dd3c7"],"shape":[10],"dtype":"object","order":"little"}],["coverage",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAA+H8AAAAAAAD4f5nwS/286SBAK01KQbc3JEDogvqWOb0lQFMFo5I6kT9AcEIhAg5BJkAzbf/KShMeQFXZd0XwHyVAkwA1tWxNIkA="},"shape":[10],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1060","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1061"}}},"glyph":{"type":"object","name":"Circle","id":"p1056","attributes":{"x":{"type":"field","field":"PC1"},"y":{"type":"field","field":"PC2"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.8},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.8},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.8}}},"nonselection_glyph":{"type":"object","name":"Circle","id":"p1057","attributes":{"x":{"type":"field","field":"PC1"},"y":{"type":"field","field":"PC2"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Circle","id":"p1058","attributes":{"x":{"type":"field","field":"PC1"},"y":{"type":"field","field":"PC2"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1013","attributes":{"tools":[{"id":"p1036"},{"id":"p1037"},{"id":"p1038"},{"type":"object","name":"SaveTool","id":"p1040"},{"id":"p1041"},{"id":"p1042"},{"id":"p1044"}]}},"toolbar_location":null,"left":[{"type":"object","name":"LinearAxis","id":"p1029","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1031","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1032"},"axis_label":"PC2 (16.1%)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1030"}}}],"right":[{"type":"object","name":"Legend","id":"p1075","attributes":{"items":[{"type":"object","name":"LegendItem","id":"p1076","attributes":{"label":{"type":"value","value":"CEU"},"renderers":[{"id":"p1059"}],"index":0}},{"type":"object","name":"LegendItem","id":"p1077","attributes":{"label":{"type":"value","value":"CHB"},"renderers":[{"id":"p1059"}],"index":4}},{"type":"object","name":"LegendItem","id":"p1078","attributes":{"label":{"type":"value","value":"YRI"},"renderers":[{"id":"p1059"}],"index":7}}]}}],"below":[{"type":"object","name":"LinearAxis","id":"p1022","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1024","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1025"},"axis_label":"PC1 (22.7%)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1023"}}}],"center":[{"type":"object","name":"Grid","id":"p1028","attributes":{"axis":{"id":"p1022"}}},{"type":"object","name":"Grid","id":"p1035","attributes":{"dimension":1,"axis":{"id":"p1029"}}},{"id":"p1075"}]}},0,0],[{"type":"object","name":"Figure","id":"p1082","attributes":{"width":400,"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1083"},"y_range":{"type":"object","name":"DataRange1d","id":"p1084"},"x_scale":{"type":"object","name":"LinearScale","id":"p1096"},"y_scale":{"type":"object","name":"LinearScale","id":"p1098"},"title":{"type":"object","name":"Title","id":"p1085","attributes":{"text":"PC1 vs PC3"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1137","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1079","attributes":{"selected":{"type":"object","name":"Selection","id":"p1081","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1080"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAA=="},"shape":[10],"dtype":"int32","order":"little"}],["sample",{"type":"ndarray","array":["CEU-0","CEU-1","CEU-2","CEU-3","CHB-0","CHB-1","CHB-2","YRI-0","YRI-1","YRI-2"],"shape":[10],"dtype":"object","order":"little"}],["PC1",{"type":"ndarray","array":{"type":"bytes","data":"mNRFQc92BkHJxztBEM2gwQPUWcGQDa3ANvIXwXT0Az/Tet9A+NYJQQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC2",{"type":"ndarray","array":{"type":"bytes","data":"ponNwJVKhsBmvqu+ZzLQwIT1BcE8vL5BBus7QLU7dcB6rpjAdxP1QA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC3",{"type":"ndarray","array":{"type":"bytes","data":"xN3BwKCKT79fjDJAQb01vgm43cCL9SrBkT+WQfueqsD8jJG/8u4YQQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC4",{"type":"ndarray","array":{"type":"bytes","data":"bzNWwZ3Di8BQ7VC/pE4bwR4exEDLaR7ABV5LvybagUEe2KJACyeDQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC5",{"type":"ndarray","array":{"type":"bytes","data":"KcsiQH2PpUA4U/u/CPcSwe745LzK1UZABogzQaYkBkBZquU/rCJswQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC6",{"type":"ndarray","array":{"type":"bytes","data":"M73dQHzSIj9VUVHAA8edvxBA8b6ro7G/r+XnP6b1D0HWdHLBzglJQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC7",{"type":"ndarray","array":{"type":"bytes","data":"IteRwL3MRkE2GXjANzqQwCi7CEFiRI++ycbPvz690MDeBHPAqTOGQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC8",{"type":"ndarray","array":{"type":"bytes","data":"Km58wDyzjr+3v3NBtjcgv6pOekDHm4E8Quo/vyyDsL/8iODAJ5aKwA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC9",{"type":"ndarray","array":{"type":"bytes","data":"ZTjeQJzyHcEZI0q/NGfOwDJrGUF4NT++rOcVQHjgq8BPMF8/0AQ7QA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC10",{"type":"ndarray","array":{"type":"bytes","data":"xVr1tfZgAbZijRe2Yq0mtvaAH7bsAdm1Yq0ytvagErZijQq2Yo0Jtg=="},"shape":[10],"dtype":"float32","order":"little"}],["population",{"type":"ndarray","array":["CEU","CEU","CEU","CEU","CHB","CHB","CHB","YRI","YRI","YRI"],"shape":[10],"dtype":"object","order":"little"}],["color",{"type":"ndarray","array":["#ffed6f","#ffed6f","#ffed6f","#ffed6f","#d6ca66","#d6ca66","#d6ca66","#8dd3c7","#8dd3c7","#8dd3c7"],"shape":[10],"dtype":"object","order":"little"}],["coverage",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAA+H8AAAAAAAD4f5nwS/286SBAK01KQbc3JEDogvqWOb0lQFMFo5I6kT9AcEIhAg5BJkAzbf/KShMeQFXZd0XwHyVAkwA1tWxNIkA="},"shape":[10],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1138","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1139"}}},"glyph":{"type":"object","name":"Circle","id":"p1134","attributes":{"x":{"type":"field","field":"PC1"},"y":{"type":"field","field":"PC3"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.8},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.8},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.8}}},"nonselection_glyph":{"type":"object","name":"Circle","id":"p1135","attributes":{"x":{"type":"field","field":"PC1"},"y":{"type":"field","field":"PC3"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Circle","id":"p1136","attributes":{"x":{"type":"field","field":"PC1"},"y":{"type":"field","field":"PC3"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1091","attributes":{"tools":[{"id":"p1114"},{"id":"p1115"},{"id":"p1116"},{"type":"object","name":"SaveTool","id":"p1118"},{"id":"p1119"},{"id":"p1120"},{"id":"p1122"}]}},"toolbar_location":null,"left":[{"type":"object","name":"LinearAxis","id":"p1107","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1109","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1110"},"axis_label":"PC3 (13.0%)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1108"}}}],"right":[{"type":"object","name":"Legend","id":"p1153","attributes":{"items":[{"type":"object","name":"LegendItem","id":"p1154","attributes":{"label":{"type":"value","value":"CEU"},"renderers":[{"id":"p1137"}],"index":0}},{"type":"object","name":"LegendItem","id":"p1155","attributes":{"label":{"type":"value","value":"CHB"},"renderers":[{"id":"p1137"}],"index":4}},{"type":"object","name":"LegendItem","id":"p1156","attributes":{"label":{"type":"value","value":"YRI"},"renderers":[{"id":"p1137"}],"index":7}}]}}],"below":[{"type":"object","name":"LinearAxis","id":"p1100","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1102","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1103"},"axis_label":"PC1 (22.7%)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1101"}}}],"center":[{"type":"object","name":"Grid","id":"p1106","attributes":{"axis":{"id":"p1100"}}},{"type":"object","name":"Grid","id":"p1113","attributes":{"dimension":1,"axis":{"id":"p1107"}}},{"id":"p1153"}]}},0,1],[{"type":"object","name":"Figure","id":"p1160","attributes":{"width":400,"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1161"},"y_range":{"type":"object","name":"DataRange1d","id":"p1162"},"x_scale":{"type":"object","name":"LinearScale","id":"p1174"},"y_scale":{"type":"object","name":"LinearScale","id":"p1176"},"title":{"type":"object","name":"Title","id":"p1163","attributes":{"text":"PC2 vs PC3"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1215","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1157","attributes":{"selected":{"type":"object","name":"Selection","id":"p1159","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1158"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAA=="},"shape":[10],"dtype":"int32","order":"little"}],["sample",{"type":"ndarray","array":["CEU-0","CEU-1","CEU-2","CEU-3","CHB-0","CHB-1","CHB-2","YRI-0","YRI-1","YRI-2"],"shape":[10],"dtype":"object","order":"little"}],["PC1",{"type":"ndarray","array":{"type":"bytes","data":"mNRFQc92BkHJxztBEM2gwQPUWcGQDa3ANvIXwXT0Az/Tet9A+NYJQQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC2",{"type":"ndarray","array":{"type":"bytes","data":"ponNwJVKhsBmvqu+ZzLQwIT1BcE8vL5BBus7QLU7dcB6rpjAdxP1QA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC3",{"type":"ndarray","array":{"type":"bytes","data":"xN3BwKCKT79fjDJAQb01vgm43cCL9SrBkT+WQfueqsD8jJG/8u4YQQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC4",{"type":"ndarray","array":{"type":"bytes","data":"bzNWwZ3Di8BQ7VC/pE4bwR4exEDLaR7ABV5LvybagUEe2KJACyeDQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC5",{"type":"ndarray","array":{"type":"bytes","data":"KcsiQH2PpUA4U/u/CPcSwe745LzK1UZABogzQaYkBkBZquU/rCJswQ=="},"shape":[10],"dtype":"float32","order":"little"}],["PC6",{"type":"ndarray","array":{"type":"bytes","data":"M73dQHzSIj9VUVHAA8edvxBA8b6ro7G/r+XnP6b1D0HWdHLBzglJQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC7",{"type":"ndarray","array":{"type":"bytes","data":"IteRwL3MRkE2GXjANzqQwCi7CEFiRI++ycbPvz690MDeBHPAqTOGQA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC8",{"type":"ndarray","array":{"type":"bytes","data":"Km58wDyzjr+3v3NBtjcgv6pOekDHm4E8Quo/vyyDsL/8iODAJ5aKwA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC9",{"type":"ndarray","array":{"type":"bytes","data":"ZTjeQJzyHcEZI0q/NGfOwDJrGUF4NT++rOcVQHjgq8BPMF8/0AQ7QA=="},"shape":[10],"dtype":"float32","order":"little"}],["PC10",{"type":"ndarray","array":{"type":"bytes","data":"xVr1tfZgAbZijRe2Yq0mtvaAH7bsAdm1Yq0ytvagErZijQq2Yo0Jtg=="},"shape":[10],"dtype":"float32","order":"little"}],["population",{"type":"ndarray","array":["CEU","CEU","CEU","CEU","CHB","CHB","CHB","YRI","YRI","YRI"],"shape":[10],"dtype":"object","order":"little"}],["color",{"type":"ndarray","array":["#ffed6f","#ffed6f","#ffed6f","#ffed6f","#d6ca66","#d6ca66","#d6ca66","#8dd3c7","#8dd3c7","#8dd3c7"],"shape":[10],"dtype":"object","order":"little"}],["coverage",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAA+H8AAAAAAAD4f5nwS/286SBAK01KQbc3JEDogvqWOb0lQFMFo5I6kT9AcEIhAg5BJkAzbf/KShMeQFXZd0XwHyVAkwA1tWxNIkA="},"shape":[10],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1216","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1217"}}},"glyph":{"type":"object","name":"Circle","id":"p1212","attributes":{"x":{"type":"field","field":"PC2"},"y":{"type":"field","field":"PC3"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.8},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.8},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.8}}},"nonselection_glyph":{"type":"object","name":"Circle","id":"p1213","attributes":{"x":{"type":"field","field":"PC2"},"y":{"type":"field","field":"PC3"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Circle","id":"p1214","attributes":{"x":{"type":"field","field":"PC2"},"y":{"type":"field","field":"PC3"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"color"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"field","field":"color"},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1169","attributes":{"tools":[{"id":"p1192"},{"id":"p1193"},{"id":"p1194"},{"type":"object","name":"SaveTool","id":"p1196"},{"id":"p1197"},{"id":"p1198"},{"id":"p1200"}]}},"toolbar_location":null,"left":[{"type":"object","name":"LinearAxis","id":"p1185","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1187","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1188"},"axis_label":"PC3 (13.0%)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1186"}}}],"right":[{"type":"object","name":"Legend","id":"p1231","attributes":{"items":[{"type":"object","name":"LegendItem","id":"p1232","attributes":{"label":{"type":"value","value":"CEU"},"renderers":[{"id":"p1215"}],"index":0}},{"type":"object","name":"LegendItem","id":"p1233","attributes":{"label":{"type":"value","value":"CHB"},"renderers":[{"id":"p1215"}],"index":4}},{"type":"object","name":"LegendItem","id":"p1234","attributes":{"label":{"type":"value","value":"YRI"},"renderers":[{"id":"p1215"}],"index":7}}]}}],"below":[{"type":"object","name":"LinearAxis","id":"p1178","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1180","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1181"},"axis_label":"PC2 (16.1%)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1179"}}}],"center":[{"type":"object","name":"Grid","id":"p1184","attributes":{"axis":{"id":"p1178"}}},{"type":"object","name":"Grid","id":"p1191","attributes":{"dimension":1,"axis":{"id":"p1185"}}},{"id":"p1231"}]}},1,0]]}}]}};
+  const render_items = [{"docid":"81b83e80-5015-45bc-8e0a-c49cd94e4893","roots":{"p1288":"1288df74-364c-4b0c-aca2-654a3e522f7f"},"root_ids":["p1288"]}];
+  root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+<p></p><figcaption class="figure-caption">(b) <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-patterson_PopulationStructureEigenanalysis_2006" class="csl-entry" role="doc-biblioentry">
+Patterson, N., Price, A. L., &amp; Reich, D. (2006). Population <span>Structure</span> and <span>Eigenanalysis</span>. <em>PLOS Genetics</em>, <em>2</em>(12), e190. <a href="https://doi.org/10.1371/journal.pgen.0020190">https://doi.org/10.1371/journal.pgen.0020190</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright NBIS</div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>
