@@ -82,22 +82,13 @@ Bateson)
 
 ### Morgan's flies
 
-
 ### Fisher and natural selection
-
 
 ### The modern synthesis
 
 ### Wright and drift
 
-
 ### Kimura and the diffusion approximation
-
-:::
-
-
-
-
 
 # What is population genomics?
 
@@ -107,10 +98,13 @@ Bateson)
 
 Points from [@hahn_MolecularPopulationGenetics_2019]:
 
-- whole-genome data instead of single loci - population genomics is population genetics for whole-genome sequences
+- whole-genome data instead of single loci - population genomics is
+  population genetics for whole-genome sequences
   - if only this, not too exciting
-- major promise: enables analyses not possible for single loci or that require genomic context
-- addresses interactions between different forces, notably selection and demographic history
+- major promise: enables analyses not possible for single loci or that
+  require genomic context
+- addresses interactions between different forces, notably selection
+  and demographic history
 
 Some applications:
 

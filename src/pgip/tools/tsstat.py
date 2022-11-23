@@ -5,11 +5,15 @@ selects equal number of samples from all populations. Per-population
 sample sizes can be set by providing (population_name, sample_size)
 pairs to the --sample-sets option.
 
+Note that S includes *hidden mutations* which means that it may
+actually be lower than the total number of sites with mutations.
+
 """
 import itertools
 import logging
 import random
 from datetime import datetime
+from inspect import signature
 from multiprocessing.dummy import Pool
 
 import click
@@ -17,6 +21,7 @@ import numpy as np
 import pandas as pd
 import tskit
 from pgip.logging import setup_logging
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -55,13 +60,14 @@ def calc_ld(windows, **kwargs):
     pass
 
 
-def make_sample_sets(ts, sample_sets, sample_size):
+def make_sample_sets(ts, sample_sets, sample_size, sample_seed):
     pmap = {
         p.metadata.get("name", None): p.id
         for p in ts.populations()
         if p.metadata is not None
     }
 
+    random.seed(sample_seed)
     if sample_sets is not None:
         labels = [item[0] for item in sample_sets]
         sizes = [item[1] for item in sample_sets]
@@ -144,6 +150,7 @@ def make_windows(ts, num_windows, window_size):
 @click.option("Ne", "--ne", help="Known effective population size (diploid)", type=int)
 @click.option("--mu", "-m", help="Known mutation rate", type=float)
 @click.option("--rho", "-r", help="Known recombination rate", type=float)
+@click.option("--span-normalise", help="Normalise by window", is_flag=True)
 @click.option("--debug", help="Print debugging info", is_flag=True)
 def cli(
     tsfile,
@@ -157,22 +164,27 @@ def cli(
     statistic,
     window_size,
     sample_size,
+    span_normalise,
     debug,
 ):
     setup_logging(debug)
     random.seed(seed)
+
     if len(sample_sets) == 0:
         sample_sets = None
 
+    sample_seeds = dict(zip(tsfile, random.sample(range(int(1e9)), len(tsfile))))
+
+    items = list(itertools.product(tsfile, [sample_sets], [sample_size]))
     functions = [ALLSTAT[s] for s in statistic]
     res = dict()
-    kwargs = {}
 
     def summary_statistic(tsfile, sample_sets, sample_size):
-        logger.info(f"compiling stats for {tsfile}...")
+        logger.debug(f"compiling stats for {tsfile}...")
+        kwargs = {}
         ts = tskit.load(tsfile)
         sample_set_labels, sample_size, kwargs["sample_sets"] = make_sample_sets(
-            ts, sample_sets, sample_size
+            ts, sample_sets, sample_size, sample_seeds[tsfile]
         )
         windows = make_windows(ts, num_windows, window_size)
         if windows is not None:
@@ -195,7 +207,11 @@ def cli(
                 res[tsfile]["sample_set"] = sample_set_labels[0]
                 res[tsfile]["sample_size"] = sample_size
             else:
-                data = fun(windows=windows, **kwargs)
+                t = signature(fun)
+                if "span_normalise" in t.parameters:
+                    data = fun(windows=windows, span_normalise=span_normalise, **kwargs)
+                else:
+                    data = fun(windows=windows, **kwargs)
                 if windows is None:
                     res[tsfile][stat] = data
                     res[tsfile]["sample_set"] = sample_set_labels
@@ -208,12 +224,13 @@ def cli(
                     res[tsfile]["sample_size"] = np.repeat(
                         sample_size, len(windows) - 1
                     )
-        logger.info(f"done compiling stats for {tsfile}")
+        logger.debug(f"done compiling stats for {tsfile}")
 
-    items = list(itertools.product(tsfile, [sample_sets], [sample_size]))
-    p = Pool(threads)
-    for _ in p.starmap(summary_statistic, items):
-        pass
+    def compile_summary_statistic(args):
+        return summary_statistic(*args)
+
+    with Pool(threads) as p:
+        _ = list(tqdm(p.imap(compile_summary_statistic, items), total=len(items)))
 
     dflist = []
     for k, v in res.items():

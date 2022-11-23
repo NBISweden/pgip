@@ -52,15 +52,21 @@ website:
         - section: "Monday 8 May"
           contents:
             - "slides/introduction.qmd"
-            - "slides/population_genomics_in_practice.qmd"
-            - "slides/population_genetics_foundations.qmd"
+            - file: "slides/population_genomics_in_practice.qmd"
+              text: "What is population genomics?"
+            - file: "slides/population_genetics_foundations.qmd"
+              text: "Data and analyses"
             - "slides/datageneration.qmd"
         - section: "Tuesday 9 May"
           contents:
             - "slides/genetic_diversity.qmd"
+        - section: "Wednesday 10 May"
         - section: "Thursday 11 May"
           contents:
             - "slides/selection.qmd"
+        - section: "Friday 12 May"
+          contents:
+            - "slides/"
 
     - title: "Exercises"
       contents:
@@ -90,7 +96,6 @@ format:
     theme:
       - cosmo
       - nbis.scss
-    css: styles.css
     toc: true
     embed-resources: true
   # pdf:

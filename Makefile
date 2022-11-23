@@ -6,6 +6,9 @@ all:
 production:
 	quarto render docs --profile production
 
+%.html: %.qmd
+	quarto render $< --profile production
+
 clean-build:
 	rm -fR _build
 

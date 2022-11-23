@@ -2,3 +2,4 @@ biopython=1.78
 insilicoseq
 joblib
 pre_commit
+tqdm

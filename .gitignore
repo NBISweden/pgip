@@ -12,3 +12,5 @@ _site
 /src/pgip.egg-info/
 /src/pgip/_version.py
 /tmp/
+*.trees
+tikz*.tex
