@@ -8,7 +8,9 @@ _site
 /_environment.local
 /docs/_freeze/
 /docs/output/
+/docs/data/
 /docs/slides/template.qmd
+/docs/results/
 /src/pgip.egg-info/
 /src/pgip/_version.py
 /tmp/

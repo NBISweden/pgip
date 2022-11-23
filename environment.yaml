@@ -37,6 +37,7 @@ dependencies:
   - r-reticulate
   - r-rmarkdown
   - r-tidyr
+  - r-transformr
   - r-viridis
   - samtools
   # - scikit-learn

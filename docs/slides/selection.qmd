@@ -30,7 +30,7 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa
 execute:
   echo: true
   warning: false
-  cache: false
+  cache: true
   include: true
   autodep: true
   eval: true
@@ -93,7 +93,7 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #| echo: false
 #| eval: true
 data <- tidyr::tibble(read.csv("../results/slim/selective_sweep.w500.csv.gz", header=TRUE))
-a <- sum(1/seq(10))
+a <- sum(1/seq(10 - 1))
 data$thetaW <- data$S / a
 data_mean <- as.data.frame(data) %>% select(windows, TajD, pi, S, thetaW) %>% group_by(windows) %>% summarise(TajD=mean(TajD, na.rm=TRUE), pi=mean(pi, na.rm=TRUE), S=mean(S, na.rm=TRUE), thetaW=mean(thetaW, na.rm=TRUE)) %>% mutate(fn="mean", pi_minus_thetaW=pi - thetaW)
 L <- 1e6
@@ -117,7 +117,7 @@ ggplot(data_mean %>% pivot_longer(
                          names_transform=list(name=~readr::parse_factor(.x, levels=c("pi", "thetaW", "pi_minus_thetaW")))),
        aes(windows, value, color=name)) +
     geom_segment(aes(x=xi, y=-1, xend=xi, yend=-2.5), color="black", arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
-    xlab("Chromosomal position") + ylab("diversity") + geom_line(size=1) +
+    xlab("Chromosomal position") + ylab("diversity") + geom_line(linewidth=1) +
     theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), legend.title=element_blank()) +
     scale_y_continuous(expand = c(0, 0), limits=c(-2.5, 10)) + # , limits = c(-0.001, 0.0045)) +
     scale_x_continuous(expand = c(0, 0), limits = c(0, L)) +
@@ -139,16 +139,15 @@ ggplot(data_mean %>% pivot_longer(
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
-p <- ggplot(subset(data, fn %in% levels(factor(data$fn))[1:50]), aes(windows, TajD, group=fn)) +
-    geom_line(color="lightgray", size=0.5) +
-    geom_line(data=data_mean, color="red", size=1.5) +
+psweep_static <- ggplot(subset(data, fn %in% levels(factor(data$fn))[1:50]), aes(windows, TajD, group=fn)) +
+    geom_line(color="lightgray", linewidth=0.5) +
     xlab("Chromosomal position") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
     geom_segment(aes(x=xi, y=-2, xend=xi, yend=-2.5), arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
     scale_y_continuous(expand = c(0, 0), limits = c(-2.5, 2.5)) +
     scale_x_continuous(expand = c(0, 0), limits = c(0, L))
+p <- psweep_static + transition_manual(fn, cumulative=TRUE)
 p
 ```
-
 :::
 
 ::::
@@ -170,5 +169,66 @@ Q: not clear how Rasmus Nielsen scales statistics to have mean=1
 [@nielsen_MolecularSignaturesNatural_2005]
 
 :::
+
+
+
+### Selective sweep
+
+```{bash }
+#| label: pgip-slim-sweep-command-2
+#| echo: true
+#| eval: false
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
+```
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: pgip-slim-sweep-plot-pi-S-2
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+ggplot(data_mean %>% pivot_longer(
+                         cols=c("pi", "thetaW", "pi_minus_thetaW"),
+                         names_transform=list(name=~readr::parse_factor(.x, levels=c("pi", "thetaW", "pi_minus_thetaW")))),
+       aes(windows, value, color=name)) +
+    geom_segment(aes(x=xi, y=-1, xend=xi, yend=-2.5), color="black", arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
+    xlab("Chromosomal position") + ylab("diversity") + geom_line(linewidth=1) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), legend.title=element_blank()) +
+    scale_y_continuous(expand = c(0, 0), limits=c(-2.5, 10)) + # , limits = c(-0.001, 0.0045)) +
+    scale_x_continuous(expand = c(0, 0), limits = c(0, L)) +
+    scale_colour_manual(name="name", values=c("blue", "red", "green"),
+                        labels=expression(pi, theta[W] , pi - theta[W]))
+```
+
+
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| label: pgip-slim-sweep-plot-tajd-2
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+psweep_static + geom_line(data=data_mean, color="red", linewidth=1.5)
+```
+:::
+
+::::
+
+
+The effect of a selective sweep on different statistics.
+
 
 ### References
