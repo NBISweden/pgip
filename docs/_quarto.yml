@@ -1,11 +1,11 @@
 project:
   type: website
-  #type: book
   title: "Population genomics in practice"
   output-dir: _site
   execute-dir: file
   pre-render:
-    - prepare.py
+    - ../scripts/prepare.py
+    - ../scripts/setup-data.sh
 
 execute:
   freeze: auto
@@ -15,7 +15,6 @@ bibliography: resources/bibliography.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
 website:
-#book:
   title: "Population genomics in practice"
   # chapters:
   #   - index.qmd
@@ -55,11 +54,13 @@ website:
             - file: "slides/population_genomics_in_practice.qmd"
               text: "What is population genomics?"
             - file: "slides/population_genetics_foundations.qmd"
-              text: "Data and analyses"
-            - "slides/datageneration.qmd"
+              text: "Foundations"
+            - file: "slides/datageneration.qmd"
+              text: "Variant data generation"
         - section: "Tuesday 9 May"
           contents:
-            - "slides/genetic_diversity.qmd"
+            - file: "slides/genetic_diversity.qmd"
+              text: "Genetic diversity"
         - section: "Wednesday 10 May"
         - section: "Thursday 11 May"
           contents:

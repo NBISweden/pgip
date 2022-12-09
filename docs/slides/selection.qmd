@@ -70,8 +70,15 @@ knitr::knit_hooks$set(inline = function(x) {
 
 
 # Selection
+### Topics
+
+- direct selection(?)
+-
+
 
 # Linked selection
+
+### Tajima's D
 
 ### Selective sweep
 
@@ -84,6 +91,7 @@ Use [Figure 2 @charlesworth_EffectsOfSelection_2021]
 #| label: pgip-slim-sweep-command
 #| echo: true
 #| eval: false
+#| code-fold: true
 pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
 pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
 ```
@@ -92,7 +100,7 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #| label: pgip-load-slim-data
 #| echo: false
 #| eval: true
-data <- tidyr::tibble(read.csv("../results/slim/selective_sweep.w500.csv.gz", header=TRUE))
+data <- tidyr::tibble(read.csv("../data/results/slim/selective_sweep.w500.csv.gz", header=TRUE))
 a <- sum(1/seq(10 - 1))
 data$thetaW <- data$S / a
 data_mean <- as.data.frame(data) %>% select(windows, TajD, pi, S, thetaW) %>% group_by(windows) %>% summarise(TajD=mean(TajD, na.rm=TRUE), pi=mean(pi, na.rm=TRUE), S=mean(S, na.rm=TRUE), thetaW=mean(thetaW, na.rm=TRUE)) %>% mutate(fn="mean", pi_minus_thetaW=pi - thetaW)
@@ -229,6 +237,7 @@ psweep_static + geom_line(data=data_mean, color="red", linewidth=1.5)
 
 
 The effect of a selective sweep on different statistics.
+
 
 
 ### References

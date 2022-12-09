@@ -172,36 +172,47 @@ instance, @talla_DissectingEffectsSelection_2019 include GATK
 tri-allelic sites due to different bi-allelic pairs segregating in
 different subpopulations (e.g. A/G in pop 1, A/T in pop 2)
 
+##### Verbose explanations of filters
 
-Base quality scores are factored into the calculation of genotype likelihoods, so if they accurately
-reflect the probability of sequencing error, bases with low scores also carry useful information.
-However, base quality scores are sometimes miscalibrated, so noise may be reduced if bases
-with scores below a threshold (e.g., 20) are either trimmed off prior to analysis or ignored.
-Alternatively, all base quality scores can be recalibrated based on estimated error profiles in
-the data (see Section 3.1).
+Source: [@lou_BeginnerGuideLowcoverage_2021]
 
-Mapping quality is not considered in genotype likelihood estimation in currently available tools,
-so it is often advisable to remove low-­confidence and/or nonuniquely mapped reads prior to
-analysis (e.g., reads with mapping quality <20). Filtering out reads that do not map in proper
-pairs should also further increase confidence in reads being mapped to the correct location,
-but could cause biases in regions with structural variation.
+Base quality scores are factored into the calculation of genotype
+likelihoods, so if they accurately reflect the probability of
+sequencing error, bases with low scores also carry useful information.
+However, base quality scores are sometimes miscalibrated, so noise may
+be reduced if bases with scores below a threshold (e.g., 20) are
+either trimmed off prior to analysis or ignored. Alternatively, all
+base quality scores can be recalibrated based on estimated error
+profiles in the data (see Section 3.1).
 
-To avoid sites with low or confounding data support in downstream analysis, minimum depth
-and/or minimum number of individual filters can be used to exclude sites with much reduced
-sequencing coverage compared to the rest of the genome (e.g., regions with low unique
-mapping rates, such as repetitive sequences). Appropriate thresholds will vary between data
-sets, but could, for example, exclude sites with read data for <50% of individuals (globally
-or within each population), or with <0.8× average depth across individuals (after filtering on
-mapping quality)
+Mapping quality is not considered in genotype likelihood estimation in
+currently available tools, so it is often advisable to remove
+low-­confidence and/or nonuniquely mapped reads prior to analysis
+(e.g., reads with mapping quality <20). Filtering out reads that do
+not map in proper pairs should also further increase confidence in
+reads being mapped to the correct location, but could cause biases in
+regions with structural variation.
 
-Maximum depth filters are used to exclude sites with exceptionally high coverage (e.g., regions that
-are susceptible to dubious mapping, such as copy number variants). Common maximum depth
-thresholds could be one or two standard deviations above the median genome-­wide depth.
+To avoid sites with low or confounding data support in downstream
+analysis, minimum depth and/or minimum number of individual filters
+can be used to exclude sites with much reduced sequencing coverage
+compared to the rest of the genome (e.g., regions with low unique
+mapping rates, such as repetitive sequences). Appropriate thresholds
+will vary between data sets, but could, for example, exclude sites
+with read data for <50% of individuals (globally or within each
+population), or with <0.8× average depth across individuals (after
+filtering on mapping quality)
 
-PCR and optical duplicates can give inflated impressions of how many unique molecules have been
-sequenced, which—­particularly in the presence of preferential amplification of one allele—­
-could bias genotype likelihood estimation. We therefore recommend removing duplicate reads
-prior to any analysis.
+Maximum depth filters are used to exclude sites with exceptionally
+high coverage (e.g., regions that are susceptible to dubious mapping,
+such as copy number variants). Common maximum depth thresholds could
+be one or two standard deviations above the median genome-­wide depth.
+
+PCR and optical duplicates can give inflated impressions of how many
+unique molecules have been sequenced, which—­particularly in the
+presence of preferential amplification of one allele—­ could bias
+genotype likelihood estimation. We therefore recommend removing
+duplicate reads prior to any analysis.
 
 Reads mapped across indels are frequently misaligned, especially if
 the ends of reads span an indel. To avoid false SNP calls, we
@@ -251,6 +262,7 @@ those SNPs with consistent major and minor allele designations
 (-­doMajorMinor 3 in angsd) no MAF or SNP p-­value filter (because
 that would incorrectly generate “missing data” if a site is fixed in a
 particular population).
+
 :::
 
 

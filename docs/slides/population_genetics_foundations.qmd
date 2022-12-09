@@ -192,7 +192,7 @@ use the term.
 
 
 In contrast to *mutation* which corresponds to within-species
-variation, a *substitution* is DNA differences between species.
+variation, a *substitution* refers to DNA differences between species.
 
 :::
 
@@ -240,7 +240,8 @@ The set of alleles found on a single sequence is called *haplotype*.
 Once we have a sample of sequences we want to describe the observed
 variation. At any position the *i*th allele has sample frequency
 $p_i$, where the sum of all allele frequencies is 1. For instance, at
-site 1, $p_T=1$ and at site 2 $p_C=1/4$ and $p_T=3/4$.
+site 1, $p_T=1$ (and by extension $p_A=p_C=p_G=0$), and at site 2
+$p_C=1/4$ and $p_T=3/4$.
 
 #### Heterozygosity
 
@@ -327,6 +328,180 @@ $$
 
 :::: {.columns}
 
+::: {.column width="50%"}
+
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions:
+
+::: {.incremental}
+
+- no selection
+- no mutation
+- no migration
+- non-overlapping generations
+- random mating
+
+:::
+
+
+:::
+
+::: {.column width="50%"}
+
+:::
+
+::::
+### Wright-Fisher model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions:
+
+- no selection
+- no mutation
+- no migration
+- non-overlapping generations
+- random mating
+
+:::
+
+::: {.column width="50%"}
+
+
+```{r }
+#| label: wright-fisher-model-graph
+#| echo: false
+#| eval: true
+wf_model_igraph <- function(width=10, height=10, parents_first=FALSE, untangled=TRUE) {
+    G <- list()
+    g <- make_empty_graph()
+    g <- add_vertices(g, width * height, color=NA, size=0, label=NA, frame.color=NA)
+    g$perm <- unlist(lapply(seq(vcount(g), 1, - width), function(x) {seq(x - width + 1, x)}))
+    g$layout <- layout_on_grid(g, width=width, height=height)
+    i <- 1
+    for (i in seq(1, height)) {
+        n0 <- (i - 1) * width + 1
+        n1 <- i * width
+        if (i >= 2) {
+            p0 <- (i - 2) * width + 1
+            p1 <- (i - 1) * width
+            parents <- sample(p0:p1, width, replace=TRUE)
+            if (untangled)
+                parents <- sort(parents)
+            children <- seq((i - 1) * width + 1, i * width)
+            edges <- unlist(Map(c, parents, children))
+            V(g)[parents]$color <- "black"
+            G[[length(G) + 1]] <- g
+            g <- add_edges(g, edges, color="black", width=2, arrow.size=0)
+        }
+        V(g)[n0:n1]$frame.color <- "black"
+        V(g)[n0:n1]$color <- NA
+        V(g)[n0:n1]$size <- 3
+        G[[length(G) + 1]] <- g
+    }
+    G
+}
+G <- wf_model_igraph()
+```
+
+
+```{r }
+#| label: fig-wf-1
+#| echo: false
+#| eval: true
+#| fig-height: 7
+#| fig-width: 7
+plot(permute(G[[1]], G[[1]]$perm))
+text(x=0, y=1.2, paste("Starting population"), cex=2)
+```
+
+
+:::
+
+::::
+
+### Wright-Fisher model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions:
+
+
+- no selection
+- no mutation
+- no migration
+- non-overlapping generations
+- random mating
+
+
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-wf-2
+#| echo: false
+#| eval: true
+#| fig-height: 7
+#| fig-width: 7
+plot(permute(G[[2]], G[[1]]$perm))
+text(x=0, y=1.2, paste("Sampled parents"), cex=2)
+```
+
+
+:::
+
+::::
+
+### Wright-Fisher model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions:
+
+
+- no selection
+- no mutation
+- no migration
+- non-overlapping generations
+- random mating
+
+
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-wf-3
+#| echo: false
+#| eval: true
+#| fig-height: 7
+#| fig-width: 7
+plot(permute(G[[3]], G[[1]]$perm))
+text(x=0, y=1.2, paste("Offspring"), cex=2)
+```
+
+
+:::
+
+::::
+
+### Wright-Fisher model
+
+:::: {.columns}
+
 ::: {.column width="30%"}
 
 
@@ -334,32 +509,10 @@ Introduce model as way to understand drift. Show n=10 and
 interactively/iteratively build next generation(s). Forward
 simulation. (Add pgip code)
 
-FIXME: figure of n=10 individuals as circles, step through generation
-one at a time to show random survival of individuals
 
 :::
 
 ::: {.column width="70%"}
-
-```{r }
-#| label: wright-fisher-function
-#| echo: false
-#| eval: false
-## wf <- function(i, g, n) {
-##         if (i >= 2) {
-##             p0 <- (i - 2) * width + 1
-##             p1 <- (i - 1) * width
-##             parents <- sort(sample(p0:p1, width, replace=TRUE))
-##             children <- seq((i - 1) * width + 1, i * width)
-##             edges <- unlist(Map(c, parents, children))
-##             g <- add_edges(g, edges, color="black", width=2, arrow.size=0)
-##         }
-##         list(graph=g, edges=edges)
-## }
-
-## for (i in seq(1, height))
-##     g <- wf(i, g, width)
-```
 
 
 ```{r }
@@ -371,36 +524,9 @@ one at a time to show random survival of individuals
 #| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
-width <- 10
-height <- 10
-g <- make_empty_graph()
-g <- add_vertices(g, width * height, color=NA, size=0, label=NA, frame.color=NA)
-perm <- unlist(lapply(seq(vcount(g), 1, - width), function(x) {seq(x - width + 1, x)}))
-layout <- layout_on_grid(g, width=width, height=height)
-#invisible(saveGIF({
-    for (i in seq(1, height)) {
-        n0 <- (i - 1) * width + 1
-        n1 <- i * width
-        V(g)[n0:n1]$frame.color <- "black"
-        V(g)[n0:n1]$color <- NA
-        V(g)[n0:n1]$size <- 3
-        plot.igraph(permute(g, perm), layout=layout)
-        text(x=0, y=1.2, paste("Generation", i), cex=2)
-        if (i >= 2) {
-            p0 <- (i - 2) * width + 1
-            p1 <- (i - 1) * width
-            parents <- sort(sample(p0:p1, width, replace=TRUE))
-            children <- seq((i - 1) * width + 1, i * width)
-            edges <- unlist(Map(c, parents, children))
-            V(g)[parents]$color <- "black"
-            plot.igraph(permute(g, perm), layout=layout)
-            text(x=0, y=1.2, paste("Generation", i), cex=2)
-            g <- add_edges(g, edges, color="black", width=2, arrow.size=0)
-        }
-        plot.igraph(permute(g, perm), layout=layout)
-        text(x=0, y=1.2, paste("Generation", i), cex=2)
-    }
-#}, movie.name="wf.gif", interval=2, ani.width=1000, ani.height=1000))
+for (i in seq(1, length(G))) {
+    plot(permute(G[[i]], G[[1]]$perm))
+}
 ```
 
 
@@ -484,7 +610,9 @@ gas particle diffusing up and down
 
 ::: {.notes }
 
-See alternative way of visualizing variation faceting on initial frequency (showing P(fixation)) and population size (showing less variance))
+See alternative way of visualizing variation faceting on initial
+frequency (showing P(fixation)) and population size (showing less
+variance))
 
 https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html
 

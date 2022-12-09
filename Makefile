@@ -1,13 +1,17 @@
 # Simple makefile for dev.
 
-all:
+QMDFILES=$(subst docs/,docs/_site/,$(subst .qmd,.html,$(wildcard docs/*/*.qmd)))
+
+all: $(QMDFILES)
+
+render:
 	quarto render docs
 
 production:
-	quarto render docs --profile production
+	quarto render docs --profile production --cache-refresh
 
-%.html: %.qmd
-	quarto render $< --profile production
+docs/_site/%.html: docs/%.qmd
+	quarto render $< --profile production --cache-refresh
 
 clean-build:
 	rm -fR _build

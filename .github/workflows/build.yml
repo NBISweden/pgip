@@ -15,6 +15,7 @@ jobs:
   build:
     name: Build site
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
     defaults:
@@ -37,7 +38,7 @@ jobs:
         CACHE_NUMBER: 0
       with:
         path: ~/conda_pkgs_dir
-        key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yaml') }}
+        key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
 
     - name: install miniconda
       uses: conda-incubator/setup-miniconda@v2
@@ -80,17 +81,3 @@ jobs:
         path: docs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # - name: Copy exercises data
-    #   run: |
-    #     cp ./requirements.txt ./docs/_site/.
-    #     cp -r data ./docs/_site/data
-    #     ls data > ./docs/_site/data/files.txt
-
-    # # Push the book's HTML to github-pages
-    # - name: GitHub Pages action
-    #   if: github.ref == 'refs/heads/main'
-    #   uses: peaceiris/actions-gh-pages@v3.5.9
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./docs/_site

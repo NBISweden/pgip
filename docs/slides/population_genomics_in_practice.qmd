@@ -1,6 +1,6 @@
 ---
 title: "Population genomics in practice"
-subtitle: "Data and analyses"
+subtitle: "What is population genomics?"
 author:
     - "Per Unneberg"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
@@ -117,6 +117,16 @@ Some applications:
 
 
 [@hartl1997principles p. 469-470]
+
+::: {.notes }
+
+[@li_InferenceHumanPopulation_2011, supplementary notes, p. 6]:
+
+	...highly consistent except for the very recent history,
+	demonstrating the power of using whole-genome data.
+
+:::
+
 
 ### An example from real life - population genetics of coral
 

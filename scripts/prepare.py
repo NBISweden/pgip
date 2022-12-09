@@ -8,5 +8,5 @@ outdir = Path(os.getenv("QUARTO_PROJECT_OUTPUT_DIR"))
 os.system(f"rsync -av img {outdir}")
 os.system(
     'rsync -av --include "*/" --include "*gz" '
-    f'--exclude "*.trees" --exclude "*" results {outdir}'
+    f'--exclude "*.trees" --exclude "*" data/results {outdir}'
 )

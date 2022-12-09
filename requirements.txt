@@ -1,15 +1,15 @@
-# bokeh
-# cyvcf2<0.30.15
-# demes
-# demesdraw
-# jupyter
-# matplotlib>=3.4.0
-# msprime>=1.0
-# networkx
-# newick
-# numpy
-# scikit-allel
-# sgkit
-# sphinx
-# tqdm
-# tskit>=0.4
+bokeh
+cyvcf2
+demes
+demesdraw
+jupyter
+matplotlib>=3.4.0
+msprime>=1.0
+networkx
+newick
+numpy
+scikit-allel
+sgkit
+sphinx
+tqdm
+tskit>=0.5
