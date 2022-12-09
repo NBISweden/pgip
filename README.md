@@ -27,7 +27,7 @@ Install additional Python requirements with pip
 
     python -m pip install -r requirements.txt
 
-Install test data data as
+Install test data and local quarto environment files as
 
     ./scripts/setup-data.sh
 
