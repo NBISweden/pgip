@@ -1,6 +1,5 @@
 # Principal component analysis {#sec-ld-pruning-pca}
 
-
 ```{python }
 #| label: ld-pruning-pca-setup
 #| echo: false
@@ -63,7 +62,7 @@ Then make output directories and convert vcf to the zarr format.
 #| eval: true
 outdir = "output/ld_pruning"
 os.makedirs(outdir, exist_ok=True)
-vcf = "../data/data/ooa/ooa.gatk.vcf.gz"
+vcf = "../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz"
 zarr = os.path.join(outdir, "ooa.gatk.zarr")
 sgvcf.vcf_to_zarr(vcf, zarr)
 ```
@@ -78,7 +77,6 @@ internally for sgkit):
 #| eval: true
 ds = sg.load_dataset(zarr)
 original_chunk_size = ds.chunks["variants"][0]
-
 ```
 
 ## Linkage disequilibrium structure
@@ -110,7 +108,6 @@ and then divide into windows by variants:
 #| eval: true
 ds = sg.window_by_variant(ds, size=200)
 print(ds)
-
 ```
 
 
@@ -175,8 +172,8 @@ df.index.names = ["sample"]
 df.columns = [f"PC{i+1}" for _, i in df.columns]
 df.reset_index(inplace=True)
 df["sample"] = ds_pca.sample_id[df["sample"].values].values
-df["population"] = df["sample"].str.slice(0, 3)
-colors = dict(zip(set(df["population"]), utils._get_palette(n=3)))
+df["population"] = df["sample"].str.slice(0, -2)
+colors = dict(zip(set(df["population"]), utils._get_palette(n=6)))
 df["color"] = [colors[x] for x in df["population"]]
 ```
 
@@ -192,9 +189,9 @@ effect of sequencing coverage.
 import io
 import pandas as pd
 import subprocess
-output = subprocess.check_output("samtools depth -a ../data/data/ooa/*.bam", shell=True)
-coverage = pd.read_table(io.StringIO(output.decode()), header=None).mean(axis=0)
-df["coverage"] = coverage[1:]
+output = subprocess.check_output("samtools depth -a ../data/data/ooa-outgroups/*.bam", shell=True)
+coverage = pd.read_table(io.StringIO(output.decode()), header=None).loc[:, 2:].mean(axis=0)
+df["coverage"] = coverage.values
 ```
 
 

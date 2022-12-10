@@ -87,9 +87,6 @@ ggplot(data, aes(x=as.Date(Date), y=Mb)) + geom_line() + xlab("") + ylab("") + s
 
 ###
 
-
-###
-
 ![@lou_BeginnerGuideLowcoverage_2021](../img/sequencing_approaches_lou_2021.png)
 
 

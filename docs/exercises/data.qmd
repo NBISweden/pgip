@@ -12,30 +12,55 @@ Datasets 1 and 2 will be used for analyses. Datasets of type 3 are
 results that take a long time to compute (e.g. on a HPC) and will be
 needed to enable compilation of jupyter book examples
 
-Only small datasets are committed to this repo. In the case we need
-larger datasets, setup an independent data repo.
+:::
+
+::: {.callout-note}
+
+This document describes data sets used to generate slides, exercise
+results and examples in general.
 
 :::
 
+All data reside in a dedicated data repository at
+<https://github.com/NBISweden/pgip-data>. Datasets consist of genome
+sequences, bam files, variant call files, and tree sequences, among
+other things. Data generation is discussed briefly below. See the
+[pgip-data README](https://github.com/NBISweden/pgip-data/README.md)
+for more information.
 
+## Datasets used on website
 
-Datasets reside in the `data` subdirectory @tbl-simulated-datasets .
-Simulated datasets have been generated with the script
-`data/make_test_data.py`.
+Simulated datasets reside in the `data` subdirectory
+(@tbl-simulated-datasets).
 
 
 | Dataset       | Description                  | Location             |
 |---------------|:-----------------------------|:---------------------|
 | ooa           | Out of Africa                | `data/ooa`           |
 | ooa-outgroups | Out of Africa with outgroups | `data/ooa-outgroups` |
+| sweep         | Selective sweep data         | `results/slim`       |
 
 : Simulated dataset {#tbl-simulated-datasets}
 
+## Simulated SLiM recipes
 
-## Simulated data {#sec-simulated-data}
+[SLiM](https://messerlab.org/slim/) recipes reside in
+`docs/recipes/slim`. The output can be generated with the helper
+script `pgip-slim` from the software repo
+[pgip-tools](https://github.com/NBISweden/pgip-tools).
 
-The script `data/make_test_data.py` has subcommands to simulate
-genealogies, mutations, and read data from a demographic model.
+## Simulated demographic models {#sec-simulated-demographic-models}
+
+::: {.callout-warning}
+
+## FIXME
+
+Desired improvements:
+
+- base mutations are random; model realistic ti/tv ratios better
+
+:::
+
 Demographic models are defined using the [Demes
 specification](https://popsim-consortium.github.io/demes-spec-docs/main/introduction.html).
 For neutral models, genealogies and mutations are [simulated with
@@ -51,28 +76,15 @@ randomly, for that individual. Given the reference and the variant
 data, haplotype sequences are generated for each individual in the
 model. The haplotype sequences are then used as templates to generate
 sequencing reads with realistic error profiles. Currently
-[insilicoseq](https://insilicoseq.readthedocs.io/en/latest/index.html)
+[InSilicoSeq](https://insilicoseq.readthedocs.io/en/latest/index.html)
 is used to simulate reads.
 
 Simulated reads are mapped with bwa to the reference and saved to bam
 files. The raw data reads and haplotype sequences are finally
 discarded to save space. Variant calling is done with GATK.
 
-::: {.callout-warning}
 
-## FIXME
-
-Desired improvements:
-
-- current datasets are based on randomly generated sequences. There is
-  now a subcommand to download ucsc data from hg38 that would better
-  represent GC content, repeats etc
-- base mutations are random; model realistic ti/tv ratios better
-
-:::
-
-
-### Out of Africa (ooa) {#sect-data-simulated-ooa}
+### Out of Africa (ooa) {#sec-data-simulated-ooa}
 
 The out of Africa dataset is based on the
 @gutenkunst_InferringJointDemographic_2009 demographic model
@@ -92,12 +104,15 @@ ooa = demes.load("../data/data/ooa/ooa.demes.yaml")
 ax = demesdraw.tubes(ooa, num_lines_per_migration=6, seed=32)
 ```
 
-### Out of Africa with outgroups (ooa-outgroups)
+Note that this dataset is based on a subset of the data generated in
+@sec-data-simulated-ooa-outgroups.
 
-The out of Africa with outgroups is an extension of the previous data
-set (@fig-ooa-with-outgroups-demesdraw). In addition to simulating
-human data, the model has been expanded to include three outgroups
-chimpanzee, gorilla and orangutan
+### Out of Africa with outgroups (ooa-outgroups) {#sec-data-simulated-ooa-outgroups}
+
+The out of Africa with outgroups demographic model is an extension of
+the previous data set (@fig-ooa-with-outgroups-demesdraw). In addition
+to simulating human data, the model has been expanded to include three
+outgroups chimpanzee, gorilla and orangutan.
 
 
 ```{python }
@@ -110,3 +125,10 @@ import demesdraw
 ooa = demes.load("../data/data/ooa-outgroups/ooa_with_outgroups.demes.yaml")
 ax = demesdraw.tubes(ooa, num_lines_per_migration=6, log_time=True, seed=32)
 ```
+
+The data generation has been implemented in a
+[Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow. See
+the rulegraph  @fig-snakemake-rulegraph for an overview of the steps
+to generate data.
+
+![Snakemake rulegraph](../data/data/ooa-outgroups/rulegraph.png){#fig-snakemake-rulegraph}

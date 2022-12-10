@@ -33,11 +33,41 @@ Install test data and local quarto environment files as
 
 Install [Quarto](https://quarto.org/), edit Quarto documents (file
 extension `.qmd` in `docs` directory and subdirectories) and build
-project with
+project with `make` in the root directory.
 
-    make
+## Make targets
 
-in the root directory.
+### Single documents
+
+To render a single document (e.g.,
+`docs/_site/slides/datageneration.html`), you can use the file name as
+a make target:
+
+    make docs/_site/slides/datageneration.html
+
+The quarto source to this file is `docs/slides/datageneration.qmd`.
+
+### The all target
+
+The generic `make` target `all`, which is run without any arguments
+being passed to `make`, is a list of all output html files that will
+be rendered in `docs/_site`. This avoids rerunning compilation of all
+files which is the case when rendering an entire project (e.g.,
+`quarto render docs`). In addition, this allows for rendering
+documents in parallel:
+
+    make -j 4
+
+Run with `-n -B` options to compile a list of all targets and commands:
+
+    make -n -B
+
+### Production target
+
+Finally, the production target, which is what is run on GitHub and
+will build the entire project, can be invoked as
+
+    make production
 
 ## Development
 
