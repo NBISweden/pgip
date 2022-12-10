@@ -73,10 +73,19 @@ will build the entire project, can be invoked as
 
 ### Test / development data
 
-Install additional data development requirements
+Install additional data development requirements and helper
+applications with
 
     pip install -r requirements-dev.txt
 
 Test data is managed with the
 [pgip-data](https://github.com/NBISweden/pgip-data) repository. The
 data will be downloaded on the first invocation of `make`.
+
+## Conda environment file
+
+The conda environment file `environment.yml` lists required binaries
+needed to generate the pages. Whenever a dependency is added, the
+script `scripts/condalock.sh` should be run to generate a new
+`conda-linux-64.lock` file that is used to install packages in the CI
+environment.
