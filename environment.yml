@@ -8,12 +8,15 @@ dependencies:
   - bokeh>=3.0
   - ca-certificates
   # - click
+  - csvtk
   - cyvcf2
   - demesdraw
+  - d4tools
   # - gatk4
   - jupyter
   - jupyter-cache
   # - matplotlib
+  - mosdepth
   - msprime>=1.0
   # - networkx
   - openssl

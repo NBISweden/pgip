@@ -69,6 +69,9 @@ jobs:
       with:
         tinytex: true
 
+    - name: Setup data
+      run: ./scripts/setup-data.sh
+
     - name: Add miniconda path
       run: |
         echo "$(dirname $(which R))" >> $GITHUB_PATH
