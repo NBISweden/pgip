@@ -38,7 +38,7 @@ jobs:
         CACHE_NUMBER: 0
       with:
         path: ~/conda_pkgs_dir
-        key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
+        key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
 
     - name: install miniconda
       uses: conda-incubator/setup-miniconda@v2
@@ -52,13 +52,13 @@ jobs:
     - name: Install test dependencies
       run: conda install -c conda-forge pytest pip
 
-    - name: Install pgip package
+    - name: Install pgip dependencies
       run: |
         pip install ipykernel
         pip install bash_kernel
         python -m bash_kernel.install
         python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
-        python -m 'pip' install --no-deps -e .
+        python -m pip install git+https://github.com/NBISweden/pgip-tools
 
     - name: Install dotenv
       run: |
