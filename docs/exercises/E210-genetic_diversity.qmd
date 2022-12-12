@@ -11,3 +11,10 @@ latter requires GLs for **all** sites. Use Table 4.1 in
 [@hahn_MolecularPopulationGenetics_2019, p. 45]
 
 :::
+
+::: {.callout-note}
+
+- use sequence masks (0/1) encoded gz files to enable quick
+  calculations of feature-based stats (e.g. 4d-degenerate sites)
+
+:::

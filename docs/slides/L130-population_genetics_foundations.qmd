@@ -344,6 +344,14 @@ under the following assumptions:
 
 :::
 
+::: {.fragment}
+
+#### Algorithm
+
+1. Setup starting population at time zero
+
+:::
+
 
 :::
 
@@ -352,6 +360,15 @@ under the following assumptions:
 :::
 
 ::::
+
+
+::: {.notes }
+
+See @hein_GeneGenealogies_2004 for more assumptions.
+
+:::
+
+
 ### Wright-Fisher model
 
 :::: {.columns}
@@ -367,6 +384,11 @@ under the following assumptions:
 - non-overlapping generations
 - random mating
 
+
+#### Algorithm
+
+1. Setup starting population at time zero
+
 :::
 
 ::: {.column width="50%"}
@@ -376,7 +398,7 @@ under the following assumptions:
 #| label: wright-fisher-model-graph
 #| echo: false
 #| eval: true
-wf_model_igraph <- function(width=10, height=10, parents_first=FALSE, untangled=TRUE) {
+wf_model_igraph <- function(width=10, height=10, offspring_first=TRUE, untangled=TRUE) {
     G <- list()
     g <- make_empty_graph()
     g <- add_vertices(g, width * height, color=NA, size=0, label=NA, frame.color=NA)
@@ -392,8 +414,14 @@ wf_model_igraph <- function(width=10, height=10, parents_first=FALSE, untangled=
             parents <- sample(p0:p1, width, replace=TRUE)
             if (untangled)
                 parents <- sort(parents)
-            children <- seq((i - 1) * width + 1, i * width)
-            edges <- unlist(Map(c, parents, children))
+            offspring <- seq((i - 1) * width + 1, i * width)
+            if (offspring_first) {
+                V(g)[n0:n1]$frame.color <- "black"
+                V(g)[n0:n1]$color <- NA
+                V(g)[n0:n1]$size <- 3
+                G[[length(G) + 1]] <- g
+            }
+            edges <- unlist(Map(c, parents, offspring))
             V(g)[parents]$color <- "black"
             G[[length(G) + 1]] <- g
             g <- add_edges(g, edges, color="black", width=2, arrow.size=0)
@@ -410,7 +438,7 @@ G <- wf_model_igraph()
 
 
 ```{r }
-#| label: fig-wf-1
+#| label: wf-1
 #| echo: false
 #| eval: true
 #| fig-height: 7
@@ -442,17 +470,65 @@ under the following assumptions:
 
 
 
+#### Algorithm
+
+1. Setup starting population at time zero
+2. Add offspring (same size) at time one
+
+
 :::
 
 ::: {.column width="50%"}
 
 ```{r }
-#| label: fig-wf-2
+#| label: wf-2
 #| echo: false
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
 plot(permute(G[[2]], G[[1]]$perm))
+text(x=0, y=1.2, paste("Offspring"), cex=2)
+```
+
+
+:::
+
+::::
+
+### Wright-Fisher model
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions:
+
+
+- no selection
+- no mutation
+- no migration
+- non-overlapping generations
+- random mating
+
+
+#### Algorithm
+
+1. Setup starting population at time zero
+2. Add offspring (same size) at time one
+3. Select parents to offspring at random
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: wf-3
+#| echo: false
+#| eval: true
+#| fig-height: 7
+#| fig-width: 7
+plot(permute(G[[3]], G[[1]]$perm))
 text(x=0, y=1.2, paste("Sampled parents"), cex=2)
 ```
 
@@ -478,19 +554,24 @@ under the following assumptions:
 - random mating
 
 
+#### Algorithm
+
+1. Setup starting population at time zero
+2. Add offspring (same size) at time one
+3. Select parents to offspring at random
 
 :::
 
 ::: {.column width="50%"}
 
 ```{r }
-#| label: fig-wf-3
+#| label: wf-4
 #| echo: false
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
-plot(permute(G[[3]], G[[1]]$perm))
-text(x=0, y=1.2, paste("Offspring"), cex=2)
+plot(permute(G[[4]], G[[1]]$perm))
+text(x=0, y=1.2, paste("Sampled parents"), cex=2)
 ```
 
 
@@ -509,6 +590,7 @@ Introduce model as way to understand drift. Show n=10 and
 interactively/iteratively build next generation(s). Forward
 simulation. (Add pgip code)
 
+Demonstrate this is binomial sampling.
 
 :::
 
@@ -524,8 +606,13 @@ simulation. (Add pgip code)
 #| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
+#| fig-cap: Wright-Fisher model
+t <- 1
 for (i in seq(1, length(G))) {
+    if (((i + 1) %% 3) == 0)
+        t <- t + 1
     plot(permute(G[[i]], G[[1]]$perm))
+    text(x=0, y=1.2, paste("Generation", t), cex=2)
 }
 ```
 
@@ -548,18 +635,21 @@ See https://mikeyharper.uk/animated-plots-with-r/
 
 ::: {.column width="50%"}
 
+To capture dynamics, follow allele frequency trajectory as function of
+time.
+
 
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="50%" .fragment}
 
 ```{r }
 #| label: wright-fisher-example
 #| echo: true
 #| eval: true
-wright_fisher <- function(p0, N, iter) {
-    x <- vector(mode="numeric", length=iter)
+wright_fisher <- function(p0, N, generations) {
+    x <- vector(mode="numeric", length=generations)
     x[1] <- p0
     for (i in seq(2, length(x)))
         x[i] <- rbinom(1, size=N, prob=x[i-1]) / N
@@ -572,32 +662,47 @@ wright_fisher <- function(p0, N, iter) {
 
 ::::
 
-
-
 ```{r }
 #| label: genetic-drift-example
 #| echo: false
 #| eval: true
-N <- c(10, 100, 200, 500, 1000, 1e4)
-iter <- 500
-p0 <- 0.2
-N <- rep(10, 5)
+set.seed(1223)
+n_reps=50
+n_gen=100
+conditions = 4
+p0 = rep(c(0.01, 0.1, 0.5, 0.8), each=conditions)
+N = rep(c(50, 100, 1000, 5000), conditions)
+sample=rep(seq(1, n_reps), length(N))
+p0_long = rep(p0, each=n_reps)
+N_long = rep(N, each=n_reps)
 
-wf <- as.data.frame(do.call("cbind", lapply(N, function(n) {wright_fisher(p0, n, iter)})))
-colnames(wf) <- N
-wf$generation <- seq(1, iter)
-data <- pivot_longer(wf, cols=as.character(N))
-colnames(data) <- c("generation", "N", "frequency")
-data$N <- factor(data$N, levels=as.character(N))
+wf <- mapply(wright_fisher, p0_long, N_long, n_gen, SIMPLIFY=FALSE)
+wf <- data.frame(frequency=unlist(wf), N=rep(N_long, each=n_gen),
+                 generation=seq(1, n_gen), sample=rep(sample, each=n_gen),
+                 p0=rep(p0_long, each=n_gen))
+wf$N <- factor(wf$N)
+wf$sample <- factor(wf$sample)
 ```
+
+::: {.fragment}
 
 ```{r }
-#| label: fig-genetic-drift-N-100
+#| label: fig-genetic-drift-N-10
 #| echo: false
 #| eval: true
-ggplot(subset(data, data$N=="100"), aes(x=generation, y=frequency, color=N)) + geom_line(size=1) + xlim(1, 40) + ylim(0, 1)
+#| fig-show: animate
+#| fig-keep: all
+#| fig-align: center
+#| fig-height: 10
+#| fig-width: 12
+#| out-width: 50%
+#| fig-cap: Genetic drift for different combinations of starting frequency and population size
+ggplot(subset(wf, wf$sample==1 & wf$p0 == 0.5), aes(x=generation, y=frequency)) + geom_line(size=1) + xlim(1, 100) + ylim(0, 1) + facet_wrap(. ~ N) + transition_reveal(generation)
 ```
 
+:::
+
+::: {.notes }
 
 
 Classic graph of allele: start at say 0.2 and drift with different Ne.
@@ -608,15 +713,29 @@ Mention *neutral* here as this is how alleles behave under drift: like
 gas particle diffusing up and down
 
 
-::: {.notes }
-
 See alternative way of visualizing variation faceting on initial
 frequency (showing P(fixation)) and population size (showing less
 variance))
 
 https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html
 
+
 :::
+
+
+### Genetic drift
+
+
+```{r }
+#| label: fig-genetic-drift-many-repetitions
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 8
+#| fig-width: 12
+#| fig-cap: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on  population size and starting frequency.
+ggplot(wf, aes(x=generation, y=frequency, group=sample)) + geom_line() + xlim(1, 100) + ylim(0, 1) + facet_grid(N ~ p0)
+```
 
 
 
