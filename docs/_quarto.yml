@@ -2,10 +2,13 @@ project:
   type: website
   title: "Population genomics in practice"
   output-dir: _site
-  execute-dir: file
   pre-render:
     - ../scripts/prepare.py
     - ../scripts/setup-data.sh
+
+filters:
+  - exercises/foldableCodeBlock.lua
+
 
 execute:
   freeze: auto
@@ -140,6 +143,11 @@ format:
   # pdf:
   #   documentclass: scrreport
 
+
+knitr:
+  opts_chunk:
+    code-fold: true
+    comment-char: "#>"
 
 jupyter:
   kernelspec:

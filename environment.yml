@@ -5,6 +5,7 @@ channels:
   - defaults
 dependencies:
   - bcftools
+  - bedtools
   - bokeh>=3.0
   - ca-certificates
   # - click
@@ -28,6 +29,7 @@ dependencies:
   - r-codetools
   - r-dt
   # - r-dotenv # Must be install via R
+  - r-formatr
   - r-gganimate
   - r-ggplot2
   - r-gifski

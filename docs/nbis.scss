@@ -45,6 +45,10 @@ pre.sourceCode.src {
 
 strong { color: $lime; font-weight: bold;}
 
+code {
+    color: $grape; font-weight: bold; background-color: white;
+}
+
 code.tree {
     line-height: 8px;
     font-size: 18px;
