@@ -6,10 +6,6 @@ project:
     - ../scripts/prepare.py
     - ../scripts/setup-data.sh
 
-filters:
-  - exercises/foldableCodeBlock.lua
-
-
 execute:
   freeze: auto
   cache: true
