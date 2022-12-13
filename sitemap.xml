@@ -2,118 +2,150 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/NBISweden/pgip/references.html</loc>
-    <lastmod>2022-12-10T15:24:41.004Z</lastmod>
+    <lastmod>2022-12-13T12:07:26.962Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/describing_variation.html</loc>
-    <lastmod>2022-12-10T15:24:42.776Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E130-variant_filtering.html</loc>
+    <lastmod>2022-12-13T12:07:31.610Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/variantcalling.html</loc>
-    <lastmod>2022-12-10T15:24:44.796Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E210-genetic_diversity.html</loc>
+    <lastmod>2022-12-13T12:07:33.290Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/selection.html</loc>
-    <lastmod>2022-12-10T15:24:46.528Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E110-popgen_primer.html</loc>
+    <lastmod>2022-12-13T12:07:34.914Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/wrightfisher.html</loc>
-    <lastmod>2022-12-10T15:24:48.232Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E230-fst_divergence.html</loc>
+    <lastmod>2022-12-13T12:08:04.922Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/ld_pruning_pca.html</loc>
-    <lastmod>2022-12-10T15:25:21.258Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E240-ld_pruning_pca.html</loc>
+    <lastmod>2022-12-13T12:08:07.610Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/variantfiltering.html</loc>
-    <lastmod>2022-12-10T15:25:22.962Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E330-msmc.html</loc>
+    <lastmod>2022-12-13T12:08:16.059Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/demographic_inference.html</loc>
-    <lastmod>2022-12-10T15:25:24.702Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E220-ld_and_phasing.html</loc>
+    <lastmod>2022-12-13T12:08:18.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/exercises/E120-variant_calling.html</loc>
+    <lastmod>2022-12-13T12:08:20.547Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/exercises/data.html</loc>
-    <lastmod>2022-12-10T15:25:31.771Z</lastmod>
+    <lastmod>2022-12-13T12:08:27.375Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/exercises/index.html</loc>
-    <lastmod>2022-12-10T15:25:33.495Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/fstatistics.html</loc>
-    <lastmod>2022-12-10T15:25:42.919Z</lastmod>
+    <lastmod>2022-12-13T12:08:29.043Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/exercises/preparation.html</loc>
-    <lastmod>2022-12-10T15:25:44.648Z</lastmod>
+    <lastmod>2022-12-13T12:08:30.759Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/genetic_diversity.html</loc>
-    <lastmod>2022-12-10T15:25:46.392Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E250-admixture.html</loc>
+    <lastmod>2022-12-13T12:08:32.419Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/genotype_likelihoods.html</loc>
-    <lastmod>2022-12-10T15:25:48.076Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E140-genotype_likelihoods.html</loc>
+    <lastmod>2022-12-13T12:08:34.047Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/exercises/admixture.html</loc>
-    <lastmod>2022-12-10T15:25:49.840Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/exercises/E430-linked_selection.html</loc>
+    <lastmod>2022-12-13T12:08:35.687Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/exercises/E310-fstatistics.html</loc>
+    <lastmod>2022-12-13T12:08:44.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/exercises/E410-direct_selection.html</loc>
+    <lastmod>2022-12-13T12:08:45.763Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/lectures/datageneration.html</loc>
-    <lastmod>2022-12-10T15:25:51.676Z</lastmod>
+    <lastmod>2022-12-13T12:08:47.471Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/lectures/index.html</loc>
-    <lastmod>2022-12-10T15:25:53.400Z</lastmod>
+    <lastmod>2022-12-13T12:08:49.099Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/lectures/genetic_diversity.html</loc>
-    <lastmod>2022-12-10T15:25:55.184Z</lastmod>
+    <lastmod>2022-12-13T12:08:50.739Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/schedule.html</loc>
-    <lastmod>2022-12-10T15:25:58.028Z</lastmod>
+    <lastmod>2022-12-13T12:08:53.295Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/about.html</loc>
-    <lastmod>2022-12-10T15:25:59.916Z</lastmod>
+    <lastmod>2022-12-13T12:08:55.007Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/recipes/index.html</loc>
-    <lastmod>2022-12-10T15:26:02.969Z</lastmod>
+    <lastmod>2022-12-13T12:08:57.779Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/index.html</loc>
-    <lastmod>2022-12-10T15:26:04.781Z</lastmod>
+    <lastmod>2022-12-13T12:08:59.463Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/slides/selection.html</loc>
-    <lastmod>2022-12-10T15:27:33.610Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/slides/L130-population_genetics_foundations.html</loc>
+    <lastmod>2022-12-13T12:10:59.413Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/slides/datageneration.html</loc>
-    <lastmod>2022-12-10T15:27:39.655Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/slides/L140-datageneration.html</loc>
+    <lastmod>2022-12-13T12:11:05.049Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L200-recap.html</loc>
+    <lastmod>2022-12-13T12:11:09.689Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L110-introduction.html</loc>
+    <lastmod>2022-12-13T12:11:14.545Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L410-direct_selection.html</loc>
+    <lastmod>2022-12-13T12:12:32.990Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L500-recap.html</loc>
+    <lastmod>2022-12-13T12:12:37.298Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L300-recap.html</loc>
+    <lastmod>2022-12-13T12:12:41.586Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L120-population_genomics_in_practice.html</loc>
+    <lastmod>2022-12-13T12:12:48.038Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/NBISweden/pgip/slides/L210-genetic_diversity.html</loc>
+    <lastmod>2022-12-13T12:12:52.378Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/pgip/slides/index.html</loc>
-    <lastmod>2022-12-10T15:27:41.875Z</lastmod>
+    <lastmod>2022-12-13T12:12:54.430Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/slides/introduction.html</loc>
-    <lastmod>2022-12-10T15:27:47.079Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/slides/L400-recap.html</loc>
+    <lastmod>2022-12-13T12:12:58.702Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/slides/population_genomics_in_practice.html</loc>
-    <lastmod>2022-12-10T15:27:54.139Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/slides/L220-ld_and_recombination.html</loc>
+    <lastmod>2022-12-13T12:13:02.911Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/NBISweden/pgip/slides/genetic_diversity.html</loc>
-    <lastmod>2022-12-10T15:27:58.852Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/NBISweden/pgip/slides/population_genetics_foundations.html</loc>
-    <lastmod>2022-12-10T15:28:14.573Z</lastmod>
+    <loc>https://github.com/NBISweden/pgip/slides/L430-linked_selection.html</loc>
+    <lastmod>2022-12-13T12:14:21.204Z</lastmod>
   </url>
 </urlset>
