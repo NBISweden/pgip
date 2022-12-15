@@ -6,13 +6,22 @@ engine: knitr
 #| label: E130-data-setup
 #| echo: false
 #| eval: true
-for f in ../data/data/ooa-outgroups/[CY]*.bam*; do
+for f in ../../data/data/ooa-outgroups/[CY]*.chr21.bam*; do
 	ln -f -s $(realpath $f) ./$(basename $f)
 done
 ```
 
 
 # Variant filtering {#sec-E130-variant_filtering}
+
+Regardless of how a raw variant call set has been produced, the calls
+will be of varying quality for a number of reasons, where for
+high-coverage sequencing the two most common are incompleteness of the
+reference sequence and misaligmnents in repetitive regions
+[@li_BetterUnderstandingArtifacts_2014]. Low-coverage sequencing comes
+with its own biases, such as
+
+
 
 ::: {.callout-warning}
 
@@ -41,25 +50,41 @@ Discuss different types of relevant filters, e.g.
 - [csvtk](https://bioinf.shenwei.me/csvtk/)
 - [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
 
+### Input data
+
+We will be working with the [Out of
+Africa](../data.qmd#sec-data-simulated-ooa) dataset, consisting of 10
+samples from the CEU, CHB, and YRI populations. The input consists of
+10 bam files:
+
+```{bash }
+#| label: e130-input-data
+#| echo: true
+#| eval: true
+ls -lLh *.bam
+```
 
 ## Coverage analyses
 
-It is often the case that raw variant calls need filtering before
-proceeding with downstream analyses (REF). Reasons may vary but
+ Reasons may vary but
 include uneven mapping coverage due to repeat regions, low coverage
 due to mis-assemblies, or coverage biases generated in the sequencing
 process. Importantly, both variable and monomorphic sites must be
-treated identically to avoid selection biases.
+treated identically in the filtering process to avoid selection biases.
 
 In this part, we will use `mosdepth` and `d4tools` to quickly generate
 depth of coverage profiles of mapped data. `mosdepth` is an ultra-fast
 command line tool for calculating coverage from a bam file. It can
 output results in a highly compressed format `d4`, which has been
 developed to handle the ever increasing size of resequencing projects.
-Files in d4 format can be with by the `d4tools` tool.
+Files in d4 format can be processed with the `d4tools` tool.
 
-For downstream purposes, we need to save the size of the chromosomes
-we're looking at:
+### Per-sample coverage
+
+We start by calculating per-sample coverages with `mosdepth`. For
+downstream purposes, we need to save the size of the chromosomes we're
+looking at:
+
 ```{bash }
 #| label: samtools-view-header
 #| echo: true
@@ -68,9 +93,11 @@ we're looking at:
 samtools view CEU-1.ooa.chr21.bam -H | grep SQ | awk '{OFS="\t";print $2, $3}' | sed -e "s/[SNL:]//g" > genome.txt
 ```
 
-We then start by calculating per-base coverage for one of the samples
-(syntax is `mosdepth <prefix> <input file>`), excluding reads with a
-mapping quality less than 20 (`-Q` flag):
+
+The syntax to generate coverage information for a bam file is
+`mosdepth <prefix> <input file>`. Here, we add the `--d4` option to
+generate d4 output and exclude reads with a mapping quality less than
+20 (`-Q` flag):
 
 ```{bash }
 #| label: mosdepth-one-sample
@@ -91,12 +118,12 @@ d4tools view CEU-1.per-base.d4 | head -n 5
 
 To get an idea of what the coverage looks like over the chromsome, we
 can use `bedtools` and `cvstk` in a one-liner to generate a simple
-coverage plot (@fig-plot-coverage).
+coverage plot (@fig-plot-coverage)[^bedtools-oneliner].
 
 ```{bash }
 #| label: bash-plot-coverage
 #| echo: true
-#| eval: false
+#| eval: true
 #| fig-show: asis
 #| fig-cap: Coverage for sample CEU-1 in 5kb windows. Experiment changing the window size (`-w`) parameter to change smoothing.
 bedtools intersect -a <(bedtools makewindows -g genome.txt -w 5000) \
@@ -104,6 +131,7 @@ bedtools intersect -a <(bedtools makewindows -g genome.txt -w 5000) \
 	bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
 	csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
 		  --ylab Coverage --width 9.0 --height 3.5 > fig-plot-coverage.png
+
 ```
 
 ::: {#fig-plot-coverage attr-output='.details summary="Output"'}
@@ -129,15 +157,18 @@ done
 ```
 
 
-::: {.notes }
 
-See
-https://evomics.org/learning/population-and-speciation-genomics/2018-population-and-speciation-genomics/psmc-msmc-activity/
-for information on coverage and accessibility masks.
+[^bedtools-oneliner]: The one-liner combines the results of several
+    commands in a pipe stream. Also, [Bash
+    redirections](https://www.gnu.org/software/bash/manual/html_node/Redirections.html)
+    are used to gather the results from the output of `bedtools
+    makewindows` and `dftools view` to `bedtools intersect`. The
+    intersection commands collects coverage data in 5kb windows that
+    are then summarized by `bedtools groupby`.
 
-Also https://github.com/stschiff/msmc-tools/blob/master/README.md and Heng Li's snpable https://lh3lh3.users.sourceforge.net/snpable.shtml
 
-:::
+
+
 
 
 

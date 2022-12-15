@@ -112,15 +112,13 @@ adaptation" but that high-coverage sequencing still too expensive
 
 lcWGS - alleviates cost issue
 
-
-
 # Read mapping and variant calling
 
 
 
 ### GATK best practice
 
-Point out: not optimal for
+Point out: not optimal for non-model organims
 
 ### Alternative variant callers
 
@@ -265,6 +263,24 @@ particular population).
 
 
 
+
+
+### Gentotype likelihoods
+
+::: {.notes }
+
+NB: samtools and GATK may actually produce different genotypes despite
+having identical GLs. Samtools applies prior $10^{-3}$ to het call,
+GATK has no prior [@li_BetterUnderstandingArtifacts_2014]
+
+:::
+
+
 ### Refs {.unnumbered .unlisted}
 ::: { #refs }
+:::
+
+
+::: {.notes }
+ART: https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm
 :::

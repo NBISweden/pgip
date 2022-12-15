@@ -189,7 +189,7 @@ effect of sequencing coverage.
 import io
 import pandas as pd
 import subprocess
-output = subprocess.check_output("samtools depth -a ../data/data/ooa-outgroups/*.bam", shell=True)
+output = subprocess.check_output("samtools depth -a ../data/data/ooa-outgroups/*.chr21.bam", shell=True)
 coverage = pd.read_table(io.StringIO(output.decode()), header=None).loc[:, 2:].mean(axis=0)
 df["coverage"] = coverage.values
 ```

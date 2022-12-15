@@ -88,9 +88,9 @@ website:
           contents:
             - file: "exercises/E110-popgen_primer.qmd"
               text: "Population genetics primer"
-            - file: "exercises/E120-variant_calling.qmd"
+            - file: "exercises/E120-variant_calling/E120-variant_calling.qmd"
               text: "Variant calling basics"
-            - file: "exercises/E130-variant_filtering.qmd"
+            - file: "exercises/E130-variant_filtering/E130-variant_filtering.qmd"
               text: "Variant filtering"
             - file: "exercises/E140-genotype_likelihoods.qmd"
               text: "Genotype likelihoods and low coverage data"
