@@ -123,7 +123,7 @@ coverage plot (@fig-plot-coverage)[^bedtools-oneliner].
 ```{bash }
 #| label: bash-plot-coverage
 #| echo: true
-#| eval: true
+#| eval: false
 #| fig-show: asis
 #| fig-cap: Coverage for sample CEU-1 in 5kb windows. Experiment changing the window size (`-w`) parameter to change smoothing.
 bedtools intersect -a <(bedtools makewindows -g genome.txt -w 5000) \
