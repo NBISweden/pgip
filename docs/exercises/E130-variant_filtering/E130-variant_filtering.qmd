@@ -131,14 +131,15 @@ bedtools intersect -a <(bedtools makewindows -g genome.txt -w 5000) \
 	bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
 	csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
 		  --ylab Coverage --width 9.0 --height 3.5 > fig-plot-coverage.png
-
 ```
 
 ::: {#fig-plot-coverage attr-output='.details summary="Output"'}
 
 ![](fig-plot-coverage.png)
 
-Coverage for sample CEU-1 in 5kb windows. Experiment changing the window size (`-w`) parameter to change smoothing.
+Coverage for sample CEU-1 in 5kb windows. Experiment changing the
+window size (`-w`) parameter to change smoothing.
+
 :::
 
 Apparently there are some high-coverage regions that could be
