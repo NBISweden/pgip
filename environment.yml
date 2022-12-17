@@ -28,7 +28,7 @@ dependencies:
   # - r-animation
   - r-codetools
   - r-dt
-  # - r-dotenv # Must be install via R
+  # - r-dotenv # Must be installed via R
   - r-formatr
   - r-gganimate
   - r-ggplot2
@@ -42,7 +42,7 @@ dependencies:
   - r-readr
   - r-readxl
   - r-reticulate
-  - r-rmarkdown
+  - r-rmarkdown>=2.19
   - r-tidyr
   - r-transformr
   - r-viridis
