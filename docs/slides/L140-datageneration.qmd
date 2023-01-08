@@ -58,9 +58,49 @@ theme_set(bw)
 knitr::knit_hooks$set(inline = function(x) {
                       prettyNum(x, big.mark=" ")
                   })
+knitr::opts_chunk$set(engine.opts=list(
+                          template="tikzfig.tex",
+                          dvisvgm.opts = "--font-format=woff"))
 ```
 
 # Data generation
+### Real data
+
+Relate back to previous lecture where data is "clean"; this is
+typically not the case due to
+
+- uneven mapping
+- incomplete reference
+-
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg" }
+#| label: coverage-filters-1
+#| echo: false
+#| eval: true
+\begin{tikzpicture}
+\node (a1s) at (0pt, 0pt) {};
+\node (a1e) at (400pt, 0pt) {};
+\draw (a1s) -- (a1e);
+\end{tikzpicture}
+```
+
+
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg" }
+#| label: coverage-filters-2
+#| echo: false
+#| eval: true
+\begin{tikzpicture}
+ \draw (0,0) circle (1cm);
+\draw (0,0) circle (2cm);
+\end{tikzpicture}
+```
+
+
 
 ### Population genomics - the data
 
@@ -137,6 +177,9 @@ Point out: not optimal for non-model organims
 
 
 # Variant filtering
+### Filters and masks
+
+Implement:
 
 ### General filters
 
@@ -259,6 +302,7 @@ that would incorrectly generate “missing data” if a site is fixed in a
 particular population).
 
 :::
+
 
 
 

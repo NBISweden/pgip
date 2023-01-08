@@ -55,6 +55,9 @@ library(igraph)
 library(gganimate)
 library(patchwork)
 library(tidyr)
+source("../../src/R/wf_model_igraph.R")
+source("../../src/R/wright_fisher.R")
+source("../../src/R/color.genes.igraph.R")
 bw <- theme_bw(base_size=18) %+replace% theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 theme_set(bw)
 knitr::knit_hooks$set(inline = function(x) {
@@ -223,6 +226,29 @@ The set of alleles found on a single sequence is called *haplotype*.
 
 ### Describing DNA variation
 
+::: {.dna }
+
+| 1 | 2     | 3 | 4 | 5     | 6 | 7 | 8     | 9 | 10 | 11    | 12 | 13    | 14 | 15    |
+|:-:|:-----:|:-:|:-:|:-----:|:-:|:-:|:-----:|:-:|:--:|:-----:|:--:|:-----:|:--:|:-----:|
+| T | T     | A | C | A     | A | T | **C** | C | G  | A     | T  | C     | G  | T     |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+| T | **C** | A | C | A     | A | T | G     | C | G  | A     | T  | **G** | G  | **A** |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+|   | *     |   |   | *     |   |   | *     |   |    | *     |    | *     |    | *     |
+
+: {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
+
+:::
+
+
+
+Once we have a sample of sequences we want to describe the observed
+variation. At any position the *i*th allele has sample frequency
+$p_i$, where the sum of all allele frequencies is 1. For instance, at
+site 1, $p_T=1$ (and by extension $p_A=p_C=p_G=0$), and at site 2
+$p_C=1/4$ and $p_T=3/4$.
+
+::: {.notes }
 
 ::: {.dna }
 
@@ -237,11 +263,12 @@ The set of alleles found on a single sequence is called *haplotype*.
 
 :::
 
-Once we have a sample of sequences we want to describe the observed
-variation. At any position the *i*th allele has sample frequency
-$p_i$, where the sum of all allele frequencies is 1. For instance, at
-site 1, $p_T=1$ (and by extension $p_A=p_C=p_G=0$), and at site 2
-$p_C=1/4$ and $p_T=3/4$.
+:::
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 #### Heterozygosity
 
@@ -250,6 +277,10 @@ The *heterozygosity* at a site is given by
 $$
 h = \frac{n}{n-1}\left(1 - \sum p_i^2\right)
 $$
+
+:::
+
+::: {.column width="50%"}
 
 ::: {.fragment}
 
@@ -266,21 +297,32 @@ $$
 :::
 
 
+:::
+
+::::
+
+
 ### Describing DNA variation
+
 
 
 ::: {.dna }
 
-| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:--:|
-| T | T | A | C | A | A | T | C | C | G  | A  | T  | C  | G  | T  |
-| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
-| T | C | A | C | A | A | T | G | C | G  | A  | T  | G  | G  | A  |
-| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
+| 1 | 2     | 3 | 4 | 5     | 6 | 7 | 8     | 9 | 10 | 11    | 12 | 13    | 14 | 15    |
+|:-:|:-----:|:-:|:-:|:-----:|:-:|:-:|:-----:|:-:|:--:|:-----:|:--:|:-----:|:--:|:-----:|
+| T | T     | A | C | A     | A | T | **C** | C | G  | A     | T  | C     | G  | T     |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+| T | **C** | A | C | A     | A | T | G     | C | G  | A     | T  | **G** | G  | **A** |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+|   | *     |   |   | *     |   |   | *     |   |    | *     |    | *     |    | *     |
 
-: {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,25]"}
+: {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
 
 :::
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 #### Nucleotide diversity $\pi$
 
@@ -289,6 +331,11 @@ The *nucleotide diversity* is the sum of site heterozygosities:
 $$
 \pi = \sum_{j=1}^S h_j
 $$
+
+
+:::
+
+::: {.column width="50%"}
 
 ::: {.fragment}
 
@@ -321,6 +368,11 @@ $$
 
 :::
 
+:::
+
+::::
+
+
 # Origin and change of variation
 
 
@@ -332,15 +384,16 @@ $$
 
 
 Model of evolution that describes sampling of alleles in a population
-under the following assumptions:
+under the following assumptions [@hein2005gene]:
 
 ::: {.incremental}
 
-- no selection
-- no mutation
-- no migration
-- non-overlapping generations
-- random mating
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
 
 :::
 
@@ -376,13 +429,14 @@ See @hein_GeneGenealogies_2004 for more assumptions.
 ::: {.column width="50%"}
 
 Model of evolution that describes sampling of alleles in a population
-under the following assumptions:
+under the following assumptions [@hein2005gene]:
 
-- no selection
-- no mutation
-- no migration
-- non-overlapping generations
-- random mating
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
 
 
 #### Algorithm
@@ -398,42 +452,16 @@ under the following assumptions:
 #| label: wright-fisher-model-graph
 #| echo: false
 #| eval: true
-wf_model_igraph <- function(width=10, height=10, offspring_first=TRUE, untangled=TRUE) {
-    G <- list()
-    g <- make_empty_graph()
-    g <- add_vertices(g, width * height, color=NA, size=0, label=NA, frame.color=NA)
-    g$perm <- unlist(lapply(seq(vcount(g), 1, - width), function(x) {seq(x - width + 1, x)}))
-    g$layout <- layout_on_grid(g, width=width, height=height)
-    i <- 1
-    for (i in seq(1, height)) {
-        n0 <- (i - 1) * width + 1
-        n1 <- i * width
-        if (i >= 2) {
-            p0 <- (i - 2) * width + 1
-            p1 <- (i - 1) * width
-            parents <- sample(p0:p1, width, replace=TRUE)
-            if (untangled)
-                parents <- sort(parents)
-            offspring <- seq((i - 1) * width + 1, i * width)
-            if (offspring_first) {
-                V(g)[n0:n1]$frame.color <- "black"
-                V(g)[n0:n1]$color <- NA
-                V(g)[n0:n1]$size <- 3
-                G[[length(G) + 1]] <- g
-            }
-            edges <- unlist(Map(c, parents, offspring))
-            V(g)[parents]$color <- "black"
-            G[[length(G) + 1]] <- g
-            g <- add_edges(g, edges, color="black", width=2, arrow.size=0)
-        }
-        V(g)[n0:n1]$frame.color <- "black"
-        V(g)[n0:n1]$color <- NA
-        V(g)[n0:n1]$size <- 3
-        G[[length(G) + 1]] <- g
-    }
-    G
-}
-G <- wf_model_igraph()
+set.seed(2023)
+G <- wf_model_igraph(generations=16)
+perm <- attr(G, "perm")
+n <- attr(G, "n")
+g <- color.genes.igraph(G[[n]], a.color = "white", frame.color = "black")
+i <- V(g)[unlist(ego(g, order = 16, nodes = c(152, 155, 158), mode = "in"))]
+E(g)$color <- "gray"
+E(g)[to(i)]$width <- 6
+E(g)[to(i)]$color <- "black"
+plot(permute(g, perm))
 ```
 
 
@@ -443,7 +471,7 @@ G <- wf_model_igraph()
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
-plot(permute(G[[1]], G[[1]]$perm))
+plot(permute(color.genes.igraph(G[[1]], a.color="white", frame.color="black"), perm))
 text(x=0, y=1.2, paste("Starting population"), cex=2)
 ```
 
@@ -459,14 +487,14 @@ text(x=0, y=1.2, paste("Starting population"), cex=2)
 ::: {.column width="50%"}
 
 Model of evolution that describes sampling of alleles in a population
-under the following assumptions:
+under the following assumptions [@hein2005gene]:
 
-
-- no selection
-- no mutation
-- no migration
-- non-overlapping generations
-- random mating
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
 
 
 
@@ -486,8 +514,8 @@ under the following assumptions:
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
-plot(permute(G[[2]], G[[1]]$perm))
-text(x=0, y=1.2, paste("Offspring"), cex=2)
+plot(permute(color.genes.igraph(G[[2]], a.color = "white", frame.color = "black"), perm))
+text(x = 0, y = 1.2, paste("Offspring"), cex = 2)
 ```
 
 
@@ -502,15 +530,14 @@ text(x=0, y=1.2, paste("Offspring"), cex=2)
 ::: {.column width="50%"}
 
 Model of evolution that describes sampling of alleles in a population
-under the following assumptions:
+under the following assumptions [@hein2005gene]:
 
-
-- no selection
-- no mutation
-- no migration
-- non-overlapping generations
-- random mating
-
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
 
 #### Algorithm
 
@@ -528,8 +555,8 @@ under the following assumptions:
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
-plot(permute(G[[3]], G[[1]]$perm))
-text(x=0, y=1.2, paste("Sampled parents"), cex=2)
+plot(permute(color.genes.igraph(G[[3]], a.color = "white", frame.color = "black"), perm))
+text(x = 0, y = 1.2, paste("Sampled parents"), cex = 2)
 ```
 
 
@@ -544,15 +571,14 @@ text(x=0, y=1.2, paste("Sampled parents"), cex=2)
 ::: {.column width="50%"}
 
 Model of evolution that describes sampling of alleles in a population
-under the following assumptions:
+under the following assumptions [@hein2005gene]:
 
-
-- no selection
-- no mutation
-- no migration
-- non-overlapping generations
-- random mating
-
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
 
 #### Algorithm
 
@@ -570,8 +596,8 @@ under the following assumptions:
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
-plot(permute(G[[4]], G[[1]]$perm))
-text(x=0, y=1.2, paste("Sampled parents"), cex=2)
+plot(permute(color.genes.igraph(G[[4]], a.color = "white", frame.color = "black"), perm))
+text(x = 0, y = 1.2, paste("Sampled parents"), cex = 2)
 ```
 
 
@@ -583,18 +609,7 @@ text(x=0, y=1.2, paste("Sampled parents"), cex=2)
 
 :::: {.columns}
 
-::: {.column width="30%"}
-
-
-Introduce model as way to understand drift. Show n=10 and
-interactively/iteratively build next generation(s). Forward
-simulation. (Add pgip code)
-
-Demonstrate this is binomial sampling.
-
-:::
-
-::: {.column width="70%"}
+::: {.column width="50%"}
 
 
 ```{r }
@@ -611,17 +626,34 @@ t <- 1
 for (i in seq(1, length(G))) {
     if (((i + 1) %% 3) == 0)
         t <- t + 1
-    plot(permute(G[[i]], G[[1]]$perm))
-    text(x=0, y=1.2, paste("Generation", t), cex=2)
+    plot(permute(color.genes.igraph(G[[i]], a.color = "white", frame.color = "black"), perm))
+    text(x = 0, y = 1.2, paste("Generation", t), cex = 2)
 }
 ```
 
 
 :::
 
+::: {.column width="50%" .fragment}
+
+
+```{r}
+#| label: fig-wf-model-genealogy
+#| echo: false
+#| eval: true
+#| fig-cap: "Wright-Fisher model tracing the genealogies of three extant genes"
+n <- attr(G, "n")
+g <- color.genes.igraph(G[[n]], a.color = "white", frame.color = "black")
+i <- V(g)[unlist(ego(g, order = 16, nodes = c(152, 155, 158), mode = "in"))]
+E(g)$color <- "gray"
+E(g)[to(i)]$width <- 6
+E(g)[to(i)]$color <- "black"
+plot(permute(g, perm))
+```
+
+:::
+
 ::::
-
-
 
 ::: {.notes }
 
@@ -629,38 +661,81 @@ See https://mikeyharper.uk/animated-plots-with-r/
 
 :::
 
-### Genetic drift
+
+### Genetic drift with alleles
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-To capture dynamics, follow allele frequency trajectory as function of
-time.
-
-
+```{r }
+#| label: fig-wright-fisher-drift-0.3-1
+#| echo: false
+#| eval: true
+#| out-height: 70%
+#| fig-align: center
+#| fig-cap: Example of fixation
+set.seed(1974)
+G <- wf_model_igraph(p0 = 0.3, popsize = 10, generations = 16)
+n <- attr(G, "n")
+perm <- attr(G, "perm")
+plot(permute(color.genes.igraph(G[[n]]), perm))
+text(x = 0, y = 1.2, paste("Generation", 16), cex = 2)
+```
 
 :::
 
 ::: {.column width="50%" .fragment}
 
 ```{r }
-#| label: wright-fisher-example
-#| echo: true
+#| label: fig-wright-fisher-drift-0.3-2
+#| echo: false
 #| eval: true
-wright_fisher <- function(p0, N, generations) {
-    x <- vector(mode="numeric", length=generations)
-    x[1] <- p0
-    for (i in seq(2, length(x)))
-        x[i] <- rbinom(1, size=N, prob=x[i-1]) / N
-    x
-}
+#| out-height: 70%
+#| fig-align: center
+#| fig-cap: Example of loss
+set.seed(2014)
+G <- wf_model_igraph(p0=0.3, popsize=10, generations=16)
+n <- attr(G, "n")
+perm <- attr(G, "perm")
+plot(permute(color.genes.igraph(G[[n]]), perm))
+text(x=0, y=1.2, paste("Generation", 16), cex=2)
 ```
-
 
 :::
 
 ::::
+
+Wright-Fisher model showing the evolution of population of 10 genes
+over 16 generations. Allele variants are shown in white and dark grey.
+
+### Genetic drift
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+To capture dynamics, follow allele frequency trajectory as function of
+time.
+
+
+```{r code=readLines("../../src/R/wright_fisher.R")}
+#| label: wright-fisher-source
+#| echo: true
+#| eval: false
+```
+
+
+::: {.fragment fragment-index=2}
+
+Note dependency of "jumpyness" (variance) on population size N
+
+:::
+
+:::
+
+::: {.column width="60%" .fragment fragment-index=1}
+
 
 ```{r }
 #| label: genetic-drift-example
@@ -684,8 +759,6 @@ wf$N <- factor(wf$N)
 wf$sample <- factor(wf$sample)
 ```
 
-::: {.fragment}
-
 ```{r }
 #| label: fig-genetic-drift-N-10
 #| echo: false
@@ -695,12 +768,15 @@ wf$sample <- factor(wf$sample)
 #| fig-align: center
 #| fig-height: 10
 #| fig-width: 12
-#| out-width: 50%
-#| fig-cap: Genetic drift for different combinations of starting frequency and population size
+#| out-width: 100%
+#| fig-cap: Genetic drift for different population sizes, starting frequency $p_0$=0.5
 ggplot(subset(wf, wf$sample==1 & wf$p0 == 0.5), aes(x=generation, y=frequency)) + geom_line(size=1) + xlim(1, 100) + ylim(0, 1) + facet_wrap(. ~ N) + transition_reveal(generation)
 ```
 
 :::
+
+::::
+
 
 ::: {.notes }
 
@@ -795,7 +871,45 @@ Repeat WF model. Point out that it can be used for *forward*
 simulation. Show how many individuals are lost each generation (limit
 e-1): lose lots of compute resources on the way to extant sample.
 
-Solution: look backwards
+```{r }
+#| label: fig-wf-model-reproductive-success
+#| echo: false
+#| eval: true
+#| fig-cap: Wright-Fisher model of 30 genes, 50 generations.
+G <- wf_model_igraph(popsize=30, generations=50, parent.transient=FALSE)
+g <- color.genes.igraph(G[[148]], a.color="white", frame.color="black")
+V(g)$size <- 2
+E(g)$width <- 1
+E(g)$color <- "lightgray"
+plot(permute(g, attr(G, "perm")))
+```
+
+::: {.fragment}
+
+```{r }
+#| label: fig-wf-model-reproductive-success-graph
+#| echo: false
+#| eval: true
+#| fig-cap: Reproductive success in percent per generation.
+x <- unlist(lapply(seq(1, length(g), attr(G, "popsize")), function(i) {sum(V(g)[i:(i+attr(G, "popsize")-1)]$reproduce, na.rm=TRUE)})) / attr(G, "popsize")
+xmean <- mean(x)*100
+plot(x[1:(length(x) - 1)] * 100, xlab="Generation", ylab="Reproductive success (%)", type="l")
+```
+
+Mean reproductive success = $sprintf("%.2f%%", xmean)$. Can show for
+large populations P(no descendants)=$e^{-1}$
+
+:::
+
+::: {.notes }
+
+[p. 15 @hein2005gene] shows the fraction of genes without descendants.
+Focus on the number of descendants for *one* gene *i*, which is X ~
+Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that
+P(no descendants) = P(X=0) = e^{-1}
+
+:::
+
 
 ### The coalescent
 

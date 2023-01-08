@@ -2,9 +2,12 @@ name: build
 
 on:
   pull_request:
+    branches:
+      - main
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
     tags:
       - '*'
 
@@ -77,8 +80,16 @@ jobs:
         echo "$(dirname $(which R))" >> $GITHUB_PATH
         quarto check
 
+    - name: Render project without publishing
+      uses: quarto-dev/quarto-actions/publish@v2
+      if: ${{ github.event_name == 'push' }}
+      with:
+        to: html
+        path: docs
+
     - name: Publish to GitHub Pages
       uses: quarto-dev/quarto-actions/publish@v2
+      if: ${{ github.event_name == 'pull_request' }}
       with:
         target: gh-pages
         path: docs

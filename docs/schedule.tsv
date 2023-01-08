@@ -1,33 +1,18 @@
  Day              	 Date   	 Time        	 Topic                                             	 Lecturer / TA 	 Type
- **Monday**       	08/05/22	             	 **Models of evolution**
-                  	        	 09:00-09:30 	 Coffee and welcome
-                  	        	 09:30-10:00 	 Introduction and practical information            	 TBA
-                  	        	 09:45-10:15 	 Population genomics in practice                   	 TBA           	 Lecture
-                  	        	 10:15-10:30 	 Models of evolution                               	 TBA           	 Lecture
-                  	        	 10:30-11:30 	 Wright-Fisher model                               	 TBA           	 Practical
-                  	        	 11:30-12:00 	 Wright-Fisher, worked examples                    	 TBA           	 Lecture
+ **Monday ** 		 08/05/22	             	 **Variant calling**
+                   	        	 08:30-09:00 	 Coffee and welcome
+                  	        	 09:00-09:30 	 Introduction and practical information            	 TBA
+                  	        	 09:30-10:00 	 Population genomics in practice			 TBA		 Lecture
+                  	        	 10:15-11:15 	 Population genetics foundations                    	 TBA           	 Lecture
+                  	        	 11:15-12:00 	 Population genetics mini-practical                    	 TBA           	 Practical
                   	        	 12:00-13:00 	 Lunch
-                  	        	 13:00-13:30 	 The coalescent                                    	 TBA           	 Lecture
-                  	        	 13:30-14:30 	 The coalescent                                    	 TBA           	 Practical
-                  	        	 14:30-15:00 	 Simulation with msprime                           	 TBA           	 Practical
+                  	        	 13:00-13:45 	 Variant calling and filtering                        	 TBA           	 Lecture
+                  	        	 13:45-15:00 	 Variant calling and filtering, low-coverage data      	 TBA           	 Practical
                   	        	 15:00-15:30 	 Coffee
-                  	        	 15:30-16:00 	                                                   	               	 Lecture
-                  	        	 16:00-17:00 	                                                   	               	 Practical
+                  	        	 15:30-16:00 	 Genotype likelihoods, low-coverage data           	 TBA           	 Lecture
+                  	        	 16:00-16:30 	 Genotype likelihoods                              	 TBA           	 Practical
+                  	        	 16:30-17:00 	                                                   	 TBA           	 Practical
 
- **Monday (alt)** 	08/05/22	             	 **Variant calling**
-                  	        	 09:00-09:30 	 Coffee and welcome
-                  	        	 09:30-10:00 	 Introduction and practical information            	 TBA
-                  	        	 09:45-10:15 	 Population genomics in practice                   	 TBA           	 Lecture
-                  	        	 10:15-10:30 	 Variant calling, best practice                    	 TBA           	 Lecture
-                  	        	 10:30-11:30 	 Variant calling                                   	 TBA           	 Practical
-                  	        	 11:30-12:00 	 Variant filtering                                 	 TBA           	 Lecture
-                  	        	 12:00-13:00 	 Lunch
-                  	        	 13:00-14:00 	 Variant filtering                                 	 TBA           	 Practical
-                  	        	 14:00-14:30 	 Genotype likelihoods, low-coverage data           	 TBA           	 Lecture
-                  	        	 14:30-15:00 	 Genotype likelihoods                              	 TBA           	 Practical
-                  	        	 15:00-15:30 	 Coffee
-                  	        	 15:30-16:00 	                                                   	               	 Lecture
-                  	        	 16:00-17:00 	                                                   	               	 Practical
 
  **Tuesday**      	09/05/22	             	 **Describing diversity**
                   	        	 09:00-09:30 	 Recap
@@ -79,3 +64,19 @@
                   	        	 12:00-13:00 	 Lunch
                   	        	 13:00-15:00 	 Own data / project feedback session?              	 TBA           	 Lecture
                   	        	 15:00-15:30 	 Summary
+
+ **Monday** (alt)       08/05/22	           	 **Models of evolution**
+                  	        	 09:00-09:30 	 Coffee and welcome
+                  	        	 09:30-10:00 	 Introduction and practical information            	 TBA
+                  	        	 09:45-10:15 	 Population genomics in practice                   	 TBA           	 Lecture
+                  	        	 10:15-10:30 	 Models of evolution                               	 TBA           	 Lecture
+                  	        	 10:30-11:30 	 Wright-Fisher model                               	 TBA           	 Practical
+                  	        	 11:30-12:00 	 Wright-Fisher, worked examples                    	 TBA           	 Lecture
+                  	        	 12:00-13:00 	 Lunch
+                  	        	 13:00-13:30 	 The coalescent                                    	 TBA           	 Lecture
+                  	        	 13:30-14:30 	 The coalescent                                    	 TBA           	 Practical
+                  	        	 14:30-15:00 	 Simulation with msprime                           	 TBA           	 Practical
+                  	        	 15:00-15:30 	 Coffee
+                  	        	 15:30-16:00 	                                                   	               	 Lecture
+                  	        	 16:00-17:00 	                                                   	               	 Practical
+

@@ -142,7 +142,7 @@ format:
 
 knitr:
   opts_chunk:
-    code-fold: true
+    code-fold: false
     comment-char: "#>"
 
 jupyter:

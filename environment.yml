@@ -38,7 +38,7 @@ dependencies:
   - r-jsonlite
   # - r-magick
   - r-patchwork
-  # - r-pdftools
+  - r-pdftools
   - r-readr
   - r-readxl
   - r-reticulate
