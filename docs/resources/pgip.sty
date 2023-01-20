@@ -1,0 +1,138 @@
+%%
+%% This is file `pgip.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pgip.dtx  (with options: `package')
+%% -------:| -----------------------------------------------------------------
+%%    pgip:| LaTeX style file for Population Genomics in Practice
+%%  Author:| Per Unneberg
+%%  E-mail:| per.unneberg@scilifelab.se
+%% License:| Released under the LaTeX Project Public License v1.3c or later
+%%     See:| http://www.latex-project.org/lppl.txt
+%%
+\def\pgip@version{1.0.0}
+\def\pgip@date{2023/01/18}
+\NeedsTeXFormat{LaTeX2e}[2020/02/02]
+\DeclareRelease{v1.0.0}{2023/01/18}{pgip.sty}
+\DeclareCurrentRelease{v\pgip@version}{\pgip@date}
+\ProvidesPackage{pgip}
+    [\pgip@date\space v\pgip@version\space LaTex style file for Population Genomics in Practice]
+\newcommand*{\pgipversion}{v\pgip@version\space dated \pgip@date}
+\RequirePackage{pgfplots}
+\RequirePackage{pgfplotstable}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\RequirePackage{ifthen}
+\RequirePackage{xargs}
+\RequirePackage{bm}
+\RequirePackage{keyval}
+\RequirePackage{graphicx}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+
+\define@key{pgipfilter}{ampersand}{\def\pgip@ampersand{#1}}
+\define@key{pgipfilter}{min}{\def\pgip@min{#1}}
+\define@key{pgipfilter}{max}{\def\pgip@max{#1}}
+\define@key{pgipfilter}{nind}{\def\pgip@nind{#1}}
+\setkeys{pgipfilter}{
+  ampersand=\&,
+  min=0,
+  max=1000,
+  nind=1,
+}
+\pgfplotstableread{coveragetable.tsv}\coveragetable
+
+\newcommand{\addcolumnsum}[3]{
+  % #1=table name
+  % #2=columns to iterate
+  % #3=new column name
+  \pgfplotstablecreatecol[
+  create col/assign/.code={%
+    \def\rowsum{0}
+    \pgfmathtruncatemacro\maxcolindex{\pgfplotstablecols-1}
+    \pgfplotsforeachungrouped \col in {#2}{
+      \pgfmathsetmacro\rowsum{\rowsum+\thisrow{\col}}
+    }
+    \pgfkeyslet{/pgfplots/table/create col/next content}\rowsum
+  }
+  ]{#3}{#1}
+}
+\newcommand{\addthresholdmask}[4][]{
+  % #1=pgip key-value pairs
+  % #2=table name
+  % #3=column name
+  % #4=new column name
+  \setkeys{pgipfilter}{#1}
+  \pgfplotstablecreatecol[
+  create col/assign/.code={%
+    \getthisrow{#3}\entry
+    \pgfmathparse{and(\entry<\pgip@max, \entry>\pgip@min)}
+    \edef\entry{\pgfmathresult}
+    \pgfkeyslet{/pgfplots/table/create col/next content}\entry
+  }]{#4}{#2}
+}
+\newcommand{\addindividualmask}[4][]{
+  % #1=pgip key-value pairs
+  % #2=table name
+  % #3=column names
+  % #4=new column name
+  \setkeys{pgipfilter}{#1}
+  \pgfplotstablecreatecol[
+  create col/assign/.code={%
+    \def\rowcount{0}
+    \pgfplotsforeachungrouped \col in {#3}{
+      \getthisrow{\col}\entry
+      \pgfmathparse{and(\entry<\pgip@max, \entry>\pgip@min)}
+      \pgfmathsetmacro\rowcount{\rowcount+\pgfmathresult}
+    }
+    \pgfmathparse{\rowcount>=\pgip@nind}
+    \edef\entry{\pgfmathresult}
+    \pgfkeyslet{/pgfplots/table/create col/next content}\entry
+  }]{#4}{#2}
+}
+\newcommand{\formatmask}[3]{
+  % #1=table name
+  % #2=empty macro
+  % #3=column name
+  \pgfplotstablegetrowsof{#1}
+  \pgfmathparse{int (\pgfplotsretval) }
+  \pgfmathtruncatemacro{\maxrowindex}{\pgfmathresult-2}
+  \foreach \i in {0,1,2,...,\maxrowindex}{%
+    \pgfmathparse{int(\i)}
+    \let\im=\pgfmathresult
+    \pgfplotstablegetelem{\im}{#3}\of#1
+    \pgfmathtruncatemacro{\x}{\pgfplotsretval}
+    %% Simply convert >0 to 1, else to 0
+    \ifthenelse{\x>0}{
+      \gappto #2 {\expandonce{1}}
+    }{
+      \gappto #2 {\expandonce{0}}
+    }
+    \ifthenelse{\im<\maxrowindex}{%
+      \gappto #2 {\expandonce{\&}}
+    }{}
+  }
+  \gappto #2{\\}
+}
+%%
+%% Copyright (C) 2023 by Per Unneberg <per.unneberg@scilifelab.se>
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Per Unneberg.
+%%
+%% This work consists of the file pgip.dtx and a Makefile.
+%% Running "make" generates the derived files README, pgip.pdf and pgip.sty.
+%% Running "make inst" installs the files in the user's TeX tree.
+%% Running "make install" installs the files in the local TeX tree.
+%%
+%%
+%% End of file `pgip.sty'.
