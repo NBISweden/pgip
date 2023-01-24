@@ -58,48 +58,41 @@ theme_set(bw)
 knitr::knit_hooks$set(inline = function(x) {
                       prettyNum(x, big.mark=" ")
                   })
-knitr::opts_chunk$set(engine.opts=list(
-                          template="tikzfig.tex",
-                          dvisvgm.opts = "--font-format=woff"))
+font_opts <- list(template="../resources/tikzfig.tex",
+                  dvisvgm.opts = "--font-format=woff")
+knitr::opts_chunk$set(engine.opts=font_opts)
 ```
 
 # Data generation
-### Real data
+### Textbook data is clean
 
-Relate back to previous lecture where data is "clean"; this is
-typically not the case due to
+
+```{bash }
+#| label: tskit-vcf-data
+#| echo: false
+#| eval: true
+chromhead=$(bcftools view -h ../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz | tail -n 1)
+tskit vcf ../data/data/ooa-outgroups/ooa.chr21.ts | head -4
+echo -e "$chromhead"
+tskit vcf ../data/data/ooa-outgroups/ooa.chr21.ts | tail -n +7 | head -n 5
+```
+
+FIXME: Include McDonald-Kreitman ADH alignment
+
+::: {.fragment}
+
+Variant calls need to be generated from sequencing data and need to be
+filtered and preprocessed before any subsequent analyses. There are
+many possible reasons, including:
 
 - uneven mapping
 - incomplete reference
--
 
-### Coverage tracks
+:::
 
-```{r, engine='tikz', fig.ext="svg" }
-#| label: coverage-filters-1
-#| echo: false
-#| eval: true
-\begin{tikzpicture}
-\node (a1s) at (0pt, 0pt) {};
-\node (a1e) at (400pt, 0pt) {};
-\draw (a1s) -- (a1e);
-\end{tikzpicture}
-```
+### Real data
 
-
-
-### Coverage tracks
-
-```{r, engine='tikz', fig.ext="svg" }
-#| label: coverage-filters-2
-#| echo: false
-#| eval: true
-\begin{tikzpicture}
- \draw (0,0) circle (1cm);
-\draw (0,0) circle (2cm);
-\end{tikzpicture}
-```
-
+![Aligments of three samples to chromosome 21](chr21_example.png)
 
 
 ### Population genomics - the data
@@ -131,7 +124,6 @@ ggplot(data, aes(x=as.Date(Date), y=Mb)) + geom_line() + xlab("") + ylab("") + s
 
 
 ### RADSeq
-
 
 ### High coverage sequencing data
 
@@ -177,6 +169,600 @@ Point out: not optimal for non-model organims
 
 
 # Variant filtering
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-1
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+\begin{scope}
+  \clip (0, 0) rectangle (0, 0);
+  \pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+  \matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+\end{scope}
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+    \clip (0, 0) rectangle (0, 0);
+    \node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+    \matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+    \matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+    \matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+    \matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+    \node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+    \node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+
+    \begin{scope}
+      \clip (0, 0) rectangle (0, 0);
+      \pgfplotsset{covaxis/.append style={ymax=45}}
+      \pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+      \matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+      \node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+    \end{scope}
+
+  \draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+  \draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+  \draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1_axis.outer south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-2
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+\begin{scope}
+  \clip (0,0) rectangle (0,0);
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+
+\end{scope}
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+    \clip (0,0) rectangle (0,0);
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+\end{scope}
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1_axis.outer south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-3
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+
+
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+    \clip (0,0) rectangle (0,0);
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+\end{scope}
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1mask.south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-4
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+
+
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+
+\begin{scope}
+\clip (0,0) rectangle (0,0);
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+\end{scope}
+
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+\end{scope}
+
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1mask.south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-5
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+
+\begin{scope}
+\clip (0,0) rectangle (0,0);
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+\end{scope}
+
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+\end{scope}
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1mask.south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-6
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+
+\begin{scope}
+\clip (0,0) rectangle (0,0);
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+\end{scope}
+
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+
+\end{scope}
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1mask.south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-7
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+  \pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+  \matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{A3}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+
+\end{scope}
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+
+\end{scope}
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1mask.south west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+### Coverage tracks
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: coverage-filters-final
+#| echo: false
+#| eval: true
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask[min=3, max=11]{\coveragetable}{Asum}{Asummask}
+\addindividualmask[min=0, max=1000, nind=2]{\coveragetable}{A1,A2,A3}{Aindmask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aindmask\empty
+\formatmask{\coveragetable}{\Aindmask}{Aindmask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+
+\begin{scope}[xshift=0, yshift=0]
+\pic[at={(0,300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\matrix[mask, anchor=west, at={($(A1_axis.south west)+(3, -10)$)}] (A1mask) {\Aonemask};
+
+
+\pic[at={(0,150)}] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};a
+\matrix[mask, anchor=west, at={($(A2_axis.south west)+(3, -10)$)}] (A2mask) {\Atwomask};
+
+
+\pic[at={(0, 0)}] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+\matrix[mask, anchor=west, at={($(A3_axis.south west)+(3, -10)$)}] (A3mask) {\Athreemask};
+
+\end{scope}
+
+\begin{scope}[yshift=320, xshift=330]
+\node[anchor=west] at (0, 10) (title) {Individual presence/absence tracks};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -10)$)}] (A1mask1) {\Aonemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -20)$)}] (A2mask1) {\Atwomask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -30)$)}] (A3mask1) {\Athreemask};
+\matrix[mask, anchor=west, at={($(0, 0)+(3, -50)$)}] (Aindmask) {\Aindmask};
+\node at ($(Aindmask.east) + (2, 0)$) {$^*$};
+\node[anchor=east] at ($(Aindmask.south east) + (0, -10)$) {$^* >$50\% filter};
+
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[at={(0, -240)}, /pgip/group, showthreshold=true, minthreshold=4, maxthreshold=10] (Asum) {coverageplot={\coveragetable}{ref}{Asum}{Total coverage}{red}};
+\matrix[mask, anchor=west, at={($(Asum_axis.south west)+(3, -10)$)}] (Asummask) {\Asummask};
+\node[anchor=north west, text width=180] at ($(Asummask.south west) + (0, -10)$) (Asummask_legend) {Mask generated from threshold 4-10 (shaded rectangle) };
+
+\end{scope}
+
+
+\draw[->] ($(A1mask.east) + (5, 0)$) to[->, out=0, in=180] ($(A1mask1.west) + (-5, 0)$);
+\draw[->] ($(A2mask.east) + (5, 0)$) to[->, out=30, in=190] ($(A2mask1.west) + (-5, 0)$);
+\draw[->] ($(A3mask.east) + (5, 0)$) to[->, out=30, in=210] ($(A3mask1.west) + (-5, 0)$);
+
+\node at ($(A3mask.south west) + (600, 0)$) (outer) {};
+\useasboundingbox (A1_axis.outer north west) rectangle (outer.north east);
+
+%% \draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
+
+
+\end{tikzpicture}
+```
+
+
+
+
+
 ### Filters and masks
 
 Implement:

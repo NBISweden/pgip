@@ -27,21 +27,18 @@
 \RequirePackage{ifthen}
 \RequirePackage{xargs}
 \RequirePackage{bm}
-\RequirePackage{keyval}
+\RequirePackage{xkeyval}
 \RequirePackage{graphicx}
 \usetikzlibrary{calc}
 \usetikzlibrary{matrix}
 
-\define@key{pgipfilter}{ampersand}{\def\pgip@ampersand{#1}}
-\define@key{pgipfilter}{min}{\def\pgip@min{#1}}
-\define@key{pgipfilter}{max}{\def\pgip@max{#1}}
-\define@key{pgipfilter}{nind}{\def\pgip@nind{#1}}
-\setkeys{pgipfilter}{
-  ampersand=\&,
-  min=0,
-  max=1000,
-  nind=1,
-}
+\define@key[KVpgip]{filter}{ampersand}[\&]{\def\pgip@filter@ampersand{#1}}
+\define@key[KVpgip]{filter}{min}[0]{\def\pgip@filter@min{#1}}
+\define@key[KVpgip]{filter}{max}[1000]{\def\pgip@filter@max{#1}}
+\define@key[KVpgip]{filter}{nind}[1]{\def\pgip@filter@nind{#1}}
+\newcommand{\resetkeys}{\setkeys[KVpgip]{filter}{ampersand,min,max,nind}}
+\resetkeys
+
 \pgfplotstableread{coveragetable.tsv}\coveragetable
 
 \newcommand{\addcolumnsum}[3]{
@@ -54,6 +51,7 @@
     \pgfmathtruncatemacro\maxcolindex{\pgfplotstablecols-1}
     \pgfplotsforeachungrouped \col in {#2}{
       \pgfmathsetmacro\rowsum{\rowsum+\thisrow{\col}}
+      \pgfmathtruncatemacro\rowsum\rowsum
     }
     \pgfkeyslet{/pgfplots/table/create col/next content}\rowsum
   }
@@ -64,33 +62,36 @@
   % #2=table name
   % #3=column name
   % #4=new column name
-  \setkeys{pgipfilter}{#1}
+  \setkeys[KVpgip]{filter}{#1}
   \pgfplotstablecreatecol[
   create col/assign/.code={%
     \getthisrow{#3}\entry
-    \pgfmathparse{and(\entry<\pgip@max, \entry>\pgip@min)}
-    \edef\entry{\pgfmathresult}
-    \pgfkeyslet{/pgfplots/table/create col/next content}\entry
+    \pgfmathparse{and(\entry<\pgip@filter@max, \entry>\pgip@filter@min)}
+    \edef\result{\pgfmathresult}
+    \pgfkeyslet{/pgfplots/table/create col/next content}\result
   }]{#4}{#2}
+  \resetkeys
 }
 \newcommand{\addindividualmask}[4][]{
   % #1=pgip key-value pairs
   % #2=table name
   % #3=column names
   % #4=new column name
-  \setkeys{pgipfilter}{#1}
+  \setkeys[KVpgip]{filter}{#1}
   \pgfplotstablecreatecol[
   create col/assign/.code={%
     \def\rowcount{0}
     \pgfplotsforeachungrouped \col in {#3}{
       \getthisrow{\col}\entry
-      \pgfmathparse{and(\entry<\pgip@max, \entry>\pgip@min)}
+      \pgfmathparse{and(\entry<\pgip@filter@max, \entry>\pgip@filter@min)}
       \pgfmathsetmacro\rowcount{\rowcount+\pgfmathresult}
+      \pgfmathtruncatemacro\rowcount\rowcount
     }
-    \pgfmathparse{\rowcount>=\pgip@nind}
-    \edef\entry{\pgfmathresult}
-    \pgfkeyslet{/pgfplots/table/create col/next content}\entry
+    \pgfmathparse{\rowcount>=\pgip@filter@nind}
+    \edef\result{\pgfmathresult}
+    \pgfkeyslet{/pgfplots/table/create col/next content}\result
   }]{#4}{#2}
+  \resetkeys
 }
 \newcommand{\formatmask}[3]{
   % #1=table name

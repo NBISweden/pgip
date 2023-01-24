@@ -12,6 +12,7 @@ execute:
 
 bibliography: resources/bibliography.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+reference-location: margin
 
 website:
   title: "Population genomics in practice"
@@ -90,8 +91,8 @@ website:
               text: "Population genetics primer"
             - file: "exercises/E120-variant_calling/E120-variant_calling.qmd"
               text: "Variant calling basics"
-            - file: "exercises/E130-variant_filtering/E130-variant_filtering.qmd"
-              text: "Variant filtering"
+            - file: "exercises/E130-data_filtering/E130-data_filtering.qmd"
+              text: "Filtering of resequencing data"
             - file: "exercises/E140-genotype_likelihoods.qmd"
               text: "Genotype likelihoods and low coverage data"
         - section: "Tuesday 9 May"

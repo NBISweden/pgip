@@ -16,7 +16,13 @@ output_notebook(hide_banner=True)
   pre-processed to obtain a high-quality variant call set. See
   [](@sec-variantfiltering).
 - sgkit pca method does not support missing data - add example?
-
+- FIXME: MAF filter [@lou_BeginnerGuideLowcoverage_2021, p 5974] -
+  otherwise low-frequency snps can bias results - even include in
+  exercise?
+- do in three steps:
+  1. no filtering
+  2. MAF filter
+  3. ld pruning
 
 :::
 
@@ -31,8 +37,12 @@ applied to genetic variation data (e.g.
 
 For large data sets, it is common practice to first prune the data to
 remove correlation between data points. In this exercise, you will
-prune the data using either [plink](sec_pca_with_plink) or
-[sgkit](sec_pca_with_sgkit) code snippets.
+prune the data [plink](sec_pca_with_plink) code snippets
+[@chang_DataManagementSummary_2020]
+
+As a bonus, an alternative solution is presented using
+the python package [sgkit](sec_pca_with_sgkit).
+
 
 ## Data preparation
 

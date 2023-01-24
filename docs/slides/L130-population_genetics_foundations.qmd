@@ -81,6 +81,17 @@ knitr::knit_hooks$set(inline = function(x) {
 
 # Population genetics
 
+::: {.notes }
+
+From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
+
+> The main subject of population genetics is to study the generation
+> and maintenance of genetic polymorphism and to understand the
+> mechanisms of evolution at the population level
+
+:::
+
+
 ### DNA variation
 
 

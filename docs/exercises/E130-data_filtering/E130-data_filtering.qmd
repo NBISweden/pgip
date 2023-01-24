@@ -20,6 +20,7 @@ knitr::knit_hooks$set(inline = function(x) {
                   })
 font_opts <- list(template="../../resources/tikzfig.tex",
                   dvisvgm.opts = "--font-format=woff")
+knitr::opts_chunk$set(engine.opts=font_opts)
 ```
 
 ```{bash }
@@ -41,7 +42,7 @@ FIXME: tikz figure of genome tracks
 - coverage distributions
 -
 
-```{r, engine='tikz', fig.ext="svg", engine.opts=font_opts}
+```{r, engine='tikz', fig.ext="svg"}
 #| label: fig-coverage-filters-1
 #| echo: false
 #| eval: true
@@ -74,7 +75,7 @@ FIXME: tikz figure of genome tracks
 \matrix[mask, anchor=west, at={($(A3.south west)+(3pt, -10pt)$)}] (A3mask) {\Athreemask};
 
 \pgfplotsset{covaxis/.append style={ymax=45}}
-\pic[xshift=200pt, yshift=-120pt] {coverageplot={\coveragetable}{ref}{Asum}{Asum}{All samples}{red}};
+\pic[xshift=250pt, yshift=-120pt] {coverageplot={\coveragetable}{ref}{Asum}{Asum}{All samples}{red}};
 \matrix[mask, anchor=west, at={($(Asum.south west)+(3pt, -10pt)$)}] (Asummask) {\Asummask};
 
 \end{tikzpicture}

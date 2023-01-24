@@ -65,6 +65,7 @@
     y label style={font=\footnotesize},
     xtick distance=1, x=10pt, y=3pt,
     height=150pt, width=250pt,
+    anchor=outer south west
   }
 }
 
@@ -72,13 +73,13 @@
 %% Plot macros
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tikzset{
-  pics/coverageplot/.default={}{}{}{}{}{blue},
-  pics/coverageplot/.style n args={6}{
+  pics/coverageplot/.default={}{}{}{}{blue},
+  pics/coverageplot/.style n args={5}{
     code = {
-      \begin{axis}[name=#4, title=#5, covaxis]
+      \begin{axis}[name=_axis, title=#4, covaxis]
         \addplot [
         const plot,
-        fill=#6, opacity=0.5,
+        fill=#5, opacity=0.5,
         ] table [x=#2,y=#3] {#1}
         \closedcycle;
         \ifpgfplots@pgip@showthreshold
@@ -91,7 +92,7 @@
           \ifx\maxthreshold\empty
             \def\maxthreshold{0}
           \fi
-          \addplot [fill=#6, opacity=0.25] coordinates {
+          \addplot [fill=#5, opacity=0.25] coordinates {
             (\pgfkeysvalueof{/pgfplots/xmin}, \minthreshold)
             (\pgfkeysvalueof{/pgfplots/xmax}, \minthreshold)
             (\pgfkeysvalueof{/pgfplots/xmax}, \maxthreshold)
@@ -99,6 +100,7 @@
           } -- cycle;
         \fi
       \end{axis}
+      %% \draw (current axis.outer south west) rectangle (current axis.outer north east);
     }
   }
 }
