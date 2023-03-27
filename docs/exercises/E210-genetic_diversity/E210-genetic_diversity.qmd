@@ -1,0 +1,61 @@
+---
+engine: knitr
+---
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| warning: false
+#| error: false
+#| cache: FALSE
+library(readxl)
+library(curl)
+library(ggplot2)
+library(scales)
+library(viridis)
+bw <- theme_bw(base_size=24) %+replace% theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+theme_set(bw)
+knitr::knit_hooks$set(inline = function(x) {
+                      prettyNum(x, big.mark=" ")
+                  })
+font_opts <- list(template="../../resources/tikzfig.tex",
+                  dvisvgm.opts = "--font-format=woff")
+knitr::opts_chunk$set(engine.opts=font_opts)
+```
+
+```{bash }
+#| label: E210-data-setup
+#| echo: false
+#| eval: true
+DATADIR=$(realpath ../../data/data/ooa-outgroups)
+for f in ${DATADIR}/[CY]*.chr21.bam*; do
+	ln -f -s $f ./$(basename $f)
+done
+ln -f -s $DATADIR/ooa.chr22.ref.fa .
+```
+
+# Genetic diversity {#sec-ex-genetic-diversity}
+
+## Nucleotide diversity {#sec-ex-nucleotide-diversity}
+
+::: {.callout-warning}
+
+FIXME: pen-and-paper exercise to calculate diversity based on "fixed"
+genotype calls and genotype likelihoods to highlight differences; the
+latter requires GLs for **all** sites. Use Table 4.1 in
+[@hartl1997principles, p.173] and/or Figure 3.1 in
+[@hahn_MolecularPopulationGenetics_2019, p. 45]
+
+:::
+
+::: {.callout-note}
+
+- use sequence masks (0/1) encoded gz files to enable quick
+  calculations of feature-based stats (e.g. 4d-degenerate sites)
+- use pixy to compare to vcf with all sites present
+
+
+:::
+
+
+FIXME: comparison of pixy and coverage-based filtering approach

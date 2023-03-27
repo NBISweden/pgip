@@ -77,6 +77,8 @@ On the limited applicability of the expected value of F_ST, [p. 243
 - in practice difficult to know demographic history
 - most natural populations do have unique phylogenetic structure
 
+More general exposition of f_st, Wahlund effect, etc
+
 :::
 
 ### The independent population model
@@ -105,6 +107,83 @@ On the limited applicability of the expected value of F_ST, [p. 243
 
 \end{tikzpicture}
 ```
+
+[@mary-huard_FastAccurateJoint_2023]
+
+
+### F_{ST} estimators
+
+Table S2 in [@bhatia_EstimatingInterpretingFST_2013]
+
+| **Conceptual definition**                        | **Citation** | **Evolutionary assumptions**                               | **WC**                                                         | **Nei** | **Hudson** |
+|--------------------------------------------------|--------------|------------------------------------------------------------|----------------------------------------------------------------|---------|------------|
+| Ratio of variances / Correlation between alleles |              | SNPs analyzed were polymorphic in the ancestral population | $F_{ST}$ is identical across populations OR Equal sample sizes | No^c    | Yes^*      |
+|                                                  |              |                                                            |                                                                |         |            |
+
+#### Weir Cockerham
+
+- correlation randomly uniting gametes / ratio of variance between populationss to total variance
+- "total population" is most recent common ancestral population (figure previous slide)
+- sites are polymorphic in ancestral
+- F_{ST} identical for each population
+
+=> populations are replicates of identical evolutionary history =>
+
+Interprentation: F_{ST} is a parameter
+
+#### Nei
+
+Interpretation: F_{ST} is a statistic
+
+#### Hudson
+
+
+::: {.notes }
+
+[@excoffier_AnalysisPopulationSubdivision_2004] provides pros/cons for
+WC vs Nei.
+
+[@mary-huard_FastAccurateJoint_2023] shows that Weir vs Hudson compare different branch lengths
+
+[@bhatia_EstimatingInterpretingFST_2013] multiple estimators make correct choice of estimator unclear.
+
+Different estimators due to confusion as to what Wright meant by
+"total population": for Nei is the combination of two populations. For
+WC it is the most recent ancestral population. Hence, Nei's F_ST is a
+statistic, whereas for WC it is a parameter of an evolutionary process
+
+
+
+:::
+
+
+### On the impact of rare variants
+
+FIXME: include stat/figure on how different estimators give different
+results
+
+::: {.notes }
+
+Different estimators can give different results; e.g., 2-fold
+difference for human samples in
+[@bhatia_EstimatingInterpretingFST_2013]. This difference, they show,
+is mainly due to ascertainment and using average of ratios (instead of
+ratio of averages) when combining estimates
+
+
+:::
+
+
+### Recommendations
+
+
+::: {.notes }
+
+[@bhatia_EstimatingInterpretingFST_2013] recommend Hudson. They observe
+
+:::
+
+
 
 
 ### Refs {.unnumbered .unlisted}

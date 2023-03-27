@@ -51,13 +51,11 @@ library(knitr)
 library(ggplot2)
 library(viridis)
 library(dotenv)
-library(igraph)
 library(gganimate)
 library(patchwork)
 library(tidyr)
-source("../../src/R/wf_model_igraph.R")
-source("../../src/R/wright_fisher.R")
-source("../../src/R/color.genes.igraph.R")
+library(pgip)
+library(igraph)
 bw <- theme_bw(base_size=18) %+replace% theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 theme_set(bw)
 knitr::knit_hooks$set(inline = function(x) {
@@ -89,6 +87,14 @@ From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 > and maintenance of genetic polymorphism and to understand the
 > mechanisms of evolution at the population level
 
+[@casillas_MolecularPopulationGenetics_2017, p. 1026]:
+
+> Big data samples of complete genome sequences of many individuals
+> from natural populations of many species have transformed population
+> genetics inferences on samples of loci to population genomics: the
+> analysis of genome-wide patterns of DNA variation within and between
+> species.
+
 :::
 
 
@@ -105,7 +111,7 @@ From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 | T | C | A | C | A | A | T | G | C | G  | A  | T  | G  | G  | A  |
 | T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
 
-: {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
+: Sequence aligmnent of four DNA sequences {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
 
 :::
 
@@ -464,7 +470,7 @@ under the following assumptions [@hein2005gene]:
 #| echo: false
 #| eval: true
 set.seed(2023)
-G <- wf_model_igraph(generations=16)
+G <- wf_model_igraph(generations = 16)
 perm <- attr(G, "perm")
 n <- attr(G, "n")
 g <- color.genes.igraph(G[[n]], a.color = "white", frame.color = "black")
@@ -472,7 +478,6 @@ i <- V(g)[unlist(ego(g, order = 16, nodes = c(152, 155, 158), mode = "in"))]
 E(g)$color <- "gray"
 E(g)[to(i)]$width <- 6
 E(g)[to(i)]$color <- "black"
-plot(permute(g, perm))
 ```
 
 
@@ -482,8 +487,10 @@ plot(permute(g, perm))
 #| eval: true
 #| fig-height: 7
 #| fig-width: 7
-plot(permute(color.genes.igraph(G[[1]], a.color="white", frame.color="black"), perm))
-text(x=0, y=1.2, paste("Starting population"), cex=2)
+plot(permute(
+    color.genes.igraph(G[[1]], a.color = "white",
+                       frame.color = "black"), perm))
+text(x = 0, y = 1.2, paste("Starting population"), cex = 2)
 ```
 
 
@@ -659,6 +666,7 @@ i <- V(g)[unlist(ego(g, order = 16, nodes = c(152, 155, 158), mode = "in"))]
 E(g)$color <- "gray"
 E(g)[to(i)]$width <- 6
 E(g)[to(i)]$color <- "black"
+par(mar = c(0, 0, 0, 0) + .1)
 plot(permute(g, perm))
 ```
 
@@ -683,13 +691,14 @@ See https://mikeyharper.uk/animated-plots-with-r/
 #| label: fig-wright-fisher-drift-0.3-1
 #| echo: false
 #| eval: true
-#| out-height: 70%
+#| out-height: 100%
 #| fig-align: center
 #| fig-cap: Example of fixation
 set.seed(1974)
 G <- wf_model_igraph(p0 = 0.3, popsize = 10, generations = 16)
 n <- attr(G, "n")
 perm <- attr(G, "perm")
+par(mar = c(0, 0, 0, 0) + .1)
 plot(permute(color.genes.igraph(G[[n]]), perm))
 text(x = 0, y = 1.2, paste("Generation", 16), cex = 2)
 ```
@@ -730,7 +739,7 @@ To capture dynamics, follow allele frequency trajectory as function of
 time.
 
 
-```{r code=readLines("../../src/R/wright_fisher.R")}
+```{r code=readLines("../../src/R/pgip/R/wright_fisher.R")}
 #| label: wright-fisher-source
 #| echo: true
 #| eval: false

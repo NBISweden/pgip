@@ -66,9 +66,13 @@ website:
               text: "Linkage disequilibrium and recombination"
             - file: "slides/L230-population_structure.qmd"
               text: "Population structure"
+            - file: "slides/L240-admixture/L240-admixture.qmd"
+              text: "Population admixture"
         - section: "Wednesday 10 May"
           contents:
             - "slides/L300-recap.qmd"
+            - file: "slides/L310-demographic-inference/L310-demographic-inference.qmd"
+              text: "Demographic inference"
         - section: "Thursday 11 May"
           contents:
             - "slides/L400-recap.qmd"
@@ -97,7 +101,7 @@ website:
               text: "Genotype likelihoods and low coverage data"
         - section: "Tuesday 9 May"
           contents:
-            - file: "exercises/E210-genetic_diversity.qmd"
+            - file: "exercises/E210-genetic_diversity/E210-genetic_diversity.qmd"
               text: "Estimating genetic diversity"
             - file: "exercises/E220-ld_and_phasing.qmd"
               text: "Linkage disequilibrium and phasing"

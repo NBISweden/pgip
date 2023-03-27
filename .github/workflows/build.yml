@@ -67,6 +67,10 @@ jobs:
       run: |
         R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 
+    - name: Install local pgip R package
+      run: |
+        R -e "library(devtools); devtools::install_local('src/R/pgip')"
+
     - name: Setup Quarto
       uses: quarto-dev/quarto-actions/setup@v2
       with:

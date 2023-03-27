@@ -275,8 +275,6 @@ to get the total coverage `r total_coverage`, which gives a hint at
 where the diploid coverage peak should be.
 
 
-
-
 ### Sample set coverages
 
 We can combine coverage intervals with `bedtools unionbedg`. We

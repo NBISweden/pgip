@@ -1,9 +1,9 @@
-# Population Genomics in Practice exercises
+# Population Genomics in Practice • Course materials
 
-Collection of exercises for course [Population Genomics in
+## **PGIP • Population genomics in practice**
+
+Course materials for course [Population Genomics in
 Practice](https://uppsala.instructure.com/courses/52168)
-
-Under construction
 
 ## Setup
 
@@ -14,6 +14,9 @@ Clone the repo
 and follow the instructions below.
 
 ## Requirements
+
+- To preview/render, you must use
+  [Quarto\>=1.2.269](https://quarto.org/docs/download/)
 
 Create a conda environment called `pgip` using the environment file
 
@@ -35,7 +38,11 @@ Install [Quarto](https://quarto.org/), edit Quarto documents (file
 extension `.qmd` in `docs` directory and subdirectories) and build
 project with `make` in the root directory.
 
-## Make targets
+## Local preview/render
+
+### Organization
+
+The root directory contains
 
 ### Single documents
 

@@ -2,8 +2,8 @@
 
 $lime: #A7C947;
 $lime25: #E9F2D1;
-$lime50: #E9F2D1;
-$lime75: #E9F2D1;
+$lime50: #D3E4A3;
+$lime75: #BDD775;
 
 $teal: #045C64;
 $teal25: #C0D6D8;
@@ -33,10 +33,10 @@ $primary: $lime;
 /*-- scss:rules --*/
 
 pre.out {
-  background-color: lightgreen;
+  background-color: $lime;
 }
 pre.sourceCode.src {
-  background-color: lightblue;
+  background-color: $teal25;
 }
 
 .green { color: $lime; font-weight: bold }
@@ -116,4 +116,3 @@ dt {
     font-family: monospace;
     color: $aqua75;
 }
-

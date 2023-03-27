@@ -27,6 +27,7 @@ dependencies:
   - python=3.10
   # - r-animation
   - r-codetools
+  - r-devtools
   - r-dt
   # - r-dotenv # Must be installed via R
   - r-formatr

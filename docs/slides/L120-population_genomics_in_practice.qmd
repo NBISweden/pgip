@@ -71,6 +71,8 @@ NB: maybe not enough time for history; just mention "classical"
 population genetics analyses with reference to Kimura, Gillespie, Nei,
 Yang and others
 
+:::
+
 # A brief history of population genetics
 
 ### Mendel's peas
@@ -89,6 +91,26 @@ Bateson)
 ### Wright and drift
 
 ### Kimura and the diffusion approximation
+
+::: {.notes }
+
+Follow [@casillas_MolecularPopulationGenetics_2017] history?
+
+:::
+
+
+### The allozyme era
+
+FIXME: picture of allozyme gel
+
+#### Development of genetic diversity measures
+
+- *H* (*gene diversity*, *heterozygosity*): average proportion
+  heterozygous loci
+- *P* (*gene polymorphism*): average proportion polymorphic loci
+
+### The nucleotide diversity era
+### The population genomics era
 
 # What is population genomics?
 
