@@ -1,0 +1,43 @@
+---
+title: "Genome scans to detect selection"
+subtitle: "Genome scans"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Genome scans to detect selection
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(viridisLite)
+library(gganimate)
+library(patchwork)
+library(dplyr)
+```
+
+# Selection
+
+### Topics
+
+- zfst
+- pcadapt [@luu_PcadaptPackagePerform_2017]
+- allele frequence difference (AFD) scan [@berner_AlleleFrequencyDifference_2019]
+- BayeScan [@foll_GenomeScanMethodIdentify_2008]
+
+- genetic load / mutational meltdown
+  - VEP [@mclaren_EnsemblVariantEffect_2016]
+  - SIFT [@kumar_PredictingEffectsCoding_2009]
+  - GERP [@davydov_IdentifyingHighFraction_2010]
+
+- local adaptation [@fitzpatrick_EcologicalGenomicsMeets_2015]
+- conservation genetics [@allendorf_GenomicsFutureConservation_2010] [@formenti_EraReferenceGenomes_2022a]

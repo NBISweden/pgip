@@ -1,6 +1,5 @@
 # Simple makefile for dev.
-
-QMDFILES=$(subst docs/,docs/_site/,$(subst .qmd,.html,$(wildcard docs/*/*.qmd)))
+QMDFILES=$(subst docs/,docs/_site/,$(subst .qmd,.html,$(wildcard docs/*/*/*.qmd)))
 
 all: $(QMDFILES)
 
@@ -22,9 +21,9 @@ clean-site:
 
 # Exclude directory from find . command
 # https://stackoverflow.com/questions/4210042/exclude-directory-from-find-command
-GARBAGE_TYPES         := __pycache__ .*.~undo-tree~ *.egg-info
+GARBAGE_TYPES         := __pycache__ .*.~undo-tree~ *.egg-info tikz*.log
 DIRECTORIES_TO_CLEAN  := $(shell find -not -path "./.git**" -type d)
 GARBAGE := $(foreach DIR, $(DIRECTORIES_TO_CLEAN), $(addprefix $(DIR)/,$(GARBAGE_TYPES)))
 
-
-clean: clean-site
+clean:
+	@$(RM) -rf $(GARBAGE)

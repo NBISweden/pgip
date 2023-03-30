@@ -1,0 +1,18 @@
+# Exercise example {#sec-exercises-example}
+```{r }
+#| label: r-libs-setup
+#| echo: false
+#| eval: true
+#| warning: false
+#| error: false
+#| cache: false
+knitr::opts_knit$set(root.dir=file.path("../../_data"))
+```
+
+```{r }
+#| label: r-test-write
+#| echo: true
+#| eval: true
+df <- data.frame(a=c(1,2), b=c(3,4))
+write.table(df, file="test.csv")
+```

@@ -1,0 +1,60 @@
+---
+title: "Title"
+subtitle: "Subtitle"
+author:
+    - "John Doe"
+format:
+  revealjs:
+    footer: My footer
+opts:
+  knitr:
+    code-fold: true
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+```{r }
+#| label: r-libs-custom
+#| echo: false
+#| eval: true
+library(curl)
+```
+
+
+
+# Test
+
+### Slide
+
+Slide information
+
+```{r test plot}
+#| fig-cap: Simple demo R plot
+#| lightbox:
+#|   group: r-graph
+#|   description: This is 1 to 10 plot
+plot(1:10, rnorm(10))
+```
+
+### New slide
+
+```{r }
+#| label: fig-test-plot
+#| echo: true
+#| eval: true
+x = 2:8
+plot(x = x, y = x**2)
+```
+
+### Other slide
+
+Image:
+
+![NBIS logo](/home/peru/teaching/pgip/pgip/docs/assets/logos/nbislogo-green.svg){description="NBIS logo"}
+
+
+`r 3000`

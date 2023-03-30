@@ -1,0 +1,41 @@
+---
+title: "Genetic diversity"
+subtitle: "Genetic diversity"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Genetic diversity
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+# Genetic diversity
+
+###
+
+### On missing data in population genetics
+
+[@korunes_PixyUnbiasedEstimation_2021] Fig 4 on real data: strong
+tendency of commonly adopted tools to **underestimate** pi, dxy (even
+for 30X data sets)
+
+
+
+### Nucleotide diversity revisited
+
+Most textbooks assume full sequence data
+[@korunes_PixyUnbiasedEstimation_2021]. Vast majority of tools make
+"assumption that missing sites are present but invariant".
+
+Consequence: \pi, d_{XY} tend to be downwards biased
+
+$$
+\pi = \frac{\sum_{i<j}k_{ij}}{\left(\nchoosek{n}{2} \right)} = \frac{c_0c_1}{\frac{n(n-1)}{2}} = \left( \frac{n}{n-1} \right)2\left( \frac{c_0}{n} \right)\left( \frac{c_1}{n} \right)
+$$
+
+FIXME: include Fig 1A from [@korunes_PixyUnbiasedEstimation_2021]

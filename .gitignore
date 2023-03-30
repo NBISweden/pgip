@@ -41,3 +41,5 @@ tikz*.tex
 /docs/*/*/*_files
 /docs/_environment
 /obsolete/
+/docs/scratch/
+/src/quarto-ext/

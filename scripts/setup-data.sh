@@ -9,7 +9,7 @@ if [[ -z "$SCRIPT_PATH" ]] ; then
 fi
 ROOT_PATH=$(realpath ${SCRIPT_PATH}/..)
 
-DATADIR=$(realpath ${ROOT_PATH}/docs/data)
+DATADIR=$(realpath ${ROOT_PATH}/docs/_data)
 DATADIR=$(realpath --relative-to=$(pwd) "$DATADIR")
 PGIPDATA=https://github.com/NBISweden/pgip-data.git
 

@@ -1,0 +1,136 @@
+---
+title: "Population genomics in practice"
+subtitle: "Welcome and information"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Welcome
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+### Welcome to population genomics in practice
+
+### Who are we?
+
+### Who are you?
+
+::: {.callout-warning}
+
+:::
+
+### Where are we?
+
+Information about Navet: safety etc
+
+### Code of conduct
+
+# Program
+
+```{r }
+#| label: load-program
+#| echo: false
+#| eval: true
+library(knitr)
+schedule <- read.table(
+    "../schedule.tsv",
+    sep = "\t", header = TRUE,
+    fill = TRUE
+)
+colnames(schedule)[5] <- "Lecturer / TA"
+days <- c("Monday", "Monday (alt)",
+          "Tuesday", "Wednesday",
+          "Thursday", "Friday")
+i <- unlist(lapply(days, function(x) {
+    grep(x, schedule$Day)
+}))
+j <- c(i[2:length(i)], nrow(schedule) + 1) - i
+schedule$split <- factor(rep(days, j), levels = days)
+splitschedule <- split(schedule, schedule$split)
+outcols <- c("Time", "Topic", "Lecturer / TA", "Type")
+```
+
+### Schedule - overview
+
+
+### Monday 8 May
+
+```{r }
+#| label: schedule-monday
+#| echo: false
+#| eval: true
+kable(splitschedule$Monday[, outcols], row.names = FALSE)
+```
+
+
+### Monday 8 May (alt)
+
+```{r }
+#| label: schedule-monday-alt
+#| echo: false
+#| eval: true
+
+kable(splitschedule[["Monday (alt)"]][, outcols], row.names = FALSE)
+```
+
+
+
+### Tuesday 9 May
+
+```{r }
+#| label: schedule-tuesday
+#| echo: false
+#| eval: true
+
+kable(splitschedule$Tuesday[, outcols], row.names = FALSE)
+```
+
+
+### Wednesday 10 May
+
+```{r }
+#| label: schedule-wednesday
+#| echo: false
+#| eval: true
+
+kable(splitschedule$Wednesday[, outcols], row.names = FALSE)
+```
+
+
+### Thursday 11 May
+
+```{r }
+#| label: schedule-thursday
+#| echo: false
+#| eval: true
+
+kable(splitschedule$Thursday[, outcols], row.names = FALSE)
+```
+
+### Friday 12 May
+
+```{r }
+#| label: schedule-friday
+#| echo: false
+#| eval: true
+
+kable(splitschedule$Friday[, outcols], row.names = FALSE)
+```
+
+# Exercises
+
+### Monday 8 May
+
+
+
+
+
+### Refs {.unnumbered .unlisted}
+
+::: { #refs }
+:::

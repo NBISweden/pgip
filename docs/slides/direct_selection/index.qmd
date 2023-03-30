@@ -1,0 +1,200 @@
+---
+title: "Signals of selection"
+subtitle: "Signals of selection"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Signals of selection
+---
+
+### Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(viridisLite)
+library(gganimate)
+library(patchwork)
+```
+
+
+# Selection
+### Topics
+
+- direct selection(?)
+-
+
+
+# Linked selection
+
+### Tajima's D
+
+### Selective sweep
+
+Use [Figure 2 @charlesworth_EffectsOfSelection_2021]
+
+
+### Selective sweep
+
+```{bash }
+#| label: pgip-slim-sweep-command
+#| echo: true
+#| eval: false
+#| code-fold: true
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
+```
+
+```{r }
+#| label: pgip-load-slim-data
+#| echo: false
+#| eval: true
+data <- tidyr::tibble(read.csv("../data/results/slim/selective_sweep.w500.csv.gz", header=TRUE))
+a <- sum(1/seq(10 - 1))
+data$thetaW <- data$S / a
+data_mean <- as.data.frame(data) %>% select(windows, TajD, pi, S, thetaW) %>% group_by(windows) %>% summarise(TajD=mean(TajD, na.rm=TRUE), pi=mean(pi, na.rm=TRUE), S=mean(S, na.rm=TRUE), thetaW=mean(thetaW, na.rm=TRUE)) %>% mutate(fn="mean", pi_minus_thetaW=pi - thetaW)
+L <- 1e6
+xi <- L / 2
+```
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: pgip-slim-sweep-plot-pi-S
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+ggplot(data_mean %>% pivot_longer(
+                         cols=c("pi", "thetaW", "pi_minus_thetaW"),
+                         names_transform=list(name=~readr::parse_factor(.x, levels=c("pi", "thetaW", "pi_minus_thetaW")))),
+       aes(windows, value, color=name)) +
+    geom_segment(aes(x=xi, y=-1, xend=xi, yend=-2.5), color="black", arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
+    xlab("Chromosomal position") + ylab("diversity") + geom_line(linewidth=1) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), legend.title=element_blank()) +
+    scale_y_continuous(expand = c(0, 0), limits=c(-2.5, 10)) + # , limits = c(-0.001, 0.0045)) +
+    scale_x_continuous(expand = c(0, 0), limits = c(0, L)) +
+    scale_colour_manual(name="name", values=c("blue", "red", "green"),
+                        labels=expression(pi, theta[W] , pi - theta[W]))
+```
+
+
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| label: pgip-slim-sweep-plot-tajd
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+psweep_static <- ggplot(subset(data, fn %in% levels(factor(data$fn))[1:50]), aes(windows, TajD, group=fn)) +
+    geom_line(color="lightgray", linewidth=0.5) +
+    xlab("Chromosomal position") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
+    geom_segment(aes(x=xi, y=-2, xend=xi, yend=-2.5), arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
+    scale_y_continuous(expand = c(0, 0), limits = c(-2.5, 2.5)) +
+    scale_x_continuous(expand = c(0, 0), limits = c(0, L))
+p <- psweep_static + transition_manual(fn, cumulative=TRUE)
+p
+```
+:::
+
+::::
+
+The effect of a selective sweep on different statistics.
+
+
+::: {.notes }
+
+N=1e4, mu=5e-8, pi=4*N*mu=0.004, seek S=a*pi=0.01, so a=S/pi which
+gives n. Need to ramp up recombination rate to see the dip in TajD
+clearly.
+
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 5e-8 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+
+2022-11-23: Current results based on mu=1e-7
+
+Q: not clear how Rasmus Nielsen scales statistics to have mean=1
+[@nielsen_MolecularSignaturesNatural_2005]
+
+:::
+
+
+
+### Selective sweep
+
+```{bash }
+#| label: pgip-slim-sweep-command-2
+#| echo: true
+#| eval: false
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
+```
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: pgip-slim-sweep-plot-pi-S-2
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+ggplot(data_mean %>% pivot_longer(
+                         cols=c("pi", "thetaW", "pi_minus_thetaW"),
+                         names_transform=list(name=~readr::parse_factor(.x, levels=c("pi", "thetaW", "pi_minus_thetaW")))),
+       aes(windows, value, color=name)) +
+    geom_segment(aes(x=xi, y=-1, xend=xi, yend=-2.5), color="black", arrow=arrow(length=unit(0.4, "cm"), type="closed")) +
+    xlab("Chromosomal position") + ylab("diversity") + geom_line(linewidth=1) +
+    theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), legend.title=element_blank()) +
+    scale_y_continuous(expand = c(0, 0), limits=c(-2.5, 10)) + # , limits = c(-0.001, 0.0045)) +
+    scale_x_continuous(expand = c(0, 0), limits = c(0, L)) +
+    scale_colour_manual(name="name", values=c("blue", "red", "green"),
+                        labels=expression(pi, theta[W] , pi - theta[W]))
+```
+
+
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| label: pgip-slim-sweep-plot-tajd-2
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+psweep_static + geom_line(data=data_mean, color="red", linewidth=1.5)
+```
+:::
+
+::::
+
+
+The effect of a selective sweep on different statistics.
+
+
+
+### References

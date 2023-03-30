@@ -1,0 +1,13 @@
+```{r }
+#| label: r-libs-setup
+#| echo: false
+#| eval: true
+#| warning: false
+#| error: false
+#| cache: false
+library(knitr)
+knitr::opts_knit$set(root.dir = normalizePath(file.path("_data")))
+knitr::knit_hooks$set(inline = function(x) {
+                      prettyNum(x, big.mark = " ")
+                  })
+```
