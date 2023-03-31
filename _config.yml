@@ -4,7 +4,6 @@
 title: Population genomics in practice
 author: Per Unneberg
 
-
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
@@ -28,24 +27,22 @@ html:
 only_build_toc_files: true
 
 sphinx:
-    extra_extensions:
+  extra_extensions:
     - sphinx.ext.todo
     - sphinx.ext.intersphinx
-    config:
-      todo_include_todos: true
-      intersphinx_mapping:
-        py: ["https://docs.python.org/3", null]
-        tskit: ["https://tskit.dev/tskit/docs/stable", null]
-        msprime: ["https://tskit.dev/msprime/docs/stable", null]
-        pyslim: ["https://tskit.dev/pyslim/docs/stable", null]
-        numpy: ["https://numpy.org/doc/stable/", null]
-      myst_enable_extensions:
+  config:
+    todo_include_todos: true
+    intersphinx_mapping:
+      py: ["https://docs.python.org/3", null]
+      tskit: ["https://tskit.dev/tskit/docs/stable", null]
+      msprime: ["https://tskit.dev/msprime/docs/stable", null]
+      pyslim: ["https://tskit.dev/pyslim/docs/stable", null]
+      numpy: ["https://numpy.org/doc/stable/", null]
+    myst_enable_extensions:
       - colon_fence
       - deflist
       - dollarmath
-      bibtex_reference_style: author_year
-
+    bibtex_reference_style: author_year
 
 bibtex_bibfiles:
   - bibliography.bib
-

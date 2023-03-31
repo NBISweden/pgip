@@ -13,17 +13,21 @@ repos:
     rev: v3.9.0
     hooks:
       - id: reorder-python-imports
-        args: [--application-directories=python,
-               --unclassifiable-application-module=_tskit]
+        args:
+          [
+            --application-directories=python,
+            --unclassifiable-application-module=_tskit,
+          ]
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.259'
+    rev: "v0.0.260"
     hooks:
       - id: ruff
         args:
-          [          "--per-file-ignores=tests/test_utils.py:E501,manticore/tests/wm/snakemake.py:E501",
+          [
+            "--per-file-ignores=tests/test_utils.py:E501,manticore/tests/wm/snakemake.py:E501",
           ]
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
         language_version: python3
@@ -40,3 +44,14 @@ repos:
       - id: markdownlint
         args: ["-i=*.qmd *.md"]
         exclude: LICENSE.md
+  # - repo: local
+  #   hooks:
+  #     - id: editorconfig-checker
+  #       name: editorconfig-checker
+  #       entry: editorconfig-checker
+  #       language: system
+  #       pass_filenames: true
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.0.0-alpha.6"
+    hooks:
+      - id: prettier

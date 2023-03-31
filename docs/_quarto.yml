@@ -133,7 +133,6 @@ website:
             - file: "exercises/linked_selection/index.qmd"
               text: "Linked selection"
 
-
 format:
   html:
     theme:
@@ -141,7 +140,7 @@ format:
       - assets/nbis.scss
     toc: true
     embed-resources: true
-    date:  last-modified
+    date: last-modified
     date-format: "DD-MMM-YYYY"
     lightbox:
       match: auto
@@ -204,7 +203,6 @@ jupyter:
     name: "pgip"
     language: "python"
     display_name: "Python 3"
-
 
 filters:
   - lightbox

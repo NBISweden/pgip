@@ -1,53 +1,53 @@
 format: jb-book
 root: intro
 parts:
-#- caption: pgip exercises
-- chapters:
-  #- file: exercises_about
-  - file: schedule
-- caption: "Day 0: Preparation"
-  chapters:
-  - file: preparation
-  #   sections:
-  #   - file: uppmax
-  #   - file: command_line
-  # - file: theory_background
-  #   sections:
-  #   - file: popgen_theory_bac
-  #   - file: readings
-  # - caption: Practical information
-  #   chapters:
-  #   - file: schedule
+  #- caption: pgip exercises
+  - chapters:
+      #- file: exercises_about
+      - file: schedule
+  - caption: "Day 0: Preparation"
+    chapters:
+      - file: preparation
+    #   sections:
+    #   - file: uppmax
+    #   - file: command_line
+    # - file: theory_background
+    #   sections:
+    #   - file: popgen_theory_bac
+    #   - file: readings
+    # - caption: Practical information
+    #   chapters:
+    #   - file: schedule
 
-- caption: "Day 1: Models of evolution"
-  chapters:
-  - file: wrightfisher
-- caption: "Day 2: Variant calling"
-  chapters:
-  - file: variantcalling
-  - file: variantfiltering
-  - file: genotype_likelihoods
-- caption: "Day 3: Describing variation and population structure"
-  chapters:
-  - file: describing_variation
-  - file: ld_pruning_pca
-    sections:
-      - file: pca/sgkit
-      - file: pca/plink
-  - file: admixture
-- caption: "Day 4: Demographic inference"
-  chapters:
-  - file: demographic_inference
-  - file: fstatistics
-- caption: "Day 5: Selection"
-  chapters:
-  - file: selection
-# - caption: "Additional material"
-#   chapters:
-#   - file: nucleotide_diversity
-- caption: About
-  chapters:
-  - file: data
-- caption: Bibliography
-  chapters:
-  - file: references
+  - caption: "Day 1: Models of evolution"
+    chapters:
+      - file: wrightfisher
+  - caption: "Day 2: Variant calling"
+    chapters:
+      - file: variantcalling
+      - file: variantfiltering
+      - file: genotype_likelihoods
+  - caption: "Day 3: Describing variation and population structure"
+    chapters:
+      - file: describing_variation
+      - file: ld_pruning_pca
+        sections:
+          - file: pca/sgkit
+          - file: pca/plink
+      - file: admixture
+  - caption: "Day 4: Demographic inference"
+    chapters:
+      - file: demographic_inference
+      - file: fstatistics
+  - caption: "Day 5: Selection"
+    chapters:
+      - file: selection
+  # - caption: "Additional material"
+  #   chapters:
+  #   - file: nucleotide_diversity
+  - caption: About
+    chapters:
+      - file: data
+  - caption: Bibliography
+    chapters:
+      - file: references
