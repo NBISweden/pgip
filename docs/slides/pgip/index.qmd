@@ -5,7 +5,9 @@ author:
     - "Per Unneberg"
 format:
   revealjs:
-    footer: Population genomics in practice
+    slide-level: 3
+
+#    footer: Population genomics in practice
 ---
 
 ### Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -164,3 +166,7 @@ List stuff we won't have time to go through
 ### Coalescent and Wright-Fisher simulations
 
 Use to determine significance in genome-wide scans
+
+### Bibliography {.unnumbered .unlisted}
+::: { #refs }
+:::

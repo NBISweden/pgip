@@ -1,6 +1,6 @@
 ---
 engine: knitr
-execute-dir: file
+format: html
 ---
 
 # Genotype likelihoods and low-coverage data {#sec-genotypelikelihoods}

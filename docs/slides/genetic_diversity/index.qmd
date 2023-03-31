@@ -32,10 +32,14 @@ Most textbooks assume full sequence data
 [@korunes_PixyUnbiasedEstimation_2021]. Vast majority of tools make
 "assumption that missing sites are present but invariant".
 
-Consequence: \pi, d_{XY} tend to be downwards biased
+Consequence: $\pi$, $d_{XY}$ tend to be downwards biased
 
 $$
-\pi = \frac{\sum_{i<j}k_{ij}}{\left(\nchoosek{n}{2} \right)} = \frac{c_0c_1}{\frac{n(n-1)}{2}} = \left( \frac{n}{n-1} \right)2\left( \frac{c_0}{n} \right)\left( \frac{c_1}{n} \right)
+\pi = \frac{\sum_{i<j}k_{ij}}{n\choose 2} = \frac{c_0c_1}{\frac{n(n-1)}{2}} = \left( \frac{n}{n-1} \right)2\left( \frac{c_0}{n} \right)\left( \frac{c_1}{n} \right)
 $$
 
 FIXME: include Fig 1A from [@korunes_PixyUnbiasedEstimation_2021]
+
+### Bibliography {.unnumbered .unlisted}
+::: { #refs }
+:::

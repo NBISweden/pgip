@@ -6,16 +6,17 @@ project:
   pre-render:
     - ../scripts/prepare.py
     - ../scripts/setup-data.sh
+  render:
+    - "*.qmd"
+    - "!lectures/*.qmd"
 
 website:
   title: "Population genomics in practice"
   navbar:
     logo: assets/logos/nbislogo-green.svg
     left:
-      - text: "Lecture notes"
-        file: "lectures/index.qmd"
       - text: "Slides"
-        file: "slides/index.qmd"
+        href: "slides/index.qmd"
       - text: "Exercises"
         file: "exercises/index.qmd"
       - text: "Code recipes"
@@ -165,7 +166,7 @@ format:
     date-format: "DD-MMM-YYYY"
     navigation-mode: vertical
     institute: NBIS
-    bibliography: resources/bibliography.bib
+    bibliography: assets/bibliography.bib
     csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
     reference-location: margin
     title-slide-attributes:

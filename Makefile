@@ -3,7 +3,7 @@ QMDFILES=$(subst docs/,docs/_site/,$(subst .qmd,.html,$(wildcard docs/*/*/*.qmd)
 
 all: $(QMDFILES)
 
-render:
+project:
 	quarto render docs
 
 production:

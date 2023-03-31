@@ -1,3 +1,18 @@
-# Exercises
-
-Exercises in population genomics in practice.
+---
+title: "Exercises"
+subtitle: " 2023 PGIP • Population Genomics in Practice"
+description: "List of all exercises"
+listing:
+  type: grid
+  grid-columns: 4
+  fields: [image, title, author]
+date: ""
+toc: false
+sidebar: false
+format:
+  html:
+    number-sections: false
+    page-layout: full
+execute:
+  freeze: false
+---

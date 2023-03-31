@@ -1,5 +1,6 @@
 ---
-ENGINE: knitr
+format: html
+engine: knitr
 knitr:
   opts_chunk:
     root.dir: _E120
@@ -57,5 +58,3 @@ Picard MarkDuplicates or bamUtil dedup (samtools rmdup deprecated)
 
 
 # References
-
-

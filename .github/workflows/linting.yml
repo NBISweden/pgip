@@ -1,9 +1,9 @@
 name: pgip linting
 
 # Run on all pushes and PRs
-# on:
-#   push:
-#     branches:
+on:
+  push:
+    branches:
 
 
 jobs:
@@ -31,5 +31,3 @@ jobs:
 
       - name: Run Prettier --check
         run: prettier --check ${GITHUB_WORKSPACE}
-
-
