@@ -5,11 +5,11 @@ echo "Setting up test data"
 SCRIPT_PATH="$(dirname -- "${BASH_SOURCE[0]}")"
 SCRIPT_PATH="$(cd -- "$SCRIPT_PATH" && pwd)"
 if [[ -z "$SCRIPT_PATH" ]] ; then
-  exit 1
+    exit 1
 fi
 ROOT_PATH=$(realpath ${SCRIPT_PATH}/..)
 
-DATADIR=$(realpath ${ROOT_PATH}/docs/_data)
+DATADIR=$(realpath ${ROOT_PATH}/docs/data)
 DATADIR=$(realpath --relative-to=$(pwd) "$DATADIR")
 PGIPDATA=https://github.com/NBISweden/pgip-data.git
 

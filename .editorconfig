@@ -8,5 +8,9 @@ trim_trailing_whitespace = true
 indent_size = 4
 indent_style = space
 
-[*.{md,yml,yaml,html,css,scss,js,cff}]
+[*.{qmd,md,yml,yaml,html,css,scss,js,cff,lua}]
 indent_size = 2
+
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab

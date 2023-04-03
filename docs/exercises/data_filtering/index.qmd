@@ -11,20 +11,19 @@ format: html
 #| label: E130-data-setup
 #| echo: false
 #| eval: true
-DATADIR=$(realpath ../../data/data/ooa-outgroups)
+DATADIR=${QUARTO_PROJECT_DIR}/data/data/ooa-outgroups
 for f in ${DATADIR}/[CY]*.chr21.bam*; do
-	ln -f -s $f ./$(basename $f)
+  ln -f -s $f ./$(basename $f)
 done
 ln -f -s $DATADIR/ooa.chr22.ref.fa .
 ```
 
 # Filtering of resequencing data {#sec-E130-data_filtering}
 
-
 FIXME: tikz figure of genome tracks
 
 - coverage distributions
--
+
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: fig-coverage-filters-1
@@ -203,10 +202,10 @@ collects coverage data in 5kb windows that are then summarized by
 #| echo: true
 #| eval: true
 bedtools intersect -a <(bedtools makewindows -g ooa.chr21.ref.fa.fai -w 5000) \
-		 -b CEU-1.per-base.bed.gz -wa -wb | \
-	bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
-	csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
-		  --ylab Coverage --width 9.0 --height 3.5 > fig-plot-coverage.png
+      -b CEU-1.per-base.bed.gz -wa -wb | \
+  bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
+  csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
+      --ylab Coverage --width 9.0 --height 3.5 > fig-plot-coverage.png
 ```
 
 ::: {#fig-plot-coverage attr-output='.details summary="Output"'}
@@ -232,10 +231,10 @@ for more information.]
 #| echo: true
 #| eval: true
 for f in *.bam; do
-	prefix=${f%.ooa.chr21.bam}
-	mosdepth -Q 20 $prefix $f
-	echo -e -n "$prefix\t"
-	cat $prefix.mosdepth.summary.txt | grep total
+  prefix=${f%.ooa.chr21.bam}
+  mosdepth -Q 20 $prefix $f
+  echo -e -n "$prefix\t"
+  cat $prefix.mosdepth.summary.txt | grep total
 done > ALL.mosdepth.summary.txt
 cat ALL.mosdepth.summary.txt
 ```
@@ -288,10 +287,10 @@ population coverage files.
 #| eval: true
 #| code-fold: true
 for pop in CEU CHB YRI; do
-	BEDGZ=$(for f in ${pop}*.per-base.bed.gz; do echo "$f "; done)
-	SAMPLES=$(for f in $BEDGZ; do echo -e -n "${f%.per-base.bed.gz} "; done)
-	bedtools unionbedg -header -names $SAMPLES -g ooa.chr21.ref.fa.fai -empty -i $BEDGZ | bgzip > $pop.bed.gz
-	tabix -f -p bed -S 1 $pop.bed.gz
+  BEDGZ=$(for f in ${pop}*.per-base.bed.gz; do echo "$f "; done)
+  SAMPLES=$(for f in $BEDGZ; do echo -e -n "${f%.per-base.bed.gz} "; done)
+  bedtools unionbedg -header -names $SAMPLES -g ooa.chr21.ref.fa.fai -empty -i $BEDGZ | bgzip > $pop.bed.gz
+  tabix -f -p bed -S 1 $pop.bed.gz
 done
 ```
 
@@ -316,10 +315,10 @@ For illustration, we plot the total coverage:
 #| fig-show: asis
 #| fig-cap: Coverage for ALL samples in 5kb windows. Experiment changing the window size (`-w`) parameter to change smoothing.
 bedtools intersect -a <(bedtools makewindows -g ooa.chr21.ref.fa.fai -w 5000) \
-		 -b ALL.sum.bed.gz -wa -wb | \
-	bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
-	csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
-		  --ylab Coverage --width 9.0 --height 3.5 > fig-plot-total-coverage.png
+    -b ALL.sum.bed.gz -wa -wb | \
+  bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
+  csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
+    --ylab Coverage --width 9.0 --height 3.5 > fig-plot-total-coverage.png
 ```
 
 ::: {#fig-plot-total-coverage attr-output='.details summary="Output"'}
@@ -341,12 +340,12 @@ k-mer plots in sequence assembly projects). In
 #| echo: false
 #| eval: true
 zcat ALL.sum.bed.gz | \
-	awk -v h=0 'BEGIN {OFS=","; cumsum=0} {a[$4] += ($3-$2)/1000; if ($4 > h) {h=$4}} END{for (i=0; i<=h; i++) {if (a[i]) {cumsum+=a[i]} else {a[i]=0;} print i, a[i], cumsum}}' \
-		> ALL.sum.bed.csv
+  awk -v h=0 'BEGIN {OFS=","; cumsum=0} {a[$4] += ($3-$2)/1000; if ($4 > h) {h=$4}} END{for (i=0; i<=h; i++) {if (a[i]) {cumsum+=a[i]} else {a[i]=0;} print i, a[i], cumsum}}' \
+    > ALL.sum.bed.csv
 cat ALL.sum.bed.csv | csvtk plot line -x 1 -y 2 --point-size 0.01 --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" --width 9.0 --height 3.5 \
-	  > fig-plot-total-coverage-distribution.png
+    > fig-plot-total-coverage-distribution.png
 cat ALL.sum.bed.csv | csvtk plot line -x 1 -y 3 --point-size 0.01 --xlab "Depth of coverage (X)" --ylab "Cumulative genome coverage (kbp)" --width 9.0 --height 3.5 \
-	  > fig-plot-total-coverage-distribution-cumulative.png
+    > fig-plot-total-coverage-distribution-cumulative.png
 ```
 
 ::: {#fig-plot-total-coverage-distribution attr-output='.details summary="Output"' layout-nrow=2}
@@ -368,9 +367,9 @@ better view:
 #| echo: true
 #| eval: false
 cat ALL.sum.bed.csv | \
-	csvtk plot line -x 1 -y 2 --point-size 0.01 \
-		  --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" \
-		  --width 9.0 --height 3.5 --x-min 90 --x-max 160
+  csvtk plot line -x 1 -y 2 --point-size 0.01 \
+    --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" \
+    --width 9.0 --height 3.5 --x-min 90 --x-max 160
 ```
 
 ```{bash }
@@ -378,10 +377,10 @@ cat ALL.sum.bed.csv | \
 #| echo: false
 #| eval: true
 cat ALL.sum.bed.csv | \
-	csvtk plot line -x 1 -y 2 --point-size 0.01 \
-		  --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" \
-		  --width 9.0 --height 3.5 --x-min 90 --x-max 160 > \
-		  fig-plot-total-coverage-distribution-hist-zoom-in.png
+  csvtk plot line -x 1 -y 2 --point-size 0.01 \
+    --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" \
+    --width 9.0 --height 3.5 --x-min 90 --x-max 160 > \
+    fig-plot-total-coverage-distribution-hist-zoom-in.png
 ```
 
 ::: {#fig-plot-total-coverage-distribution-zoom-in attr-output='.details summary="Output"'}
@@ -438,13 +437,13 @@ generate bed files with accessible regions.
 #| eval: true
 #| code-fold: true
 for pop in CEU CHB YRI; do
-	bgzip -c -d $pop.bed.gz | \
-		awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=NF; i++) sum+=$i; print $1, $2, $3, sum}' | \
-		bgzip > $pop.sum.bed.gz
-	tabix -f -p bed $pop.sum.bed.gz
-	zcat $pop.sum.bed.gz | \
-		awk -v h=0 'BEGIN {OFS=","; cumsum=0} {a[$4] += ($3-$2)/1000; if ($4 > h) {h=$4}} END{for (i=0; i<=h; i++) {if (a[i]) {cumsum+=a[i]} else {a[i]=0;} print i, a[i], cumsum}}' \
-			> $pop.sum.bed.csv
+  bgzip -c -d $pop.bed.gz | \
+    awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=NF; i++) sum+=$i; print $1, $2, $3, sum}' | \
+    bgzip > $pop.sum.bed.gz
+  tabix -f -p bed $pop.sum.bed.gz
+  zcat $pop.sum.bed.gz | \
+    awk -v h=0 'BEGIN {OFS=","; cumsum=0} {a[$4] += ($3-$2)/1000; if ($4 > h) {h=$4}} END{for (i=0; i<=h; i++) {if (a[i]) {cumsum+=a[i]} else {a[i]=0;} print i, a[i], cumsum}}' \
+    > $pop.sum.bed.csv
 done
 ```
 ```{bash }
@@ -454,10 +453,10 @@ done
 #| code-fold: true
 for pop in CEU CHB YRI; do
 cat ${pop}.sum.bed.csv | \
-	csvtk plot line -x 1 -y 2 --point-size 0.01 \
-		  --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" \
-		  --width 9.0 --height 3.5 --x-min 10 --x-max 100 > \
-		  fig-plot-total-coverage-distribution-hist-zoom-in-$pop.png
+  csvtk plot line -x 1 -y 2 --point-size 0.01 \
+    --xlab "Depth of coverage (X)" --ylab "Genome coverage (kbp)" \
+    --width 9.0 --height 3.5 --x-min 10 --x-max 100 > \
+    fig-plot-total-coverage-distribution-hist-zoom-in-$pop.png
 done
 
 ```
@@ -483,8 +482,8 @@ individuals have a call.
 #| echo: true
 #| eval: true
 bgzip -c -d ALL.bed.gz | \
-	awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | \
-	bgzip > ALL.ind.bed.gz
+  awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | \
+  bgzip > ALL.ind.bed.gz
 tabix -f -p bed ALL.ind.bed.gz
 ```
 
@@ -498,8 +497,8 @@ Generate coverage sums for sample sets CEU, CHB, and YRI.
 #| eval: true
 #| code-fold: true
 for pop in CEU CHB YRI; do
-	bgzip -c -d $pop.bed.gz | awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | bgzip > $pop.ind.bed.gz
-	tabix -f -p bed $pop.ind.bed.gz
+  bgzip -c -d $pop.bed.gz | awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | bgzip > $pop.ind.bed.gz
+  tabix -f -p bed $pop.ind.bed.gz
 done
 ```
 
@@ -542,7 +541,7 @@ used:
 
 1. p-value
 2. multi-allelic sites (but illustrate case where one subpop may be
-   tri-allelic but sister populations bi-allelic - for sub-population
-   specific analyses the latter should not be removed)
+    tri-allelic but sister populations bi-allelic - for sub-population
+    specific analyses the latter should not be removed)
 3. MAF filter - for many analyses low-frequency snps are uninformative
-   (e.g. PCA, LD) and can bias results
+    (e.g. PCA, LD) and can bias results

@@ -25,11 +25,31 @@ library(curl)
 #| label: E210-data-setup
 #| echo: false
 #| eval: true
-DATADIR=$(realpath ../../data/data/ooa-outgroups)
-for f in ${DATADIR}/[CY]*.chr21.bam*; do
-    ln -f -s $f ./$(basename $f)
-done
-ln -f -s $DATADIR/ooa.chr22.ref.fa .
+#if [ ! -e assets/data ]; then
+#		mkdir -p assets/data
+#fi
+DATADIR=${QUARTO_PROJECT_DIR}/data/data/ooa-outgroups
+#for f in ${DATADIR}/[CY]*.chr21.bam*; do
+#    cp $f assets/data/$(basename $f)
+#done
+
+#cp $DATADIR/ooa.chr22.ref.fa assets/data/
+```
+
+
+```{r }
+#| label: r-set-working-dir
+#| echo: false
+#| eval: true
+knitr::opts_knit$set(root.dir = normalizePath(file.path("assets/data")))
+knitr::opts_knit$get("root.dir")
+```
+
+```{r }
+#| label: r-pwd
+#| echo: true
+#| eval: true
+getwd()
 ```
 
 # Genetic diversity {#sec-ex-genetic-diversity}

@@ -29,17 +29,27 @@ dependencies:
   - r-codetools
   - r-devtools
   - r-dt
+  - r-dygraphs
   # - r-dotenv # Must be installed via R
   - r-formatr
+  - r-formattable
   - r-gganimate
+  - r-ggiraph
   - r-ggplot2
   - r-gifski
+  - r-highcharter
+  - r-htmlTable
   - r-igraph
   # - r-irkernel
   - r-jsonlite
+  - r-kableextra
+  - r-leaflet
+  - r-networkD3
   # - r-magick
   - r-patchwork
   - r-pdftools
+  - r-plotly
+  - r-reactable
   - r-readr
   - r-readxl
   - r-reticulate
