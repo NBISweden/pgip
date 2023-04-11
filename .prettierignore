@@ -1,1 +1,12 @@
 title-slide.html
+docs/_freeze
+docs/_extensions
+docs/_site
+*.ts
+.quarto
+docs/exercises/data
+bokeh.yaml
+ooa_with_outgroups.demes.yaml
+ooa.demes.yaml
+.jupyter
+docs/data
