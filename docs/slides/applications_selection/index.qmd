@@ -8,7 +8,7 @@ format:
     footer: Genome scans to detect selection
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -27,7 +27,7 @@ library(dplyr)
 
 # Selection
 
-### Topics
+## Topics
 
 - zfst
 - pcadapt [@luu_PcadaptPackagePerform_2017]

@@ -5,6 +5,7 @@ project:
   pre-render:
     - ../scripts/prepare.py
     - ../scripts/setup-data.sh
+    - ../scripts/setup-exercise-data.sh
   render:
     - "*.qmd"
     - "!lectures/*.qmd"
@@ -43,7 +44,6 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa
 format:
   html:
     theme:
-      # - cosmo
       - assets/css/custom.scss
     toc: true
     embed-resources: true
@@ -52,7 +52,7 @@ format:
     lightbox:
       match: auto
   revealjs:
-    quarto-required: ">=1.2.269"
+    quarto-required: ">=1.2.475"
     toc: true
     toc-depth: 1
     slide-level: 2
@@ -80,7 +80,6 @@ format:
       data-background-size: 500px
       data-background-position: top left
     theme:
-      # - white
       - assets/css/custom.scss
 
 from: markdown+emoji

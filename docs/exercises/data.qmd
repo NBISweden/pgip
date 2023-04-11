@@ -2,6 +2,16 @@
 format: html
 ---
 
+```{python}
+#| label: link-data
+#| echo: false
+#| eval: true
+import os
+if not os.path.exists("data"):
+    os.symlink("../data", "data")
+```
+
+
 # Data {#sec-exercise-data}
 
 ::: {.callout-note}
@@ -135,4 +145,4 @@ The data generation has been implemented in a
 the rulegraph  @fig-snakemake-rulegraph for an overview of the steps
 to generate data.
 
-![Snakemake rulegraph](../data/data/ooa-outgroups/rulegraph.png){#fig-snakemake-rulegraph}
+![Snakemake rulegraph](data/data/ooa-outgroups/rulegraph.png){#fig-snakemake-rulegraph}

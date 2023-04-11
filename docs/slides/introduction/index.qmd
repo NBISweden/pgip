@@ -8,34 +8,34 @@ format:
     footer: Welcome
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
 {{< include ../_rlibs.qmd >}}
 
-### Welcome to population genomics in practice
+## Welcome to population genomics in practice
 
-### Who are we?
+## Who are we?
 
-### Who are you?
+## Who are you?
 
 ::: {.callout-warning}
 
 :::
 
-### Where are we?
+## Where are we?
 
 Information about Navet: safety etc
 
-### Code of conduct
+## Code of conduct
 
 # Program
 
 List contents
-### Exercises
+## Exercises
 
-### Refs {.unnumbered .unlisted}
+## Refs {.unnumbered .unlisted}
 
 ::: { #refs }
 :::

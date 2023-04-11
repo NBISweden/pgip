@@ -42,6 +42,7 @@ library(leaflet) # interactive maps
 library(crosstalk) # linking plots
 ```
 
+
 ## Introduction
 
 ::: {.callout-note}
@@ -1006,11 +1007,12 @@ R package [`crosstalk`](https://rstudio.github.io/crosstalk/index.html) allows c
 library(crosstalk)
 shared_quakes <- SharedData$new(quakes[sample(nrow(quakes), 100),])
 lf <- leaflet(shared_quakes,height=300) %>%
-        addTiles(urlTemplate='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') %>%
-        addMarkers()
-py <- plot_ly(shared_quakes,x=~depth,y=~mag,size=~stations,height=300) %>%
-        add_markers()
-div(div(lf, style =  "float:left;width:49%"), div(py, style = "float:right;width:49%"))
+    addTiles(urlTemplate='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') %>%
+    addMarkers()
+py <- plot_ly(shared_quakes,x = ~depth, y = ~mag, size = ~stations,height = 300) %>%
+    add_markers()
+div(div(lf, style =  "float:left;width:49%"),
+    div(py, style = "float:right;width:49%"))
 ```
 
 ## Colourful {background-color="#ABEBC6"}

@@ -2,12 +2,13 @@ Package: pgip
 Title: R code for Population Genomics in Practice
 Version: 0.0.0.9000
 Authors@R:
-    person("Per", "Unneberg", , "per.unneberg@scilifelab.se", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-5735-3315"))
+    person("Per", "Unneberg", , "per.unneberg@scilifelab.se",
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-5735-3315"))
 Description: Functions and R code for Population Genomics in Practice
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-	igraph
+    igraph

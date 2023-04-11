@@ -55,3 +55,9 @@ repos:
     rev: "v3.0.0-alpha.6"
     hooks:
       - id: prettier
+  # - repo: https://github.com/lorenzwalthert/precommit
+  #   rev: v0.3.2
+  #   hooks:
+  #     - id: lintr
+  #       args: [--warn-only, --key=value]
+  #       verbose: true

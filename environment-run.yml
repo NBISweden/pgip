@@ -1,0 +1,12 @@
+name: pgip
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bcftools>=1.17
+  - bedtools
+  - csvtk
+  - gawk
+  - mosdepth
+  - samtools

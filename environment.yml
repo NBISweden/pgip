@@ -1,32 +1,30 @@
+## Environment file to reproduce exercises
 name: pgip
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - bcftools
+  - bcftools=1.8
   - bedtools
-  - bokeh>=3.0
   - ca-certificates
-  # - click
   - csvtk
-  - cyvcf2
+  # - cyvcf2
   - demesdraw
-  - d4tools
+  # - d4tools
   # - gatk4
+  - gawk
   - jupyter
   - jupyter-cache
-  # - matplotlib
   - mosdepth
-  - msprime>=1.0
-  # - networkx
-  - openssl
-  - pandas
-  # - plink
-  - pyslim
+  # - msprime>=1.0
+  # - openssl
+  # - pandas
+  # - pyslim
   - python=3.10
-  # - r-animation
+  # # - r-animation
   - r-codetools
+  - r-curl
   - r-devtools
   - r-dt
   - r-dygraphs
@@ -38,30 +36,30 @@ dependencies:
   - r-ggplot2
   - r-gifski
   - r-highcharter
-  - r-htmlTable
+  # - r-htmlTable
   - r-igraph
-  # - r-irkernel
-  - r-jsonlite
+  # # - r-irkernel
+  # - r-jsonlite
   - r-kableextra
   - r-leaflet
   - r-networkD3
-  # - r-magick
+  # # - r-magick
   - r-patchwork
-  - r-pdftools
+  # - r-pdftools
   - r-plotly
-  - r-reactable
-  - r-readr
+  # - r-reactable
+  # - r-readr
   - r-readxl
   - r-reticulate
   - r-rmarkdown>=2.19
   - r-tidyr
-  - r-transformr
+  # - r-transformr
   - r-viridis
   - samtools
-  # - scikit-learn
-  # - scikit-allel
-  - sgkit=0.5.0
-  - slim>=4.0
+  # # - scikit-learn
+  # # - scikit-allel
+  # - sgkit=0.5.0
+  # - slim>=4.0
   - tskit>=0.5.0
-  # - tqdm
-  # - yarl
+  # # - tqdm
+  # # - yarl

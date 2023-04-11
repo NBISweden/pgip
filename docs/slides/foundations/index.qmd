@@ -6,10 +6,9 @@ author:
 format:
   revealjs:
     footer: Population genetics foundations
-    smaller: true
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -51,7 +50,7 @@ From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 :::
 
 
-### DNA variation
+## DNA variation {.small}
 
 
 
@@ -74,6 +73,13 @@ sequence has 15 nucleotides (*sites*) "from the same *locus*
 (location) on a chromosome" [p.2
 @hahn_MolecularPopulationGenetics_2019]
 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+
 ::: {.fragment}
 
 Alternative names for *sequence*:
@@ -90,6 +96,10 @@ Alternative names for *sequence*:
 
 :::
 
+:::
+
+::: {.column width="50%"}
+
 ::: {.fragment}
 
 We will preferentially use *sequence* or *chromosome* to refer to an
@@ -98,7 +108,11 @@ differ.
 
 :::
 
-### DNA variation - monomorphic sites
+:::
+
+::::
+
+## DNA variation - monomorphic sites
 
 ::: {.dna }
 
@@ -121,7 +135,7 @@ monomorphic sites.
 
 
 
-### DNA variation - segregating sites
+## DNA variation - segregating sites
 
 ::: {.dna }
 
@@ -169,7 +183,7 @@ variation, a *substitution* refers to DNA differences between species.
 
 :::
 
-### DNA variation - major and minor alleles
+## DNA variation - major and minor alleles
 
 ::: {.dna }
 
@@ -194,7 +208,7 @@ The set of alleles found on a single sequence is called *haplotype*.
 
 
 
-### Describing DNA variation
+## Describing DNA variation
 
 ::: {.dna }
 
@@ -240,7 +254,7 @@ $p_C=1/4$ and $p_T=3/4$.
 
 ::: {.column width="50%"}
 
-#### Heterozygosity
+### Heterozygosity
 
 The *heterozygosity* at a site is given by
 
@@ -254,7 +268,7 @@ $$
 
 ::: {.fragment}
 
-#### Exercise: calculate the heterozygosity at sites 1, 2 and 5
+### Exercise: calculate the heterozygosity at sites 1, 2 and 5
 
 :::
 
@@ -273,7 +287,7 @@ $$
 ::::
 
 
-### Describing DNA variation
+## Describing DNA variation
 
 
 
@@ -295,7 +309,7 @@ $$
 
 ::: {.column width="50%"}
 
-#### Nucleotide diversity $\pi$
+### Nucleotide diversity $\pi$
 
 The *nucleotide diversity* is the sum of site heterozygosities:
 
@@ -310,7 +324,7 @@ $$
 
 ::: {.fragment}
 
-#### Calculate the nucleotide diversity
+### Calculate the nucleotide diversity
 
 :::
 
@@ -346,7 +360,7 @@ $$
 
 # Origin and change of variation
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 :::: {.columns}
 
@@ -385,7 +399,7 @@ See @hein_GeneGenealogies_2004 for more assumptions.
 
 
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 :::: {.columns}
 
@@ -402,7 +416,7 @@ under the following assumptions [@hein2005gene]:
 - no recombination
 
 
-#### Algorithm
+### Algorithm
 
 1. Setup starting population at time zero
 
@@ -446,7 +460,7 @@ text(x = 0, y = 1.2, paste("Starting population"), cex = 2)
 
 ::::
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 :::: {.columns}
 
@@ -464,7 +478,7 @@ under the following assumptions [@hein2005gene]:
 
 
 
-#### Algorithm
+### Algorithm
 
 1. Setup starting population at time zero
 2. Add offspring (same size) at time one
@@ -490,7 +504,7 @@ text(x = 0, y = 1.2, paste("Offspring"), cex = 2)
 
 ::::
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 :::: {.columns}
 
@@ -506,7 +520,7 @@ under the following assumptions [@hein2005gene]:
 - population has no geographical or social structure
 - no recombination
 
-#### Algorithm
+### Algorithm
 
 1. Setup starting population at time zero
 2. Add offspring (same size) at time one
@@ -532,7 +546,7 @@ text(x = 0, y = 1.2, paste("Sampled parents"), cex = 2)
 
 ::::
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 :::: {.columns}
 
@@ -548,7 +562,7 @@ under the following assumptions [@hein2005gene]:
 - population has no geographical or social structure
 - no recombination
 
-#### Algorithm
+### Algorithm
 
 1. Setup starting population at time zero
 2. Add offspring (same size) at time one
@@ -574,7 +588,7 @@ text(x = 0, y = 1.2, paste("Sampled parents"), cex = 2)
 
 ::::
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 ```{r }
 #| label: wright-fisher-graphical-model
@@ -600,7 +614,7 @@ See https://mikeyharper.uk/animated-plots-with-r/
 :::
 
 
-### Wright-Fisher model
+## Wright-Fisher model
 
 
 ```{r}
@@ -626,7 +640,7 @@ See https://mikeyharper.uk/animated-plots-with-r/
 
 :::
 
-### Genetic drift with alleles
+## Genetic drift with alleles
 
 :::: {.columns .compact}
 
@@ -671,7 +685,7 @@ over 16 generations. Allele variants are shown in white and dark grey. Starting 
 
 ::::
 
-### Genetic drift
+## Genetic drift
 
 :::: {.columns}
 
@@ -681,7 +695,7 @@ To capture dynamics, follow allele frequency trajectory as function of
 time.
 
 
-```{r code=readLines("../../src/R/pgip/R/wright_fisher.R")}
+```{r code=readLines("../../../src/R/pgip/R/wright_fisher.R")}
 #| label: wright-fisher-source
 #| echo: true
 #| eval: false
@@ -759,7 +773,7 @@ https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html
 :::
 
 
-### Genetic drift
+## Genetic drift
 
 
 ```{r }
@@ -774,7 +788,7 @@ ggplot(wf, aes(x=generation, y=frequency, group=sample)) + geom_line() + xlim(1,
 
 
 
-### Mutation
+## Mutation
 
 Drift randomly "moves" frequencies, but once lost, how does new
 variation arise? Mutation.
@@ -785,18 +799,18 @@ Mutation - drift balance
 
 Infinite sites vs infinite alleles
 
-### Selection
+## Selection
 
 Relative fitness.
 
 Define s, positive and negative selection
 
-### Direct selection
+## Direct selection
 
 d_N/d_S
 
 
-### Two-locus dynamics
+## Two-locus dynamics
 
 Graph focal locus and flanking loci (Charlesworth figure)
 
@@ -806,7 +820,7 @@ Graph focal locus and flanking loci (Charlesworth figure)
 - Genetic draft / background selection
 
 
-### Neutral theory
+## Neutral theory
 
 Move right after drift?
 
@@ -815,7 +829,7 @@ Move right after drift?
 - Fig 4.2, Eq 4.2 from Lynch
 
 
-### Nearly neutral theory
+## Nearly neutral theory
 
 - Distribution of fitness effects?
 
@@ -824,7 +838,7 @@ Move right after drift?
 
 If simulation section show brief code examples
 
-### Wright-Fisher model again
+## Wright-Fisher model again
 
 Repeat WF model. Point out that it can be used for *forward*
 simulation. Show how many individuals are lost each generation (limit
@@ -872,7 +886,7 @@ P(no descendants) = P(X=0) = e^{-1}
 :::
 
 
-### The coalescent
+## The coalescent
 
 Introduce concept. Describe algorithm (show code - include as
 exercise?). Genealogy and mutations:
@@ -883,15 +897,15 @@ exercise?). Genealogy and mutations:
 Note that #mutations propto branch length -> don't actually even need
 to know the mutations (e.g. fastsimcoal)
 
-### The coalescent: diminishing returns
+## The coalescent: diminishing returns
 
 Show plot of diminishing returns (better to add sites, not samples)
 
-### The coalescent and diversity
+## The coalescent and diversity
 
 Recalculate example
 
-### Evolutionary processes and genealogies
+## Evolutionary processes and genealogies
 
 Non-neutral processes change topologies in ways that we detect when
 applying tests [@ferretti_DecomposingSiteFrequency_2017]
@@ -901,18 +915,18 @@ Show some qualitative examples of how trees change for
 
 - bottleneck
 
-### msprime
+## msprime
 
 
-### SLiM
+## SLiM
 
 Mention advances in forward simulations
 
 
-### Recapitation
+## Recapitation
 
 Combine the best of two worlds
 
-### Recipes
+## Recipes
 
 Show some recipes and the pgip CLI

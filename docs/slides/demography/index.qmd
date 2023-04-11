@@ -8,7 +8,7 @@ format:
     footer: Demographic inference
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -17,7 +17,7 @@ format:
 
 # Test
 
-### Slide
+## Slide
 
 Slide information
 
@@ -29,7 +29,7 @@ Slide information
 plot(1:10, rnorm(10))
 ```
 
-### New slide
+## New slide
 
 ```{r }
 #| label: fig-test-plot
@@ -39,7 +39,7 @@ x = 2:8
 plot(x = x, y = x**2)
 ```
 
-### Other slide
+## Other slide
 
 Image:
 

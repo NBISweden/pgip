@@ -23,17 +23,17 @@ library(curl)
 ```
 
 # Data generation
-### Textbook data is clean
+## Textbook data is clean
 
 
 ```{bash }
 #| label: tskit-vcf-data
 #| echo: false
 #| eval: true
-chromhead=$(bcftools view -h ../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz | tail -n 1)
-tskit vcf ../data/data/ooa-outgroups/ooa.chr21.ts | head -4
+chromhead=$(bcftools view -h ../../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz | tail -n 1)
+tskit vcf ../../data/data/ooa-outgroups/ooa.chr21.ts | head -4
 echo -e "$chromhead"
-tskit vcf ../data/data/ooa-outgroups/ooa.chr21.ts | tail -n +7 | head -n 5
+tskit vcf ../../data/data/ooa-outgroups/ooa.chr21.ts | tail -n +7 | head -n 5
 ```
 
 FIXME: Include McDonald-Kreitman ADH alignment
@@ -49,12 +49,12 @@ many possible reasons, including:
 
 :::
 
-### Real data
+## Real data
 
 ![Aligments of three samples to chromosome 21](chr21_example.png)
 
 
-### Population genomics - the data
+## Population genomics - the data
 
 Since the goal of population genomics is to analyze variation in a set
 of individuals, data generation consists of compiling variation data
@@ -77,14 +77,14 @@ ggplot(data, aes(x=as.Date(Date), y=Mb)) + geom_line() + xlab("") + ylab("") + s
 
 
 
-###
+##
 
 ![@lou_BeginnerGuideLowcoverage_2021](assets/images/sequencing_approaches_lou_2021.png)
 
 
-### RADSeq
+## RADSeq
 
-### High coverage sequencing data
+## High coverage sequencing data
 
 Pros: call genotypes with confidence
 
@@ -99,7 +99,7 @@ adaptation" but that high-coverage sequencing still too expensive
 :::
 
 
-### Low coverage sequencing data
+## Low coverage sequencing data
 
 lcWGS - alleviates cost issue
 
@@ -107,28 +107,28 @@ lcWGS - alleviates cost issue
 
 
 
-### GATK best practice
+## GATK best practice
 
 Point out: not optimal for non-model organims
 
-### Alternative variant callers
+## Alternative variant callers
 
-#### freebayes
-
-
-#### bcftools
+### freebayes
 
 
-#### ANGSd
+### bcftools
 
 
-### PoolSeq
+### ANGSd
 
-#### Popoolation
+
+## PoolSeq
+
+### Popoolation
 
 
 # Variant filtering
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-1
@@ -202,7 +202,7 @@ Point out: not optimal for non-model organims
 ```
 
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-2
@@ -276,7 +276,7 @@ Point out: not optimal for non-model organims
 \end{tikzpicture}
 ```
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-3
@@ -348,7 +348,7 @@ Point out: not optimal for non-model organims
 \end{tikzpicture}
 ```
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-4
@@ -425,7 +425,7 @@ Point out: not optimal for non-model organims
 \end{tikzpicture}
 ```
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-5
@@ -500,7 +500,7 @@ Point out: not optimal for non-model organims
 \end{tikzpicture}
 ```
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-6
@@ -576,7 +576,7 @@ Point out: not optimal for non-model organims
 \end{tikzpicture}
 ```
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-7
@@ -648,7 +648,7 @@ Point out: not optimal for non-model organims
 \end{tikzpicture}
 ```
 
-### Coverage tracks
+## Coverage tracks
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: coverage-filters-final
@@ -722,11 +722,11 @@ Point out: not optimal for non-model organims
 
 
 
-### Filters and masks
+## Filters and masks
 
 Implement:
 
-### General filters
+## General filters {.smallest}
 
 
 | Category                                       | Filter                                      | Recommendation (examples)                                              |
@@ -755,7 +755,7 @@ instance, @talla_DissectingEffectsSelection_2019 include GATK
 tri-allelic sites due to different bi-allelic pairs segregating in
 different subpopulations (e.g. A/G in pop 1, A/T in pop 2)
 
-##### Verbose explanations of filters
+#### Verbose explanations of filters
 
 Source: [@lou_BeginnerGuideLowcoverage_2021]
 
@@ -854,7 +854,7 @@ particular population).
 
 
 
-### Gentotype likelihoods
+## Gentotype likelihoods
 
 ::: {.notes }
 
@@ -864,8 +864,7 @@ GATK has no prior [@li_BetterUnderstandingArtifacts_2014]
 
 :::
 
-
-### Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted}
 ::: { #refs }
 :::
 

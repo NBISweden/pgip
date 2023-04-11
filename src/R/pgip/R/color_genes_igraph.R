@@ -26,11 +26,11 @@ color_genes_igraph <- function(g, frame.color = "black", a.color = "white",
     igraph::V(g)[i.show]$frame.color <- parent.frame.color
 
     ## Set some default values on edges and vertices
-    igraph::V(g)$size = 3
-    igraph::V(g)$label = NA
-    igraph::E(g)$color = "black"
-    igraph::E(g)$width = 2
-    igraph::E(g)$arrow.size = 0
+    igraph::V(g)$size <- 3
+    igraph::V(g)$label <- NA
+    igraph::E(g)$color <- "black"
+    igraph::E(g)$width <- 2
+    igraph::E(g)$arrow.size <- 0
 
     g
 }

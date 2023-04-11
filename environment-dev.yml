@@ -1,0 +1,15 @@
+name: pgip-dev
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - conda-lock
+  - pre-commit
+  - prettier
+  - r-docopt
+  - r-languageserver
+  - r-lintr
+  - r-precommit
+  - pip:
+      - editorconfig-checker

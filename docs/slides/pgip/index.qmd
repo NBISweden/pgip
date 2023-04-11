@@ -10,7 +10,7 @@ format:
 #    footer: Population genomics in practice
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -26,22 +26,22 @@ Yang and others
 
 # A brief history of population genetics
 
-### Mendel's peas
+## Mendel's peas
 
-### Galton, Pearson and Bateson
+## Galton, Pearson and Bateson
 
 Of blending and particulate inheritance (the latter championed by
 Bateson)
 
-### Morgan's flies
+## Morgan's flies
 
-### Fisher and natural selection
+## Fisher and natural selection
 
-### The modern synthesis
+## The modern synthesis
 
-### Wright and drift
+## Wright and drift
 
-### Kimura and the diffusion approximation
+## Kimura and the diffusion approximation
 
 ::: {.notes }
 
@@ -50,24 +50,24 @@ Follow [@casillas_MolecularPopulationGenetics_2017] history?
 :::
 
 
-### The allozyme era
+## The allozyme era
 
 FIXME: picture of allozyme gel
 
-#### Development of genetic diversity measures
+### Development of genetic diversity measures
 
 - *H* (*gene diversity*, *heterozygosity*): average proportion
   heterozygous loci
 - *P* (*gene polymorphism*): average proportion polymorphic loci
 
-### The nucleotide diversity era
+## The nucleotide diversity era
 
-### The population genomics era
+## The population genomics era
 
 # What is population genomics?
 
 
-### What is population genomics?
+## What is population genomics?
 
 
 Points from [@hahn_MolecularPopulationGenetics_2019]:
@@ -102,7 +102,7 @@ Some applications:
 :::
 
 
-### An example from real life - population genetics of coral
+## An example from real life - population genetics of coral
 
 
 :::: {.columns}
@@ -141,7 +141,7 @@ Some applications:
 :::
 
 
-### Statistical inference in population genomics
+## Statistical inference in population genomics
 
 [@johri_RecommendationsImprovingStatistical_2022]
 
@@ -152,21 +152,21 @@ Some applications:
 List stuff we won't have time to go through
 
 
-### Machine learning and AI for population genomics
+## Machine learning and AI for population genomics
 
 
-### Ancestral recombination graph methods
+## Ancestral recombination graph methods
 
 - deep population sequencing - tskit was developed to handle data size
 
 
-### Ancient DNA
+## Ancient DNA
 
 
-### Coalescent and Wright-Fisher simulations
+## Coalescent and Wright-Fisher simulations
 
 Use to determine significance in genome-wide scans
 
-### Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted}
 ::: { #refs }
 :::

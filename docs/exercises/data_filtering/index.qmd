@@ -7,15 +7,12 @@ format: html
 
 {{< include ../_rlibs.qmd >}}
 
-```{bash }
-#| label: E130-data-setup
-#| echo: false
+
+```{r }
+#| label: setup-r
+#| echo: true
 #| eval: true
-DATADIR=${QUARTO_PROJECT_DIR}/data/data/ooa-outgroups
-for f in ${DATADIR}/[CY]*.chr21.bam*; do
-  ln -f -s $f ./$(basename $f)
-done
-ln -f -s $DATADIR/ooa.chr22.ref.fa .
+options(tinytex.verbose=TRUE)
 ```
 
 # Filtering of resequencing data {#sec-E130-data_filtering}
@@ -24,31 +21,37 @@ FIXME: tikz figure of genome tracks
 
 - coverage distributions
 
+```{r, engine='tikz'}
+#| label: fig-coverage-filter-test
+#| echo: true
+#| eval: true
+\begin{tikzpicture}
+\draw (0, 0) -- (0, 1);
+\end{tikzpicture}
+```
+
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: fig-coverage-filters-1
 #| echo: false
-#| eval: true
-#| fig-show: asis
-#| fig-cap: A tikzpicture example of coverage
+#| eval: false
 \addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
 \addthresholdmask{\coveragetable}{A1}{A1mask}
 \addthresholdmask{\coveragetable}{A2}{A2mask}
 \addthresholdmask{\coveragetable}{A3}{A3mask}
 \addthresholdmask{\coveragetable}{Asum}{Asummask}
 
-%% \let\Aonemask\empty
-%% \formatmask{\coveragetable}{\Aonemask}{A1mask}
-%% \let\Atwomask\empty
-%% \formatmask{\coveragetable}{\Atwomask}{A2mask}
-%% \let\Athreemask\empty
-%% \formatmask{\coveragetable}{\Athreemask}{A3mask}
-%% \let\Asummask\empty
-%% \formatmask{\coveragetable}{\Asummask}{Asummask}
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
 
-\begin{tikzpicture}
-
-%% \pic[at={(0, 0)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+\begin{tikzpicture}[x=1pt, y=1pt]
+\pic[at={(0, 300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
 %% \matrix[mask, anchor=west, at={($(A1.south west)+(3pt, -10pt)$)}] (A1mask) {\Aonemask};
 
 %% \pic[yshift=-100pt] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};
@@ -113,7 +116,7 @@ samples from the CEU, CHB, and YRI populations. The input consists of
 #| label: e130-input-data
 #| echo: true
 #| eval: true
-ls -lLh *.bam
+ls -lLh [CY]*.chr21.bam
 ```
 
 Each population consists of a collection -- or set -- of samples, and
@@ -230,7 +233,7 @@ for more information.]
 #| label: mosdepth-compile-coverage-data
 #| echo: true
 #| eval: true
-for f in *.bam; do
+for f in [CY]*.chr21.bam; do
   prefix=${f%.ooa.chr21.bam}
   mosdepth -Q 20 $prefix $f
   echo -e -n "$prefix\t"
@@ -274,7 +277,7 @@ before finally indexing with `tabix`:
 BEDGZ=$(for f in *.per-base.bed.gz; do echo "$f "; done)
 SAMPLES=$(for f in $BEDGZ; do echo -e -n "${f%.per-base.bed.gz} "; done)
 bedtools unionbedg -header -names $SAMPLES -g ooa.chr21.ref.fa.fai -empty -i $BEDGZ | bgzip > ALL.bg.gz
-tabix -f -p bed -S 1 ALL.bed.gz
+tabix -f -p bed -S 1 ALL.bg.gz
 ```
 
 We also need to combine coverages per populations CEU, CHB, and YRI.
@@ -303,7 +306,7 @@ sample coverages for each sample set with `awk`:
 #| label: awk-sum-ALL-coverage
 #| echo: true
 #| eval: true
-bgzip -c -d ALL.bed.gz | awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=NF; i++) sum+=$i; print $1, $2, $3, sum}' | bgzip > ALL.sum.bed.gz
+bgzip -c -d ALL.bg.gz | awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=NF; i++) sum+=$i; print $1, $2, $3, sum}' | bgzip > ALL.sum.bed.gz
 tabix -f -p bed ALL.sum.bed.gz
 ```
 
@@ -355,10 +358,9 @@ cat ALL.sum.bed.csv | csvtk plot line -x 1 -y 3 --point-size 0.01 --xlab "Depth 
 ![Cumulative genome coverage](fig-plot-total-coverage-distribution-cumulative.png){#fig-plot-total-coverage-distribution-cumulative}
 
 Genome coverage vs depth of coverage.
-
 :::
 
-In @fig-plot-total-coverage-distribution-hist, a diploid peak is
+In @fig-plot-total-coverage-distribution a, a diploid peak is
 evident just below coverage X=150; we zoom in on that region to get a
 better view:
 
@@ -481,7 +483,7 @@ individuals have a call.
 #| label: awk-filter-50pct-ALL
 #| echo: true
 #| eval: true
-bgzip -c -d ALL.bed.gz | \
+bgzip -c -d ALL.bg.gz | \
   awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | \
   bgzip > ALL.ind.bed.gz
 tabix -f -p bed ALL.ind.bed.gz
@@ -541,7 +543,7 @@ used:
 
 1. p-value
 2. multi-allelic sites (but illustrate case where one subpop may be
-    tri-allelic but sister populations bi-allelic - for sub-population
-    specific analyses the latter should not be removed)
+   tri-allelic but sister populations bi-allelic - for sub-population
+   specific analyses the latter should not be removed)
 3. MAF filter - for many analyses low-frequency snps are uninformative
-    (e.g. PCA, LD) and can bias results
+   (e.g. PCA, LD) and can bias results

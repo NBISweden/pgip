@@ -5,7 +5,7 @@
 Course materials for course [Population Genomics in
 Practice](https://uppsala.instructure.com/courses/52168)
 
-## Setup
+## Installation
 
 Clone the repo
 
@@ -13,10 +13,7 @@ Clone the repo
 
 and follow the instructions below.
 
-## Requirements
-
-- To preview/render, you must use
-  [Quarto\>=1.2.269](https://quarto.org/docs/download/)
+### Requirements
 
 Create a conda environment called `pgip` using the environment file
 
@@ -26,19 +23,29 @@ and activate the environment
 
     conda activate pgip
 
-Install additional Python requirements with pip
-
-    python -m pip install -r requirements.txt
-
-Install test data and local quarto environment files as
-
-    ./scripts/setup-data.sh
-
 Install [Quarto](https://quarto.org/), edit Quarto documents (file
-extension `.qmd` in `docs` directory and subdirectories) and build
-project with `make` in the root directory.
+extension `.qmd` in `docs` directory and subdirectories). To
+preview/render, you must use
+[Quarto\>=1.2.475](https://quarto.org/docs/download/).
 
 ## Local preview/render
+
+## Adding/Modifying topics
+
+## Style guide
+
+It is recommended you follow pre-defined style guides. To help enforce
+styles and catch formatting errors early, use the linters listed
+below. To this end, it is also recommended to setup pre-commit hooks
+(see following subsection). The linters are listed as dependencies in
+the development requirements file `environment-dev.yml`.
+
+- R documents should follow the [tidyverse style guide](https://style.tidyverse.org/)
+
+### pre-commit hooks
+
+It is recommended you setup pre-commit hooks to enforce a common style
+guide
 
 ### Organization
 
@@ -75,6 +82,13 @@ Finally, the production target, which is what is run on GitHub and
 will build the entire project, can be invoked as
 
     make production
+
+## Adding material
+
+References:
+
+- on making slides: [@rubenson_HowNotChatter_2023]
+- on use of color: [@crameri_MisuseColourScience_2020]
 
 ## Development
 

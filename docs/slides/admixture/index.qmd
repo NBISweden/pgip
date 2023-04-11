@@ -8,7 +8,7 @@ format:
     footer: Population admixture
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -26,7 +26,7 @@ Base on [@peter_AdmixturePopulationStructure_2016] and
 [@lipson_ApplyingF4statisticsAdmixture_2020]
 
 
-### Refs {.unnumbered .unlisted}
+## Refs {.unnumbered .unlisted}
 
 ::: { #refs }
 :::
