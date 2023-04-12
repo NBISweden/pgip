@@ -1,0 +1,10 @@
+```{r}
+#| label: r-custom
+#| echo: false
+#| eval: true
+#| warning: false
+#| error: false
+#| cache: false
+library(readxl)
+library(curl)
+```

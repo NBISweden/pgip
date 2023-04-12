@@ -1,0 +1,13 @@
+name: pgip
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - ca-certificates
+  - demesdraw
+  - jupyter
+  - jupyter-cache
+  - python=3.10
+  - r-codetools
+  - r-rmarkdown>=2.19

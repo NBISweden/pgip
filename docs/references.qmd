@@ -1,7 +1,9 @@
 ---
+format: html
 nocite: |
   @*
 ---
+
 # References
 
 ::: {#refs}

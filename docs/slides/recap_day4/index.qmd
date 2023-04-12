@@ -1,0 +1,28 @@
+---
+title: "Recap day 4"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Recap day 4
+---
+
+## Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(viridisLite)
+library(gganimate)
+library(patchwork)
+```
+
+# Recap day 4
+
+## Overview

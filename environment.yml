@@ -1,56 +1,65 @@
+## Environment file to reproduce exercises
 name: pgip
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - bcftools
+  - bash_kernel
   - bedtools
-  - bokeh>=3.0
+  - bokeh
   - ca-certificates
-  # - click
   - csvtk
   - cyvcf2
   - demesdraw
   - d4tools
-  # - gatk4
+  - gatk4
+  - gawk
   - jupyter
   - jupyter-cache
-  # - matplotlib
   - mosdepth
   - msprime>=1.0
-  # - networkx
-  - openssl
   - pandas
-  # - plink
   - pyslim
-  - python=3.10
+  - python>=3.10
   # - r-animation
   - r-codetools
+  - r-curl
+  - r-devtools
   - r-dt
-  # - r-dotenv # Must be installed via R
+  - r-dygraphs
   - r-formatr
+  - r-formattable
   - r-gganimate
+  - r-ggiraph
   - r-ggplot2
   - r-gifski
+  - r-highcharter
+  # # - r-htmlTable
   - r-igraph
-  # - r-irkernel
-  - r-jsonlite
-  # - r-magick
+  # # - r-irkernel
+  # # - r-jsonlite
+  - r-kableextra
+  - r-leaflet
+  - r-networkD3
+  # # - r-magick
   - r-patchwork
-  - r-pdftools
+  # # - r-pdftools
+  - r-plotly
+  # # - r-reactable
   - r-readr
   - r-readxl
   - r-reticulate
   - r-rmarkdown>=2.19
   - r-tidyr
-  - r-transformr
+  # # - r-transformr
   - r-viridis
   - samtools
-  # - scikit-learn
-  # - scikit-allel
-  - sgkit=0.5.0
+  # # - scikit-learn
+  # # - scikit-allel
   - slim>=4.0
   - tskit>=0.5.0
-  # - tqdm
-  # - yarl
+  # # - tqdm
+  # # - yarl
+  - pip:
+      - sgkit[vcf]

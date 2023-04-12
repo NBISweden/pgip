@@ -1,0 +1,389 @@
+// SciLife color scheme: see https://www.scilifelab.se/community-pages/resources/visual-identity/
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Nunito:ital,wght@0,400;0,600;1,400;1,600&display=swap");
+
+$lime: #a7c947;
+$lime25: #e9f2d1;
+$lime50: #d3e4a3;
+$lime75: #bdd775;
+
+$teal: #045c64;
+$teal25: #c0d6d8;
+$teal50: #82aeb2;
+$teal75: #43858b;
+
+$aqua: #4c979f;
+$aqua25: #d2e5e7;
+$aqua50: #a6cbcf;
+$aqua75: #79b1b7;
+
+$grape: #491f53;
+$grape25: #d2c7d4;
+$grape50: #a48fa9;
+$grape75: #77577e;
+
+$lightgray: #e5e5e5;
+$mediumgray: #a6a6a6;
+$darkgray: #3f3f3f;
+$black: #202020;
+
+$blockMargin: 20px;
+$headingMargin: $blockMargin 0 $blockMargin 0;
+$presentation-slide-text-align: left !default;
+
+$primary: $lime;
+$secondary: $lime75;
+$link-color: $grape50;
+$body-color: $black;
+$code-block-bg: WhiteSmoke;
+
+$font-family-sans-serif: "Nunito", "Source Sans Pro", "Helvetica", "sans-serif";
+$font-family-monospace: "JetBrains Mono", "Ubuntu Mono", "Lucida Console",
+  "Courier", "monospace";
+
+$font-size-root: 18px;
+$code-font-size: 14px;
+/* major second scale */
+$h1-font-size: 1.802rem;
+$h2-font-size: 1.602rem;
+$h3-font-size: 1.424rem;
+$h4-font-size: 1.266rem;
+$h5-font-size: 1.125rem;
+$h6-font-size: 1rem;
+$code-block-border-color: none;
+$code-block-font-size: 0.95rem;
+$code-bg: $code-block-bg; /* inline code */
+/*$code-color: ; */
+
+/* smaller is somehowe
+$presentation-font-smaller: 1.6 !default;
+
+/* site */
+$navbar-bg: white;
+$footer-bg: white;
+$footer-fg: DimGray;
+
+/* presentation */
+$presentation-font-size-root: 28px;
+$presentation-line-height: 1.3;
+$presentation-h1-font-size: 1.802em;
+$presentation-h2-font-size: 1.602em;
+$presentation-h3-font-size: 1.424em;
+$presentation-h4-font-size: 1.266em;
+$presentation-h5-font-size: 1.125em;
+$presentation-h6-font-size: 1em;
+
+/*-- scss:rules --*/
+
+/* major third scale */
+.largest {
+  font-size: 1.953em;
+}
+.larger {
+  font-size: 1.563em;
+}
+.large {
+  font-size: 1.25em;
+}
+.small {
+  font-size: 0.8em;
+}
+.smallr {
+  font-size: 0.64em;
+}
+.smallest {
+  font-size: 0.512em;
+}
+
+.highlight {
+  background-color: $secondary;
+  color: white;
+  font-size: 0.85em;
+  padding: 0.2em 0.3em;
+  border-radius: 4px;
+  vertical-align: baseline;
+}
+
+pre.out {
+  background-color: $lime;
+}
+pre.sourceCode.src {
+  background-color: $teal25;
+}
+
+.label {
+  color: $lime;
+  font-weight: bold;
+  background-color: white;
+  font-size: 1em;
+}
+
+strong {
+  color: $lime;
+  font-weight: bold;
+}
+
+code {
+  color: $grape;
+  font-weight: bold;
+  background-color: white;
+}
+
+code.tree {
+  line-height: 8px;
+  font-size: 18px;
+}
+
+code.stree {
+  line-height: 6.6px;
+  font-size: 12px;
+}
+
+code.sstree {
+  line-height: 5.6px;
+  font-size: 10px;
+}
+
+code.large {
+  font-size: 20px;
+}
+
+.citation {
+  font-size: 1em;
+}
+
+.flushright {
+  float: right;
+}
+
+.center {
+  margin: auto;
+}
+
+.graynote {
+  color: $mediumgray;
+  font-size: 0.7em;
+}
+
+dt {
+  font-weight: bold;
+  color: $grape;
+}
+
+.software {
+  font-weight: bold;
+  font-style: italic;
+  color: $teal50;
+}
+
+.dna {
+  font-weight: normal;
+  font-family: monospace;
+}
+
+.dna .italic {
+  font-weight: bold;
+  font-family: monospace;
+  color: $aqua75;
+}
+
+.reveal .compact > p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.reveal .compact img {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.reveal .panel-tabset [role="tab"][aria-selected="true"] {
+  border: lightgray 2px solid;
+  border-radius: 6px 6px 0px 0px;
+  border-bottom: none;
+}
+
+.reveal .panel-tabset .tab-content {
+  border-top: lightgray 2px solid;
+}
+
+.reveal .callout.callout-captioned .callout-icon::before {
+  margin-top: 0.5rem;
+  scale: 0.8;
+}
+
+.reveal pre {
+  font-size: 0.92em;
+  line-height: 1.3;
+}
+
+.reveal pre code {
+  background-color: #f5f5f5 !important;
+  border-radius: 6px;
+}
+
+.reveal code {
+  font-size: 0.9em;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.reveal div.sourceCode {
+  border: 0 !important;
+  border-radius: 6px;
+  margin-bottom: 0.6em !important;
+  /* margin-top: 0.6em !important; */
+}
+
+// Not setting this results in different background color in
+// sourceCode
+.reveal .sourceCode span.in {
+  background-color: $code-block-bg;
+}
+
+// Additional stuff from RaukR
+
+// .navbar-brand {
+//   padding-top: 0;
+// }
+
+// .navbar-nav {
+//   font-size: 0.85em;
+//   letter-spacing: 0.1em;
+// }
+
+// .contents-table table {
+//   line-height: 1.2;
+// }
+
+// .listing-image img {
+//   height: 40px;
+//   width: 60px;
+//   object-fit: cover;
+// }
+
+/* about */
+
+// .organisers-parent {
+//   display: grid;
+//   gap: 1em;
+//   grid-template-columns: repeat(5, 1fr);
+// }
+
+// .organisers-child {
+//   text-align: center;
+// }
+
+// .organisers-child img {
+//   height: 150px;
+//   width: 150px;
+//   object-fit: cover;
+//   border-radius: 50%;
+// }
+
+// .guests-parent {
+//   display: grid;
+//   gap: 1em;
+//   grid-template-columns: repeat(4, 1fr);
+// }
+
+// .guests-child {
+//   text-align: center;
+// }
+
+// .guests-child img {
+//   height: 150px;
+//   width: 150px;
+//   object-fit: cover;
+//   border-radius: 50%;
+// }
+
+// .venue-parent {
+//   display: grid;
+//   gap: 10px;
+//   grid-template-columns: repeat(5, 1fr);
+// }
+
+// .venue-child {
+//   text-align: center;
+// }
+
+// .venue-child img {
+//   height: 150px;
+//   width: 150px;
+//   object-fit: cover;
+// }
+
+// .venue-child .quarto-figure,
+// .venue-child .quarto-figure .figure-img {
+//   margin-bottom: 0;
+// }
+
+/* presentation ---------------------------------------------------------------------- */
+
+.reveal .slides section[data-vertical-align-top] {
+  top: 0 !important;
+}
+
+.reveal .blockquote {
+  font-size: inherit;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  color: #5a6570;
+  padding: 0.625rem 1.25rem;
+  border-left: 0.25rem solid #ecf0f1;
+  margin-bottom: 1rem;
+}
+
+// .reveal .left {
+//   display: block;
+//   text-align: left;
+// }
+
+// .reveal .center {
+//   display: block;
+//   text-align: center;
+// }
+
+// .reveal .right {
+//   display: block;
+//   text-align: right;
+// }
+// .reveal .slide-number {
+//   font-family: "Source Sans Pro";
+// }
+
+// .reveal .slide ul, .reveal .slide ol {
+//   line-height: 1.2;
+// }
+
+// .reveal .slide ul li, .reveal .slide ol li {
+//   margin-top: 0.05em !important;
+//   margin-bottom: 0.05em !important;
+// }
+
+// .reveal table {
+//   font-size: 0.8em !important;
+//   margin: 0;
+// }
+
+// .reveal .dataTables_wrapper .dataTables_length,
+// .reveal .dataTables_wrapper .dataTables_filter,
+// .reveal .dataTables_wrapper .dataTables_info,
+// .reveal .dataTables_wrapper .dataTables_processing,
+// .reveal .dataTables_wrapper .dataTables_paginate {
+//   font-size: .8em;
+// }
+
+// .reveal .panel-tabset [role="tab"][aria-selected="true"] {
+//   border: lightgray 2px solid;
+//   border-radius: 6px 6px 0px 0px;
+//   border-bottom: none;
+// }
+
+// .reveal .panel-tabset .tab-content {
+//   border-top: lightgray 2px solid;
+// }

@@ -5,149 +5,115 @@ project:
   pre-render:
     - ../scripts/prepare.py
     - ../scripts/setup-data.sh
-
-execute:
-  freeze: auto
-  cache: true
-
-bibliography: resources/bibliography.bib
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
-reference-location: margin
+    - ../scripts/setup-exercise-data.sh
+  render:
+    - "*.qmd"
+    - "!lectures/*.qmd"
 
 website:
   title: "Population genomics in practice"
-  # chapters:
-  #   - index.qmd
   navbar:
-    logo: img/nbislogo-green.svg
-    left:
-      - text: "Lecture notes"
-        file: "lectures/index.qmd"
-      - text: "Slides"
-        file: "slides/index.qmd"
-      - text: "Exercises"
-        file: "exercises/index.qmd"
-      - text: "Code recipes"
-        file: "recipes/index.qmd"
-  sidebar:
-    - title: "Information"
-      contents:
-        - index.qmd
-        - about.qmd
-        - schedule.qmd
-        - references.qmd
-
-    - title: "Lecture notes"
-      style: "docked"
-      contents:
-        - "lectures/index.qmd"
-        - section: "Monday 8 May"
-          contents:
-            - "lectures/datageneration.qmd"
-
-    - title: "Slides"
-      contents:
-        - "slides/index.qmd"
-        - section: "Monday 8 May"
-          contents:
-            - "slides/L110-introduction.qmd"
-            - file: "slides/L120-population_genomics_in_practice.qmd"
-              text: "What is population genomics?"
-            - file: "slides/L130-population_genetics_foundations.qmd"
-              text: "Foundations"
-            - file: "slides/L140-datageneration.qmd"
-              text: "Variant data generation"
-        - section: "Tuesday 9 May"
-          contents:
-            - "slides/L200-recap.qmd"
-            - file: "slides/L210-genetic_diversity.qmd"
-              text: "Genetic diversity"
-            - file: "slides/L220-ld_and_recombination.qmd"
-              text: "Linkage disequilibrium and recombination"
-            - file: "slides/L230-population_structure.qmd"
-              text: "Population structure"
-        - section: "Wednesday 10 May"
-          contents:
-            - "slides/L300-recap.qmd"
-        - section: "Thursday 11 May"
-          contents:
-            - "slides/L400-recap.qmd"
-            - file: "slides/L410-direct_selection.qmd"
-              text: "Direct selection"
-            - file: "slides/L430-linked_selection.qmd"
-              text: "Linked selection"
-        - section: "Friday 12 May"
-          contents:
-            - "slides/L500-recap.qmd"
-
-    - title: "Exercises"
-      contents:
-        - "exercises/index.qmd"
-        - "exercises/preparation.qmd"
-        - "exercises/data.qmd"
-        - section: "Monday 8 May"
-          contents:
-            - file: "exercises/E110-popgen_primer.qmd"
-              text: "Population genetics primer"
-            - file: "exercises/E120-variant_calling/E120-variant_calling.qmd"
-              text: "Variant calling basics"
-            - file: "exercises/E130-data_filtering/E130-data_filtering.qmd"
-              text: "Filtering of resequencing data"
-            - file: "exercises/E140-genotype_likelihoods.qmd"
-              text: "Genotype likelihoods and low coverage data"
-        - section: "Tuesday 9 May"
-          contents:
-            - file: "exercises/E210-genetic_diversity.qmd"
-              text: "Estimating genetic diversity"
-            - file: "exercises/E220-ld_and_phasing.qmd"
-              text: "Linkage disequilibrium and phasing"
-            - file: "exercises/E230-fst_divergence.qmd"
-              text: "Population differentiation"
-            - file: "exercises/E240-ld_pruning_pca.qmd"
-              text: "LD pruning and PCA"
-            - file: "exercises/E250-admixture.qmd"
-              text: "Admixture"
-        - section: "Wednesday 10 May"
-          contents:
-            - file: "exercises/E310-fstatistics.qmd"
-              text: "D/f statistics"
-            - file: "exercises/E330-msmc.qmd"
-              text: "MSMC"
-        - section: "Thursday 11 May"
-          contents:
-            - file: "exercises/E410-direct_selection.qmd"
-              text: "Direct selection"
-            - file: "exercises/E430-linked_selection.qmd"
-              text: "Linked selection"
-
+    logo: assets/logos/nbislogo-green.svg
+    right:
+      - text: "HOME"
+        href: "index.qmd"
+      - text: "CONTENTS"
+        href: "contents.qmd"
+      - text: ABOUT
+        href: "about.qmd"
+      - text: SLIDES
+        href: "slides/index.qmd"
+      - text: EXERCISES
+        href: "exercises/index.qmd"
+      - icon: "twitter"
+        href: "https://twitter.com/NBISwe"
   page-footer:
-    left: |
-      Copyright NBIS
-    right: |
-      This book was built with <a
-      href="https://quarto.org/">Quarto</a>.
-  favicon: img/nbislogo-green.svg
+    border: false
+    left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
+    right: "Published with [Quarto](https://quarto.org/) v<?quarto.version?>"
+  favicon: assets/logos/nbislogo-green.svg
 
+  sidebar:
+    contents:
+      - section: Slides
+        contents: slides
+      - section: Exercises
+        contents: exercises
+      - section: Code recipes
+        contents: recipes
 
+bibliography: assets/bibliography.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
 format:
   html:
     theme:
-      - cosmo
-      - nbis.scss
+      - assets/css/custom.scss
     toc: true
     embed-resources: true
-  # pdf:
-  #   documentclass: scrreport
+    date: last-modified
+    date-format: "DD-MMM-YYYY"
+    lightbox:
+      match: auto
+  revealjs:
+    quarto-required: ">=1.2.475"
+    toc: true
+    toc-depth: 1
+    slide-level: 2
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+    smaller: false
+    highlight-style: gruvbox
+    fig-cap-location: top
+    fig-align: left
+    fig-height: 12
+    fig-width: 10
+    width: 1280
+    height: 720
+    margin: 0.1
+    date: last-modified
+    date-format: "DD-MMM-YYYY"
+    navigation-mode: vertical
+    institute: NBIS
+    reference-location: margin
+    template-partials:
+      - assets/www/title-slide.html
+    title-slide-attributes:
+      data-background-image: assets/logos/nbis-scilifelab.svg
+      data-background-size: 500px
+      data-background-position: top left
+    theme:
+      - assets/css/custom.scss
 
+from: markdown+emoji
+
+execute:
+  freeze: auto
+  cache: true
+  echo: true
+  warning: false
+  include: true
+  autodep: true
+  eval: true
+  error: true
 
 knitr:
   opts_chunk:
     code-fold: false
+    tidy: true
     comment-char: "#>"
+    fig-format: svg
+    engine.opts:
+      dvisvgm.opts: --font-format=woff
+      template: assets/www/tikzfig.tex
 
 jupyter:
   kernelspec:
     name: "pgip"
     language: "python"
     display_name: "Python 3"
+
+filters:
+  - lightbox
+  - fontawesome

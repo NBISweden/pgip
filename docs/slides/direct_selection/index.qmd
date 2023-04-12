@@ -1,0 +1,32 @@
+---
+title: "Direct selection"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Direct selection
+---
+
+## Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+```{r }
+#| label: r-custom
+#| echo: false
+#| eval: true
+#| cache: false
+library(viridisLite)
+library(gganimate)
+library(patchwork)
+```
+
+# Direct selection
+
+## Topics
+
+- ka/ks
+
+## References

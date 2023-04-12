@@ -1,4 +1,0 @@
-project:
-  execute-dir: file
-  post-render:
-    - ../../scripts/trim.sh

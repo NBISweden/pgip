@@ -1,0 +1,36 @@
+---
+format: html
+jupyter: pgip
+---
+
+# Exercise example using pgip jupyter kernel (WIP) {#sec-exercises-example}
+
+::: {.callout-note}
+
+Add the directory name to the pre-render script
+`setup-exercise-data.sh` to link test data. If you want to setup your
+own test data, you need to add a custom script and add it to the
+quarto project file `_quarto.yml`. See [quarto pre and post
+render](https://quarto.org/docs/projects/scripts.html#pre-and-post-render)
+for more information.
+
+:::
+
+## Python code
+
+```{python }
+#| label: test
+#| echo: true
+#| eval: true
+import os
+os.listdir()
+```
+
+
+```{python }
+#| label: test-pgip
+#| echo: true
+#| eval: true
+import pgip
+dir(pgip)
+```
