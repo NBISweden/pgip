@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_size = 4
+indent_style = space
+
+[*.{yml,yaml,html,css,scss,js,cff,lua,bib,tex,sty}]
+indent_size = 2
+
+[*.{qmd,md,dtx,slim,R}]
+indent_size = unset
+
+[LICENSE]
+indent_size = unset
+
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab

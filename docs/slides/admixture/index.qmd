@@ -1,0 +1,32 @@
+---
+title: "Population admixture"
+subtitle: "Admixture"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Population admixture
+---
+
+## Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+# Admixture and f-statistics
+
+Focus more generally on admixture and f-statistics
+
+## Admixture
+
+- *f4*-statistics
+
+Base on [@peter_AdmixturePopulationStructure_2016] and
+[@lipson_ApplyingF4statisticsAdmixture_2020]
+
+
+## Refs {.unnumbered .unlisted}
+
+::: { #refs }
+:::

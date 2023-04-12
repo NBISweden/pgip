@@ -1,3 +1,18 @@
-# Slides
-
-Lecture slides that go along with the lecture notes.
+---
+title: "Slides"
+subtitle: "PGIP 2023 • Population Genomics in Practice"
+description: "List of all presentations"
+listing:
+  type: grid
+  grid-columns: 4
+  fields: [image, title, author]
+date: ""
+toc: false
+sidebar: false
+format:
+  html:
+    number-sections: false
+    page-layout: full
+execute:
+  freeze: false
+---

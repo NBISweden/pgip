@@ -1,0 +1,7 @@
+title: Reveal-header
+author: Per Unneberg
+version: 1.0.0
+quarto-required: ">=1.2.0"
+contributes:
+  filters:
+    - reveal-header.lua

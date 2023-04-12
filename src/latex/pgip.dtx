@@ -1,0 +1,306 @@
+% \iffalse meta-comment
+% vim: textwidth=75
+%<*internal>
+\iffalse
+%</internal>
+%<*readme>
+|
+-------:| -----------------------------------------------------------------
+   pgip:| LaTeX style file for Population Genomics in Practice
+ Author:| Per Unneberg
+ E-mail:| per.unneberg@scilifelab.se
+License:| Released under the LaTeX Project Public License v1.3c or later
+    See:| http://www.latex-project.org/lppl.txt
+
+
+LaTeX style file for Population Genomics in Practice
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+-------:| -----------------------------------------------------------------
+   pgip:| LaTeX style file for Population Genomics in Practice
+ Author:| Per Unneberg
+ E-mail:| per.unneberg@scilifelab.se
+License:| Released under the LaTeX Project Public License v1.3c or later
+    See:| http://www.latex-project.org/lppl.txt
+
+\endpreamble
+\postamble
+
+Copyright (C) 2023 by Per Unneberg <per.unneberg@scilifelab.se>
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License (LPPL), either
+version 1.3c of this license or (at your option) any later
+version.  The latest version of this license is in the file:
+
+http://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status) by
+Per Unneberg.
+
+This work consists of the file pgip.dtx and a Makefile.
+Running "make" generates the derived files README, pgip.pdf and pgip.sty.
+Running "make inst" installs the files in the user's TeX tree.
+Running "make install" installs the files in the local TeX tree.
+
+\endpostamble
+
+\usedir{tex/latex/pgip}
+\generate{
+  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/pgip}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/pgip}
+\generate{
+  \file{README.txt}{\from{\jobname.dtx}{readme}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{pgip.dtx}
+%</driver>
+%<package>\def\pgip@version{1.0.0}
+%<package>\def\pgip@date{2023/01/18}
+%<package>\NeedsTeXFormat{LaTeX2e}[2020/02/02]
+%<package>\DeclareRelease{v1.0.0}{2023/01/18}{pgip.sty}
+%<package>\DeclareCurrentRelease{v\pgip@version}{\pgip@date}
+%<package>\ProvidesPackage{pgip}
+%<*package>
+    [\pgip@date\space v\pgip@version\space LaTex style file for Population Genomics in Practice]
+%</package>
+%<package>\newcommand*{\pgipversion}{v\pgip@version\space dated \pgip@date}
+%<package>\RequirePackage{pgfplots}
+%<package>\RequirePackage{pgfplotstable}
+%<package>\RequirePackage{etoolbox}
+%<package>\RequirePackage{tikz}
+%<package>\RequirePackage{ifthen}
+%<package>\RequirePackage{xargs}
+%<package>\RequirePackage{bm}
+%<package>\RequirePackage{xkeyval}
+%<package>\RequirePackage{graphicx}
+%<package>\usetikzlibrary{calc}
+%<package>\usetikzlibrary{matrix}
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[a4paper,margin=25mm,left=50mm,nohead]{geometry}
+\usepackage[numbered]{hypdoc}
+\usepackage{\jobname}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{\jobname.dtx}
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+%\title{\textsf{pgip} --- LaTex style file for Population Genomics in Practice\thanks{This file
+%   describes version \fileversion, last revised \filedate.}
+%}
+%\author{Per Unneberg\thanks{E-mail: per.unneberg@scilifelab.se}}
+%\date{Released \filedate}
+%
+%\maketitle
+%
+%\changes{v1.00}{2023/01/18}{First public release}
+%
+% \begin{abstract}
+%   Macros and utilities for developing Population Genomics in
+%   Practice course material.
+% \end{abstract}
+%
+% \section{Usage}
+%
+% Include with \usepackage{pgip}
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing.\index{doing nothing|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+%\StopEventually{^^A
+%  \PrintChanges
+%  \PrintIndex
+%}
+%
+% \section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+
+%    \end{macrocode}
+%
+% \begin{macro}{pgipfilter}
+%   Define filter thresholds as key-value parameters that can be used
+%   in functions as options.
+%
+%    \begin{macrocode}
+\define@key[KVpgip]{filter}{ampersand}[\&]{\def\pgip@filter@ampersand{#1}}
+\define@key[KVpgip]{filter}{min}[0]{\def\pgip@filter@min{#1}}
+\define@key[KVpgip]{filter}{max}[1000]{\def\pgip@filter@max{#1}}
+\define@key[KVpgip]{filter}{nind}[1]{\def\pgip@filter@nind{#1}}
+\newcommand{\resetkeys}{\setkeys[KVpgip]{filter}{ampersand,min,max,nind}}
+\resetkeys
+
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\coveragetable}
+%   Load a table using |\pgfplotstableread| into \TeX macro
+%   |\coveragetable|. The macro elements can be accessed using
+%   |\pgfplotstable| commands.
+%    \begin{macrocode}
+\pgfplotstableread{coveragetable.tsv}\coveragetable
+%    \end{macrocode}
+% \end{macro}
+%
+
+% \begin{macro}{\addcolumnsum}
+% Add column sum to table.
+%    \begin{macrocode}
+\newcommand{\addcolumnsum}[3]{
+  % #1=table name
+  % #2=columns to iterate
+  % #3=new column name
+  \pgfplotstablecreatecol[
+  create col/assign/.code={%
+    \def\rowsum{0}
+    \pgfmathtruncatemacro\maxcolindex{\pgfplotstablecols-1}
+    \pgfplotsforeachungrouped \col in {#2}{
+      \pgfmathsetmacro\rowsum{\rowsum+\thisrow{\col}}
+      \pgfmathtruncatemacro\rowsum\rowsum
+    }
+    \pgfkeyslet{/pgfplots/table/create col/next content}\rowsum
+  }
+  ]{#3}{#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\addthresholdmask}
+%   Apply a threshold to a numerical |\pgfplotstable| column and
+%   generate and insert 0/1 into the provided table. The first
+%   argument consists of key-value pairs, where keys are |ampersand|,
+%   |min|, and |max|. The second argument is the table name, third
+%   the column to access, and fourth an empty table to update.
+%    \begin{macrocode}
+\newcommand{\addthresholdmask}[4][]{
+  % #1=pgip key-value pairs
+  % #2=table name
+  % #3=column name
+  % #4=new column name
+  \setkeys[KVpgip]{filter}{#1}
+  \pgfplotstablecreatecol[
+  create col/assign/.code={%
+    \getthisrow{#3}\entry
+    \pgfmathparse{and(\entry<\pgip@filter@max, \entry>\pgip@filter@min)}
+    \edef\result{\pgfmathresult}
+    \pgfkeyslet{/pgfplots/table/create col/next content}\result
+  }]{#4}{#2}
+  \resetkeys
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\addindividualmask}
+%   Create a mask based on the number of columns that fulfil a given
+%   threshold criterion and insert 0/1 into the provided table. The
+%   first argument consists of key-value pairs, where keys are
+%   |ampersand|, |min|, and |max|. The second argument is the table
+%   name, third the column to access, and fourth an empty table to
+%   update.
+%    \begin{macrocode}
+\newcommand{\addindividualmask}[4][]{
+  % #1=pgip key-value pairs
+  % #2=table name
+  % #3=column names
+  % #4=new column name
+  \setkeys[KVpgip]{filter}{#1}
+  \pgfplotstablecreatecol[
+  create col/assign/.code={%
+    \def\rowcount{0}
+    \pgfplotsforeachungrouped \col in {#3}{
+      \getthisrow{\col}\entry
+      \pgfmathparse{and(\entry<\pgip@filter@max, \entry>\pgip@filter@min)}
+      \pgfmathsetmacro\rowcount{\rowcount+\pgfmathresult}
+      \pgfmathtruncatemacro\rowcount\rowcount
+    }
+    \pgfmathparse{\rowcount>=\pgip@filter@nind}
+    \edef\result{\pgfmathresult}
+    \pgfkeyslet{/pgfplots/table/create col/next content}\result
+  }]{#4}{#2}
+  \resetkeys
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\formatmask}
+%   Format column to mask string that can be inserted in a tikz
+%   matrix.
+%    \begin{macrocode}
+\newcommand{\formatmask}[3]{
+  % #1=table name
+  % #2=empty macro
+  % #3=column name
+  \pgfplotstablegetrowsof{#1}
+  \pgfmathparse{int (\pgfplotsretval) }
+  \pgfmathtruncatemacro{\maxrowindex}{\pgfmathresult-2}
+  \foreach \i in {0,1,2,...,\maxrowindex}{%
+    \pgfmathparse{int(\i)}
+    \let\im=\pgfmathresult
+    \pgfplotstablegetelem{\im}{#3}\of#1
+    \pgfmathtruncatemacro{\x}{\pgfplotsretval}
+    %% Simply convert >0 to 1, else to 0
+    \ifthenelse{\x>0}{
+      \gappto #2 {\expandonce{1}}
+    }{
+      \gappto #2 {\expandonce{0}}
+    }
+    \ifthenelse{\im<\maxrowindex}{%
+      \gappto #2 {\expandonce{\&}}
+    }{}
+  }
+  \gappto #2{\\}
+}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\endinput
+%</package>
+%    \end{macrocode}
+%\Finale

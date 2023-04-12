@@ -1,0 +1,19 @@
+name: pgip linting
+
+# Run on all pushes and PRs
+on:
+  push:
+    branches:
+
+jobs:
+  EditorConfig:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+
+      - name: Install editorconfig-checker
+        run: npm install -g editorconfig-checker
+
+      - name: Run ECLint check
+        run: editorconfig-checker -exclude README.md $(find .* -type f | grep -v '.git\|.py\|.md\|json\|yml\|yaml\|html\|css\|work\|build\|log.txt\|Makefile')

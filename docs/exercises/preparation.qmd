@@ -1,3 +1,7 @@
+---
+format: html
+---
+
 # Preparation {#sec-preparation}
 
 ::: {.callout-warning}
@@ -21,11 +25,21 @@ Add instructions on packages to install, or provide a docker image.
 
 ## Command line {#sec-preparation-command-line}
 
-Add basics of working in a CLI.
+Add basics of working in a CLI. Add list of hints on how to get
+information on commands (e.g., -h option or --help option).
+
+Many exercises will be based on command line tools, including bash
+functions, awk and sed.
+
+csvtk plots can be piped to `display`.
+
+So as not to interrupt flow of text many explanations of commands have
+been put in footnotes?
 
 ## UPPMAX {#sec-preparation-uppmax}
 
-Add instructions on how to work on uppmax. Prerecorded video would be nice.
+Add instructions on how to work on uppmax. Prerecorded video would be
+nice.
 
 ## Population genetics basics {#sec-preparation-population-genetics-basics}
 

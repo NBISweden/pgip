@@ -1,4 +1,5 @@
 ---
+format: html
 knitr:
   opts_chunk:
     collapse: true

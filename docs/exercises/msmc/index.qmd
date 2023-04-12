@@ -1,0 +1,53 @@
+---
+format: html
+---
+
+# Msmc {#sec-msmc}
+
+# Exercises
+
+
+::: {layout-ncol="2" panel="tabset"}
+
+```{python }
+#| label: col1
+#| echo: true
+#| eval: true
+1 + 1
+```
+
+
+```{bash }
+#| label: col3
+#| echo: true
+#| eval: true
+pwd
+```
+
+:::
+
+
+```{r }
+#| label: bash-1
+#| echo: true
+#| eval: true
+getwd()
+```
+
+
+
+NOTE: Dsuite uses allele frequency estimates. Start example by
+calculating stuff by hand.
+
+
+Want also to relate the allele frequencies to branch lengths; cf
+@peter_AdmixturePopulationStructure_2016
+
+
+```{bash }
+#| label: col4
+#| echo: true
+#| eval: true
+pwd
+ls
+```
