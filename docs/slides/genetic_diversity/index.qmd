@@ -8,7 +8,7 @@ format:
     footer: Genetic diversity
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -16,9 +16,9 @@ format:
 
 # Genetic diversity
 
-###
+##
 
-### On missing data in population genetics
+## On missing data in population genetics
 
 [@korunes_PixyUnbiasedEstimation_2021] Fig 4 on real data: strong
 tendency of commonly adopted tools to **underestimate** pi, dxy (even
@@ -26,7 +26,7 @@ for 30X data sets)
 
 
 
-### Nucleotide diversity revisited
+## Nucleotide diversity revisited
 
 Most textbooks assume full sequence data
 [@korunes_PixyUnbiasedEstimation_2021]. Vast majority of tools make
@@ -40,6 +40,7 @@ $$
 
 FIXME: include Fig 1A from [@korunes_PixyUnbiasedEstimation_2021]
 
-### Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted}
+
 ::: { #refs }
 :::

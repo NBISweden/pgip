@@ -8,7 +8,7 @@ format:
     footer: Population structure
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -30,7 +30,7 @@ More general exposition of f_st, Wahlund effect, etc
 
 :::
 
-### The independent population model
+## The independent population model
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: fst-independent-population-model
@@ -59,8 +59,7 @@ More general exposition of f_st, Wahlund effect, etc
 
 [@mary-huard_FastAccurateJoint_2023]
 
-
-### F_{ST} estimators
+## $F_{ST}$ estimators
 
 Table S2 in [@bhatia_EstimatingInterpretingFST_2013]
 
@@ -69,12 +68,14 @@ Table S2 in [@bhatia_EstimatingInterpretingFST_2013]
 | Ratio of variances / Correlation between alleles |              | SNPs analyzed were polymorphic in the ancestral population | $F_{ST}$ is identical across populations OR Equal sample sizes | No^c    | Yes^*      |
 |                                                  |              |                                                            |                                                                |         |            |
 
-#### Weir Cockerham
+### Weir Cockerham
 
-- correlation randomly uniting gametes / ratio of variance between populationss to total variance
-- "total population" is most recent common ancestral population (figure previous slide)
+- correlation randomly uniting gametes / ratio of variance between
+  populationss to total variance
+- "total population" is most recent common ancestral population
+  (figure previous slide)
 - sites are polymorphic in ancestral
-- F_{ST} identical for each population
+- $F_{ST}$ identical for each population
 
 => populations are replicates of identical evolutionary history =>
 
@@ -86,27 +87,25 @@ Interpretation: F_{ST} is a statistic
 
 #### Hudson
 
-
 ::: {.notes }
 
 [@excoffier_AnalysisPopulationSubdivision_2004] provides pros/cons for
 WC vs Nei.
 
-[@mary-huard_FastAccurateJoint_2023] shows that Weir vs Hudson compare different branch lengths
+[@mary-huard_FastAccurateJoint_2023] shows that Weir vs Hudson compare
+different branch lengths
 
-[@bhatia_EstimatingInterpretingFST_2013] multiple estimators make correct choice of estimator unclear.
+[@bhatia_EstimatingInterpretingFST_2013] multiple estimators make
+correct choice of estimator unclear.
 
 Different estimators due to confusion as to what Wright meant by
 "total population": for Nei is the combination of two populations. For
 WC it is the most recent ancestral population. Hence, Nei's F_ST is a
 statistic, whereas for WC it is a parameter of an evolutionary process
 
-
-
 :::
 
-
-### On the impact of rare variants
+## On the impact of rare variants
 
 FIXME: include stat/figure on how different estimators give different
 results
@@ -119,12 +118,9 @@ difference for human samples in
 is mainly due to ascertainment and using average of ratios (instead of
 ratio of averages) when combining estimates
 
-
 :::
 
-
-### Recommendations
-
+## Recommendations
 
 ::: {.notes }
 
@@ -132,10 +128,7 @@ ratio of averages) when combining estimates
 
 :::
 
-
-
-
-### Refs {.unnumbered .unlisted}
+## Refs {.unnumbered .unlisted}
 
 ::: { #refs }
 :::

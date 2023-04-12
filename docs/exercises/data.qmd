@@ -2,6 +2,8 @@
 format: html
 ---
 
+# Data {#sec-exercise-data}
+
 ```{python}
 #| label: link-data
 #| echo: false
@@ -10,9 +12,6 @@ import os
 if not os.path.exists("data"):
     os.symlink("../data", "data")
 ```
-
-
-# Data {#sec-exercise-data}
 
 ::: {.callout-note}
 
@@ -46,7 +45,6 @@ for more information.
 
 Simulated datasets reside in the `data` subdirectory
 (@tbl-simulated-datasets).
-
 
 | Dataset       | Description                  | Location             |
 |---------------|:-----------------------------|:---------------------|
@@ -97,7 +95,6 @@ Simulated reads are mapped with bwa to the reference and saved to bam
 files. The raw data reads and haplotype sequences are finally
 discarded to save space. Variant calling is done with GATK.
 
-
 ### Out of Africa (ooa) {#sec-data-simulated-ooa}
 
 The out of Africa dataset is based on the
@@ -127,7 +124,6 @@ The out of Africa with outgroups demographic model is an extension of
 the previous data set (@fig-ooa-with-outgroups-demesdraw). In addition
 to simulating human data, the model has been expanded to include three
 outgroups chimpanzee, gorilla and orangutan.
-
 
 ```{python }
 #| label: fig-ooa-with-outgroups-demesdraw

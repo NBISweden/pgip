@@ -61,6 +61,18 @@ information.
 
 [Install Quarto](https://quarto.org/docs/get-started) version [Quarto\>=1.2.475](https://quarto.org/docs/download/).
 
+### bcftools manual install
+
+Due to dependency issues, bcftools has to be manually installed:
+
+    make install-bcftools
+
+or
+
+    ./scripts/install-bcftools.sh
+
+in the root directory.
+
 ### Development tools
 
 There are a number of development tools in `environments-dev.yaml`

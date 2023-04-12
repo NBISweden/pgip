@@ -1,19 +1,6 @@
 ---
 format: html
-engine: knitr
-knitr:
-  opts_chunk:
-    root.dir: _E120
 ---
-
-```{bash }
-#| label: E120-data-setup
-#| echo: false
-#| eval: true
-for f in ../../data/data/ooa-outgroups/[CY]*.chr21.bam*; do
-	ln -f -s $(realpath $f) ./$(basename $f)
-done
-```
 
 # Variant calling {#sec-variantcalling}
 

@@ -1,5 +1,6 @@
 ---
 format: html
+cache: false
 ---
 
 # Linkage disequilibrium pruning {#sec-ld-pruning-pca}
@@ -76,7 +77,7 @@ Then make output directories and convert vcf to the zarr format.
 #| eval: true
 outdir = "output/ld_pruning"
 os.makedirs(outdir, exist_ok=True)
-vcf = "../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz"
+vcf = "../../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz"
 zarr = os.path.join(outdir, "ooa.gatk.zarr")
 sgvcf.vcf_to_zarr(vcf, zarr)
 ```
@@ -100,11 +101,14 @@ use `python` for plotting and first load the necessary libraries:
 
 ## Linkage disequilibrium pruning
 
-Depending on the number of variants, it may be necessary to work on a
-subset of variants. Here with only ```{python}
+
+```{python}
 #| echo: false
-display(Markdown("""{nvar}""".format(nvar = len(ds.variants))))
-``` variants we skip this step.
+nvar = len(ds.variants)
+display(Markdown(""" Depending on the number of variants, it may be
+necessary to work on a subset of variants. Here with only {nvar}
+variants we skip this step.""".format(nvar=nvar)))
+```
 
 For pruning, we first need to calculate the dosage:
 
@@ -203,7 +207,7 @@ effect of sequencing coverage.
 import io
 import pandas as pd
 import subprocess
-output = subprocess.check_output("samtools depth -a ../data/data/ooa-outgroups/*chr21.bam", shell=True)
+output = subprocess.check_output("samtools depth -a ../../data/data/ooa-outgroups/*chr21.bam", shell=True)
 coverage = pd.read_table(io.StringIO(output.decode()), header=None).loc[:, 2:].mean(axis=0)
 df["coverage"] = coverage.values
 ```

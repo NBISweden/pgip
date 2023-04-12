@@ -337,7 +337,9 @@ Level 1 usage is not recommended. Use level 2 for slide titles. Use level 3 and 
 :::
 
 ::: {.column width="50%"}
-Text scaling classes
+
+Text scaling classes. Note the css definition for smaller text:
+`.smallr`
 
 ```
 [Largest text]{.largest}
@@ -345,7 +347,7 @@ Text scaling classes
 [Large text]{.large}
 Normal text.
 [Small text]{.small}
-[Smaller text]{.smaller}
+[Smaller text]{.smallr}
 [Smallest text]{.smallest}
 ```
 
@@ -354,7 +356,7 @@ Normal text.
 [Large text]{.large}\
 Normal text\
 [Small text]{.small}\
-[Smaller text]{.smaller}\
+[Smaller text]{.smallr}\
 [Smallest text]{.smallest}
 :::
 ::::
@@ -1082,4 +1084,4 @@ R.version[c("platform", "os", "major", "minor")]
 ```
 
 [Graphics from [freepik](https://www.freepik.com), [Pexels](https://www.pexels.com)]{.small}
-[2023 • [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/) • [RaukR](https://nbisweden.github.io/workshop-RaukR-2306/)]{.smaller}
+[2023 • [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/) • [RaukR](https://nbisweden.github.io/workshop-RaukR-2306/)]{.smallr}

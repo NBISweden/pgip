@@ -6,6 +6,7 @@ author:
 format:
   revealjs:
     footer: Population genetics foundations
+    smaller: true
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -13,7 +14,6 @@ format:
 {{< include ../_knitr.qmd >}}
 
 {{< include ../_rlibs.qmd >}}
-
 
 ```{r libs}
 #| echo: false
@@ -27,7 +27,6 @@ library(igraph)
 ::: {.notes }
 
 :::
-
 
 # Population genetics
 
@@ -49,10 +48,7 @@ From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 
 :::
 
-
 ## DNA variation {.small}
-
-
 
 ::: {.dna }
 
@@ -73,12 +69,9 @@ sequence has 15 nucleotides (*sites*) "from the same *locus*
 (location) on a chromosome" [p.2
 @hahn_MolecularPopulationGenetics_2019]
 
-
 :::: {.columns}
 
 ::: {.column width="50%"}
-
-
 
 ::: {.fragment}
 
@@ -133,8 +126,6 @@ $L=15$. A site where all nucleotides (alleles) are identical is called
 a *monomorphic* site (indicated with asterisks above). There are 9
 monomorphic sites.
 
-
-
 ## DNA variation - segregating sites
 
 ::: {.dna }
@@ -154,7 +145,6 @@ monomorphic sites.
 A site where there are different nucleotides (alleles) is called a
 *segregating* site (indicated with asterisks above), often denoted
 *S*. There are $S=6$ segregating sites.
-
 
 ::: {.fragment}
 
@@ -208,7 +198,7 @@ The set of alleles found on a single sequence is called *haplotype*.
 
 
 
-## Describing DNA variation
+## Describing DNA variation {.small}
 
 ::: {.dna }
 
@@ -254,7 +244,7 @@ $p_C=1/4$ and $p_T=3/4$.
 
 ::: {.column width="50%"}
 
-### Heterozygosity
+#### Heterozygosity
 
 The *heterozygosity* at a site is given by
 
@@ -268,7 +258,7 @@ $$
 
 ::: {.fragment}
 
-### Exercise: calculate the heterozygosity at sites 1, 2 and 5
+#### Exercise: calculate the heterozygosity at sites 1, 2 and 5
 
 :::
 
@@ -716,7 +706,6 @@ Note dependency of "jumpyness" (variance) on population size N
 
 ::: {.column width="60%" .fragment fragment-index=1}
 
-
 ```{r }
 #| label: genetic-drift-example
 #| echo: false
@@ -748,7 +737,7 @@ wf$sample <- factor(wf$sample)
 #| eval: true
 #| fig-show: animate
 #| fig-keep: all
-#| out-width: 100%
+#| out-width: 60%
 #| fig-cap: Genetic drift for different population sizes, starting frequency $p_0$=0.5
 ggplot(subset(wf, wf$sample == 1 & wf$p0 == 0.5), aes(x = generation, y = frequency)) +
   geom_line(size = 1) +
@@ -762,9 +751,7 @@ ggplot(subset(wf, wf$sample == 1 & wf$p0 == 0.5), aes(x = generation, y = freque
 
 ::::
 
-
 ::: {.notes }
-
 
 Classic graph of allele: start at say 0.2 and drift with different Ne.
 Point out that variation becomes smaller with large Ne, but that
@@ -773,19 +760,15 @@ eventually, an allele is fixed or lost (formula).
 Mention *neutral* here as this is how alleles behave under drift: like
 gas particle diffusing up and down
 
-
 See alternative way of visualizing variation faceting on initial
 frequency (showing P(fixation)) and population size (showing less
 variance))
 
 https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html
 
-
 :::
 
-
 ## Genetic drift
-
 
 ```{r }
 #| label: fig-genetic-drift-many-repetitions
@@ -800,8 +783,6 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
   ylim(0, 1) +
   facet_grid(N ~ p0)
 ```
-
-
 
 ## Mutation
 
@@ -934,11 +915,9 @@ Show some qualitative examples of how trees change for
 
 ## msprime
 
-
 ## SLiM
 
 Mention advances in forward simulations
-
 
 ## Recapitation
 

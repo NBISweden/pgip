@@ -75,8 +75,8 @@ jobs:
         with:
           tinytex: true
 
-      - name: Setup data
-        run: ./scripts/setup-data.sh
+      - name: Install bcftools
+        run: ./scripts/install-bcftools.sh
 
       - name: Add miniconda path
         run: |

@@ -7,17 +7,7 @@ engine: knitr
 
 {{< include ../_rlibs.qmd >}}
 
-
-```{r}
-#| label: r-custom
-#| echo: false
-#| eval: true
-#| warning: false
-#| error: false
-#| cache: false
-library(readxl)
-library(curl)
-```
+{{< include _rcustom.qmd >}}
 
 # Genetic diversity {#sec-ex-genetic-diversity}
 

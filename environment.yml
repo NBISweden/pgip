@@ -6,31 +6,28 @@ channels:
   - defaults
 dependencies:
   - bash_kernel
-  - bcftools=1.8
   - bedtools
   - bokeh
   - ca-certificates
   - csvtk
-  # - cyvcf2
+  - cyvcf2
   - demesdraw
-  # - d4tools
-  # - gatk4
+  - d4tools
+  - gatk4
   - gawk
   - jupyter
   - jupyter-cache
   - mosdepth
   - msprime>=1.0
-  # - openssl
   - pandas
   - pyslim
-  - python=3.10
-  # # - r-animation
+  - python>=3.10
+  # - r-animation
   - r-codetools
   - r-curl
   - r-devtools
   - r-dt
   - r-dygraphs
-  # - r-dotenv # Must be installed via R
   - r-formatr
   - r-formattable
   - r-gganimate
@@ -38,30 +35,31 @@ dependencies:
   - r-ggplot2
   - r-gifski
   - r-highcharter
-  # - r-htmlTable
+  # # - r-htmlTable
   - r-igraph
   # # - r-irkernel
-  # - r-jsonlite
+  # # - r-jsonlite
   - r-kableextra
   - r-leaflet
   - r-networkD3
   # # - r-magick
   - r-patchwork
-  # - r-pdftools
+  # # - r-pdftools
   - r-plotly
-  # - r-reactable
-  # - r-readr
+  # # - r-reactable
+  - r-readr
   - r-readxl
   - r-reticulate
   - r-rmarkdown>=2.19
   - r-tidyr
-  # - r-transformr
+  # # - r-transformr
   - r-viridis
   - samtools
   # # - scikit-learn
   # # - scikit-allel
-  - sgkit>=0.6.0
   - slim>=4.0
   - tskit>=0.5.0
   # # - tqdm
   # # - yarl
+  - pip:
+      - sgkit[vcf]

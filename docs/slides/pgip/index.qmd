@@ -6,8 +6,6 @@ author:
 format:
   revealjs:
     slide-level: 3
-
-#    footer: Population genomics in practice
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -49,7 +47,6 @@ Follow [@casillas_MolecularPopulationGenetics_2017] history?
 
 :::
 
-
 ## The allozyme era
 
 FIXME: picture of allozyme gel
@@ -66,9 +63,7 @@ FIXME: picture of allozyme gel
 
 # What is population genomics?
 
-
 ## What is population genomics?
-
 
 Points from [@hahn_MolecularPopulationGenetics_2019]:
 
@@ -89,29 +84,24 @@ Some applications:
   - different statistics rely on similar input
   - overlapping peaks from different statistics *not* independent
 
-
 [@hartl1997principles p. 469-470]
 
 ::: {.notes }
 
 [@li_InferenceHumanPopulation_2011, supplementary notes, p. 6]:
 
-	...highly consistent except for the very recent history,
-	demonstrating the power of using whole-genome data.
+    ...highly consistent except for the very recent history,
+    demonstrating the power of using whole-genome data.
 
 :::
 
-
 ## An example from real life - population genetics of coral
-
 
 :::: {.columns}
 
 ::: {.column width="33%"}
 
-
 ![Genome assembly and sampling](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly height=250}
-
 
 :::
 
@@ -130,8 +120,6 @@ Some applications:
 
 ::::
 
-
-
 ![Population structure](https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg){#fig-corals-structure height=150 fig-align="center"}
 
 ::: { .flushright }
@@ -140,33 +128,27 @@ Some applications:
 
 :::
 
-
 ## Statistical inference in population genomics
 
 [@johri_RecommendationsImprovingStatistical_2022]
-
-
 
 # Population genomics in the future
 
 List stuff we won't have time to go through
 
-
 ## Machine learning and AI for population genomics
-
 
 ## Ancestral recombination graph methods
 
 - deep population sequencing - tskit was developed to handle data size
 
-
 ## Ancient DNA
-
 
 ## Coalescent and Wright-Fisher simulations
 
 Use to determine significance in genome-wide scans
 
 ## Bibliography {.unnumbered .unlisted}
+
 ::: { #refs }
 :::

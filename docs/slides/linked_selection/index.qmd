@@ -1,11 +1,10 @@
 ---
-title: "Signals of selection"
-subtitle: "Signals of selection"
+title: "Linked selection"
 author:
     - "Per Unneberg"
 format:
   revealjs:
-    footer: Signals of selection
+    footer: Linked selection
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -14,8 +13,7 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-
-```{r libs}
+```{r }
 #| echo: false
 #| eval: true
 #| cache: false
@@ -25,11 +23,10 @@ library(patchwork)
 ```
 
 # Selection
+
 ## Topics
 
 - direct selection(?)
--
-
 
 # Linked selection
 
@@ -38,7 +35,6 @@ library(patchwork)
 ## Selective sweep
 
 Use [Figure 2 @charlesworth_EffectsOfSelection_2021]
-
 
 ## Selective sweep
 
@@ -55,7 +51,7 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #| label: pgip-load-slim-data
 #| echo: false
 #| eval: true
-data <- tidyr::tibble(read.csv("../data/results/slim/selective_sweep.w500.csv.gz", header = TRUE))
+data <- tidyr::tibble(read.csv("../../data/results/slim/selective_sweep.w500.csv.gz", header = TRUE))
 a <- sum(1 / seq(10 - 1))
 data$thetaW <- data$S / a
 data_mean <- as.data.frame(data) %>%
@@ -66,7 +62,6 @@ data_mean <- as.data.frame(data) %>%
 L <- 1e6
 xi <- L / 2
 ```
-
 
 :::: {.columns}
 
@@ -79,13 +74,11 @@ xi <- L / 2
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
-ggplot(
-  data_mean %>% pivot_longer(
-    cols = c("pi", "thetaW", "pi_minus_thetaW"),
-    names_transform = list(name = ~ readr::parse_factor(.x, levels = c("pi", "thetaW", "pi_minus_thetaW")))
-  ),
-  aes(windows, value, color = name)
-) +
+x <- data_mean %>% pivot_longer(
+  cols = c("pi", "thetaW", "pi_minus_thetaW"),
+  names_transform = list(name = ~ readr::parse_factor(.x, levels = c("pi", "thetaW", "pi_minus_thetaW")))
+)
+ggplot(x, aes(windows, value, color = name)) +
   geom_segment(aes(x = xi, y = -1, xend = xi, yend = -2.5), color = "black", arrow = arrow(length = unit(0.4, "cm"), type = "closed")) +
   xlab("Chromosomal position") +
   ylab("diversity") +
@@ -99,21 +92,19 @@ ggplot(
   )
 ```
 
-
-
 :::
-
 
 ::: {.column width="50%"}
 
-```{r}
+```{r }
 #| label: pgip-slim-sweep-plot-tajd
 #| echo: false
 #| eval: true
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
-psweep_static <- ggplot(subset(data, fn %in% levels(factor(data$fn))[1:50]), aes(windows, TajD, group = fn)) +
+x <- subset(data, fn %in% levels(factor(data$fn))[1:50])
+psweep_static <- ggplot(x, aes(windows, TajD, group = fn)) +
   geom_line(color = "lightgray", linewidth = 0.5) +
   xlab("Chromosomal position") +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
@@ -123,12 +114,12 @@ psweep_static <- ggplot(subset(data, fn %in% levels(factor(data$fn))[1:50]), aes
 p <- psweep_static + transition_manual(fn, cumulative = TRUE)
 p
 ```
+
 :::
 
 ::::
 
 The effect of a selective sweep on different statistics.
-
 
 ::: {.notes }
 
@@ -145,18 +136,16 @@ Q: not clear how Rasmus Nielsen scales statistics to have mean=1
 
 :::
 
-
-
 ## Selective sweep
 
 ```{bash }
 #| label: pgip-slim-sweep-command-2
 #| echo: true
 #| eval: false
+#| code-fold: true
 pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
 pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
 ```
-
 
 :::: {.columns}
 
@@ -169,12 +158,12 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
+x <- data_mean %>% pivot_longer(
+  cols = c("pi", "thetaW", "pi_minus_thetaW"),
+  names_transform = list(name = ~ readr::parse_factor(.x, levels = c("pi", "thetaW", "pi_minus_thetaW")))
+)
 ggplot(
-  data_mean %>% pivot_longer(
-    cols = c("pi", "thetaW", "pi_minus_thetaW"),
-    names_transform = list(name = ~ readr::parse_factor(.x, levels = c("pi", "thetaW", "pi_minus_thetaW")))
-  ),
-  aes(windows, value, color = name)
+  x, aes(windows, value, color = name)
 ) +
   geom_segment(aes(x = xi, y = -1, xend = xi, yend = -2.5), color = "black", arrow = arrow(length = unit(0.4, "cm"), type = "closed")) +
   xlab("Chromosomal position") +
@@ -189,10 +178,7 @@ ggplot(
   )
 ```
 
-
-
 :::
-
 
 ::: {.column width="50%"}
 
@@ -205,13 +191,11 @@ ggplot(
 #| fig-width: 10
 psweep_static + geom_line(data = data_mean, color = "red", linewidth = 1.5)
 ```
+
 :::
 
 ::::
 
-
 The effect of a selective sweep on different statistics.
-
-
 
 ## References

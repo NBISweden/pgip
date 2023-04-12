@@ -1,4 +1,4 @@
-```{r}
+```{r }
 #| label: r-libs-init
 #| echo: false
 #| eval: true

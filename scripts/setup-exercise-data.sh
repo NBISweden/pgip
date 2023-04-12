@@ -10,7 +10,7 @@ echo Exercise path $EXERCISE_PATH
 
 
 # Link ooa-outgroups
-OOA_OUTGROUPS="data_filtering genetic_diversity ld_pruning"
+OOA_OUTGROUPS="data_filtering genetic_diversity ld_pruning variant_calling"
 for d in $OOA_OUTGROUPS; do
     ROOTDATADIR=$(realpath ${EXERCISE_PATH}/${d})
     echo "Setting up exercise data at ${ROOTDATADIR}"

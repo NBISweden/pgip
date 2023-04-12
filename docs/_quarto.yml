@@ -21,6 +21,10 @@ website:
         href: "contents.qmd"
       - text: ABOUT
         href: "about.qmd"
+      - text: SLIDES
+        href: "slides/index.qmd"
+      - text: EXERCISES
+        href: "exercises/index.qmd"
       - icon: "twitter"
         href: "https://twitter.com/NBISwe"
   page-footer:

@@ -15,32 +15,4 @@ format:
 {{< include ../_rlibs.qmd >}}
 
 
-# Test
-
-## Slide
-
-Slide information
-
-```{r test plot}
-#| fig-cap: Simple demo R plot
-#| lightbox:
-#|   group: r-graph
-#|   description: This is 1 to 10 plot
-plot(1:10, rnorm(10))
-```
-
-## New slide
-
-```{r }
-#| label: fig-test-plot
-#| echo: true
-#| eval: true
-x <- 2:8
-plot(x = x, y = x**2)
-```
-
-## Other slide
-
-Image:
-
-![NBIS logo](/home/peru/teaching/pgip/pgip/docs/assets/logos/nbislogo-green.svg){description="NBIS logo"}
+# Demography

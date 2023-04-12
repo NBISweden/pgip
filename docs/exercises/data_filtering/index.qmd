@@ -7,34 +7,23 @@ format: html
 
 {{< include ../_rlibs.qmd >}}
 
-
-```{r }
-#| label: setup-r
-#| echo: true
-#| eval: true
-options(tinytex.verbose=TRUE)
-```
-
 # Filtering of resequencing data {#sec-E130-data_filtering}
 
-FIXME: tikz figure of genome tracks
+FIXME: text
 
-- coverage distributions
-
-```{r, engine='tikz', fig.ext="svg"}
-#| label: fig-coverage-filter-test
-#| echo: true
-#| eval: true
-\begin{tikzpicture}
-\draw (0, 0) -- (0, 1);
-\end{tikzpicture}
-```
+Regardless of how a raw variant call set has been produced, the calls
+will be of varying quality for a number of reasons. For high-coverage
+sequencing, the two most common are incompleteness of the reference
+sequence and misaligmnents in repetitive regions
+[@li_BetterUnderstandingArtifacts_2014]. Low-coverage sequencing comes
+with its own biases, such as
 
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: fig-coverage-filters-1
 #| echo: false
-#| eval: false
+#| eval: true
+#| fig-cap: Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples.
 \addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
 \addthresholdmask{\coveragetable}{A1}{A1mask}
 \addthresholdmask{\coveragetable}{A2}{A2mask}
@@ -51,30 +40,21 @@ FIXME: tikz figure of genome tracks
 \formatmask{\coveragetable}{\Asummask}{Asummask}
 
 \begin{tikzpicture}[x=1pt, y=1pt]
-\pic[at={(0, 300)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
-%% \matrix[mask, anchor=west, at={($(A1.south west)+(3pt, -10pt)$)}] (A1mask) {\Aonemask};
+\pic[at={(0, 0)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+%%\matrix[mask, anchor=west, at={($(A1.south west)+(3pt, -10pt)$)}] (A1mask) {\Aonemask};
+\pic[yshift=-100pt] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};
+%%\matrix[mask, anchor=west, at={($(A2.south west)+(3pt, -10pt)$)}] (A2mask) {\Atwomask};
 
-%% \pic[yshift=-100pt] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};
-%% \matrix[mask, anchor=west, at={($(A2.south west)+(3pt, -10pt)$)}] (A2mask) {\Atwomask};
+\pic[yshift=-200pt] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+%%\matrix[mask, anchor=west, at={($(A3.south west)+(3pt, -10pt)$)}] (A3mask) {\Athreemask};
 
-%% \pic[yshift=-200pt] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
-%% \matrix[mask, anchor=west, at={($(A3.south west)+(3pt, -10pt)$)}] (A3mask) {\Athreemask};
-
-%% \pgfplotsset{covaxis/.append style={ymax=45}}
-%% \pic[xshift=250pt, yshift=-120pt] (Asum) {coverageplot={\coveragetable}{ref}{Asum}{All samples}{red}};
-%% \matrix[mask, anchor=west, at={($(Asum.south west)+(3pt, -10pt)$)}] (Asummask) {\Asummask};
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[xshift=250pt,yshift=-120pt](Asum){coverageplot={\coveragetable}{ref}{Asum}{All samples}{red}};
+%%\matrix[mask, anchor=west, at={($(Asum.south west)+(3pt, -10pt)$)}] (Asummask) {\Asummask};
 
 \end{tikzpicture}
 ```
 
-FIXME: text
-
-Regardless of how a raw variant call set has been produced, the calls
-will be of varying quality for a number of reasons. For high-coverage
-sequencing, the two most common are incompleteness of the reference
-sequence and misaligmnents in repetitive regions
-[@li_BetterUnderstandingArtifacts_2014]. Low-coverage sequencing comes
-with its own biases, such as
 
 
 ::: {.callout-warning}

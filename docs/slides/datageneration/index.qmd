@@ -23,8 +23,8 @@ library(curl)
 ```
 
 # Data generation
-## Textbook data is clean
 
+## Textbook data is clean
 
 ```{bash }
 #| label: tskit-vcf-data
@@ -51,7 +51,7 @@ many possible reasons, including:
 
 ## Real data
 
-![Aligments of three samples to chromosome 21](chr21_example.png)
+![Aligments of three samples to chromosome 21](assets/images/chr21_example.png)
 
 
 ## Population genomics - the data

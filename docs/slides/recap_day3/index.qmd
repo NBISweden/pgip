@@ -7,7 +7,7 @@ format:
     footer: Recap day 3
 ---
 
-### Setup  {visibility="hidden" .unnumbered .unlisted}
+## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
 
@@ -25,4 +25,4 @@ library(patchwork)
 
 # Recap day 3
 
-### Overview
+## Overview
