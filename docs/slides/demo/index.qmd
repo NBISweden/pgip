@@ -3,7 +3,6 @@ title: "Demo"
 subtitle: "Demo slides"
 author:
   - name: "Per Unneberg"
-  - name: "Roy Francis"
 format:
   revealjs:
     footer: Demo slides
@@ -1050,7 +1049,19 @@ Sys.info()
 
 ##  {background-image="../../assets/images/cover.jpg"}
 
-### Thank you! Questions?
+
+## Python code (WIP)
+
+```{python }
+#| label: test
+#| echo: true
+#| eval: true
+import os
+os.listdir()
+```
+
+
+## Thank you! Questions?
 
 ```{r}
 #| echo: false

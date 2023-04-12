@@ -3,7 +3,7 @@ format: html
 jupyter: pgip
 ---
 
-# Exercise example using the pgip kernel {#sec-exercises-example}
+# Exercise example using pgip jupyter kernel (WIP) {#sec-exercises-example}
 
 ::: {.callout-note}
 
@@ -15,3 +15,22 @@ render](https://quarto.org/docs/projects/scripts.html#pre-and-post-render)
 for more information.
 
 :::
+
+## Python code
+
+```{python }
+#| label: test
+#| echo: true
+#| eval: true
+import os
+os.listdir()
+```
+
+
+```{python }
+#| label: test-pgip
+#| echo: true
+#| eval: true
+import pgip
+dir(pgip)
+```

@@ -21,7 +21,7 @@ FIXME: tikz figure of genome tracks
 
 - coverage distributions
 
-```{r, engine='tikz'}
+```{r, engine='tikz', fig.ext="svg"}
 #| label: fig-coverage-filter-test
 #| echo: true
 #| eval: true

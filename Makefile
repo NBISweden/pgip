@@ -2,15 +2,13 @@
 ## Simple makefile for development and production.
 ##
 ## Remember: for automated regeneration of output files,
-## use `quarto preview`.
+## cd to docs directory and run `quarto preview`.
 ## ------------------------------------------------------
 TEXINPUTS:=$TEXINPUTS:src/latex
 
 
 help:     ## Show this help.
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
-
-.phony: help Makefile
 
 project:  ## Make project
 	quarto render docs
@@ -38,14 +36,26 @@ clean: ## Remove garbage files
 	find . -name __pycache__ -delete
 
 
-install: ## Create pgip environment and install packages to render site
-	mamba env create -n pgip --file environment.yml
+install-pgip: ## Create pgip environment and install packages to render site
+	if conda env list | cut -f1 -d ' ' | grep -q "pgip$$"; then \
+		echo "Environment exists; skipping install"; \
+	else \
+		mamba env create -n pgip --file environment.yml; \
+	fi;
 
-install-dev: ## Install additional development tools
+install-dev: install-pgip ## Install additional development tools
 	mamba env update -n pgip --file environment-dev.yml
 
-install-R: ## Install additional R packages that require manual installation
+install-R: install-pgip ## Install additional R packages that require manual installation
 	R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 	R -e "tinytex::tlmgr_update()"
 	R -e "tinytex::reinstall_tinytex(force=TRUE)"
 	R -e "library(devtools); devtools::install_local('src/R/pgip')"
+
+install-kernels: install-pgip ## Install python and bash kernel
+	python -m pip install git+https://github.com/NBISweden/pgip-tools
+	python -m bash_kernel.install
+	python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
+
+
+.phony: help Makefile project production clean-site clean install-pgip install-dev install-R

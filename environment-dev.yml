@@ -6,7 +6,6 @@ channels:
 dependencies:
   - conda-lock
   - pre-commit
-  - prettier
   - r-docopt
   - r-languageserver
   - r-lintr
