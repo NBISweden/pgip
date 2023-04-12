@@ -19,7 +19,7 @@ repos:
             --unclassifiable-application-module=_tskit,
           ]
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.260"
+    rev: "v0.0.261"
     hooks:
       - id: ruff
         args:
@@ -50,9 +50,29 @@ repos:
       - id: editorconfig-checker
         alias: ec
         pass_filenames: true
-  # - repo: https://github.com/lorenzwalthert/precommit
-  #   rev: v0.3.2
-  #   hooks:
-  #     - id: lintr
-  #       args: [--warn-only, --key=value]
-  #       verbose: true
+  - repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.3.2
+    hooks:
+      - id: style-files
+        name: style-files
+        description: style files with {styler}
+        entry: Rscript inst/hooks/exported/style-files.R
+        language: r
+        files: '(\.[rR]profile|\.[rR]|\.[rR]md|\.[rR]nw|\.[qQ]md)$'
+        exclude: 'renv/activate\.R'
+        minimum_pre_commit_version: "2.13.0"
+      - id: parsable-R
+        name: parsable-R
+        description: check if a .R file is parsable
+        entry: Rscript inst/hooks/exported/parsable-R.R
+        language: r
+        files: '\.[rR](md)?$'
+        minimum_pre_commit_version: "2.13.0"
+      - id: lintr
+        name: lintr
+        description: check if a `.R` file is lint free (using {lintr})
+        entry: Rscript inst/hooks/exported/lintr.R
+        language: r
+        files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
+        exclude: 'renv/activate\.R'
+        minimum_pre_commit_version: "2.13.0"

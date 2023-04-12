@@ -640,7 +640,7 @@ data(iris)
 ```{r}
 #| echo: true
 data(iris)
-head(iris[1:3,1:2])
+head(iris[1:3, 1:2])
 ```
 
 [These are called chunk options. For more options, see [here](https://quarto.org/docs/computations/execution-options.html) and complete list [here](https://quarto.org/docs/reference/cells/cells-knitr.html).]{.smaller}
@@ -673,9 +673,9 @@ iris %>%
 #| code-line-numbers: "2-3"
 
 iris %>%
-  ggplot(aes(x=Sepal.Length,y=Sepal.Width,col=Species))+
-  geom_point(size=2)+
-  labs(x="Sepal Length",y="Sepal Width")+
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width, col = Species)) +
+  geom_point(size = 2) +
+  labs(x = "Sepal Length", y = "Sepal Width") +
   theme_report()
 ```
 
@@ -702,9 +702,9 @@ iris %>%
 #| code-line-numbers: "2|3|5"
 
 iris %>%
-  ggplot(aes(x=Sepal.Length,y=Sepal.Width,col=Species))+
-  geom_point(size=2)+
-  labs(x="Sepal Length",y="Sepal Width")+
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width, col = Species)) +
+  geom_point(size = 2) +
+  labs(x = "Sepal Length", y = "Sepal Width") +
   theme_report()
 ```
 :::
@@ -837,7 +837,7 @@ $\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq & \frac{\math
 The most simple table using `kable` from R package `knitr`.
 
 ```{r}
-knitr::kable(head(iris),'html')
+knitr::kable(head(iris), "html")
 ```
 
 ## Tables • `kableExtra`
@@ -848,12 +848,16 @@ More advanced table using [`kableExtra`](https://cran.r-project.org/web/packages
 iris[c(1:2, 51:52, 105:106), ] %>%
   mutate(Sepal.Length = color_bar("lightsteelblue")(Sepal.Length)) %>%
   mutate(Sepal.Width = color_tile("white", "orange")(Sepal.Width)) %>%
-  mutate(Species=cell_spec(Species, "html",color = "white", bold = TRUE,
-    background=c("#8dd3c7","#fb8072","#bebada")[factor(.$Species)])) %>%
-  kable("html",escape=F) %>%
-  kable_styling(bootstrap_options=c("striped","hover","responsive"),
-                full_width=F,position="left") %>%
-  column_spec(5,width="3cm")
+  mutate(Species = cell_spec(Species, "html",
+    color = "white", bold = TRUE,
+    background = c("#8dd3c7", "#fb8072", "#bebada")[factor(.$Species)]
+  )) %>%
+  kable("html", escape = F) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "responsive"),
+    full_width = F, position = "left"
+  ) %>%
+  column_spec(5, width = "3cm")
 ```
 
 ## Tables • `DT`
@@ -862,7 +866,7 @@ Interactive table using R package [`DT`](https://rstudio.github.io/DT/).
 
 ```{r}
 library(DT)
-DT::datatable(iris[1:20,],options=list(pageLength=7))
+DT::datatable(iris[1:20, ], options = list(pageLength = 7))
 ```
 
 ## Static plots • Base Plot
@@ -873,13 +877,18 @@ Plots using base R.
 #| fig-height: 6
 #| fig-width: 6
 
-{par(mar=c(5,5,0,0))
-  plot(x=iris$Sepal.Length,y=iris$Sepal.Width,
-      col=c("coral","steelblue","forestgreen")[iris$Species],
-      xlab="Sepal Length",ylab="Sepal Width",pch=19)
+{
+  par(mar = c(5, 5, 0, 0))
+  plot(
+    x = iris$Sepal.Length, y = iris$Sepal.Width,
+    col = c("coral", "steelblue", "forestgreen")[iris$Species],
+    xlab = "Sepal Length", ylab = "Sepal Width", pch = 19
+  )
   legend(
-      x=7,y=4.47,legend=c("setosa","versicolor","virginica"),
-      col=c("coral","steelblue","forestgreen"),pch=19)}
+    x = 7, y = 4.47, legend = c("setosa", "versicolor", "virginica"),
+    col = c("coral", "steelblue", "forestgreen"), pch = 19
+  )
+}
 ```
 
 ## Static plots • `ggplot2`
@@ -891,10 +900,10 @@ Plotting using [`ggplot2`](http://ggplot2.org/).
 #| fig-width: 8
 
 iris %>%
-  ggplot(aes(x=Sepal.Length,y=Sepal.Width,col=Species))+
-  geom_point(size=2)+
-  labs(x="Sepal Length",y="Sepal Width")+
-  theme_bw(base_size=18)
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width, col = Species)) +
+  geom_point(size = 2) +
+  labs(x = "Sepal Length", y = "Sepal Width") +
+  theme_bw(base_size = 18)
 ```
 
 ## Interactive plots • `highcharter`
@@ -904,11 +913,12 @@ R package [`highcharter`](http://jkunst.com/highcharter/) is a wrapper around ja
 ```{r}
 library(highcharter)
 h <- iris %>%
-  hchart("scatter",hcaes(x="Sepal.Length",y="Sepal.Width",group="Species")) %>%
-  hc_xAxis(title=list(text="Sepal Length"),crosshair=TRUE) %>%
-  hc_yAxis(title=list(text="Sepal Width"),crosshair=TRUE) %>%
-  hc_chart(zoomType="xy",inverted=FALSE) %>%
-  hc_legend(verticalAlign="top",align="right") %>% hc_size(height=300,width=500)
+  hchart("scatter", hcaes(x = "Sepal.Length", y = "Sepal.Width", group = "Species")) %>%
+  hc_xAxis(title = list(text = "Sepal Length"), crosshair = TRUE) %>%
+  hc_yAxis(title = list(text = "Sepal Width"), crosshair = TRUE) %>%
+  hc_chart(zoomType = "xy", inverted = FALSE) %>%
+  hc_legend(verticalAlign = "top", align = "right") %>%
+  hc_size(height = 300, width = 500)
 
 htmltools::tagList(list(h))
 ```
@@ -920,7 +930,7 @@ R package [`plotly`](https://plot.ly/r/) provides R binding around javascript pl
 ```{r}
 library(plotly)
 p <- iris %>%
-  plot_ly(x=~Sepal.Length,y=~Sepal.Width,color=~Species,width=550,height=400) %>%
+  plot_ly(x = ~Sepal.Length, y = ~Sepal.Width, color = ~Species, width = 550, height = 400) %>%
   add_markers()
 p
 ```
@@ -934,12 +944,12 @@ p
 #| fig-width: 9
 
 library(plotly)
-p <- ggplot(iris,aes(x=Sepal.Length,y=Sepal.Width,col=Species))+
-  geom_point()+
-  labs(x="Sepal Length",y="Sepal Width")+
-  theme_bw(base_size=12)
+p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species)) +
+  geom_point() +
+  labs(x = "Sepal Length", y = "Sepal Width") +
+  theme_bw(base_size = 12)
 
-plotly::ggplotly(p,width=460,height=360)
+plotly::ggplotly(p, width = 460, height = 360)
 ```
 
 ## Interactive plots • `ggiraph`
@@ -951,11 +961,11 @@ R package [`ggiraph`](https://github.com/davidgohel/ggiraph) converts a static g
 #| fig-width: 4
 
 library(ggiraph)
-p <- ggplot(iris,aes(x=Sepal.Length,y=Petal.Length,colour=Species))+
-      geom_point_interactive(aes(tooltip=paste0("<b>Petal Length:</b> ",Petal.Length,"\n<b>Sepal Length: </b>",Sepal.Length,"\n<b>Species: </b>",Species)),size=2)+
+p <- ggplot(iris, aes(x = Sepal.Length, y = Petal.Length, colour = Species)) +
+  geom_point_interactive(aes(tooltip = paste0("<b>Petal Length:</b> ", Petal.Length, "\n<b>Sepal Length: </b>", Sepal.Length, "\n<b>Species: </b>", Species)), size = 2) +
   theme_bw()
 tooltip_css <- "background-color:#f8f9f9;padding:10px;border-style:solid;border-width:2px;border-color:#125687;border-radius:5px;"
-ggiraph(code=print(p),hover_css="cursor:pointer;stroke:black;fill-opacity:0.3",zoom_max=5,tooltip_extra_css=tooltip_css,tooltip_opacity=0.9,height_svg=2,width_svg=4,width=0.6)
+ggiraph(code = print(p), hover_css = "cursor:pointer;stroke:black;fill-opacity:0.3", zoom_max = 5, tooltip_extra_css = tooltip_css, tooltip_opacity = 0.9, height_svg = 2, width_svg = 4, width = 0.6)
 ```
 
 ## Interactive time series • `dygraphs`
@@ -967,8 +977,8 @@ R package [`dygraphs`](http://rstudio.github.io/dygraphs/) provides R bindings f
 #| fig-width: 9
 library(dygraphs)
 lungDeaths <- cbind(ldeaths, mdeaths, fdeaths)
-dygraph(lungDeaths,main="Deaths from Lung Disease (UK)") %>%
-  dyOptions(colors=c("#66C2A5","#FC8D62","#8DA0CB"))
+dygraph(lungDeaths, main = "Deaths from Lung Disease (UK)") %>%
+  dyOptions(colors = c("#66C2A5", "#FC8D62", "#8DA0CB"))
 ```
 
 ## Network graph
@@ -977,12 +987,13 @@ R package `networkD3` allows the use of interactive network graphs from the [D3.
 
 ```{r}
 library(networkD3)
-data(MisLinks,MisNodes)
+data(MisLinks, MisNodes)
 forceNetwork(
-    Links=MisLinks,Nodes=MisNodes,Source="source",
-    Target="target",Value="value",NodeID="name",
-    Group="group",opacity=0.4,
-    height=300,width=500)
+  Links = MisLinks, Nodes = MisNodes, Source = "source",
+  Target = "target", Value = "value", NodeID = "name",
+  Group = "group", opacity = 0.4,
+  height = 300, width = 500
+)
 ```
 
 ## Interactive maps • `leaflet`
@@ -991,11 +1002,11 @@ R package [`leaflet`](https://rstudio.github.io/leaflet/) provides R bindings fo
 
 ```{r}
 library(leaflet)
-leaflet(height=300,width=800) %>%
-  addTiles(urlTemplate='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') %>%
-  #addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-  addMarkers(lat=57.639327,lng=18.288534,popup="RaukR") %>%
-  setView(lat=57.639327,lng=18.288534,zoom=15)
+leaflet(height = 300, width = 800) %>%
+  addTiles(urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>%
+  # addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+  addMarkers(lat = 57.639327, lng = 18.288534, popup = "RaukR") %>%
+  setView(lat = 57.639327, lng = 18.288534, zoom = 15)
 ```
 
 ## Linking Plots • `crosstalk`
@@ -1004,14 +1015,16 @@ R package [`crosstalk`](https://rstudio.github.io/crosstalk/index.html) allows c
 
 ```{r,message=FALSE,warning=FALSE}
 library(crosstalk)
-shared_quakes <- SharedData$new(quakes[sample(nrow(quakes), 100),])
-lf <- leaflet(shared_quakes,height=300) %>%
-    addTiles(urlTemplate='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') %>%
-    addMarkers()
-py <- plot_ly(shared_quakes,x = ~depth, y = ~mag, size = ~stations,height = 300) %>%
-    add_markers()
-div(div(lf, style =  "float:left;width:49%"),
-    div(py, style = "float:right;width:49%"))
+shared_quakes <- SharedData$new(quakes[sample(nrow(quakes), 100), ])
+lf <- leaflet(shared_quakes, height = 300) %>%
+  addTiles(urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>%
+  addMarkers()
+py <- plot_ly(shared_quakes, x = ~depth, y = ~mag, size = ~stations, height = 300) %>%
+  add_markers()
+div(
+  div(lf, style = "float:left;width:49%"),
+  div(py, style = "float:right;width:49%")
+)
 ```
 
 ## Colourful {background-color="#ABEBC6"}
@@ -1065,7 +1078,7 @@ os.listdir()
 
 ```{r}
 #| echo: false
-R.version[c("platform","os","major","minor")]
+R.version[c("platform", "os", "major", "minor")]
 ```
 
 [Graphics from [freepik](https://www.freepik.com), [Pexels](https://www.pexels.com)]{.small}

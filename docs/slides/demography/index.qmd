@@ -35,7 +35,7 @@ plot(1:10, rnorm(10))
 #| label: fig-test-plot
 #| echo: true
 #| eval: true
-x = 2:8
+x <- 2:8
 plot(x = x, y = x**2)
 ```
 

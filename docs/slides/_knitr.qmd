@@ -7,6 +7,6 @@
 #| cache: false
 library(knitr)
 knitr::knit_hooks$set(inline = function(x) {
-                      prettyNum(x, big.mark = " ")
-                  })
+  prettyNum(x, big.mark = " ")
+})
 ```

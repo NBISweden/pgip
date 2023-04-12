@@ -1,6 +1,6 @@
 ##' Plot wf model
 ##'
-plot.wf <- function(graphObj, permutation, which = 1, ...) {
-    g <- graphObj[[which]]
-    plot(igraph::permute(g, permutation), ...)
+plot.wf <- function(graph_obj, permutation, which = 1, ...) {
+  g <- graph_obj[[which]]
+  plot(igraph::permute(g, permutation), ...)
 }
