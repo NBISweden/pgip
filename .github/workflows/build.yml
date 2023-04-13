@@ -19,7 +19,7 @@ jobs:
   build:
     name: Build site
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test-build'
     permissions:
       contents: write
     defaults:
