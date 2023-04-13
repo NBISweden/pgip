@@ -57,7 +57,7 @@ install-kernels: install-pgip ## Install python and bash kernel
 	python -m bash_kernel.install
 	python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
 
-bcftools: ## Install bcftools manually due to issues with conda version 1.8
+install-bcftools: ## Install bcftools manually due to issues with conda version 1.8
 	scripts/install-bcftools.sh
 
 .phony: help Makefile project production clean-site clean install-pgip install-dev install-R install-kernels bcftools

@@ -3,7 +3,8 @@
 ## **PGIP • Population genomics in practice**
 
 Course materials for course [Population Genomics in
-Practice](https://uppsala.instructure.com/courses/52168)
+Practice](https://uppsala.instructure.com/courses/52168). Please make
+sure to read the entire README before adding material.
 
 ## Installation
 
@@ -50,10 +51,11 @@ or
 
     make install-kernels
 
-The make command will also install a named python (`pgip`) and a bash
-kernel that can be used as engines to render documents. For instance,
-setting `jupyter: pgip` in the frontmatter of a document will use the
-`pgip` jupyter kernel as the rendering engine. See [Using
+The make command will also install a python kernel that can be used as
+the main engine to render documents. The kernel is named `pgip` and is
+detailed as a [jupyter
+kernelspec](https://quarto.org/docs/computations/python.html#kernel-selection)
+in the project configuration file. See [Using
 Python](https://quarto.org/docs/computations/python.html) for more
 information.
 
@@ -107,7 +109,7 @@ also make rules to render single files or the entire project
 Add subdirectories to `docs/exercises` and `docs/slides` that describe
 the topic in one or a few words. Shorter is better. Add an `index.qmd`
 file to each directory and edit away. Look at the demo files
-(`docs/slides/demo/index.qmd`, `docs/slides/demopy/index.qmd`,
+(`docs/slides/demo/index.qmd`,
 `docs/exercises/demo/index.qmd` and `docs/exercises/demopy/index.qmd`)
 for examples.
 
@@ -140,6 +142,11 @@ file `environment-dev.yml`.
 - python code should follow [the Black code style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 
 ## Development
+
+Pushing to the `main` branch is prohibited so any updates to the
+online material must be added via pull requests. Create a branch from
+`main` prefixed with `dev-` (e.g., `dev-yourgithubusername`) to use as
+your main development branch.
 
 ### Test / development data
 

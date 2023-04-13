@@ -18,10 +18,11 @@ dependencies:
   - jupyter
   - jupyter-cache
   - mosdepth
-  - msprime>=1.0
+  - msprime>=1.2
   - pandas
   - pyslim
   - python>=3.10
+  - python-newick
   # - r-animation
   - r-codetools
   - r-curl
@@ -35,7 +36,6 @@ dependencies:
   - r-ggplot2
   - r-gifski
   - r-highcharter
-  # # - r-htmlTable
   - r-igraph
   # # - r-irkernel
   # # - r-jsonlite
@@ -58,8 +58,7 @@ dependencies:
   # # - scikit-learn
   # # - scikit-allel
   - slim>=4.0
+  - sgkit
   - tskit>=0.5.0
   # # - tqdm
   # # - yarl
-  - pip:
-      - sgkit[vcf]
