@@ -73,8 +73,9 @@ jobs:
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
+
+      - name: Install TinyTeX
+        run: quarto install tinytex --update-path
 
       - name: Install bcftools
         run: ./scripts/install-bcftools.sh
@@ -100,7 +101,6 @@ jobs:
           sudo apt-get install dvisvgm
           which dvisvgm
           echo $TEXINPUTS
-
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
