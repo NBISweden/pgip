@@ -76,6 +76,9 @@ jobs:
         with:
           tinytex: true
 
+      - name: Install dvisvgm
+        run: sudo apt-get install dvisvgm
+
       - name: Install bcftools
         run: ./scripts/install-bcftools.sh
 
