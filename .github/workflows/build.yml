@@ -90,6 +90,9 @@ jobs:
       #     to: html
       #     path: docs
 
+      - name: "Set environment variables"
+        run: |
+          echo "TEXINPUTS=$TEXINPUTS:$GITHUB_WORKSPACE/src/latex" >> $GITHUB_ENV
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         if: ${{ github.event_name == 'push' }}
