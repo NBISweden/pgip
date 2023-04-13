@@ -76,9 +76,6 @@ jobs:
         with:
           tinytex: true
 
-      - name: Install dvisvgm
-        run: sudo apt-get install dvisvgm
-
       - name: Install bcftools
         run: ./scripts/install-bcftools.sh
 
@@ -97,6 +94,14 @@ jobs:
       - name: "Set environment variables"
         run: |
           echo "TEXINPUTS=$TEXINPUTS:$GITHUB_WORKSPACE/src/latex" >> $GITHUB_ENV
+
+      - name: Install dvisvgm
+        run: |
+          sudo apt-get install dvisvgm
+          which dvisvgm
+          echo $TEXINPUTS
+
+
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         if: ${{ github.event_name == 'push' }}
