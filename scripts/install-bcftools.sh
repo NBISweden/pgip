@@ -7,7 +7,6 @@ wget https://github.com/samtools/htslib/releases/download/1.17/htslib-1.17.tar.b
 tar -jxvf htslib-1.17.tar.bz2 && rm -f htslib-1.17.tar.bz2
 tar -jxvf bcftools-1.17.tar.bz2 && rm -f bcftools-1.17.tar.bz2
 cd bcftools-1.17 || return
-echo "Configuring for prefix $CONDA_PREFIX"
 ./configure --prefix $CONDA_PREFIX
 make
 make install
