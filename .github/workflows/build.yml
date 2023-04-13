@@ -69,6 +69,7 @@ jobs:
 
       - name: Update TinyTeX
         run: |
+          which tlmgr
           R -e "tinytex::tlmgr_update()"
           R -e "tinytex::reinstall_tinytex(force=TRUE)"
 
