@@ -3,9 +3,9 @@ project:
   title: "Population genomics in practice"
   output-dir: _site
   pre-render:
-    - ../scripts/prepare.py
     - ../scripts/setup-data.sh
     - ../scripts/setup-exercise-data.sh
+    - ../scripts/prepare.py
   render:
     - "*.qmd"
     - "!lectures/*.qmd"

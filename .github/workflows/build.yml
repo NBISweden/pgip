@@ -67,15 +67,17 @@ jobs:
         run: |
           R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 
+      - name: Update TinyTeX
+        run: |
+          R -e "tinytex::tlmgr_update()"
+          R -e "tinytex::reinstall_tinytex(force=TRUE)"
+
       - name: Install local pgip R package
         run: |
           R -e "library(devtools); devtools::install_local('src/R/pgip')"
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Install TinyTeX
-        run: quarto install tinytex --update-path
 
       - name: Install bcftools
         run: ./scripts/install-bcftools.sh
