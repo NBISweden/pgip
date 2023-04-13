@@ -67,10 +67,11 @@ jobs:
         run: |
           R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 
-      - name: Update TinyTeX and update tlmgr
+      - name: Run tlmgr help
+        run: tlmgr --help
+
+      - name: Update TinyTeX
         run: |
-          which tlmgr
-          tlmgr --help
           R -e "tinytex::tlmgr_update()"
           R -e "tinytex::reinstall_tinytex(force=TRUE)"
 
