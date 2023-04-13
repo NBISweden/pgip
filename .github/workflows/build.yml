@@ -74,8 +74,6 @@ jobs:
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
 
       - name: Install bcftools
         run: ./scripts/install-bcftools.sh
