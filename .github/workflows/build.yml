@@ -62,9 +62,11 @@ jobs:
           python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
           python -m pip install git+https://github.com/NBISweden/pgip-tools
 
-      - name: Install dotenv
+      - name: Install dotenv and update tlmgr
         run: |
           R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
+          R -e "tinytex::tlmgr_update()"
+          R -e "tinytex::reinstall_tinytex(force=TRUE)"
 
       - name: Install local pgip R package
         run: |
