@@ -83,12 +83,12 @@ jobs:
           echo "$(dirname $(which R))" >> $GITHUB_PATH
           quarto check
 
-      - name: Render project without publishing
-        uses: quarto-dev/quarto-actions/publish@v2
-        if: ${{ github.event_name == 'push' }}
-        with:
-          to: html
-          path: docs
+      # - name: Render project without publishing
+      #   uses: quarto-dev/quarto-actions/publish@v2
+      #   if: ${{ github.event_name == 'push' }}
+      #   with:
+      #     to: html
+      #     path: docs
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
