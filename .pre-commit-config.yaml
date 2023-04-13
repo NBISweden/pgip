@@ -1,4 +1,13 @@
 repos:
+  - repo: local
+    hooks:
+      - id: condalock
+        name: condalock
+        entry: ./scripts/condalock.sh
+        language: script
+        exclude: '.*'
+        always_run: true
+        fail_fast: true
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:

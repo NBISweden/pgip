@@ -5,6 +5,7 @@ channels:
   - defaults
 dependencies:
   - conda-lock
+  - pip
   - pre-commit
   - r-docopt
   - r-languageserver
