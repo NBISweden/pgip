@@ -72,6 +72,7 @@ jobs:
           R -e "tinytex::install_tinytex()"
           R -e "tinytex::tlmgr_update()"
           R -e "tinytex::tinytex_root()"
+          R -e "tinytex::reinstall_tinytex()"
 
       - name: Install local pgip R package
         run: |
