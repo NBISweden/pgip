@@ -67,14 +67,6 @@ jobs:
         run: |
           R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 
-      - name: Run tlmgr help
-        run: tlmgr --help
-
-      - name: Update TinyTeX
-        run: |
-          R -e "tinytex::tlmgr_update()"
-          R -e "tinytex::reinstall_tinytex(force=TRUE)"
-
       - name: Install local pgip R package
         run: |
           R -e "library(devtools); devtools::install_local('src/R/pgip')"

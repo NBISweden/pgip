@@ -41,10 +41,11 @@ dependencies:
   # # - r-jsonlite
   - r-kableextra
   - r-leaflet
+  - r-magick
   - r-networkD3
   # # - r-magick
   - r-patchwork
-  # # - r-pdftools
+  - r-pdftools
   - r-plotly
   # # - r-reactable
   - r-readr
