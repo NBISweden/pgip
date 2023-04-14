@@ -48,8 +48,9 @@ install-dev: install-pgip ## Install additional development tools
 
 install-R: install-pgip ## Install additional R packages that require manual installation
 	R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
+	R -e "tinytex::install_tinytex()"
 	R -e "tinytex::tlmgr_update()"
-	R -e "tinytex::reinstall_tinytex(force=TRUE)"
+	R -e "tinytex::reinstall_tinytex()"
 	R -e "library(devtools); devtools::install_local('src/R/pgip')"
 
 install-kernels: install-pgip ## Install python and bash kernel

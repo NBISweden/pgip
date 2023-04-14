@@ -70,9 +70,9 @@ jobs:
       - name: Install TinyTeX
         run: |
           R -e "tlmgr(c('info', '--list', '--only-installed', '--data', 'name'))"
-          R -e "tinytex::tinytex_root()"
-          R -e "tinytex::tlmgr_update()"
           R -e "tinytex::install_tinytex()"
+          R -e "tinytex::tlmgr_update()"
+          R -e "tinytex::tinytex_root()"
 
       - name: Install local pgip R package
         run: |
