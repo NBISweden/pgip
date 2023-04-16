@@ -106,6 +106,12 @@ jobs:
           which dvisvgm
           echo $TEXINPUTS
 
+      - name: Test TeXLive installation
+        run: |
+          kpsewhich tex.pro
+          dvisvgm -V1  | grep kpathsea
+          ldd `which dvisvgm` | grep kpathsea
+          ldd `which kpsewhich` | grep kpathsea
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         if: ${{ github.event_name == 'push' }}
