@@ -67,12 +67,10 @@ jobs:
         run: |
           R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
 
-      - name: Install TinyTeX
+      - name: Install texlive
         run: |
-          R -e "tinytex::install_tinytex()"
-          R -e "tinytex::tlmgr_update()"
-          R -e "tinytex::tinytex_root()"
-          R -e "tinytex::reinstall_tinytex()"
+          sudo apt update
+          sudo apt-get install texlive texlive-latex-extra
 
       - name: Install local pgip R package
         run: |
@@ -106,12 +104,6 @@ jobs:
           which dvisvgm
           echo $TEXINPUTS
 
-      - name: Test TeXLive installation
-        run: |
-          kpsewhich tex.pro
-          dvisvgm -V1  | grep kpathsea
-          ldd `which dvisvgm` | grep kpathsea
-          ldd `which kpsewhich` | grep kpathsea
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         if: ${{ github.event_name == 'push' }}
