@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../assets/logos/nbislogo-green.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.2.475">
+
+  <meta name="author" content="Per Unneberg">
+  <title>Population genomics in practice - Population genetics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #3c3836;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #3c3836; } /* Normal */
+    code span.al { color: #282828; background-color: #cc241d; font-weight: bold; } /* Alert */
+    code span.an { color: #98971a; } /* Annotation */
+    code span.at { color: #d79921; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #d65d0e; } /* BuiltIn */
+    code span.cf { color: #cc241d; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #b16286; } /* Char */
+    code span.cn { color: #b16286; font-weight: bold; } /* Constant */
+    code span.co { color: #928374; } /* Comment */
+    code span.cv { color: #928374; } /* CommentVar */
+    code span.do { color: #98971a; } /* Documentation */
+    code span.dt { color: #d79921; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #cc241d; text-decoration: underline; } /* Error */
+    code span.ex { color: #689d6a; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #689d6a; } /* Function */
+    code span.im { color: #689d6a; } /* Import */
+    code span.in { color: #282828; background-color: #83a598; } /* Information */
+    code span.kw { color: #3c3836; font-weight: bold; } /* Keyword */
+    code span.op { color: #3c3836; } /* Operator */
+    code span.ot { color: #689d6a; } /* Other */
+    code span.pp { color: #d65d0e; } /* Preprocessor */
+    code span.re { color: #928374; background-color: #f9f5d7; } /* RegionMarker */
+    code span.sc { color: #b16286; } /* SpecialChar */
+    code span.ss { color: #98971a; } /* SpecialString */
+    code span.st { color: #98971a; } /* String */
+    code span.va { color: #458588; } /* Variable */
+    code span.vs { color: #98971a; } /* VerbatimString */
+    code span.wa { color: #282828; background-color: #fabd2f; } /* Warning */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="../../assets/logos/nbis-scilifelab.svg" data-background-position="top left" data-background-size="500px" class="center">
+  <h1 class="title">Population genetics</h1>
+  <p class="subtitle">Foundations</p>
+  <p class="author">Per Unneberg</p>
+  <p class="institute">NBIS</p>
+  <p class="date">17-Apr-2023</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/population-genetics" id="/toc-population-genetics">Population genetics</a></li>
+<li><a href="#/origin-and-change-of-variation" id="/toc-origin-and-change-of-variation">Origin and change of variation</a></li>
+<li><a href="#/a-primer-on-simulation" id="/toc-a-primer-on-simulation">A primer on simulation</a></li>
+</ul>
+</nav>
+</section>
+
+<section>
+<section id="population-genetics" class="title-slide slide level1 center">
+<h1>Population genetics</h1>
+<aside class="notes">
+<p>From <span class="citation" data-cites="nei_MolecularEvolutionPhylogenetics_2000">(<a href="#/recipes" role="doc-biblioref" onclick="">Nei &amp; Kumar, 2000, p. 231</a>)</span>:</p>
+<blockquote>
+<p>The main subject of population genetics is to study the generation and maintenance of genetic polymorphism and to understand the mechanisms of evolution at the population level</p>
+</blockquote>
+<p><span class="citation" data-cites="casillas_MolecularPopulationGenetics_2017">(<a href="#/recipes" role="doc-biblioref" onclick="">Casillas &amp; Barbadilla, 2017, p. 1026</a>)</span>:</p>
+<blockquote>
+<p>Big data samples of complete genome sequences of many individuals from natural populations of many species have transformed population genetics inferences on samples of loci to population genomics: the analysis of genome-wide patterns of DNA variation within and between species.</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dna-variation" class="slide level2 small">
+<h2>DNA variation</h2>
+<div class="dna">
+<table style="width:75%;">
+<caption>Sequence aligmnent of four DNA sequences</caption>
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The main data for molecular population genetics are DNA sequences. The alignment above shows a <em>sample</em> of four DNA <em>sequences</em>. Each sequence has 15 nucleotides (<em>sites</em>) “from the same <em>locus</em> (location) on a chromosome” <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(p.2 <a href="#/recipes" role="doc-biblioref" onclick="">Hahn, 2019</a>)</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p>Alternative names for <em>sequence</em>:</p>
+</div>
+<div>
+<ul>
+<li class="fragment"><em>chromosome</em></li>
+<li class="fragment"><em>gene</em></li>
+<li class="fragment"><em>allele</em> (different by origin)</li>
+<li class="fragment"><em>sample</em></li>
+<li class="fragment"><em>cistron</em></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p>We will preferentially use <em>sequence</em> or <em>chromosome</em> to refer to an entire sequence, and <em>allele</em> to refer to individual nucleotides that differ.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="dna-variation---monomorphic-sites" class="slide level2">
+<h2>DNA variation - monomorphic sites</h2>
+<div class="dna">
+<table style="width:75%;">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The alignment has 4 DNA sequences where each sequence has length <span class="math inline">\(L=15\)</span>. A site where all nucleotides (alleles) are identical is called a <em>monomorphic</em> site (indicated with asterisks above). There are 9 monomorphic sites.</p>
+</section>
+<section id="dna-variation---segregating-sites" class="slide level2">
+<h2>DNA variation - segregating sites</h2>
+<div class="dna">
+<table style="width:75%;">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>A</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A site where there are different nucleotides (alleles) is called a <em>segregating</em> site (indicated with asterisks above), often denoted <em>S</em>. There are <span class="math inline">\(S=6\)</span> segregating sites.</p>
+<div class="fragment">
+<p>Alternative names for <em>segregating site</em> are:</p>
+</div>
+<div>
+<ul>
+<li class="fragment"><em>polymorphism</em></li>
+<li class="fragment"><em>mutation</em></li>
+<li class="fragment"><em>single nucleotide polymorphism (SNP)</em></li>
+</ul>
+</div>
+<div class="fragment">
+<p><em>mutation</em> may refer to the process that generates new variation and the new variants generated by this process, which is the way we will use the term.</p>
+<p>In contrast to <em>mutation</em> which corresponds to within-species variation, a <em>substitution</em> refers to DNA differences between species.</p>
+</div>
+</section>
+<section id="dna-variation---major-and-minor-alleles" class="slide level2">
+<h2>DNA variation - major and minor alleles</h2>
+<div class="dna">
+<table style="width:75%;">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>A</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Much of the nucleotide variation we study consists of <em>bi-allelic</em> SNPs. The most common variant is called the <em>major</em> allele, and the least common the <em>minor</em> allele.</p>
+<p>The set of alleles found on a single sequence is called <em>haplotype</em>.</p>
+</section>
+<section id="describing-dna-variation" class="slide level2 small">
+<h2>Describing DNA variation</h2>
+<div class="dna">
+<table style="width:75%;">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>A</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Once we have a sample of sequences we want to describe the observed variation. At any position the <em>i</em>th allele has sample frequency <span class="math inline">\(p_i\)</span>, where the sum of all allele frequencies is 1. For instance, at site 1, <span class="math inline">\(p_T=1\)</span> (and by extension <span class="math inline">\(p_A=p_C=p_G=0\)</span>), and at site 2 <span class="math inline">\(p_C=1/4\)</span> and <span class="math inline">\(p_T=3/4\)</span>.</p>
+<aside class="notes">
+<div class="dna">
+<table style="width:75%;">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="heterozygosity">Heterozygosity</h4>
+<p>The <em>heterozygosity</em> at a site is given by</p>
+<p><span class="math display">\[
+h = \frac{n}{n-1}\left(1 - \sum p_i^2\right)
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<!-- -->
+<h4 id="exercise-calculate-the-heterozygosity-at-sites-1-2-and-5">Exercise: calculate the heterozygosity at sites 1, 2 and 5</h4>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+h_1 = \frac{4}{3} \left(1 - p_T^2 \right) = 0 \\
+h_2 = \frac{4}{3} \left(1 - \left(p_C^2 + p_T^2\right) \right) = \frac{4}{3} \left( 1 - \left(\frac{1}{16} + \frac{9}{16}\right)\right) = \frac{1}{2}\\
+h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \left( 1 - \left(\frac{1}{4} + \frac{1}{4}\right)\right) = \frac{2}{3}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="describing-dna-variation-1" class="slide level2">
+<h2>Describing DNA variation</h2>
+<div class="dna">
+<table style="width:75%;">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>A</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="nucleotide-diversity-pi">Nucleotide diversity <span class="math inline">\(\pi\)</span></h3>
+<p>The <em>nucleotide diversity</em> is the sum of site heterozygosities:</p>
+<p><span class="math display">\[
+\pi = \sum_{j=1}^S h_j
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<!-- -->
+<h3 id="calculate-the-nucleotide-diversity">Calculate the nucleotide diversity</h3>
+</div>
+<div class="fragment">
+<p>Observation: <span class="math inline">\(h_i\)</span> either 1/2 or 2/3 (for sites with <span class="math inline">\(p_{major}=p_{minor}\)</span>).</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\pi = \frac{1}{2} + \frac{2}{3} + \frac{1}{2} + \frac{2}{3} + \frac{1}{2} + \frac{1}{2} = 3\frac{1}{3}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Often we provide <span class="math inline">\(\pi\)</span> per site:</p>
+<p><span class="math display">\[
+\pi = 3.33/15 = 0.222
+\]</span></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="origin-and-change-of-variation" class="title-slide slide level1 center">
+<h1>Origin and change of variation</h1>
+
+</section>
+<section id="wright-fisher-model" class="slide level2">
+<h2>Wright-Fisher model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/recipes" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<div>
+<ul>
+<li class="fragment">discrete and non-overlapping generations</li>
+<li class="fragment">haploid individuals or two subpopulations (males and females)</li>
+<li class="fragment">constant population size</li>
+<li class="fragment">all individuals are equally fit</li>
+<li class="fragment">population has no geographical or social structure</li>
+<li class="fragment">no recombination</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+<aside class="notes">
+<p>See <span class="citation" data-cites="hein_GeneGenealogies_2004">Hein et al. (<a href="#/recipes" role="doc-biblioref" onclick="">2004</a>)</span> for more assumptions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wright-fisher-model-1" class="slide level2">
+<h2>Wright-Fisher model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/recipes" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<ul>
+<li>discrete and non-overlapping generations</li>
+<li>haploid individuals or two subpopulations (males and females)</li>
+<li>constant population size</li>
+<li>all individuals are equally fit</li>
+<li>population has no geographical or social structure</li>
+<li>no recombination</li>
+</ul>
+<h3 id="algorithm">Algorithm</h3>
+<ol type="1">
+<li>Setup starting population at time zero</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-1-1.png" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wright-fisher-model-2" class="slide level2">
+<h2>Wright-Fisher model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/recipes" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<ul>
+<li>discrete and non-overlapping generations</li>
+<li>haploid individuals or two subpopulations (males and females)</li>
+<li>constant population size</li>
+<li>all individuals are equally fit</li>
+<li>population has no geographical or social structure</li>
+<li>no recombination</li>
+</ul>
+<h3 id="algorithm-1">Algorithm</h3>
+<ol type="1">
+<li>Setup starting population at time zero</li>
+<li>Add offspring (same size) at time one</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-2-1.png" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wright-fisher-model-3" class="slide level2">
+<h2>Wright-Fisher model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/recipes" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<ul>
+<li>discrete and non-overlapping generations</li>
+<li>haploid individuals or two subpopulations (males and females)</li>
+<li>constant population size</li>
+<li>all individuals are equally fit</li>
+<li>population has no geographical or social structure</li>
+<li>no recombination</li>
+</ul>
+<h3 id="algorithm-2">Algorithm</h3>
+<ol type="1">
+<li>Setup starting population at time zero</li>
+<li>Add offspring (same size) at time one</li>
+<li>Select parents to offspring at random</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-3-1.png" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wright-fisher-model-4" class="slide level2">
+<h2>Wright-Fisher model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/recipes" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<ul>
+<li>discrete and non-overlapping generations</li>
+<li>haploid individuals or two subpopulations (males and females)</li>
+<li>constant population size</li>
+<li>all individuals are equally fit</li>
+<li>population has no geographical or social structure</li>
+<li>no recombination</li>
+</ul>
+<h3 id="algorithm-3">Algorithm</h3>
+<ol type="1">
+<li>Setup starting population at time zero</li>
+<li>Add offspring (same size) at time one</li>
+<li>Select parents to offspring at random</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-4-1.png" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wright-fisher-model-5" class="slide level2">
+<h2>Wright-Fisher model</h2>
+
+<img data-src="index_files/figure-revealjs/wright-fisher-graphical-model-.gif" width="960" class="r-stretch quarto-figure-left"><p class="caption">Wright-Fisher model</p><aside class="notes">
+<p>See https://mikeyharper.uk/animated-plots-with-r/</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wright-fisher-model-6" class="slide level2">
+<h2>Wright-Fisher model</h2>
+
+<img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.png" width="960" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Wright-Fisher model tracing the genealogies of three extant genes</p><aside class="notes">
+<p>See https://mikeyharper.uk/animated-plots-with-r/</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="genetic-drift-with-alleles" class="slide level2">
+<h2>Genetic drift with alleles</h2>
+<div class="columns compact">
+<div class="column" style="width:35%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-1-1.png" width="960"></p>
+</div>
+</div>
+</div><div class="column fragment" style="width:35%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-2-1.png" width="960"></p>
+</div>
+</div>
+</div><p>Wright-Fisher model showing the evolution of population of 10 genes over 16 generations. Allele variants are shown in white and dark grey. Starting frequency dark grey variant is 0.3.</p>
+</div>
+</section>
+<section id="genetic-drift" class="slide level2">
+<h2>Genetic drift</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>To capture dynamics, follow allele frequency trajectory as function of time.</p>
+<div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_a7de69e963b0b9fc64aecfba553bdbdc">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="do">##'</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="do">##' @param n Population size</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="do">##'</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
+<span id="cb1-11"><a href="#cb1-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    }</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    x</span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p>Note dependency of “jumpyness” (variance) on population size N</p>
+</div>
+</div><div class="column fragment" data-fragment-index="1" style="width:60%;">
+<div class="cell">
+
+</div>
+<div class="cell" data-animation.hook="gifski" data-hash="index_cache/revealjs/fig-genetic-drift-N-10_11bdef99ec908c14fd7fe66b9a0b0f07">
+<div class="cell-output-display">
+<div id="fig-genetic-drift-N-10" class="quarto-figure quarto-figure-left">
+<figure>
+<p></p><figcaption>Figure&nbsp;2: Genetic drift for different population sizes, starting frequency <span class="math inline">\(p_0\)</span>=0.5</figcaption><p></p>
+<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-N-10-1.gif" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Classic graph of allele: start at say 0.2 and drift with different Ne. Point out that variation becomes smaller with large Ne, but that eventually, an allele is fixed or lost (formula).</p>
+<p>Mention <em>neutral</em> here as this is how alleles behave under drift: like gas particle diffusing up and down</p>
+<p>See alternative way of visualizing variation faceting on initial frequency (showing P(fixation)) and population size (showing less variance))</p>
+<p>https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="genetic-drift-1" class="slide level2">
+<h2>Genetic drift</h2>
+
+<img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.png" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;3: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</p></section>
+<section id="mutation" class="slide level2">
+<h2>Mutation</h2>
+<p>Drift randomly “moves” frequencies, but once lost, how does new variation arise? Mutation.</p>
+<p>Introduce variation at rate <span class="math inline">\(2N_e\mu\)</span></p>
+<p>Mutation - drift balance</p>
+<p>Infinite sites vs infinite alleles</p>
+</section>
+<section id="selection" class="slide level2">
+<h2>Selection</h2>
+<p>Relative fitness.</p>
+<p>Define s, positive and negative selection</p>
+</section>
+<section id="direct-selection" class="slide level2">
+<h2>Direct selection</h2>
+<p>d_N/d_S</p>
+</section>
+<section id="two-locus-dynamics" class="slide level2">
+<h2>Two-locus dynamics</h2>
+<p>Graph focal locus and flanking loci (Charlesworth figure)</p>
+<ul>
+<li>Linkage disequilibrium and recombination (each probably need separate treatment)</li>
+<li>Contrast linked selection with direct selection</li>
+<li>Genetic draft / background selection</li>
+</ul>
+</section>
+<section id="neutral-theory" class="slide level2">
+<h2>Neutral theory</h2>
+<p>Move right after drift?</p>
+<ul>
+<li>Hahn: <span class="math inline">\(\mu = \nu*f_0\)</span></li>
+<li>why population size matters</li>
+<li>Fig 4.2, Eq 4.2 from Lynch</li>
+</ul>
+</section>
+<section id="nearly-neutral-theory" class="slide level2">
+<h2>Nearly neutral theory</h2>
+<ul>
+<li>Distribution of fitness effects?</li>
+</ul>
+</section></section>
+<section>
+<section id="a-primer-on-simulation" class="title-slide slide level1 center">
+<h1>A primer on simulation</h1>
+<p>If simulation section show brief code examples</p>
+</section>
+<section id="wright-fisher-model-again" class="slide level2">
+<h2>Wright-Fisher model again</h2>
+<p>Repeat WF model. Point out that it can be used for <em>forward</em> simulation. Show how many individuals are lost each generation (limit e-1): lose lots of compute resources on the way to extant sample.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-wf-model-reproductive-success" class="quarto-figure quarto-figure-left">
+<figure>
+<p></p><figcaption>Figure&nbsp;4: Wright-Fisher model of 30 genes, 50 generations.</figcaption><p></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-wf-model-reproductive-success-graph" class="quarto-figure quarto-figure-left">
+<figure>
+<p></p><figcaption>Figure&nbsp;5: Reproductive success in percent per generation.</figcaption><p></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-graph-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Mean reproductive success = <span class="math inline">\(sprintf("%.2f%%", xmean)\)</span>. Can show for large populations P(no descendants)=<span class="math inline">\(e^{-1}\)</span></p>
+</div>
+<aside class="notes">
+<p><span class="citation" data-cites="hein2005gene">(p.&nbsp;15 <a href="#/recipes" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span> shows the fraction of genes without descendants. Focus on the number of descendants for <em>one</em> gene <em>i</em>, which is X ~ Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that P(no descendants) = P(X=0) = e^{-1}</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-coalescent" class="slide level2">
+<h2>The coalescent</h2>
+<p>Introduce concept. Describe algorithm (show code - include as exercise?). Genealogy and mutations:</p>
+<ul>
+<li>sim_ancestry</li>
+<li>sim_mutations</li>
+</ul>
+<p>Note that #mutations propto branch length -&gt; don’t actually even need to know the mutations (e.g.&nbsp;fastsimcoal)</p>
+</section>
+<section id="the-coalescent-diminishing-returns" class="slide level2">
+<h2>The coalescent: diminishing returns</h2>
+<p>Show plot of diminishing returns (better to add sites, not samples)</p>
+</section>
+<section id="the-coalescent-and-diversity" class="slide level2">
+<h2>The coalescent and diversity</h2>
+<p>Recalculate example</p>
+</section>
+<section id="evolutionary-processes-and-genealogies" class="slide level2">
+<h2>Evolutionary processes and genealogies</h2>
+<p>Non-neutral processes change topologies in ways that we detect when applying tests <span class="citation" data-cites="ferretti_DecomposingSiteFrequency_2017">(<a href="#/recipes" role="doc-biblioref" onclick="">Ferretti et al., 2017</a>)</span></p>
+<p>genealogies change due to non Show some qualitative examples of how trees change for</p>
+<ul>
+<li>bottleneck</li>
+</ul>
+</section>
+<section id="msprime" class="slide level2">
+<h2>msprime</h2>
+</section>
+<section id="slim" class="slide level2">
+<h2>SLiM</h2>
+<p>Mention advances in forward simulations</p>
+</section>
+<section id="recapitation" class="slide level2">
+<h2>Recapitation</h2>
+<p>Combine the best of two worlds</p>
+</section>
+<section id="recipes" class="slide level2 smaller scrollable">
+<h2>Recipes</h2>
+<p>Show some recipes and the pgip CLI</p>
+
+<div class="footer footer-default">
+<p>Population genetics foundations</p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-casillas_MolecularPopulationGenetics_2017" class="csl-entry" role="doc-biblioentry">
+Casillas, S., &amp; Barbadilla, A. (2017). Molecular <span>Population Genetics</span>. <em>Genetics</em>, <em>205</em>(3), 1003–1035. <a href="https://doi.org/10.1534/genetics.116.196493">https://doi.org/10.1534/genetics.116.196493</a>
+</div>
+<div id="ref-ferretti_DecomposingSiteFrequency_2017" class="csl-entry" role="doc-biblioentry">
+Ferretti, L., Ledda, A., Wiehe, T., Achaz, G., &amp; Ramos-Onsins, S. E. (2017). Decomposing the <span>Site Frequency Spectrum</span>: <span>The Impact</span> of <span>Tree Topology</span> on <span>Neutrality Tests</span>. <em>Genetics</em>, <em>207</em>(1), 229–240. <a href="https://doi.org/10.1534/genetics.116.188763">https://doi.org/10.1534/genetics.116.188763</a>
+</div>
+<div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="doc-biblioentry">
+Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
+</div>
+<div id="ref-hein2005gene" class="csl-entry" role="doc-biblioentry">
+Hein, J., Schierup, M. H., &amp; Wiuf, C. (2005). <em>Gene genealogies, variation and evolution: <span>A</span> primer in coalescent theory</em>. <span>Oxford University Press</span>. <a href="https://books.google.se/books?id=CCmLNAEACAAJ">https://books.google.se/books?id=CCmLNAEACAAJ</a>
+</div>
+<div id="ref-hein_GeneGenealogies_2004" class="csl-entry" role="doc-biblioentry">
+Hein, J., Schierup, M., &amp; Wiuf, C. (2004). Gene genealogies, variation and evolution. A primer in coalescent theory. In <em>Systematic Biology - SYST BIOL</em> (Vol. 54).
+</div>
+<div id="ref-nei_MolecularEvolutionPhylogenetics_2000" class="csl-entry" role="doc-biblioentry">
+Nei, M., &amp; Kumar, S. (2000). <em>Molecular <span>Evolution</span> and <span>Phylogenetics</span></em>. <span>Oxford University Press</span>.
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'h.v',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
