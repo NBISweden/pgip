@@ -52,8 +52,11 @@ More general exposition of f_st, Wahlund effect, etc
 \draw (pop0) edge node[left] {$\theta_B$} (popB);
 \draw (pop0) edge node[left] {$\theta_C$} (popC);
 \draw (pop0) edge node[above] {$\theta_K$} (popK);
-\draw (current bounding box.north east) -- (current bounding box.north west) -- (current bounding box.south west) -- (current bounding box.south east) -- cycle;
-
+\draw (current bounding box.north east)
+  -- (current bounding box.north west)
+  -- (current bounding box.south west)
+  -- (current bounding box.south east)
+  -- cycle;
 \end{tikzpicture}
 ```
 
@@ -63,10 +66,14 @@ More general exposition of f_st, Wahlund effect, etc
 
 Table S2 in [@bhatia_EstimatingInterpretingFST_2013]
 
+<!-- markdownlint-disable MD013 -->
+
 | **Conceptual definition**                        | **Citation** | **Evolutionary assumptions**                               | **WC**                                                         | **Nei** | **Hudson** |
 |--------------------------------------------------|--------------|------------------------------------------------------------|----------------------------------------------------------------|---------|------------|
 | Ratio of variances / Correlation between alleles |              | SNPs analyzed were polymorphic in the ancestral population | $F_{ST}$ is identical across populations OR Equal sample sizes | No^c    | Yes^*      |
 |                                                  |              |                                                            |                                                                |         |            |
+
+<!-- markdownlint-disable MD013 -->
 
 ### Weir Cockerham
 

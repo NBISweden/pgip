@@ -38,6 +38,8 @@ Use [Figure 2 @charlesworth_EffectsOfSelection_2021]
 
 ## Selective sweep
 
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: pgip-slim-sweep-command
 #| echo: true
@@ -63,9 +65,13 @@ L <- 1e6
 xi <- L / 2
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 :::: {.columns}
 
 ::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
 
 ```{r }
 #| label: pgip-slim-sweep-plot-pi-S
@@ -92,9 +98,13 @@ ggplot(x, aes(windows, value, color = name)) +
   )
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 :::
 
 ::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
 
 ```{r }
 #| label: pgip-slim-sweep-plot-tajd
@@ -115,6 +125,8 @@ p <- psweep_static + transition_manual(fn, cumulative = TRUE)
 p
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 :::
 
 ::::
@@ -127,7 +139,8 @@ N=1e4, mu=5e-8, pi=4*N*mu=0.004, seek S=a*pi=0.01, so a=S/pi which
 gives n. Need to ramp up recombination rate to see the dip in TajD
 clearly.
 
-pgip-slim --seed 42 -n 1000 -r 1e-6 -m 5e-8 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 5e-8 --threads 12
+recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
 
 2022-11-23: Current results based on mu=1e-7
 
@@ -138,6 +151,8 @@ Q: not clear how Rasmus Nielsen scales statistics to have mean=1
 
 ## Selective sweep
 
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: pgip-slim-sweep-command-2
 #| echo: true
@@ -147,9 +162,13 @@ pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_
 pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 :::: {.columns}
 
 ::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
 
 ```{r }
 #| label: pgip-slim-sweep-plot-pi-S-2
@@ -177,6 +196,8 @@ ggplot(
     labels = expression(pi, theta[W], pi - theta[W])
   )
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 :::
 

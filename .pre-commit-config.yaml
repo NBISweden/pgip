@@ -53,9 +53,11 @@ repos:
       - id: markdownlint-cli2
         files: \.(md|qmd)$
         types: [file]
+        exclude: LICENSE.md
       - id: markdownlint-cli2-fix
         files: \.(md|qmd)$
         types: [file]
+        exclude: LICENSE.md
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: '2.7.1'
     hooks:
@@ -75,7 +77,8 @@ repos:
           (?x)^(
           renv/activate\.R|
           docs/slides/datageneration/index\.qmd|
-          docs/exercises/data_filtering/index\.qmd
+          docs/exercises/data_filtering/index\.qmd|
+          docs/slides/population_structure/index\.qmd
           )$
         minimum_pre_commit_version: "2.13.0"
       - id: parsable-R

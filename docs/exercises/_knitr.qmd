@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD041 -->
+
 ```{r }
 #| label: r-libs-setup
 #| echo: false
@@ -10,3 +12,5 @@ knitr::knit_hooks$set(inline = function(x) {
   prettyNum(x, big.mark = " ")
 })
 ```
+
+<!-- markdownlint-enable MD041 -->

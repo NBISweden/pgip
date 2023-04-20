@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD041 -->
+
 ```{r}
 #| label: r-custom
 #| echo: false
@@ -8,3 +10,5 @@
 library(readxl)
 library(curl)
 ```
+
+<!-- markdownlint-enable MD041 -->
