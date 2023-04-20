@@ -3,9 +3,13 @@ engine: knitr
 format: html
 ---
 
+<!-- markdownlint-disable MD041 -->
+
 {{< include ../_knitr.qmd >}}
 
 {{< include ../_rlibs.qmd >}}
+
+<!-- markdownlint-enable MD041 -->
 
 # Filtering of resequencing data {#sec-E130-data_filtering}
 
@@ -18,6 +22,7 @@ sequence and misaligmnents in repetitive regions
 [@li_BetterUnderstandingArtifacts_2014]. Low-coverage sequencing comes
 with its own biases, such as
 
+<!-- markdownlint-disable MD013 -->
 
 ```{r, engine='tikz', fig.ext="svg"}
 #| label: fig-coverage-filters-1
@@ -55,7 +60,7 @@ with its own biases, such as
 \end{tikzpicture}
 ```
 
-
+<!-- markdownlint-enable MD013 -->
 
 ::: {.callout-warning}
 
@@ -68,14 +73,12 @@ Discuss different types of relevant filters, e.g.
   incomplete assemblies
 - also briefly mention filtering on polymorphic sites
 
-
 :::
 
 ## Intended learning outcomes
 
 - create per sample, per population, and total depth of coverage profiles
 - generate mask files for downstream processing
-
 
 ## Tools
 
@@ -221,7 +224,9 @@ for f in [CY]*.chr21.bam; do
 done > ALL.mosdepth.summary.txt
 cat ALL.mosdepth.summary.txt
 ```
+
 We can calculate the total coverage with `csvtk` as follows:
+
 ```{bash }
 #| label: mosdepth-compile-coverage-data-sum
 #| echo: true
@@ -240,7 +245,6 @@ total_coverage <- sum(x$V5)
 to get the total coverage `r total_coverage`, which gives a hint at
 where the diploid coverage peak should be.
 
-
 ### Sample set coverages
 
 We can combine coverage intervals with `bedtools unionbedg`. We
@@ -249,6 +253,8 @@ as arguments to option `-names`. Also, we include positions with no
 coverage (`-empty`) which requires the use of a genome file (option
 `-g`). The bed output is piped to `bgzip` which compresses the output,
 before finally indexing with `tabix`:
+
+<!-- markdownlint-disable MD013 -->
 
 ```{bash }
 #| label: bedtools-unionbedg-all
@@ -260,9 +266,13 @@ bedtools unionbedg -header -names $SAMPLES -g ooa.chr21.ref.fa.fai -empty -i $BE
 tabix -f -p bed -S 1 ALL.bg.gz
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 We also need to combine coverages per populations CEU, CHB, and YRI.
 Using the previous command as a template, try to generate per
 population coverage files.
+
+<!-- markdownlint-disable MD013 -->
 
 ```{bash }
 #| label: bedtools-unionbedg-per-population
@@ -277,11 +287,15 @@ for pop in CEU CHB YRI; do
 done
 ```
 
+<!-- markdownlint-enable MD013 -->
 
 ### Total coverage
 
 Since we eventually want to filter on total coverage, we sum per
 sample coverages for each sample set with `awk`:
+
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: awk-sum-ALL-coverage
 #| echo: true
@@ -290,7 +304,12 @@ bgzip -c -d ALL.bg.gz | awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=
 tabix -f -p bed ALL.sum.bed.gz
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 For illustration, we plot the total coverage:
+
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: total-coverage
 #| echo: true
@@ -304,6 +323,8 @@ bedtools intersect -a <(bedtools makewindows -g ooa.chr21.ref.fa.fai -w 5000) \
     --ylab Coverage --width 9.0 --height 3.5 > fig-plot-total-coverage.png
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 ::: {#fig-plot-total-coverage attr-output='.details summary="Output"'}
 
 ![](fig-plot-total-coverage.png)
@@ -316,7 +337,7 @@ In order to define thresholds for subsequent filtering, we plot the
 proportion of the genome coverage versus depth of coverage (similar to
 k-mer plots in sequence assembly projects). In
 
-
+<!-- markdownlint-disable MD013 -->
 
 ```{bash }
 #| label: total-depth-of-coverage-distribution
@@ -339,6 +360,8 @@ cat ALL.sum.bed.csv | csvtk plot line -x 1 -y 3 --point-size 0.01 --xlab "Depth 
 
 Genome coverage vs depth of coverage.
 :::
+
+<!-- markdownlint-enable MD013 -->
 
 In @fig-plot-total-coverage-distribution a, a diploid peak is
 evident just below coverage X=150; we zoom in on that region to get a
@@ -365,6 +388,8 @@ cat ALL.sum.bed.csv | \
     fig-plot-total-coverage-distribution-hist-zoom-in.png
 ```
 
+<!-- markdownlint-disable MD013 -->
+
 ::: {#fig-plot-total-coverage-distribution-zoom-in attr-output='.details summary="Output"'}
 
 ![Genome coverage](fig-plot-total-coverage-distribution-hist-zoom-in.png){#fig-plot-total-coverage-distribution-hist-zoom-in}
@@ -373,6 +398,7 @@ Genome coverage vs depth of coverage.
 
 :::
 
+<!-- markdownlint-enable MD013 -->
 
 [@lou_BeginnerGuideLowcoverage_2021] point out that appropriate
 thresholds depend on the data set, but as a general rule recommends a
@@ -387,6 +413,8 @@ that are accessible, i.e., have sufficient coverage for downstream
 analyses. We also calculate the number of bases that pass the
 filtering criteria.
 
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: filter-all-bed-file-on-coverage
 #| echo: true
@@ -394,6 +422,8 @@ filtering criteria.
 zcat ALL.sum.bed.gz | awk '{if (($4 >= 100) && ($4 <= 160)) print $0}' > ALL.sum.depth.bed.gz
 bedtools genomecov -i ALL.sum.depth.bed.gz -g ooa.chr21.ref.fa.fai  | grep genome
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 ```{r }
 #| label: r-compute-genome-coverage
@@ -413,6 +443,8 @@ Generate coverage sums for sample sets CEU, CHB, and YRI, and from
 these determine coverage thresholds and apply the thresholds to
 generate bed files with accessible regions.
 
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: awk-sum-sample-set-coverage
 #| echo: true
@@ -428,6 +460,9 @@ for pop in CEU CHB YRI; do
     > $pop.sum.bed.csv
 done
 ```
+
+<!-- markdownlint-enable MD013 -->
+
 ```{bash }
 #| label: plot-sum-sample-set-coverage
 #| echo: true
@@ -450,7 +485,6 @@ for sample sets CEU, CHB, and YRI. The upcoming task will be to
 generate sequence masks from the total coverage and minimum number of
 individuals with coverage greater than zero.
 
-
 ### Filter on minimum number of individuals
 
 In addition to filtering on coverage, we will also filter on the
@@ -458,6 +492,8 @@ minimum number of individuals with calls. This is to account for cases
 where coverages that pass the coverage filter originate from just a
 few samples. Here, we will remove sites where less than 50% of
 individuals have a call.
+
+<!-- markdownlint-disable MD013 -->
 
 ```{bash }
 #| label: awk-filter-50pct-ALL
@@ -469,9 +505,13 @@ bgzip -c -d ALL.bg.gz | \
 tabix -f -p bed ALL.ind.bed.gz
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 #### Exercise
 
 Generate coverage sums for sample sets CEU, CHB, and YRI.
+
+<!-- markdownlint-disable MD013 -->
 
 ```{bash }
 #| label: awk-filter-50pct-sample-set
@@ -483,6 +523,8 @@ for pop in CEU CHB YRI; do
   tabix -f -p bed $pop.ind.bed.gz
 done
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 ## Sequence masks
 
@@ -497,7 +539,8 @@ FIXME: make coverage filter above and intersect with ROI files
 #| label: bedtools-intersect-all
 #| echo: true
 #| eval: true
-#bedtools intersect -a ALL.sum.bed.gz -b ALL.ind.bed.gz -g ooa.chr21.ref.fa.fai | bgzip > ALL.mask.bed.gz
+# bedtools intersect -a ALL.sum.bed.gz -b ALL.ind.bed.gz \
+# -g ooa.chr21.ref.fa.fai | bgzip > ALL.mask.bed.gz
 #tabix -f -p bed ALL.mask.bed.gz
 ```
 
@@ -507,6 +550,8 @@ mask file in fasta format. The file will consist of characters `0` and
 subsequent analyses. First, we make a mask file that consists solely
 of `1`'s:
 
+<!-- markdownlint-disable MD013 -->
+
 ```{bash }
 #| label: bedtools-maskfasta-make-genome-mask
 #| echo: true
@@ -515,6 +560,7 @@ awk 'BEGIN {OFS="\t"} {print $1, 0, $2}' ooa.chr21.ref.fa.fai > ooa.chr21.ref.fa
 bedtools maskfasta -fi ooa.chr21.ref.fa -mc 1 -fo ooa.chr21.mask.ref.fa -bed ooa.chr21.ref.fa.bed
 ```
 
+<!-- markdownlint-enable MD013 -->
 
 # Variant filtering {#sec-E130-variant-filtering}
 

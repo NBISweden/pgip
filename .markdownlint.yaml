@@ -7,10 +7,13 @@ MD013:
   # Number of characters
   line_length: 88
 
-# MD024/no-duplicate-heading/no-duplicate-header - Multiple headings with the same content
-MD024:
-  # Allow multiple headings with the same content
-  siblings_only: true
+# MD024/no-duplicate-heading/no-duplicate-header - Multiple headings
+# with the same content
+MD024: false
+
+# MD025/single-title/single-h1 - Multiple top-level headings in the
+# same document
+MD025: false
 
 # MD033/no-inline-html - Inline HTML
 MD033: false

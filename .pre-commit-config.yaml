@@ -71,7 +71,12 @@ repos:
         entry: Rscript inst/hooks/exported/style-files.R
         language: r
         files: '(\.[rR]profile|\.[rR]|\.[rR]md|\.[rR]nw|\.[qQ]md)$'
-        exclude: 'renv/activate\.R'
+        exclude: |
+          (?x)^(
+          renv/activate\.R|
+          docs/slides/datageneration/index\.qmd|
+          docs/exercises/data_filtering/index\.qmd
+          )$
         minimum_pre_commit_version: "2.13.0"
       - id: parsable-R
         name: parsable-R

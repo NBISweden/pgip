@@ -11,23 +11,21 @@ What are the goals? To compile variation data for individuals. What are the issu
 - sequencing cost
 - lack of reference genomes (soon outdated)
 
-
 ## Sequencing protocols
 
 ### Individual sequencing
 
-  - high-coverage sequencing
-    - pros: comprehensive coverage
-    - cons: until recently expensive, time-consuming
-  - low-coverage sequencing @lou_BeginnerGuideLowcoverage_2021
-	- pros: cost-efficient, better to sample many sites
-	- cons: needs alternative analysis methods (likelihoods)
+- high-coverage sequencing
+  - pros: comprehensive coverage
+  - cons: until recently expensive, time-consuming
+- low-coverage sequencing @lou_BeginnerGuideLowcoverage_2021
+  - pros: cost-efficient, better to sample many sites
+  - cons: needs alternative analysis methods (likelihoods)
 
 ### pool sequencing
 
-  - pool-seq @schlotterer_SequencingPoolsIndividuals_2014
-  - RADSeq [@davey_RADSeqNextgenerationPopulation_2010; @baird_RapidSNPDiscovery_2008]
-
+- pool-seq @schlotterer_SequencingPoolsIndividuals_2014
+- RADSeq [@davey_RADSeqNextgenerationPopulation_2010; @baird_RapidSNPDiscovery_2008]
 
 ## Reference genome
 
@@ -44,17 +42,13 @@ sequencing cost and advances in long-read technologies, new projects
 could be complemented with *de novo* assembly of a reference
 individual.
 
-
 ## Low-coverage whole genome sequencing
-
 
 ## Filtering data
 
 cf Table 3 [@lou_BeginnerGuideLowcoverage_2021 p. 5974]
 
-
-
 [^genome-projects]: This is likely to change soon as ongoing efforts
-	to generate genome assemblies over a large range of taxa, for
-	instance [@_GenomeAtlasEuropean_] and
-	[@_VertebrateGenomesProject_], are completed.
+ to generate genome assemblies over a large range of taxa, for
+ instance [@*GenomeAtlasEuropean*] and
+ [@*VertebrateGenomesProject*], are completed.
