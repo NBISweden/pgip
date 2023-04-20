@@ -25,4 +25,4 @@ jobs:
             *.md
             **/*.md
             **/*.qmd
-            !*LICENSE.md
+            !LICENSE.md
