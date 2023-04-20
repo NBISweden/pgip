@@ -19,6 +19,10 @@ website:
         href: "index.qmd"
       - text: "CONTENTS"
         href: "contents.qmd"
+      - text: PROGRAM
+        href: "program.qmd"
+      - text: SCHEDULE
+        href: "schedule.qmd"
       - text: ABOUT
         href: "about.qmd"
       - text: SLIDES

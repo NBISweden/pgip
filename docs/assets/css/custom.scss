@@ -267,22 +267,22 @@ dt {
 
 /* about */
 
-// .organisers-parent {
-//   display: grid;
-//   gap: 1em;
-//   grid-template-columns: repeat(5, 1fr);
-// }
+.organisers-parent {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(5, 1fr);
+}
 
-// .organisers-child {
-//   text-align: center;
-// }
+.organisers-child {
+  text-align: center;
+}
 
-// .organisers-child img {
-//   height: 150px;
-//   width: 150px;
-//   object-fit: cover;
-//   border-radius: 50%;
-// }
+.organisers-child img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 // .guests-parent {
 //   display: grid;
