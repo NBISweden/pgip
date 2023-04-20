@@ -104,6 +104,8 @@ The out of Africa dataset is based on the
 and [the stdpopsim out of Africa model
 specification](https://popsim-consortium.github.io/stdpopsim-docs/stable/catalog.html#sec_catalog_homsap_models_outofafrica_3g09)).
 
+<!-- markdownlint-disable MD013 -->
+
 ```{python }
 #| label: fig-ooa-demesdraw
 #| echo: false
@@ -115,6 +117,8 @@ ooa = demes.load("data/data/ooa/ooa.demes.yaml")
 ax = demesdraw.tubes(ooa, num_lines_per_migration=6, seed=32)
 ```
 
+<!-- markdownlint-enable MD013 -->
+
 Note that this dataset is based on a subset of the data generated in
 @sec-data-simulated-ooa-outgroups.
 
@@ -124,6 +128,8 @@ The out of Africa with outgroups demographic model is an extension of
 the previous data set (@fig-ooa-with-outgroups-demesdraw). In addition
 to simulating human data, the model has been expanded to include three
 outgroups chimpanzee, gorilla and orangutan.
+
+<!-- markdownlint-disable MD013 -->
 
 ```{python }
 #| label: fig-ooa-with-outgroups-demesdraw
@@ -135,6 +141,8 @@ import demesdraw
 ooa = demes.load("data/data/ooa-outgroups/ooa_with_outgroups.demes.yaml")
 ax = demesdraw.tubes(ooa, num_lines_per_migration=6, log_time=True, seed=32)
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 The data generation has been implemented in a
 [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow. See

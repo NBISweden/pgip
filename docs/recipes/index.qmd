@@ -19,6 +19,5 @@ generate figures and examples. SLiM recipes can be run with wrapper
 pgip-slim --help
 ```
 
-
 [selective_sweep.slim](slim/selective_sweep.slim)
 : Recipe to simulate a selective sweep

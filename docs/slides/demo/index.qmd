@@ -41,7 +41,6 @@ library(leaflet) # interactive maps
 library(crosstalk) # linking plots
 ```
 
-
 ## Introduction
 
 ::: {.callout-note}
@@ -56,7 +55,10 @@ presentation uses the javascript library
 
 ::: {.callout-note}
 
-Many examples make use of **[fenced divs](https://quarto.org/docs/authoring/markdown-basics.html#divs-and-spans)**. For more information on quarto markdown syntax, see **[Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html#divs-and-spans)**.
+Many examples make use of **[fenced
+divs](https://quarto.org/docs/authoring/markdown-basics.html#divs-and-spans)**.
+For more information on quarto markdown syntax, see **[Markdown
+Basics](https://quarto.org/docs/authoring/markdown-basics.html#divs-and-spans)**.
 
 :::
 
@@ -86,13 +88,13 @@ For a **rendered** preview
 #| eval: false
 quarto::quarto_render("slide.qmd")
 ```
+
 - or use `quarto render` in the terminal:
 
 ```{sh}
 #| eval: false
 quarto render slide.qmd
 ```
-
 
 :::
 
@@ -114,13 +116,12 @@ quarto::quarto_preview("slide.qmd")
 #| eval: false
 quarto preview slide.qmd
 ```
+
 :::
 
 ::::
 
 Consult the [quarto documentation](https://quarto.org/) or `quarto --help` for more information.
-
-
 
 ## Slides {.small}
 
@@ -135,11 +136,13 @@ Hide or not count a slide:
 ## Slide Title {visibility="hidden"}
 ## Slide Title {visibility="uncounted"}
 ```
+
 . . .
 
 ### Slide notes
 
-Any content inside class `.notes` on a slide are notes. This is only visible in presenter mode (by pressing **s**).
+Any content inside class `.notes` on a slide are notes. This is only
+visible in presenter mode (by pressing **s**).
 
 . . .
 
@@ -180,7 +183,6 @@ The slide content can be organized into columns which can be nested if needed.
 :::
 ```
 
-
 :::{.columns}
 
 ::: {.column width="50%"}
@@ -196,7 +198,6 @@ Left content
 ::: {style="background-color:#eaf2f8"}
 Right content
 :::
-
 
 ::: {.column width="60%"}
 
@@ -218,10 +219,10 @@ Inner right
 
 :::
 
-
 ## Layout bootstrap css grid  {visibility="hidden"}
 
-Alternatively columns can be setup using the [bootstrap css grid](https://getbootstrap.com/docs/5.1/layout/css-grid/) layout
+Alternatively columns can be setup using the [bootstrap css
+grid](https://getbootstrap.com/docs/5.1/layout/css-grid/) layout
 
 ::: {.grid}
 
@@ -238,7 +239,6 @@ More text
 :::
 
 :::
-
 
 ## Layout CSS grid {.small}
 
@@ -325,6 +325,7 @@ Headings can be defined as shown below.
 ##### Level 5 heading
 ###### Level 6 heading
 ```
+
 ### Level 3 heading
 
 #### Level 4 heading
@@ -333,7 +334,9 @@ Headings can be defined as shown below.
 
 ###### Level 6 heading
 
-Level 1 usage is not recommended. Use level 2 for slide titles. Use level 3 and below for other titles.
+Level 1 usage is not recommended. Use level 2 for slide titles. Use
+level 3 and below for other titles.
+
 :::
 
 ::: {.column width="50%"}
@@ -447,7 +450,10 @@ This content is in here.
 More content here
 
 ::: {.callout-tip}
-In reports, **aside** pushes content right into the margin while, in revealjs presentation, it is pushed to the bottom left.
+
+In reports, **aside** pushes content right into the margin while, in
+revealjs presentation, it is pushed to the bottom left.
+
 :::
 
 ## Lists
@@ -481,6 +487,7 @@ In reports, **aside** pushes content right into the margin while, in revealjs pr
 ```
 
 ::: incremental
+
 - Incremental Bullet 1
 - Incremental Bullet 2
 - Incremental Bullet 3
@@ -517,9 +524,7 @@ This slide is typeset with the heading
 
 `## Make slide text smaller {.smaller}`
 
-
 ## Call-Outs
-
 
 :::: {.columns}
 ::: {.column width="40%"}
@@ -545,6 +550,7 @@ This is a call-out.
 This is a call-out.
 :::
 ```
+
 :::
 
 ::: {.column width="60%"}
@@ -587,7 +593,10 @@ Call-Out blocks are explained [here](https://quarto.org/docs/authoring/callouts.
 
 `== != && ++ |> <> <- <= <~ /= |=> ->>`
 
-[Code font used is [**JetBrains Mono**](https://www.jetbrains.com/lp/mono/). For full set of ligatures, see [here](https://www.jetbrains.com/lp/mono/#ligatures).]{.smaller}
+[Code font used is [**JetBrains
+Mono**](https://www.jetbrains.com/lp/mono/). For full set of
+ligatures, see
+[here](https://www.jetbrains.com/lp/mono/#ligatures).]{.smaller}
 
 ## Code formatting
 
@@ -624,8 +633,6 @@ which shows the code and output.
 Sys.Date()
 ```
 
-
-
 :::
 
 ::: {.column width="50%"}
@@ -645,7 +652,10 @@ data(iris)
 head(iris[1:3, 1:2])
 ```
 
-[These are called chunk options. For more options, see [here](https://quarto.org/docs/computations/execution-options.html) and complete list [here](https://quarto.org/docs/reference/cells/cells-knitr.html).]{.smaller}
+[These are called chunk options. For more options, see
+[here](https://quarto.org/docs/computations/execution-options.html)
+and complete list
+[here](https://quarto.org/docs/reference/cells/cells-knitr.html).]{.smaller}
 
 :::
 ::::
@@ -709,11 +719,11 @@ iris %>%
   labs(x = "Sepal Length", y = "Sepal Width") +
   theme_report()
 ```
+
 :::
 ::::
 
 [For more code highlighting documentation, see [here](https://quarto.org/docs/presentations/revealjs/#code-blocks).]{.smaller}
-
 
 ## Images • Markdown
 
@@ -826,14 +836,18 @@ $$\int_0^{2\pi} \sin x~dx$$
 
 ::: {.column width="60%"}
 
-$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
-$\begin{eqnarray} X & \sim & \mathrm{N}(0,1)\\ Y & \sim & \chi^2_{n-p}\\ R & \equiv & X/Y \sim t_{n-p} \end{eqnarray}$
+$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2
+= \frac{n^2(n-1)^2}{4}$ $\begin{eqnarray} X & \sim & \mathrm{N}(0,1)\\
+Y & \sim & \chi^2_{n-p}\\ R & \equiv & X/Y \sim t_{n-p}
+\end{eqnarray}$
 
-
-$\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq & \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\ & \leq & \frac{\mathrm{Var}[X]}{k^2} \end{eqnarray}$
+$\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq &
+\frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\ & \leq &
+\frac{\mathrm{Var}[X]}{k^2} \end{eqnarray}$
 
 :::
 ::::
+
 ## Tables • `kable`
 
 The most simple table using `kable` from R package `knitr`.
@@ -844,7 +858,14 @@ knitr::kable(head(iris), "html")
 
 ## Tables • `kableExtra`
 
-More advanced table using [`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) and [`formattable`](https://cran.r-project.org/web/packages/formattable/vignettes/formattable-data-frame.html).
+<!-- markdownlint-disable MD013 -->
+
+More advanced table using
+[`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+and
+[`formattable`](https://cran.r-project.org/web/packages/formattable/vignettes/formattable-data-frame.html).
+
+<!-- markdownlint-enable MD013 -->
 
 ```{r}
 iris[c(1:2, 51:52, 105:106), ] %>%
@@ -910,7 +931,8 @@ iris %>%
 
 ## Interactive plots • `highcharter`
 
-R package [`highcharter`](http://jkunst.com/highcharter/) is a wrapper around javascript library [`highcharts`](https://www.highcharts.com/).
+R package [`highcharter`](http://jkunst.com/highcharter/) is a wrapper
+around javascript library [`highcharts`](https://www.highcharts.com/).
 
 ```{r}
 library(highcharter)
@@ -927,19 +949,24 @@ htmltools::tagList(list(h))
 
 ## Interactive plots • `plotly`
 
-R package [`plotly`](https://plot.ly/r/) provides R binding around javascript plotting library [`plotly`](https://plot.ly).
+R package [`plotly`](https://plot.ly/r/) provides R binding around
+javascript plotting library [`plotly`](https://plot.ly).
 
 ```{r}
 library(plotly)
 p <- iris %>%
-  plot_ly(x = ~Sepal.Length, y = ~Sepal.Width, color = ~Species, width = 550, height = 400) %>%
+  plot_ly(
+    x = ~Sepal.Length, y = ~Sepal.Width, color = ~Species,
+    width = 550, height = 400
+  ) %>%
   add_markers()
 p
 ```
 
 ## Interactive plots • `ggplotly`
 
-`plotly` also has a function called `ggplotly` which converts a static ggplot2 object into an interactive plot.
+`plotly` also has a function called `ggplotly` which converts a static
+ggplot2 object into an interactive plot.
 
 ```{r}
 #| fig-height: 6
@@ -956,7 +983,10 @@ plotly::ggplotly(p, width = 460, height = 360)
 
 ## Interactive plots • `ggiraph`
 
-R package [`ggiraph`](https://github.com/davidgohel/ggiraph) converts a static ggplot2 object into an interactive plot.
+R package [`ggiraph`](https://github.com/davidgohel/ggiraph) converts
+a static ggplot2 object into an interactive plot.
+
+<!-- markdownlint-disable MD013 -->
 
 ```{r}
 #| fig-height: 2
@@ -967,12 +997,22 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Petal.Length, colour = Species)) +
   geom_point_interactive(aes(tooltip = paste0("<b>Petal Length:</b> ", Petal.Length, "\n<b>Sepal Length: </b>", Sepal.Length, "\n<b>Species: </b>", Species)), size = 2) +
   theme_bw()
 tooltip_css <- "background-color:#f8f9f9;padding:10px;border-style:solid;border-width:2px;border-color:#125687;border-radius:5px;"
-ggiraph(code = print(p), hover_css = "cursor:pointer;stroke:black;fill-opacity:0.3", zoom_max = 5, tooltip_extra_css = tooltip_css, tooltip_opacity = 0.9, height_svg = 2, width_svg = 4, width = 0.6)
+ggiraph(
+  code = print(p),
+  hover_css = "cursor:pointer;stroke:black;fill-opacity:0.3",
+  zoom_max = 5, tooltip_extra_css = tooltip_css,
+  tooltip_opacity = 0.9, height_svg = 2, width_svg = 4,
+  width = 0.6
+)
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 ## Interactive time series • `dygraphs`
 
-R package [`dygraphs`](http://rstudio.github.io/dygraphs/) provides R bindings for javascript library [dygraphs](http://dygraphs.com/) for time series data.
+R package [`dygraphs`](http://rstudio.github.io/dygraphs/) provides R
+bindings for javascript library [dygraphs](http://dygraphs.com/) for
+time series data.
 
 ```{r}
 #| fig-height: 4
@@ -985,7 +1025,8 @@ dygraph(lungDeaths, main = "Deaths from Lung Disease (UK)") %>%
 
 ## Network graph
 
-R package `networkD3` allows the use of interactive network graphs from the [D3.js](https://d3js.org/) javascript library.
+R package `networkD3` allows the use of interactive network graphs
+from the [D3.js](https://d3js.org/) javascript library.
 
 ```{r}
 library(networkD3)
@@ -1000,7 +1041,9 @@ forceNetwork(
 
 ## Interactive maps • `leaflet`
 
-R package [`leaflet`](https://rstudio.github.io/leaflet/) provides R bindings for javascript mapping library; [leafletjs](http://leafletjs.com/).
+R package [`leaflet`](https://rstudio.github.io/leaflet/) provides R
+bindings for javascript mapping library;
+[leafletjs](http://leafletjs.com/).
 
 ```{r}
 library(leaflet)
@@ -1013,7 +1056,11 @@ leaflet(height = 300, width = 800) %>%
 
 ## Linking Plots • `crosstalk`
 
-R package [`crosstalk`](https://rstudio.github.io/crosstalk/index.html) allows crosstalk enabled plotting libraries to be linked. Through the shared 'key' variable, data points can be manipulated simultaneously on two independent plots.
+R package
+[`crosstalk`](https://rstudio.github.io/crosstalk/index.html) allows
+crosstalk enabled plotting libraries to be linked. Through the shared
+'key' variable, data points can be manipulated simultaneously on two
+independent plots.
 
 ```{r,message=FALSE,warning=FALSE}
 library(crosstalk)
@@ -1053,17 +1100,18 @@ This slide has a background image
 - If content overflows the slide in vertical direction, add class `.scrollable`
 
 ::: scrollable
+
 ```{r}
 #| echo: false
 Sys.info()
 ```
+
 :::
 
 - Export HTML to PDF using PDF export mode by pressing **e**
 - For complete Quarto revealjs documentation, click [here](https://quarto.org/docs/presentations/revealjs/)
 
-##  {background-image="../../assets/images/cover.jpg"}
-
+## {background-image="../../assets/images/cover.jpg"}
 
 ## Python code (WIP)
 
@@ -1075,7 +1123,6 @@ import os
 os.listdir()
 ```
 
-
 ## Thank you! Questions?
 
 ```{r}
@@ -1083,5 +1130,7 @@ os.listdir()
 R.version[c("platform", "os", "major", "minor")]
 ```
 
-[Graphics from [freepik](https://www.freepik.com), [Pexels](https://www.pexels.com)]{.small}
-[2023 • [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/) • [RaukR](https://nbisweden.github.io/workshop-RaukR-2306/)]{.smallr}
+[Graphics from [freepik](https://www.freepik.com),
+[Pexels](https://www.pexels.com)]{.small} [2023 •
+[SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/) •
+[RaukR](https://nbisweden.github.io/workshop-RaukR-2306/)]{.smallr}

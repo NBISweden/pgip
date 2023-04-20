@@ -148,6 +148,26 @@ online material must be added via pull requests. Create a branch from
 `main` prefixed with `dev-` (e.g., `dev-yourgithubusername`) to use as
 your main development branch.
 
+### Common linting errors
+
+[markdownlint](https://github.com/DavidAnson/markdownlint) is run on
+quarto and regular markdown files. It is possible to [disable a
+linting error by adding a
+comment](https://github.com/DavidAnson/markdownlint#configuration).
+For instance,
+
+    <!-- markdownlint-disable MD013 -->
+
+    Some code here
+
+    <!-- markdownlint-enable MD013 -->
+
+will disable error MD013/line-length between the two comment
+statements above. This is particularly useful for code blocks that are
+difficult to wrap. It can also be convenient to disable error
+MD041/first-line-heading/first-line-h1 when including external files
+before the first heading.
+
 ### Test / development data
 
 Test data is managed with the

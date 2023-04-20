@@ -6,7 +6,6 @@ format: html
 
 # Exercises
 
-
 ::: {layout-ncol="2" panel="tabset"}
 
 ```{python }
@@ -15,7 +14,6 @@ format: html
 #| eval: true
 1 + 1
 ```
-
 
 ```{bash }
 #| label: col3
@@ -26,7 +24,6 @@ pwd
 
 :::
 
-
 ```{r }
 #| label: bash-1
 #| echo: true
@@ -34,15 +31,11 @@ pwd
 getwd()
 ```
 
-
-
 NOTE: Dsuite uses allele frequency estimates. Start example by
 calculating stuff by hand.
 
-
 Want also to relate the allele frequencies to branch lengths; cf
 @peter_AdmixturePopulationStructure_2016
-
 
 ```{bash }
 #| label: col4

@@ -97,6 +97,8 @@ Some applications:
 
 ## An example from real life - population genetics of coral
 
+<!-- markdownlint-disable MD013 -->
+
 :::: {.columns}
 
 ::: {.column width="33%"}
@@ -113,7 +115,6 @@ Some applications:
 
 ::: {.column width="33%"}
 
-
 ![Selection scan](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection height=250}
 
 :::
@@ -127,6 +128,8 @@ Some applications:
 @fuller_PopulationGeneticsCoral_2020
 
 :::
+
+<!-- markdownlint-enable MD013 -->
 
 ## Statistical inference in population genomics
 

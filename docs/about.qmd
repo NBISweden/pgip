@@ -1,106 +1,47 @@
 ---
-format: html
+title: "About"
+toc: false
+date: ""
+sidebar: false
+format:
+  html:
+    number-sections: false
 ---
 
-# About the course
+## Organizers
 
-As the focus of the course is on hands-on work, the topics have been
-designed to cover the fundamental analyses that are common in many
-population genomics studies. The course consists of lectures and
-exercises, with a focus on the practical aspects of analyses. Whereas
-lectures introduce some background theory, their primary aim is to set
-the stage for accompanying exercises.
+::: {.organisers-parent}
+::: {.organisers-child}
 
-## The manuscript route {#sec-manuscript-route}
+![](assets/profile/per-unneberg.png)
 
-In principle, you could imagine the course structure to follow that of
-a manuscript [@fuller_PopulationGeneticsCoral_2020]
-
-High-throughput DNA sequencing has now made it possible to generate
-whole-genome resequencing data for multiple individuals and
-populations, and a first step is to map sequence data to a reference,
-perform variant calling and variant filtering.
-
-Once a high-quality variant set has been obtained, a common task is to
-describe variation, either in terms of summary statistics such as
-nucleotide diversity ($\pi$) or site-frequency spectra (sfs), or as
-descriptions of population structure in terms of admixture or pca
-plots.
-
-Genetic diversity is also affected by population history and
-demographic processes such as population expansion, bottlenecks,
-migration events and hybridizations.
-
-Finally, it is often of interest to identify adaptive traits, to which
-end selection tests and scans can be performed. The tests are designed
-to detect signals of selection, either via direct selection on loci,
-or by looking at haplotype structures to detect linked selection.
-
-## The baseline model
-
-Much of what has been described in [The manuscript
- route](#sec-manuscript-route) has recently been treated in an article
-on recommendations for improving statistical inference in population
-genomics [@johri_RecommendationsImprovingStatistical_2022]. In it, the
-authors point out that whereas historically theoretical advances
-outpaced data production, that is no longer true due to the advent of
-next-generation sequencing. In particular, they caution researchers
-to attach too much faith to a test that explains the data well, as
-there are many alternative hypotheses with equal explanatory power,
-but with drastically different conclusions. At the very least, a
-population genomics study should aim at first generating a baseline
-model consisting of all or several of the following components:
-
-1. mutation
-2. recombination
-3. reassortment
-4. gene conversion
-5. purifying selection acting on functional regions and its effects on
-   linked variants (background selection)
-6. genetic drift with demographic history and geographic structure
-
-The exercises are designed to address many of the points above, and to
-highlight cases where competing hypotheses may actually explain data
-to equal degrees.
-
-
-## Additional material
-
-::: {.callout-warning}
-
-## FIXME
-
-Rewrite/restructure and add more additional topics
-:::
-
-
-
-::: {.callout-note}
-
-NB: with time we could use repo to collect all kinds of exercises
-(even those that don't fit current curriculum), providing the
-possibility to create optional course plans
+[Per Unneberg](https://nbis.se/about/staff/per-unneberg)
 
 :::
+::: {.organisers-child}
 
+![](assets/profile/nikolay-oskolkov.jpg)
 
-A five day course cannot but provide an overview of possible analyses
-and topics. Among the things we won't have time to cover are
+[Nikolay Oskolkov](https://nbis.se/about/staff/nikolay-oskolkov)
 
-1. machine learning and AI for population genomics
-2. recombination landscape estimation
-3. gene conversion
-4. experimental design
-5. coalescent and Wright-Fisher simulations
-6. ABC methods
-7. ancestral recombination graphs and tree sequence inference
-8. ancient DNA
-9. spatial genetics
-10. ...
+:::
+::: {.organisers-child}
 
+![](assets/profile/jason-hill.jpg)
 
-### Additional courses
+[Jason Hill](https://nbis.se/about/staff/jason-hill)
 
-1. machine learning and AI for population genomics
-2. simulation (focus on msprime and SLiM)
-3. ancestral recombination graphs and tree sequence inference
+:::
+:::
+
+## Venue
+
+The workshop is held onsite in
+[Trippelrummet](https://www.bmc.uu.se/scilifelab-navet-inglish/meeting-rooms-in-navet/#anchor-933950)
+in [Navet](https://www.bmc.uu.se/scilifelab-navet-inglish/) at the
+[Uppsala Biomedical Centre](https://www.bmc.uu.se/), Uppsala.
+
+## NBIS
+
+[NBIS](https://nbis.se) is a platform of the Science for Life
+Laboratory ([SciLifeLab](https://www.scilifelab.se/)).

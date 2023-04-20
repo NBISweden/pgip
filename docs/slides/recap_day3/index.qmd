@@ -13,7 +13,6 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-
 ```{r libs}
 #| echo: false
 #| eval: true

@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - 'main'
+      - 'test-build'
     tags:
       - "*"
 
@@ -18,7 +19,7 @@ jobs:
   build:
     name: Build site
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test-build'
     permissions:
       contents: write
     defaults:
@@ -62,11 +63,14 @@ jobs:
           python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
           python -m pip install git+https://github.com/NBISweden/pgip-tools
 
-      - name: Install dotenv and update tlmgr
+      - name: Install dotenv
         run: |
           R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
-          R -e "tinytex::tlmgr_update()"
-          R -e "tinytex::reinstall_tinytex(force=TRUE)"
+
+      - name: Install TeXLive
+        run: |
+          sudo apt update
+          sudo apt-get install texlive texlive-latex-extra
 
       - name: Install local pgip R package
         run: |
@@ -83,16 +87,21 @@ jobs:
           echo "$(dirname $(which R))" >> $GITHUB_PATH
           quarto check
 
-      # - name: Render project without publishing
-      #   uses: quarto-dev/quarto-actions/publish@v2
-      #   if: ${{ github.event_name == 'push' }}
-      #   with:
-      #     to: html
-      #     path: docs
+      - name: Render project without publishing
+        uses: quarto-dev/quarto-actions/publish@v2
+        if: ${{ github.event_name == 'push' }}
+        with:
+          to: html
+          path: docs
 
       - name: "Set environment variables"
         run: |
           echo "TEXINPUTS=$TEXINPUTS:$GITHUB_WORKSPACE/src/latex" >> $GITHUB_ENV
+
+      - name: Install dvisvgm
+        run: |
+          sudo apt-get install dvisvgm
+
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         if: ${{ github.event_name == 'push' }}

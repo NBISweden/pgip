@@ -1,0 +1,36 @@
+---
+title: "Program"
+toc: false
+date: ""
+sidebar: false
+format:
+  html:
+    number-sections: false
+---
+
+Course program:
+
+- introduction to the coalescent and simulations
+- variant calling and variant filtering
+- describing genetic diversity
+- population structure and admixture
+- selection scans
+
+## Preparation
+
+### Readings
+
+- @fuller_PopulationGeneticsCoral_2020
+- @johri_RecommendationsImprovingStatistical_2022
+
+### UPPMAX account
+
+You will need an [uppmax account](https://www.uppmax.uu.se/) to run
+the exercises. You can apply for an account
+[here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
+
+#### Tutorials
+
+Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
+<https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
+for information on how to connect to and work on uppmax.

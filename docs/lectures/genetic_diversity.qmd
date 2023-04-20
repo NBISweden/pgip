@@ -22,7 +22,9 @@ Since $\pi_{ii} = 0$ and $\pi_{ij} = \pi_{ji}$, the equation can be
 rewritten as
 
 $$
- \pi = \sum_{ij} x_i x_j \pi_{ij} = \sum_{i<j} x_i x_j \pi_{ij} + \sum_{j<i} x_j x_i \pi_{ji} + \sum_{i} x_i x_i \pi_{ii} = 2\sum_{ij} x_i x_j \pi_{ij}
+ \pi = \sum_{ij} x_i x_j \pi_{ij} = \sum_{i<j} x_i x_j \pi_{ij} +
+ \sum_{j<i} x_j x_i \pi_{ji} + \sum_{i} x_i x_i \pi_{ii} =
+ 2\sum_{ij} x_i x_j \pi_{ij}
 $$
 
 The (second) summation has $n(n-1)/2$ terms.
@@ -32,8 +34,8 @@ allele frequency spectrum (afs) $p = (p_1,p_2,...,p_q)$, where
 $p_i$ is the frequency of sites with $i$ minor alleles, and $q$ is the
 number of possible non-monomorphic allele configurations. For diploid
 organisms, $q = 2k - 1$. $p$ is the *unfolded* afs. There is a
-*folded* version $p^* = (p^*_1, p^*_2, p^*_{\lceil(q+1)/2\rceil})$,
-where $p^*_i = p_i + p_{q-i}$ for $i \neq \lceil(q+1)/2\rceil$ and
+*folded* version $p^*= (p^*_1, p^**2, p^**{\lceil(q+1)/2\rceil})$,
+where $p^**i = p_i + p*{q-i}$ for $i \neq \lceil(q+1)/2\rceil$ and
 $p^*_i = p_i$ otherwise.
 
 Now, for a given site $s$ with $i$ minor alleles, there are $i(q-i)$
@@ -57,5 +59,7 @@ average pairwise nucleotide diversity per site.
 Letting $k = \lceil(q+1)/2\rceil$, we can further rewrite $\pi$ as
 
 $$
- \pi = \sum_{i=1}^{q} p_i i (q-i) = p_k k (q-k) +  \sum_{i=1}^{k - 1} p_i i (q-i) + p_{q-i} (q-i) i = \sum_{i=1}^{k} p^*_i i (k - i)
+\pi = \sum_{i=1}^{q} p_i i (q-i) =
+p_k k (q-k) + \sum_{i=1}^{k - 1}
+p_i i (q-i) + p_{q-i} (q-i) i = \sum_{i=1}^{k} p^*_i i (k - i)
 $$
