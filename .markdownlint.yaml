@@ -37,4 +37,8 @@ MD046:
 # quartos #sec style links
 MD051: false
 
+# MD053/link-image-reference-definitions Link and image reference
+# definitions should be needed
+MD053: false
+
 ignores: ["explainaboard/third_party"]
