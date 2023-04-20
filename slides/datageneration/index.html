@@ -350,7 +350,7 @@
   <p class="subtitle">Sequencing protocols, best practice variant calling and filtering</p>
   <p class="author">Per Unneberg</p>
   <p class="institute">NBIS</p>
-  <p class="date">17-Apr-2023</p>
+  <p class="date">20-Apr-2023</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -369,6 +369,7 @@
 </section>
 <section id="textbook-data-is-clean" class="slide level2">
 <h2>Textbook data is clean</h2>
+<!-- markdownlint-disable MD013 -->
 <div class="cell" data-hash="index_cache/revealjs/tskit-vcf-data_720a33eb12a12dc1875b1aff7319502e">
 <div class="cell-output cell-output-stdout">
 <pre><code>##fileformat=VCFv4.2
@@ -383,6 +384,7 @@
 1   29  4   A   T   .   PASS    .   GT  1|1 1|1 1|1 1|1 1|1 1|1 1|1 1|1 1|1 1|1 1|1 0|0 1|1</code></pre>
 </div>
 </div>
+<!-- markdownlint-enable MD013 -->
 <p>FIXME: Include McDonald-Kreitman ADH alignment</p>
 <div class="fragment">
 <p>Variant calls need to be generated from sequencing data and need to be filtered and preprocessed before any subsequent analyses. There are many possible reasons, including:</p>
@@ -399,7 +401,9 @@
 <section id="population-genomics---the-data" class="slide level2">
 <h2>Population genomics - the data</h2>
 <p>Since the goal of population genomics is to analyze variation in a set of individuals, data generation consists of compiling variation data from individuals. Here the focus is on next-generation sequencing data.</p>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/fig-sequencing-cost-1.png" width="960" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Sequencing cost ($) per megabase <span class="citation" data-cites="wetterstrandka_DNASequencingCosts_">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wetterstrand, KA</a>)</span></p></section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -456,35 +460,51 @@
 </section>
 <section id="coverage-tracks" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-1-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-1" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-2-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-2" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-3-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-3" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-4-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-4" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-5-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-5" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-6-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-6" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-7-1.svg" width="960" class="r-stretch"></section>
 <section id="coverage-tracks-7" class="slide level2">
 <h2>Coverage tracks</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/coverage-filters-final-1.svg" width="960" class="r-stretch"></section>
 <section id="filters-and-masks" class="slide level2">
 <h2>Filters and masks</h2>
@@ -492,6 +512,7 @@
 </section>
 <section id="general-filters" class="slide level2 smallest">
 <h2>General filters</h2>
+<!-- markdownlint-disable MD013 -->
 <div id="tbl-key-data-filters">
 <table>
 <caption>Table&nbsp;1: Key data filters <span class="citation" data-cites="lou_BeginnerGuideLowcoverage_2021">(Table 3 <a href="#/bibliography" role="doc-biblioref" onclick="">Lou et al., 2021, p. 5974</a>)</span></caption>
@@ -566,6 +587,7 @@
 </tbody>
 </table>
 </div>
+<!-- markdownlint-enable MD013 -->
 <aside class="notes">
 <p>NB: bypassing recommendations often means doing custom analyses. For instance, <span class="citation" data-cites="talla_DissectingEffectsSelection_2019">Talla et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span> include GATK tri-allelic sites due to different bi-allelic pairs segregating in different subpopulations (e.g.&nbsp;A/G in pop 1, A/T in pop 2)</p>
 <h4 id="verbose-explanations-of-filters">Verbose explanations of filters</h4>
@@ -626,7 +648,7 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
 </div>
 </div>
 <aside class="notes">
-<p>ART: https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm</p>
+<p>ART: <a href="https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm" class="uri">https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm</a></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

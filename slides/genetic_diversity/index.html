@@ -350,7 +350,7 @@
   <p class="subtitle">Genetic diversity</p>
   <p class="author">Per Unneberg</p>
   <p class="institute">NBIS</p>
-  <p class="date">17-Apr-2023</p>
+  <p class="date">20-Apr-2023</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -365,9 +365,6 @@
 <h1>Genetic diversity</h1>
 
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-</section>
 <section id="on-missing-data-in-population-genetics" class="slide level2">
 <h2>On missing data in population genetics</h2>
 <p><span class="citation" data-cites="korunes_PixyUnbiasedEstimation_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">Korunes &amp; Samuk, 2021</a>)</span> Fig 4 on real data: strong tendency of commonly adopted tools to <strong>underestimate</strong> pi, dxy (even for 30X data sets)</p>
@@ -376,9 +373,11 @@
 <h2>Nucleotide diversity revisited</h2>
 <p>Most textbooks assume full sequence data <span class="citation" data-cites="korunes_PixyUnbiasedEstimation_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">Korunes &amp; Samuk, 2021</a>)</span>. Vast majority of tools make “assumption that missing sites are present but invariant”.</p>
 <p>Consequence: <span class="math inline">\(\pi\)</span>, <span class="math inline">\(d_{XY}\)</span> tend to be downwards biased</p>
+<!-- markdownlint-disable MD013 -->
 <p><span class="math display">\[
 \pi = \frac{\sum_{i&lt;j}k_{ij}}{n\choose 2} = \frac{c_0c_1}{\frac{n(n-1)}{2}} = \left( \frac{n}{n-1} \right)2\left( \frac{c_0}{n} \right)\left( \frac{c_1}{n} \right)
 \]</span></p>
+<!-- markdownlint-enable MD013 -->
 <p>FIXME: include Fig 1A from <span class="citation" data-cites="korunes_PixyUnbiasedEstimation_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">Korunes &amp; Samuk, 2021</a>)</span></p>
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">

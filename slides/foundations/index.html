@@ -414,7 +414,7 @@
   <p class="subtitle">Foundations</p>
   <p class="author">Per Unneberg</p>
   <p class="institute">NBIS</p>
-  <p class="date">17-Apr-2023</p>
+  <p class="date">20-Apr-2023</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1258,11 +1258,13 @@ h = \frac{n}{n-1}\left(1 - \sum p_i^2\right)
 <h4 id="exercise-calculate-the-heterozygosity-at-sites-1-2-and-5">Exercise: calculate the heterozygosity at sites 1, 2 and 5</h4>
 </div>
 <div class="fragment">
+<!-- markdownlint-disable MD013 -->
 <p><span class="math display">\[
 h_1 = \frac{4}{3} \left(1 - p_T^2 \right) = 0 \\
 h_2 = \frac{4}{3} \left(1 - \left(p_C^2 + p_T^2\right) \right) = \frac{4}{3} \left( 1 - \left(\frac{1}{16} + \frac{9}{16}\right)\right) = \frac{1}{2}\\
 h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \left( 1 - \left(\frac{1}{4} + \frac{1}{4}\right)\right) = \frac{2}{3}
 \]</span></p>
+<!-- markdownlint-enable MD013 -->
 </div>
 </div>
 </div>
@@ -1412,9 +1414,11 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <p>Observation: <span class="math inline">\(h_i\)</span> either 1/2 or 2/3 (for sites with <span class="math inline">\(p_{major}=p_{minor}\)</span>).</p>
 </div>
 <div class="fragment">
+<!-- markdownlint-disable MD013 -->
 <p><span class="math display">\[
 \pi = \frac{1}{2} + \frac{2}{3} + \frac{1}{2} + \frac{2}{3} + \frac{1}{2} + \frac{1}{2} = 3\frac{1}{3}
 \]</span></p>
+<!-- markdownlint-enable MD013 -->
 </div>
 <div class="fragment">
 <p>Often we provide <span class="math inline">\(\pi\)</span> per site:</p>
@@ -1579,7 +1583,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 
 <img data-src="index_files/figure-revealjs/wright-fisher-graphical-model-.gif" width="960" class="r-stretch quarto-figure-left"><p class="caption">Wright-Fisher model</p><aside class="notes">
-<p>See https://mikeyharper.uk/animated-plots-with-r/</p>
+<p>See <a href="https://mikeyharper.uk/animated-plots-with-r/" class="uri">https://mikeyharper.uk/animated-plots-with-r/</a></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1596,7 +1600,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 
 <img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.png" width="960" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Wright-Fisher model tracing the genealogies of three extant genes</p><aside class="notes">
-<p>See https://mikeyharper.uk/animated-plots-with-r/</p>
+<p>See <a href="https://mikeyharper.uk/animated-plots-with-r/" class="uri">https://mikeyharper.uk/animated-plots-with-r/</a></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1671,7 +1675,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <p>Classic graph of allele: start at say 0.2 and drift with different Ne. Point out that variation becomes smaller with large Ne, but that eventually, an allele is fixed or lost (formula).</p>
 <p>Mention <em>neutral</em> here as this is how alleles behave under drift: like gas particle diffusing up and down</p>
 <p>See alternative way of visualizing variation faceting on initial frequency (showing P(fixation)) and population size (showing less variance))</p>
-<p>https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html</p>
+<p><a href="https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html" class="uri">https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html</a></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1686,7 +1690,9 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </section>
 <section id="genetic-drift-1" class="slide level2">
 <h2>Genetic drift</h2>
+<!-- markdownlint-disable MD013 -->
 
+<!-- markdownlint-enable MD013 -->
 <img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.png" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;3: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</p></section>
 <section id="mutation" class="slide level2">
 <h2>Mutation</h2>
@@ -1747,6 +1753,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 <div class="fragment">
+<!-- markdownlint-disable MD013 -->
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-reproductive-success-graph" class="quarto-figure quarto-figure-left">
@@ -1757,6 +1764,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 </div>
+<!-- markdownlint-enable MD013 -->
 <p>Mean reproductive success = <span class="math inline">\(sprintf("%.2f%%", xmean)\)</span>. Can show for large populations P(no descendants)=<span class="math inline">\(e^{-1}\)</span></p>
 </div>
 <aside class="notes">
