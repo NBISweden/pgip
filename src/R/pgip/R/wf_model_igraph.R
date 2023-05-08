@@ -6,7 +6,8 @@
 ##'
 ##' @param popsize Population size
 ##' @param generations Number of generations
-##' @param offspring_first Start from offspring (?)
+##' @param offspring_first Add offspring before labelling/adding
+##'     parents
 ##' @param untangled Untangle graph
 ##' @param p0 Starting frequency
 ##' @param parent_transient

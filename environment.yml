@@ -33,6 +33,7 @@ dependencies:
   - r-formattable
   - r-gganimate
   - r-ggiraph
+  - r-ggraph
   - r-ggplot2
   - r-gifski
   - r-highcharter
