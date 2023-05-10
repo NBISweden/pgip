@@ -1,25 +1,27 @@
 ##' Plot wf model with ggplot2
 ##'
-ggplot_wf <- function(obj, permutation = NULL, generation = 1,
-                      edge_color = "lightgray", edge_width = .8,
+##'
+ggplot_wf <- function(obj, edge_color = "lightgray", edge_width = .8,
                       point_shape = 21, point_size = 3, ...) {
-  generations <- max(obj$layout[, 2]) + 1
-  color <- unlist(rev(
-    split(igraph::V(obj)$color, cut(seq_along(igraph::V(obj)$color),
-      generations,
-      labels = FALSE
-    ))
-  ))
-  if (!is.null(permutation)) {
-    obj <- igraph::permute(obj, permutation)
+  if (is.null(igraph::V(obj)$fill)) {
+    fill <- "white"
+  } else {
+    fill <- igraph::V(obj)$fill
   }
-
+  if (is.null(igraph::V(obj)$color)) {
+    color <- "black"
+  } else {
+    color <- igraph::V(obj)$color
+  }
   p <- ggraph::ggraph(obj, layout = obj$layout) +
-    ggplot2::geom_edge_link(color = edge_color, width = edge_width) +
-    ggplot2::geom_node_point(
-      fill = color, shape = point_shape,
+    ggraph::geom_edge_link(color = edge_color, width = edge_width) +
+    ggraph::geom_node_point(
+      fill = fill,
+      color = color,
+      shape = point_shape,
       size = point_size
     ) +
-    ggplot2::theme(axis.text.x = ggplot2::element_blank())
+    ggplot2::theme(axis.text.x = ggplot2::element_blank()) +
+    ggplot2::scale_y_reverse()
   p
 }
