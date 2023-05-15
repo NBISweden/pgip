@@ -5,7 +5,8 @@
 ##' @importFrom magrittr %>%
 ##'
 ggplot_wf <- function(graph, fill, size, width, edge_color,
-                      node_color = "black", point_shape = 21, ...) {
+                      node_color = "black", point_shape = 21,
+                      x_range = NULL, y_range = NULL, ...) {
   set_defaults <- function(graph, x, default, is_node = TRUE) {
     gattr <- igraph::vertex_attr
     set_gattr <- igraph::set_vertex_attr
@@ -100,6 +101,7 @@ ggplot_wf <- function(graph, fill, size, width, edge_color,
       axis.text.x = ggplot2::element_blank(),
       legend.position = "none"
     ) +
+    expand_limits(x = x_range, y = y_range) +
     ggplot2::scale_y_reverse()
   p
 }

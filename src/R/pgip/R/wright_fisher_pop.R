@@ -43,14 +43,25 @@ wright_fisher_pop <- function(n, generations, p0 = NULL,
     ))
     wf$parent <- parents[, 1]
     wf$tangled <- parents[, 2]
+    edges <- data.frame(
+      from = subset(wf, y < (generations - 1))$parent,
+      to = subset(wf, y >= 1)$node
+    )
+    graph <- tidygraph::tbl_graph(wf, edges)
+    if (!is.null(p0)) {
+      j <- sample(igraph::V(graph)$node[1:n], p0 * n)
+      igraph::V(graph)$allele[j] <- "A"
+      igraph::V(graph)[unlist(
+        igraph::ego(graph,
+          order = 16,
+          nodes = j,
+          mode = "out"
+        )
+      )]$allele <- "A"
+    }
   } else {
 
   }
-  edges <- data.frame(
-    from = subset(wf, y < (generations - 1))$parent,
-    to = subset(wf, y >= 1)$node
-  )
-  graph <- tidygraph::tbl_graph(wf, edges)
   attr(graph, "popsize") <- n
   attr(graph, "generations") <- generations
   class(graph) <- c("wf", class(graph))

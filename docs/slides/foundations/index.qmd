@@ -445,7 +445,7 @@ under the following assumptions [@hein2005gene]:
 #| eval: true
 #| cache: false
 set.seed(2023)
-wf <- wf_model_igraph(generations = 16)
+wf <- wright_fisher_pop(n = 10, generations = 16)
 ```
 
 ```{r }
@@ -455,9 +455,9 @@ wf <- wf_model_igraph(generations = 16)
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-obj <- ggcolor_graph(wf, to = 0)
-obj <- delete_edges(obj, E(obj))
-ggplot_wf(obj) + ggtitle("Starting population")
+y_range <- range(V(wf)$y)
+ggplot_wf(wf %>% filter(y == 0), y_range = y_range) +
+  ggtitle("Starting population")
 ```
 
 :::
@@ -496,9 +496,10 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-obj <- ggcolor_graph(wf, to = 1)
-obj <- delete_edges(obj, E(obj))
-ggplot_wf(obj) + ggtitle("Offspring")
+wf %>%
+  filter(y >= 0 & y <= 1) %E>%
+  filter(from <= -1) %>%
+  ggplot_wf(., y_range = y_range) + ggtitle("Offspring")
 ```
 
 :::
@@ -538,13 +539,12 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-obj <- ggcolor_graph(wf, to = 1)
-elist <- get.edgelist(obj)
-obj <- delete_edges(obj, E(obj))
-obj <- add_edges(obj, elist[1, ])
-V(obj)$fill[get.edgelist(obj)[1, 1]] <- "black"
-V(obj)$fill[get.edgelist(obj)[1, 2]] <- "gray"
-ggplot_wf(obj) + ggtitle("Sampled parents")
+V(wf)$allele[1] <- "parent"
+V(wf)$allele[11] <- "child"
+wf %E>%
+  filter(to == 11) %N>%
+  filter(y >= 0 & y <= 1) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
 ```
 
 :::
@@ -584,10 +584,11 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-obj <- igraph::add_edges(obj, elist[2, ])
-V(obj)$fill[get.edgelist(obj)[2, 1]] <- "black"
-V(obj)$fill[get.edgelist(obj)[2, 2]] <- "gray"
-ggplot_wf(obj) + ggtitle("Sampled parents")
+V(wf)$allele[12] <- "child"
+wf %E>%
+  filter(to == 11 | to == 12) %N>%
+  filter(y >= 0 & y <= 1) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
 ```
 
 :::
@@ -627,10 +628,11 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-obj <- igraph::add_edges(obj, elist[3, ])
-V(obj)$fill[get.edgelist(obj)[3, 1]] <- "black"
-V(obj)$fill[get.edgelist(obj)[3, 2]] <- "gray"
-ggplot_wf(obj) + ggtitle("Sampled parents")
+V(wf)$allele[13] <- "child"
+wf %E>%
+  filter(to %in% 11:13) %N>%
+  filter(y >= 0 & y <= 1) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
 ```
 
 :::
@@ -670,8 +672,10 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-ggplot_wf(ggcolor_graph(wf, to = 1, eto = 1, pto = 0, parents_fill = "black")) +
-  ggtitle("Sampled parents")
+wf %>%
+  filter(y >= 0 & y <= 1) %>%
+  mutate(allele = ifelse(degree(., mode = "out") > 0 & y == 0, "b", "a")) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
 ```
 
 :::
@@ -711,12 +715,10 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-ggplot_wf(ggcolor_graph(wf,
-  to = 2, eto = 2,
-  pfrom = 1, pto = 1,
-  parents_fill = "black"
-)) +
-  ggtitle("Sampled parents")
+wf %>%
+  filter(y >= 0 & y <= 2) %>%
+  mutate(allele = ifelse(degree(., mode = "out") > 0 & y == 1, "b", "a")) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
 ```
 
 :::
@@ -734,22 +736,27 @@ ggplot_wf(ggcolor_graph(wf,
 #| fig-keep: all
 #| fig-cap: Wright-Fisher model
 #| out-width: 14
-popsize <- max(obj$layout[, 1]) + 1
-generations <- max(obj$layout[, 2]) + 1
-obj <- ggcolor_graph(wf, to = 0, eto = 0)
+popsize <- max(V(wf)$x) + 1
+generations <- max(V(wf)$y) + 1
 for (t in 3:generations) {
-  obj <- ggcolor_graph(wf, to = t, pfrom = t - 1, pto = t - 1, eto = t - 1)
-  print(ggplot_wf(obj) + ggtitle(paste("Generation", t)))
-  obj <- ggcolor_graph(wf,
-    to = t, pfrom = t - 1, pto = t - 1, eto = t - 1,
-    parents_fill = "black"
-  )
-  print(ggplot_wf(obj) + ggtitle(paste("Generation", t)))
-  obj <- ggcolor_graph(wf,
-    to = t, pfrom = t - 1, pto = t - 1, eto = t,
-    parents_fill = "black"
-  )
-  print(ggplot_wf(obj) + ggtitle(paste("Generation", t)))
+  obj <- wf %E>% filter(to <= (t * popsize)) %N>% filter(y >= 0 & y <= t)
+  print(ggplot_wf(obj, y_range = y_range) + ggtitle(paste("Generation", t)))
+
+  obj <- wf %N>%
+    filter(y >= 0 & y <= t) %>%
+    mutate(allele = ifelse(degree(., mode = "out") > 0 & y == (t - 1), "b", "a")) %E>%
+    filter(to <= (t * popsize))
+
+  print(ggplot_wf(obj, y_range = y_range, fill = allele) +
+    ggtitle(paste("Generation", t)))
+
+  obj <- wf %N>%
+    filter(y >= 0 & y <= t) %>%
+    mutate(allele = ifelse(degree(., mode = "out") > 0 & y == (t - 1), "b", "a")) %E>%
+    filter(to <= ((t + 1) * popsize))
+
+  print(ggplot_wf(obj, y_range = y_range, fill = allele) +
+    ggtitle(paste("Generation", t)))
 }
 ```
 
@@ -766,12 +773,13 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 #| echo: false
 #| eval: true
 #| fig-cap: "Wright-Fisher model tracing the genealogies of three extant genes"
+obj <- wf
 i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
 E(obj)$color <- "lightgray"
 E(obj)$width <- .1
 E(obj)[.to(i)]$width <- .2
 E(obj)[.to(i)]$color <- "black"
-ggraph(obj, layout = obj$layout) +
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
   geom_edge_link(aes(color = color, width = width)) +
   scale_edge_color_manual(values = c(
     "black" = "black",
@@ -800,20 +808,8 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 #| eval: true
 #| cache: false
 set.seed(1974)
-g <- wf_model_igraph(generations = 16, p0 = 0.3)
-j <- which(V(g)$allele == "A")
-V(g)[unlist(ego(g, order = 16, nodes = j, mode = "out"))]$allele <- "A"
-ggraph(g, layout = g$layout) +
-  geom_edge_link() +
-  scale_edge_color_manual(values = c(
-    "black" = "black",
-    "lightgray" = "lightgray"
-  )) +
-  geom_node_point(aes(fill = allele), color = "black", shape = 21, size = 3) +
-  scale_fill_manual(values = c("a" = "white", "A" = "black")) +
-  theme(legend.position = "none", axis.text.x = element_blank()) +
-  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
-  ggtitle("Allele fixation")
+g <- wright_fisher_pop(n = 10, generations = 16, p0 = 0.3)
+ggplot_wf(g, fill = allele) + ggtitle("Allele fixation")
 ```
 
 :::
@@ -826,20 +822,8 @@ ggraph(g, layout = g$layout) +
 #| eval: true
 #| cache: false
 set.seed(2014)
-g <- wf_model_igraph(generations = 16, p0 = 0.3)
-j <- which(V(g)$allele == "A")
-V(g)[unlist(ego(g, order = 16, nodes = j, mode = "out"))]$allele <- "A"
-ggraph(g, layout = g$layout) +
-  geom_edge_link() +
-  scale_edge_color_manual(values = c(
-    "black" = "black",
-    "lightgray" = "lightgray"
-  )) +
-  geom_node_point(aes(fill = allele), color = "black", shape = 21, size = 3) +
-  scale_fill_manual(values = c("a" = "white", "A" = "black")) +
-  theme(legend.position = "none", axis.text.x = element_blank()) +
-  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
-  ggtitle("Allele loss")
+g <- wright_fisher_pop(n = 10, generations = 16, p0 = 0.3)
+ggplot_wf(g, fill = allele) + ggtitle("Allele loss")
 ```
 
 :::
@@ -1041,27 +1025,15 @@ If simulation section show brief code examples
 #| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
 #| out-width: 80%
 set.seed(132)
-G <- wf_model_igraph(
-  popsize = 30, generations = 50,
-  parent.transient = FALSE
-)
-g <- color_genes_igraph(G[[148]],
-  a.color = "white",
-  frame.color = "black"
-)
-E(g)$color <- "lightgray"
-set_graph_style(plot_margin = margin(0, 0, 0, 0))
-V(g)$color[which(V(g)$reproduce)] <- "black"
-color <- unlist(rev(
-  split(V(g)$color, cut(seq_along(V(g)$color),
-    50,
-    labels = FALSE
-  ))
-))
-ggraph(permute(g, attr(G, "perm")), layout = g$layout) +
-  geom_edge_link(color = "lightgray", width = .8) +
-  geom_node_point(fill = color, shape = 21, size = 3) +
-  theme(axis.text.x = element_blank())
+g <- wright_fisher_pop(n = 30, generations = 50)
+g %>%
+  mutate(
+    allele =
+      ifelse(degree(., mode = "out") > 0,
+        "b", "a"
+      )
+  ) %>%
+  ggplot_wf(., fill = allele)
 ```
 
 :::
@@ -1076,20 +1048,23 @@ ggraph(permute(g, attr(G, "perm")), layout = g$layout) +
 #| eval: true
 #| cache: false
 #| fig-cap: Reproductive success in percent per generation.
-#| out-width: 80%
-x <- unlist(lapply(seq(1, length(g), attr(G, "popsize")), function(i) {
-  sum(V(g)[i:(i + attr(G, "popsize") - 1)]$reproduce, na.rm = TRUE)
-})) / attr(G, "popsize")
-xmean <- mean(x) * 100
-plot(x[1:(length(x) - 1)] * 100,
-  xlab = "Generation",
-  ylab = "Reproductive success (%)", type = "l",
-  cex.axis = 2, cex.lab = 2
-)
+#| out-width: 60%
+gdf <- g %>%
+  mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
+  as.data.frame()
+x <- tapply(gdf$allele, gdf$y, function(x) {
+  sum(x == "b") / length(x)
+})
+xmean <- sprintf("%.1f%%", mean(x) * 100)
+df <- data.frame(x = seq_along(x), y = x)
+ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
+  geom_line() +
+  xlab("Generation") +
+  ylab("Reproductive success (%)")
 ```
 
-Mean reproductive success = $sprintf("%.2f%%", xmean)$. Can show for
-large populations P(no descendants)=$e^{-1}$
+Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can show for
+large populations P(no descendants)=$1 - e^{-1} \approx 0.632$
 
 :::
 
