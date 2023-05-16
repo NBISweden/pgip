@@ -113,6 +113,8 @@ Point out: not optimal for non-model organims
 
 ## Alternative variant callers
 
+Reference bias: plot no. hets vs coverage for real data, e.g., conifer
+
 ### freebayes
 
 ### bcftools
@@ -124,6 +126,8 @@ Point out: not optimal for non-model organims
 ### Popoolation
 
 # Variant filtering
+
+Show coverage tracks from e.g., krill
 
 ## Coverage tracks
 

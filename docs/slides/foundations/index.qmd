@@ -29,7 +29,7 @@ library(tidygraph)
 
 :::
 
-# Population genetics
+# DNA variation
 
 ::: {.notes }
 
@@ -379,7 +379,7 @@ $$
 
 ::::
 
-# Origin and change of variation
+# Models of populations
 
 ## Wright-Fisher model {.smaller}
 
@@ -808,8 +808,9 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 #| eval: true
 #| cache: false
 set.seed(1974)
-g <- wright_fisher_pop(n = 10, generations = 16, p0 = 0.3)
-ggplot_wf(g, fill = allele) + ggtitle("Allele fixation")
+g <- wright_fisher_pop(n = 10, generations = 16, p0 = 3)
+ggplot_wf(g, fill = allele) + ggtitle("Allele fixation") +
+  scale_fill_manual(values = c("a" = "white", "A" = "black"))
 ```
 
 :::
@@ -823,14 +824,15 @@ ggplot_wf(g, fill = allele) + ggtitle("Allele fixation")
 #| cache: false
 set.seed(2014)
 g <- wright_fisher_pop(n = 10, generations = 16, p0 = 0.3)
-ggplot_wf(g, fill = allele) + ggtitle("Allele loss")
+ggplot_wf(g, fill = allele) + ggtitle("Allele loss") +
+  scale_fill_manual(values = c("a" = "white", "A" = "black"))
 ```
 
 :::
 
 Wright-Fisher model showing the evolution of population of 10 genes
-over 16 generations. Allele variants are shown in white and dark grey.
-Starting frequency dark grey variant is 0.3.
+over 16 generations. Allele variants are shown in white and white.
+Starting frequency black variant is 0.3.
 
 ::::
 
@@ -950,18 +952,89 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
 
 <!-- markdownlint-enable MD013 -->
 
+# Origin and change of variation
+
 ## Mutation
 
-Genetic drift "moves" frequencies to the point that variation is lost.
-New variation is introduced through *mutation*. We typically assume
-mutations are described by a Poisson process with rate $\mu$ (per
-generation).
+:::: {.columns}
+
+::: {.column width="60%"}
+
+Genetic drift "moves" frequencies to the point that variation is lost
+via allele fixation or loss. New variation is introduced through
+*mutation*. We typically assume mutations are described by a Poisson
+process with rate $\mu$ (per generation).
+
+The *mutation rate* is denoted $\mu$, and the *population scaled*
+mutation rate is $2N_e\mu$ for haploid populations, $4N_e\mu$ for
+diploid, where $N_e$ is the *effective population size*.
+
+The *mutation - drift balance* is when the diversity lost due to drift
+equals the diversity gained due to mutation.
+
+:::
+
+::: {.column width="40%"}
+
+```{r }
+#| label: fig-wf-mutation
+#| echo: false
+#| eval: true
+#| fig-height: 15
+#| fig-width: 10
+#| out-height: 600px
+#| out-width: 400px
+#| fig-cap: |
+#|   Variation is introduced by mutations (black) at rate $\mu=1e^{-4}$
+#|   and is  occasionally lost through genetic drift.
+set.seed(1212)
+wf <- wright_fisher_pop(n = 40, generations = 30, mu = 0.0001)
+ggplot_wf(wf, fill = allele) +
+  scale_fill_manual(values = c("a" = "white", "A" = "black"))
+```
+
+:::
+
+::::
+
+## Tracing the evolution of mutations
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-#### Infinit
+```{r }
+#| label: fig-tracing-evolution-of-mutations
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|   Different mutations suffer different fates.
+#|   Most mutations are lost in a couple of
+#|   generations.
+j <- wf %E>%
+  filter(.N()$allele[from] == "a" & .N()$allele[to] == "A") %>%
+  pull(., to)
+V(wf)$m0 <- V(wf)$allele
+cliques <- ego(wf,
+  order = attr(wf, "generations"),
+  nodes = j, mode = "out"
+)
+alleles <- mapply(function(values, index) {
+  rep(paste("a", index, sep = ""), length(values))
+}, cliques, seq_along(cliques))
+V(wf)[unlist(cliques)]$m0 <- unlist(alleles)
+
+m0_scale <- c("white", rep_len(
+  c("darkgrey", "gray", "black"),
+  length(unique(V(wf)$m0)) - 1
+))
+names(m0_scale) <- c(
+  "a", paste0("a", 1:(length(unique(V(wf)$m0)) - 1))
+)
+
+ggplot_wf(wf, fill = m0, width = 0.1, node_color = "gray") +
+  scale_fill_manual(values = m0_scale)
+```
 
 :::
 
@@ -971,11 +1044,15 @@ generation).
 
 ::::
 
-Introduce variation at rate $2N_e\mu$
+## Models of mutation
 
-Mutation - drift balance
+FIXME: insert Hahn's sites-picture
 
-Infinite sites vs infinite alleles
+## Heterozygosity
+
+Trace a plot showing decline in heterozygosity - see <https://bio.libretexts.org/Bookshelves/Genetics/Population_and_Quantitative_Genetics_(Coop)/04%3A_Genetic_Drift_and_Neutral_Diversity>
+
+# Selection
 
 ## Selection
 
@@ -987,6 +1064,10 @@ Define s, positive and negative selection
 
 d_N/d_S
 
+## Selective sweeps
+
+Show WF-model with sweep
+
 ## Two-locus dynamics
 
 Graph focal locus and flanking loci (Charlesworth figure)
@@ -995,6 +1076,8 @@ Graph focal locus and flanking loci (Charlesworth figure)
   separate treatment)
 - Contrast linked selection with direct selection
 - Genetic draft / background selection
+
+## Soft sweep
 
 ## Neutral theory
 
@@ -1007,123 +1090,3 @@ Move right after drift?
 ## Nearly neutral theory
 
 - Distribution of fitness effects?
-
-# A primer on simulation
-
-If simulation section show brief code examples
-
-## Wright-Fisher model again
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-```{r }
-#| label: fig-wf-model-reproductive-success
-#| echo: false
-#| eval: true
-#| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
-#| out-width: 80%
-set.seed(132)
-g <- wright_fisher_pop(n = 30, generations = 50)
-g %>%
-  mutate(
-    allele =
-      ifelse(degree(., mode = "out") > 0,
-        "b", "a"
-      )
-  ) %>%
-  ggplot_wf(., fill = allele)
-```
-
-:::
-
-::: {.column width="50%"}
-
-::: {.fragment}
-
-```{r }
-#| label: fig-wf-model-reproductive-success-graph
-#| echo: false
-#| eval: true
-#| cache: false
-#| fig-cap: Reproductive success in percent per generation.
-#| out-width: 60%
-gdf <- g %>%
-  mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
-  as.data.frame()
-x <- tapply(gdf$allele, gdf$y, function(x) {
-  sum(x == "b") / length(x)
-})
-xmean <- sprintf("%.1f%%", mean(x) * 100)
-df <- data.frame(x = seq_along(x), y = x)
-ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
-  geom_line() +
-  xlab("Generation") +
-  ylab("Reproductive success (%)")
-```
-
-Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can show for
-large populations P(no descendants)=$1 - e^{-1} \approx 0.632$
-
-:::
-
-:::
-
-::::
-
-::: {.notes }
-
-Repeat WF model. Point out that it can be used for *forward*
-simulation. Show how many individuals are lost each generation (limit
-e-1): lose lots of compute resources on the way to extant  sample.
-
-[p. 15 @hein2005gene] shows the fraction of genes without descendants.
-Focus on the number of descendants for *one* gene *i*, which is X ~
-Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that
-P(no descendants) = P(X=0) = e^{-1}
-
-:::
-
-## The coalescent
-
-Introduce concept. Describe algorithm (show code - include as
-exercise?). Genealogy and mutations:
-
-- sim_ancestry
-- sim_mutations
-
-Note that #mutations propto branch length -> don't actually even need
-to know the mutations (e.g. fastsimcoal)
-
-## The coalescent: diminishing returns
-
-Show plot of diminishing returns (better to add sites, not samples)
-
-## The coalescent and diversity
-
-Recalculate example
-
-## Evolutionary processes and genealogies
-
-Non-neutral processes change topologies in ways that we detect when
-applying tests [@ferretti_DecomposingSiteFrequency_2017]
-
-genealogies change due to non
-Show some qualitative examples of how trees change for
-
-- bottleneck
-
-## msprime
-
-## SLiM
-
-Mention advances in forward simulations
-
-## Recapitation
-
-Combine the best of two worlds
-
-## Recipes
-
-Show some recipes and the pgip CLI

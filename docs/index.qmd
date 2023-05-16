@@ -14,7 +14,11 @@ execute:
 
 ### Population genomics in practice
 
+::: {style="margin-bottom: 1em;"}
+
 ##### 6-10 November 2023, Uppsala, Sweden
+
+:::
 
 <br>
 
@@ -28,9 +32,14 @@ This workshop is organised by the National Bioinformatics
 Infrastructure, Sweden (NBIS). NBIS is a platform of the Science for
 Life Laboratory (SciLifeLab).
 
+<br>
+
 ![](assets/logos/nbis-scilifelab.svg){height="1.2em"}
 
+<br>
+
 ---
+
 ::: small
-Updated: <?lua.date?> at <?lua.time?>..
+Updated: <?lua.date?> at <?lua.time?>.
 :::
