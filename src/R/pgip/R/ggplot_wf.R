@@ -6,7 +6,9 @@
 ##'
 ggplot_wf <- function(graph, fill, size, width, edge_color,
                       node_color = "black", point_shape = 21,
-                      x_range = NULL, y_range = NULL, ...) {
+                      x_range = NULL, y_range = NULL, show_time =
+                        FALSE,
+                      ...) {
   set_defaults <- function(graph, x, default, is_node = TRUE) {
     gattr <- igraph::vertex_attr
     set_gattr <- igraph::set_vertex_attr
@@ -75,6 +77,13 @@ ggplot_wf <- function(graph, fill, size, width, edge_color,
     unique(.)
   edge_scale <- mapply(c, edge_scale)
 
+  if (is.null(x_range)) {
+    x_range <- range(igraph::vertex_attr(graph, "x"))
+  }
+  if (is.null(y_range)) {
+    y_range <- range(igraph::vertex_attr(graph, "y"))
+  }
+
   p <- ggraph::ggraph(graph,
     layout = cbind(
       x = igraph::V(graph)$x,
@@ -101,7 +110,26 @@ ggplot_wf <- function(graph, fill, size, width, edge_color,
       axis.text.x = ggplot2::element_blank(),
       legend.position = "none"
     ) +
-    expand_limits(x = x_range, y = y_range) +
     ggplot2::scale_y_reverse()
+  if (show_time) {
+    x_range[1] <- x_range[1] - 4
+    x1 <- x_range[1] + 1
+    p <- p +
+      ggplot2::geom_segment(
+        ggplot2::aes(
+          x = x1, y = y_range[1],
+          xend = x1, yend = y_range[2]
+        ),
+        arrow = ggplot2::arrow(
+          length = ggplot2::unit(0.5, "cm"),
+          type = "closed"
+        )
+      ) +
+      ggplot2::annotate("text",
+        label = "time",
+        x = x1 - 2, y = mean(y_range), size = 10, angle = 90
+      )
+  }
+  p <- p + ggplot2::expand_limits(x = x_range, y = y_range)
   p
 }
