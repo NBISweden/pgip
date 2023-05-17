@@ -14,6 +14,19 @@ Clone the repo
 
 and follow the instructions below.
 
+### TL;DR
+
+You can change the environment name by modifying the `PGIP`
+environment variable:
+
+    export PGIP=pgip
+    make install-pgip
+    conda activate pgip
+    make install-R
+    make install-kernels
+    make install-bcftools
+    make install-dev
+
 ### Create pgip conda environment
 
 Create a conda environment called `pgip` using the environment file
@@ -93,6 +106,26 @@ enforced), run
     pre-commit install
 
 From here, pre-commit will be run whenever you attempt to commit code.
+
+### Setup environment variables
+
+Finally, you need to set some environment variables to enable correct
+rendering. For reproducibility, set these in a file `.envrc` in the
+pgip root directory and source it with `source .envrc`.
+
+On a first run you will likely encounter an `MissingEnvVarsError` for
+the `PARTICIPANT_DATA` variable, which has to be set. The first run
+should trigger a setup script that generates the file
+`docs/_environment.local` where `PARTICIPANT_DATA` is initialized.
+Rerunning `quarto preview` in the `docs` folder should suffice. Should
+this for some reason fail, you can always set the variable manually:
+
+    export PARTICIPANT_DATA="foo.csv"
+
+The repo contains custom LaTeX code and the path `src/latex` needs to
+be set via the `TEXINPUTS` variable:
+
+    export TEXINPUTS=${TEXINPUTS}:/path/to/pgip/src/latex
 
 ## Local preview/render
 
