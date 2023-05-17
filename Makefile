@@ -5,7 +5,7 @@
 ## cd to docs directory and run `quarto preview`.
 ## ------------------------------------------------------
 TEXINPUTS:=$TEXINPUTS:src/latex
-
+PGIP?=pgip
 
 help:     ## Show this help.
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
@@ -37,14 +37,14 @@ clean: ## Remove garbage files
 
 
 install-pgip: ## Create pgip environment and install packages to render site
-	if conda env list | cut -f1 -d ' ' | grep -q "pgip$$"; then \
+	if conda env list | cut -f1 -d ' ' | grep -q "${PGIP}$$"; then \
 		echo "Environment exists; skipping install"; \
 	else \
-		mamba env create -n pgip --file environment.yml; \
+		mamba env create -n ${PGIP} --file environment.yml; \
 	fi;
 
 install-dev: install-pgip ## Install additional development tools
-	mamba env update -n pgip --file environment-dev.yml
+	mamba env update -n ${PGIP} --file environment-dev.yml
 
 install-R: install-pgip ## Install additional R packages that require manual installation
 	R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
@@ -55,7 +55,7 @@ install-R: install-pgip ## Install additional R packages that require manual ins
 install-kernels: install-pgip ## Install python and bash kernel
 	python -m pip install git+https://github.com/NBISweden/pgip-tools
 	python -m bash_kernel.install
-	python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
+	python -m ipykernel install --user --name ${PGIP} --display-name "Population Genomics in Practice (Python)"
 
 install-bcftools: ## Install bcftools manually due to issues with conda version 1.8
 	scripts/install-bcftools.sh
