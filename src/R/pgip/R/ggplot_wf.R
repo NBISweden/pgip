@@ -112,8 +112,8 @@ ggplot_wf <- function(graph, fill, size, width, edge_color,
     ) +
     ggplot2::scale_y_reverse()
   if (show_time) {
-    x_range[1] <- x_range[1] - 4
-    x1 <- x_range[1] + 1
+    x_range[1] <- x_range[1] - 1
+    x1 <- x_range[1] + 0.5
     p <- p +
       ggplot2::geom_segment(
         ggplot2::aes(
@@ -127,7 +127,7 @@ ggplot_wf <- function(graph, fill, size, width, edge_color,
       ) +
       ggplot2::annotate("text",
         label = "time",
-        x = x1 - 2, y = mean(y_range), size = 10, angle = 90
+        x = x1 - .5, y = mean(y_range), size = 10, angle = 90
       )
   }
   p <- p + ggplot2::expand_limits(x = x_range, y = y_range)

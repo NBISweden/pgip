@@ -539,12 +539,14 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-V(wf)$allele[1] <- "parent"
-V(wf)$allele[11] <- "child"
 wf %E>%
   filter(to == 11) %N>%
-  filter(y >= 0 & y <= 1) %>%
-  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
+  mutate(allele = ifelse(node %in% .E()$from, "parent", allele)) %>%
+  mutate(allele = ifelse(node %in% .E()$to, "child", allele)) %>%
+  filter(y >= 0 & y <= 1) %N>%
+  mutate(x = x[tangled]) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) +
+  ggtitle("Sampled parents")
 ```
 
 :::
@@ -584,11 +586,61 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-V(wf)$allele[12] <- "child"
 wf %E>%
-  filter(to == 11 | to == 12) %N>%
-  filter(y >= 0 & y <= 1) %>%
-  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
+  filter(to %in% c(11, 12)) %N>%
+  mutate(allele = ifelse(node %in% .E()$from, "parent", allele)) %>%
+  mutate(allele = ifelse(node %in% .E()$to, "child", allele)) %>%
+  filter(y >= 0 & y <= 1) %N>%
+  mutate(x = x[tangled]) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) +
+  ggtitle("Sampled parents")
+```
+
+:::
+
+::::
+
+## Wright-Fisher model {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions [@hein2005gene]:
+
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
+
+### Algorithm
+
+1. Setup starting population at time zero
+2. Add offspring (same size) at time one
+3. Select parents to offspring at random
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: wf-3.1b
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-height: 7
+#| fig-width: 7
+wf %E>%
+  filter(to %in% c(11:13)) %N>%
+  mutate(allele = ifelse(node %in% .E()$from, "parent", allele)) %>%
+  mutate(allele = ifelse(node %in% .E()$to, "child", allele)) %>%
+  filter(y >= 0 & y <= 1) %N>%
+  mutate(x = x[tangled]) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) +
+  ggtitle("Sampled parents")
 ```
 
 :::
@@ -628,11 +680,14 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-V(wf)$allele[13] <- "child"
 wf %E>%
-  filter(to %in% 11:13) %N>%
-  filter(y >= 0 & y <= 1) %>%
-  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
+  filter(to %in% 11:18) %N>%
+  mutate(allele = ifelse(node %in% .E()$from, "parent", allele)) %>%
+  mutate(allele = ifelse(node %in% .E()$to, "child", allele)) %>%
+  filter(y >= 0 & y <= 1) %N>%
+  mutate(x = x[tangled]) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) +
+  ggtitle("Sampled parents")
 ```
 
 :::
@@ -672,10 +727,60 @@ under the following assumptions [@hein2005gene]:
 #| cache: false
 #| fig-height: 7
 #| fig-width: 7
-wf %>%
-  filter(y >= 0 & y <= 1) %>%
-  mutate(allele = ifelse(degree(., mode = "out") > 0 & y == 0, "b", "a")) %>%
-  ggplot_wf(., y_range = y_range, fill = allele) + ggtitle("Sampled parents")
+wf %E>%
+  filter(to %in% 11:20) %N>%
+  mutate(allele = ifelse(node %in% .E()$from, "parent", allele)) %>%
+  mutate(allele = ifelse(node %in% .E()$to, "child", allele)) %>%
+  filter(y >= 0 & y <= 1) %N>%
+  mutate(x = x[tangled]) %>%
+  ggplot_wf(., y_range = y_range, fill = allele) +
+  ggtitle("Sampled parents")
+```
+
+:::
+
+::::
+
+## Wright-Fisher model {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Model of evolution that describes sampling of alleles in a population
+under the following assumptions [@hein2005gene]:
+
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
+
+### Algorithm
+
+1. Setup starting population at time zero
+2. Add offspring (same size) at time one
+3. Select parents to offspring at random
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: wf-3-untangled
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-height: 7
+#| fig-width: 7
+wf %E>%
+  filter(to %in% 11:20) %N>%
+  mutate(allele = ifelse(node %in% .E()$from, "parent", allele)) %>%
+  mutate(allele = ifelse(node %in% .E()$to, "child", allele)) %>%
+  filter(y >= 0 & y <= 1) %N>%
+  ggplot_wf(., y_range = y_range, fill = allele) +
+  ggtitle("Sampled parents (untangled)")
 ```
 
 :::
@@ -768,6 +873,58 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 
 ## Wright-Fisher model {.smaller}
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-wright-fisher-model-gganimation-last
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|   Wright-Fisher model indicating time
+#|   direction from past (top) to present
+#|   (bottom).
+#| out-width: 100%
+x_range <- range(vertex_attr(wf, "x"))
+y_range <- range(vertex_attr(wf, "y"))
+x1 <- x_range[1] - 0.5
+x_range <- c(x1 - 2, x_range[2])
+wf %>% ggplot_wf(.) +
+  geom_segment(
+    aes(
+      x = x1, y = y_range[1],
+      xend = x1, yend = y_range[2]
+    ),
+    arrow = arrow(
+      length = unit(0.5, "cm"),
+      type = "closed"
+    )
+  ) +
+  annotate("text",
+    label = "time",
+    x = x1 - .5, y = mean(y_range),
+    size = 10, angle = 90
+  ) +
+  annotate("text",
+    label = "past",
+    x = x1 - .5, y = 0,
+    size = 10, hjust = 1,
+  ) +
+  annotate("text",
+    label = "present",
+    x = x1 - .5, y = 15,
+    size = 10, hjust = 1,
+  ) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment}
+
 ```{r}
 #| label: fig-wf-model-genealogy
 #| echo: false
@@ -790,11 +947,11 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
   scale_y_reverse() + scale_edge_width(range = c(.8, 3))
 ```
 
-::: {.notes }
-
-See <https://mikeyharper.uk/animated-plots-with-r/>
+:::
 
 :::
+
+::::
 
 ## Genetic drift with alleles
 
@@ -831,7 +988,7 @@ ggplot_wf(g, fill = allele) + ggtitle("Allele loss") +
 :::
 
 Wright-Fisher model showing the evolution of population of 10 genes
-over 16 generations. Allele variants are shown in white and white.
+over 16 generations. Allele variants are shown in white and black.
 Starting frequency black variant is 0.3.
 
 ::::
@@ -952,6 +1109,14 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
 
 <!-- markdownlint-enable MD013 -->
 
+## Hardy-Weinberg equilibrium
+
+Detail the WF model and HWE
+
+## Heterozygosity dynamics
+
+Plot (expected) loss of heterozygosity along with real data example
+
 # Origin and change of variation
 
 ## Mutation
@@ -1007,10 +1172,16 @@ ggplot_wf(wf, fill = allele) +
 #| label: fig-tracing-evolution-of-mutations
 #| echo: false
 #| eval: true
+#| fig-height: 15
+#| fig-width: 15
+#| out-height: 600px
+#| out-width: 600px
 #| fig-cap: |
 #|   Different mutations suffer different fates.
 #|   Most mutations are lost in a couple of
-#|   generations.
+#|   generations. Mutant alleles are colored
+#|   black and their genealogies are highlighted
+#|   with thicker edges.
 j <- wf %E>%
   filter(.N()$allele[from] == "a" & .N()$allele[to] == "A") %>%
   pull(., to)
@@ -1019,21 +1190,10 @@ cliques <- ego(wf,
   order = attr(wf, "generations"),
   nodes = j, mode = "out"
 )
-alleles <- mapply(function(values, index) {
-  rep(paste("a", index, sep = ""), length(values))
-}, cliques, seq_along(cliques))
-V(wf)[unlist(cliques)]$m0 <- unlist(alleles)
-
-m0_scale <- c("white", rep_len(
-  c("darkgrey", "gray", "black"),
-  length(unique(V(wf)$m0)) - 1
-))
-names(m0_scale) <- c(
-  "a", paste0("a", 1:(length(unique(V(wf)$m0)) - 1))
-)
-
-ggplot_wf(wf, fill = m0, width = 0.1, node_color = "gray") +
-  scale_fill_manual(values = m0_scale)
+wf %>%
+  mutate(clique = .N()$m0 != "a") %E>%
+  mutate(width = (0.2 + as.integer(.N()$allele[from] != "a"))) %N>%
+  ggplot_wf(fill = clique, node_color = "lightgray")
 ```
 
 :::
@@ -1046,11 +1206,26 @@ ggplot_wf(wf, fill = m0, width = 0.1, node_color = "gray") +
 
 ## Models of mutation
 
-FIXME: insert Hahn's sites-picture
+::: {.dna .small}
+
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:--:|
+| T | T | A | C | A | A | T | C | C | G  | A  | T  | C  | G  | T  |
+| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
+| T | C | A | C | A | A | T | G | C | G  | A  | T  | G  | G  | A  |
+| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
+
+: Sequence aligmnent of four DNA sequences
+  [@hahn_MolecularPopulationGenetics_2019, Fig 1.1].
+  {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
+
+:::
 
 ## Heterozygosity
 
 Trace a plot showing decline in heterozygosity - see <https://bio.libretexts.org/Bookshelves/Genetics/Population_and_Quantitative_Genetics_(Coop)/04%3A_Genetic_Drift_and_Neutral_Diversity>
+
+## Mutation drift balance
 
 # Selection
 
