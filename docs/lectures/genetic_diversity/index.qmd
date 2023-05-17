@@ -1,5 +1,8 @@
 ---
+title: "Genetic diversity"
 format: html
+output:
+  tufte::tufte_html: default
 ---
 
 # Genetic diversity {#sec-lecture-genetic-diversity}
@@ -63,3 +66,5 @@ $$
 p_k k (q-k) + \sum_{i=1}^{k - 1}
 p_i i (q-i) + p_{q-i} (q-i) i = \sum_{i=1}^{k} p^*_i i (k - i)
 $$
+
+## References

@@ -106,7 +106,7 @@ jobs:
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
-        if: ${{ (github.event.pull_request.merged == true && github.ref_name == 'main') || (github.event_name == "push" && (github.ref_name == "main" || github.ref_name == "test-build") )}}
+        if: ${{ (github.event.pull_request.merged == true && github.ref_name == 'main') || (github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'test-build') )}}
         with:
           target: gh-pages
           path: docs
