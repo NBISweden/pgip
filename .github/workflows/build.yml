@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - "*"
   workflow_dispatch:
   push:
     branches:
@@ -19,6 +20,7 @@ jobs:
   build:
     name: Build site
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test-build'
     permissions:
       contents: write
@@ -104,7 +106,7 @@ jobs:
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ (github.event.pull_request.merged == true && github.ref_name == 'main') || (github.event_name == "push" && (github.ref_name == "main" || github.ref_name == "test-build") )}}
         with:
           target: gh-pages
           path: docs
