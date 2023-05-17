@@ -52,10 +52,14 @@ jobs:
           use-only-tar-bz2: true
           auto-activate-base: false
 
-      - name: Install test dependencies
+      # - name: Install test dependencies
+      #   run: |
+      #     conda install -c conda-forge mamba
+      #     mamba install -c conda-forge pip
+
+      - name: Install pip dependencies
         run: |
-          conda install -c conda-forge mamba
-          mamba install -c conda-forge pip
+          pip install cyvcf2
 
       - name: Install pgip dependencies
         run: |
