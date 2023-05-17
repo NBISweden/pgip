@@ -53,7 +53,9 @@ jobs:
           auto-activate-base: false
 
       - name: Install test dependencies
-        run: mamba env update -n pgip -c conda-forge pytest pip
+        run: |
+          conda install mamba
+          mamba env update -n pgip -c conda-forge pytest pip
 
       - name: Install pgip dependencies
         run: |
