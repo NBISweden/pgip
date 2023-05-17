@@ -21,7 +21,7 @@ format:
 | Coffee break                            | 10:00-10:30 |            |                                                                                         |
 | Population genetics foundations         | 10:30-12:00 | PU         | [Slides](slides/foundations/index.html), [Exercise](exercises/popgen_primer/index.html) |
 | Lunch                                   | 12:00-13:00 |            |                                                                                         |
-| Introduction to simulation              | 13:00-15:00 | PU         | Slides, Exercise                                                                        |
+| Introduction to simulation              | 13:00-15:00 | PU         | [Slides](slides/simulation/index.html), [Exercise](exercises/simulation/index.html)     |
 | Coffee break                            | 15:00-15:30 |            |                                                                                         |
 | Variant calling                         | 15:30-17:00 | PU         | Slides, Exercise                                                                        |
 | [**7-Nov-2023 (Tue)**]{.highlight}      |             |            |                                                                                         |

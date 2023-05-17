@@ -1,0 +1,185 @@
+---
+title: "Simulation"
+subtitle: "Primer on forward simulation and the coalescent"
+author:
+    - "Per Unneberg"
+format:
+  revealjs:
+    footer: Simulation primer
+---
+
+## Setup  {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(gganimate)
+library(patchwork)
+library(igraph)
+library(ggraph)
+library(tidygraph)
+```
+
+::: {.notes }
+
+The goal of simulation primer must be to convey intuition about
+evolutionary processes:
+
+- how genealogies change under different scenarios
+- how they connect with summary statistics (e.g., Tajima's)
+- duality tree-based stats - summary stats (Ralph/Kelleher)
+- how they can be used to calculate outlier stats
+
+:::
+
+# Forward simulation
+
+## Forward simulation
+
+Begin with forward simulation as it makes more intuitive sense.
+
+Outline principles of forward simulation from Wright-Fisher model
+"algorithm".
+
+## SLiM
+
+Mention advances in forward simulations
+
+## Forward simulation in SLiM
+
+Outline steps in SLiM - relate to WF model
+
+## Example in SLiM
+
+## Exercise in SLiM
+
+Optional: do a simple neutral model
+
+# The coalescent
+
+## Wright-Fisher model again
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-wf-model-reproductive-success
+#| echo: false
+#| eval: true
+#| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
+#| out-width: 80%
+set.seed(132)
+g <- wright_fisher_pop(n = 30, generations = 50)
+g %>%
+  mutate(
+    allele =
+      ifelse(degree(., mode = "out") > 0,
+        "b", "a"
+      )
+  ) %>%
+  ggplot_wf(., fill = allele)
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment}
+
+```{r }
+#| label: fig-wf-model-reproductive-success-graph
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-cap: Reproductive success in percent per generation.
+#| out-width: 60%
+gdf <- g %>%
+  mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
+  as.data.frame()
+x <- tapply(gdf$allele, gdf$y, function(x) {
+  sum(x == "b") / length(x)
+})
+xmean <- sprintf("%.1f%%", mean(x) * 100)
+df <- data.frame(x = seq_along(x), y = x)
+ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
+  geom_line() +
+  xlab("Generation") +
+  ylab("Reproductive success (%)")
+```
+
+Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can show for
+large populations P(no descendants)=$1 - e^{-1} \approx 0.632$
+
+:::
+
+:::
+
+::::
+
+::: {.notes }
+
+Repeat WF model. Point out that it can be used for *forward*
+simulation. Show how many individuals are lost each generation (limit
+e-1): lose lots of compute resources on the way to extant  sample.
+
+[p. 15 @hein2005gene] shows the fraction of genes without descendants.
+Focus on the number of descendants for *one* gene *i*, which is X ~
+Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that
+P(no descendants) = P(X=0) = e^{-1}
+
+:::
+
+## The coalescent
+
+Introduce concept. Describe algorithm (show code - include as
+exercise?). Genealogy and mutations:
+
+- sim_ancestry
+- sim_mutations
+
+Note that #mutations propto branch length -> don't actually even need
+to know the mutations (e.g. fastsimcoal)
+
+## The coalescent: diminishing returns
+
+Show plot of diminishing returns (better to add sites, not samples)
+
+## The coalescent and diversity
+
+Recalculate example
+
+## Evolutionary processes and genealogies
+
+Non-neutral processes change topologies in ways that we detect when
+applying tests [@ferretti_DecomposingSiteFrequency_2017]
+
+genealogies change due to non
+Show some qualitative examples of how trees change for
+
+- bottleneck
+
+## msprime
+
+## Exercises with msprime
+
+Use CLI to generate genealogies and mutations.
+
+# Combining forward and backward simulations
+
+## Recapitation
+
+Combine the best of two worlds
+
+## Recipes
+
+Show some recipes and the pgip CLI
+
+## PGIP data set
+
+Show the pgip data set and how it was generated
