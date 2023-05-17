@@ -54,7 +54,7 @@ jobs:
 
       - name: Install test dependencies
         run: |
-          conda install mamba
+          conda install -c conda-forge mamba
           mamba env update -n pgip -c conda-forge pytest pip
 
       - name: Install pgip dependencies
