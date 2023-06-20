@@ -42,6 +42,9 @@ install-pgip`.
 
 ### Install R packages
 
+**UPDATE**: the tinytex distribution causes all kinds of trouble. See
+section Installation issues below.
+
 A number of `R` packages need to be installed manually, notably
 [dotenv](https://www.rdocumentation.org/packages/dotenv/versions/1.0.3),
 [tinytex](https://github.com/rstudio/tinytex-releases),
@@ -127,11 +130,32 @@ be set via the `TEXINPUTS` variable:
 
     export TEXINPUTS=${TEXINPUTS}:/path/to/pgip/src/latex
 
+### Installation issues
+
+#### tinytex
+
+The current TinyTeX installation setup causes errors from the TeXLive
+manager `tlmgr` that are difficult to fix. As a workaround, install
+`texlive` and `texlive-latex-extra`. This is the working solution in
+the github CI actions. See .github/workflow/build.yml for details.
+
+#### Missing libz2 and lzma library headers
+
+In case you get errors related to libz2 and lzma it is likely due to
+missing header files. On Ubuntu, run
+
+    sudo apt install libz2-dev
+    sudo apt install liblzma-dev
+
 ## Local preview/render
 
 For local preview (edits to files immediately triggers regeneration of
-output), cd to `docs` directory and run `quarto preview`. There are
-also make rules to render single files or the entire project
+output), cd to `docs` directory and run `quarto preview`. You can
+specify a port to consistently reenter the same local web page:
+
+    quarto preview --port 8888
+
+There are also make rules to render single files or the entire project
 ('production') as they would appear online:
 
     make docs/_site/slides/demo/index.html
@@ -173,6 +197,15 @@ file `environment-dev.yml`.
 - R documents should follow the [tidyverse style
   guide](https://style.tidyverse.org/)
 - python code should follow [the Black code style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
+
+### Bibliographic entries
+
+Bibliographic entries are stored in
+[BibTeX](https://en.wikipedia.org/wiki/BibTeX) format in
+`docs/assets/bibliography.bib`. Add entries when necessary and cite
+using quarto's [citation
+syntax](https://quarto.org/docs/authoring/footnotes-and-citations.html#sec-citations)
+(e.g., [@citation]).
 
 ## Development
 
