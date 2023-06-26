@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.361">
+  <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Per Unneberg">
   <title>Population genomics in practice - Simulation</title>
@@ -351,7 +351,7 @@
   <h3 class="subtitle">Primer on forward simulation and the coalescent</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">20-Jun-2023</h4>
+  <h4 class="date">26-Jun-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -447,6 +447,272 @@
 </ul>
 <p>Note that #mutations propto branch length -&gt; don’t actually even need to know the mutations (e.g.&nbsp;fastsimcoal)</p>
 </section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-1_e90be7a4338a89c98f76b6b27f20b0a3">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-1-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-1" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><p>Start with <span class="math inline">\(i=n\)</span> chromosomes</p></li>
+<li><p>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-2_ad228ed887d13828b844eaa177336744">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-2-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-2" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><p>Start with <span class="math inline">\(i=n\)</span> chromosomes</p></li>
+<li><p>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></p></li>
+<li><p>Choose two chromosomes at random to coalesce</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-3_482ccc8d085df9ef737320f3075445d4">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-3-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-3" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><p>Start with <span class="math inline">\(i=n\)</span> chromosomes</p></li>
+<li><p>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></p></li>
+<li><p>Choose two chromosomes at random to coalesce</p></li>
+<li><p>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-4_8470dc40887d491af07e3dded028a141">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-4-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-4" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-5_dd87706e2bf8f83aed9026e89530b727">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-5-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-5" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-6_d0dd2a84bae854768f02171bafa02337">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-6-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-6" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-7_854a905c09525ae4f739b21b3fd9e567">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-7-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-7" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-8_00fc90338137b62f89b8f6f97d68ae5d">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-8-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-8" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-9_6e3289dfe378b20f3489441a1e9cfdcd">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-9-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-9" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-10_098292e2360028489a1f6bf2c62c32b4">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-10-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-10" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span><span class="math inline">\(^1\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+<div class="smallr">
+<p><span class="math inline">\(^1\)</span>: The exponential can be parametrized in two different ways, so that the parameter to the function is either <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\beta=1/\lambda\)</span>.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-11_a35e8a92e1307dacb915f0cabe1f4dd2">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/simulate-genealogy-11-1.svg" width="500" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-11" class="slide level2">
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
+<li>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span><span class="math inline">\(^1\)</span></li>
+<li>Choose two chromosomes at random to coalesce</li>
+<li>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></li>
+<li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
+</ol>
+<div class="smallr">
+<p><span class="math inline">\(^1\)</span>: The exponential can be parametrized in two different ways, so that the parameter to the function is either <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\beta=1/\lambda\)</span>.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-simulate-genealogy-end_0c374dfbf970bbe62f3ba6cb5142fed7">
+<div class="cell-output-display">
+<div id="fig-simulate-genealogy-end" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;3: A simulated genealogy. The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-simulate-genealogy-end-1.svg" width="500" height="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="variation-in-topology-and-height" class="slide level2">
+<h2>Variation in topology and height</h2>
+<div style="transform:  translate(-300px, 0);">
+<div style="transform: rotate(180deg);">
+<div class="cell" data-hash="index_cache/revealjs/genealogy-variation_d21267a152891a8e26c1fb4765479345">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/genealogy-variation-1.png" width="960" height="500"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-mutations" class="slide level2">
+<h2>Adding mutations</h2>
+<div class="cell" data-hash="index_cache/revealjs/fig-add-mutations_81e8b212e6404072fc82b331b3f2c8b9">
+<div class="cell-output-display">
+<div id="fig-add-mutations" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;4: Adding mutations on a coalescent genealogy.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-add-mutations-1.svg" width="500" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="the-coalescent-diminishing-returns" class="slide level2">
 <h2>The coalescent: diminishing returns</h2>
 <p>Show plot of diminishing returns (better to add sites, not samples)</p>
@@ -493,6 +759,9 @@
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-ferretti_DecomposingSiteFrequency_2017" class="csl-entry" role="listitem">
 Ferretti, L., Ledda, A., Wiehe, T., Achaz, G., &amp; Ramos-Onsins, S. E. (2017). Decomposing the <span>Site Frequency Spectrum</span>: <span>The Impact</span> of <span>Tree Topology</span> on <span>Neutrality Tests</span>. <em>Genetics</em>, <em>207</em>(1), 229–240. <a href="https://doi.org/10.1534/genetics.116.188763">https://doi.org/10.1534/genetics.116.188763</a>
+</div>
+<div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="listitem">
+Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
 </div>
 <div id="ref-hein2005gene" class="csl-entry" role="listitem">
 Hein, J., Schierup, M. H., &amp; Wiuf, C. (2005). <em>Gene genealogies, variation and evolution: <span>A</span> primer in coalescent theory</em>. <span>Oxford University Press</span>. <a href="https://books.google.se/books?id=CCmLNAEACAAJ">https://books.google.se/books?id=CCmLNAEACAAJ</a>

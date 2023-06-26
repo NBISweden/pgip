@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.361">
+  <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Per Unneberg">
   <title>Population genomics in practice - Population genetics</title>
@@ -416,7 +416,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">20-Jun-2023</h4>
+  <h4 class="date">26-Jun-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -433,11 +433,11 @@
 <section id="dna-variation" class="title-slide slide level1 center">
 <h1>DNA variation</h1>
 <aside class="notes">
-<p>From <span class="citation" data-cites="nei_MolecularEvolutionPhylogenetics_2000">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Nei &amp; Kumar, 2000, p. 231</a>)</span>:</p>
+<p>From <span class="citation" data-cites="nei_MolecularEvolutionPhylogenetics_2000">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Nei &amp; Kumar, 2000, p. 231</a>)</span>:</p>
 <blockquote>
 <p>The main subject of population genetics is to study the generation and maintenance of genetic polymorphism and to understand the mechanisms of evolution at the population level</p>
 </blockquote>
-<p><span class="citation" data-cites="casillas_MolecularPopulationGenetics_2017">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Casillas &amp; Barbadilla, 2017, p. 1026</a>)</span>:</p>
+<p><span class="citation" data-cites="casillas_MolecularPopulationGenetics_2017">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Casillas &amp; Barbadilla, 2017, p. 1026</a>)</span>:</p>
 <blockquote>
 <p>Big data samples of complete genome sequences of many individuals from natural populations of many species have transformed population genetics inferences on samples of loci to population genomics: the analysis of genome-wide patterns of DNA variation within and between species.</p>
 </blockquote>
@@ -457,7 +457,7 @@
 <h2>DNA variation</h2>
 <div class="dna small">
 <table style="width:75%;">
-<caption>Sequence aligmnent of four DNA sequences <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hahn, 2019</a>, Fig 1.1)</span>. </caption>
+<caption>Sequence aligmnent of four DNA sequences <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hahn, 2019</a>, Fig 1.1)</span>. </caption>
 <colgroup>
 <col style="width: 5%">
 <col style="width: 5%">
@@ -566,7 +566,7 @@
 </tbody>
 </table>
 </div>
-<p>The main data for molecular population genetics are DNA sequences. The alignment above shows a <em>sample</em> of four DNA <em>sequences</em>. Each sequence has 15 nucleotides (<em>sites</em>) “from the same <em>locus</em> (location) on a chromosome” <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(p.2 <a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hahn, 2019</a>)</span></p>
+<p>The main data for molecular population genetics are DNA sequences. The alignment above shows a <em>sample</em> of four DNA <em>sequences</em>. Each sequence has 15 nucleotides (<em>sites</em>) “from the same <em>locus</em> (location) on a chromosome” <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(p.2 <a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hahn, 2019</a>)</span></p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="fragment">
@@ -1457,7 +1457,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <div>
 <ul>
 <li class="fragment">discrete and non-overlapping generations</li>
@@ -1473,7 +1473,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 <aside class="notes">
-<p>See <span class="citation" data-cites="hein_GeneGenealogies_2004">Hein et al. (<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">2004</a>)</span> for more assumptions.</p>
+<p>See <span class="citation" data-cites="hein_GeneGenealogies_2004">Hein et al. (<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">2004</a>)</span> for more assumptions.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1490,7 +1490,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1516,7 +1516,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1543,7 +1543,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1571,7 +1571,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1599,7 +1599,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1627,7 +1627,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1655,7 +1655,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1683,7 +1683,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1711,7 +1711,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
+<p>Model of evolution that describes sampling of alleles in a population under the following assumptions <span class="citation" data-cites="hein2005gene">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span>:</p>
 <ul>
 <li>discrete and non-overlapping generations</li>
 <li>haploid individuals or two subpopulations (males and females)</li>
@@ -1755,24 +1755,24 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <section id="wright-fisher-model-11" class="slide level2 smaller">
 <h2>Wright-Fisher model</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wright-fisher-model-gganimation-last_a8fe9752f8e25a9f42076e1c61291ccb">
+<div class="column" style="width:40%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-wright-fisher-model-gganimation-last_8cd59dc1d9c95763f797c371cce6df7d">
 <div class="cell-output-display">
 <div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;2: Wright-Fisher model indicating time direction from past (top) to present (bottom).</figcaption>
+<figcaption>Figure&nbsp;2: WF model indicating time direction from past (top) to present (bottom).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_63895c0409e21cd9fc78f97f9a085c41">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_c068a78c81aab943949515154845ac89">
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;3: Wright-Fisher model tracing the genealogies of three extant genes</figcaption>
+<figcaption>Figure&nbsp;3: WF model tracing the genealogies of three extant genes</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.png" width="960"></p>
 </figure>
 </div>
@@ -1800,6 +1800,22 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div><p>Wright-Fisher model showing the evolution of population of 10 genes over 16 generations. Allele variants are shown in white and black. Starting frequency black variant is 0.3.</p>
 </div>
 </section>
+<section id="the-wright-fisher-sampling-model" class="slide level2 smaller">
+<h2>The Wright-Fisher sampling model</h2>
+<p>Let’s formalise the sampling process of the Wright-Fisher model<sup>1</sup></p>
+<p>We assume</p>
+<ol type="1">
+<li>a single locus in a haploid population of size N</li>
+<li>no mutation and selection</li>
+<li>discrete generations</li>
+</ol>
+<p>Each generation we sample N new individuals from the previous generation, which is equivalent to <em>multinomial sampling with replacement</em>. Then, the number of offspring of a given parent <em>i</em> is <em>binomially distributed</em>, with probability of success <span class="math inline">\(p=\frac{1}{N}\)</span>:</p>
+<p><span class="math display">\[
+\mathrm{Pr}(x) = {N\choose x}\left( \frac{1}{N} \right)^x
+\left(1 - \frac{1}{N} \right)^{(N - x)}
+\]</span></p>
+<p>Under the assumption of random mating, a diploid population of size <span class="math inline">\(N\)</span> can be described by a haploid population of size <span class="math inline">\(2N\)</span></p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>For a more extensive treatment, see <span class="citation" data-cites="hermisson_MathematicalPopulationGenetics_2017">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hermisson, 2017</a>)</span></p></li></ol></aside></section>
 <section id="genetic-drift" class="slide level2">
 <h2>Genetic drift</h2>
 <div class="columns">
@@ -1858,17 +1874,47 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </section>
 <section id="genetic-drift-1" class="slide level2">
 <h2>Genetic drift</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
 <!-- markdownlint-disable MD013 -->
-
+<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-many-repetitions_9b73fbe1c68309b51a8af811458f14e4">
+<div class="cell-output-display">
+<div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;5: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.png" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
 <!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.png" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;5: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</p></section>
-<section id="hardy-weinberg-equilibrium" class="slide level2">
-<h2>Hardy-Weinberg equilibrium</h2>
-<p>Detail the WF model and HWE</p>
+</div><div class="column" style="width:35%;">
+<p>Probability of fixation <span class="math inline">\(\propto p_0\)</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>Simplifying assumptions -&gt; rate of drift <span class="math inline">\(propto \frac{1}{N}\)</span> <span class="citation" data-cites="leffler_RevisitingOldRiddle_2012">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Leffler et al., 2012</a>)</span></p>
+<p>In reality population fluctuates and therefore Ne is substituted for N. Larger Ne -&gt; smaller fluctuation in allele frequency (as evidenced in plots) -&gt; maintain larger genetic diversity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="heterozygosity-dynamics" class="slide level2">
 <h2>Heterozygosity dynamics</h2>
 <p>Plot (expected) loss of heterozygosity along with real data example</p>
+<p>Heterozygisity in WF population lost at rate 1/2N</p>
+</section>
+<section id="hardy-weinberg-equilibrium" class="slide level2">
+<h2>Hardy-Weinberg equilibrium</h2>
+<p>Detail the WF model and HWE</p>
 </section></section>
 <section>
 <section id="origin-and-change-of-variation" class="title-slide slide level1 center">
@@ -1919,7 +1965,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <h2>Models of mutation</h2>
 <div class="dna small">
 <table style="width:75%;">
-<caption>Sequence aligmnent of four DNA sequences <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/nearly-neutral-theory" role="doc-biblioref" onclick="">Hahn, 2019</a>, Fig 1.1)</span>. </caption>
+<caption>Sequence aligmnent of four DNA sequences <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hahn, 2019</a>, Fig 1.1)</span>. </caption>
 <colgroup>
 <col style="width: 5%">
 <col style="width: 5%">
@@ -2074,12 +2120,51 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <li>why population size matters</li>
 <li>Fig 4.2, Eq 4.2 from Lynch</li>
 </ul>
+<aside class="notes">
+<p>Mutation - drift balance. Simplifying assumptions -&gt; rate of drift <span class="math inline">\(propto \frac{1}{N}\)</span> <span class="citation" data-cites="leffler_RevisitingOldRiddle_2012">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Leffler et al., 2012</a>)</span></p>
+<p>In reality population fluctuates and therefore Ne is substituted for N. Larger Ne -&gt; smaller fluctuation in allele frequency (as evidenced in plots) -&gt; maintain larger genetic diversity</p>
+<p>Neutral diversity patterns depend not only on drift but also on rate at which variation changes at <em>linked sites</em> <span class="citation" data-cites="leffler_RevisitingOldRiddle_2012">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Leffler et al., 2012</a>)</span></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="nearly-neutral-theory" class="slide level2 smaller scrollable">
+<section id="nearly-neutral-theory" class="slide level2">
 <h2>Nearly neutral theory</h2>
 <ul>
 <li>Distribution of fitness effects?</li>
 </ul>
+</section>
+<section id="effect-on-genetic-diversity" class="slide level2 smaller scrollable">
+<h2>Effect on genetic diversity</h2>
+<aside class="notes">
+<p>Mutation - drift balance. Mode of selection important:</p>
+<ul>
+<li>selection for adaptation at new mutations decreases diversity more than if at standing variation</li>
+<li>balancing selection may <em>increase</em> variation</li>
+</ul>
+<p>Recombination</p>
+<ul>
+<li>low recombination -&gt; lower diversity (less reshuffling of variation)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 <div class="footer footer-default">
 <p>Population genetics foundations</p>
@@ -2097,11 +2182,18 @@ Hein, J., Schierup, M. H., &amp; Wiuf, C. (2005). <em>Gene genealogies, variatio
 <div id="ref-hein_GeneGenealogies_2004" class="csl-entry" role="listitem">
 Hein, J., Schierup, M., &amp; Wiuf, C. (2004). Gene genealogies, variation and evolution. A primer in coalescent theory. In <em>Systematic Biology - SYST BIOL</em> (Vol. 54).
 </div>
+<div id="ref-hermisson_MathematicalPopulationGenetics_2017" class="csl-entry" role="listitem">
+Hermisson, J. (2017). <em>Mathematical population genetics</em>. <a href="https://www.mabs.at/teaching/files/Lecture%20Notes%202017.pdf">https://www.mabs.at/teaching/files/Lecture%20Notes%202017.pdf</a>
+</div>
+<div id="ref-leffler_RevisitingOldRiddle_2012" class="csl-entry" role="listitem">
+Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venkat, A., Andolfatto, P., &amp; Przeworski, M. (2012). Revisiting an <span>Old Riddle</span>: <span>What Determines Genetic Diversity Levels</span> within <span>Species</span>? <em>PLOS Biology</em>, <em>10</em>(9), e1001388. <a href="https://doi.org/10.1371/journal.pbio.1001388">https://doi.org/10.1371/journal.pbio.1001388</a>
+</div>
 <div id="ref-nei_MolecularEvolutionPhylogenetics_2000" class="csl-entry" role="listitem">
 Nei, M., &amp; Kumar, S. (2000). <em>Molecular <span>Evolution</span> and <span>Phylogenetics</span></em>. <span>Oxford University Press</span>.
 </div>
 </div>
 </section></section>
+
     </div>
   </div>
 
