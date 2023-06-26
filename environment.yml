@@ -26,6 +26,7 @@ dependencies:
   - python>=3.10
   - python-newick
   # - r-animation
+  - r-ape
   - r-codetools
   - r-curl
   - r-devtools

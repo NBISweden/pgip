@@ -1050,7 +1050,7 @@ library(leaflet)
 leaflet(height = 300, width = 800) %>%
   addTiles(urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>%
   # addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-  addMarkers(lat = 57.639327, lng = 18.288534, popup = "RaukR") %>%
+  addMarkers(lat = 57.639327, lng = 18.288534, popup = "PGIP") %>%
   setView(lat = 57.639327, lng = 18.288534, zoom = 15)
 ```
 
@@ -1111,7 +1111,9 @@ Sys.info()
 - Export HTML to PDF using PDF export mode by pressing **e**
 - For complete Quarto revealjs documentation, click [here](https://quarto.org/docs/presentations/revealjs/)
 
-## {background-image="../../assets/images/cover.jpg"}
+## {background-image="assets/cover.jpg"}
+
+Changed background image.
 
 ## Python code (WIP)
 
@@ -1133,4 +1135,4 @@ R.version[c("platform", "os", "major", "minor")]
 [Graphics from [freepik](https://www.freepik.com),
 [Pexels](https://www.pexels.com)]{.small} [2023 •
 [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/) •
-[RaukR](https://nbisweden.github.io/workshop-RaukR-2306/)]{.smallr}
+[PGIP](https://nbisweden.github.io/pgip/)]{.smallr}
