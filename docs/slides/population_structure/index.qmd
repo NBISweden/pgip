@@ -14,6 +14,37 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
+::: {.notes }
+
+Outline: (follow Hahn)
+
+- brief outline of what it is, including the Wahllund effect
+
+- Measuring population structure:
+  - f_st
+    - definition
+    - how to estimate: parameter vs statistic
+    - recommendations (Bahtia)
+  - alternative measures, notably dxy
+    - tree representation relating dxy and fst
+- evolutionary processes and structure
+  - selection
+    - show f_st in different regions (krill?)
+    - linked selection -> reduce / decrease *local* N_e
+  - migration / drift
+    - focus on neutral alleles
+- defining populations
+  - data exploration -> want to identify populations
+  - ADMIXTURE, STRUCTURE, fast-STRUCTURE
+    - elaborate on overfitting, how to identify best K
+
+Exercise:
+
+- f_st calculation and making an unrooted tree mapping
+- ADMIXTURE
+
+:::
+
 # Population structure
 
 ::: {.notes }

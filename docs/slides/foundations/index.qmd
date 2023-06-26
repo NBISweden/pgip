@@ -875,14 +875,14 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ```{r }
 #| label: fig-wright-fisher-model-gganimation-last
 #| echo: false
 #| eval: true
 #| fig-cap: |
-#|   Wright-Fisher model indicating time
+#|   WF model indicating time
 #|   direction from past (top) to present
 #|   (bottom).
 #| out-width: 100%
@@ -921,7 +921,7 @@ wf %>% ggplot_wf(.) +
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ::: {.fragment}
 
@@ -929,7 +929,7 @@ wf %>% ggplot_wf(.) +
 #| label: fig-wf-model-genealogy
 #| echo: false
 #| eval: true
-#| fig-cap: "Wright-Fisher model tracing the genealogies of three extant genes"
+#| fig-cap: "WF model tracing the genealogies of three extant genes"
 obj <- wf
 i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
 E(obj)$color <- "lightgray"
@@ -992,6 +992,31 @@ over 16 generations. Allele variants are shown in white and black.
 Starting frequency black variant is 0.3.
 
 ::::
+
+## The Wright-Fisher sampling model {.smaller}
+
+Let's formalise the sampling process of the Wright-Fisher model^[For a
+more extensive treatment, see
+[@hermisson_MathematicalPopulationGenetics_2017]]
+
+We assume
+
+1. a single locus in a haploid population of size N
+2. no mutation and selection
+3. discrete generations
+
+Each generation we sample N new individuals from the previous
+generation, which is equivalent to *multinomial sampling with
+replacement*. Then, the number of offspring of a given parent *i* is
+*binomially distributed*, with probability of success $p=\frac{1}{N}$:
+
+$$
+\mathrm{Pr}(x) = {N\choose x}\left( \frac{1}{N} \right)^x
+\left(1 - \frac{1}{N} \right)^{(N - x)}
+$$
+
+Under the assumption of random mating, a diploid population of size
+$N$ can be described by a haploid population of size $2N$
 
 ## Genetic drift
 
@@ -1091,6 +1116,10 @@ variance))
 
 ## Genetic drift
 
+:::: {.columns}
+
+::: {.column width="65%"}
+
 <!-- markdownlint-disable MD013 -->
 
 ```{r }
@@ -1099,7 +1128,11 @@ variance))
 #| eval: true
 #| fig-height: 8
 #| fig-width: 12
-#| fig-cap: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on  population size and starting frequency.
+#| fig-cap: |
+#|   Genetic drift for different combinations of starting
+#|   frequency and population size for n=50 repetitions per parameter
+#|   combination. Note how variation and time to fixation depends on
+#|   population size and starting frequency.
 ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
   geom_line() +
   xlim(1, 100) +
@@ -1109,13 +1142,36 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
 
 <!-- markdownlint-enable MD013 -->
 
-## Hardy-Weinberg equilibrium
+:::
 
-Detail the WF model and HWE
+::: {.column width="35%"}
+
+Probability of fixation $\propto p_0$
+
+:::
+
+::::
+
+::: {.notes }
+
+Simplifying assumptions -> rate of drift $propto \frac{1}{N}$
+[@leffler_RevisitingOldRiddle_2012]
+
+In reality population fluctuates and therefore Ne is substituted for
+N. Larger Ne -> smaller fluctuation in allele frequency (as evidenced
+in plots) -> maintain larger genetic diversity
+
+:::
 
 ## Heterozygosity dynamics
 
 Plot (expected) loss of heterozygosity along with real data example
+
+Heterozygisity in WF population lost at rate 1/2N
+
+## Hardy-Weinberg equilibrium
+
+Detail the WF model and HWE
 
 # Origin and change of variation
 
@@ -1262,6 +1318,37 @@ Move right after drift?
 - why population size matters
 - Fig 4.2, Eq 4.2 from Lynch
 
+::: {.notes }
+
+Mutation - drift balance. Simplifying assumptions -> rate of drift
+$propto \frac{1}{N}$ [@leffler_RevisitingOldRiddle_2012]
+
+In reality population fluctuates and therefore Ne is substituted for
+N. Larger Ne -> smaller fluctuation in allele frequency (as evidenced
+in plots) -> maintain larger genetic diversity
+
+Neutral diversity patterns depend not only on drift but also on rate
+at which variation changes at *linked sites*
+[@leffler_RevisitingOldRiddle_2012]
+
+:::
+
 ## Nearly neutral theory
 
 - Distribution of fitness effects?
+
+## Effect on genetic diversity
+
+::: {.notes }
+
+Mutation - drift balance. Mode of selection important:
+
+- selection for adaptation at new mutations decreases diversity more
+  than if at standing variation
+- balancing selection may *increase* variation
+
+Recombination
+
+- low recombination -> lower diversity (less reshuffling of variation)
+
+:::

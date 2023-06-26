@@ -14,6 +14,30 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
+::: {.notes }
+
+Outline:
+
+- what is admixture?
+- why do we do it?
+  - population history
+  - correction for GWAS
+  - breeding: failure to account for admixture leads to overestimate
+    of hereditability
+  - identify pure subpopulations for, e.g., prediction via pca
+- methods and theory
+  - f-statistics
+  - TreeMix
+  - qpGraph
+  - ADMIXTURE - estimates *proportions* of admixture and does not say
+    whether admixture has ocurred or not; cf population structure
+
+Exercise:
+
+- admixtools2?
+
+:::
+
 # Admixture and f-statistics
 
 Focus more generally on admixture and f-statistics

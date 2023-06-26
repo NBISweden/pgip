@@ -18,6 +18,7 @@ format:
 #| echo: false
 #| eval: true
 #| cache: false
+library(ape)
 library(gganimate)
 library(patchwork)
 library(igraph)
@@ -145,6 +146,1199 @@ exercise?). Genealogy and mutations:
 
 Note that #mutations propto branch length -> don't actually even need
 to know the mutations (e.g. fastsimcoal)
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-1
+#| echo: false
+#| eval: true
+#| out-height: 600px
+#| out-width: 500px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[leaf] (1) {}
+node[leaf, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[leaf, right of=3, node distance=60px] (4) {}
+node[leaf, right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+;
+
+\useasboundingbox (t5l.south west) rectangle (t1r.north east);
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-2
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[leaf] (1) {}
+node[leaf, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[leaf, right of=3, node distance=60px] (4) {}
+node[leaf, right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-3
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          selected/.style={circle,fill=black,minimum size=7pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[leaf] (1) {}
+node[leaf, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[selected, right of=3, node distance=60px] (4) {}
+node[selected, right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-4
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[leaf] (1) {}
+node[leaf, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node[leaf] at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+(4) -- (6)
+(5) -- (6)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-5
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[leaf] (1) {}
+node[leaf, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node[leaf] at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+(4) -- (6)
+(5) -- (6)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-6
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[leaf] (1) {}
+node[leaf, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node[leaf] at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+(4) -- (6)
+(5) -- (6)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-7
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          selected/.style={circle,fill=black, minimum size=7pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node[selected] (1) {}
+node[selected, right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node[leaf] at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+(4) -- (6)
+(5) -- (6)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-8
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          selected/.style={circle,fill=black, minimum size=7pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node (1) {}
+node[right of=1, node distance=60px] (2) {}
+node[leaf, right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node[leaf] at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node[leaf] at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+(4) -- (6)
+(5) -- (6)
+(1) -- (7)
+(2) -- (7)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-9
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          selected/.style={circle,fill=black, minimum size=7pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node (1) {}
+node[right of=1, node distance=60px] (2) {}
+node[right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node[leaf] at ($(1) !.6! (root) $) (8) {}
+node[leaf] at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+(4) -- (6)
+(5) -- (6)
+(1) -- (7)
+(2) -- (7)
+(7) -- (8)
+(3) -- (8)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-10
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          selected/.style={circle,fill=black, minimum size=7pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node (1) {}
+node[right of=1, node distance=60px] (2) {}
+node[right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[leaf, above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+(4) -- (6)
+(5) -- (6)
+(1) -- (7)
+(2) -- (7)
+(7) -- (8)
+(3) -- (8)
+(8) -- (root)
+(6) -- (root)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$$^1$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+::: {.smallr}
+
+$^1$: The exponential can be parametrized in two different ways, so
+that the parameter to the function is either $\lambda$ or
+$\beta=1/\lambda$.
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: simulate-genealogy-11
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 600px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          selected/.style={circle,fill=black, minimum size=7pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node (1) {}
+node[right of=1, node distance=60px] (2) {}
+node[right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+(4) -- (6)
+(5) -- (6)
+(1) -- (7)
+(2) -- (7)
+(7) -- (8)
+(3) -- (8)
+(8) -- (root)
+(6) -- (root)
+;
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\begin{scope}
+\clip (0, 0) rectangle (0, 0);
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{scope}
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1. Start with $i=n$ chromosomes
+2. Choose time to next coalescent event from an exponential
+    distribution with parameter $\lambda=i(i-1)/2$$^1$
+3. Choose two chromosomes at random to coalesce
+4. Merge the two lineages and set $i \rightarrow i - 1$
+5. If $i>1$, go to step 2; if not, stop.
+
+::: {.smallr}
+
+$^1$: The exponential can be parametrized in two different ways, so
+that the parameter to the function is either $\lambda$ or
+$\beta=1/\lambda$.
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+```{tikz, fig.ext="svg" }
+#| label: fig-simulate-genealogy-end
+#| echo: false
+#| eval: true
+#| fig-cap:
+#|   A simulated genealogy. The $T_i$ represent the
+#|   waiting time when the state has $i$ chromosomes.
+#| out-height: 600px
+#| out-width: 500px
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=5pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node (1) {}
+node[right of=1, node distance=60px] (2) {}
+node[right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=60px] (4) {}
+node[right of=4, node distance=20px] (5) {}
+node at ($(1) !.5! (5)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(1) !.3! (root) $) (7) {}
+node at ($(1) !.6! (root) $) (8) {}
+node at ($(5) !.1! (root) $) (6) {}
+node[left of=1, node distance=40px] (t5l) {}
+node[right of=5, node distance=40px] (t5r) {}
+node at ($(t5l |- 6)$) (t4l) {}
+node at ($(t5r |- 6)$) (t4r) {}
+node at ($(t4l |- 7)$) (t3l) {}
+node at ($(t4r |- 7)$) (t3r) {}
+node at ($(t3l |- 8)$) (t2l) {}
+node at ($(t3r |- 8)$) (t2r) {}
+node at ($(t2l |- root)$) (t1l) {}
+node at ($(t2r |- root)$) (t1r) {}
+;
+
+\draw
+(1) -- (root)
+(5) -- (root)
+(7) -- (2)
+(8) -- (3)
+(4) -- (6)
+;
+
+\draw
+node at ($(t5r) !.5! (t4r)$) (T5) {$T_5$}
+node at ($(t4r) !.5! (t3r)$) (T4) {$T_4$}
+node at ($(t3r) !.5! (t2r)$) (T3) {$T_3$}
+node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
+;
+
+\draw[dotted]
+(t5l) -- (t5r)
+(t4l) -- (t4r)
+(t3l) -- (t3r)
+(t2l) -- (t2r)
+(t1l) -- (t1r)
+;
+\end{tikzpicture}
+```
+
+:::
+
+::::
+
+## Variation in topology and height
+
+::: {style="transform:  translate(-300px, 0);"}
+
+::: {style="transform: rotate(180deg);"}
+
+```{r }
+#| label: genealogy-variation
+#| echo: false
+#| eval: true
+#| out-height: 500px
+set.seed(20)
+mykronoviz <- function(x, layout = length(x), ...) {
+  par(mar = rep(0.5, 4), oma = rep(0, 4))
+  rts <- sapply(x, function(x) branching.times(x)[1])
+  maxrts <- max(rts)
+  lim <- cbind(rts - maxrts, rts)
+  Ntree <- length(x)
+  Ntips <- sapply(x, Ntip)
+  nrow <- 1
+  w <- Ntips
+  h <- 1
+  layout(matrix(1:layout, nrow), widths = w, heights = h)
+  for (i in 1:Ntree) {
+    plot(x[[i]],
+      y.lim = lim[i, ], direction = "u",
+      ...
+    )
+  }
+}
+trees <- lapply(rep(5, 6), rcoal, simplify = FALSE)
+mykronoviz(trees, type = "c", show.tip.label = FALSE, edge.width = 3)
+```
+
+:::
+
+:::
+
+## Adding mutations
+
+```{tikz, fig.ext="svg" }
+#| label: fig-add-mutations
+#| echo: false
+#| eval: true
+#| out-width: 500px
+#| out-height: 500px
+#| fig-cap:
+#|   Adding mutations on a coalescent genealogy.
+\begin{tikzpicture}[
+          ultra thick, inner sep=0, outer sep=0,
+          leaf/.style={circle,fill=black,minimum size=10pt},
+          level distance=100px,
+          every node/.style={font=\Large},
+          ]
+\draw
+node (1) {}
+node[right of=1, node distance=120px] (2) {}
+node[right of=2, node distance=80px] (3) {}
+node[right of=3, node distance=80px] (4) {}
+node at ($(1) !.5! (4)$) (mid) {}
+node[above of=mid, node distance=300px] (root) {}
+node at ($(4) !.6! (root) $) (6) {}
+node at ($(2) !.5! (6) $) (5) {}
+
+;
+\draw
+(1) -- (root)
+(4) -- (root)
+(2) -- (6)
+(3) -- (5);
+
+\end{tikzpicture}
+```
 
 ## The coalescent: diminishing returns
 
