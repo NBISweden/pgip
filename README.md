@@ -27,6 +27,13 @@ environment variable:
     make install-bcftools
     make install-dev
 
+If the above commands have worked without issues you are done and you
+can head over to the section on [rendering
+documents](#local-previewrender). If not, start by reading the
+following sections that describe each installation step in more
+detail. There is also a section on [known installation
+issues](#installation-issues).
+
 ### Create pgip conda environment
 
 Create a conda environment called `pgip` using the environment file

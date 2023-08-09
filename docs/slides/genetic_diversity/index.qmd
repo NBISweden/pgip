@@ -47,7 +47,8 @@ passing here, and refer to section on demography later on.
 a rapid decrease of population size during last few generations will
 lead to significant reduction in heterozygosity.
 
-Genetic diversity is not the only issue for conservation however [@lewis_BiggestEverStudy_2023]:
+Genetic diversity is not the only issue for conservation however
+[@lewis_BiggestEverStudy_2023]:
 
 >The analysis of all 233 species’ genomes also has implications for
 >conservation. For example, it shows that genetic diversity within a
@@ -85,7 +86,8 @@ head(data)
 
 ::: {.notes }
 
-Riddle: why is genetic diversity range so narrow? Possibly there are lower and upper limits.
+Riddle: why is genetic diversity range so narrow? Possibly there are
+lower and upper limits.
 
 Lower limit: censoring effect, i.e., when diversity passes a lower
 limit, population is driven to extinction due to inability to adapt
@@ -101,7 +103,8 @@ selection; little support for this in literature.
 Purifying selection. Nearly neutral model could explain narrow range.
 
 [@ellegren_DeterminantsGeneticDiversity_2016] Upper limit could in
-part be explained by linked selection [@corbett-detig_NaturalSelectionConstrains_2015]
+part be explained by linked selection
+[@corbett-detig_NaturalSelectionConstrains_2015]
 
 :::
 
