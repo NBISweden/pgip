@@ -36,6 +36,14 @@ evolutionary processes:
 - duality tree-based stats - summary stats (Ralph/Kelleher)
 - how they can be used to calculate outlier stats
 
+A compelling argument for the necessity of simulations is given by
+[@gillespie_PopulationGeneticsConcise_2004], who observes that hardly
+any analytical solutions exist for multi-locus models and that
+therefore simulation is the only resort to understand allele frequency
+dynamics.
+
+Simulated data are often used to validate new methods.
+
 :::
 
 # Forward simulation

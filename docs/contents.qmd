@@ -60,11 +60,10 @@ model consisting of all or several of the following components:
 
 1. mutation
 2. recombination
-3. reassortment
-4. gene conversion
-5. purifying selection acting on functional regions and its effects on
+3. gene conversion
+4. purifying selection acting on functional regions and its effects on
    linked variants (background selection)
-6. genetic drift with demographic history and geographic structure
+5. genetic drift with demographic history and geographic structure
 
 The exercises are designed to address many of the points above, and to
 highlight cases where competing hypotheses may actually explain data
