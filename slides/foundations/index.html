@@ -416,7 +416,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">09-Aug-2023</h4>
+  <h4 class="date">14-Aug-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1010,8 +1010,8 @@
 <p>Much of the nucleotide variation we study consists of <em>bi-allelic</em> SNPs. The most common variant is called the <em>major</em> allele, and the least common the <em>minor</em> allele.</p>
 <p>The set of alleles found on a single sequence is called <em>haplotype</em>.</p>
 </section>
-<section id="describing-dna-variation" class="slide level2 smaller">
-<h2>Describing DNA variation</h2>
+<section id="describing-dna-variation---heterozygosity" class="slide level2 smaller">
+<h2>Describing DNA variation - heterozygosity</h2>
 <div class="dna">
 <table style="width:75%;">
 <colgroup>
@@ -1264,12 +1264,15 @@
       }</style></aside>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="fragment">
+<!-- -->
 <h4 id="heterozygosity">Heterozygosity</h4>
 <p>The <em>heterozygosity</em> at a site <span class="math inline">\(j\)</span> is given by</p>
 <p><span class="math display">\[
 h_j = \frac{n}{n-1}\left(1 - \sum_i p_i^2\right)
 \]</span></p>
 <p>where the summation is over all alleles and <span class="math inline">\(p_i\)</span> is the frequency of the <span class="math inline">\(i\)</span>-th allele</p>
+</div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <!-- -->
@@ -1287,8 +1290,8 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 </section>
-<section id="describing-dna-variation-1" class="slide level2">
-<h2>Describing DNA variation</h2>
+<section id="describing-dna-variation---nucleotide-diversity" class="slide level2">
+<h2>Describing DNA variation - nucleotide diversity</h2>
 <div class="dna">
 <table style="width:75%;">
 <colgroup>
@@ -1418,12 +1421,15 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="fragment">
+<!-- -->
 <h3 id="nucleotide-diversity-pi">Nucleotide diversity <span class="math inline">\(\pi\)</span></h3>
 <p>The <em>nucleotide diversity</em> is the sum of site heterozygosities:</p>
 <p><span class="math display">\[
 \pi = \sum_{j=1}^S h_j
 \]</span></p>
 <p>where <span class="math inline">\(S\)</span> is the number of segregating sites</p>
+</div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <!-- -->
@@ -2089,6 +2095,15 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </section>
 <section id="selection-1" class="slide level2">
 <h2>Selection</h2>
+<p><span class="math display">\[
+\begin{matrix}
+\mathrm{Genotype} &amp; A_1A_1 &amp; A_1A_2 &amp; A_2A_2 \\
+\mathrm{Fitnesses} &amp; w_{11} &amp; w_{12} &amp; w_{22}\\
+\mathrm{Observations} &amp; 1.5 &amp; 1.1 &amp; 1.0 \\
+\mathrm{Relative\ fitness} &amp; 1 &amp; 1-hs &amp; 1-s\\
+\mathrm{Normalized} &amp; 1 &amp; 11 / 15 &amp; 10 / 15
+\end{matrix}
+\]</span></p>
 <p>Relative fitness.</p>
 <p>Define s, positive and negative selection</p>
 </section>
