@@ -77,6 +77,7 @@ repos:
           (?x)^(
           renv/activate\.R|
           docs/slides/datageneration/index\.qmd|
+          docs/slides/foundations/index\.qmd|
           docs/exercises/data_filtering/index\.qmd|
           docs/slides/population_structure/index\.qmd
           )$

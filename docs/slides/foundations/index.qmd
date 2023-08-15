@@ -387,6 +387,38 @@ $$
 
 ::::
 
+## Equilibrium state of alleles in absence of evolutionary forces
+
+### The Hardy-Weinberg equilibrium
+
+For a locus, let $A_1$ and $A_2$ be two different alleles and let $p$
+be the frequency of the $A_1$ allele and $q=1-p$ the frequency of the
+$A_2$ allele. In the **absence** of **mutation**, **drift**,
+**migration**, and other evolutionary processes, the equilibrium state
+is given by the **Hardy-Weinberg equilibrium** (**HWE**).
+
+|            |          |          |          |
+|------------|----------|----------|----------|
+| Genotype:  | $A_1A_1$ | $A_1A_2$ | $A_2A_2$ |
+| Frequency: | $p^2$    | $2pq$    | $q^2$    |
+
+Importantly, under the HWE assumption, we can calculate allele
+frequencies from genotype frequencies and vice versa:
+
+$$
+p = p^2 + pq\\
+q = q^2 + pq
+$$
+
+::: {.notes }
+
+Segway: apart from describing the variation we want to model how
+allele frequencies *change* in time. As
+[@gillespie_PopulationGeneticsConcise_2004] points out, measuring
+allele frequencies is easy, measuring their change, however, is not
+
+:::
+
 # Models of populations
 
 ## Wright-Fisher model {.smaller}
@@ -1173,13 +1205,118 @@ in plots) -> maintain larger genetic diversity
 
 ## Heterozygosity dynamics
 
-Plot (expected) loss of heterozygosity along with real data example
+:::: {.columns}
 
-Heterozygisity in WF population lost at rate 1/2N
+::: {.column width="50%"}
 
-## Hardy-Weinberg equilibrium
+```{r, engine='tikz', fig.ext="svg" }
+#| label: fig-identity-by-state-and-descent
+#| echo: false
+#| eval: true
+#| out-width: 70%
+#| fig-cap: Illustration of identity by descent and state.
+\begin{tikzpicture}
+\node (n_2) {$n-2$};
+\node[right of=n_2] (nl0) {};
+\node[right of=nl0] (n0) {\ttfamily-aac-};
+\node[right of=n0] (nr0) {};
+\node[below of=nl0,anchor=north] (n1) {\ttfamily-aac-};
+\node[below of=nr0,anchor=north] (n2) {\ttfamily-aac-};
+  \node[below of=n1,anchor=north] (n3) {\ttfamily-aac-};
+  \node[below of=n2,anchor=north] (n4) {\ttfamily-aag-};
+  \node[left of=n1] (nm1) {$n - 1$};
+  \node[left of=n3] {$n$};
+  \draw[->] (n0) -- (n1);
+  \draw[->] (n0) -- (n2);
+  \draw[->] (n1) -- (n3);
+  \draw[->] (n2) -- (n4);
+\end{tikzpicture}
+```
 
-Detail the WF model and HWE
+:::
+
+::: {.column width="50%"}
+
+Let $\mathcal{H}_t$ be the probability that two alleles are *identical
+by state*. The time course evolution of $\mathcal{H}_t$ in a randomly
+mating population consisting of $N$ diploid hermaphroditic individuals
+is
+
+$$
+\mathcal{H}_t = \mathcal{H}_0 \left( 1 - \frac{1}{2N} \right)^t
+$$
+
+Important consequence: heterozygosity in WF population lost at rate
+$1/2N$.
+
+:::
+
+::::
+
+::: {.notes }
+
+Motivation: mathematical description of genetic drift complicated for
+populations with more than one individual. Easier to study the
+evolution of heterozygosity.
+
+:::
+
+## Heterozygosity dynamics
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-gillespie-2.4
+#| echo: false
+#| eval: true
+#| fig-cap: Plot of $\mathcal{H}_t$.
+#| out-width: 70%
+het_t <- function(N=1, t=0:100, H0=1) {
+  H0 * (1 - 1/(2*N))^t
+}
+tmax <- 100
+t <- 0:tmax
+data <- data.frame(
+    population_size = c(
+        rep(1, length(t)),
+        rep(10, length(t)),
+        rep(100, length(t)),
+        rep(1e6, length(t))),
+    het = c(het_t(N=1), het_t(N=10), het_t(N=100), het_t(N=1e6)),
+    tn = rep(t, 4)
+)
+ggplot(data, aes(x=tn, y=het, shape=factor(population_size))) +
+  geom_point(size=3) + geom_line() + xlab("generation") +
+  ylab("heterozygosity") + guides(shape=guide_legend(title="Size"))
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-black-footed-ferret
+#| echo: false
+#| eval: true
+#| out-width: 70%
+#| fig-cap: Heterozygosity in black-footed ferret [@wisely_GeneticDiversityFitness_2002]
+# cf: https://github.com/cooplab/popgen-notes/blob/master/Journal_figs/genetic_drift/black_footed_ferrets/black-footed-ferrets_He.csv
+data <- data.frame(date=c(1891, 1972, 1985, 1986),
+                   He=c(0.231284916, 0.210335196,
+                        0.101396648, 0.067877095),
+                   N=c("N>10k", "N=62", "N=40", "N=7")
+                   )
+ggplot(data, aes(x=date, y=He, label=N)) + geom_line() + geom_point() +
+  xlab("year") + ylab("heterozygosity") + geom_text(nudge_y=.005, nudge_x=2)
+```
+
+:::
+
+::::
+
+## Effective population size
 
 # Origin and change of variation
 
@@ -1210,8 +1347,8 @@ equals the diversity gained due to mutation.
 #| echo: false
 #| eval: true
 #| fig-height: 15
-#| fig-width: 10
-#| out-height: 600px
+#| fig-width: 12
+#| out-height: 500px
 #| out-width: 400px
 #| fig-cap: |
 #|   Variation is introduced by mutations (black) at rate $\mu=1e^{-4}$
@@ -1270,24 +1407,84 @@ wf %>%
 
 ## Models of mutation
 
-::: {.dna .small}
+<!-- markdownlint-disable MD013 -->
 
-| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:--:|
-| T | T | A | C | A | A | T | C | C | G  | A  | T  | C  | G  | T  |
-| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
-| T | C | A | C | A | A | T | G | C | G  | A  | T  | G  | G  | A  |
-| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
+```{r, engine='tikz', fig.ext="svg" }
+#| label: mutation-models
+#| echo: false
+#| eval: true
+\usetikzlibrary{fit,decorations.pathreplacing}
 
-: Sequence aligmnent of four DNA sequences
-  [@hahn_MolecularPopulationGenetics_2019, Fig 1.1].
-  {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
+\begin{tikzpicture}[
+  every matrix/.style={matrix of nodes, ampersand replacement=\&,
+    nodes in empty cells},
+  every node/.style={text height=1.5ex},
+  ]
+\tikzstyle{sequence} = [black, font=\sffamily, column sep={.5cm,between origins}]
+  \matrix(seq)[sequence] at (0,0)
+  {
+    T \& T \& A \& C \& A \& A \& T \& C \& C \& G \& A \& T \& C \& G \& C\\
+    T \& T \& A \& C \& G \& A \& T \& G \& C \& G \& C \& T \& C \& G \& C\\
+    T \& C \& A \& C \& A \& A \& T \& G \& C \& G \& A \& T \& G \& G \& A\\
+     T \& T \& A \& C \& G \& A \& T \& G \& C \& G \& C \& T \& C \& G \& T\\
+  };
+\node[fit={(seq-1-2.north west) (seq-4-2.south east)}, inner sep=0, draw=black]{};
+\node[fit={(seq-1-15.north west) (seq-4-15.south east)}, inner sep=0, draw=black]{};
+\node[above of=seq-1-2, node distance=1.2cm] (two-allele) {Two-allele model};
+\draw (seq-1-2.north) -- (two-allele);
+\node[above of=seq-1-15, node distance=1.2cm] (finite) {Finite sites model};
+\draw (seq-1-15.north) -- (finite);
+\draw[decorate,decoration={brace,raise=0.2cm}] (seq-1-15.north east) -- (seq-4-15.south east);
+\node at ($(seq-3-15) !.5! (seq-2-15)$) (seq-right) {};
+\node[anchor=west, text width=1cm, right of=seq-right, node distance=1.2cm] (infinite-alleles) {Inifinite alleles model};
+\node at ($(seq-4-1) !.5! (seq-4-15)$) (seq-low) {};
+\draw[decorate,decoration={brace,mirror,raise=0.2cm}] (seq-4-1.south west) -- (seq-4-15.south east);
+\node[below of=seq-low, node distance=.8cm] (infinite-sites) {Inifinite sites model};
+\end{tikzpicture}
+```
+
+::: {.fragment}
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: stepwise-mutation-model
+#| echo: false
+#| eval: true
+#| out-width: 1000px
+\begin{tikzpicture}[
+  every matrix/.style={matrix of nodes, ampersand replacement=\&,
+    nodes in empty cells},
+  every node/.style={text height=2ex},
+  ]
+  \tikzstyle{sequence} = [black, font=\sffamily, column sep={1.5cm,between origins},row sep={.7cm}]
+  \matrix(seq)[sequence] at (0,0)
+  {
+$\mathsf{A}_{i-3}$ \&  $\mathsf{A}_{i-2}$ \&  $\mathsf{A}_{i-1}$ \& $\mathsf{A}_{i}$ \&  $\mathsf{A}_{i+1}$ \&  $\mathsf{A}_{i+2}$ \& $\mathsf{A}_{i+3}$ \\
+  \&   \&  \&   \&   \&  \&  \\
+  };
+\draw[<->] (seq-1-1) -- (seq-1-2);
+\draw[<->] (seq-1-2) -- (seq-1-3);
+\draw[<->] (seq-1-3) -- (seq-1-4);
+\draw[<->] (seq-1-4) -- (seq-1-5);
+\draw[<->] (seq-1-5) -- (seq-1-6);
+\draw[<->] (seq-1-6) -- (seq-1-7);
+\node[left of=seq-1-1, node distance=0.7cm] {...};
+\node[right of=seq-1-7, node distance=0.7cm] {...};
+\draw[thick] (seq-2-1.south) -- (seq-2-1.north)
+(seq-2-2.south) -- (seq-2-2.north)
+(seq-2-3.south) -- (seq-2-3.north)
+(seq-2-4.south) -- (seq-2-4.north)
+(seq-2-5.south) -- (seq-2-5.north)
+(seq-2-6.south) -- (seq-2-6.north)
+(seq-2-7.south) -- (seq-2-7.north);
+
+\draw[thick] (seq-2-1.west) -- (seq-2-7.east);
+\node[above of=seq-1-4] {Stepwise mutation model};
+\end{tikzpicture}
+```
 
 :::
 
-## Heterozygosity
-
-Trace a plot showing decline in heterozygosity - see <https://bio.libretexts.org/Bookshelves/Genetics/Population_and_Quantitative_Genetics_(Coop)/04%3A_Genetic_Drift_and_Neutral_Diversity>
+<!-- markdownlint-enable MD013 -->
 
 ## Mutation drift balance
 
