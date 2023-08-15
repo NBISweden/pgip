@@ -416,7 +416,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">14-Aug-2023</h4>
+  <h4 class="date">15-Aug-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1453,6 +1453,45 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 </div>
+</section>
+<section id="equilibrium-state-of-alleles-in-absence-of-evolutionary-forces" class="slide level2">
+<h2>Equilibrium state of alleles in absence of evolutionary forces</h2>
+<h3 id="the-hardy-weinberg-equilibrium">The Hardy-Weinberg equilibrium</h3>
+<p>For a locus, let <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span> be two different alleles and let <span class="math inline">\(p\)</span> be the frequency of the <span class="math inline">\(A_1\)</span> allele and <span class="math inline">\(q=1-p\)</span> the frequency of the <span class="math inline">\(A_2\)</span> allele. In the <strong>absence</strong> of <strong>mutation</strong>, <strong>drift</strong>, <strong>migration</strong>, and other evolutionary processes, the equilibrium state is given by the <strong>Hardy-Weinberg equilibrium</strong> (<strong>HWE</strong>).</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>Genotype:</td>
+<td><span class="math inline">\(A_1A_1\)</span></td>
+<td><span class="math inline">\(A_1A_2\)</span></td>
+<td><span class="math inline">\(A_2A_2\)</span></td>
+</tr>
+<tr class="even">
+<td>Frequency:</td>
+<td><span class="math inline">\(p^2\)</span></td>
+<td><span class="math inline">\(2pq\)</span></td>
+<td><span class="math inline">\(q^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Importantly, under the HWE assumption, we can calculate allele frequencies from genotype frequencies and vice versa:</p>
+<p><span class="math display">\[
+p = p^2 + pq\\
+q = q^2 + pq
+\]</span></p>
+<aside class="notes">
+<p>Segway: apart from describing the variation we want to model how allele frequencies <em>change</em> in time. As <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Gillespie, 2004</a>)</span> points out, measuring allele frequencies is easy, measuring their change, however, is not</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="models-of-populations" class="title-slide slide level1 center">
@@ -1915,12 +1954,70 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </section>
 <section id="heterozygosity-dynamics" class="slide level2">
 <h2>Heterozygosity dynamics</h2>
-<p>Plot (expected) loss of heterozygosity along with real data example</p>
-<p>Heterozygisity in WF population lost at rate 1/2N</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-identity-by-state-and-descent_f998d4454f8e711f556970ff1392f30b">
+<div class="cell-output-display">
+<div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;6: Illustration of identity by descent and state.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-identity-by-state-and-descent-1.svg" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Let <span class="math inline">\(\mathcal{H}_t\)</span> be the probability that two alleles are <em>identical by state</em>. The time course evolution of <span class="math inline">\(\mathcal{H}_t\)</span> in a randomly mating population consisting of <span class="math inline">\(N\)</span> diploid hermaphroditic individuals is</p>
+<p><span class="math display">\[
+\mathcal{H}_t = \mathcal{H}_0 \left( 1 - \frac{1}{2N} \right)^t
+\]</span></p>
+<p>Important consequence: heterozygosity in WF population lost at rate <span class="math inline">\(1/2N\)</span>.</p>
+</div>
+</div>
+<aside class="notes">
+<p>Motivation: mathematical description of genetic drift complicated for populations with more than one individual. Easier to study the evolution of heterozygosity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="hardy-weinberg-equilibrium" class="slide level2">
-<h2>Hardy-Weinberg equilibrium</h2>
-<p>Detail the WF model and HWE</p>
+<section id="heterozygosity-dynamics-1" class="slide level2">
+<h2>Heterozygosity dynamics</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-gillespie-2.4_f7bd6699fc84473f60af1e607f3175b4">
+<div class="cell-output-display">
+<div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;7: Plot of <span class="math inline">\(\mathcal{H}_t\)</span>.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_f8419bf1dde49e5984ee63244f5ff196">
+<div class="cell-output-display">
+<div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;8: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span></figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="effective-population-size" class="slide level2">
+<h2>Effective population size</h2>
 </section></section>
 <section>
 <section id="origin-and-change-of-variation" class="title-slide slide level1 center">
@@ -1935,12 +2032,12 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <p>The <em>mutation rate</em> is denoted <span class="math inline">\(\mu\)</span>, and the <em>population scaled</em> mutation rate is <span class="math inline">\(2N_e\mu\)</span> for haploid populations, <span class="math inline">\(4N_e\mu\)</span> for diploid, where <span class="math inline">\(N_e\)</span> is the <em>effective population size</em>.</p>
 <p>The <em>mutation - drift balance</em> is when the diversity lost due to drift equals the diversity gained due to mutation.</p>
 </div><div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-mutation_546165eb2d46f985dca01422fc140cc2">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-mutation_991753748542c1791bf543655453779e">
 <div class="cell-output-display">
 <div id="fig-wf-mutation" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;6: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-mutation-1.png" width="400" height="600"></p>
+<figcaption>Figure&nbsp;9: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-wf-mutation-1.png" width="400" height="500"></p>
 </figure>
 </div>
 </div>
@@ -1956,7 +2053,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <div class="cell-output-display">
 <div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;7: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
+<figcaption>Figure&nbsp;10: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.png" width="600" height="600"></p>
 </figure>
 </div>
@@ -1969,121 +2066,20 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </section>
 <section id="models-of-mutation" class="slide level2">
 <h2>Models of mutation</h2>
-<div class="dna small">
-<table style="width:75%;">
-<caption>Sequence aligmnent of four DNA sequences <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/effect-on-genetic-diversity" role="doc-biblioref" onclick="">Hahn, 2019</a>, Fig 1.1)</span>. </caption>
-<colgroup>
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">9</th>
-<th style="text-align: center;">10</th>
-<th style="text-align: center;">11</th>
-<th style="text-align: center;">12</th>
-<th style="text-align: center;">13</th>
-<th style="text-align: center;">14</th>
-<th style="text-align: center;">15</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">T</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">T</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">A</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">A</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">C</td>
-<td style="text-align: center;">G</td>
-<td style="text-align: center;">T</td>
-</tr>
-</tbody>
-</table>
+<!-- markdownlint-disable MD013 -->
+<div class="cell" data-hash="index_cache/revealjs/mutation-models_3f70c997ca56276a30990761aadd9c91">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/mutation-models-1.svg" width="960"></p>
 </div>
-</section>
-<section id="heterozygosity-1" class="slide level2">
-<h2>Heterozygosity</h2>
-<p>Trace a plot showing decline in heterozygosity - see <a href="https://bio.libretexts.org/Bookshelves/Genetics/Population_and_Quantitative_Genetics_(Coop)/04%3A_Genetic_Drift_and_Neutral_Diversity" class="uri">https://bio.libretexts.org/Bookshelves/Genetics/Population_and_Quantitative_Genetics_(Coop)/04%3A_Genetic_Drift_and_Neutral_Diversity</a></p>
+</div>
+<div class="fragment">
+<div class="cell" data-hash="index_cache/revealjs/stepwise-mutation-model_32e1c231beacfa65c02c72702dc6b636">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/stepwise-mutation-model-1.svg" width="1000"></p>
+</div>
+</div>
+</div>
+<!-- markdownlint-enable MD013 -->
 </section>
 <section id="mutation-drift-balance" class="slide level2">
 <h2>Mutation drift balance</h2>
@@ -2188,6 +2184,9 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <div id="ref-casillas_MolecularPopulationGenetics_2017" class="csl-entry" role="listitem">
 Casillas, S., &amp; Barbadilla, A. (2017). Molecular <span>Population Genetics</span>. <em>Genetics</em>, <em>205</em>(3), 1003–1035. <a href="https://doi.org/10.1534/genetics.116.196493">https://doi.org/10.1534/genetics.116.196493</a>
 </div>
+<div id="ref-gillespie_PopulationGeneticsConcise_2004" class="csl-entry" role="listitem">
+Gillespie, J. H. (2004). <em>Population <span>Genetics</span>: <span>A Concise Guide</span></em> (2nd edition). <span>Johns Hopkins University Press</span>.
+</div>
 <div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="listitem">
 Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
 </div>
@@ -2205,6 +2204,9 @@ Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venka
 </div>
 <div id="ref-nei_MolecularEvolutionPhylogenetics_2000" class="csl-entry" role="listitem">
 Nei, M., &amp; Kumar, S. (2000). <em>Molecular <span>Evolution</span> and <span>Phylogenetics</span></em>. <span>Oxford University Press</span>.
+</div>
+<div id="ref-wisely_GeneticDiversityFitness_2002" class="csl-entry" role="listitem">
+Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander, E. A. (2002). Genetic <span>Diversity</span> and <span>Fitness</span> in <span>Black-Footed Ferrets Before</span> and <span>During</span> a <span>Bottleneck</span>. <em>Journal of Heredity</em>, <em>93</em>(4), 231–237. <a href="https://doi.org/10.1093/jhered/93.4.231">https://doi.org/10.1093/jhered/93.4.231</a>
 </div>
 </div>
 </section></section>
