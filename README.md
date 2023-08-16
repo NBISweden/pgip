@@ -10,7 +10,7 @@ sure to read the entire README before adding material.
 
 Clone the repo
 
-    git clone https://github.com/NBISweden/pgip.git
+    git clone https://github.com/NBISweden/workshop-pgip.git
 
 and follow the instructions below.
 
