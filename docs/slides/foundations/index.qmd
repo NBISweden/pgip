@@ -387,20 +387,20 @@ $$
 
 ::::
 
-## Equilibrium state of alleles in absence of evolutionary forces
+## In absence of evolutionary forces alleles are in equilibrium
 
 ### The Hardy-Weinberg equilibrium
 
-For a locus, let $A_1$ and $A_2$ be two different alleles and let $p$
-be the frequency of the $A_1$ allele and $q=1-p$ the frequency of the
-$A_2$ allele. In the **absence** of **mutation**, **drift**,
+For a locus, let $A$ and $a$ be two different alleles and let $p$
+be the frequency of the $A$ allele and $q=1-p$ the frequency of the
+$a$ allele. In the **absence** of **mutation**, **drift**,
 **migration**, and other evolutionary processes, the equilibrium state
 is given by the **Hardy-Weinberg equilibrium** (**HWE**).
 
-|            |          |          |          |
-|------------|----------|----------|----------|
-| Genotype:  | $A_1A_1$ | $A_1A_2$ | $A_2A_2$ |
-| Frequency: | $p^2$    | $2pq$    | $q^2$    |
+|            |       |       |       |
+|------------|-------|-------|-------|
+| Genotype:  | $AA$  | $Aa$  | $aa$  |
+| Frequency: | $p^2$ | $2pq$ | $q^2$ |
 
 Importantly, under the HWE assumption, we can calculate allele
 frequencies from genotype frequencies and vice versa:
@@ -412,14 +412,55 @@ $$
 
 ::: {.notes }
 
-Segway: apart from describing the variation we want to model how
-allele frequencies *change* in time. As
-[@gillespie_PopulationGeneticsConcise_2004] points out, measuring
-allele frequencies is easy, measuring their change, however, is not
+Segue: apart from describing the variation we want to model how allele
+frequencies *change* in time. As
+[@gillespie_PopulationGeneticsConcise_2004, preface p. xi] points out,
+"While genotype frequencies are easily measured, their change is not"
+
+:::
+
+::: {.notes }
+
+Segue: describing variation fine, but where does it come from and how does it change?
+
+If assumptions of HWE hold, we have no change of variation. However,
+we **want** to look at **change** of variation and disentangle the
+forces that imposes change
+
+:::
+
+## The obsession of population genetics
+
+Population genetics is about [@gillespie_PopulationGeneticsConcise_2004]
+
+1. describing the genetic structure of populations
+2. constructing theories on the forces that influence genetic
+   variation
+
+::: {.fragment}
+
+Questions to ponder:
+
+- why does variation look the way it does?
+- how is variation maintained?
+- how does variation change over time ($\Delta p$)?
+- what forces shape the genetic structure of *populations*?
+
+:::
+
+::: {.notes }
+
+From HWE: we want to look a the creation, maintenance and loss of
+variation and what forces affect it
+
+Goal: describe theory behind evolving populations. This has been an
+obsession for a long time, even before DNA was known -> back to basics
 
 :::
 
 # Models of populations
+
+FIXME: what is segue from previous slide?
 
 ## Wright-Fisher model {.smaller}
 
@@ -427,8 +468,9 @@ allele frequencies is easy, measuring their change, however, is not
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 ::: {.incremental}
 
@@ -451,7 +493,9 @@ under the following assumptions [@hein2005gene]:
 
 ::: {.notes }
 
-See @hein_GeneGenealogies_2004 for more assumptions.
+See @hein_GeneGenealogies_2004 for more assumptions. The second
+assumption means we can use 2N chromosome interchangeably for haploid
+(n=2N) and diploid (n=N) populations.
 
 :::
 
@@ -461,8 +505,9 @@ See @hein_GeneGenealogies_2004 for more assumptions.
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -510,8 +555,9 @@ ggplot_wf(wf %>% filter(y == 0), y_range = y_range) +
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -552,8 +598,9 @@ wf %>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -599,8 +646,9 @@ wf %E>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -646,8 +694,9 @@ wf %E>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -693,8 +742,9 @@ wf %E>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -740,8 +790,9 @@ wf %E>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -787,8 +838,9 @@ wf %E>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -833,8 +885,9 @@ wf %E>%
 
 ::: {.column width="50%"}
 
-Model of evolution that describes sampling of alleles in a population
-under the following assumptions [@hein2005gene]:
+Model of populations that describes **genealogical** relationships of
+genes (chromosomes) in a population under the following assumptions
+[@hein2005gene]:
 
 - discrete and non-overlapping generations
 - haploid individuals or two subpopulations (males and females)
@@ -993,6 +1046,88 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 ::::
 
+## The Wright-Fisher sampling model
+
+Let's formalise the sampling process of the Wright-Fisher model^[For a
+more extensive treatment, see
+[@hermisson_MathematicalPopulationGenetics_2017]]. We assume
+
+1. a single locus in a haploid population of size 2N (or diploid of
+   size N when random mationg)
+2. no mutation and selection
+3. discrete generations
+
+Each generation we sample 2N new individuals from the previous
+generation, which is equivalent to *multinomial sampling with
+replacement*. Then, the number of offspring of a given parent $v_i$ is
+*binomially distributed* $\mathrm{Bin}(m, p)$, with parameters $m=2N$
+and probability of success $p=\frac{1}{2N}$:
+
+$$
+P(v_i=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
+\left(1 - \frac{1}{2N} \right)^{(2N - k)}
+$$
+
+::: {.notes }
+
+FIXME: multinomial sampling with replacement: Hermisson nomenclature?
+Alternatively (and easier) assume all genes different and look at
+*one* gene; then sampling is Bernoulli with success $p=\frac{1}{2N}$
+repeated 2N times -> Binomial sampling
+
+:::
+
+## Properties of Wright-Fisher sampling
+
+$$
+E(v_i) = mp = 2N\frac{1}{2N} = 1
+$$
+
+::: {.fragment}
+
+Poisson approximation: when 2N large
+
+$$
+P(v_i=k) \approx \frac{1}{k!}e^{-1}
+$$
+
+Since $P(v_i=0) = e^{-1} \approx 0.37$, a fraction 0.37 of genes lack
+descendants
+
+:::
+
+::: {.fragment}
+
+Probability that parents are identical: pick a parent $v_i$. The
+probability that
+
+- the second parent is identical is $\frac{1}{2N}$
+- they are different is $1 - \frac{1}{2N}$
+
+:::
+
+::: {.notes }
+
+Since a large fraction of genes lack descendants, very quickly
+(compared to 2N) a population will descend from a small proportion of
+genes.
+
+Derivation of average time to having same parent (i.e., coalescence)
+requires knowledge of geometric distribution. The probability that the
+genes find common parent $j$ generations ago is
+
+$$
+(1-\frac{1}{2N})^{(j-1)}\frac{1}{2N}
+$$
+
+due to independence between generations. This is the geometric
+distribution $Ge(p)$ with $p=1/2N$, which has expected value $1/p$,
+i.e., 2N in this case.
+
+:::
+
+# Origin and change of variation
+
 ## Genetic drift with alleles
 
 :::: {.columns .compact}
@@ -1033,30 +1168,34 @@ Starting frequency black variant is 0.3.
 
 ::::
 
-## The Wright-Fisher sampling model {.smaller}
+::: {.notes }
 
-Let's formalise the sampling process of the Wright-Fisher model^[For a
-more extensive treatment, see
-[@hermisson_MathematicalPopulationGenetics_2017]]
+Enter allelic variants; we are looking at two variants
 
-We assume
+Important: point out that the fate of any allele under drift is to be
+**lost** or **fixed**, which ultimately means variation is **lost**
+with drift
 
-1. a single locus in a haploid population of size N
-2. no mutation and selection
-3. discrete generations
+:::
 
-Each generation we sample N new individuals from the previous
-generation, which is equivalent to *multinomial sampling with
-replacement*. Then, the number of offspring of a given parent *i* is
-*binomially distributed*, with probability of success $p=\frac{1}{N}$:
+## Sampling model again
+
+We assume two gene variants $A$, $a$, each with $i$ and $j=2N-i$
+copies in generation $t$. Let $p_t=i/2N$ be the *frequency* of $A$ in
+generation $t$, and $q_t=1-p_t$ the frequency of $a$.
+
+The sampling model for next generation $t+1$ is then
 
 $$
-\mathrm{Pr}(x) = {N\choose x}\left( \frac{1}{N} \right)^x
-\left(1 - \frac{1}{N} \right)^{(N - x)}
+p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
+\left(1 - \frac{i}{2N} \right)^{(2N - k)} = \mathsf{Bin}(2N, \frac{i}{2N})
 $$
 
-Under the assumption of random mating, a diploid population of size
-$N$ can be described by a haploid population of size $2N$
+::: {.notes }
+
+NB: we here slightly change notation, with $p_{t+1} = P(X=k)$ p
+
+:::
 
 ## Genetic drift
 
@@ -1079,7 +1218,7 @@ time.
 
 ::: {.fragment fragment-index=2}
 
-Note dependency of "jumpyness" (variance) on population size N
+Note dependency of variance on population size 2N
 
 :::
 
@@ -1139,18 +1278,14 @@ ggplot(
 
 ::: {.notes }
 
-Classic graph of allele: start at say 0.2 and drift with different Ne.
-Point out that variation becomes smaller with large Ne, but that
+FIXME:
+
+FIXME: Mention *neutral* here as this is how alleles behave under
+drift: like gas particle diffusing up and down
+
+Classic graph of allele: start at say 0.2 and drift with different N.
+Point out that variation becomes smaller with large N., but that
 eventually, an allele is fixed or lost (formula).
-
-Mention *neutral* here as this is how alleles behave under drift: like
-gas particle diffusing up and down
-
-See alternative way of visualizing variation faceting on initial
-frequency (showing P(fixation)) and population size (showing less
-variance))
-
-<https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html>
 
 :::
 
@@ -1158,7 +1293,7 @@ variance))
 
 :::: {.columns}
 
-::: {.column width="65%"}
+::: {.column width="50%"}
 
 <!-- markdownlint-disable MD013 -->
 
@@ -1168,6 +1303,8 @@ variance))
 #| eval: true
 #| fig-height: 8
 #| fig-width: 12
+#| out-height: 400
+#| out-width: 600
 #| fig-cap: |
 #|   Genetic drift for different combinations of starting
 #|   frequency and population size for n=50 repetitions per parameter
@@ -1184,13 +1321,27 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
 
 :::
 
-::: {.column width="35%"}
+::: {.column width="50%"}
 
-Probability of fixation $\propto p_0$
+::: {.incremental}
+
+- fate of allele: fixation or loss $\rightarrow$ eventually loss of
+  variation
+- probability of fixation $\propto p_0$
+- rate of drift (loss of variation) $\propto \frac{1}{2N}$
+
+:::
 
 :::
 
 ::::
+
+::: {.fragment}
+
+Mathematical treatment of drift can become complicated: easier to
+study dynamics of *heterozygosity*
+
+:::
 
 ::: {.notes }
 
@@ -1259,6 +1410,8 @@ Motivation: mathematical description of genetic drift complicated for
 populations with more than one individual. Easier to study the
 evolution of heterozygosity.
 
+Alleles in generation $n$ are IDB but not IBS
+
 :::
 
 ## Heterozygosity dynamics
@@ -1271,7 +1424,9 @@ evolution of heterozygosity.
 #| label: fig-gillespie-2.4
 #| echo: false
 #| eval: true
-#| fig-cap: Plot of $\mathcal{H}_t$.
+#| fig-cap:
+#|    Plot of $\mathcal{H}_t$ illustrating how loss depends
+#|    on population size
 #| out-width: 70%
 het_t <- function(N=1, t=0:100, H0=1) {
   H0 * (1 - 1/(2*N))^t
@@ -1296,6 +1451,8 @@ ggplot(data, aes(x=tn, y=het, shape=factor(population_size))) +
 
 ::: {.column width="50%"}
 
+::: {.fragment}
+
 ```{r }
 #| label: fig-black-footed-ferret
 #| echo: false
@@ -1314,11 +1471,39 @@ ggplot(data, aes(x=date, y=He, label=N)) + geom_line() + geom_point() +
 
 :::
 
+:::
+
 ::::
+
+::: {.notes }
+
+FIXME: add illustration of ferret?
+
+:::
 
 ## Effective population size
 
-# Origin and change of variation
+Assumptions underlying Wright-Fisher model seldom fulfilled for natural populations. In particular
+
+- non-random mating (populations structured)
+- fluctuations of population census size
+
+Therefore, magnitude of drift experienced by a population different
+from that predicted by population size
+
+Technically correct definition (but see @waples_WhatNeAnyway_2022):
+
+> $N_e$ is the size of an ideal population that would experience the
+> same rate of genetic drift as the population in question.
+
+::: {.notes }
+
+FIXME: segue?
+
+ideal population: discrete generations with random mating, no
+evolutionary forces besides drift, no selective advantages
+
+:::
 
 ## Mutation
 
@@ -1331,16 +1516,26 @@ via allele fixation or loss. New variation is introduced through
 *mutation*. We typically assume mutations are described by a Poisson
 process with rate $\mu$ (per generation).
 
+::: {.fragment}
+
 The *mutation rate* is denoted $\mu$, and the *population scaled*
 mutation rate is $2N_e\mu$ for haploid populations, $4N_e\mu$ for
 diploid, where $N_e$ is the *effective population size*.
+
+:::
+
+::: {.fragment}
 
 The *mutation - drift balance* is when the diversity lost due to drift
 equals the diversity gained due to mutation.
 
 :::
 
+:::
+
 ::: {.column width="40%"}
+
+::: {.fragment}
 
 ```{r }
 #| label: fig-wf-mutation
@@ -1361,49 +1556,15 @@ ggplot_wf(wf, fill = allele) +
 
 :::
 
-::::
-
-## Tracing the evolution of mutations
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-```{r }
-#| label: fig-tracing-evolution-of-mutations
-#| echo: false
-#| eval: true
-#| fig-height: 15
-#| fig-width: 15
-#| out-height: 600px
-#| out-width: 600px
-#| fig-cap: |
-#|   Different mutations suffer different fates.
-#|   Most mutations are lost in a couple of
-#|   generations. Mutant alleles are colored
-#|   black and their genealogies are highlighted
-#|   with thicker edges.
-j <- wf %E>%
-  filter(.N()$allele[from] == "a" & .N()$allele[to] == "A") %>%
-  pull(., to)
-V(wf)$m0 <- V(wf)$allele
-cliques <- ego(wf,
-  order = attr(wf, "generations"),
-  nodes = j, mode = "out"
-)
-wf %>%
-  mutate(clique = .N()$m0 != "a") %E>%
-  mutate(width = (0.2 + as.integer(.N()$allele[from] != "a"))) %N>%
-  ggplot_wf(fill = clique, node_color = "lightgray")
-```
-
-:::
-
-::: {.column width="50%"}
-
 :::
 
 ::::
+
+::: {.notes }
+
+Segue: so if drift removes variation, what introduces it? Mutation!
+
+:::
 
 ## Models of mutation
 
@@ -1486,25 +1647,137 @@ $\mathsf{A}_{i-3}$ \&  $\mathsf{A}_{i-2}$ \&  $\mathsf{A}_{i-1}$ \& $\mathsf{A}_
 
 <!-- markdownlint-enable MD013 -->
 
+::: {.notes }
+
+FIXME: add notes regarding the different models
+
+Model B: mainly for repeats
+
+:::
+
+## Tracing the evolution of mutations
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-tracing-evolution-of-mutations
+#| echo: false
+#| eval: true
+#| fig-height: 15
+#| fig-width: 15
+#| out-height: 600px
+#| out-width: 600px
+#| fig-cap: |
+#|   Different mutations suffer different fates.
+#|   Most mutations are lost in a couple of
+#|   generations. Mutant alleles are colored
+#|   black and their genealogies are highlighted
+#|   with thicker edges.
+j <- wf %E>%
+  filter(.N()$allele[from] == "a" & .N()$allele[to] == "A") %>%
+  pull(., to)
+V(wf)$m0 <- V(wf)$allele
+cliques <- ego(wf,
+  order = attr(wf, "generations"),
+  nodes = j, mode = "out"
+)
+wf %>%
+  mutate(clique = .N()$m0 != "a") %E>%
+  mutate(width = (0.2 + as.integer(.N()$allele[from] != "a"))) %N>%
+  ggplot_wf(fill = clique, node_color = "lightgray")
+```
+
+:::
+
+::: {.column width="50%"}
+
+:::
+
+::::
+
+::: {.notes }
+
+Difference to previous figure: here we highlight the genealogies
+
+:::
+
 ## Mutation drift balance
+
+## Rate of substitution
+
+Molecular evolution: state the $k=u$ relationship
+
+## Fixation
 
 # Selection
 
-## Selection
+::: {.notes }
+
+For a list of methods see <https://methodspopgen.com/methods-to-detect-selection/>
+
+:::
+
+## Selection {.smaller}
+
+> Much confusion exists in the literature regarding how various types
+> of selection are defined, in particular because some of the
+> terminology is used slightly differently within different scientific
+> communities [@nielsen_MolecularSignaturesNatural_2005]
 
 $$
 \begin{matrix}
-\mathrm{Genotype} & A_1A_1 & A_1A_2 & A_2A_2 \\
-\mathrm{Fitnesses} & w_{11} & w_{12} & w_{22}\\
-\mathrm{Observations} & 1.5 & 1.1 & 1.0 \\
+\mathrm{Genotype} & aa & aA & AA \\
+\mathrm{Frequency\ in\ newborns} & p^2 & 2pq & q^2\\
+\mathrm{Viability} & w_{aa} & w_{aA} & w_{AA}\\
+\mathrm{Frequency\ after\ selection} & p^2w_{aa} / \bar{w} &
+    2pqw_{Aa} / \bar{w} & q^2w_{AA} / \bar{w} \\
 \mathrm{Relative\ fitness} & 1 & 1-hs & 1-s\\
-\mathrm{Normalized} & 1 & 11 / 15 & 10 / 15
 \end{matrix}
 $$
 
-Relative fitness.
+where $\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}$ is the **mean
+fitness**
 
-Define s, positive and negative selection
+<br/>
+
+|         |                                        |
+|---------|----------------------------------------|
+| $h=0$   | $a$ dominant, $A$ recessive            |
+| $h=1$   | $A$ dominant, $a$ recessive            |
+| $0<h<1$ | incomplete dominance                   |
+| $h<0$   | overdominance (heterozygote advantage) |
+| $h>1$   | underdominance                         |
+
+## Mean fitness of a population
+
+```{r }
+#| label: fig-dominance
+#| echo: false
+#| eval: true
+#| fig-cap:
+#|    Mean fitness of the population as a function of
+#|    $p$ for $s=0.1$ and $h=-0.5$, $0.5$, and $1.5$
+wbar <- function(h, s, p) {
+  q <- 1-p
+  1 - 2*p*q*h*s - q**2 * s
+}
+p <- seq(0, 1, 0.01)
+s <- 0.1
+data <- rbind(
+    data.frame(p=p, h=-0.5, wbar=wbar(-0.5, s, p), Dominance="overdominant"),
+    data.frame(p=p, h=0.5, wbar=wbar(0.5, s, p), Dominance="additive"),
+    data.frame(p=p, h=1.5, wbar=wbar(1.5, s, p), Dominance="underdominant")
+)
+ggplot(data, aes(x=p, y=wbar, color=Dominance)) + geom_point() + geom_line()
+```
+
+::: {.notes }
+
+FIXME: add Gillespies figure of selection
+
+:::
 
 ## Direct selection
 
