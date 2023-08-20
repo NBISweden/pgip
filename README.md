@@ -3,14 +3,14 @@
 ## **PGIP • Population genomics in practice**
 
 Course materials for course [Population Genomics in
-Practice](https://uppsala.instructure.com/courses/52168). Please make
+Practice](https://uppsala.instructure.com/courses/86976). Please make
 sure to read the entire README before adding material.
 
 ## Installation
 
 Clone the repo
 
-    git clone https://github.com/NBISweden/pgip.git
+    git clone https://github.com/NBISweden/workshop-pgip.git
 
 and follow the instructions below.
 

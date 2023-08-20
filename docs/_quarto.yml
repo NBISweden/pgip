@@ -32,7 +32,7 @@ website:
       - icon: "twitter"
         href: "https://twitter.com/NBISwe"
       - icon: "github"
-        href: "https://github.com/NBISweden/pgip"
+        href: "https://github.com/NBISweden/workshop-pgip"
   page-footer:
     border: false
     left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
