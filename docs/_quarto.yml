@@ -4,6 +4,7 @@ project:
   output-dir: _site
   pre-render:
     - ../scripts/setup-data.sh
+    - ../scripts/setup-slides-data.sh
     - ../scripts/setup-exercise-data.sh
     - ../scripts/prepare.py
   render:
