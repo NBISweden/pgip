@@ -348,46 +348,22 @@
 
 <section id="title-slide" data-background-image="../../assets/logos/nbis-scilifelab.svg" data-background-position="top left" data-background-size="500px" class="center">
   <h1 class="title">Simulation</h1>
-  <h3 class="subtitle">Primer on forward simulation and the coalescent</h3>
+  <h3 class="subtitle">Primer on the coalescent and forward simulation</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">20-Aug-2023</h4>
+  <h4 class="date">22-Aug-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#/forward-simulation" id="/toc-forward-simulation">Forward simulation</a></li>
 <li><a href="#/the-coalescent" id="/toc-the-coalescent">The coalescent</a></li>
+<li><a href="#/the-coalescent-with-recombination" id="/toc-the-coalescent-with-recombination">The coalescent with recombination</a></li>
+<li><a href="#/forward-simulation" id="/toc-forward-simulation">Forward simulation</a></li>
 <li><a href="#/combining-forward-and-backward-simulations" id="/toc-combining-forward-and-backward-simulations">Combining forward and backward simulations</a></li>
 </ul>
 </nav>
 </section>
 
-<section>
-<section id="forward-simulation" class="title-slide slide level1 center">
-<h1>Forward simulation</h1>
-
-</section>
-<section id="forward-simulation-1" class="slide level2">
-<h2>Forward simulation</h2>
-<p>Begin with forward simulation as it makes more intuitive sense.</p>
-<p>Outline principles of forward simulation from Wright-Fisher model “algorithm”.</p>
-</section>
-<section id="slim" class="slide level2">
-<h2>SLiM</h2>
-<p>Mention advances in forward simulations</p>
-</section>
-<section id="forward-simulation-in-slim" class="slide level2">
-<h2>Forward simulation in SLiM</h2>
-<p>Outline steps in SLiM - relate to WF model</p>
-</section>
-<section id="example-in-slim" class="slide level2">
-<h2>Example in SLiM</h2>
-</section>
-<section id="exercise-in-slim" class="slide level2">
-<h2>Exercise in SLiM</h2>
-<p>Optional: do a simple neutral model</p>
-</section></section>
 <section>
 <section id="the-coalescent" class="title-slide slide level1 center">
 <h1>The coalescent</h1>
@@ -688,6 +664,25 @@
 </div>
 </div>
 </section>
+<section id="some-properties-of-the-tree" class="slide level2">
+<h2>Some properties of the tree</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-genealogy-properties_3e7a3f6cc17d800de40104e0ada916fc">
+<div class="cell-output-display">
+<div id="fig-genealogy-properties" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;4: A coalescent tree with numbered nodes. Nodes 1-5 correspond to the samples and are leaves. The internal nodes 6-8 (and the unlabelled root) are ancestral chromosomes (unsampled). The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes, whereas <span class="math inline">\(\tau_i\)</span> correspond to the branch length from node <span class="math inline">\(i\)</span> to its parent.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-genealogy-properties-1.svg" width="400" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
 <section id="variation-in-topology-and-height" class="slide level2">
 <h2>Variation in topology and height</h2>
 <div style="transform:  translate(-300px, 0);">
@@ -706,7 +701,7 @@
 <div class="cell-output-display">
 <div id="fig-add-mutations" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;4: Adding mutations on a coalescent genealogy.</figcaption>
+<figcaption>Figure&nbsp;5: Adding mutations on a coalescent genealogy.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-add-mutations-1.svg" width="500" height="500"></p>
 </figure>
 </div>
@@ -729,12 +724,57 @@
 <li>bottleneck</li>
 </ul>
 </section>
+<section id="exercise-on-the-coalescent" class="slide level2">
+<h2>Exercise on the coalescent</h2>
+</section></section>
+<section>
+<section id="the-coalescent-with-recombination" class="title-slide slide level1 center">
+<h1>The coalescent with recombination</h1>
+
+</section>
+<section id="chromosome-are-mosaics-of-non-recombining-units" class="slide level2">
+<h2>Chromosome are mosaics of non-recombining units</h2>
+</section>
+<section id="the-ancestral-recombination-graph" class="slide level2">
+<h2>The ancestral recombination graph</h2>
+</section>
+<section id="the-sequential-markovian-coalescent" class="slide level2">
+<h2>The Sequential Markovian Coalescent</h2>
+</section>
+<section id="tree-sequences" class="slide level2">
+<h2>Tree sequences</h2>
+</section>
 <section id="msprime" class="slide level2">
 <h2>msprime</h2>
 </section>
 <section id="exercises-with-msprime" class="slide level2">
 <h2>Exercises with msprime</h2>
 <p>Use CLI to generate genealogies and mutations.</p>
+</section></section>
+<section>
+<section id="forward-simulation" class="title-slide slide level1 center">
+<h1>Forward simulation</h1>
+
+</section>
+<section id="forward-simulation-1" class="slide level2">
+<h2>Forward simulation</h2>
+<p>Begin with forward simulation as it makes more intuitive sense.</p>
+<p>Outline principles of forward simulation from Wright-Fisher model “algorithm”.</p>
+</section>
+<section id="slim" class="slide level2">
+<h2>SLiM</h2>
+<p>Mention advances in forward simulations</p>
+</section>
+<section id="forward-simulation-in-slim" class="slide level2">
+<h2>Forward simulation in SLiM</h2>
+<p>Outline steps in SLiM - relate to WF model</p>
+</section>
+<section id="example-in-slim" class="slide level2">
+<h2>Example in SLiM</h2>
+</section>
+<section id="exercise-in-slim" class="slide level2">
+<h2>Exercise in SLiM</h2>
+<p>Optional: do a simple neutral model</p>
 </section></section>
 <section>
 <section id="combining-forward-and-backward-simulations" class="title-slide slide level1 center">
