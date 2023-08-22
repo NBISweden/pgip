@@ -154,6 +154,19 @@ of coral cover a better understanding of genetics is warranted.
 
 :::
 
+## Population genetics
+
+- briefly outline what popultation genetics studies,
+
+::: {.notes }
+
+Population genetics focuses on the genetic basis of evolution. It is
+mainly a theoretical subject, owing to the slow changes of genetic
+variation. As such, it tries to explain the shape and structure of
+genetic variation from theoretical predictions and models.
+
+:::
+
 ## From population genetics to population genomics
 
 <!-- markdownlint-disable MD013 -->
@@ -164,11 +177,6 @@ of coral cover a better understanding of genetics is warranted.
 <!-- markdownlint-enable MD013 -->
 
 ::: {.notes }
-
-Population genetics focuses on the genetic basis of evolution. It is
-mainly a theoretical subject, owing to the slow changes of genetic
-variation. As such, it tries to explain the shape and structure of
-genetic variation from theoretical predictions and models.
 
 - from locus-based studies (e.g., alcohol dehydrogenase in Drosophila
   [@kreitman_NucleotidePolymorphismAlcohol_1983]) to genome-wide
@@ -266,51 +274,7 @@ that takes into account the processes that shape genetic variation
 
 :::
 
-# Population genomics in the future
-
-## Machine learning and AI for population genomics
-
-## Ancestral recombination graph methods
-
-- deep population sequencing
-- argweaver
-- tskit
-- Relate
-- ARG-Needle
-
-## Ancient DNA
-
-- Relate
-
-## Coalescent and Wright-Fisher simulations
-
-Use to determine significance in genome-wide scans
-
-## Structural variation in natural populations
-
 ## Bibliography {.unnumbered .unlisted}
 
 ::: { #refs }
 :::
-
-:::::::::: {.notes }
-
-- A brief history of population genetics
-  - Mendel's peas
-  - Galton, Pearson and Bateson: Of blending and particulate
-    inheritance (the latter championed by Bateson)
-  - Morgan's flies
-  - Fisher and natural selection
-  - The modern synthesis
-  - Wright and drift
-  - Kimura and the diffusion approximation - Follow
-    [@casillas_MolecularPopulationGenetics_2017] history?
-  - The allozyme era (FIXME: picture of allozyme gel)
-    - Development of genetic diversity measures
-      - *H* (*gene diversity*, *heterozygosity*): average proportion
-        heterozygous loci
-      - *P* (*gene polymorphism*): average proportion polymorphic loci
-  - The nucleotide diversity era
-  - The population genomics era
-
-::::::::::

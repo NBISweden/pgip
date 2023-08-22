@@ -33,6 +33,9 @@ library(tidygraph)
 
 ::: {.notes }
 
+Goal of section: look at the data that forms the foundation for
+population genomic analyses
+
 From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 
 > The main subject of population genetics is to study the generation
@@ -46,6 +49,12 @@ From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 > genetics inferences on samples of loci to population genomics: the
 > analysis of genome-wide patterns of DNA variation within and between
 > species.
+
+[@gillespie_PopulationGeneticsConcise_2004, p. 1]
+
+> Population geneticists spend most of their time doing one of two
+> things: describing the genetic structure of populations or
+> theorizing on the evolutionary forces acting on populations
 
 :::
 
@@ -429,6 +438,82 @@ forces that imposes change
 
 :::
 
+## Natural populations do mate randomly?
+
+```{r }
+#| label: fig-hwe-1000genomes
+#| echo: false
+#| eval: true
+#| fig-height: 6
+#| fig-width: 12
+#| fig-cap:
+#|     Hardy-Weinberg proportions in 10,000 SNPs on chromosome
+#|     22 from three populations based on 1000 genomes data.
+#|     Illustration inspired by @cooplab_PopulationGeneticsCourse_2011
+pops <- c("CEU", "CHB", "YRI")
+fn <- file.path("data/Homo_sapiens/1000g/genotypes", paste0(pops, ".22:17000000-20000000.hwe.gz"))
+names(fn) <- pops
+x <- do.call(
+    "rbind", lapply(pops, function(p) {
+      y <- cbind(population=p, read.table(fn[[p]], header=TRUE))
+      geno <- do.call("rbind", lapply(strsplit(y$GENO, "/"), as.numeric))
+      n <- round(nrow(geno)/2)
+      geno <- rbind(geno[1:n,], geno[(n+1):nrow(geno), 3:1])
+      colnames(geno) <- c("AA.cnt", "Aa.cnt", "aa.cnt")
+      geno.frq <- as.data.frame(geno / apply(geno, 1, sum))
+      colnames(geno.frq) <- c("AA", "Aa", "aa")
+      allele.frq <- as.data.frame(cbind(geno.frq$AA + 0.5*geno.frq$Aa,
+                                        geno.frq$aa + 0.5*geno.frq$Aa))
+      colnames(allele.frq) <- c("p", "q")
+      cbind(y, geno, geno.frq, allele.frq)
+    }))
+x <- pivot_longer(x, cols=c("AA", "Aa", "aa"), names_to="genotype")
+p <- seq(0, 1, 0.01)
+n <- 10000
+z <- do.call("rbind", by(x, x$population, function(y) {
+  y[sample(nrow(y), 10000),]}))
+
+vend <- 0.8
+cols.hwe <- c(viridis_pal(end=vend)(3), "black", "black")
+lt.hwe <- c(rep("blank", 3), "dashed", "solid")
+shape.hwe <- c(rep(16, 3), NA, NA)
+cnames <- c("aa", "Aa", "AA", "Hardy Weinberg Expectation", "Mean")
+names(cols.hwe) <- cnames
+names(lt.hwe) <- cnames
+names(shape.hwe) <- cnames
+
+ggplot(z, aes(x=p, y=value)) +
+  geom_point(size=2, alpha=.6, aes(color=genotype)) +
+  geom_smooth(method="loess", linewidth=1, show.legend=TRUE,
+              lty="dashed", aes(group=genotype, color="Mean")) +
+  geom_line(inherit.aes=FALSE, aes(x=p, y=p**2,
+                                   color="Hardy Weinberg Expectation")) +
+  geom_line(inherit.aes=FALSE, aes(x=p, y=2*p*(1-p),
+                                   color="Hardy Weinberg Expectation")) +
+  geom_line(inherit.aes=FALSE, aes(x=p, y=(1-p)**2,
+                                   color="Hardy Weinberg Expectation")) +
+  xlab("allele frequency") + ylab("genotype frequency") +
+  facet_grid(. ~ population) + scale_color_viridis_d(end=vend) +
+  scale_color_manual(name=NULL, values=cols.hwe,
+                     guide = guide_legend(
+                         override.aes = list(
+                             linetype = lt.hwe,
+                             shape = shape.hwe
+                         )))
+```
+
+::: {.notes }
+
+<!-- markdownlint-disable MD013 -->
+
+See
+<https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines>
+for legend customization.
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
 ## The obsession of population genetics
 
 Population genetics is about [@gillespie_PopulationGeneticsConcise_2004]
@@ -460,7 +545,15 @@ obsession for a long time, even before DNA was known -> back to basics
 
 # Models of populations
 
-FIXME: what is segue from previous slide?
+::: {.notes }
+
+Segue: take a step back to the days before the nature of genetic
+inheritance was known. First focus on the population.
+
+Goal of lecture is also to understand genetic relationships in the
+context of genealogies -> coalescent.
+
+:::
 
 ## Wright-Fisher model {.smaller}
 
@@ -1050,59 +1143,62 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 Let's formalise the sampling process of the Wright-Fisher model^[For a
 more extensive treatment, see
-[@hermisson_MathematicalPopulationGenetics_2017]]. We assume
+@hermisson_MathematicalPopulationGenetics_2017 or @hein2005gene]. We
+assume
 
-1. a single locus in a haploid population of size 2N (or diploid of
-   size N when random mationg)
+1. a single locus in a haploid population of size $2N$ (or diploid of
+   size $N$ when random mationg)
 2. no mutation and selection
 3. discrete generations
 
-Each generation we sample 2N new individuals from the previous
-generation, which is equivalent to *multinomial sampling with
-replacement*. Then, the number of offspring of a given parent $v_i$ is
-*binomially distributed* $\mathrm{Bin}(m, p)$, with parameters $m=2N$
-and probability of success $p=\frac{1}{2N}$:
+Each generation we sample $2N$ new chromosomes from the previous
+generation. The probability of choosing a chromosome $v$ is $1/2N$
+(coin flip with probability of succes $1/2N$). Since the trials are
+independent, and we perform $2N$ trials, the number of offspring of a
+given chromosome $v$ is *binomially distributed* $\mathrm{Bin}(m, p)$,
+with parameters $m=2N$ and probability of success $p=\frac{1}{2N}$:
 
 $$
-P(v_i=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
+P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 \left(1 - \frac{1}{2N} \right)^{(2N - k)}
 $$
-
-::: {.notes }
-
-FIXME: multinomial sampling with replacement: Hermisson nomenclature?
-Alternatively (and easier) assume all genes different and look at
-*one* gene; then sampling is Bernoulli with success $p=\frac{1}{2N}$
-repeated 2N times -> Binomial sampling
-
-:::
 
 ## Properties of Wright-Fisher sampling
 
 $$
-E(v_i) = mp = 2N\frac{1}{2N} = 1
+E(v) = mp = 2N\frac{1}{2N} = 1
 $$
 
 ::: {.fragment}
 
-Poisson approximation: when 2N large
+Poisson approximation: when $2N$ large
 
 $$
-P(v_i=k) \approx \frac{1}{k!}e^{-1}
+P(v=k) \approx \frac{1}{k!}e^{-1}
 $$
 
-Since $P(v_i=0) = e^{-1} \approx 0.37$, a fraction 0.37 of genes lack
+Since $P(v=0) = e^{-1} \approx 0.37$, a fraction 0.37 of genes lack
 descendants
 
 :::
 
 ::: {.fragment}
 
-Probability that parents are identical: pick a parent $v_i$. The
-probability that
+Probability that parents are identical: pick a parent $v$, then a
+second parent $u$. Then $P(v=u)=\frac{1}{2N}$, and $P(v\neq
+u)=1-\frac{1}{2N}$.
 
-- the second parent is identical is $\frac{1}{2N}$
-- they are different is $1 - \frac{1}{2N}$
+:::
+
+::: {.fragment}
+
+Time for two chromosomes $u$ and $v$ to find common ancestor
+distributed as $(1 - \frac{1}{2N})^{j-1}\frac{1}{2N}$ ($j-1$ failures
+followed by success). This is the [geometric
+distribution](https://en.wikipedia.org/wiki/Geometric_distribution)
+$Ge(p)$, with parameter $p=\frac{1}{2N}$, and expected value
+$\frac{1}{p}={2N}$. That is, the **expected time for two chromosomes
+to find a common ancester (i.e., coalesce) is $2N$ generations**.
 
 :::
 
@@ -1259,8 +1355,8 @@ wf$sample <- factor(wf$sample)
 #| fig-keep: all
 #| out-width: 60%
 #| fig-cap: |
-#|    - Genetic drift for different population sizes,
-#|    - starting frequency $p_0$=0.5
+#|    Genetic drift for different population sizes,
+#|    starting frequency $p_0$=0.5
 ggplot(
   subset(wf, wf$sample == 1 & wf$p0 == 0.5),
   aes(x = generation, y = frequency)
@@ -1278,14 +1374,8 @@ ggplot(
 
 ::: {.notes }
 
-FIXME:
-
-FIXME: Mention *neutral* here as this is how alleles behave under
-drift: like gas particle diffusing up and down
-
-Classic graph of allele: start at say 0.2 and drift with different N.
-Point out that variation becomes smaller with large N., but that
-eventually, an allele is fixed or lost (formula).
+Mention *neutral* here as this is how alleles behave under
+drift: like gas particle diffusing up and down. Allele is eventually either fixed or lost.
 
 :::
 
@@ -1303,8 +1393,8 @@ eventually, an allele is fixed or lost (formula).
 #| eval: true
 #| fig-height: 8
 #| fig-width: 12
-#| out-height: 400
-#| out-width: 600
+#| out-height: 380
+#| out-width: 560
 #| fig-cap: |
 #|   Genetic drift for different combinations of starting
 #|   frequency and population size for n=50 repetitions per parameter
@@ -1327,8 +1417,32 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
 
 - fate of allele: fixation or loss $\rightarrow$ eventually loss of
   variation
-- probability of fixation $\propto p_0$
+- **probability of fixation $\pi(p)=p$**, where $p$ is the *current*
+  frequency
 - rate of drift (loss of variation) $\propto \frac{1}{2N}$
+
+:::
+
+::: {.fragment}
+
+::: {.center}
+
+```{r, engine='tikz', fig.ext="svg" }
+#| label: gas-particle-drift
+#| echo: false
+#| eval: true
+#| out-height: 200
+#| fig-align: center
+\begin{tikzpicture}
+\node[circle, fill=black] (n) {};
+\node[above of=n] (drift_up) {};
+\node[below of=n] (drift_down) {};
+\draw[->, >=latex] (n) -- node[right] {drift} (drift_down);
+\draw[->, >=latex] (n) -- node[right] {drift} (drift_up);
+\end{tikzpicture}
+```
+
+:::
 
 :::
 
@@ -1365,7 +1479,9 @@ in plots) -> maintain larger genetic diversity
 #| echo: false
 #| eval: true
 #| out-width: 70%
-#| fig-cap: Illustration of identity by descent and state.
+#| fig-cap:
+#|     Illustration of identity by descent (IBD) and state (IBS).
+#|     Alleles in generation $n$ are IBD but not IBS.
 \begin{tikzpicture}
 \node (n_2) {$n-2$};
 \node[right of=n_2] (nl0) {};
@@ -1388,10 +1504,10 @@ in plots) -> maintain larger genetic diversity
 
 ::: {.column width="50%"}
 
-Let $\mathcal{H}_t$ be the probability that two alleles are *identical
-by state*. The time course evolution of $\mathcal{H}_t$ in a randomly
-mating population consisting of $N$ diploid hermaphroditic individuals
-is
+Let $\mathcal{H}_t$ be the probability that two alleles are
+**different by state**. The time course evolution of $\mathcal{H}_t$
+in a randomly mating population consisting of $N$ diploid
+hermaphroditic individuals is
 
 $$
 \mathcal{H}_t = \mathcal{H}_0 \left( 1 - \frac{1}{2N} \right)^t
@@ -1406,11 +1522,11 @@ $1/2N$.
 
 ::: {.notes }
 
+Alleles in generation $n$ are IDB but not IBS
+
 Motivation: mathematical description of genetic drift complicated for
 populations with more than one individual. Easier to study the
 evolution of heterozygosity.
-
-Alleles in generation $n$ are IDB but not IBS
 
 :::
 
@@ -1475,12 +1591,6 @@ ggplot(data, aes(x=date, y=He, label=N)) + geom_line() + geom_point() +
 
 ::::
 
-::: {.notes }
-
-FIXME: add illustration of ferret?
-
-:::
-
 ## Effective population size
 
 Assumptions underlying Wright-Fisher model seldom fulfilled for natural populations. In particular
@@ -1498,8 +1608,6 @@ Technically correct definition (but see @waples_WhatNeAnyway_2022):
 
 ::: {.notes }
 
-FIXME: segue?
-
 ideal population: discrete generations with random mating, no
 evolutionary forces besides drift, no selective advantages
 
@@ -1513,20 +1621,20 @@ evolutionary forces besides drift, no selective advantages
 
 Genetic drift "moves" frequencies to the point that variation is lost
 via allele fixation or loss. New variation is introduced through
-*mutation*. We typically assume mutations are described by a Poisson
+**mutation**. We typically assume mutations are described by a Poisson
 process with rate $\mu$ (per generation).
 
 ::: {.fragment}
 
-The *mutation rate* is denoted $\mu$, and the *population scaled*
+The **mutation rate** is denoted $\mu$, and the **population scaled**
 mutation rate is $2N_e\mu$ for haploid populations, $4N_e\mu$ for
-diploid, where $N_e$ is the *effective population size*.
+diploid, where $N_e$ is the **effective population size**.
 
 :::
 
 ::: {.fragment}
 
-The *mutation - drift balance* is when the diversity lost due to drift
+The **mutation - drift balance** is when the diversity lost due to drift
 equals the diversity gained due to mutation.
 
 :::
@@ -1649,8 +1757,6 @@ $\mathsf{A}_{i-3}$ \&  $\mathsf{A}_{i-2}$ \&  $\mathsf{A}_{i-1}$ \& $\mathsf{A}_
 
 ::: {.notes }
 
-FIXME: add notes regarding the different models
-
 Model B: mainly for repeats
 
 :::
@@ -1667,8 +1773,8 @@ Model B: mainly for repeats
 #| eval: true
 #| fig-height: 15
 #| fig-width: 15
-#| out-height: 600px
-#| out-width: 600px
+#| out-height: 500
+#| out-width: 500
 #| fig-cap: |
 #|   Different mutations suffer different fates.
 #|   Most mutations are lost in a couple of
@@ -1693,6 +1799,20 @@ wf %>%
 
 ::: {.column width="50%"}
 
+::: {.fragment}
+
+Observation: most mutations are in fact lost
+
+:::
+
+::: {.fragment}
+
+Recall: fixation probability $\pi(p)=p$
+
+:::
+
+:::
+
 :::
 
 ::::
@@ -1705,11 +1825,71 @@ Difference to previous figure: here we highlight the genealogies
 
 ## Mutation drift balance
 
-## Rate of substitution
+Drift removes variation. Mutation reintroduces it. At equilibrium the
+change in variation by definition is 0. In terms of $\mathcal{H}_t$
+(the probability that two alleles are *not* identical by state),
+$\Delta\mathcal{H}=0$.
 
-Molecular evolution: state the $k=u$ relationship
+One can show^[see [@gillespie_PopulationGeneticsConcise_2004, p.29 --
+31] for a concise treatement] the classical formula that the
+equilibrium *heterozysity* value is
 
-## Fixation
+$$
+\hat{\mathcal{H}} = \frac{4N_e\mu}{1 + 4N_e\mu}
+$$
+
+::: {.fragment}
+
+$\mu$ is often assumed known, and heterozygosity is easily calculated
+from data, which provides a way of estimating $N_e$.
+
+:::
+
+## Molecular evolution and rate of substitution
+
+Mutation enters populations and may be fixed by drift. Therefore, with
+time there will be fixed differences, or **substitions** (typically in
+the evolution of species) between populations, or species. In
+molecular evolution, the **substition rate**, **$\rho$**, is the most
+interesting quantity.
+
+::: {.fragment}
+
+The total number of new mutations in every generation is $2N\mu$
+(total number of gametes times mutation rate)
+
+:::
+
+::: {.fragment}
+
+New mutations fix at a rate $1/2N$
+
+:::
+
+::: {.fragment}
+
+Therefore, the **average rate of substitution**, **$\rho$**, is $2N\mu\times1/2N$, or
+
+$$
+\rho=\mu
+$$
+
+which is independent of population size!
+
+:::
+
+::: {.notes }
+
+On $2N\mu$: the larger the population, the larger the number of
+mutations that can fix
+
+Stress importance of results and how it defies logic - it is
+independent of population size
+
+If $4N\mu>>0$ no new mutations can fix - no explicit mention of DNA
+sequence -> infinite sites model
+
+:::
 
 # Selection
 
@@ -1773,70 +1953,52 @@ data <- rbind(
 ggplot(data, aes(x=p, y=wbar, color=Dominance)) + geom_point() + geom_line()
 ```
 
-::: {.notes }
+## Selection and drift
 
-FIXME: add Gillespies figure of selection
+:::: {.columns}
 
-:::
+::: {.column width="80%"}
 
-## Direct selection
-
-d_N/d_S
-
-## Selective sweeps
-
-Show WF-model with sweep
-
-## Two-locus dynamics
-
-Graph focal locus and flanking loci (Charlesworth figure)
-
-- Linkage disequilibrium and recombination (each probably need
-  separate treatment)
-- Contrast linked selection with direct selection
-- Genetic draft / background selection
-
-## Soft sweep
-
-## Neutral theory
-
-Move right after drift?
-
-- Hahn: $\mu = \nu*f_0$
-- why population size matters
-- Fig 4.2, Eq 4.2 from Lynch
-
-::: {.notes }
-
-Mutation - drift balance. Simplifying assumptions -> rate of drift
-$propto \frac{1}{N}$ [@leffler_RevisitingOldRiddle_2012]
-
-In reality population fluctuates and therefore Ne is substituted for
-N. Larger Ne -> smaller fluctuation in allele frequency (as evidenced
-in plots) -> maintain larger genetic diversity
-
-Neutral diversity patterns depend not only on drift but also on rate
-at which variation changes at *linked sites*
-[@leffler_RevisitingOldRiddle_2012]
+```{r }
+#| label: fig-selection-and-drift
+#| echo: false
+#| eval: true
+#| fig-width: 12
+#| fig-height: 6
+#| fig-cap:
+#|     The fixation probability relative to the neutral
+#|     probability of fixation under the assumption $s<0.1$.
+Ne_s <- seq(-2, 2, 0.01)
+# Lynch p. 74
+thetaf <- 4*Ne_s / (1-exp(-4*Ne_s))
+data <- as.data.frame(cbind(Ne_s, thetaf))
+ggplot(data, aes(x=Ne_s, y=thetaf)) + geom_line() +
+  ylab(expression("Relative fixation probability" ~ theta[f])) +
+  xlab(expression(N[e]* s)) + geom_hline(yintercept=1, linetype="dashed") +
+  geom_rect(inherit.aes=FALSE, data = data.frame(xstart=c(-0.1), xend=c(0.1)),
+            aes(xmin = xstart, xmax = xend, ymin = -Inf,
+                ymax = Inf, fill = "red"), alpha = 0.4,
+            show.legend=FALSE)
+```
 
 :::
 
-## Nearly neutral theory
+::: {.column width="20%"}
 
-- Distribution of fitness effects?
+:::
 
-## Effect on genetic diversity
+::::
 
 ::: {.notes }
 
-Mutation - drift balance. Mode of selection important:
+Even if a new mutation has, say, $s=0.01$, it still needs to overcome
+effects of drift.
 
-- selection for adaptation at new mutations decreases diversity more
-  than if at standing variation
-- balancing selection may *increase* variation
+In figure, we assume $s<0.1$, which is almost always the case.
 
-Recombination
+:::
 
-- low recombination -> lower diversity (less reshuffling of variation)
+## Bibliography {.unnumbered .unlisted}
 
+::: { #refs }
 :::
