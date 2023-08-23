@@ -68,7 +68,7 @@ wright_fisher_pop <- function(n, generations, p0 = NULL,
     if (!is.null(p0)) {
       i <- min(subset(wf, y == init_gen)$node)
       j <- max(subset(wf, y == init_gen)$node)
-      k <- which(wf$allele[i:j] == minor)
+      k <- seq(i, j)[which(wf$allele[i:j] == minor)]
       igraph::V(graph)[unlist(
         igraph::ego(graph,
           order = generations,
