@@ -416,7 +416,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">22-Aug-2023</h4>
+  <h4 class="date">23-Aug-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1917,7 +1917,7 @@ q = q^2 + pq
 <li>no mutation and selection</li>
 <li>discrete generations</li>
 </ol>
-<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of succes <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring of a given chromosome <span class="math inline">\(v\)</span> is <em>binomially distributed</em> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
+<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring of a given chromosome <span class="math inline">\(v\)</span> is <em>binomially distributed</em> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
 <p><span class="math display">\[
 P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 \left(1 - \frac{1}{2N} \right)^{(2N - k)}
@@ -2026,20 +2026,20 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <p>To capture dynamics, follow allele frequency trajectory as function of time.</p>
 <div class="smallr">
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_a7de69e963b0b9fc64aecfba553bdbdc">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="do">##'</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="do">##' @param n Population size</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="do">##'</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
-<span id="cb1-11"><a href="#cb1-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    }</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    x</span>
-<span id="cb1-14"><a href="#cb1-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="do">##'</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="do">##' @param n Population size</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="do">##'</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
+<span id="cb2-11"><a href="#cb2-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    }</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    x</span>
+<span id="cb2-14"><a href="#cb2-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment" data-fragment-index="2">
@@ -2200,7 +2200,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Effective population size</h2>
 <p>Assumptions underlying Wright-Fisher model seldom fulfilled for natural populations. In particular</p>
 <ul>
-<li>non-random mating (populations structured)</li>
+<li>non-random mating (population structure)</li>
 <li>fluctuations of population census size</li>
 </ul>
 <p>Therefore, magnitude of drift experienced by a population different from that predicted by population size</p>
@@ -2333,14 +2333,57 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <section id="mutation-drift-balance" class="slide level2">
 <h2>Mutation drift balance</h2>
 <p>Drift removes variation. Mutation reintroduces it. At equilibrium the change in variation by definition is 0. In terms of <span class="math inline">\(\mathcal{H}_t\)</span> (the probability that two alleles are <em>not</em> identical by state), <span class="math inline">\(\Delta\mathcal{H}=0\)</span>.</p>
-<p>One can show<sup>1</sup> the classical formula that the equilibrium <em>heterozysity</em> value is</p>
+<p>One can show<sup>1</sup> the classical formula that the equilibrium <strong>heterozysity</strong> value is</p>
 <p><span class="math display">\[
 \hat{\mathcal{H}} = \frac{4N_e\mu}{1 + 4N_e\mu}
 \]</span></p>
 <div class="fragment">
 <p><span class="math inline">\(\mu\)</span> is often assumed known, and heterozygosity is easily calculated from data, which provides a way of estimating <span class="math inline">\(N_e\)</span>.</p>
 </div>
+<div class="fragment">
+<p>The compound parameter <span class="math inline">\(4N_e\mu\)</span> is called the <strong>population scaled mutation rate</strong> and is commonly named <span class="math inline">\(\theta\)</span> such that</p>
+<p><span class="math display">\[
+\hat{\mathcal{H}} = \frac{\theta}{1 + \theta}
+\]</span></p>
+</div>
 <aside><ol class="aside-footnotes"><li id="fn2"><p>see <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, p. 29</a> – 31)</span> for a concise treatement</p></li></ol></aside></section>
+<section id="the-neutral-theory-of-evolution" class="slide level2">
+<h2>The neutral theory of evolution</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Mutation drift balance, together with the observation during 50’s-60’s that polymorphism was more common than expected, is the foundation of the <strong>neutral theory</strong> of evolution: allele frequencies may change and fix due to chance alone and not selection.</p>
+<div class="fragment">
+<p><strong>Nearly neutral theory</strong> later developed to explain failure to predict scaling of polymorphism with population size.</p>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-heterozygosity-function-ne_389a426b23689878e01a383513a63831">
+<div class="cell-output-display">
+<div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;12: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.png" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Related to rate of substitution and molecular evolution is the work of Kimura that lead to the development of the neutral theory.</p>
+<p>Motivation: if polymorphic sites deleterious, should not expect much polymorphism.</p>
+<p>Low levels of polymorphism expected assuming little balancing selection <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hurst, 2009, p. 87</a>)</span>; however electrophoretic studies showed polymorphism common. Would lead to detrimental load <span class="citation" data-cites="kimura_ProteinPolymorphismPhase_1971">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura &amp; Ohta, 1971</a>)</span> -&gt; therefore majority of polymorphism must evolve neutrally (dynamics). Also: rate of evolution (on protein level) too high (Haldane’s dilemma)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="molecular-evolution-and-rate-of-substitution" class="slide level2">
 <h2>Molecular evolution and rate of substitution</h2>
 <p>Mutation enters populations and may be fixed by drift. Therefore, with time there will be fixed differences, or <strong>substitions</strong> (typically in the evolution of species) between populations, or species. In molecular evolution, the <strong>substition rate</strong>, <strong><span class="math inline">\(\rho\)</span></strong>, is the most interesting quantity.</p>
@@ -2359,8 +2402,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 <aside class="notes">
 <p>On <span class="math inline">\(2N\mu\)</span>: the larger the population, the larger the number of mutations that can fix</p>
-<p>Stress importance of results and how it defies logic - it is independent of population size</p>
-<p>If <span class="math inline">\(4N\mu&gt;&gt;0\)</span> no new mutations can fix - no explicit mention of DNA sequence -&gt; infinite sites model</p>
+<p>If <span class="math inline">\(4N\mu&gt;&gt;0\)</span> no new mutations can fix. Issue here is there is no explicit mention of DNA sequence -&gt; introduction of infinite sites model</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2432,12 +2474,29 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </tbody>
 </table>
 </section>
-<section id="mean-fitness-of-a-population" class="slide level2">
-<h2>Mean fitness of a population</h2>
-
-<img data-src="index_files/figure-revealjs/fig-dominance-1.png" width="960" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;12: Mean fitness of the population as a function of <span class="math inline">\(p\)</span> for <span class="math inline">\(s=0.1\)</span> and <span class="math inline">\(h=-0.5\)</span>, <span class="math inline">\(0.5\)</span>, and <span class="math inline">\(1.5\)</span></p></section>
-<section id="selection-and-drift" class="slide level2">
-<h2>Selection and drift</h2>
+<section id="the-most-important-equation-in-population-genetics" class="slide level2">
+<h2>The most important equation in population genetics</h2>
+<p><span class="math display">\[
+\Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} - w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
+\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/selection-fig-dp_2e34b9ea656d575656fc2f838ff19659">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/selection-fig-dp-1.png" width="500" height="500"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/selection-fig-p_63317e4a648cf02a58f350cc7631c4ed">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/selection-fig-p-1.png" width="500" height="500"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="selection-and-drift---population-size-matters" class="slide level2">
+<h2>Selection and drift - population size matters</h2>
 <div class="columns">
 <div class="column" style="width:80%;">
 <div class="cell" data-hash="index_cache/revealjs/fig-selection-and-drift_f17a6253fe47d76f6abe9f4718c8bc6e">
@@ -2455,8 +2514,10 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div>
 <aside class="notes">
-<p>Even if a new mutation has, say, <span class="math inline">\(s=0.01\)</span>, it still needs to overcome effects of drift.</p>
+<p>Segue: note on the strength of s and the relation to <span class="math inline">\(N_e\)</span>.</p>
+<p>Even if a new mutation has, say, <span class="math inline">\(s=0.01\)</span>, it still needs to overcome effects of drift. Only has 2% change of fixation.</p>
 <p>In figure, we assume <span class="math inline">\(s&lt;0.1\)</span>, which is almost always the case.</p>
+<p><span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 133</a>)</span></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2468,6 +2529,148 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="substitutions-and-direct-selection" class="slide level2">
+<h2>Substitutions and direct selection</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<dl>
+<dt><strong><span class="math inline">\(\mathbf{d_N/d_S &lt;&lt; 1}\)</span></strong></dt>
+<dd>
+negative (purifying) selection
+</dd>
+<dt><strong><span class="math inline">\(\mathbf{d_N/d_S &lt; 1}\)</span></strong></dt>
+<dd>
+majority nonsynonymous deleterious, some advantageous
+</dd>
+<dt><strong><span class="math inline">\(\mathbf{d_N/d_S = 1}\)</span></strong></dt>
+<dd>
+neutral or mix neutral / advantageous / deleterious mutations
+</dd>
+<dt><strong><span class="math inline">\(\mathbf{d_N/d_S &gt; 1}\)</span></strong></dt>
+<dd>
+positive selection
+</dd>
+</dl>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_e70a4f3b7482f7ff2c9e592388e52d19">
+<div class="cell-output-display">
+<div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;14: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.png" width="768" height="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div style="transform: translate(0, -50px);">
+<p>Not all mutations fall in genes. Methods for detecting direct selection not applicable to studying selection on <em>single</em> mutation, or e.g., balancing. This requires looking for specific patterns of diversity surrounding locus under selection.</p>
+</div>
+</div>
+<aside class="notes">
+<p>Segue: how do we detect selection?</p>
+<p>Not all mutations in genes. Also want to look at single advantageous mutations, or balanced polymorphisms. Must therefore look at tell-tale signs of linked neutral variants.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="linked-selection" class="slide level2">
+<h2>Linked selection</h2>
+<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_d4eea5112e7603c62b1dd1788e11852f">
+<div class="cell-output-display">
+<div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;15: A selective sweep of an advantageous mutation (gray dot).</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Previous example showed a selective sweep. If a sweep completes at a locus, it will become monomorphic.</p>
+<aside class="notes">
+<p>Topologies become important when we discuss sweeps</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="recombination-breaks-upp-association-between-loci" class="slide level2">
+<h2>Recombination breaks upp association between loci</h2>
+
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.png" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;16: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
+<section id="distinguishing-selection-from-drift-via-topology" class="slide level2">
+<h2>Distinguishing selection from drift via topology</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-drift-genealogy_d9bdf86bf1536b7d81c8b940f5636ab4">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-model-drift-genealogy-1.png" width="960" height="600"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-selection-genealogy_34c55135ee7fe659b15a67852a1d6442">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-model-selection-genealogy-1.png" width="960" height="600"></p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Topology for selection more compressed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-phases-of-a-selective-sweep" class="slide level2">
+<h2>The phases of a selective sweep</h2>
+<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep-phases_40e2553241c950142f1fb1870198a2fa">
+<div class="cell-output-display">
+<div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;17: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="hitchhiking-versus-background-selection" class="slide level2">
+<h2>Hitchhiking versus background selection</h2>
+<p><br></p>
+
+<img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="800" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;18: Hitchhiking (left) versus background selection (right).</p></section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>We have looked at the <strong>Wright-Fisher model</strong> as a model of populations and <strong>genealogies</strong>*</p>
+<p><strong>Genetic drift</strong> moves allele frequencies up and down at random and removes variation at rate <span class="math inline">\(\propto 1/2N\)</span></p>
+<p><strong>Mutation</strong> reintroduces variation. The <strong>Neutral theory</strong> posits most mutations are neutral and dynamics follow <strong>mutation drift</strong> equilibrium.</p>
+<p>Methods to detect <strong>selection</strong> are based on <strong>direct selection</strong> or studying patterns of variation caused by <strong>linked selection</strong>.</p>
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
@@ -2492,6 +2695,12 @@ Hein, J., Schierup, M., &amp; Wiuf, C. (2004). Gene genealogies, variation and e
 </div>
 <div id="ref-hermisson_MathematicalPopulationGenetics_2017" class="csl-entry" role="listitem">
 Hermisson, J. (2017). <em>Mathematical population genetics</em>. <a href="https://www.mabs.at/teaching/files/Lecture%20Notes%202017.pdf">https://www.mabs.at/teaching/files/Lecture%20Notes%202017.pdf</a>
+</div>
+<div id="ref-hurst_GeneticsUnderstandingSelection_2009" class="csl-entry" role="listitem">
+Hurst, L. D. (2009). Genetics and the understanding of selection. <em>Nature Reviews Genetics</em>, <em>10</em>(2), 83–93. <a href="https://doi.org/10.1038/nrg2506">https://doi.org/10.1038/nrg2506</a>
+</div>
+<div id="ref-kimura_ProteinPolymorphismPhase_1971" class="csl-entry" role="listitem">
+Kimura, M., &amp; Ohta, T. (1971). Protein <span>Polymorphism</span> as a <span>Phase</span> of <span>Molecular Evolution</span>. <em>Nature</em>, <em>229</em>(5285), 467–469. <a href="https://doi.org/10.1038/229467a0">https://doi.org/10.1038/229467a0</a>
 </div>
 <div id="ref-leffler_RevisitingOldRiddle_2012" class="csl-entry" role="listitem">
 Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venkat, A., Andolfatto, P., &amp; Przeworski, M. (2012). Revisiting an <span>Old Riddle</span>: <span>What Determines Genetic Diversity Levels</span> within <span>Species</span>? <em>PLOS Biology</em>, <em>10</em>(9), e1001388. <a href="https://doi.org/10.1371/journal.pbio.1001388">https://doi.org/10.1371/journal.pbio.1001388</a>
