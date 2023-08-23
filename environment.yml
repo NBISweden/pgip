@@ -44,6 +44,7 @@ dependencies:
   # # - r-irkernel
   # # - r-jsonlite
   - r-kableextra
+  - r-latex2exp
   - r-leaflet
   - r-networkD3
   - r-magick

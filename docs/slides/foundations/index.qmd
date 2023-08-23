@@ -18,6 +18,7 @@ format:
 #| echo: false
 #| eval: true
 #| cache: false
+library(viridislite)
 library(gganimate)
 library(patchwork)
 library(igraph)
@@ -1153,7 +1154,7 @@ assume
 
 Each generation we sample $2N$ new chromosomes from the previous
 generation. The probability of choosing a chromosome $v$ is $1/2N$
-(coin flip with probability of succes $1/2N$). Since the trials are
+(coin flip with probability of success $1/2N$). Since the trials are
 independent, and we perform $2N$ trials, the number of offspring of a
 given chromosome $v$ is *binomially distributed* $\mathrm{Bin}(m, p)$,
 with parameters $m=2N$ and probability of success $p=\frac{1}{2N}$:
@@ -1595,7 +1596,7 @@ ggplot(data, aes(x=date, y=He, label=N)) + geom_line() + geom_point() +
 
 Assumptions underlying Wright-Fisher model seldom fulfilled for natural populations. In particular
 
-- non-random mating (populations structured)
+- non-random mating (population structure)
 - fluctuations of population census size
 
 Therefore, magnitude of drift experienced by a population different
@@ -1832,7 +1833,7 @@ $\Delta\mathcal{H}=0$.
 
 One can show^[see [@gillespie_PopulationGeneticsConcise_2004, p.29 --
 31] for a concise treatement] the classical formula that the
-equilibrium *heterozysity* value is
+equilibrium **heterozysity** value is
 
 $$
 \hat{\mathcal{H}} = \frac{4N_e\mu}{1 + 4N_e\mu}
@@ -1842,6 +1843,98 @@ $$
 
 $\mu$ is often assumed known, and heterozygosity is easily calculated
 from data, which provides a way of estimating $N_e$.
+
+:::
+
+::: {.fragment}
+
+The compound parameter $4N_e\mu$ is called the **population scaled
+mutation rate** and is commonly named $\theta$ such that
+
+$$
+\hat{\mathcal{H}} = \frac{\theta}{1 + \theta}
+$$
+
+:::
+
+## The neutral theory of evolution
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+Mutation drift balance, together with the observation during 50's-60's
+that polymorphism was more common than expected, is the foundation of
+the **neutral theory** of evolution: allele frequencies may change and
+fix due to chance alone and not selection.
+
+::: {.fragment}
+
+**Nearly neutral theory** later developed to explain failure to
+predict scaling of polymorphism with population size.
+
+:::
+
+:::
+
+::: {.column width="60%"}
+
+```{r }
+#| label: fig-heterozygosity-function-ne
+#| echo: false
+#| eval: true
+#| out-width: 60%
+#| fig-cap:
+#|     Heterozygosity predicted by the neutral theory.
+#|     Shaded region shows typical heterozygosities in animals.
+#|     $N_e\mu$ range is higher than predicted from plot.
+#|     From @hurst_GeneticsUnderstandingSelection_2009, Fig 1.
+NeMu <- c(
+    seq(0.001, 0.999, 0.001),
+    seq(1, 9.9, 0.1),
+    seq(10, 100, 1)
+)
+ticks <- data.frame(x = c(trans_breaks("log10", function(x) 10^x)(c(0.001, 100)),
+                          0.01483, 0.0567))
+data <- data.frame(NeMu=NeMu,
+                   H=4*NeMu / (1 + 4*NeMu))
+ggplot(data, aes(x=NeMu, y=H)) + geom_line() +
+  scale_x_continuous(trans="log10",
+                     breaks = ticks$x,
+                     labels = function(x) ifelse(x==0, "0", x),
+                     expand = c(0, 0)) +
+  scale_y_continuous(
+      breaks = c(seq(0, 1, 0.1), 0.056, 0.185),
+      labels = function(x) ifelse(x==0, "0", x),
+      expand=c(0,0)) +
+  ylab("Heterozygosity (H)") + xlab(expression(N[e]~mu)) +
+  geom_rect(inherit.aes=FALSE,
+            data = data.frame(xstart = c(0.01483, 0.01483), xend = c(0.0567, 0),
+                              ystart = c(0, 0.056), yend = c(0.185, 0.185)),
+                              aes(xmin = xstart, xmax = xend,
+                                  ymin = ystart, ymax = yend,
+                                  fill = "red"), alpha = 0.4,
+            show.legend=FALSE)
+```
+
+:::
+
+::::
+
+::: {.notes }
+
+Related to rate of substitution and molecular evolution is the work of
+Kimura that lead to the development of the neutral theory.
+
+Motivation: if polymorphic sites deleterious, should not expect much
+polymorphism.
+
+Low levels of polymorphism expected assuming little balancing
+selection [@hurst_GeneticsUnderstandingSelection_2009, p. 87]; however
+electrophoretic studies showed polymorphism common. Would lead to
+detrimental load [@kimura_ProteinPolymorphismPhase_1971] -> therefore
+majority of polymorphism must evolve neutrally (dynamics). Also: rate
+of evolution (on protein level) too high (Haldane's dilemma)
 
 :::
 
@@ -1883,11 +1976,9 @@ which is independent of population size!
 On $2N\mu$: the larger the population, the larger the number of
 mutations that can fix
 
-Stress importance of results and how it defies logic - it is
-independent of population size
-
-If $4N\mu>>0$ no new mutations can fix - no explicit mention of DNA
-sequence -> infinite sites model
+If $4N\mu>>0$ no new mutations can fix. Issue here is there is no
+explicit mention of DNA sequence -> introduction of infinite sites
+model
 
 :::
 
@@ -1930,30 +2021,106 @@ fitness**
 | $h<0$   | overdominance (heterozygote advantage) |
 | $h>1$   | underdominance                         |
 
-## Mean fitness of a population
+## The most important equation in population genetics
+
+$$
+\Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} - w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
+$$
 
 ```{r }
-#| label: fig-dominance
+#| label: allele-frequency-dynamics
 #| echo: false
 #| eval: true
-#| fig-cap:
-#|    Mean fitness of the population as a function of
-#|    $p$ for $s=0.1$ and $h=-0.5$, $0.5$, and $1.5$
-wbar <- function(h, s, p) {
-  q <- 1-p
-  1 - 2*p*q*h*s - q**2 * s
+#| out-height: 400px
+#| out-width: 200px
+#| fig-width: 8
+#| fig-height: 4
+dp <- function(h, s, p) {
+  q <- 1 - p
+  wbar <- 1 - 2 * p * q * h * s - q * q * s
+  p * q * s * (p * h + q * (1 - h)) / wbar
+}
+pevol <- function(p0, n, h, s) {
+  p <- vector(length=n, mode="numeric")
+  p[1] <- p0
+  for (i in 2:n)
+    p[i] <- p[i-1] + dp(h, s, p[i-1])
+  p
 }
 p <- seq(0, 1, 0.01)
-s <- 0.1
-data <- rbind(
-    data.frame(p=p, h=-0.5, wbar=wbar(-0.5, s, p), Dominance="overdominant"),
-    data.frame(p=p, h=0.5, wbar=wbar(0.5, s, p), Dominance="additive"),
-    data.frame(p=p, h=1.5, wbar=wbar(1.5, s, p), Dominance="underdominant")
+data <- as.data.frame(rbind(
+    data.frame(dp=dp(0.5, 0.1, p), h=0.5, p, selection="directional"),
+    data.frame(dp=dp(-0.5, 0.1, p), h=-0.5, p, selection="balancing"),
+    data.frame(dp=dp(1.5, 0.1, p), h=1.5, p, selection="disruptive")
+))
+data$selection <- factor(data$selection,
+                         levels=c("directional", "balancing",
+                                  "disruptive"))
+data2 <- as.data.frame(rbind(
+    data.frame(p=pevol(0.1, 100, 0.5, 0.1), generation=1:100, h=0.5,
+               selection="directional", p0=0.1),
+    data.frame(p=pevol(0.1, 100, -0.5, 0.1), generation=1:100, h=-0.5,
+               selection="balancing", p0=0.1),
+    data.frame(p=pevol(0.9, 100, -0.5, 0.1), generation=1:100, h=-0.5,
+               selection="balancing", p0=0.9),
+    data.frame(p=pevol(0.24, 100, 1.5, 0.1), generation=1:100, h=-0.5,
+               selection="disruptive", p0=0.24),
+    data.frame(p=pevol(0.26, 100, 1.5, 0.1), generation=1:100, h=1.5,
+               selection="disruptive", p0=0.26)
+))
+data2$selection <- factor(data2$selection,
+                          levels=c("directional", "balancing",
+                                   "disruptive"))
+data2$p0 <- as.factor(data2$p0)
+selnames <- list(
+    `directional` = "directional (h=0.5, s=0.1)",
+    `balancing` = "balancing (h=-0.5, s=0.1)",
+    `disruptive` = "disruptive (h=1.5, s=0.1)"
 )
-ggplot(data, aes(x=p, y=wbar, color=Dominance)) + geom_point() + geom_line()
+selection_labeller <- function(variable, value) {
+  selnames[value]
+}
 ```
 
-## Selection and drift
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: selection-fig-dp
+#| echo: false
+#| eval: true
+#| out-height: 500
+#| out-width: 500
+#| fig-height: 8
+#| fig-width: 8
+ggplot(data, aes(x = p, y = dp)) +
+  geom_line(linewidth=1.2) +
+  facet_grid(selection ~ ., labeller=selection_labeller) +
+  geom_hline(yintercept=0, linetype="twodash")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: selection-fig-p
+#| echo: false
+#| eval: true
+#| out-height: 500
+#| out-width: 500
+#| fig-height: 8
+#| fig-width: 8
+ggplot(data2, aes(x=generation, y=p, linetype=p0)) + geom_line(linewidth=1.2) +
+  facet_grid(selection ~ ., labeller=selection_labeller)
+```
+
+:::
+
+::::
+
+## Selection and drift - population size matters
 
 :::: {.columns}
 
@@ -1991,12 +2158,676 @@ ggplot(data, aes(x=Ne_s, y=thetaf)) + geom_line() +
 
 ::: {.notes }
 
+Segue: note on the strength of s and the relation to $N_e$.
+
 Even if a new mutation has, say, $s=0.01$, it still needs to overcome
-effects of drift.
+effects of drift. Only has 2% change of fixation.
 
 In figure, we assume $s<0.1$, which is almost always the case.
 
+[@hahn_MolecularPopulationGenetics_2019, p. 133]
+
 :::
+
+## Substitutions and direct selection
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**$\mathbf{d_N/d_S << 1}$**
+: negative (purifying) selection
+
+**$\mathbf{d_N/d_S < 1}$**
+: majority nonsynonymous deleterious, some advantageous
+
+**$\mathbf{d_N/d_S = 1}$**
+: neutral or mix neutral / advantageous / deleterious mutations
+
+**$\mathbf{d_N/d_S > 1}$**
+: positive selection
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-ensembl-hsapiens-rat-dnds
+#| echo: false
+#| eval: true
+#| out-height: 400
+#| fig-width: 8
+#| fig-height: 6
+#| fig-cap: $d_n/d_s$ comparisons for human-rat orthologs.
+fn <- "assets/data/hsapiens_rat.dnds.tsv"
+if (!file.exists(fn)) {
+  library(biomaRt)
+  ensembl = useEnsembl(version = 99,
+                       biomart = 'ENSEMBL_MART_ENSEMBL',
+                       dataset = 'hsapiens_gene_ensembl')
+  genes <- getBM(mart=ensembl, attributes=c("ensembl_gene_id"))
+  hsapiens_rat <- getBM(attributes=c("ensembl_gene_id",
+                                     "rnorvegicus_homolog_ensembl_gene",
+                                     "rnorvegicus_homolog_dn",
+                                     "rnorvegicus_homolog_ds",
+                                     "rnorvegicus_homolog_orthology_type"),
+                        filters="ensembl_gene_id",
+                        values=genes$ensembl_gene_id,
+                        mart=ensembl)
+  hsapiens_rat <- subset(hsapiens_rat,
+                         !is.na(rnorvegicus_homolog_ds) &
+                         !is.na(rnorvegicus_homolog_dn) &
+                         rnorvegicus_homolog_orthology_type == "ortholog_one2one")
+  hsapiens_rat$dnds <- hsapiens_rat$rnorvegicus_homolog_dn /
+    hsapiens_rat$rnorvegicus_homolog_ds
+  hsapiens_rat <- subset(hsapiens_rat, !is.nan(dnds))
+  write.table(hsapiens_rat, file="assets/data/hsapiens_rat.dnds.tsv",
+              sep="\t", quote=FALSE, row.names=FALSE)
+}
+x <- read.table(fn, header=TRUE)
+ggplot(x, aes(x=dnds)) +
+  geom_histogram(bins=100, aes(y=..count../sum(..count..)), fill="white",
+                 color="black") + xlim(0, 2) +
+  xlab(expression(d[n]~"/"~d[s])) + ylab("Frequency") +
+  ggtitle(paste0(nrow(x), " human-rat orthologue pairs"))
+```
+
+:::
+
+::::
+
+::: {.fragment}
+
+<div style="transform: translate(0, -50px);">
+
+Not all mutations fall in genes. Methods for detecting direct
+selection not applicable to studying selection on *single* mutation,
+or e.g., balancing. This requires looking for specific patterns of
+diversity surrounding locus under selection.
+
+</div>
+
+:::
+
+::: {.notes }
+
+Segue: how do we detect selection?
+
+Not all mutations in genes. Also want to look at single advantageous
+mutations, or balanced polymorphisms. Must therefore look at tell-tale
+signs of linked neutral variants.
+
+:::
+
+## Linked selection
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: fig-selective-sweep
+#| echo: false
+#| eval: true
+#| out-height: 300
+#| fig-cap: A selective sweep of an advantageous mutation (gray dot).
+\begin{tikzpicture}
+  \tikzstyle{mut} = [circle, minimum height=0.4cm, fill=gray, draw];
+  \tikzstyle{neutral} = [circle, minimum height=0.4cm, draw, fill=white];
+  \begin{scope}
+    \draw (0,0) -- (10,0);
+    \node[neutral] at (3, 0) {};
+    \node[neutral] at (7, 0) {};
+    \draw (0,1) -- (10,1);
+    \node[neutral] at (8, 1) {};
+    \draw (0,2) -- (10,2);
+    \node[neutral] at (2, 2) {};
+    \node[neutral] at (3, 2) {};
+    \node[neutral] at (4, 2) {};
+    \node[neutral] at (9, 2) {};
+    \draw (0,3) -- (10,3);
+    \node[neutral] at (3, 3) {};
+    \node[neutral] at (7, 3) {};
+    \draw (0,4) -- (10,4);
+    \node[neutral] at (0.5, 4) {};
+    \node[neutral] at (7, 4) {};
+    \draw (0,5) -- (10,5);
+    \node[neutral] at (9, 5) {};
+    \node[mut] at (3, 5) {};
+    \draw (0,6) -- (10,6);
+    \node[neutral] at (2, 6) {};
+    \node[neutral] at (5, 6) {};
+    \draw (0,7) -- (10,7);
+    \node[neutral] at (1, 7) {};
+    \node[neutral] at (5, 7) {};
+    \draw (0,8) -- (10,8);
+    \node[neutral] at (2, 8) {};
+    \node[neutral] at (5, 8) {};
+    \node[neutral] at (9, 8) {};
+    \draw (0,9) -- (10,9);
+    \node[neutral] at (2, 9) {};
+  \end{scope}
+
+  \draw[->, ultra thick] (11, 5) -- (19, 5);
+  \node[font=\bfseries] at (15, 5.5) {\LARGE Many generations};
+
+  \begin{scope}[shift={(20, 0)}]
+    \draw (0,0) -- (10,0);
+    \node[neutral] at (9, 0) {};
+    \node[mut] at (3, 0) {};
+
+    \draw (0,1) -- (10,1);
+    \node[neutral] at (9, 1) {};
+    \node[mut] at (3, 1) {};
+
+    \draw (0,2) -- (10,2);
+\node[neutral] at (9, 2) {};
+    \node[mut] at (3, 2) {};
+
+    \draw (0,3) -- (10,3);
+    \node[neutral] at (9, 3) {};
+    \node[mut] at (3, 3) {};
+
+    \draw (0,4) -- (10,4);
+    \node[neutral] at (9, 4) {};
+    \node[mut] at (3, 4) {};
+
+    \draw (0,5) -- (10,5);
+    \node[neutral] at (9, 5) {};
+    \node[mut] at (3, 5) {};
+
+    \draw (0,6) -- (10,6);
+    \node[neutral] at (9, 6) {};
+    \node[mut] at (3, 6) {};
+
+    \draw (0,7) -- (10,7);
+    \node[neutral] at (9, 7) {};
+    \node[mut] at (3, 7) {};
+
+    \draw (0,8) -- (10,8);
+    \node[neutral] at (9, 8) {};
+    \node[mut] at (3, 8) {};
+
+    \draw (0,9) -- (10,9);
+    \node[neutral] at (9, 9) {};
+    \node[mut] at (3, 9) {};
+
+  \end{scope}
+\end{tikzpicture}
+```
+
+Previous example showed a selective sweep. If a sweep completes at a
+locus, it will become monomorphic.
+
+::: {.notes }
+
+Topologies become important when we discuss sweeps
+
+:::
+
+## Recombination breaks upp association between loci
+
+```{r }
+#| label: pgip-load-slim-data
+#| echo: false
+#| eval: true
+data <- tidyr::tibble(read.csv("../../data/results/slim/selective_sweep.w500.csv.gz",
+                               header = TRUE))
+a <- sum(1 / seq(10 - 1))
+data$thetaW <- data$S / a
+data_mean <- as.data.frame(data) %>%
+  dplyr::select(windows, TajD, pi, S, thetaW) %>%
+  group_by(windows) %>%
+  summarise(TajD = mean(TajD, na.rm = TRUE),
+            pi = mean(pi, na.rm = TRUE), S = mean(S, na.rm = TRUE),
+            thetaW = mean(thetaW, na.rm = TRUE)) %>%
+  mutate(fn = "mean", pi_minus_thetaW = pi - thetaW)
+L <- 1e6
+xi <- L / 2
+```
+
+```{r }
+#| label: fig-pgip-slim-sweep-plot-pi-S
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+#| out-width: 600
+#| fig-cap:
+#|     The effect of a selective sweep on diversity.
+#|     The figure shows the mean of 1000 simulations
+#|     with the selected locus indicated with an arrow.
+x <- data_mean %>% pivot_longer(
+  cols = c("pi", "thetaW", "pi_minus_thetaW"),
+  names_transform =
+    list(name = ~readr::parse_factor(.x, levels = c("pi", "thetaW",
+                                                    "pi_minus_thetaW")))
+  )
+ggplot(x, aes(windows, value, color = name)) +
+  geom_segment(aes(x = xi, y = -1, xend = xi, yend = -2.5),
+               color = "black", arrow = arrow(length = unit(0.4, "cm"),
+                                              type = "closed")) +
+  xlab("Chromosomal position") +
+  ylab("diversity") +
+  geom_line(linewidth = 1) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        legend.title = element_blank()) +
+  scale_y_continuous(expand = c(0, 0), limits = c(-2.5, 10)) +
+  scale_x_continuous(expand = c(0, 0), limits = c(0, L)) +
+  scale_colour_manual(
+    name = "name", values = c("blue", "red", "green"),
+    labels = expression("diversity "~pi, theta[W], pi - theta[W])
+  )
+```
+
+## Distinguishing selection from drift via topology
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: wf-model-drift-genealogy
+#| echo: false
+#| eval: true
+#| out-height: 600
+set.seed(181)
+ngen <- 50
+n <- 30
+wf <- wright_fisher_pop(n = 30, generations = 50, p0=1, init_gen=5)
+samples <- sort(sample(which(V(wf)$y == (ngen - 1)), 10))
+obj <- wf
+i <- V(obj)[unlist(ego(obj, order = ngen - 7, nodes = samples, mode = "in"))]
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "lightgray"
+  )) +
+  geom_node_point(ggplot2::aes(fill = allele),
+                  color = "black", shape = 21, size = 1.5) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_y_reverse() + scale_edge_width(range = c(.1, 1)) +
+  scale_fill_manual(values = c("a" = "white", "A" = "black")) +
+  ggtitle("drift")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: wf-model-selection-genealogy
+#| echo: false
+#| eval: true
+#| out-height: 600
+set.seed(1232)
+ngen <- 50
+n <- 30
+wf <- wright_fisher_pop(n = n, generations = ngen, p0=1, init_gen=5, s=.2)
+#samples <- sort(sample(which(V(wf)$y == (ngen - 1)), 12))
+obj <- wf
+i <- V(obj)[unlist(ego(obj, order = 43, nodes = samples, mode = "in"))]
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "lightgray"
+  )) +
+  geom_node_point(ggplot2::aes(fill = allele),
+                  color = "black", shape = 21, size = 1.5) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_fill_manual(values = c("a" = "white", "A" = "black")) +
+  scale_y_reverse() + scale_edge_width(range = c(.1, 1)) +
+  ggtitle("selection")
+```
+
+:::
+
+::::
+
+::: {.notes }
+
+Topology for selection more compressed.
+
+:::
+
+## The phases of a selective sweep
+
+```{R, engine="tikz", fig.ext="svg" }
+#| label: fig-selective-sweep-phases
+#| echo: false
+#| eval: true
+#| out-height: 500
+#| fig-cap:
+#|     Time goes from left to right. As sweep progresses,
+#|     tree topology changes. Adapted from
+#|     @hahn_MolecularPopulationGenetics_2019, Figure 8.1
+\begin{tikzpicture}[inner sep=0, outer sep=0, thick]
+\tikzstyle{neutral} = [circle, minimum height=0.4cm, draw, fill=white];
+\tikzstyle{mut} = [circle, minimum height=0.4cm, fill=black, draw];
+  \begin{scope}
+  \path (0, 0) node (a1) {}
+  (1, 0) node (a2) {}
+  (2, 0) node (a3) {}
+  (3, 0) node (a4) {}
+  (4, 0) node (a5) {}
+  (5, 0) node (a6) {};
+\node (a7) at ($(a1) !.5! (a2) + (0, 1)$) {};
+\node (a8) at ($(a1-|a7) !.5! (a3) + (0, 3)$) {};
+\node (a9) at ($(a4) !.5! (a5) + (0, 4)$) {};
+\node (a10) at ($(a1-|a9) !.5! (a6) + (0, 6)$) {};
+\node (a11) at ($(a1-|a8) !.5! (a1-|a10) + (0, 10)$) {};
+  \draw (a1) -- (a7)
+(a2) -- (a7)
+(a7) -- (a8)
+(a3) -- (a8)
+(a4) -- (a9)
+(a5) -- (a9)
+(a6) -- (a10)
+(a9) -- (a10)
+(a10) -- (a11)
+(a8) -- (a11)
+;
+\node[mut] at ($(a6) !.1! (a10)$) {};
+\draw (0, -2) -- (6, -2)
+(0, -3) -- (6, -3)
+(0, -4) -- (6, -4)
+(0, -5) -- (6, -5)
+(0, -6) -- (6, -6)
+(0, -7) -- (6, -7)
+;
+\node[neutral] at (5, -2) {};
+\node[mut] at (4, -3) {};
+\node[neutral] at (2, -3) {};
+\node[neutral] at (5, -3) {};
+\node[neutral] at (2, -4) {};
+\node[neutral] at (1, -5) {};
+\node[neutral] at (3, -5) {};
+\node[neutral] at (1, -6) {};
+\node[neutral] at (5, -6) {};
+\node[neutral] at (1, -7) {};
+
+\end{scope}
+  \begin{scope}[xshift=8cm]
+  \path (0, 0) node (a1) {}
+  (2, 0) node (a2) {}
+  (4, 0) node (a3) {}
+  (4.5, 0) node (a4) {}
+  (5, 0) node (a5) {}
+  (5.5, 0) node (a6) {};
+\node (a7) at ($(a1) !.5! (a2) + (0, 3)$) {};
+\node (a8) at ($(a3) !.5! (a6) + (0, 2)$) {};
+\node (a9) at ($(a1-|a8) !.5! (a1-|a8) + (0, 10)$) {};
+  \draw (a1) -- (a7)
+(a2) -- (a7)
+(a3) -- (a8)
+(a4) -- (a8)
+(a5) -- (a8)
+(a6) -- (a8)
+(a8) -- (a9)
+(a7) -- (a9);
+\node[mut] at ($(a8) !.1! (a9)$) {};
+\draw (0, -2) -- (6, -2)
+(0, -3) -- (6, -3)
+(0, -4) -- (6, -4)
+(0, -5) -- (6, -5)
+(0, -6) -- (6, -6)
+(0, -7) -- (6, -7)
+;
+\node[neutral] at (2, -2) {};
+\node[mut] at (4, -2) {};
+\node[neutral] at (5, -2) {};
+\node[neutral] at (2, -3) {};
+\node[mut] at (4, -3) {};
+\node[neutral] at (5, -3) {};
+\node[neutral] at (2, -4) {};
+\node[mut] at (4, -5) {};
+\node[neutral] at (5, -4) {};
+\node[neutral] at (2, -5) {};
+\node[mut] at (4, -4) {};
+\node[neutral] at (5, -5) {};
+\node[neutral] at (1, -6) {};
+\node[neutral] at (5, -6) {};
+\node[neutral] at (1, -7) {};
+\node[neutral] at (3, -7) {};
+    \end{scope}
+
+  \begin{scope}[xshift=16cm]
+  \path (1.5, 0) node (a1) {}
+  (2, 0) node (a2) {}
+  (2.5, 0) node (a3) {}
+  (3, 0) node (a4) {}
+  (3.5, 0) node (a5) {}
+  (4, 0) node (a6) {};
+\node (a7) at ($(a1) !.5! (a6) + (0, 1)$) {};
+\node (a8) at ($(a7) + (0, 9)$) {};
+  \draw (a1) -- (a7)
+(a2) -- (a7)
+(a3) -- (a7)
+(a3) -- (a7)
+(a4) -- (a7)
+(a5) -- (a7)
+(a6) -- (a7)
+(a7) -- (a8);
+\node[mut] at ($(a7) !.1! (a8)$) {};
+\draw (0, -2) -- (6, -2)
+(0, -3) -- (6, -3)
+(0, -4) -- (6, -4)
+(0, -5) -- (6, -5)
+(0, -6) -- (6, -6)
+(0, -7) -- (6, -7)
+;
+\node[neutral] at (2, -2) {};
+\node[mut] at (4, -2) {};
+\node[neutral] at (5, -2) {};
+\node[neutral] at (2, -3) {};
+\node[mut] at (4, -3) {};
+\node[neutral] at (5, -3) {};
+\node[neutral] at (2, -4) {};
+\node[mut] at (4, -4) {};
+\node[neutral] at (5, -4) {};
+\node[neutral] at (2, -5) {};
+\node[mut] at (4, -5) {};
+\node[neutral] at (5, -5) {};
+\node[neutral] at (2, -6) {};
+\node[mut] at (4, -6) {};
+\node[neutral] at (5, -6) {};
+\node[neutral] at (2, -7) {};
+\node[mut] at (4, -7) {};
+\node[neutral] at (5, -7) {};
+
+    \end{scope}
+
+\end{tikzpicture}
+```
+
+## Hitchhiking versus background selection
+
+<br>
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: fig-hitchhiking-vs-background-selection
+#| echo: false
+#| eval: true
+#| out-width: 800
+#| fig-cap: Hitchhiking (left) versus background selection (right).
+\begin{tikzpicture}
+  \tikzstyle{mut} = [circle, minimum height=0.4cm, fill=gray, draw];
+  \tikzstyle{neutral} = [circle, minimum height=0.4cm, draw, fill=white];
+
+\begin{scope}
+    \draw (0,0) -- (10,0);
+    \node[neutral] at (3, 0) {};
+    \node[neutral] at (7, 0) {};
+    \draw (0,1) -- (10,1);
+    \node[neutral] at (8, 1) {};
+    \draw (0,2) -- (10,2);
+    \node[neutral] at (2, 2) {};
+    \node[neutral] at (3, 2) {};
+    \node[neutral] at (4, 2) {};
+    \node[neutral] at (9, 2) {};
+    \draw (0,3) -- (10,3);
+    \node[neutral] at (3, 3) {};
+    \node[neutral] at (7, 3) {};
+    \draw (0,4) -- (10,4);
+    \node[neutral] at (0.5, 4) {};
+    \node[neutral] at (7, 4) {};
+    \draw (0,5) -- (10,5);
+    \node[neutral] at (9, 5) {};
+    \node[mut] at (3, 5) {};
+    \draw (0,6) -- (10,6);
+    \node[neutral] at (2, 6) {};
+    \node[neutral] at (5, 6) {};
+    \draw (0,7) -- (10,7);
+    \node[neutral] at (1, 7) {};
+    \node[neutral] at (5, 7) {};
+    \draw (0,8) -- (10,8);
+    \node[neutral] at (2, 8) {};
+    \node[neutral] at (5, 8) {};
+    \node[neutral] at (9, 8) {};
+    \draw (0,9) -- (10,9);
+    \node[neutral] at (2, 9) {};
+  \end{scope}
+
+  \draw[->, ultra thick] (11, 5) -- (14, 5);
+
+  \begin{scope}[shift={(15, 0)}]
+    \draw (0,0) -- (10,0);
+    \node[neutral] at (9, 0) {};
+    \node[mut] at (3, 0) {};
+
+    \draw (0,1) -- (10,1);
+    \node[neutral] at (9, 1) {};
+    \node[mut] at (3, 1) {};
+
+    \draw (0,2) -- (10,2);
+\node[neutral] at (9, 2) {};
+    \node[mut] at (3, 2) {};
+
+    \draw (0,3) -- (10,3);
+    \node[neutral] at (9, 3) {};
+    \node[mut] at (3, 3) {};
+
+    \draw (0,4) -- (10,4);
+    \node[neutral] at (9, 4) {};
+    \node[mut] at (3, 4) {};
+
+    \draw (0,5) -- (10,5);
+    \node[neutral] at (9, 5) {};
+    \node[mut] at (3, 5) {};
+
+    \draw (0,6) -- (10,6);
+    \node[neutral] at (9, 6) {};
+    \node[mut] at (3, 6) {};
+
+    \draw (0,7) -- (10,7);
+    \node[neutral] at (9, 7) {};
+    \node[mut] at (3, 7) {};
+
+    \draw (0,8) -- (10,8);
+    \node[neutral] at (9, 8) {};
+    \node[mut] at (3, 8) {};
+
+    \draw (0,9) -- (10,9);
+    \node[neutral] at (9, 9) {};
+    \node[mut] at (3, 9) {};
+
+\end{scope}
+
+  \begin{scope}[shift={(35, 0)}]
+    \draw (0,0) -- (10, 0);
+    \node[neutral] at (3, 0) {};
+\node[neutral] at (7, 0) {};
+    \node[mut] at (9, 0) {};
+\draw (0,1) -- (10,1);
+    \node[neutral] at (7, 1) {};
+    \node[neutral] at (8, 1) {};
+    \draw (0,2) -- (10,2);
+    \node[neutral] at (3, 2) {};
+    \node[neutral] at (4, 2) {};
+    \node[neutral] at (9, 2) {};
+    \draw (0,3) -- (10,3);
+    \node[mut] at (3, 3) {};
+    \node[neutral] at (7, 3) {};
+    \draw (0,4) -- (10,4);
+\node[neutral] at (0.5, 4) {};
+\node[neutral] at (3.5, 4) {};
+    \node[neutral] at (8.5, 4) {};
+    \node[neutral] at (7, 4) {};
+    \draw (0,5) -- (10,5);
+    \node[neutral] at (5, 5) {};
+    \node[neutral] at (4, 5) {};
+    \draw (0,6) -- (10,6);
+    \node[neutral] at (2, 6) {};
+    \draw (0,7) -- (10,7);
+    \node[neutral] at (5, 7) {};
+    \node[neutral] at (8, 7) {};
+    \draw (0,8) -- (10,8);
+    \node[neutral] at (2, 8) {};
+    \node[neutral] at (4, 8) {};
+    \node[mut] at (7, 8) {};
+    \draw (0,9) -- (10,9);
+\node[neutral] at (2, 9) {};
+\node[neutral] at (9, 9) {};
+  \end{scope}
+
+  \draw[->, ultra thick] (46, 5) -- (49, 5);
+
+  \begin{scope}[shift={(50, 0)}]
+    \draw (0,0) -- (10, 0);
+    \node[neutral] at (3, 0) {};
+\node[neutral] at (7, 0) {};
+\draw (0,1) -- (10,1);
+    \node[neutral] at (7, 1) {};
+    \node[neutral] at (8, 1) {};
+    \draw (0,2) -- (10,2);
+    \node[neutral] at (3, 2) {};
+    \node[neutral] at (4, 2) {};
+    \node[neutral] at (9, 2) {};
+    \draw (0,3) -- (10,3);
+    \node[mut] at (3, 3) {};
+    \node[neutral] at (7, 3) {};
+    \draw (0,4) -- (10,4);
+    \node[neutral] at (5, 4) {};
+    \node[neutral] at (4, 4) {};
+    \draw (0,5) -- (10,5);
+    \node[neutral] at (5, 5) {};
+    \node[neutral] at (4, 5) {};
+    \draw (0,6) -- (10,6);
+    \node[neutral] at (2, 6) {};
+    \draw (0,7) -- (10,7);
+    \node[neutral] at (5, 7) {};
+    \node[neutral] at (8, 7) {};
+    \draw (0,8) -- (10,8);
+    \node[neutral] at (2, 8) {};
+    \node[neutral] at (9, 8) {};
+    \draw (0,9) -- (10,9);
+    \node[neutral] at (2, 9) {};
+    \node[neutral] at (9, 9) {};
+  \end{scope}
+
+\end{tikzpicture}
+```
+
+## Summary
+
+We have looked at the **Wright-Fisher model** as a model of populations and **genealogies***
+
+**Genetic drift** moves allele frequencies up and down at random and
+removes variation at rate $\propto 1/2N$
+
+**Mutation** reintroduces variation. The **Neutral theory** posits
+most mutations are neutral and dynamics follow **mutation drift**
+equilibrium.
+
+Methods to detect **selection** are based on **direct selection** or
+studying patterns of variation caused by **linked selection**.
 
 ## Bibliography {.unnumbered .unlisted}
 
