@@ -26,42 +26,24 @@ library(ggraph)
 library(tidygraph)
 ```
 
-::: {.notes }
-
-The goal of simulation primer must be to convey intuition about
-evolutionary processes:
-
-- how genealogies change under different scenarios
-- how they connect with summary statistics (e.g., Tajima's)
-- duality tree-based stats - summary stats (Ralph/Kelleher)
-- how they can be used to calculate outlier stats
-
-A compelling argument for the necessity of simulations is given by
-[@gillespie_PopulationGeneticsConcise_2004], who observes that hardly
-any analytical solutions exist for multi-locus models and that
-therefore simulation is the only resort to understand allele frequency
-dynamics.
-
-Simulated data are often used to validate new methods.
-
-:::
-
-# The coalescent
-
-## Wright-Fisher model again
+## The Wright-Fisher model and simulations
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
 ```{r }
-#| label: fig-wf-model-reproductive-success
+#| label: fig-wf-model-reproductive-success-1
 #| echo: false
 #| eval: true
 #| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
 #| out-width: 80%
 set.seed(132)
 g <- wright_fisher_pop(n = 30, generations = 50)
+x_range <- range(vertex_attr(g, "x"))
+y_range <- range(vertex_attr(g, "y"))
+x1 <- x_range[1] - 1
+x_range <- c(x1 - 4, x_range[2])
 g %>%
   mutate(
     allele =
@@ -69,38 +51,55 @@ g %>%
         "b", "a"
       )
   ) %>%
-  ggplot_wf(., fill = allele)
+  ggplot_wf(., fill = allele) +
+    geom_segment(
+    aes(
+      x = x1, y = y_range[1],
+      xend = x1, yend = y_range[2]
+    ),
+    arrow = arrow(
+      length = unit(0.5, "cm"),
+      type = "closed"
+    )
+  ) +
+  annotate("text",
+    label = "time",
+    x = x1 - 1, y = mean(y_range),
+    size = 10, angle = 90
+  ) +
+  annotate("text",
+    label = "past",
+    x = x1 - .5, y = y_range[1],
+    size = 10, hjust = 1,
+  ) +
+  annotate("text",
+    label = "present",
+    x = x1 - .5, y = y_range[2],
+    size = 10, hjust = 1,
+  ) +
+  expand_limits(x = x_range, y = y_range)
 ```
 
 :::
 
 ::: {.column width="50%"}
 
+### Recap
+
+Model of a population describing **genealogies** under the following assumptions
+
+- discrete and non-overlapping generations
+- haploid individuals or two subpopulations (males and females)
+- constant population size
+- all individuals are equally fit
+- population has no geographical or social structure
+- no recombination
+
 ::: {.fragment}
 
-```{r }
-#| label: fig-wf-model-reproductive-success-graph
-#| echo: false
-#| eval: true
-#| cache: false
-#| fig-cap: Reproductive success in percent per generation.
-#| out-width: 60%
-gdf <- g %>%
-  mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
-  as.data.frame()
-x <- tapply(gdf$allele, gdf$y, function(x) {
-  sum(x == "b") / length(x)
-})
-xmean <- sprintf("%.1f%%", mean(x) * 100)
-df <- data.frame(x = seq_along(x), y = x)
-ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
-  geom_line() +
-  xlab("Generation") +
-  ylab("Reproductive success (%)")
-```
+**Forward** simulation
 
-Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can show for
-large populations P(no descendants)=$1 - e^{-1} \approx 0.632$
+:::
 
 :::
 
@@ -110,27 +109,437 @@ large populations P(no descendants)=$1 - e^{-1} \approx 0.632$
 
 ::: {.notes }
 
-Repeat WF model. Point out that it can be used for *forward*
-simulation. Show how many individuals are lost each generation (limit
-e-1): lose lots of compute resources on the way to extant  sample.
+[p. 15 @hein2005gene] shows the fraction of genes without descendants.
+Focus on the number of descendants for *one* gene *i*, which is X ~
+Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that
+P(no descendants) = P(X=0) = e^{-1}
+
+Low reproductive success: forward simulations costly!
+
+:::
+
+## The Wright-Fisher model and simulations
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-wf-model-reproductive-success-2
+#| echo: false
+#| eval: true
+#| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
+#| out-width: 80%
+set.seed(132)
+g <- wright_fisher_pop(n = 30, generations = 50)
+x_range <- range(vertex_attr(g, "x"))
+y_range <- range(vertex_attr(g, "y"))
+x1 <- x_range[1] - 1
+x_range <- c(x1 - 4, x_range[2])
+g %>%
+  mutate(
+    allele =
+      ifelse(degree(., mode = "out") > 0,
+        "b", "a"
+      )
+  ) %>%
+  ggplot_wf(., fill = allele) +
+    geom_segment(
+    aes(
+      x = x1, y = y_range[1],
+      xend = x1, yend = y_range[2]
+    ),
+    arrow = arrow(
+      length = unit(0.5, "cm"),
+      type = "closed"
+    )
+  ) +
+  annotate("text",
+    label = "time",
+    x = x1 - 1, y = mean(y_range),
+    size = 10, angle = 90
+  ) +
+  annotate("text",
+    label = "past",
+    x = x1 - .5, y = y_range[1],
+    size = 10, hjust = 1,
+  ) +
+  annotate("text",
+    label = "present",
+    x = x1 - .5, y = y_range[2],
+    size = 10, hjust = 1,
+  ) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-wf-model-reproductive-success-graph
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-cap:
+#|    Reproductive success in percent per generation.
+#| out-width: 55%
+gdf <- g %>%
+  mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
+  as.data.frame()
+x <- tapply(gdf$allele, gdf$y, function(x) {
+  sum(x == "b") / length(x)
+})
+xmean <- sprintf("%.1f%%", mean(x) * 100)
+df <- data.frame(x = seq_along(x), y = x)
+ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
+  geom_line(linewidth=1.2) +
+  xlab("Generation") +
+  ylab("Reproductive success (%)") +
+  theme(text=element_text(size=36))
+```
+
+Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can
+show for large populations P(no descendants)=$1 - e^{-1} \approx
+0.632$
+
+:::
+
+:::
+
+::::
+
+::: {.notes }
 
 [p. 15 @hein2005gene] shows the fraction of genes without descendants.
 Focus on the number of descendants for *one* gene *i*, which is X ~
 Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that
 P(no descendants) = P(X=0) = e^{-1}
 
+Low reproductive success: forward simulations costly!
+
 :::
 
-## The coalescent
+## Forward and backward simulation
 
-Introduce concept. Describe algorithm (show code - include as
-exercise?). Genealogy and mutations:
+```{r }
+#| label: wright-fisher-model-graph
+#| echo: false
+#| eval: true
+#| cache: false
+set.seed(2023)
+wf <- wright_fisher_pop(n = 10, generations = 16)
+```
 
-- sim_ancestry
-- sim_mutations
+:::: {.columns}
 
-Note that #mutations propto branch length -> don't actually even need
-to know the mutations (e.g. fastsimcoal)
+::: {.column width="50%"}
+
+```{r}
+#| label: fig-wf-model-genealogy-forward
+#| echo: false
+#| eval: true
+#| fig-cap:
+#|    Forward simulation.
+#| out-width: 60%
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+x1 <- x_range[1] - 1
+x_range <- c(x1 - 3, x_range[2])
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "black"
+  )) +
+  geom_node_point(fill = "black", color = "black", shape = 21, size = 3) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+      geom_segment(
+    aes(
+      x = x1, y = y_range[1],
+      xend = x1, yend = y_range[2]
+    ),
+    arrow = arrow(
+      length = unit(0.5, "cm"),
+      type = "closed"
+    )
+  ) +
+  annotate("text",
+    label = "time",
+    x = x1 - 1, y = mean(y_range),
+    size = 10, angle = 90
+  ) +
+  annotate("text",
+    label = "past",
+    x = x1 - .5, y = y_range[1],
+    size = 10, hjust = 1,
+  ) +
+  annotate("text",
+    label = "present",
+    x = x1 - .5, y = y_range[2],
+    size = 10, hjust = 1,
+  ) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: fig-wf-model-genealogy-backward
+#| echo: false
+#| eval: true
+#| fig-cap:
+#|    Backward simulation.
+#| out-width: 60%
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+x1 <- x_range[1] - 1
+x_range <- c(x1 - 3, x_range[2])
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+V(obj)[i]$allele <- "A"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "lightgray"
+  )) +
+  geom_node_point(ggplot2::aes(fill = allele), color = "black", shape = 21, size = 3) +
+  scale_fill_manual(values=list(a="white", A="black")) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+      geom_segment(
+    aes(
+      x = x1, y = y_range[2],
+      xend = x1, yend = y_range[1]
+    ),
+    arrow = arrow(
+      length = unit(0.5, "cm"),
+      type = "closed"
+    )
+  ) +
+  annotate("text",
+    label = "time",
+    x = x1 - 1, y = mean(y_range),
+    size = 10, angle = 90
+  ) +
+  annotate("text",
+    label = "past",
+    x = x1 - .5, y = y_range[1],
+    size = 10, hjust = 1,
+  ) +
+  annotate("text",
+    label = "present",
+    x = x1 - .5, y = y_range[2],
+    size = 10, hjust = 1,
+  ) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::::
+
+Simulated nodes are filled with black. Genealogy of interest is
+highlighted in thick black lines.
+
+## Why do we want simulations anyway
+
+::: {.incremental}
+
+- No analytical solutions for linked selection and the like
+  $\rightarrow$ must use simulations
+- Use to gain understanding and improve interpretation of mutational
+  processes
+- Generate neutral null distributions to compare with observed data
+- Generate training data for machine learning
+
+:::
+
+# The coalescent
+
+## Coalescent simulations
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+The coalescent simulates the genealogy of a **sample** of individuals
+on which mutations are "sprinkled" according to a Poisson process.
+
+1. Simulate ancestry (genealogy)
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: wf-model-genealogy-backward-1
+#| echo: false
+#| eval: true
+#| out-width: 75%
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+y_range <- c(y_range[1], y_range[2] + 1)
+sample_nodes <- c(152, 155, 158)
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = sample_nodes, mode = "in"))]
+V(obj)$sample <- ""
+V(obj)[sample_nodes]$sample <- c(1,2,3)
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+V(obj)[i]$allele <- "A"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "lightgray"
+  )) +
+  geom_node_point(ggplot2::aes(fill = allele), color = "black", shape = 21, size = 3) +
+  scale_fill_manual(values=list(a="white", A="black")) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  geom_node_text(aes(label = sample), size=10, vjust=1.5) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::::
+
+## Coalescent simulations
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+The coalescent simulates the genealogy of a **sample** of individuals
+on which mutations are "sprinkled" according to a Poisson process.
+
+1. Simulate ancestry (genealogy)
+2. Simulate mutations
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: wf-model-genealogy-backward-mutations
+#| echo: false
+#| eval: true
+#| out-width: 75%
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+y_range <- c(y_range[1], y_range[2] + 1)
+sample_nodes <- c(152, 155, 158)
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = sample_nodes, mode = "in"))]
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)$mut <- ""
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+V(obj)[i]$allele <- "A"
+V(obj)$sample <- ""
+V(obj)[sample_nodes]$sample <- c(1,2,3)
+set.seed(23)
+E(obj)[sample(E(obj)[.to(i)], 5)]$mut <- "*"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width, label=mut),
+                 angle_calc="along", label_size=18) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "lightgray"
+  )) +
+  geom_node_point(ggplot2::aes(fill = allele), color = "black", shape = 21, size = 3) +
+  scale_fill_manual(values=list(a="white", A="black")) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  geom_node_text(aes(label = sample), size=10, vjust=1.5) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::::
+
+## Coalescent simulations
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+The coalescent simulates the genealogy of a **sample** of individuals
+on which mutations are "sprinkled" according to a Poisson process.
+
+1. Simulate ancestry (genealogy)
+2. Simulate mutations
+
+Question: how many mutations are common to all samples? How many
+mutations does sample 1 have? Sample 2?
+
+Assuming the ancestral state is denoted `0` (prior to the *first*
+generation) and the derived state `1`, what are the sequences of the
+samples?
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: wf-model-genealogy-backward-mutations-1
+#| echo: false
+#| eval: true
+#| out-width: 75%
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+y_range <- c(y_range[1], y_range[2] + 1)
+sample_nodes <- c(152, 155, 158)
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = sample_nodes, mode = "in"))]
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+E(obj)$mut <- ""
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+V(obj)[i]$allele <- "A"
+V(obj)$sample <- ""
+V(obj)[sample_nodes]$sample <- c(1,2,3)
+set.seed(23)
+E(obj)[sample(E(obj)[.to(i)], 5)]$mut <- "*"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width, label=mut),
+                 angle_calc="along", label_size=18) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "lightgray"
+  )) +
+  geom_node_point(ggplot2::aes(fill = allele), color = "black", shape = 21, size = 3) +
+  scale_fill_manual(values=list(a="white", A="black")) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  geom_node_text(aes(label = sample), size=10, vjust=1.5) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+::::
 
 ## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
 
@@ -1342,6 +1751,21 @@ node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
 
 ::: {.column width="50%"}
 
+Expected waiting time to coalesce when $i$ lineages: $E(T_i) =
+\frac{2}{i(i-1)}$
+
+Branch lengths can be derived from waiting times. For instance,
+$\tau_1=\tau_2=T_5+T_4$ and $\tau_4=\tau_5=T_5$
+
+Time to the **most recent common ancestor (MRCA)**: $T_{MRCA} =
+\sum_{i=2}^n T_i$
+
+with expected value $E(T_{MRCA}) = \sum_{i=2}^nE(T_i) = 2\left(1 -
+\frac{1}{n}\right)$
+
+The expected **total tree height** is $E(T_{total}) = \sum_{i=2}^n
+iE(T_i) = 2\sum_{i=2}^n\frac{1}{i-1}$
+
 :::
 
 ::::
@@ -1384,6 +1808,28 @@ mykronoviz(trees, type = "c", show.tip.label = FALSE, edge.width = 3)
 
 :::
 
+## Diminishing returns of adding more samples
+
+```{r }
+#| label: coalescent-diminishing-returns
+#| echo: false
+#| eval: true
+#| fig-width: 16
+#| fig-height: 8
+n <- 20
+t_total <- function(n) {2*sum(1/(seq(2,n)-1))}
+t_mrca <- function(n) {2*(1 - 1/n)}
+
+data <- data.frame(y=c(c(0, unlist(lapply(2:n, t_total))),
+                       c(0, unlist(lapply(2:n, t_mrca)))),
+                       x=c(1:n, 1:n),
+                       stat=c(rep("E[T_total]", n), rep("E[T_MRCA]", n))
+                       )
+ggplot(data, aes(x=x, y=y, linetype=factor(stat))) +
+  geom_line(linewidth=1.2) + xlab("n") + ylab("") +
+  guides(linetype=guide_legend(title="Statistic"))
+```
+
 ## Adding mutations
 
 ```{tikz, fig.ext="svg" }
@@ -1409,86 +1855,375 @@ node at ($(1) !.5! (4)$) (mid) {}
 node[above of=mid, node distance=300px] (root) {}
 node at ($(4) !.6! (root) $) (6) {}
 node at ($(2) !.5! (6) $) (5) {}
-
+node[above of=root, node distance=10px, outer sep=10px] (ancestral) {00000}
+node[below of=1, rotate=60, node distance=8px, anchor=south east] (l1) {11000}
+node[below of=2, rotate=60, node distance=8px, anchor=south east] (l2) {00110}
+node[below of=3, rotate=60, node distance=8px, anchor=south east] (l3) {00100}
+node[below of=4, rotate=60, node distance=8px, anchor=south east] (l4) {00001}
+node at ($(1) !.33! (root) - (.5, 0)$) (m1l) {0}
+node at ($(1) !.33! (root) + (.5, 0)$) (m1r) {1}
+node at ($(1) !.67! (root) - (.5, 0)$) (m2l) {0}
+node at ($(1) !.67! (root) + (.5, 0)$) (m2r) {1}
+node at ($(2) !.5! (5) - (.5, 0)$) (m3l) {0}
+node at ($(2) !.5! (5) + (.5, 0)$) (m3r) {1}
+node at ($(5) !.5! (6) - (.5, 0)$) (m4l) {0}
+node at ($(5) !.5! (6) + (.5, 0)$) (m4r) {1}
+node at ($(4) !.5! (6) - (.5, 0)$) (m5l) {0}
+node at ($(4) !.5! (6) + (.5, 0)$) (m5r) {1}
 ;
 \draw
 (1) -- (root)
 (4) -- (root)
 (2) -- (6)
 (3) -- (5);
+\draw[>=latex, ->] (m1l) -- (m1r);
+\draw[>=latex, ->] (m2l) -- (m2r);
+\draw[>=latex, ->] (m3l) -- (m3r);
+\draw[>=latex, ->] (m4l) -- (m4r);
+\draw[>=latex, ->] (m5l) -- (m5r);
 
 \end{tikzpicture}
 ```
 
-## The coalescent: diminishing returns
+## The coalescent and diversity {.smaller}
 
-Show plot of diminishing returns (better to add sites, not samples)
+:::: {.columns}
 
-## The coalescent and diversity
+::: {.column width="50%"}
 
-Recalculate example
+```{r, engine="tikz", fig.ext="svg" }
+#| label: coalescent-tree-dna-variation
+#| echo: false
+#| eval: true
+#| out-height: 600
+\begin{tikzpicture}[outer sep=0, inner sep=0, thick,
+                    node distance=5px, every node/.style={font=\ttfamily}]
+\tikzstyle{mut} = [circle, minimum height=0.2cm, fill=gray, draw];
+\draw
+node (1) at (0, 0) {}
+node (2) at (1, 0) {}
+node (3) at (2, 0) {}
+node (4) at (3, 0) {}
+node (5) at ($(1) !.5! (2) + (0, 2)$) {}
+node (6) at ($(1-|5) !.5! (3) + (0, 3)$) {}
+node (7) at ($(1-|6) !.5! (4) + (0, 5)$) {}
+node[above of=7, anchor=south] (rootl) {000000}
+node[rotate=45, below left of=1, anchor=north east] (1l) {010100}
+node[rotate=45, below left of=2, anchor=north east] (2l) {010100}
+node[rotate=45, below left of=3, anchor=north east] (3l) {001000}
+node[rotate=45, below left of=4, anchor=north east] (4l) {100011}
+;
 
-## Evolutionary processes and genealogies
+\draw
+(1) -- (5)
+(2) -- (5)
+(5) -- (6)
+(3) -- (6)
+(6) -- (7)
+(4) -- (7)
+node[mut] (m1) at ($(5) !.33! (6)$) {}
+node[mut] (m2) at ($(5) !.67! (6)$) {}
+node[mut] (m3) at ($(3) !.5! (6)$) {}
+node[mut] (m4) at ($(4) !.25! (7)$) {}
+node[mut] (m5) at ($(4) !.5! (7)$) {}
+node[mut] (m6) at ($(4) !.75! (7)$) {}
+;
+\end{tikzpicture}
+```
 
-Non-neutral processes change topologies in ways that we detect when
-applying tests [@ferretti_DecomposingSiteFrequency_2017]
+:::
 
-genealogies change due to non
-Show some qualitative examples of how trees change for
+::: {.column width="50%"}
 
-- bottleneck
+Many statistical quantities can be related to the **site frequency
+spectrum** (**SFS**), which is a summary of the frequencies of the
+segregating sites. Let $\xi_i$ be the number of chromosomes in the
+sample with $i$ minor alleles. In the figure we have 6 mutations on
+$n=4$ chromosomes.
 
-## Exercise on the coalescent
+|         | Name      | Count |
+|---------|-----------|-------|
+| $\xi_1$ | singleton | 4     |
+| $\xi_2$ | doubleton | 2     |
+| $\xi_3$ |           | 0     |
+
+Note that the number of segregating sites is $S=\sum_{i=1}^{n-1}\xi_i$
+
+In this notation one can show that $\pi$, the nucleotide diversity, is
+
+$$
+\pi = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2}
+$$
+
+::: {.fragment}
+
+#### Exercise
+
+Calculate the nucleotide diversity and compare the results from the foundation lecture
+
+:::
+
+::: {.fragment}
+
+$$
+\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2} =
+\frac{1}{6}\left(12 + 8 + 0\right) = 3\frac{1}{3}
+$$
+
+:::
+
+:::
+
+::::
+
+::: {.notes }
+
+Point out that we record the number of mutations per branch which together with
+
+:::
+
+## The impact of topology on the SFS
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![Interpretation of neutrality tests [@ferretti_DecomposingSiteFrequency_2017]](assets/images/ferretti-table1.jpg){width=480}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![The SFS under neutrality and selection](assets/images/nielsen-fig2-2005.jpeg){width=480}
+
+<!-- markdownlint-enable MD013 -->
+
+Many tests for selection are based on the SFS which in turn is
+influenced by the topology of the tree.
+
+:::
+
+::::
+
+::: {.notes }
+
+Take home: topologies influence shape of SFS
+
+### Example: Tajima's D
+
+Tests common versus rare alleles. Numerator compares nucleotide
+diversity $\pi$ to Watterson's theta, $\theta_W$.
+
+D < 0
+: recent population increase *or* positive selection
+
+D > 0
+: population contraction *or* balancing selection
+
+:::
+
+# Exercise on the coalescent {.unnumbered .unlisted}
 
 # The coalescent with recombination
 
-## Chromosome are mosaics of non-recombining units
+## On non-recombining chromosomes and assortment
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r, engine="tikz", fig.ext="svg" }
+#| label: non-recombining-chromosomes-assortment-1
+#| echo: false
+#| eval: true
+#| out-width: 300
+\tikzstyle{female}=[circle,thick,minimum size=1cm,draw=black]
+\tikzstyle{male}=[rectangle,thick,minimum width=1cm, minimum height=1cm, draw=black]
+  \begin{tikzpicture}[>=latex,font=\small, thick,
+    plab/.style={font=\scriptsize, outer sep=0cm}]
+    \node[male, fill=gray] (grandfather) at (0, 8) { };
+    \node[female] (grandmother) at (4, 8) { };
+
+\node[inner sep=0cm] (grandparents) at (2, 8) { };
+
+    \node[male, fill=gray] (father) at (2, 4) { };
+    \node[female] (mother) at (6, 4) { };
+
+\node[inner sep=0cm] (parents) at (4, 4) { };
+\node[inner sep=0cm] (siblings) at (4, 2) { };
+
+    \node[female, fill=gray] (sister1) at (2, 0) { };
+    \node[female, fill=gray] (sister2) at (6, 0) { };
+
+\draw (grandfather) -- (grandmother);
+\draw (grandparents) -- (father);
+\draw (parents) -- (siblings);
+\draw (father) -- (mother);
+\draw (siblings) -| (sister1);
+\draw (siblings) -| (sister2);
+\end{tikzpicture}
+```
+
+Both siblings inherit chromosome from paternal grandfather
+
+Chromosomes coalesce at father
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment}
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: non-recombining-chromosomes-assortment-2
+#| echo: false
+#| eval: true
+#| out-width: 300
+\usetikzlibrary{shapes}
+\tikzstyle{female}=[circle,thick,minimum size=1cm,draw=black]
+\tikzstyle{male}=[rectangle,thick,minimum width=1cm, minimum height=1cm, draw=black]
+\tikzstyle{splitmale}=[rectangle split, rectangle split
+                       parts=2,thick,minimum width=1cm, minimum
+                       height=1cm, draw=black]
+  \begin{tikzpicture}[>=latex,font=\small, thick,
+    plab/.style={font=\scriptsize, outer sep=0cm}]
+    \node[male, fill=gray] (grandfather) at (0, 8) { };
+    \node[female, fill=lightgray] (grandmother) at (4, 8) { };
+
+\node[inner sep=0cm] (grandparents) at (2, 8) { };
+
+\node[splitmale, rotate=90, rectangle split part fill={gray,
+  lightgray}] (father) at (2, 4) { };
+    \node[female] (mother) at (6, 4) { };
+
+\node[inner sep=0cm] (parents) at (4, 4) { };
+\node[inner sep=0cm] (siblings) at (4, 2) { };
+
+    \node[female, fill=gray] (sister1) at (2, 0) { };
+    \node[female, fill=lightgray] (sister2) at (6, 0) { };
+
+\draw (grandfather) -- (grandmother);
+\draw (grandparents) -- (father);
+\draw (parents) -- (siblings);
+\draw (father) -- (mother);
+\draw (siblings) -| (sister1);
+\draw (siblings) -| (sister2);
+\end{tikzpicture}
+```
+
+Siblings inherit different grandparental chromosomes $\Rightarrow$
+chromosomes coalesce God knows when in the past
+
+Genealogies **differ**
+
+:::
+
+:::
+
+::::
 
 ## The ancestral recombination graph
 
-## The Sequential Markovian Coalescent
+:::: {.columns}
 
-## Tree sequences
+::: {.column width="50%"}
 
-## msprime
+![The ancestral recombination graph,
+[@hubisz_InferenceAncestralRecombination_2020, Fig.
+1]](assets/images/hejase-2020-fig1.jpg){width=400}
 
-## Exercises with msprime
+:::
 
-Use CLI to generate genealogies and mutations.
+::: {.column width="50%"}
 
-# Forward simulation
+Properties:
 
-## Forward simulation
+- marginal trees constitute a sequence of trees (**tree sequence**)
+  along a chromosome
+- each tree represents the genealogy of a non-recombining part of the
+  chromosome
+- neighbouring trees are **correlated**
 
-Begin with forward simulation as it makes more intuitive sense.
+Interpretation: chromosomes are mosaics of non-recombining units
 
-Outline principles of forward simulation from Wright-Fisher model
-"algorithm".
+:::
 
-## SLiM
+::::
 
-Mention advances in forward simulations
+## msprime stores variation data as tree sequences
 
-## Forward simulation in SLiM
+:::: {.columns}
 
-Outline steps in SLiM - relate to WF model
+::: {.column width="50%"}
 
-## Example in SLiM
+![Tree sequences [@kelleher_EfficientPedigreeRecording_2018, Fig. 3]](assets/images/kelleher-plos-2018-fig3.png){width=500}
 
-## Exercise in SLiM
+:::
 
-Optional: do a simple neutral model
+::: {.column width="50%"}
 
-# Combining forward and backward simulations
+![Data compression [@kelleher_InferringWholegenomeHistories_2019, Fig. 1c]](assets/images/kelleher-nature-2019-fig1c.png){width=600}
 
-## Recapitation
+:::
 
-Combine the best of two worlds
+::::
 
-## Recipes
+## Simulating ancestry with msprime
 
-Show some recipes and the pgip CLI
+<!-- markdownlint-disable MD013 -->
 
-## PGIP data set
+From [msprime
+quickstart](https://tskit.dev/msprime/docs/stable/quickstart.html)
 
-Show the pgip data set and how it was generated
+<!-- markdownlint-enable MD013 -->
+
+```{python }
+#| label: sim_ancestry
+#| echo: true
+#| eval: true
+#| fig-format: svg
+#| output: asis
+#| out-width: 300
+import msprime
+# Simulate an ancestral history for 3 diploid samples under the coalescent
+# with recombination on a 5kb region with human-like parameters.
+ts = msprime.sim_ancestry(
+    samples=3,
+    recombination_rate=1e-8,
+    sequence_length=5_000,
+    population_size=10_000,
+    random_seed=123456)
+ts.draw_svg()
+```
+
+## Simulating mutations with msprime
+
+```{python }
+#| label: sim_mutations
+#| echo: true
+#| eval: true
+#| output: asis
+#| fig-format: svg
+import msprime
+ts = msprime.sim_ancestry(
+    samples=3,
+    recombination_rate=1e-8,
+    sequence_length=5_000,
+    population_size=10_000,
+    random_seed=123456)
+mutated_ts = msprime.sim_mutations(ts, rate=1e-8, random_seed=54321)
+mutated_ts.draw_svg()
+```
+
+# msprime exercise {.unnumbered .unlisted}
+
+## Bibliography {.unnumbered .unlisted}
+
+::: { #refs }
+:::

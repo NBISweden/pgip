@@ -24,56 +24,56 @@ format:
 
 ::: {.contents-table .column-body-outset}
 
-| Topic                                    | Time        | Author     | Links                                   |
-|------------------------------------------|-------------|------------|-----------------------------------------|
-| [**6-Nov-2023 (Mon)**]{.highlight}       |             |            |                                         |
-| Coffee and welcome                       | 08:30-09:00 |            |                                         |
-| Introduction to PGIP                     | 09:00-09:30 | JH, NO, PU |                                         |
-| Population genomics in practice          | 09:30-10:00 | PU         | [Slides](slides/pgip/index.html)        |
-| Coffee break                             | 10:00-10:30 |            |                                         |
-| Population genetics foundations          | 10:30-12:00 | PU         | [Slides](slides/foundations/index.html) |
-| Lunch                                    | 12:00-13:00 |            |                                         |
-| Introduction to simulation               | 13:00-15:00 | PU         | Slides, Exercise                        |
-| Coffee break                             | 15:00-15:30 |            |                                         |
-| Introduction to simulation               | 15:30-17:00 | PU         | Slides, Exercise                        |
-| [**7-Nov-2023 (Tue)**]{.highlight}       |             |            |                                         |
-| Recap day 1                              | 09:00-09:30 | PU         |                                         |
-| Variant calling and filtering            | 09:30-10:00 | PU         | Slides, Exercise                        |
-| Coffee break                             | 10:00-10:30 |            |                                         |
-| Variant calling and filtering, continued | 10:30-12:00 | PU         | Slides, Exercise                        |
-| Lunch                                    | 12:00-13:00 |            |                                         |
-| Genetic diversity                        | 13:00-15:00 | PU         | Slides, Exercise                        |
-| Coffee break                             | 15:00-15:30 |            |                                         |
-| TBA                                      | 15:30-17:00 |            |                                         |
-| [**8-Nov-2023 (Wed)**]{.highlight}       |             |            |                                         |
-| Recap day 2                              | 09:00-09:30 | PU         |                                         |
-| PCA                                      | 09:30-10:00 |            |                                         |
-| Coffee break                             | 10:00-10:30 |            |                                         |
-| Fst                                      | 10:30-12:00 |            |                                         |
-| Lunch                                    | 12:00-13:00 |            |                                         |
-| Admixture                                | 13:00-15:00 |            |                                         |
-| Coffee break                             | 15:00-15:30 |            |                                         |
-| f-statistics                             | 15:30-17:00 |            |                                         |
-|                                          |             |            |                                         |
-| [**9-Nov-2023 (Thu)**]{.highlight}       |             |            |                                         |
-| Recap day 3                              | 09:00-09:30 |            |                                         |
-| Demography                               | 09:30-10:00 |            |                                         |
-| Coffee break                             | 10:00-10:30 |            |                                         |
-| Demography and psmc                      | 10:30-12:00 |            |                                         |
-| Lunch                                    | 12:00-13:00 |            |                                         |
-| Selection                                | 13:00-15:00 |            |                                         |
-| Coffee break                             | 15:00-15:30 |            |                                         |
-| Selection                                | 15:30-17:00 |            |                                         |
-|                                          |             |            |                                         |
-| [**10-Nov-2023 (Fri)**]{.highlight}      |             |            |                                         |
-| Recap                                    | 09:00-10:00 | JH, NO, PU |                                         |
-| Coffee break                             | 10:00-10:30 |            |                                         |
-| Guest lecture                            | 10:30-11:30 |            |                                         |
-| Recap continued                          | 11:30-12:00 | JH, NO, PU |                                         |
-| Lunch                                    | 12:00-13:00 |            |                                         |
-| Guest lecture                            | 13:00-14:00 |            |                                         |
-| Recap continued                          | 14:00-15:00 | JH, NO, PU |                                         |
-| Project discussion                       | 15:00-17:00 |            |                                         |
+| Topic                                    | Time        | Author     | Links                                                                                                    |
+|------------------------------------------|-------------|------------|----------------------------------------------------------------------------------------------------------|
+| [**6-Nov-2023 (Mon)**]{.highlight}       |             |            |                                                                                                          |
+| Coffee and welcome                       | 08:30-09:00 |            |                                                                                                          |
+| Introduction to PGIP                     | 09:00-09:30 | JH, NO, PU |                                                                                                          |
+| Population genomics in practice          | 09:30-10:00 | PU         | [Slides](slides/pgip/index.html)                                                                         |
+| Coffee break                             | 10:00-10:30 |            |                                                                                                          |
+| Population genetics foundations          | 10:30-12:00 | PU         | [Slides](slides/foundations/index.html)                                                                  |
+| Lunch                                    | 12:00-13:00 |            |                                                                                                          |
+| Introduction to simulation               | 13:00-15:00 | PU         | [Slides](slides/simulation/index.html), [Exercise](https://percyfal.github.io/pgip-jlite/lab/index.html) |
+| Coffee break                             | 15:00-15:30 |            |                                                                                                          |
+| Introduction to simulation               | 15:30-17:00 | PU         | [Slides](slides/simulation/index.html), [Exercise](https://percyfal.github.io/pgip-jlite/lab/index.html) |
+| [**7-Nov-2023 (Tue)**]{.highlight}       |             |            |                                                                                                          |
+| Recap day 1                              | 09:00-09:30 | PU         |                                                                                                          |
+| Variant calling and filtering            | 09:30-10:00 | PU         | Slides, Exercise                                                                                         |
+| Coffee break                             | 10:00-10:30 |            |                                                                                                          |
+| Variant calling and filtering, continued | 10:30-12:00 | PU         | Slides, Exercise                                                                                         |
+| Lunch                                    | 12:00-13:00 |            |                                                                                                          |
+| Genetic diversity                        | 13:00-15:00 | PU         | Slides, Exercise                                                                                         |
+| Coffee break                             | 15:00-15:30 |            |                                                                                                          |
+| TBA                                      | 15:30-17:00 |            |                                                                                                          |
+| [**8-Nov-2023 (Wed)**]{.highlight}       |             |            |                                                                                                          |
+| Recap day 2                              | 09:00-09:30 | PU         |                                                                                                          |
+| PCA                                      | 09:30-10:00 |            |                                                                                                          |
+| Coffee break                             | 10:00-10:30 |            |                                                                                                          |
+| Fst                                      | 10:30-12:00 |            |                                                                                                          |
+| Lunch                                    | 12:00-13:00 |            |                                                                                                          |
+| Admixture                                | 13:00-15:00 |            |                                                                                                          |
+| Coffee break                             | 15:00-15:30 |            |                                                                                                          |
+| f-statistics                             | 15:30-17:00 |            |                                                                                                          |
+|                                          |             |            |                                                                                                          |
+| [**9-Nov-2023 (Thu)**]{.highlight}       |             |            |                                                                                                          |
+| Recap day 3                              | 09:00-09:30 |            |                                                                                                          |
+| Demography                               | 09:30-10:00 |            |                                                                                                          |
+| Coffee break                             | 10:00-10:30 |            |                                                                                                          |
+| Demography and psmc                      | 10:30-12:00 |            |                                                                                                          |
+| Lunch                                    | 12:00-13:00 |            |                                                                                                          |
+| Selection                                | 13:00-15:00 |            |                                                                                                          |
+| Coffee break                             | 15:00-15:30 |            |                                                                                                          |
+| Selection                                | 15:30-17:00 |            |                                                                                                          |
+|                                          |             |            |                                                                                                          |
+| [**10-Nov-2023 (Fri)**]{.highlight}      |             |            |                                                                                                          |
+| Recap                                    | 09:00-10:00 | JH, NO, PU |                                                                                                          |
+| Coffee break                             | 10:00-10:30 |            |                                                                                                          |
+| Guest lecture                            | 10:30-11:30 |            |                                                                                                          |
+| Recap continued                          | 11:30-12:00 | JH, NO, PU |                                                                                                          |
+| Lunch                                    | 12:00-13:00 |            |                                                                                                          |
+| Guest lecture                            | 13:00-14:00 |            |                                                                                                          |
+| Recap continued                          | 14:00-15:00 | JH, NO, PU |                                                                                                          |
+| Project discussion                       | 15:00-17:00 |            |                                                                                                          |
 
 :::
 

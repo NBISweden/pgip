@@ -537,6 +537,24 @@ journal = {Systematic Biology - SYST BIOL}
   langid = {english},
   keywords = {Data processing,Genome informatics,Software}
 }
+@incollection{hubisz_InferenceAncestralRecombination_2020,
+  title = {Inference of {{Ancestral Recombination Graphs Using ARGweaver}}},
+  booktitle = {Statistical {{Population Genomics}}},
+  author = {Hubisz, Melissa and Siepel, Adam},
+  editor = {Dutheil, Julien Y.},
+  year = {2020},
+  series = {Methods in {{Molecular Biology}}},
+  pages = {231--266},
+  publisher = {{Springer US}},
+  address = {{New York, NY}},
+  doi = {10.1007/978-1-0716-0199-0_10},
+  url = {https://doi.org/10.1007/978-1-0716-0199-0_10},
+  urldate = {2021-06-03},
+  abstract = {This chapter describes the usage of the program ARGweaver, which estimates the ancestral recombination graph for as many as about 100 genome sequences. The ancestral recombination graph is a detailed description of the coalescence and recombination events that define the relationships among the sampled sequences. This rich description is useful for a wide variety of population genetic analyses. We describe the preparation of data and major considerations for running ARGweaver, as well as the interpretation of results. We then demonstrate an analysis using the DARC (Duffy) gene as an example, and show how ARGweaver can be used to detect signatures of natural selection and Neandertal introgression, as well as to estimate the dates of mutation events. This chapter provides sufficient detail to get a new user up and running with this complex but powerful analysis tool.},
+  isbn = {978-1-07-160199-0},
+  langid = {english},
+  keywords = {Ancestral recombination graph,Local ancestry,Markov chain Monte Carlo,Sequentially Markov coalescent},
+}
 @article{hurst_GeneticsUnderstandingSelection_2009,
   title = {Genetics and the Understanding of Selection},
   author = {Hurst, Laurence D.},
@@ -555,6 +573,7 @@ journal = {Systematic Biology - SYST BIOL}
   langid = {english},
   keywords = {Journal club EBC},
 }
+
 @article{hurst_GeneticsUnderstandingSelection_2009,
   title = {Genetics and the Understanding of Selection},
   author = {Hurst, Laurence D.},
@@ -590,6 +609,42 @@ journal = {Systematic Biology - SYST BIOL}
   langid = {english},
   keywords = {Deletion mutation,Evolutionary processes,Genome analysis,Genomics,Population genetics,Population size,Statistical data,Statistical distributions},
 }
+@article{kelleher_EfficientPedigreeRecording_2018,
+  title = {Efficient Pedigree Recording for Fast Population Genetics Simulation},
+  author = {Kelleher, Jerome and Thornton, Kevin R. and Ashander, Jaime and Ralph, Peter L.},
+  year = {2018},
+  month = nov,
+  journal = {PLOS Computational Biology},
+  volume = {14},
+  number = {11},
+  pages = {e1006581},
+  issn = {1553-7358},
+  doi = {10.1371/journal.pcbi.1006581},
+  url = {https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006581},
+  urldate = {2019-11-03},
+  abstract = {In this paper we describe how to efficiently record the entire genetic history of a population in forwards-time, individual-based population genetics simulations with arbitrary breeding models, population structure and demography. This approach dramatically reduces the computational burden of tracking individual genomes by allowing us to simulate only those loci that may affect reproduction (those having non-neutral variants). The genetic history of the population is recorded as a succinct tree sequence as introduced in the software package msprime, on which neutral mutations can be quickly placed afterwards. Recording the results of each breeding event requires storage that grows linearly with time, but there is a great deal of redundancy in this information. We solve this storage problem by providing an algorithm to quickly `simplify' a tree sequence by removing this irrelevant history for a given set of genomes. By periodically simplifying the history with respect to the extant population, we show that the total storage space required is modest and overall large efficiency gains can be made over classical forward-time simulations. We implement a general-purpose framework for recording and simplifying genealogical data, which can be used to make simulations of any population model more efficient. We modify two popular forwards-time simulation frameworks to use this new approach and observe efficiency gains in large, whole-genome simulations of one to two orders of magnitude. In addition to speed, our method for recording pedigrees has several advantages: (1) All marginal genealogies of the simulated individuals are recorded, rather than just genotypes. (2) A population of N individuals with M polymorphic sites can be stored in O(N log N + M) space, making it feasible to store a simulation's entire final generation as well as its history. (3) A simulation can easily be initialized with a more efficient coalescent simulation of deep history. The software for recording and processing tree sequences is named tskit.},
+  langid = {english},
+  keywords = {Algorithms,Genome analysis,Natural selection,Phylogenetic analysis,Population genetics,Population size,Simulation and modeling,Trees},
+}
+
+@article{kelleher_InferringWholegenomeHistories_2019,
+  title = {Inferring Whole-Genome Histories in Large Population Datasets},
+  author = {Kelleher, Jerome and Wong, Yan and Wohns, Anthony W. and Fadil, Chaimaa and Albers, Patrick K. and McVean, Gil},
+  year = {2019},
+  month = sep,
+  journal = {Nature Genetics},
+  volume = {51},
+  number = {9},
+  pages = {1330--1338},
+  issn = {1546-1718},
+  doi = {10.1038/s41588-019-0483-y},
+  url = {https://www.nature.com/articles/s41588-019-0483-y},
+  urldate = {2019-12-19},
+  abstract = {A new method for inferring genealogical histories from large-scale genetic data is used to characterize population structure using data from the 1000 Genomes Project, the UK Biobank and the Simons Genome Diversity Project.},
+  copyright = {2019 The Author(s), under exclusive licence to Springer Nature America, Inc.},
+  langid = {english},
+}
+
 
 @book{kimura_1983,
   title = {The Neutral Theory of Molecular Evolution},
@@ -599,6 +654,26 @@ journal = {Systematic Biology - SYST BIOL}
   address = {{Cambridge}},
   doi = {10.1017/CBO9780511623486}
 }
+
+@article{kimura_ProteinPolymorphismPhase_1971,
+  title = {Protein {{Polymorphism}} as a {{Phase}} of {{Molecular Evolution}}},
+  author = {Kimura, Motoo and Ohta, Tomoko},
+  year = {1971},
+  month = feb,
+  journal = {Nature},
+  volume = {229},
+  number = {5285},
+  pages = {467--469},
+  issn = {1476-4687},
+  doi = {10.1038/229467a0},
+  url = {https://www.nature.com/articles/229467a0},
+  urldate = {2018-10-24},
+  abstract = {It is proposed that random genetic drift of neutral mutations in finite populations can account for observed protein polymorphisms.},
+  copyright = {1971 Nature Publishing Group},
+  langid = {english},
+  keywords = {Journal club EBC,Population Genetics Gillespie book},
+}
+
 @article{korunes_PixyUnbiasedEstimation_2021,
   title = {Pixy: {{Unbiased}} Estimation of Nucleotide Diversity and Divergence in the Presence of Missing Data},
   shorttitle = {Pixy},
@@ -616,8 +691,6 @@ journal = {Systematic Biology - SYST BIOL}
   langid = {english},
   keywords = {bioinfomatics/phyloinfomatics,genomics/proteomics,molecular evolution,population genetics – empirical,software},
 }
-
-
 @article{kreitman_NucleotidePolymorphismAlcohol_1983,
   title = {Nucleotide Polymorphism at the Alcohol Dehydrogenase Locus of {{Drosophila}} Melanogaster},
   author = {Kreitman, Martin},
@@ -635,7 +708,6 @@ journal = {Systematic Biology - SYST BIOL}
   langid = {english},
   keywords = {Population Genetics Gillespie book},
 }
-
 @article{kumar_PredictingEffectsCoding_2009,
   title = {Predicting the Effects of Coding Non-Synonymous Variants on Protein Function Using the {{SIFT}} Algorithm},
   author = {Kumar, Prateek and Henikoff, Steven and Ng, Pauline C.},
@@ -706,7 +778,6 @@ journal = {Systematic Biology - SYST BIOL}
   urldate = {2022-12-15},
   abstract = {Motivation: Whole-genome high-coverage sequencing has been widely used for personal and cancer genomics as well as in various research areas. However, in the lack of an unbiased whole-genome truth set, the global error rate of variant calls and the leading causal artifacts still remain unclear even given the great efforts in the evaluation of variant calling methods. Results: We made 10 single nucleotide polymorphism and INDEL call sets with two read mappers and five variant callers, both on a haploid human genome and a diploid genome at a similar coverage. By investigating false heterozygous calls in the haploid genome, we identified the erroneous realignment in low-complexity regions and the incomplete reference genome with respect to the sample as the two major sources of errors, which press for continued improvements in these two areas. We estimated that the error rate of raw genotype calls is as high as 1 in 10\textendash 15 kb, but the error rate of post-filtered calls is reduced to 1 in 100\textendash 200 kb without significant compromise on the sensitivity. Availability and implementation: BWA-MEM alignment and raw variant calls are available at http://bit.ly/1g8XqRt scripts and miscellaneous data at https://github.com/lh3/varcmp . Contact:hengli@broadinstitute.orgSupplementary information:Supplementary data are available at Bioinformatics online.},
 }
-
 @article{li_InferenceHumanPopulation_2011,
   title = {Inference of Human Population History from Individual Whole-Genome Sequences},
   author = {Li, Heng and Durbin, Richard},
@@ -890,6 +961,22 @@ journal = {Systematic Biology - SYST BIOL}
   pmid = {16285858},
   keywords = {nmo journal club}
 }
+@incollection{ohta_MolecularEvolutionNearly_2013,
+  title = {Molecular {{Evolution}}: {{Nearly Neutral Theory}}},
+  shorttitle = {Molecular {{Evolution}}},
+  booktitle = {{{eLS}}},
+  author = {Ohta, Tomoko},
+  year = {2013},
+  publisher = {{American Cancer Society}},
+  doi = {10.1002/9780470015902.a0001801.pub4},
+  url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/9780470015902.a0001801.pub4},
+  urldate = {2019-02-20},
+  abstract = {Nearly neutral theory is an extension of the neutral theory and contends that the borderline mutations, whose effects lie between the selected and the neutral classes, are important at the molecular level. Under the strict neutral theory, the evolutionary rate is equal to the neutral mutation rate. Under the near-neutrality, the situation is not so simple and the most significant difference between the neutral and the nearly neutral theories is that the latter predicts a negative correlation between evolutionary rate and species population size. The nearly neutral theory also predicts abundant rare alleles in the population as compared with strict neutrality. Genome-wide data on protein evolution are mostly in accord with the nearly neutral theory. Genetic regulatory systems are highly complex. The near-neutrality concept may be extended to the evolution of such systems, where epigenetics and robustness are important for gene expression and many mutations are weakly selected. Key Concepts: The emphasis of significance of weak selection in evolution distinguishes the nearly neutral theory from the neutral theory. The nearly neutral theory contends that the interplay of drift and weak selection is important and predicts that evolution is more rapid in small populations than in large populations. Many observed patterns of protein evolution by measuring synonymous and nonsynonymous divergences are in accord with the nearly neutral theory. Observed molecular polymorphisms within a population often show abundance of rare alleles, in accord with the prediction of the nearly neutral theory. Numerous complex systems work together in living cells such as those in chromatin modelling/remodelling and in various signalling pathways. Interplay of drift and weak selection is important for evolution of such complex systems.},
+  copyright = {eLS \textcopyright{} 2013, John Wiley \& Sons, Ltd. www.els.net},
+  isbn = {978-0-470-01590-2},
+  langid = {english},
+  keywords = {drift,effectiveness of selection,interplay of drift and selection for evolution of complex systems,nmo journal club,slightly deleterious mutations},
+}
 @article{patterson_PopulationStructureEigenanalysis_2006,
   title = {Population {{Structure}} and {{Eigenanalysis}}},
   author = {Patterson, Nick and Price, Alkes L. and Reich, David},
@@ -922,6 +1009,7 @@ journal = {Systematic Biology - SYST BIOL}
   urldate = {2022-08-26},
   abstract = {Mosdepth is a new command-line tool for rapidly calculating genome-wide sequencing coverage. It measures depth from BAM or CRAM files at either each nucleotide position in a genome or for sets of genomic regions. Genomic regions may be specified as either a BED file to evaluate coverage across capture regions, or as a fixed-size window as required for copy-number calling. Mosdepth uses a simple algorithm that is computationally efficient and enables it to quickly produce coverage summaries. We demonstrate that mosdepth is faster than existing tools and provides flexibility in the types of coverage profiles produced.mosdepth is available from https://github.com/brentp/mosdepth under the MIT license.Supplementary data are available at Bioinformatics online.}
 }
+
 @article{peter_AdmixturePopulationStructure_2016,
   title = {Admixture, {{Population Structure}}, and {{F-Statistics}}},
   author = {Peter, Benjamin M.},
@@ -993,7 +1081,6 @@ journal = {Systematic Biology - SYST BIOL}
   keywords = {C_Cornwallis_1502,Data Mining,Genome; Human,Genotype,High-Throughput Nucleotide Sequencing,Humans,Metagenomics,Phenotype,Polymorphism; Genetic,Sequence Analysis; DNA,Software},
   annotation = {00126}
 }
-
 @article{shen_SeqKitCrossPlatformUltrafast_2016,
   title = {{{SeqKit}}: {{A Cross-Platform}} and {{Ultrafast Toolkit}} for {{FASTA}}/{{Q File Manipulation}}},
   shorttitle = {{{SeqKit}}},
@@ -1049,6 +1136,7 @@ journal = {Systematic Biology - SYST BIOL}
   urldate = {2023-05-24},
   abstract = {The abundance of many species of bumblebees is declining and climate change is a major contributing factor. The distributions of bumblebees are shifting northwards to track suitable climates across continents. Some of the species that are most vulnerable inhabit the Arctic and have no possibility to move further north. An important indicator of the viability of animal populations is genetic diversity, which can be tracked over time by genetic monitoring to identify populations that are declining or at risk. Species of arctic bumblebees found in the Swedish mountains are considered high priority for inclusion in genetic monitoring due to the threats they face from climate change. In this report we use whole-genome sequencing to assess genetic variation in seven species of bumblebee that inhabit the Swedish mountains. Six of the species are restricted to arctic and mountain environments, whereas one is widespread throughout Europe. In total, we sequenced 333 samples of these species from across their ranges in Sweden. Estimates of effective population size (NE) predicted from levels of genetic variation vary between \textasciitilde 55,000 for the species with the most restricted high alpine distributions, to 200,000 for the more common mountain species, and 220,000 for the widespread species. Population fragmentation is generally very low or undetectable in Swedish mountains, suggesting an absence of barriers to gene flow between sub-populations. None of the species appear to be at immediate risk of negative genetic effects due to high levels of genetic drift. Reconstruction of historical fluctuations in NE indicate that the arctic specialist species Bombus hyperboreus has already experienced substantial population declines since the last ice age and we detected one highly inbred sample of this species, suggesting it may be particularly vulnerable. The ranges of all of the mountain bumblebee species are predicted to shrink drastically due to the effects of climate change. Future genetic monitoring would be a useful way to detect whether populations have been adversely affected by declines or fragmentation that could threaten their viability. The data presented here serves as an important first step towards future genetic monitoring programs for these species.},
 }
+
 @misc{wetterstrandka_DNASequencingCosts_,
   title = {{{DNA Sequencing Costs}}: {{Data}} from the {{NHGRI Genome Sequencing Program}} ({{GSP}})},
   shorttitle = {{{DNA Sequencing Costs}}},
@@ -1090,39 +1178,4 @@ journal = {Systematic Biology - SYST BIOL}
   url = {https://doi.org/10.1093/jhered/93.4.231},
   urldate = {2023-08-15},
   abstract = {The black-footed ferret (Mustela nigripes) is an endangered North American carnivore that underwent a well-documented population bottleneck in the mid-1980s. To better understand the effects of a bottleneck on a free-ranging carnivore population, we used 24 microsatellite loci to compare genetic diversity before versus during the bottleneck, and compare the last wild population to two historical populations. We also compared genetic diversity in black-footed ferrets to that of two sibling species, the steppe polecat (Mustela eversmanni) and the European polecat (Mustela putorius). Black-footed ferrets during the bottleneck had less genetic diversity than steppe polecats. The three black-footed ferret populations were well differentiated (FST = 0.57 {$\pm$} 0.15; mean {$\pm$} SE). We attributed the decrease in genetic diversity in black-footed ferrets to localized extinction of these genetically distinct subpopulations and to the bottleneck in the surviving subpopulation. Although genetic diversity decreased, female fecundity and juvenile survival were not affected by the population bottleneck.},
-}
-@article{kimura_ProteinPolymorphismPhase_1971,
-  title = {Protein {{Polymorphism}} as a {{Phase}} of {{Molecular Evolution}}},
-  author = {Kimura, Motoo and Ohta, Tomoko},
-  year = {1971},
-  month = feb,
-  journal = {Nature},
-  volume = {229},
-  number = {5285},
-  pages = {467--469},
-  issn = {1476-4687},
-  doi = {10.1038/229467a0},
-  url = {https://www.nature.com/articles/229467a0},
-  urldate = {2018-10-24},
-  abstract = {It is proposed that random genetic drift of neutral mutations in finite populations can account for observed protein polymorphisms.},
-  copyright = {1971 Nature Publishing Group},
-  langid = {english},
-  keywords = {Journal club EBC,Population Genetics Gillespie book},
-}
-
-@incollection{ohta_MolecularEvolutionNearly_2013,
-  title = {Molecular {{Evolution}}: {{Nearly Neutral Theory}}},
-  shorttitle = {Molecular {{Evolution}}},
-  booktitle = {{{eLS}}},
-  author = {Ohta, Tomoko},
-  year = {2013},
-  publisher = {{American Cancer Society}},
-  doi = {10.1002/9780470015902.a0001801.pub4},
-  url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/9780470015902.a0001801.pub4},
-  urldate = {2019-02-20},
-  abstract = {Nearly neutral theory is an extension of the neutral theory and contends that the borderline mutations, whose effects lie between the selected and the neutral classes, are important at the molecular level. Under the strict neutral theory, the evolutionary rate is equal to the neutral mutation rate. Under the near-neutrality, the situation is not so simple and the most significant difference between the neutral and the nearly neutral theories is that the latter predicts a negative correlation between evolutionary rate and species population size. The nearly neutral theory also predicts abundant rare alleles in the population as compared with strict neutrality. Genome-wide data on protein evolution are mostly in accord with the nearly neutral theory. Genetic regulatory systems are highly complex. The near-neutrality concept may be extended to the evolution of such systems, where epigenetics and robustness are important for gene expression and many mutations are weakly selected. Key Concepts: The emphasis of significance of weak selection in evolution distinguishes the nearly neutral theory from the neutral theory. The nearly neutral theory contends that the interplay of drift and weak selection is important and predicts that evolution is more rapid in small populations than in large populations. Many observed patterns of protein evolution by measuring synonymous and nonsynonymous divergences are in accord with the nearly neutral theory. Observed molecular polymorphisms within a population often show abundance of rare alleles, in accord with the prediction of the nearly neutral theory. Numerous complex systems work together in living cells such as those in chromatin modelling/remodelling and in various signalling pathways. Interplay of drift and weak selection is important for evolution of such complex systems.},
-  copyright = {eLS \textcopyright{} 2013, John Wiley \& Sons, Ltd. www.els.net},
-  isbn = {978-0-470-01590-2},
-  langid = {english},
-  keywords = {drift,effectiveness of selection,interplay of drift and selection for evolution of complex systems,nmo journal club,slightly deleterious mutations},
 }
