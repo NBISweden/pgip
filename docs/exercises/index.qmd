@@ -5,7 +5,10 @@ description: "List of all exercises"
 listing:
   type: grid
   grid-columns: 4
-  fields: [image, title, author]
+  fields: [image, title, subtitle, author]
+  sort: false
+  contents:
+    - test/test.ipynb
 date: ""
 toc: false
 sidebar: false

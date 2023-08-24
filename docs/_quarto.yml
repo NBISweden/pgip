@@ -10,6 +10,7 @@ project:
   render:
     - "*.qmd"
     - "!lectures/*.qmd"
+    - "*.ipynb"
 
 website:
   title: "Population genomics in practice"

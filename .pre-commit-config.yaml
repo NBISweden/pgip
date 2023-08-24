@@ -79,7 +79,8 @@ repos:
           docs/slides/datageneration/index\.qmd|
           docs/slides/foundations/index\.qmd|
           docs/exercises/data_filtering/index\.qmd|
-          docs/slides/population_structure/index\.qmd
+          docs/slides/population_structure/index\.qmd|
+          docs/slides/simulation/index\.qmd
           )$
         minimum_pre_commit_version: "2.13.0"
       - id: parsable-R
