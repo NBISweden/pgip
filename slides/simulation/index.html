@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #3c3836;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #3c3836; } /* Normal */
+    code span.al { color: #282828; background-color: #cc241d; font-weight: bold; } /* Alert */
+    code span.an { color: #98971a; } /* Annotation */
+    code span.at { color: #d79921; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #d65d0e; } /* BuiltIn */
+    code span.cf { color: #cc241d; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #b16286; } /* Char */
+    code span.cn { color: #b16286; font-weight: bold; } /* Constant */
+    code span.co { color: #928374; } /* Comment */
+    code span.cv { color: #928374; } /* CommentVar */
+    code span.do { color: #98971a; } /* Documentation */
+    code span.dt { color: #d79921; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #cc241d; text-decoration: underline; } /* Error */
+    code span.ex { color: #689d6a; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #689d6a; } /* Function */
+    code span.im { color: #689d6a; } /* Import */
+    code span.in { color: #282828; background-color: #83a598; } /* Information */
+    code span.kw { color: #3c3836; font-weight: bold; } /* Keyword */
+    code span.op { color: #3c3836; } /* Operator */
+    code span.ot { color: #689d6a; } /* Other */
+    code span.pp { color: #d65d0e; } /* Preprocessor */
+    code span.re { color: #928374; background-color: #f9f5d7; } /* RegionMarker */
+    code span.sc { color: #b16286; } /* SpecialChar */
+    code span.ss { color: #98971a; } /* SpecialString */
+    code span.st { color: #98971a; } /* String */
+    code span.va { color: #458588; } /* Variable */
+    code span.vs { color: #98971a; } /* VerbatimString */
+    code span.wa { color: #282828; background-color: #fabd2f; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -351,57 +416,51 @@
   <h3 class="subtitle">Primer on the coalescent and forward simulation</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">23-Aug-2023</h4>
+  <h4 class="date">24-Aug-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#/the-coalescent" id="/toc-the-coalescent">The coalescent</a></li>
 <li><a href="#/the-coalescent-with-recombination" id="/toc-the-coalescent-with-recombination">The coalescent with recombination</a></li>
-<li><a href="#/forward-simulation" id="/toc-forward-simulation">Forward simulation</a></li>
-<li><a href="#/combining-forward-and-backward-simulations" id="/toc-combining-forward-and-backward-simulations">Combining forward and backward simulations</a></li>
 </ul>
 </nav>
 </section>
 
-<section>
-<section id="the-coalescent" class="title-slide slide level1 center">
-<h1>The coalescent</h1>
-
-</section>
-<section id="wright-fisher-model-again" class="slide level2">
-<h2>Wright-Fisher model again</h2>
+<section id="the-wright-fisher-model-and-simulations" class="slide level2">
+<h2>The Wright-Fisher model and simulations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-reproductive-success_050440ac03e5fbd7e7e51e713ca6b438">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-reproductive-success-1_c56a2ed65baba8f321ee9e7c3b2948cd">
 <div class="cell-output-display">
-<div id="fig-wf-model-reproductive-success" class="quarto-figure quarto-figure-left">
+<div id="fig-wf-model-reproductive-success-1" class="quarto-figure quarto-figure-left">
 <figure>
 <figcaption>Figure&nbsp;1: Wright-Fisher model for 50 generations, 30 individuals</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-1.png" style="width:80.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-1-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
+<h3 id="recap">Recap</h3>
+<p>Model of a population describing <strong>genealogies</strong> under the following assumptions</p>
+<ul>
+<li>discrete and non-overlapping generations</li>
+<li>haploid individuals or two subpopulations (males and females)</li>
+<li>constant population size</li>
+<li>all individuals are equally fit</li>
+<li>population has no geographical or social structure</li>
+<li>no recombination</li>
+</ul>
 <div class="fragment">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-wf-model-reproductive-success-graph" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;2: Reproductive success in percent per generation.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-graph-1.png" style="width:60.0%"></p>
-</figure>
+<p><strong>Forward</strong> simulation</p>
 </div>
 </div>
 </div>
-<p>Mean reproductive success = 63.4%. Can show for large populations P(no descendants)=<span class="math inline">\(1 - e^{-1} \approx 0.632\)</span></p>
-</div>
-</div>
-</div>
+<p>::::</p>
 <aside class="notes">
-<p>Repeat WF model. Point out that it can be used for <em>forward</em> simulation. Show how many individuals are lost each generation (limit e-1): lose lots of compute resources on the way to extant sample.</p>
-<p><span class="citation" data-cites="hein2005gene">(p.&nbsp;15 <a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span> shows the fraction of genes without descendants. Focus on the number of descendants for <em>one</em> gene <em>i</em>, which is X ~ Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that P(no descendants) = P(X=0) = e^{-1}</p>
+<p><span class="citation" data-cites="hein2005gene">(p.&nbsp;15 <a href="#/bibliography" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span> shows the fraction of genes without descendants. Focus on the number of descendants for <em>one</em> gene <em>i</em>, which is X ~ Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that P(no descendants) = P(X=0) = e^{-1}</p>
+<p>Low reproductive success: forward simulations costly!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -414,17 +473,152 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-coalescent-1" class="slide level2">
-<h2>The coalescent</h2>
-<p>Introduce concept. Describe algorithm (show code - include as exercise?). Genealogy and mutations:</p>
+<section id="the-wright-fisher-model-and-simulations-1" class="slide level2">
+<h2>The Wright-Fisher model and simulations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-reproductive-success-2_b1b85916e6a5eb171f7c04a04abf0210">
+<div class="cell-output-display">
+<div id="fig-wf-model-reproductive-success-2" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;2: Wright-Fisher model for 50 generations, 30 individuals</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-2-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-wf-model-reproductive-success-graph" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;3: Reproductive success in percent per generation.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-graph-1.png" style="width:55.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Mean reproductive success = 63.4%. Can show for large populations P(no descendants)=<span class="math inline">\(1 - e^{-1} \approx 0.632\)</span></p>
+</div>
+</div>
+<p>::::</p>
+<aside class="notes">
+<p><span class="citation" data-cites="hein2005gene">(p.&nbsp;15 <a href="#/bibliography" role="doc-biblioref" onclick="">Hein et al., 2005</a>)</span> shows the fraction of genes without descendants. Focus on the number of descendants for <em>one</em> gene <em>i</em>, which is X ~ Bin(2N, 1/2N). Since E(X)=1, for large 2N, X is almos Po(1), such that P(no descendants) = P(X=0) = e^{-1}</p>
+<p>Low reproductive success: forward simulations costly!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="forward-and-backward-simulation" class="slide level2">
+<h2>Forward and backward simulation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy-forward_8fcdc3a96548783738ce9bfefa5ceae9">
+<div class="cell-output-display">
+<div id="fig-wf-model-genealogy-forward" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;4: Forward simulation.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-forward-1.png" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy-backward_2b2b1266a57ad6e4647b66bdea9071f4">
+<div class="cell-output-display">
+<div id="fig-wf-model-genealogy-backward" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;5: Backward simulation.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-backward-1.png" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Simulated nodes are filled with black. Genealogy of interest is highlighted in thick black lines.</p>
+</section>
+<section id="why-do-we-want-simulations-anyway" class="slide level2">
+<h2>Why do we want simulations anyway</h2>
+<div>
 <ul>
-<li>sim_ancestry</li>
-<li>sim_mutations</li>
+<li class="fragment">No analytical solutions for linked selection and the like <span class="math inline">\(\rightarrow\)</span> must use simulations</li>
+<li class="fragment">Use to gain understanding and improve interpretation of mutational processes</li>
+<li class="fragment">Generate neutral null distributions to compare with observed data</li>
+<li class="fragment">Generate training data for machine learning</li>
 </ul>
-<p>Note that #mutations propto branch length -&gt; don’t actually even need to know the mutations (e.g.&nbsp;fastsimcoal)</p>
+</div>
+</section>
+<section>
+<section id="the-coalescent" class="title-slide slide level1 center">
+<h1>The coalescent</h1>
+
+</section>
+<section id="coalescent-simulations" class="slide level2">
+<h2>Coalescent simulations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The coalescent simulates the genealogy of a <strong>sample</strong> of individuals on which mutations are “sprinkled” according to a Poisson process.</p>
+<ol type="1">
+<li>Simulate ancestry (genealogy)</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-1_acf4ce3e29da16f3e4900713a6338c6b">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-model-genealogy-backward-1-1.png" style="width:75.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="coalescent-simulations-1" class="slide level2">
+<h2>Coalescent simulations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The coalescent simulates the genealogy of a <strong>sample</strong> of individuals on which mutations are “sprinkled” according to a Poisson process.</p>
+<ol type="1">
+<li>Simulate ancestry (genealogy)</li>
+<li>Simulate mutations</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-mutations_90c18d1e9dc0b8eb31cd84df9df4fd12">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-model-genealogy-backward-mutations-1.png" style="width:75.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="coalescent-simulations-2" class="slide level2">
+<h2>Coalescent simulations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The coalescent simulates the genealogy of a <strong>sample</strong> of individuals on which mutations are “sprinkled” according to a Poisson process.</p>
+<ol type="1">
+<li>Simulate ancestry (genealogy)</li>
+<li>Simulate mutations</li>
+</ol>
+<p>Question: how many mutations are common to all samples? How many mutations does sample 1 have? Sample 2?</p>
+<p>Assuming the ancestral state is denoted <code>0</code> (prior to the <em>first</em> generation) and the derived state <code>1</code>, what are the sequences of the samples?</p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-mutations-1_831cd02cdff747499adda730555b372b">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/wf-model-genealogy-backward-mutations-1-1.png" style="width:75.0%"></p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -440,7 +634,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-1" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -457,7 +651,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-2" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -475,7 +669,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-3" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -494,7 +688,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-4" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -514,7 +708,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-5" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -534,7 +728,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-6" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -554,7 +748,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-7" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -574,7 +768,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-8" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -594,7 +788,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-9" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -614,7 +808,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-10" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -637,7 +831,7 @@
 </div>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115-11" class="slide level2">
-<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
+<h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
@@ -655,7 +849,7 @@
 <div class="cell-output-display">
 <div id="fig-simulate-genealogy-end" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;3: A simulated genealogy. The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes.</figcaption>
+<figcaption>Figure&nbsp;6: A simulated genealogy. The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-simulate-genealogy-end-1.svg" width="500" height="600"></p>
 </figure>
 </div>
@@ -672,14 +866,18 @@
 <div class="cell-output-display">
 <div id="fig-genealogy-properties" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;4: A coalescent tree with numbered nodes. Nodes 1-5 correspond to the samples and are leaves. The internal nodes 6-8 (and the unlabelled root) are ancestral chromosomes (unsampled). The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes, whereas <span class="math inline">\(\tau_i\)</span> correspond to the branch length from node <span class="math inline">\(i\)</span> to its parent.</figcaption>
+<figcaption>Figure&nbsp;7: A coalescent tree with numbered nodes. Nodes 1-5 correspond to the samples and are leaves. The internal nodes 6-8 (and the unlabelled root) are ancestral chromosomes (unsampled). The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes, whereas <span class="math inline">\(\tau_i\)</span> correspond to the branch length from node <span class="math inline">\(i\)</span> to its parent.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genealogy-properties-1.svg" width="400" height="500"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-
+<p>Expected waiting time to coalesce when <span class="math inline">\(i\)</span> lineages: <span class="math inline">\(E(T_i) = \frac{2}{i(i-1)}\)</span></p>
+<p>Branch lengths can be derived from waiting times. For instance, <span class="math inline">\(\tau_1=\tau_2=T_5+T_4\)</span> and <span class="math inline">\(\tau_4=\tau_5=T_5\)</span></p>
+<p>Time to the <strong>most recent common ancestor (MRCA)</strong>: <span class="math inline">\(T_{MRCA} = \sum_{i=2}^n T_i\)</span></p>
+<p>with expected value <span class="math inline">\(E(T_{MRCA}) = \sum_{i=2}^nE(T_i) = 2\left(1 - \frac{1}{n}\right)\)</span></p>
+<p>The expected <strong>total tree height</strong> is <span class="math inline">\(E(T_{total}) = \sum_{i=2}^n iE(T_i) = 2\sum_{i=2}^n\frac{1}{i-1}\)</span></p>
 </div>
 </div>
 </section>
@@ -695,113 +893,265 @@
 </div>
 </div>
 </section>
+<section id="diminishing-returns-of-adding-more-samples" class="slide level2">
+<h2>Diminishing returns of adding more samples</h2>
+
+<img data-src="index_files/figure-revealjs/coalescent-diminishing-returns-1.png" width="1536" class="r-stretch"></section>
 <section id="adding-mutations" class="slide level2">
 <h2>Adding mutations</h2>
-<div class="cell" data-hash="index_cache/revealjs/fig-add-mutations_81e8b212e6404072fc82b331b3f2c8b9">
+<div class="cell" data-hash="index_cache/revealjs/fig-add-mutations_4e6a240f7a3b126ad63658592fec96e1">
 <div class="cell-output-display">
 <div id="fig-add-mutations" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;5: Adding mutations on a coalescent genealogy.</figcaption>
+<figcaption>Figure&nbsp;8: Adding mutations on a coalescent genealogy.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-add-mutations-1.svg" width="500" height="500"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="the-coalescent-diminishing-returns" class="slide level2">
-<h2>The coalescent: diminishing returns</h2>
-<p>Show plot of diminishing returns (better to add sites, not samples)</p>
-</section>
-<section id="the-coalescent-and-diversity" class="slide level2">
+<section id="the-coalescent-and-diversity" class="slide level2 smaller">
 <h2>The coalescent and diversity</h2>
-<p>Recalculate example</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/coalescent-tree-dna-variation_b32769acdbddfe596c04eceef7de41eb">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/coalescent-tree-dna-variation-1.svg" width="960" height="600"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Many statistical quantities can be related to the <strong>site frequency spectrum</strong> (<strong>SFS</strong>), which is a summary of the frequencies of the segregating sites. Let <span class="math inline">\(\xi_i\)</span> be the number of chromosomes in the sample with <span class="math inline">\(i\)</span> minor alleles. In the figure we have 6 mutations on <span class="math inline">\(n=4\)</span> chromosomes.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Name</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\xi_1\)</span></td>
+<td>singleton</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\xi_2\)</span></td>
+<td>doubleton</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\xi_3\)</span></td>
+<td></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the number of segregating sites is <span class="math inline">\(S=\sum_{i=1}^{n-1}\xi_i\)</span></p>
+<p>In this notation one can show that <span class="math inline">\(\pi\)</span>, the nucleotide diversity, is</p>
+<p><span class="math display">\[
+\pi = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2}
+\]</span></p>
+<div class="fragment">
+<!-- -->
+<h4 id="exercise">Exercise</h4>
+<p>Calculate the nucleotide diversity and compare the results from the foundation lecture</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2} =
+\frac{1}{6}\left(12 + 8 + 0\right) = 3\frac{1}{3}
+\]</span></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Point out that we record the number of mutations per branch which together with</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="evolutionary-processes-and-genealogies" class="slide level2">
-<h2>Evolutionary processes and genealogies</h2>
-<p>Non-neutral processes change topologies in ways that we detect when applying tests <span class="citation" data-cites="ferretti_DecomposingSiteFrequency_2017">(<a href="#/pgip-data-set" role="doc-biblioref" onclick="">Ferretti et al., 2017</a>)</span></p>
-<p>genealogies change due to non Show some qualitative examples of how trees change for</p>
-<ul>
-<li>bottleneck</li>
-</ul>
-</section>
-<section id="exercise-on-the-coalescent" class="slide level2">
-<h2>Exercise on the coalescent</h2>
+<section id="the-impact-of-topology-on-the-sfs" class="slide level2">
+<h2>The impact of topology on the SFS</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<!-- markdownlint-disable MD013 -->
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Interpretation of neutrality tests <span class="citation" data-cites="ferretti_DecomposingSiteFrequency_2017">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ferretti et al., 2017</a>)</span></figcaption>
+<p><img data-src="assets/images/ferretti-table1.jpg" width="480"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div><div class="column" style="width:50%;">
+<!-- markdownlint-disable MD013 -->
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>The SFS under neutrality and selection</figcaption>
+<p><img data-src="assets/images/nielsen-fig2-2005.jpeg" width="480"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+<p>Many tests for selection are based on the SFS which in turn is influenced by the topology of the tree.</p>
+</div>
+</div>
+<aside class="notes">
+<p>Take home: topologies influence shape of SFS</p>
+<h3 id="example-tajimas-d">Example: Tajima’s D</h3>
+<p>Tests common versus rare alleles. Numerator compares nucleotide diversity <span class="math inline">\(\pi\)</span> to Watterson’s theta, <span class="math inline">\(\theta_W\)</span>.</p>
+<dl>
+<dt>D &lt; 0</dt>
+<dd>
+recent population increase <em>or</em> positive selection
+</dd>
+<dt>D &gt; 0</dt>
+<dd>
+population contraction <em>or</em> balancing selection
+</dd>
+</dl>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
+<section id="exercise-on-the-coalescent" class="title-slide slide level1 unnumbered unlisted center">
+<h1>Exercise on the coalescent</h1>
+
+</section>
+
 <section>
 <section id="the-coalescent-with-recombination" class="title-slide slide level1 center">
 <h1>The coalescent with recombination</h1>
 
 </section>
-<section id="chromosome-are-mosaics-of-non-recombining-units" class="slide level2">
-<h2>Chromosome are mosaics of non-recombining units</h2>
+<section id="on-non-recombining-chromosomes-and-assortment" class="slide level2">
+<h2>On non-recombining chromosomes and assortment</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="index_cache/revealjs/non-recombining-chromosomes-assortment-1_88b72120bda98163cbb04564970e3708">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-1-1.svg" width="300"></p>
+</div>
+</div>
+<p>Both siblings inherit chromosome from paternal grandfather</p>
+<p>Chromosomes coalesce at father</p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell" data-hash="index_cache/revealjs/non-recombining-chromosomes-assortment-2_375d43bbb21184bb65bd8f0d706a608c">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-2-1.svg" width="300"></p>
+</div>
+</div>
+<p>Siblings inherit different grandparental chromosomes <span class="math inline">\(\Rightarrow\)</span> chromosomes coalesce God knows when in the past</p>
+<p>Genealogies <strong>differ</strong></p>
+</div>
+</div>
+</div>
 </section>
 <section id="the-ancestral-recombination-graph" class="slide level2">
 <h2>The ancestral recombination graph</h2>
-</section>
-<section id="the-sequential-markovian-coalescent" class="slide level2">
-<h2>The Sequential Markovian Coalescent</h2>
-</section>
-<section id="tree-sequences" class="slide level2">
-<h2>Tree sequences</h2>
-</section>
-<section id="msprime" class="slide level2">
-<h2>msprime</h2>
-</section>
-<section id="exercises-with-msprime" class="slide level2">
-<h2>Exercises with msprime</h2>
-<p>Use CLI to generate genealogies and mutations.</p>
-</section></section>
-<section>
-<section id="forward-simulation" class="title-slide slide level1 center">
-<h1>Forward simulation</h1>
-
-</section>
-<section id="forward-simulation-1" class="slide level2">
-<h2>Forward simulation</h2>
-<p>Begin with forward simulation as it makes more intuitive sense.</p>
-<p>Outline principles of forward simulation from Wright-Fisher model “algorithm”.</p>
-</section>
-<section id="slim" class="slide level2">
-<h2>SLiM</h2>
-<p>Mention advances in forward simulations</p>
-</section>
-<section id="forward-simulation-in-slim" class="slide level2">
-<h2>Forward simulation in SLiM</h2>
-<p>Outline steps in SLiM - relate to WF model</p>
-</section>
-<section id="example-in-slim" class="slide level2">
-<h2>Example in SLiM</h2>
-</section>
-<section id="exercise-in-slim" class="slide level2">
-<h2>Exercise in SLiM</h2>
-<p>Optional: do a simple neutral model</p>
-</section></section>
-<section>
-<section id="combining-forward-and-backward-simulations" class="title-slide slide level1 center">
-<h1>Combining forward and backward simulations</h1>
-
-</section>
-<section id="recapitation" class="slide level2">
-<h2>Recapitation</h2>
-<p>Combine the best of two worlds</p>
-</section>
-<section id="recipes" class="slide level2">
-<h2>Recipes</h2>
-<p>Show some recipes and the pgip CLI</p>
-</section>
-<section id="pgip-data-set" class="slide level2 smaller scrollable">
-<h2>PGIP data set</h2>
-<p>Show the pgip data set and how it was generated</p>
-
-<div class="footer footer-default">
-<p>Simulation primer</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>The ancestral recombination graph, <span class="citation" data-cites="hubisz_InferenceAncestralRecombination_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hubisz &amp; Siepel, 2020, fig. 1</a>)</span></figcaption>
+<p><img data-src="assets/images/hejase-2020-fig1.jpg" width="400"></p>
+</figure>
 </div>
+</div><div class="column" style="width:50%;">
+<p>Properties:</p>
+<ul>
+<li>marginal trees constitute a sequence of trees (<strong>tree sequence</strong>) along a chromosome</li>
+<li>each tree represents the genealogy of a non-recombining part of the chromosome</li>
+<li>neighbouring trees are <strong>correlated</strong></li>
+</ul>
+<p>Interpretation: chromosomes are mosaics of non-recombining units</p>
+</div>
+</div>
+</section>
+<section id="msprime-stores-variation-data-as-tree-sequences" class="slide level2">
+<h2>msprime stores variation data as tree sequences</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Tree sequences <span class="citation" data-cites="kelleher_EfficientPedigreeRecording_2018">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kelleher et al., 2018, fig. 3</a>)</span></figcaption>
+<p><img data-src="assets/images/kelleher-plos-2018-fig3.png" width="500"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Data compression <span class="citation" data-cites="kelleher_InferringWholegenomeHistories_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kelleher et al., 2019, fig. 1c</a>)</span></figcaption>
+<p><img data-src="assets/images/kelleher-nature-2019-fig1c.png" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-ancestry-with-msprime" class="slide level2">
+<h2>Simulating ancestry with msprime</h2>
+<!-- markdownlint-disable MD013 -->
+<p>From <a href="https://tskit.dev/msprime/docs/stable/quickstart.html">msprime quickstart</a></p>
+<!-- markdownlint-enable MD013 -->
+<div class="cell" data-fig.format="svg" data-hash="index_cache/revealjs/sim_ancestry_fa1fa240298cd19452d2472c6eb1419e">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> msprime</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Simulate an ancestral history for 3 diploid samples under the coalescent</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># with recombination on a 5kb region with human-like parameters.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>    recombination_rate<span class="op">=</span><span class="fl">1e-8</span>,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    sequence_length<span class="op">=</span><span class="dv">5_000</span>,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    population_size<span class="op">=</span><span class="dv">10_000</span>,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    random_seed<span class="op">=</span><span class="dv">123456</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>ts.draw_svg()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+’<svg baseprofile="full" height="200" version="1.1" width="800" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink"><defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}</style>
+</defs></svg><p><g class="tree-sequence"><g class="background"><path d="M20,0 l190,0 l0,138.2 l-168.568,25 l0,5 l-21.432,0 l0,-5 l0,-25 l0,-138.2z"><path d="M210,0 l190,0 l0,138.2 l-261.136,25 l0,5 l-97.432,0 l0,-5 l168.568,-25 l0,-138.2z"><path d="M400,0 l190,0 l0,138.2 l38.152,25 l0,5 l-489.288,0 l0,-5 l261.136,-25 l0,-138.2z"><path d="M590,0 l190,0 l0,138.2 l0,25 l0,5 l-151.848,0 l0,-5 l-38.152,-25 l0,-138.2z"></path></path></path></path></g><g class="axes"><g class="x-axis"><g class="title" transform="translate(400 200)"><text class="lab" text-anchor="middle" transform="translate(0 -11)">Genome position</text></g><line class="ax-line" x1="20" x2="780" y1="163.2" y2="163.2"><g class="ticks"><g class="tick" transform="translate(20 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">0</text></g></line></g><g class="tick" transform="translate(41.432 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">141</text></g></line></g><g class="tick" transform="translate(138.864 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">782</text></g></line></g><g class="tick" transform="translate(628.152 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">4001</text></g></line></g><g class="tick" transform="translate(780 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">5000</text></g></line></g></g></line></g></g><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n13 p0 root" transform="translate(124.688 26.8)"><g class="a13 i1 leaf node n3 p0 sample" transform="translate(32.8125 94.6)"><path class="edge" d="M 0 0 V -94.6 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a13 c2 node n10 p0" transform="translate(-32.8125 79.037)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">6</text></circle></path></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -79.037 H 32.8125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">13</text></circle></g></g></g><g class="tree t1" transform="translate(210 0)"><g class="plotbox"><g class="c2 node n12 p0 root" transform="translate(124.688 50.9994)"><g class="a12 i1 leaf node n3 p0 sample" transform="translate(32.8125 70.4006)"><path class="edge" d="M 0 0 V -70.4006 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a12 c2 node n10 p0" transform="translate(-32.8125 54.8376)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">6</text></circle></path></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -54.8376 H 32.8125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">12</text></circle></g></g></g><g class="tree t2" transform="translate(400 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf node n3 p0 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">6</text></circle></path></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">11</text></circle></g></g></g><g class="tree t3" transform="translate(590 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf node n3 p0 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(-28.125 12.0777)"><g class="a8 i2 leaf node n5 p0 sample" transform="translate(18.75 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><g class="a8 c2 node n7 p0" transform="translate(-18.75 1.62753)"><g class="a7 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a7 i0 leaf node n1 p0 sample" transform="translate(12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><path class="edge" d="M 0 0 V -1.62753 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">7</text></circle></path></g><path class="edge" d="M 0 0 V -12.0777 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 i1 leaf node n2 p0 sample" transform="translate(-12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -11.4842 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">11</text></circle></g></g></g></g></g>’</p>
+</div>
+</section>
+<section id="simulating-mutations-with-msprime" class="slide level2">
+<h2>Simulating mutations with msprime</h2>
+<div class="cell" data-fig.format="svg" data-hash="index_cache/revealjs/sim_mutations_f95ddb056dedd51927e7333874c9a2ab">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> msprime</span>
+<span id="cb2-2"><a href="#cb2-2"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    recombination_rate<span class="op">=</span><span class="fl">1e-8</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    sequence_length<span class="op">=</span><span class="dv">5_000</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    population_size<span class="op">=</span><span class="dv">10_000</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    random_seed<span class="op">=</span><span class="dv">123456</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>mutated_ts <span class="op">=</span> msprime.sim_mutations(ts, rate<span class="op">=</span><span class="fl">1e-8</span>, random_seed<span class="op">=</span><span class="dv">54321</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>mutated_ts.draw_svg()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+’<svg baseprofile="full" height="200" version="1.1" width="800" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink"><defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}</style>
+</defs></svg><p><g class="tree-sequence"><g class="background"><path d="M20,0 l190,0 l0,138.2 l-168.568,25 l0,5 l-21.432,0 l0,-5 l0,-25 l0,-138.2z"><path d="M210,0 l190,0 l0,138.2 l-261.136,25 l0,5 l-97.432,0 l0,-5 l168.568,-25 l0,-138.2z"><path d="M400,0 l190,0 l0,138.2 l38.152,25 l0,5 l-489.288,0 l0,-5 l261.136,-25 l0,-138.2z"><path d="M590,0 l190,0 l0,138.2 l0,25 l0,5 l-151.848,0 l0,-5 l-38.152,-25 l0,-138.2z"></path></path></path></path></g><g class="axes"><g class="x-axis"><g class="title" transform="translate(400 200)"><text class="lab" text-anchor="middle" transform="translate(0 -11)">Genome position</text></g><line class="ax-line" x1="20" x2="780" y1="163.2" y2="163.2"><g class="ticks"><g class="tick" transform="translate(20 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">0</text></g></line></g><g class="tick" transform="translate(41.432 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">141</text></g></line></g><g class="tick" transform="translate(138.864 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">782</text></g></line></g><g class="tick" transform="translate(628.152 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">4001</text></g></line></g><g class="tick" transform="translate(780 163.2)"><line x1="0" x2="0" y1="0" y2="5"><g transform="translate(0 6)"><text class="lab">5000</text></g></line></g></g><g class="site s0" transform="translate(33.68 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"><g class="mut m0"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></line></g><g class="site s1" transform="translate(70.616 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"><g class="mut m1"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></line></g><g class="site s2" transform="translate(144.488 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"><g class="mut m2"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></line></g><g class="site s3" transform="translate(507.008 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"><g class="mut m3"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></line></g></line></g></g><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n13 p0 root" transform="translate(124.688 26.8)"><g class="a13 i1 leaf node n3 p0 sample" transform="translate(32.8125 94.6)"><path class="edge" d="M 0 0 V -94.6 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a13 c2 m0 node n10 p0 s0" transform="translate(-32.8125 79.037)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">6</text></circle></path></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -79.037 H 32.8125"><g class="mut m0 s0" transform="translate(0 -0.962491)"><line x1="0" x2="0" y1="0" y2="0.962491"><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"><text class="lab lft" transform="translate(-5 0)">0</text></path></line></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">13</text></circle></g></g></g><g class="tree t1" transform="translate(210 0)"><g class="plotbox"><g class="c2 node n12 p0 root" transform="translate(124.688 50.9994)"><g class="a12 i1 leaf node n3 p0 sample" transform="translate(32.8125 70.4006)"><path class="edge" d="M 0 0 V -70.4006 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a12 c2 m1 node n10 p0 s1" transform="translate(-32.8125 54.8376)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">6</text></circle></path></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -54.8376 H 32.8125"><g class="mut m1 s1" transform="translate(0 -44.3139)"><line x1="0" x2="0" y1="0" y2="44.3139"><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"><text class="lab lft" transform="translate(-5 0)">1</text></path></line></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">12</text></circle></g></g></g><g class="tree t2" transform="translate(400 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf m3 node n3 p0 s3 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"><g class="mut m3 s3" transform="translate(0 -1.57025)"><line x1="0" x2="0" y1="0" y2="1.57025"><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"><text class="lab rgt" transform="translate(5 0)">3</text></path></line></g><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">8</text></circle></path></g><g class="a10 c2 m2 node n9 p0 s2" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">6</text></circle></path></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"><g class="mut m2 s2" transform="translate(0 -8.93025)"><line x1="0" x2="0" y1="0" y2="8.93025"><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"><text class="lab lft" transform="translate(-5 0)">2</text></path></line></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">11</text></circle></g></g></g><g class="tree t3" transform="translate(590 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf node n3 p0 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">3</text></rect></path></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(-28.125 12.0777)"><g class="a8 i2 leaf node n5 p0 sample" transform="translate(18.75 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -18.75"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">5</text></rect></path></g><g class="a8 c2 node n7 p0" transform="translate(-18.75 1.62753)"><g class="a7 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">0</text></rect></path></g><g class="a7 i0 leaf node n1 p0 sample" transform="translate(12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">1</text></rect></path></g><path class="edge" d="M 0 0 V -1.62753 H 18.75"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">7</text></circle></path></g><path class="edge" d="M 0 0 V -12.0777 H 28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">8</text></circle></path></g><g class="a10 c2 node n9 p0" transform="translate(28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">4</text></rect></path></g><g class="a9 i1 leaf node n2 p0 sample" transform="translate(-12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H 12.5"><rect class="sym" height="6" width="6" x="-3" y="-3"><text class="lab" transform="translate(0 11)">2</text></rect></path></g><path class="edge" d="M 0 0 V -11.4842 H -28.125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab rgt" transform="translate(3 -7.0)">9</text></circle></path></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"><circle class="sym" cx="0" cy="0" r="3"><text class="lab lft" transform="translate(-3 -7.0)">10</text></circle></path></g><circle class="sym" cx="0" cy="0" r="3"><text class="lab" transform="translate(0 -11)">11</text></circle></g></g></g></g></g>’</p>
+</div>
+</section></section>
+<section>
+<section id="msprime-exercise" class="title-slide slide level1 unnumbered unlisted center">
+<h1>msprime exercise</h1>
+
+</section>
+<section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
+<h2>Bibliography</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-ferretti_DecomposingSiteFrequency_2017" class="csl-entry" role="listitem">
 Ferretti, L., Ledda, A., Wiehe, T., Achaz, G., &amp; Ramos-Onsins, S. E. (2017). Decomposing the <span>Site Frequency Spectrum</span>: <span>The Impact</span> of <span>Tree Topology</span> on <span>Neutrality Tests</span>. <em>Genetics</em>, <em>207</em>(1), 229–240. <a href="https://doi.org/10.1534/genetics.116.188763">https://doi.org/10.1534/genetics.116.188763</a>
-</div>
-<div id="ref-gillespie_PopulationGeneticsConcise_2004" class="csl-entry" role="listitem">
-Gillespie, J. H. (2004). <em>Population <span>Genetics</span>: <span>A Concise Guide</span></em> (2nd edition). <span>Johns Hopkins University Press</span>.
 </div>
 <div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="listitem">
 Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
@@ -809,6 +1159,19 @@ Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <s
 <div id="ref-hein2005gene" class="csl-entry" role="listitem">
 Hein, J., Schierup, M. H., &amp; Wiuf, C. (2005). <em>Gene genealogies, variation and evolution: <span>A</span> primer in coalescent theory</em>. <span>Oxford University Press</span>. <a href="https://books.google.se/books?id=CCmLNAEACAAJ">https://books.google.se/books?id=CCmLNAEACAAJ</a>
 </div>
+<div id="ref-hubisz_InferenceAncestralRecombination_2020" class="csl-entry" role="listitem">
+Hubisz, M., &amp; Siepel, A. (2020). Inference of <span>Ancestral Recombination Graphs Using ARGweaver</span>. In J. Y. Dutheil (Ed.), <em>Statistical <span>Population Genomics</span></em> (pp. 231–266). <span>Springer US</span>. <a href="https://doi.org/10.1007/978-1-0716-0199-0_10">https://doi.org/10.1007/978-1-0716-0199-0_10</a>
+</div>
+<div id="ref-kelleher_EfficientPedigreeRecording_2018" class="csl-entry" role="listitem">
+Kelleher, J., Thornton, K. R., Ashander, J., &amp; Ralph, P. L. (2018). Efficient pedigree recording for fast population genetics simulation. <em>PLOS Computational Biology</em>, <em>14</em>(11), e1006581. <a href="https://doi.org/10.1371/journal.pcbi.1006581">https://doi.org/10.1371/journal.pcbi.1006581</a>
+</div>
+<div id="ref-kelleher_InferringWholegenomeHistories_2019" class="csl-entry" role="listitem">
+Kelleher, J., Wong, Y., Wohns, A. W., Fadil, C., Albers, P. K., &amp; McVean, G. (2019). Inferring whole-genome histories in large population datasets. <em>Nature Genetics</em>, <em>51</em>(9), 1330–1338. <a href="https://doi.org/10.1038/s41588-019-0483-y">https://doi.org/10.1038/s41588-019-0483-y</a>
+</div>
+</div>
+
+<div class="footer footer-default">
+<p>Simulation primer</p>
 </div>
 </section></section>
     </div>
