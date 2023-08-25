@@ -5,12 +5,12 @@ description: "List of all presentations"
 listing:
   type: grid
   grid-columns: 4
-  fields: [image, title, subtitle, author]
+  fields: [title, subtitle, author]
   sort: false
   contents:
-    - introduction/index.qmd
     - pgip/index.qmd
     - foundations/index.qmd
+    - simultation/index.qmd
 date: ""
 toc: false
 sidebar: false

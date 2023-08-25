@@ -3,22 +3,79 @@ title: "Program"
 toc: false
 date: ""
 sidebar: false
+engine: knitr
 format:
   html:
     number-sections: false
 ---
 
-Course program:
+The aim of this workshop is to provide an introduction to commonly
+used methods in population genomics. As the focus of the course is on
+hands-on work, the topics have been designed to cover the fundamental
+analyses that are common in many population genomics studies. The
+course consists of lectures and exercises, with a focus on the
+practical aspects of analyses. Whereas lectures introduce some
+background theory, their primary aim is to set the stage for
+accompanying exercises.
 
-- introduction to the coalescent and simulations
-- variant calling and variant filtering
-- describing genetic diversity
-- population structure and admixture
-- selection scans
+## Covered topics
+
+- Foundations of population genetics
+- Introduction to simulation and the coalescent
+- Basics of variant calling
+- Variant filtering and sequence masks
+- Characterization and intepretation of DNA sequence variation
+- Calculation and interpretation of summary statistics from variation
+  data
+- Investigating population structure with admixture modelling and
+  principal component analyses
+- Demographic modelling using sequentially Markovian coalescent models and linkage disequlibrium
+- Selection scans
+
+## Learning objectives
+
+Upon completion of this course, you will be able to:
+
+- describe the different forces of evolution and how they influence
+  genetic variation
+- understand and interpret genealogical trees and how they relate to
+  genetic variation data
+- describe the basics of the coalescent
+- perform simple coalescent simulations with msprime
+- run simple SLiM forward simulation models
+- describe and run the steps of a variant calling pipeline, including
+  quality control of raw reads, read mapping, and variant calling
+- know how and when to filter raw variant calls using manual coverage
+  filters
+- describe and calculate nucleotide diversity from variation data
+- analyze population structure with admixture modelling and
+  dimensionality reduction methods
+- perform demographic modelling with sequential Markovian coalescent
+  models
+- describe methods that identify regions undergoing adaptation and
+  selection
+- run selection scans, score identified regions and interpret findings
+  in the context of genome annotations
+
+## Requirements
+
+- Basic knowledge in R or Python
+- Basic knowledge of variant calling, or the equivalent of NBIS course
+  "Introduction to Bioinformatics using NGS data"
+- Basic knowledge of population genetics
+- Basic understanding of frequentist statistics
+- A computer
+
+Desirable:
+
+- Experience with analysis of NGS and other omic data
 
 ## Preparation
 
-### Readings
+### Suggested readings
+
+Although not required, it is recommended to briefly go through the
+following papers (in particular @fuller_PopulationGeneticsCoral_2020):
 
 - @fuller_PopulationGeneticsCoral_2020
 - @johri_RecommendationsImprovingStatistical_2022
@@ -34,3 +91,83 @@ the exercises. You can apply for an account
 Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
 <https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
 for information on how to connect to and work on uppmax.
+
+### Software installation
+
+::: {.callout-important}
+
+Instructions will be updated when a full list of required programs are
+available.
+
+:::
+
+In case there are issues with UPPMAX we ask you to prepare a local
+backup compute environment on your computer. We will use the
+[conda](https://docs.conda.io/en/latest/) package manager to install
+necessary requirements from the package repositories
+[bioconda](https://bioconda.github.io/) and
+[conda-forge](https://conda-forge.org/).
+
+#### 1. Install conda
+
+To start using conda, follow the [quick command line install
+instructions](https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install)
+to install the minimal conda installer
+[miniconda](https://docs.conda.io/en/latest/miniconda.html).
+
+#### 2. Configure conda
+
+Configure conda to access the package repositories (see also [bioconda
+usage](https://bioconda.github.io/#usage)). This will modify your
+`~/.condarc` file:
+
+```{bash}
+#| label: conda-configuration
+#| echo: true
+#| eval: false
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+::: {.callout-important}
+
+Please note that the order of these commands is important!
+
+:::
+
+#### 3. Create an isolated course environment
+
+It is suggested you create and change to a isolated environment `pgip`
+dedicated to the course:
+
+```{bash }
+#| label: create-conda-pgip
+#| echo: true
+#| eval: false
+conda create -n pgip python=3.10 r-base
+conda activate pgip
+```
+
+To deactivate an environment you issue the command `conda deactivate`.
+
+#### 4. Install packages
+
+You can install packages as follows (remember to activate `pgip`!):
+
+```{bash }
+#| label: conda-install-packages
+#| echo: true
+#| eval: false
+conda install bcftools angsd mosdepth
+```
+
+::: {.callout-tip}
+
+If installation is slow, you can try the
+[mamba](https://mamba.readthedocs.io/en/latest/mamba-installation.html) installer.
+
+:::
+
+<br>

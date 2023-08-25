@@ -1199,7 +1199,7 @@ followed by success). This is the [geometric
 distribution](https://en.wikipedia.org/wiki/Geometric_distribution)
 $Ge(p)$, with parameter $p=\frac{1}{2N}$, and expected value
 $\frac{1}{p}={2N}$. That is, the **expected time for two chromosomes
-to find a common ancester (i.e., coalesce) is $2N$ generations**.
+to find a common ancestor (i.e., coalesce) is $2N$ generations**.
 
 :::
 
