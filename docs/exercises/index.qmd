@@ -5,10 +5,10 @@ description: "List of all exercises"
 listing:
   type: grid
   grid-columns: 4
-  fields: [image, title, subtitle, author]
+  fields: [title, subtitle, author]
   sort: false
   contents:
-    - test/test.ipynb
+    - simulation/index.qmd
 date: ""
 toc: false
 sidebar: false
