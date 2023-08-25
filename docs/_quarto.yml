@@ -44,9 +44,11 @@ website:
   sidebar:
     contents:
       - section: Slides
-        contents: slides
+        contents:
+          - slides/index.qmd
       - section: Exercises
-        contents: exercises
+        contents:
+          - exercises/index.qmd
       - section: Code recipes
         contents: recipes
 
