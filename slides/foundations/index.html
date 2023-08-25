@@ -416,7 +416,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">24-Aug-2023</h4>
+  <h4 class="date">25-Aug-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1939,7 +1939,7 @@ P(v=k) \approx \frac{1}{k!}e^{-1}
 <p>Probability that parents are identical: pick a parent <span class="math inline">\(v\)</span>, then a second parent <span class="math inline">\(u\)</span>. Then <span class="math inline">\(P(v=u)=\frac{1}{2N}\)</span>, and <span class="math inline">\(P(v\neq u)=1-\frac{1}{2N}\)</span>.</p>
 </div>
 <div class="fragment">
-<p>Time for two chromosomes <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> to find common ancestor distributed as <span class="math inline">\((1 - \frac{1}{2N})^{j-1}\frac{1}{2N}\)</span> (<span class="math inline">\(j-1\)</span> failures followed by success). This is the <a href="https://en.wikipedia.org/wiki/Geometric_distribution">geometric distribution</a> <span class="math inline">\(Ge(p)\)</span>, with parameter <span class="math inline">\(p=\frac{1}{2N}\)</span>, and expected value <span class="math inline">\(\frac{1}{p}={2N}\)</span>. That is, the <strong>expected time for two chromosomes to find a common ancester (i.e., coalesce) is <span class="math inline">\(2N\)</span> generations</strong>.</p>
+<p>Time for two chromosomes <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> to find common ancestor distributed as <span class="math inline">\((1 - \frac{1}{2N})^{j-1}\frac{1}{2N}\)</span> (<span class="math inline">\(j-1\)</span> failures followed by success). This is the <a href="https://en.wikipedia.org/wiki/Geometric_distribution">geometric distribution</a> <span class="math inline">\(Ge(p)\)</span>, with parameter <span class="math inline">\(p=\frac{1}{2N}\)</span>, and expected value <span class="math inline">\(\frac{1}{p}={2N}\)</span>. That is, the <strong>expected time for two chromosomes to find a common ancestor (i.e., coalesce) is <span class="math inline">\(2N\)</span> generations</strong>.</p>
 </div>
 <aside class="notes">
 <p>Since a large fraction of genes lack descendants, very quickly (compared to 2N) a population will descend from a small proportion of genes.</p>

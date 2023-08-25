@@ -4696,9 +4696,9 @@ vertical-align: -.125em;
     }
 
     const options = {
-      valueNames: ['listing-image','listing-title','listing-subtitle','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-subtitle','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -4931,7 +4931,22 @@ return!"\t\n\x0B\f\r                　\u2028\u2029
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-4">
-
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1692953937225" data-listing-reading-time-sort="1">
+<a href="../exercises/simulation/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Introduction to simulation
+</h5>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+Per Unneberg
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items

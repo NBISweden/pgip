@@ -20,6 +20,40 @@ width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
 
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+
 div.csl-bib-body { }
 div.csl-entry {
 clear: both;
@@ -4552,18 +4586,58 @@ vertical-align: -.125em;
 
 </header>
 
-<p>Course program:</p>
+<p>The aim of this workshop is to provide an introduction to commonly used methods in population genomics. As the focus of the course is on hands-on work, the topics have been designed to cover the fundamental analyses that are common in many population genomics studies. The course consists of lectures and exercises, with a focus on the practical aspects of analyses. Whereas lectures introduce some background theory, their primary aim is to set the stage for accompanying exercises.</p>
+<section id="covered-topics" class="level2">
+<h2 class="anchored" data-anchor-id="covered-topics">Covered topics</h2>
 <ul>
-<li>introduction to the coalescent and simulations</li>
-<li>variant calling and variant filtering</li>
-<li>describing genetic diversity</li>
-<li>population structure and admixture</li>
-<li>selection scans</li>
+<li>Foundations of population genetics</li>
+<li>Introduction to simulation and the coalescent</li>
+<li>Basics of variant calling</li>
+<li>Variant filtering and sequence masks</li>
+<li>Characterization and intepretation of DNA sequence variation</li>
+<li>Calculation and interpretation of summary statistics from variation data</li>
+<li>Investigating population structure with admixture modelling and principal component analyses</li>
+<li>Demographic modelling using sequentially Markovian coalescent models and linkage disequlibrium</li>
+<li>Selection scans</li>
 </ul>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>Upon completion of this course, you will be able to:</p>
+<ul>
+<li>describe the different forces of evolution and how they influence genetic variation</li>
+<li>understand and interpret genealogical trees and how they relate to genetic variation data</li>
+<li>describe the basics of the coalescent</li>
+<li>perform simple coalescent simulations with msprime</li>
+<li>run simple SLiM forward simulation models</li>
+<li>describe and run the steps of a variant calling pipeline, including quality control of raw reads, read mapping, and variant calling</li>
+<li>know how and when to filter raw variant calls using manual coverage filters</li>
+<li>describe and calculate nucleotide diversity from variation data</li>
+<li>analyze population structure with admixture modelling and dimensionality reduction methods</li>
+<li>perform demographic modelling with sequential Markovian coalescent models</li>
+<li>describe methods that identify regions undergoing adaptation and selection</li>
+<li>run selection scans, score identified regions and interpret findings in the context of genome annotations</li>
+</ul>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<ul>
+<li>Basic knowledge in R or Python</li>
+<li>Basic knowledge of variant calling, or the equivalent of NBIS course “Introduction to Bioinformatics using NGS data”</li>
+<li>Basic knowledge of population genetics</li>
+<li>Basic understanding of frequentist statistics</li>
+<li>A computer</li>
+</ul>
+<p>Desirable:</p>
+<ul>
+<li>Experience with analysis of NGS and other omic data</li>
+</ul>
+</section>
 <section id="preparation" class="level2">
 <h2 class="anchored" data-anchor-id="preparation">Preparation</h2>
-<section id="readings" class="level3">
-<h3 class="anchored" data-anchor-id="readings">Readings</h3>
+<section id="suggested-readings" class="level3">
+<h3 class="anchored" data-anchor-id="suggested-readings">Suggested readings</h3>
+<p>Although not required, it is recommended to briefly go through the following papers (in particular <span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span>):</p>
 <ul>
 <li><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span></li>
 <li><span class="citation" data-cites="johri_RecommendationsImprovingStatistical_2022">Johri et al. (<a href="#ref-johri_RecommendationsImprovingStatistical_2022" role="doc-biblioref">2022</a>)</span></li>
@@ -4575,6 +4649,80 @@ vertical-align: -.125em;
 <section id="tutorials" class="level4">
 <h4 class="anchored" data-anchor-id="tutorials">Tutorials</h4>
 <p>Look at <a href="https://www.uppmax.uu.se/support/user-guides/" class="uri">https://www.uppmax.uu.se/support/user-guides/</a>, in particular <a href="https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/" class="uri">https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/</a> for information on how to connect to and work on uppmax.</p>
+</section>
+</section>
+<section id="software-installation" class="level3">
+<h3 class="anchored" data-anchor-id="software-installation">Software installation</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Instructions will be updated when a full list of required programs are available.</p>
+</div>
+</div>
+<p>In case there are issues with UPPMAX we ask you to prepare a local backup compute environment on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
+<section id="install-conda" class="level4">
+<h4 class="anchored" data-anchor-id="install-conda">1. Install conda</h4>
+<p>To start using conda, follow the <a href="https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install">quick command line install instructions</a> to install the minimal conda installer <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>.</p>
+</section>
+<section id="configure-conda" class="level4">
+<h4 class="anchored" data-anchor-id="configure-conda">2. Configure conda</h4>
+<p>Configure conda to access the package repositories (see also <a href="https://bioconda.github.io/#usage">bioconda usage</a>). This will modify your <code>~/.condarc</code> file:</p>
+<div class="cell" data-hash="program_cache/html/conda-configuration_06107dceb7eaf1ba0db602c1a14c2f0f">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please note that the order of these commands is important!</p>
+</div>
+</div>
+</section>
+<section id="create-an-isolated-course-environment" class="level4">
+<h4 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h4>
+<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course:</p>
+<div class="cell" data-hash="program_cache/html/create-conda-pgip_1dff7e1288f56e019c3a09e1320828d0">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pgip python=3.10 r-base</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To deactivate an environment you issue the command <code>conda deactivate</code>.</p>
+</section>
+<section id="install-packages" class="level4">
+<h4 class="anchored" data-anchor-id="install-packages">4. Install packages</h4>
+<p>You can install packages as follows (remember to activate <code>pgip</code>!):</p>
+<div class="cell" data-hash="program_cache/html/conda-install-packages_8f46835b406a4ae5b78d896d71a83c61">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If installation is slow, you can try the <a href="https://mamba.readthedocs.io/en/latest/mamba-installation.html">mamba</a> installer.</p>
+</div>
+</div>
+<p><br></p>
 
 
 
