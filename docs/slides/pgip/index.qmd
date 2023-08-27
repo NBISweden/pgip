@@ -60,37 +60,19 @@ of coral cover a better understanding of genetics is warranted.
 
 <!-- markdownlint-disable MD013 -->
 
-:::: {.columns}
-
-::: {.column width="50%"}
-
 ::: {.fragment}
 
-![Genome assembly and sampling](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly height=420}
+![Genome assembly and sample collection. ](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly height=550 fig-align=center}
 
-:::
-
-:::
-
-::: {.column width="50%"}
-
-::: {.fragment}
-
-![Variation and demographic history](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-corals-variation height=420}
-
-:::
-
-:::
-
-::::
-
-<!-- markdownlint-enable MD013 -->
-
-::: { .flushright .smallest}
+::: { .flushright .smallest .translatey100}
 
 @fuller_PopulationGeneticsCoral_2020
 
 :::
+
+:::
+
+<!-- markdownlint-enable MD013 -->
 
 ::: {.notes }
 
@@ -106,16 +88,47 @@ Walk through steps of the main figures which represent common analyses
 in a population genomics experiment. No need to supply text; better to
 exemplify via the figures.
 
-1. genome assembly and sampling. Points to consider:
-   - choice of reference individual
-   - the number of populations
-   - the number of samples (more sites better than many samples per
-     population)
-   - the geographical distribution of samples
-   - sequencing depth (low-coverage often sufficient)
+Genome assembly and sampling
 
-2. variation and demographic history
-   - why do we want to do this?
+Points to consider:
+
+- choice of reference individual
+- the number of populations
+- the number of samples (more sites better than many samples per
+     population)
+- the geographical distribution of samples
+- sequencing depth (low-coverage often sufficient)
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Motivation: corals are facing hard times and to prevent future losses
+of coral cover a better understanding of genetics is warranted.
+
+![Variation and demographic history inferred from 44 resequenced
+individuals.](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-corals-variation
+height=550 fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: { .flushright .smallest .translatey100}
+
+@fuller_PopulationGeneticsCoral_2020
+
+:::
+
+::: {.notes }
+
+Variation and demographic history
+
+- LD decay: important for imputation (e.g.,
+  stephens_AccountingDecayLinkage_2005)
+- The extent of LD and its decay with genetic distance are useful
+  parameters for determining the number of markers needed to
+  successfully map a QTL, and the resolution with which the trait can
+  be successfully mapped otyama_EvaluationLinkageDisequilibrium_2019
+- 0.363% average pi
 
 :::
 
@@ -126,25 +139,9 @@ of coral cover a better understanding of genetics is warranted.
 
 <!-- markdownlint-disable MD013 -->
 
-:::: {.columns}
-
-::: {.column width="50%"}
-
-![Population structure](https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg){#fig-corals-structure}
-
-:::
-
-::: {.column width="50%"}
-
-::: {.fragment}
-
-![Selection scan](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection height=420}
-
-:::
-
-:::
-
-::::
+![Characterizing population structure and gene flow across 12
+refs](https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg){#fig-corals-structure
+width=550 fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
@@ -154,9 +151,111 @@ of coral cover a better understanding of genetics is warranted.
 
 :::
 
-## Population genetics
+::: {.notes }
 
-- briefly outline what popultation genetics studies,
+Population structure:
+
+- no discernible relationship between geographic distance and genetic
+  differentiation
+- EEMS (Estimated Effective Migration Surfaces) models relationship
+  between genetics and geography
+  petkova_VisualizingSpatialPopulation_2016
+
+Indicative of high connectivity among 12 sampled reefs.
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Motivation: corals are facing hard times and to prevent future losses
+of coral cover a better understanding of genetics is warranted.
+
+<!-- markdownlint-disable MD013 -->
+
+![Genomic scans for local adaptation detect a signal at
+*sacsin*](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection
+height=550 fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: { .flushright .smallest .translatey100}
+
+@fuller_PopulationGeneticsCoral_2020
+
+:::
+
+::: {.notes }
+
+Little differentiation across reefs -> littel population structure
+over hundreds of kilometers. However, there are environmental
+differences (thermal regimes). Scan for pi outliers:
+
+- points to *sacsin* gene
+- h12 measures the frequency of the two most common haplotypes; red
+  indicate 0.01% outlier genome-wide
+- 4C: tree for central 1kb region in *sacsin* deeper than split from
+  *A.digitifera* and *A.tenuis*
+  - variation in *sacsin* has been maintained for long time
+  - co-chaperone for heat-shock protein Hsp70
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Study highlights common analyses in population genomics study:
+
+::: {.incremental}
+
+1. Genome assembly, resequencing, variant calling and filtering
+2. Description of variation (e.g., $\pi$) and genetic structure (LD)
+3. Description of population structure (admixture, PCA)
+4. Modelling of demographic history (PSMC)
+5. Genome scans for adaptive traits
+
+:::
+
+## Population genetics {.center}
+
+:::: {style="display: grid; grid-template-columns: 300px 200px 200px;
+grid-row-gap: 0px; grid-column-gap: 100px;"}
+
+<div>&nbsp;</div>
+
+:::{.circular-image}
+
+Mutation
+
+![](assets/images/mutation.jpg)
+
+:::
+
+:::{.circular-image}
+
+Selection
+
+![](assets/images/finches.jpg)
+
+:::
+
+<div>&nbsp;</div>
+
+:::{.circular-image}
+
+Recombination
+
+![](assets/images/recombination.jpeg)
+
+:::
+
+:::{.circular-image}
+
+Drift
+
+![](assets/images/genetic-drift.png)
+
+:::
+
+::::
 
 ::: {.notes }
 

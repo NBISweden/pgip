@@ -356,16 +356,28 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 Simulated nodes are filled with black. Genealogy of interest is
 highlighted in thick black lines.
 
-## Why do we want simulations anyway
+## Why do we want simulations anyway?
 
 ::: {.incremental}
 
-- No analytical solutions for linked selection and the like
-  $\rightarrow$ must use simulations
-- Use to gain understanding and improve interpretation of mutational
+Null model
+: Generate neutral null distributions to compare with observed data
+
+Exploration
+: Use to gain understanding and improve interpretation of mutational
   processes
-- Generate neutral null distributions to compare with observed data
-- Generate training data for machine learning
+
+Mathematical complexity
+: No analytical solutions for linked selection and the like
+  $\rightarrow$ must use simulations
+
+Benchmarking
+: Use to generate test data with known properties on which to test and
+  evaluate new methods
+
+Model training
+: Generate training data for machine learning, e.g., Approximate
+  Bayesian Computation (ABC) or Neural Networks (NNs)
 
 :::
 
@@ -2199,7 +2211,7 @@ ts = msprime.sim_ancestry(
     sequence_length=5_000,
     population_size=10_000,
     random_seed=123456)
-ts.draw_svg()
+print(ts.draw_svg())
 ```
 
 ## Simulating mutations with msprime
@@ -2218,7 +2230,7 @@ ts = msprime.sim_ancestry(
     population_size=10_000,
     random_seed=123456)
 mutated_ts = msprime.sim_mutations(ts, rate=1e-8, random_seed=54321)
-mutated_ts.draw_svg()
+print(mutated_ts.draw_svg())
 ```
 
 # msprime exercise {.unnumbered .unlisted}

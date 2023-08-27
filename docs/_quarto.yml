@@ -45,10 +45,12 @@ website:
     contents:
       - section: Slides
         contents:
-          - slides/index.qmd
+          - slides/pgip/index.qmd
+          - slides/foundations/index.qmd
+          - slides/simulation/index.qmd
       - section: Exercises
         contents:
-          - exercises/index.qmd
+          - exercises/simulation/index.qmd
       - section: Code recipes
         contents: recipes
 
