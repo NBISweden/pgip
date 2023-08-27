@@ -351,55 +351,37 @@
   <h3 class="subtitle">What is population genomics?</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">25-Aug-2023</h4>
+  <h4 class="date">27-Aug-2023</h4>
 </section>
 
 <section id="example-population-genetics-of-the-coral-acropora-millepora" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
 <!-- markdownlint-disable MD013 -->
-<div class="columns">
-<div class="column" style="width:50%;">
 <div class="fragment">
-<div id="fig-corals-assembly" class="quarto-figure quarto-figure-left">
+<div id="fig-corals-assembly" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;1: Genome assembly and sampling</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" height="420"></p>
+<figcaption>Figure&nbsp;1: Genome assembly and sample collection.</figcaption>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" height="550"></p>
 </figure>
 </div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="fragment">
-<div id="fig-corals-variation" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;2: Variation and demographic history</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" height="420"></p>
-</figure>
-</div>
-</div>
+<div class="flushright smallest translatey100">
+<p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 </div>
 <!-- markdownlint-enable MD013 -->
-<div class="flushright smallest">
-<p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
-</div>
 <aside class="notes">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Fuller et al., 2020</a>)</span> is an example of a population genomics study that applies methods that could be seen as a basic foundation of population genomics. We believe these present a minimum toolkit of methods that should be known to anyone starting out in population genomics, and that is sufficiently small to be presented in a one-week workshop. At the end of this lecture, we will discuss some more advanced applications in population genomics.</p>
 <p>Walk through steps of the main figures which represent common analyses in a population genomics experiment. No need to supply text; better to exemplify via the figures.</p>
-<ol type="1">
-<li>genome assembly and sampling. Points to consider:
+<p>Genome assembly and sampling</p>
+<p>Points to consider:</p>
 <ul>
 <li>choice of reference individual</li>
 <li>the number of populations</li>
 <li>the number of samples (more sites better than many samples per population)</li>
 <li>the geographical distribution of samples</li>
 <li>sequencing depth (low-coverage often sufficient)</li>
-</ul></li>
-<li>variation and demographic history
-<ul>
-<li>why do we want to do this?</li>
-</ul></li>
-</ol>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -415,36 +397,139 @@
 <section id="example-population-genetics-of-the-coral-acropora-millepora-1" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
-<!-- markdownlint-disable MD013 -->
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig-corals-structure" class="quarto-figure quarto-figure-left">
+<div id="fig-corals-variation" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;3: Population structure</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg"></p>
+<figcaption>Figure&nbsp;2: Variation and demographic history inferred from 44 resequenced individuals.</figcaption>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" height="550"></p>
 </figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="fragment">
-<div id="fig-corals-selection" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;4: Selection scan</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg" height="420"></p>
-</figure>
-</div>
-</div>
-</div>
 </div>
 <!-- markdownlint-enable MD013 -->
-<div class="flushright smallest">
+<div class="flushright smallest translatey100">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
-</section>
-<section id="population-genetics" class="slide level2">
-<h2>Population genetics</h2>
+<aside class="notes">
+<p>Variation and demographic history</p>
 <ul>
-<li>briefly outline what popultation genetics studies,</li>
+<li>LD decay: important for imputation (e.g., stephens_AccountingDecayLinkage_2005)</li>
+<li>The extent of LD and its decay with genetic distance are useful parameters for determining the number of markers needed to successfully map a QTL, and the resolution with which the trait can be successfully mapped otyama_EvaluationLinkageDisequilibrium_2019</li>
+<li>0.363% average pi</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-population-genetics-of-the-coral-acropora-millepora-2" class="slide level2">
+<h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg" width="550" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;3: Characterizing population structure and gene flow across 12 refs</p><div class="flushright smallest">
+<p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div>
+<aside class="notes">
+<p>Population structure:</p>
+<ul>
+<li>no discernible relationship between geographic distance and genetic differentiation</li>
+<li>EEMS (Estimated Effective Migration Surfaces) models relationship between genetics and geography petkova_VisualizingSpatialPopulation_2016</li>
+</ul>
+<p>Indicative of high connectivity among 12 sampled reefs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-population-genetics-of-the-coral-acropora-millepora-3" class="slide level2">
+<h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
+<!-- markdownlint-disable MD013 -->
+<div id="fig-corals-selection" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;4: Genomic scans for local adaptation detect a signal at <em>sacsin</em></figcaption>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg" height="550"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+<div class="flushright smallest translatey100">
+<p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div>
+<aside class="notes">
+<p>Little differentiation across reefs -&gt; littel population structure over hundreds of kilometers. However, there are environmental differences (thermal regimes). Scan for pi outliers:</p>
+<ul>
+<li>points to <em>sacsin</em> gene</li>
+<li>h12 measures the frequency of the two most common haplotypes; red indicate 0.01% outlier genome-wide</li>
+<li>4C: tree for central 1kb region in <em>sacsin</em> deeper than split from <em>A.digitifera</em> and <em>A.tenuis</em>
+<ul>
+<li>variation in <em>sacsin</em> has been maintained for long time</li>
+<li>co-chaperone for heat-shock protein Hsp70</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-population-genetics-of-the-coral-acropora-millepora-4" class="slide level2">
+<h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<p>Study highlights common analyses in population genomics study:</p>
+<div>
+<ol type="1">
+<li class="fragment">Genome assembly, resequencing, variant calling and filtering</li>
+<li class="fragment">Description of variation (e.g., <span class="math inline">\(\pi\)</span>) and genetic structure (LD)</li>
+<li class="fragment">Description of population structure (admixture, PCA)</li>
+<li class="fragment">Modelling of demographic history (PSMC)</li>
+<li class="fragment">Genome scans for adaptive traits</li>
+</ol>
+</div>
+</section>
+<section id="population-genetics" class="slide level2 center">
+<h2>Population genetics</h2>
+<div style="display: grid; grid-template-columns: 300px 200px 200px; grid-row-gap: 0px; grid-column-gap: 100px;">
+<div>
+&nbsp;
+</div>
+<div class="circular-image">
+<p>Mutation</p>
+<p><img data-src="assets/images/mutation.jpg"></p>
+</div>
+<div class="circular-image">
+<p>Selection</p>
+<p><img data-src="assets/images/finches.jpg"></p>
+</div>
+<div>
+&nbsp;
+</div>
+<div class="circular-image">
+<p>Recombination</p>
+<p><img data-src="assets/images/recombination.jpeg"></p>
+</div>
+<div class="circular-image">
+<p>Drift</p>
+<p><img data-src="assets/images/genetic-drift.png"></p>
+</div>
+</div>
 <aside class="notes">
 <p>Population genetics focuses on the genetic basis of evolution. It is mainly a theoretical subject, owing to the slow changes of genetic variation. As such, it tries to explain the shape and structure of genetic variation from theoretical predictions and models.</p>
 <style type="text/css">
