@@ -64,6 +64,12 @@ repos:
       - id: editorconfig-checker
         alias: ec
         pass_filenames: true
+        exclude: |
+          (?x)^(
+          docs/slides/population_structure/data/DavidReich/AADR\.ind|
+          docs/slides/population_structure/data/DavidReich/AADR\.snp|
+          docs/slides/population_structure/data/DavidReich/AADR\.geno
+          )
   - repo: https://github.com/lorenzwalthert/precommit
     rev: v0.3.2.9019
     hooks:
@@ -80,7 +86,6 @@ repos:
           docs/slides/datageneration/index\.qmd|
           docs/slides/foundations/index\.qmd|
           docs/exercises/data_filtering/index\.qmd|
-          docs/slides/population_structure/index\.qmd|
           docs/slides/simulation/index\.qmd
           )$
         minimum_pre_commit_version: "2.13.0"
