@@ -1,11 +1,16 @@
 ---
 title: "Population structure"
-subtitle: "Fixation indices, admixture and more"
+subtitle: "Principal Component Analysis, Admixture and F-statistics"
 author:
-    - "Per Unneberg"
+    - "Nikolay Oskolkov"
+    - "(uses material from lectures of Ben Peter, Anders Albrechtsen, Ida Moltke, Graham Coop)"
 format:
   revealjs:
+    fig-align: center
+    css: "assets/styles.css"
     footer: Population structure
+    smaller: true
+    center: true
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -14,157 +19,750 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-::: {.notes }
 
-Outline: (follow Hahn)
+## PCA in population genetics: Cavalli-Sforza
 
-- brief outline of what it is, including the Wahllund effect
+![](assets/Cavalli_Sforza.png){width="90%"}
 
-- Measuring population structure:
-  - f_st
-    - definition
-    - how to estimate: parameter vs statistic
-    - recommendations (Bahtia)
-  - alternative measures, notably dxy
-    - tree representation relating dxy and fst
-- evolutionary processes and structure
-  - selection
-    - show f_st in different regions (krill?)
-    - linked selection -> reduce / decrease *local* N_e
-  - migration / drift
-    - focus on neutral alleles
-- defining populations
-  - data exploration -> want to identify populations
-  - ADMIXTURE, STRUCTURE, fast-STRUCTURE
-    - elaborate on overfitting, how to identify best K
+[@Cavalli_Sforza_1978] noticed that genetic distances seem to correlate with geographical distances
 
-Exercise:
+## PCA in population genetics: John Novembre
 
-- f_st calculation and making an unrooted tree mapping
-- ADMIXTURE
+:::: {.columns}
+::: {.column width="60%"}
+![](assets/Novembre.png){height=510}
 
+[@Novembre_2008]
+:::
+::: {.column width="40%"}
+- genetics seems to mirrow the map of Europe
+- caveate: it is not always the case
+- J. Novembre selected samples
+:::
+::::
+
+## PCA and MDS are matrix factorization techniques
+
+![](assets/MatrixFactor.png){fig-align="center"}
+
+## Toy example of PCA for population genetics
+
+:::: {.columns}
+::: {.column width="49%"}
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+gen <-t(matrix(c(1,0,2,0,2,0,2,1,1,1,0,1,0,2,1,2,1,1,1,1,1,0,1,0,2,0,1,1,0,2,1,2,0,1,0),5,by=TRUE))
+colnames(gen)<-paste0("Ind",1:5)
+rownames(gen)<-paste0("SNP",1:7)
+print(gen)
+```
+::: {.fragment}
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 5
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+gen_centered <- scale(gen, center = TRUE, scale = FALSE)
+covariance <- t(gen_centered) %*% gen_centered
+eig <- eigen(covariance)
+barplot(eig$values / sum(eig$values),names=paste0("PC",1:5))
+```
 :::
 
-# Population structure
-
-::: {.notes }
-
-On the limited applicability of the expected value of F_ST, [p. 243
-@nei_MolecularEvolutionPhylogenetics_2000]:
-
-- assumes idealized population structure, all subpopulations derived
-  at same time (equal size, no demographic history)
-- in practice difficult to know demographic history
-- most natural populations do have unique phylogenetic structure
-
-More general exposition of f_st, Wahlund effect, etc
-
 :::
-
-## The independent population model
-
-```{r, engine='tikz', fig.ext="svg"}
-#| label: fst-independent-population-model
-#| echo: false
-#| eval: true
-#| out-height: 300px
-#| fig-height: 300px
-\tikzset{pop/.style={circle, text width=20, align=center, draw, minimum width=10}}
-\begin{tikzpicture}[x=1pt, y=1pt, node distance=150]
-\node[pop] (pop0) at (0,0) {Pop. 0};
-\node[pop, below of=pop0] (popC) {Pop. C};
-\node[pop, left of=popC] (popB) {Pop. B};
-\node[pop, left of=popB] (popA) {Pop. A};
-\node[right of=popC, node distance=75] (dot1) {...};
-\node[right of=dot1, node distance=75] (dot2) {...};
-\node[right of=dot2, node distance=75] (dot3) {...};
-\node[pop, right of=dot3, node distance=75] (popK) {Pop. K};
-\draw (pop0) edge node[above] {$\theta_A$} (popA);
-\draw (pop0) edge node[left] {$\theta_B$} (popB);
-\draw (pop0) edge node[left] {$\theta_C$} (popC);
-\draw (pop0) edge node[above] {$\theta_K$} (popK);
-\draw (current bounding box.north east)
-  -- (current bounding box.north west)
-  -- (current bounding box.south west)
-  -- (current bounding box.south east)
-  -- cycle;
-\end{tikzpicture}
+::: {.column width="51%"}
+::: {.fragment}
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6.5
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+plot(eig$vectors[,1:2],xlab="PC1",ylab="PC2",pch=16,cex=5,col=2:6)
+points(eig$vectors[,1:2], pch = as.character(1:5))
 ```
 
-[@mary-huard_FastAccurateJoint_2023]
+Idea: project the data into a low dimensional space that explains
+the largest amount of variance
+:::
+:::
+::::
 
-## $F_{ST}$ estimators
 
-Table S2 in [@bhatia_EstimatingInterpretingFST_2013]
+## Variance maximization and eigen value decomposition
 
-<!-- markdownlint-disable MD013 -->
+![](assets/max_variance.png){fig-align="center"}
 
-| **Conceptual definition**                        | **Citation** | **Evolutionary assumptions**                               | **WC**                                                         | **Nei** | **Hudson** |
-|--------------------------------------------------|--------------|------------------------------------------------------------|----------------------------------------------------------------|---------|------------|
-| Ratio of variances / Correlation between alleles |              | SNPs analyzed were polymorphic in the ancestral population | $F_{ST}$ is identical across populations OR Equal sample sizes | No^c    | Yes^*      |
-|                                                  |              |                                                            |                                                                |         |            |
 
-<!-- markdownlint-disable MD013 -->
+## Toy example of MDS for population genetics
 
-### Weir Cockerham
+:::: {.columns}
+::: {.column width="49%"}
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+gen <-t(matrix(c(1,0,2,0,2,0,2,1,1,1,0,1,0,2,1,2,1,1,1,1,1,0,1,0,2,0,1,1,0,2,1,2,0,1,0),5,by=TRUE))
+colnames(gen)<-paste0("Ind",1:5)
+rownames(gen)<-paste0("SNP",1:7)
+print(gen)
+```
+::: {.fragment}
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 5
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
 
-- correlation randomly uniting gametes / ratio of variance between
-  populationss to total variance
-- "total population" is most recent common ancestral population
-  (figure previous slide)
-- sites are polymorphic in ancestral
-- $F_{ST}$ identical for each population
+my_dist <- dist(t(gen), method = "manhattan", upper = TRUE, diag = TRUE)
+my_dist
+my_mds<-cmdscale(my_dist)
+my_mds
+```
+:::
 
-=> populations are replicates of identical evolutionary history =>
+:::
+::: {.column width="51%"}
+::: {.fragment}
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6.5
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+plot(my_mds, xlab = "MDS1", ylab = "MDS2", pch = 16, cex = 5, col = 6:2)
+points(my_mds, pch = as.character(5:1))
+```
 
-Interprentation: F_{ST} is a parameter
+Idea: project the data into a low dimensional space that preserves
+distances
+:::
+:::
+::::
 
-#### Nei
 
-Interpretation: F_{ST} is a statistic
+## Example of PCA plot from 1000G project
 
-#### Hudson
+:::: {.columns}
+::: {.column width="50%"}
 
-::: {.notes }
+We will use ANGSD [@Korneliussen_2014] and compute genotype likelihoods on 435 bam-files from the 1000G project.
 
-[@excoffier_AnalysisPopulationSubdivision_2004] provides pros/cons for
-WC vs Nei.
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
 
-[@mary-huard_FastAccurateJoint_2023] shows that Weir vs Hudson compare
-different branch lengths
+cd /home/nikolay/Documents/Teaching/PopGen_2023/data/1000G_bam_files
+find $PWD -name '*.bam' > 1000G_bam_list.txt
+angsd -bam 1000G_bam_list.txt -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 2e-6 \
+-minMapQ 30 -minQ 20 -minInd 25 -minMaf 0.05 -doGlf 2 -out 1000G -P 5
+```
+Next, we will run PCAANGSD to infer admixures proportions:
 
-[@bhatia_EstimatingInterpretingFST_2013] multiple estimators make
-correct choice of estimator unclear.
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
 
-Different estimators due to confusion as to what Wright meant by
-"total population": for Nei is the combination of two populations. For
-WC it is the most recent ancestral population. Hence, Nei's F_ST is a
-statistic, whereas for WC it is a parameter of an evolutionary process
+pcangsd -b 1000G.beagle.gz -o pca_1000G -t 4
+```
+
+and finally we will plots the results using custom R scripts:
+
+```{r}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+C <- as.matrix(read.table("pca_1000G.cov"))
+e <- eigen(C)
+pops <- readLines("1000G_bam_list.txt")
+pops <- sapply(strsplit(pops, "\\."), function(x) x[6])
+mycolor<-rep("red",length(pops))
+mycolor[pops=="CEU"]<-"blue"; mycolor[pops=="CHB"]<-"green"; mycolor[pops=="MXL"]<-"brown"; mycolor[pops=="ASW"]<-"magenta"
+plot(e$vectors[,1:2], xlab="PC1", ylab="PC2", main="PCA 1000G Project", col=mycolor, pch=19)
+legend("topright",c("YRI","CEU","CHB","MXL","ASW"),fill=c("red","blue","green","brown","magenta"),cex=2,inset=0.02)
+```
+:::
+::: {.column width="50%"}
+![](assets/pca_1000G.png){width="200%"}
+:::
+::::
+
+
+## ANGSD: genotype likelihood tool for low-coverage data
+
+![](assets/angsd_publ.png){fig-align="center"}
+
+[@Korneliussen_2014]
+
+
+## Hard genotype calls vs. genotype likelihoods
+
+![](assets/likes.png){fig-align="center"}
+
+::: {.fragment}
+- Minor allele frequency based on hard calls:
+$$\rm{MAF_{hc}}=\frac{1+1+2}{2*5}=\frac{4}{10}$$
+:::
+
+
+::: {.fragment}
+- Minor allele frequency based on genotype likelihoods:
+$$\rm{MAF_{gl}}=\frac{0*(0.98+0.20+0.89+0.10+0.15)+1*(0.02+0.75+0.10+0.80+0.20)+2*(0.00+0.05+0.01+0.10+0.65)}{2*5}=\frac{3.49}{10}$$
+:::
+
+
+## A known pitfall of PCA: uneven sampling
+
+:::: {.columns}
+::: {.column width="40%"}
+![](assets/McVean.png){fig-align="center" height=510}
+
+[@McVean_2009]
+:::
+::: {.column width="60%"}
+“The results described here provide an explanation. First, from Equation 10 it can be seen that **the matrix M is influenced by the relative sample size from each population through the components $t_i$**. For instance, even if all populations are equally divergent from each other, those for which there are fewer samples will have larger values of $t_i$ because relatively more pairwise comparisons are between populations.”
+
+$$M=XX^T=\frac{1}{N}\sum_{ij}x_ix_j$$
+$$N=N_{pop1}+N_{pop2}+N_{pop3}+...=\sum_k N_k$$
+$$M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}$$
+
+- Potential solution: normalize each sample by its population size before computing the covariance matrix.
+
+- Is it still an unsupervised technique?
+
+:::
+::::
+
+
+## Example of uneven sampling from 1000G project
+
+:::: {.columns}
+::: {.column width="50%"}
+![](assets/Downsampled_Europeans.png)
+
+**Downsampled Europeans**
+:::
+::: {.column width="50%"}
+![](assets/Downsampled_Asians.png)
+
+**Downsampled Asians**
+:::
+::::
+
+
+## Admixture: underlying assumtions
+
+:::: {.columns}
+::: {.column width="70%"}
+![](assets/IBD.png)
+
+:::
+::: {.column width="30%"}
+- genetic clustering algorithm
+- at least two unadmixed populations
+- at least one admixed population
+- Maximum Likelihood: ADMIXTURE
+- Bayesian: STRUCTURE
+- delivers admixture proportions Q
+- delivers allele frequencies F for all loci for all K populations
+:::
+::::
+
+
+## Q and F outputs of admixture analysis
+
+![](assets/QF.png){fig-align="center"}
+
+
+## NGSadmix vs. ADMIXTURE
+
+:::: {.columns}
+::: {.column width="45%"}
+![](assets/NGSadmix_publ.png)
+:::
+::: {.column width="55%"}
+![](assets/NGSadmix_vs_Admixture.png)
+:::
+::::
+
+
+## Example of admixture plot from 1000G project
+
+:::: {.columns}
+::: {.column width="50%"}
+
+We will use ANGSD [@Korneliussen_2014] and compute genotype likelihoods on 435 bam-files from the 1000G project.
+
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+cd /home/nikolay/Documents/Teaching/PopGen_2023/data/1000G_bam_files
+find $PWD -name '*.bam' > 1000G_bam_list.txt
+angsd -bam 1000G_bam_list.txt -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 2e-6 \
+-minMapQ 30 -minQ 20 -minInd 25 -minMaf 0.05 -doGlf 2 -out 1000G -P 5
+```
+Next, we will run NGSadmix to infer admixures proportions:
+
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+NGSadmix -likes 1000G.beagle.gz -K 3 -minMaf 0.05 -seed 1 -o 1000G
+```
+
+and finally we will plots the results using custom R scripts:
+
+```{r}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+pops<-readLines("1000G_bam_list.txt")
+pops<-sapply(strsplit(pops,"\\."),function(x) x[6])
+source("https://raw.githubusercontent.com/GenisGE/evalAdmix/master/visFuns.R")
+qopts<-read.table("1000G.qopt")
+ord <- orderInds(pop=pops,q=qopts, popord=c("YRI", "ASW", "CEU", "MXL", "CHB"))
+barplot(t(qopts)[,ord],col=c(3,2,4),las=2, space=0, border=NA)
+text(sort(tapply(1:length(pops),pops[ord],mean)),-0.05,unique(pops[ord]))
+abline(v=cumsum(sapply(unique(pops[ord]),function(x){sum(pops[ord]==x)})),col=1,lwd=1.2)
+```
+:::
+::: {.column width="50%"}
+![](assets/admixture_1000G.png){width="200%"}
+:::
+::::
+
+
+## Admixture bar plots should not be over-interpreted
+
+![](assets/Falush.png){fig-align="center"}
+
+[@Lawson_2018]
+
+
+## Haplotype clustering
+
+:::: {.columns}
+::: {.column width="70%"}
+![](assets/haplo_clustering.png){fig-align="center"}
+:::
+::: {.column width="30%"}
+- Ancestry assignments in STRUCTURE / ADMIXTURE do not identify where admixture has occurred
+
+- Haplotype-based methods explore **local ancestry**, LD, recombination and subsequently fine-scale patterns of population structure at different scales
+
+- Chromosome painting: the genome is a mosaic of LD blocks separated by recombination
+
+- ChromoPainter and fineSTRUCTURE are tools for resolving **subtle differences**
+between populations.
+
+[@Lawson_2012]
+
+[@Schraiber_2015]
+:::
+::::
+
+
+
+## Fixation index $F_{st}$
+
+:::: {.columns}
+::: {.column width="45%"}
+
+- $F_{st}$ is a measure of population differentiation due to population structure
+- Expressed through nucleotide diversity $\pi$ as relative nucleotide diversity between populations minus average nucleotide diversity within populations. If we have two populations 1 and 2, then:
+
+$$F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim \frac{\sigma_{subpops}^2}{\sigma_{total}^2}$$
+
+
+```{r}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+library("admixtools")
+library("tidyverse")
+
+admixtools::extract_f2('AADR', outdir='f2_AADR')
+
+f2_aadr <- read_f2("f2_AADR")
+fst_aadr <- fst(f2_aadr)
+fst_aadr
+
+mat = f2(f2_aadr, unique_only=F) %>% 
+  select(-se) %>% 
+  pivot_wider(names_from=pop2, values_from = est) %>% 
+  column_to_rownames('pop1') %>% as.matrix
+
+library("pheatmap")
+pheatmap(mat,cluster_rows = TRUE,cluster_cols = TRUE)
+```
 
 :::
 
-## On the impact of rare variants
+::: {.column width="55%"}
+![](assets/fst_heatmap.png){width="200%"}
+:::
+::::
 
-FIXME: include stat/figure on how different estimators give different
-results
 
-::: {.notes }
+## Allen Ancient DNA Resource (AADR) dataset
 
-Different estimators can give different results; e.g., 2-fold
-difference for human samples in
-[@bhatia_EstimatingInterpretingFST_2013]. This difference, they show,
-is mainly due to ascertainment and using average of ratios (instead of
-ratio of averages) when combining estimates
+:::: {.columns}
+::: {.column width="50%"}
+![](assets/AADR.png){fig-align="center"}
+[https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data](https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data)
+:::
+
+
+::: {.column width="50%"}
+::: {.fragment}
+
+```{bash}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+
+cd /home/nikolay/Documents/Teaching/PopGen_2023/data/DavidReich
+head AADR.ind
+```
+
+```{bash}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+cd /home/nikolay/Documents/Teaching/PopGen_2023/data/DavidReich
+head -8 AADR.snp
+```
+
+```{bash}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+cd /home/nikolay/Documents/Teaching/PopGen_2023/data/DavidReich
+head AADR.geno
+```
+:::
+:::
+::::
+
+
+
+## Example of Fst computation from 1000G project
+
+:::: {.columns}
+::: {.column width="50%"}
+
+We will use ANGSD [@Korneliussen_2014] and compute Fst between CEU and YRI populations from the 1000G project.
+
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+angsd -b 1000G_CEU_bam_list.txt -anc anc.fa -out CEU -dosaf 1 -gl 1
+angsd -b 1000G_YRI_bam_list.txt -anc anc.fa -out YRI -dosaf 1 -gl 1
+realSFS CEU.saf.idx YRI.saf.idx > CEU.YRI.ml
+realSFS fst index CEU.saf.idx YRI.saf.idx -sfs CEU.YRI.ml -fstout CEU_YRI
+realSFS fst stats  CEU_YRI.fst.idx 
+realSFS fst stats2 CEU_YRI.fst.idx -win 50 -step 10 > slidingwindow_win50_step10
+```
+
+and finally we will plots the results using custom R scripts:
+
+```{r}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+df<-read.delim("slidingwindow_win50_step10",header=FALSE)
+df<-df[-1,]
+df$V2<-as.numeric(df$V2)
+df$V3<-as.numeric(df$V3)
+df$V5<-as.numeric(df$V5)
+df<-df[order(df$V2,df$V3),]
+rownames(df)<-seq(1,dim(df)[1],1)
+plot(df$V5,col=df$V2,xlab="Chromosomes",ylab="Fst",xaxt='n')
+myticks<-as.numeric(rownames(df[!duplicated(df$V2),]))
+axis(side=1,at=myticks,labels=seq(1,21,1))
+```
+:::
+::: {.column width="50%"}
+![](assets/Fst_1000G.png){width="200%"}
+:::
+::::
+
+
+## F-statistics: underlying assumtions
+
+:::: {.columns}
+::: {.column width="50%"}
+![](assets/fstat_tree.png)
+
+:::
+::: {.column width="50%"}
+- Treeness test: are populations related in a tree-like fashion (Reich et al. 2009)?
+
+- Admixture test: ss a particular population descended from
+multiple ancestral populations (Reich et al. 2009)?
+
+- Admixture proportions: what are the contributions from
+different populations to a focal population (Green et al.
+2010; Haak et al. 2015)?
+
+- Number of founders: how many founder populations are
+there for a certain region (Reich et al. 2012; Lazaridis et al.
+2014)?
+
+- Complex demography: how can mixtures and splits of
+population explain demography (Patterson et al. 2012;
+Lipson et al. 2013)?
+
+- Closest relative: what is the closest relative to a contemporary or ancient population (Raghavan et al. 2014)?
+
+[@Peter_2016]
+:::
+::::
+
+
+## F2-statistic and F3-statistic
+
+:::: {.columns}
+::: {.column width="65%"}
+
+- $F_2$ is a covarinace in contrast to $F_{st}$ which is a correlation coefficeint, therefore $F_2$ is tree-additive by its definition
+
+$$F_2=2\pi_{12}-\pi_{1}-\pi_{2}$$
+
+- $F_3$ can be expressed through a combination of $F_2$-statistic
+
+$$F_3(P_X; P_1, P_2)=\frac{1}{2}\left(F_2(P_X, P_1)+F_2(P_X, P_2)-F_2(P_1, P_2)\right)$$
+
+- Outgroup $F_3$-statistic: for an unknown population $P_X$ find the closest population from a panel $P_i$ computing the distances via an outgroup $P_O$.
+
+![](assets/F3_outgroup.png){width=30%}
+:::
+
+::: {.column width="35%"}
+![](assets/F3_tree.png)
+:::
+::::
+
+
+## Example of F3-outgroup-statistic for an Unknown population
+
+:::: {.columns}
+::: {.column width="53%"}
+
+We will use the AADR dataset and compute F3-statistic for a (presumably!) European population, which is marked as **Unknown** in the dataset, with respect to a panel of other World populations using a Mbuti as an outgroup population.
+
+```{r}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+library("admixtools")
+library("tidyverse")
+
+admixtools::extract_f2('AADR', outdir='f2_AADR')
+
+f2_aadr <- read_f2("f2_AADR")
+fst_aadr <- fst(f2_aadr)
+fst_aadr
+
+f3_aadr <- f3(f2_aadr, pop1='Mbuti', pop2='Unknown', pop3=unique(ind$pop)) %>% arrange(est)
+f3_aadr
+
+
+viz_outgroup_f3 <- function(f3_res){
+  f3_res %>% mutate(pop3=fct_reorder(pop3, est)) %>%  
+    ggplot(aes(x=pop3, y=est, ymin=est-3*se, ymax = est+3*se)) +
+    geom_point() + geom_errorbar() +
+    coord_flip() + theme_bw(25) + xlab(NULL) + ylab("f3")
+}
+viz_outgroup_f3(f3_aadr)
+```
+**Can you guess what was the Unknown population?**
 
 :::
 
-## Recommendations
+::: {.column width="47%"}
+![](assets/f3.png)
+:::
+::::
 
-::: {.notes }
 
-[@bhatia_EstimatingInterpretingFST_2013] recommend Hudson. They observe
+## Relation between F-statistics and PCA
+
+![](assets/F_stats_PCA.png){fig-align="center"}
+
+[@Peter_2022]
+
+
+## F4-statistic, D-statistic: ABBA-BABA test
+
+:::: {.columns}
+::: {.column width="70%"}
+![](assets/D_stat_tree.png){fig-align="center"}
+:::
+
+::: {.column width="30%"}
+
+- Four populations considered: Ape is an outgroup, Europeans and Africans are tested for their gene flow with Neanderthals
+
+- A – ancestral allele, B – derived allele
+
+- Count number of sites corresponding to ABBA and BABA situations
+
+$$D=\frac{N_{ABBA}-N_{BABA}}{N_{ABBA}+N_{BABA}}$$
+
+- $N_{ABBA}$ the total counts of ABBA patterns, $N_{BABA}$ the total counts of BABA patterns
+
+- Exess of shared derived alleles between Europeans and 
+Neanderthals indicates a gene flow between them
+
+- Positive values of D imply Neanderthals are closer to Europeans
+
+- Negative values of D imply Neanderthals are closer to Africans
 
 :::
+::::
+
+
+## Example of D-statistic computation from 1000G project
+
+:::: {.columns}
+::: {.column width="50%"}
+We will use ANGSD [@Korneliussen_2014] and compute D-statistic in irder to test potential Neanderthal introgression to European (CEU) and African (YRI) populations from the 1000G project.
+
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+echo Neandertal.bam > bams
+find $PWD -name '*YRI*.bam' | head -10 >> bams
+find $PWD -name '*CEU*.bam' | head -10 >> bams
+angsd -out out -doAbbababa 1 -bam bams -doCounts 1 -anc anc.fa
+Rscript jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_results
+```
+
+and, finally, we will display the resulting table of D-statistics and plot the ABBA and BABA counts using custom R scripts:
+
+```{r}
+#| eval: true
+#| echo: false
+path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
+```
+
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+df<-read.delim(paste0(path,"out_abbababa_results.txt"),header=T,sep="\t")
+df<-df[grepl("Neandertal",as.character(df$H3)),]
+df<-df[grepl("CEU",as.character(df$H2)),]
+df<-df[grepl("YRI",as.character(df$H1)),]
+YRI<-matrix(unlist(strsplit(as.character(df$H1),"\\.")),ncol=9,byrow=T)
+df$H1<-paste(YRI[,6], YRI[,2], sep="_")
+CEU<-matrix(unlist(strsplit(as.character(df$H2),"\\.")),ncol=9,byrow=T)
+df$H2<-paste(CEU[,6], CEU[,2], sep="_")
+df$H3<-"NEAND"
+df[1:8,1:8]
+```
+:::
+::: {.column width="50%"}
+
+```{r}
+#| eval: true
+#| echo: false
+path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
+df<-read.delim(paste0(path,"out_abbababa_results.txt"),header=T,sep="\t")
+df<-df[grepl("Neandertal",as.character(df$H3)),]
+df<-df[grepl("CEU",as.character(df$H2)),]
+df<-df[grepl("YRI",as.character(df$H1)),]
+```
+
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+boxplot(df$nABBA,df$nBABA,names=c("ABBA","BABA"),ylab="COUNTS",col=2)
+wilcox.test(df$nABBA,df$nBABA)
+```
+:::
+::::
+
+
+
+
 
 ## Refs {.unnumbered .unlisted}
 
