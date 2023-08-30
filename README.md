@@ -6,13 +6,37 @@ Course materials for course [Population Genomics in
 Practice](https://uppsala.instructure.com/courses/86976). Please make
 sure to read the entire README before adding material.
 
-## Installation
+## Installation and setup
 
-Clone the repo
+Clone the repo and cd to directory
 
-    git clone https://github.com/NBISweden/workshop-pgip.git
+    git clone git@github.com:NBISweden/workshop-pgip.git
+    cd workshop-pgip
 
-and follow the instructions below.
+Since pushing to the main branch is disallowed, make sure you create a
+development branch named `dev-yourgithubusername`:
+
+    git checkout -b dev-yourgithubusername
+
+Make edits on and push this branch to the repo. For this to work you
+need to properly setup [github
+authentication](https://docs.github.com/en/authentication).
+Alternatively, you can [fork the
+repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+to your own github user account.
+
+Whenever a pull request is accepted, you need to sync your development
+branch with the new main. If you have cloned from NBISweden do
+
+    git fetch -a
+    git checkout main
+    git merge origin/main
+    git checkout dev-yourgithubusername
+    git merge main
+
+If you are working on a forked copy it is easiest to sync the main
+branch via the github interface, after which you can follow the
+previous commands.
 
 ### TL;DR
 
