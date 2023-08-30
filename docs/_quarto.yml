@@ -31,6 +31,8 @@ website:
         href: "slides/index.qmd"
       - text: EXERCISES
         href: "exercises/index.qmd"
+      - text: CODE RECIPES
+        href: "recipes/index.qmd"
       - icon: "twitter"
         href: "https://twitter.com/NBISwe"
       - icon: "github"
@@ -48,11 +50,13 @@ website:
           - slides/pgip/index.qmd
           - slides/foundations/index.qmd
           - slides/simulation/index.qmd
+          - slides/population_structure/index.qmd
       - section: Exercises
         contents:
           - exercises/simulation/index.qmd
       - section: Code recipes
-        contents: recipes
+        contents:
+          - recipes/index.qmd
 
 bibliography: assets/bibliography.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
