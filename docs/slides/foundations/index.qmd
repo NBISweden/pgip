@@ -21,6 +21,8 @@ format:
 library(viridislite)
 library(gganimate)
 library(patchwork)
+library(expm)
+library(gridExtra)
 library(igraph)
 library(ggraph)
 library(tidygraph)
@@ -1166,42 +1168,198 @@ $$
 
 ## Properties of Wright-Fisher sampling
 
+### The expected number of offspring is one
+
+<br>
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: wf-expected-number-of-offspring
+#| echo: false
+#| eval: true
+#| fig-align: center
+\begin{tikzpicture}
+  \tikzstyle{wf} = [circle, inner sep=0, minimum size=0.2cm, fill=white, draw]
+  \tikzstyle{neutral} = [fill=white];
+\tikzstyle{cdot} = [circle, inner sep=0, minimum size=0.05cm, fill=black, draw];
+\tikzstyle{lab} = [node distance=0.4cm, inner sep=0];
+\foreach \y in {0,1} {
+  \foreach \x in {1,2,3,4,5} {\node[wf, neutral] (n\y\x) at (\x, \y) {};}
+}
+\draw[->] (n13) -- (n03);
+\draw[->, dotted] (n13) -- (n02);
+\draw[->, dotted] (n13) -- (n04);
+\node[lab, above of=n13] {$v$};
+\end{tikzpicture}
+```
+
+<br>
+
 $$
 E(v) = mp = 2N\frac{1}{2N} = 1
 $$
 
-::: {.fragment}
+## Properties of Wright-Fisher sampling
 
-Poisson approximation: when $2N$ large
+### Poisson approximation for large $N$
+
+<br>
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: wf-poisson-approximation-large-n
+#| echo: false
+#| eval: true
+#| fig-align: center
+\begin{tikzpicture}
+  \tikzstyle{wf} = [circle, inner sep=0, minimum size=0.2cm, fill=white, draw]
+  \tikzstyle{neutral} = [fill=white];
+\tikzstyle{cdot} = [circle, inner sep=0, minimum size=0.05cm, fill=black, draw];
+\tikzstyle{lab} = [node distance=0.4cm, inner sep=0];
+\foreach \y in {0,1} {
+  \foreach \x in {1,2,3,4,5,8,9,10} {\node[wf, neutral] (n\y\x) at (\x, \y) {};}
+  \foreach \x in {6, 6.5, 7} {\node[cdot] at (\x, \y) {};}
+}
+\draw[->] (n13) -- (n03);
+\draw[->] (n13) -- (n02);
+\draw[->] (n13) -- (n04);
+\node[lab, above of=n13] {$v$};
+\node[lab, above of=n11] {$1$};
+\node[lab, above of=n110] {$2N$};
+\end{tikzpicture}
+```
+
+<br>
+
+When $2N$ large it holds that the probability that sequence $v$ has
+$k$ offspring is
 
 $$
-P(v=k) \approx \frac{1}{k!}e^{-1}
+P(v=k) \approx \frac{1}{k!}e^{-k}
 $$
 
-Since $P(v=0) = e^{-1} \approx 0.37$, a fraction 0.37 of genes lack
+Since $P(v=0) = e^{-1} \approx 0.37$, a fraction 0.37 of sequences lack
 descendants
 
+## Properties of Wright-Fisher sampling
+
+### Probability that two sequences pick same parent
+
+```{r, engine="tikz", fig.ext="svg" }
+#| label: wf-prob-parents-identical-fig
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| out-width: 800
+\begin{tikzpicture}
+  \tikzstyle{wf} = [circle, inner sep=0, minimum size=0.2cm, fill=white, draw]
+  \tikzstyle{u} = [fill=black];
+  \tikzstyle{v} = [fill=gray];
+  \tikzstyle{neutral} = [fill=white];
+\tikzstyle{cdot} = [circle, inner sep=0, minimum size=0.05cm, fill=black, draw];
+\tikzstyle{lab} = [node distance=0.3cm, inner sep=0];
+\foreach \y in {0, 2} {
+  \foreach \x in {1,2,3,4,5,6,7,8,9,12,13,14,15} {
+    \node[wf, neutral] (n\y\x) at (\x, \y) {};}
+  \foreach \x in {10, 10.5, 11} {\node[cdot] at (\x, \y) {};}
+}
+\node[lab, above of=n21] {1};
+\node[lab, above of=n215] {2N};
+\node[lab, below of=n03] {u};
+\node[lab, below of=n06] {v};
+\node[lab, above of=n23] {$p_u=p_v$};
+\node[lab, above of=n26] {$p_u \neq p_v$};
+\node[lab, above of=n213] {$p_u \neq p_v$};
+\draw[->] (n03) -- (n23);
+\path[->] (n06) edge node[above right] {$\frac{1}{2N}$} (n23);
+\path[->] (n06) edge[dotted] node[right] {$1-\frac{1}{2N}$} (n26);
+\path[->] (n06) edge[dotted] node[above left] {$1-\frac{1}{2N}$} (n213);
+\end{tikzpicture}
+```
+
+Let $u$ and $v$ be two sequences. Pick a parent $p_u$ of $u$. Then the
+probability that $v$ picks the same parent is (solid lines)
+
+$$
+P(p_u=p_v) = \frac{1}{2N}
+$$
+
+The probability that they pick different parents is
+
+$$
+P(p_u \neq p_v) = 1 - \frac{1}{2N}
+$$
+
+## Properties of Wright-Fisher sampling {.smaller}
+
+### Time for two sequences to coalesce
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
 :::
 
-::: {.fragment}
+::: {.column width="50%"}
 
-Probability that parents are identical: pick a parent $v$, then a
-second parent $u$. Then $P(v=u)=\frac{1}{2N}$, and $P(v\neq
-u)=1-\frac{1}{2N}$.
+```{r, engine="tikz", fig.ext="svg" }
+#| label: fig-wf-two-chrom-find-common-ancestor
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| out-width: 70%
+#| fig-cap: Illustration of two sequences finding a
+#|     common ancestor after five generations; four failures
+#|     with probability $1-1/2N$, one success with probability
+#|     1/2N
+\begin{tikzpicture}[>=latex,thick]
+  \tikzstyle{wf} = [circle, inner sep=0, minimum size=0.2cm, fill=white, draw]
+  \tikzstyle{u} = [fill=black];
+  \tikzstyle{v} = [fill=gray];
+  \tikzstyle{neutral} = [fill=white];
+\tikzstyle{cdot} = [circle, inner sep=0, minimum size=0.05cm, fill=black, draw];
+\tikzstyle{lab} = [node distance=0.4cm, inner sep=0];
+\foreach \y in {0,1,2,3,4,5} {
+  \foreach \x in {1,2,3,4,7,8} {\node[wf, neutral] (n\y\x) at (\x, \y) {};}
+  \foreach \x in {5, 5.5, 6} {\node[cdot] at (\x, \y) {};}
+}
+\node[lab, above of=n51] {1};
+\node[lab, above of=n58] {2N};
+\node[lab, below of=n02] {u};
+\node[lab, below of=n04] {v};
+\draw[->] (n02) -- (n11);
+\draw[->] (n11) -- (n22);
+\draw[->] (n22) -- (n32);
+\draw[->] (n32) -- (n43);
+\draw[->] (n43) -- (n53);
+\draw[->] (n04) -- (n14);
+\draw[->] (n14) -- (n23);
+\draw[->] (n23) -- (n33);
+\draw[->] (n33) -- (n44);
+\draw[->] (n44) -- (n53);
+
+\node at ($(n01) !.5! (n11) - (1, 0)$) {$1-\frac{1}{2N}$};
+\node at ($(n11) !.5! (n21) - (1, 0)$) {$1-\frac{1}{2N}$};
+\node at ($(n21) !.5! (n31) - (1, 0)$) {$1-\frac{1}{2N}$};
+\node at ($(n31) !.5! (n41) - (1, 0)$) {$1-\frac{1}{2N}$};
+\node at ($(n41) !.5! (n51) - (1, 0)$) {$\frac{1}{2N}$};
+\end{tikzpicture}
+```
 
 :::
 
-::: {.fragment}
+::: {.column width="25%"}
 
-Time for two chromosomes $u$ and $v$ to find common ancestor
+:::
+
+::::
+
+Time for two sequences $u$ and $v$ to find common ancestor
 distributed as $(1 - \frac{1}{2N})^{j-1}\frac{1}{2N}$ ($j-1$ failures
 followed by success). This is the [geometric
 distribution](https://en.wikipedia.org/wiki/Geometric_distribution)
 $Ge(p)$, with parameter $p=\frac{1}{2N}$, and expected value
-$\frac{1}{p}={2N}$. That is, the **expected time for two chromosomes
-to find a common ancestor (i.e., coalesce) is $2N$ generations**.
-
-:::
+$\frac{1}{p}={2N}$. That is, the **expected number of generations for
+two sequences to find a common ancestor (i.e., coalesce) is $2N$
+generations**.
 
 ::: {.notes }
 
@@ -1276,6 +1434,20 @@ with drift
 :::
 
 ## Sampling model again
+
+```{r }
+#| label: allele-sampling-model
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-height: 3
+#| fig-width: 12
+#| fig-align: center
+set.seed(901)
+wf <- wright_fisher_pop(n = 20, generations = 2, p0=0.3)
+y_range <- range(V(wf)$y)
+ggplot_wf(wf, fill=allele)
+```
 
 We assume two gene variants $A$, $a$, each with $i$ and $j=2N-i$
 copies in generation $t$. Let $p_t=i/2N$ be the *frequency* of $A$ in
@@ -1468,6 +1640,125 @@ N. Larger Ne -> smaller fluctuation in allele frequency (as evidenced
 in plots) -> maintain larger genetic diversity
 
 :::
+
+## Genetic drift as allele frequency distributions
+
+```{r }
+#| label: genetic-drift-histogram
+#| echo: false
+#| eval: true
+n <- 10
+x <- vector(mode="numeric", length=n + 1)
+# Start with n major = n minor
+n_a <- ceiling(length(x)/2)
+x[n_a] <- 1
+class <- c("absorbing", rep("normal", n - 1), "absorbing")
+# Make transition matrix
+P <- do.call("rbind", lapply(0:n, function(i) {dbinom(0:n, n, i/n)}))
+
+plot_drift_histogram <- function(t, P) {
+  data <- t(x %*% (P%^%t))
+  xlabels <- unlist(lapply(0:n, function(x) {
+    sprintf("frac(%i, %i)", x, n)
+  }))
+  p <- data.frame(n=0:n, class=class, obs=data) %>%
+    ggplot(aes(y=obs, x=n, fill=class)) +
+    geom_bar(stat="identity", color="black", width=1) +
+    xlab("") + ylab("") +
+    annotate("text", label = paste("t =", t), fontface="italic",
+             x = n/2, y = 1.2*max(data), size = 10) +
+    scale_fill_manual(values=list("absorbing"="black", "normal"="white")) +
+    theme(legend.position="none",
+          axis.text.y = element_text(size=16),
+          axis.text.x = element_text(size=16, angle=0, hjust=0.5, vjust=0)) +
+    scale_x_continuous(
+        breaks=0:n,
+        labels=do.call(c, lapply(xlabels, function(l) {parse(text=l)}))) +
+    ylim(c(0, 1.3*max(data)))
+  p
+}
+```
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{r }
+#| label: fig-genetic-drift-histogram-plot
+#| echo: false
+#| eval: true
+#| fig-cap: Histogram @kimura_1983, Fig. 3.4
+grid.arrange(
+    plot_drift_histogram(t=1, P=P),
+    plot_drift_histogram(t=5, P=P),
+    plot_drift_histogram(t=10, P=P),
+    plot_drift_histogram(t=20, P=P),
+    ncol=2)
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r }
+#| label: fig-buri-table-14
+#| echo: false
+#| eval: true
+#| out-width: 70%
+#| fig-width: 12
+#| fig-height: 12
+#| fig-cap: Buri experiment
+data <- read.csv("assets/data/buri-table14.csv", header=TRUE, fill=0)
+colnames(data)[3:35] <- as.character(0:32)
+data <- data %>% replace(., is.na(.), 0)
+data$`32` <- data$`32` + data$Total.fixed.bw.75
+data$`0` <- data$`0` + data$Total.fixed.bw
+plot_buri <- function(t, xaxis=FALSE, yaxis=FALSE, title=TRUE) {
+  labels <- lapply(0:32, function(x) {
+    ""
+  })
+  names(labels) <- as.character(0:32)
+  labels$`0` <- 0
+  labels$`32` <- 1
+  p <- ggplot(stack(subset(data[2:20,c(1, 2:36)], Generation==t)[ , 3:35]),
+              aes(x=ind, y=values)) +
+    geom_bar(stat="identity") +
+    theme(legend.position="none",
+          axis.ticks=element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          plot.margin = unit(c(0, 0, 0, 0), "null"),
+          panel.spacing = unit(c(0, 0, 0, 0), "null")) +
+    ylab("") + xlab("") + ylim(0, 30)
+  if (title) {
+    p <- p + annotate("text", label = paste("t =", t), fontface="italic",
+                      x = 2, y = 28, size = 8)
+  }
+  if (xaxis)  {
+    p <- p + scale_x_discrete(breaks=0:32, labels=labels) +
+      xlab("Frequency") +
+      theme(axis.text.x = element_text(size=16, angle=0,
+                                       hjust=0.5, vjust=0))
+  }
+  if (yaxis) {
+    p <- p + ylab("Count") +
+      theme(axis.text.y = element_text(size=16))
+  }
+  p
+}
+grid.arrange(
+    plot_buri(1),# plot_buri(2), plot_buri(3),
+    plot_buri(5),# plot_buri(5), plot_buri(6),
+    plot_buri(10),# plot_buri(8), plot_buri(9),
+    plot_buri(15),# plot_buri(11), plot_buri(12),
+    plot_buri(19),
+    ncol=1, padding=0
+)
+```
+
+:::
+
+::::
 
 ## Heterozygosity dynamics
 

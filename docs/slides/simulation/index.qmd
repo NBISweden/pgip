@@ -103,8 +103,6 @@ Model of a population describing **genealogies** under the following assumptions
 
 :::
 
-:::
-
 ::::
 
 ::: {.notes }
@@ -202,8 +200,6 @@ ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
 Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can
 show for large populations P(no descendants)=$1 - e^{-1} \approx
 0.632$
-
-:::
 
 :::
 
