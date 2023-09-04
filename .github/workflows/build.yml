@@ -35,27 +35,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: cache-conda
-        uses: actions/cache@v3
-        env:
-          CACHE_NUMBER: 0
+      - name: Install micromamba
+        uses: mamba-org/setup-micromamba@v1
         with:
-          path: ~/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
-
-      - name: install miniconda
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          miniconda-version: "latest"
-          activate-environment: pgip
+          micromamba-version: "1.3.1-0"
           environment-file: conda-linux-64.lock
-          use-only-tar-bz2: true
-          auto-activate-base: false
-
-      # - name: Install test dependencies
-      #   run: |
-      #     conda install -c conda-forge mamba
-      #     mamba install -c conda-forge pip
+          environment-name: pgip
+          init-shell: bash
+          cache-environment: true
 
       - name: Install pgip dependencies
         run: |
