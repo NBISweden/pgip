@@ -68,7 +68,7 @@ jobs:
 
       - name: Install TeXLive
         run: |
-          sudo apt update
+          sudo apt-get update
           sudo apt-get install texlive texlive-latex-extra
 
       - name: Install local pgip R package
