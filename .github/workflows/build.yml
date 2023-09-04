@@ -78,9 +78,6 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install bcftools
-        run: ./scripts/install-bcftools.sh
-
       - name: Add miniconda path
         run: |
           echo "$(dirname $(which R))" >> $GITHUB_PATH
