@@ -57,10 +57,6 @@ jobs:
       #     conda install -c conda-forge mamba
       #     mamba install -c conda-forge pip
 
-      - name: Install pip dependencies
-        run: |
-          pip install cyvcf2
-
       - name: Install pgip dependencies
         run: |
           pip install ipykernel
