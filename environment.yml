@@ -32,6 +32,7 @@ dependencies:
   - r-devtools
   - r-dt
   - r-dygraphs
+  - r-expm
   - r-formatr
   - r-formattable
   - r-gganimate
