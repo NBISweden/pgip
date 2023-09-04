@@ -73,7 +73,7 @@ jobs:
 
       - name: Install local pgip R package
         run: |
-          R -e "library(devtools); devtools::install_local('src/R/pgip')"
+          R -e "library(devtools); devtools::install_local('src/R/pgip', upgrade=F)"
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
