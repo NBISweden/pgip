@@ -8,16 +8,16 @@ format: html
 ::: {.callout-note}
 
 {{< meta date >}}: The simulation exercises are currently hosted at
-[{{< var exercises.simulation.baseurl >}}/index.html]({{< var
-exercises.simulation.baseurl >}}/index.html). The repository will
-shortly be moved to the NBIS github organization.
+[{{< var lab.sim.baseurl >}}/index.html]({{< var lab.sim.baseurl
+>}}/index.html). The repository will shortly be moved to the NBIS
+github organization.
 
 :::
 
 ## Instructions {#sec-exercise-simulation-howto}
 
-Start by going through the [HOWTO]({{< var
-exercises.simulation.baseurl >}}?path=HOWTO.ipynb)
+Start by going through the [HOWTO]({{< var lab.sim.baseurl
+>}}?path=HOWTO.ipynb)
 
 ## 1. Introduction to the coalescent {#sec-exercise-simulation-coalescent}
 
@@ -27,5 +27,5 @@ exercises.simulation.baseurl >}}?path=coalescent.ipynb) workbook.
 ## 2. Introduction to msprime {#sec-exercise-simulation-msprime}
 
 Work through the [introduction to msprime]({{< var
-exercises.simulation.baseurl >}}?path=simulation_with_msprime.ipynb)
+lab.sim.baseurl >}}?path=simulation_with_msprime.ipynb)
 workbook.
