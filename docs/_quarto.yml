@@ -22,7 +22,7 @@ from: markdown+emoji
 format:
   html:
     theme:
-      - assets/css/style.scss
+      - assets/css/custom.scss
     toc: true
     embed-resources: true
     date: last-modified
@@ -58,7 +58,7 @@ format:
       data-background-size: 500px
       data-background-position: top left
     theme:
-      - assets/css/style.scss
+      - assets/css/custom.scss
 
 execute:
   freeze: auto
