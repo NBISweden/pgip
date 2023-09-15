@@ -33,7 +33,7 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install micromamba
         uses: mamba-org/setup-micromamba@v1
@@ -79,10 +79,12 @@ jobs:
           sudo apt-get install dvisvgm
 
       - name: Render project without publishing
-        uses: quarto-dev/quarto-actions/publish@v2
+        uses: quarto-dev/quarto-actions/render@v2
         if: ${{ github.event_name == 'pull_request' }}
         with:
           path: docs
+          # Dummy target
+          target: html
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
