@@ -32,7 +32,7 @@ $presentation-slide-text-align: left !default;
 
 $primary: $lime;
 $secondary: $lime75;
-$link-color: $grape50;
+$link-color: $lime75;
 $body-color: $black;
 $code-block-bg: WhiteSmoke;
 
@@ -54,9 +54,6 @@ $code-block-font-size: 0.95rem;
 $code-bg: $code-block-bg; /* inline code */
 /*$code-color: ; */
 
-/* smaller is somehowe
-$presentation-font-smaller: 1.6 !default;
-
 /* site */
 $navbar-bg: white;
 $footer-bg: white;
@@ -73,6 +70,10 @@ $presentation-h5-font-size: 1.125em;
 $presentation-h6-font-size: 1em;
 
 /*-- scss:rules --*/
+:root {
+  --color-primary: $lime75;
+  --color-primary-dark: $lime;
+}
 
 /* major third scale */
 .largest {
@@ -101,6 +102,7 @@ $presentation-h6-font-size: 1em;
   padding: 0.2em 0.3em;
   border-radius: 4px;
   vertical-align: baseline;
+  font-weight: bold;
 }
 
 pre.out {
@@ -117,7 +119,7 @@ pre.sourceCode.src {
   font-size: 1em;
 }
 
-strong {
+.reveal strong {
   color: $lime;
   font-weight: bold;
 }
@@ -256,27 +258,6 @@ dt {
   background-color: $code-block-bg;
 }
 
-// Additional stuff from RaukR
-
-// .navbar-brand {
-//   padding-top: 0;
-// }
-
-// .navbar-nav {
-//   font-size: 0.85em;
-//   letter-spacing: 0.1em;
-// }
-
-// .contents-table table {
-//   line-height: 1.2;
-// }
-
-// .listing-image img {
-//   height: 40px;
-//   width: 60px;
-//   object-fit: cover;
-// }
-
 /* about */
 
 .organisers-parent {
@@ -357,52 +338,82 @@ dt {
   border-radius: 90%;
 }
 
-// .reveal .left {
-//   display: block;
-//   text-align: left;
-// }
 
-// .reveal .center {
-//   display: block;
-//   text-align: center;
-// }
+/* link colour */
+a, table a{
+  color: $link-color;
+  text-decoration: underline;
+}
 
-// .reveal .right {
-//   display: block;
-//   text-align: right;
-// }
-// .reveal .slide-number {
-//   font-family: "Source Sans Pro";
-// }
+a:hover, table a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
 
-// .reveal .slide ul, .reveal .slide ol {
-//   line-height: 1.2;
-// }
+a:focus, table a:focus{
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
 
-// .reveal .slide ul li, .reveal .slide ol li {
-//   margin-top: 0.05em !important;
-//   margin-bottom: 0.05em !important;
-// }
+/* table even shading colour */
+.even {
+    background-color: var(--color-code-bg);
+}
 
-// .reveal table {
-//   font-size: 0.8em !important;
-//   margin: 0;
-// }
+/* schedule table */
+.table-schedule {
+  display: inline-block;
+  padding: 25px;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 1px 6px var(--color-shadow);
+  -moz-box-shadow: 1px 1px 6px var(--color-shadow);
+  box-shadow: 1px 1px 6px var(--color-shadow);
+  margin-bottom: 20px;
+}
 
-// .reveal .dataTables_wrapper .dataTables_length,
-// .reveal .dataTables_wrapper .dataTables_filter,
-// .reveal .dataTables_wrapper .dataTables_info,
-// .reveal .dataTables_wrapper .dataTables_processing,
-// .reveal .dataTables_wrapper .dataTables_paginate {
-//   font-size: .8em;
-// }
+.table-schedule td, .table-schedule th {
+  border: none !important;
+}
 
-// .reveal .panel-tabset [role="tab"][aria-selected="true"] {
-//   border: lightgray 2px solid;
-//   border-radius: 6px 6px 0px 0px;
-//   border-bottom: none;
-// }
+// Table entries
+.topic {
+  margin-right: 5px;
+}
+.topic-highlight {
+  color:white;
+  font-weight:bold;
+  border-radius:4px;
+  padding:4px;
+  background: $grape25;
+}
+.day-highlight {
+  color:white;
+  border-radius:4px;
+  padding-right:4px;
+  padding-left:4px;
+  background: $lime;
+  margin-left:9px;
+  margin-right:7px;
+}
+.table-date {
+  font-size:110%;
+  font-weight: bold;
+  padding-top:10px;
+  padding-bottom:5px;
+  margin-top:10px;
+}
 
-// .reveal .panel-tabset .tab-content {
-//   border-top: lightgray 2px solid;
-// }
+@media only screen and (max-width: 575px) {
+  .landing {
+    grid-template-columns: 100%;
+    text-align: center;
+  }
+
+  .landing-update {
+    text-align: center;
+  }
+
+  .landing-right {
+    padding: 2em;
+  }
+}

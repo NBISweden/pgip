@@ -6,7 +6,7 @@ Course materials for course [Population Genomics in
 Practice](https://uppsala.instructure.com/courses/86976). Please make
 sure to read the entire README before adding material.
 
-## Installation and setup
+## Installation and setup, TL;DR
 
 Clone the repo and cd to directory
 
@@ -38,7 +38,7 @@ If you are working on a forked copy it is easiest to sync the main
 branch via the github interface, after which you can follow the
 previous commands.
 
-### TL;DR
+### Installation
 
 You can change the environment name by modifying the `PGIP`
 environment variable:
@@ -57,6 +57,8 @@ documents](#local-previewrender). If not, start by reading the
 following sections that describe each installation step in more
 detail. There is also a section on [known installation
 issues](#installation-issues).
+
+## Installation and setup
 
 ### Create pgip conda environment
 

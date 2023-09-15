@@ -1,0 +1,25 @@
+date;room;start_time;end_time;topic;teacher;assistant;link_slide;link_lab;link_youtube;link_room
+2023/11/06;Uppsala;08:30:00;09:30:00;Coffee and registration;;;;;;https://www.bmc.uu.se/scilifelab-navet/motesrum-i-navet/#anchor-933950
+;Uppsala;09:00:00;09:30:00;Welcome and general introduction;Per Unneberg;AS, JH, NO;;;;
+;Uppsala;09:30:00;10:30:00;Population genomics in practice;Per Unneberg;;slides/pgip/index.html;;;
+;Uppsala;10:30:00;12:00:00;Population genetics foundations;Per Unneberg;;slides/foundations/index.html;;;
+;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
+;Uppsala;13:00:00;15:00:00;Introduction to the coalescent;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
+;Uppsala;15:00:00;17:00:00;Introduction to msprime;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
+2023/11/07;Uppsala;09:00:00;09:30:00;Recap day 1;Per Unneberg;;;;;
+;Uppsala;09:30:00;12:00:00;Variant calling and filtering;Per Unneberg;AS, JH, NO;;;;
+;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
+;Uppsala;13:00:00;17:00:00;Genetic diversity, summarizing variation data;Per Unneberg;AS, JH, NO;;;;
+2023/11/08;Uppsala;09:00:00;09:30:00;Recap day 2;Per Unneberg;;;;;
+;Uppsala;09:30:00;12:00:00;Population structure;Nikolay Oskolkov;AS, JH, PU;slides/population_structure/index.html;;;
+;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
+;Uppsala;13:00:00;15:00:00;Population structure;Nikolay Oskolkov;AS, JH, PU;slides/population_structure/index.html;;;
+2023/11/09;Uppsala;09:00:00;09:30:00;Recap day 3;Nikolay Oskolkov;;;;;
+;Uppsala;09:30:00;12:00:00;Demography;André Soares;JH, NO, PU;;;;
+;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
+;Uppsala;13:00:00;17:00:00;Selection;Jason Hill;AS, NO, PU;;;;
+2023/11/10;Uppsala;09:00:00;10:30:00;Recap;André Soares / Jason Hill / Nikolay Oskolkov / Per Unneberg;;;;;
+;Uppsala;10:30:00;11:30:00;Guest lecture (TBA);;;;;;
+;Uppsala;11:30:00;12:00:00;Recap;André Soares / Jason Hill / Nikolay Oskolkov / Per Unneberg;;;;;
+;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
+;Uppsala;13:00:00;17:00:00;Project discussion / networking / own time;;;;;;
