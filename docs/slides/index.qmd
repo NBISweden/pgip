@@ -5,7 +5,13 @@ description: "List of all presentations"
 listing:
   type: grid
   grid-columns: 4
-  fields: [image, title, author]
+  fields: [title, subtitle, author]
+  sort: false
+  contents:
+    - pgip/index.qmd
+    - foundations/index.qmd
+    - simulation/index.qmd
+    - population_structure/index.qmd
 date: ""
 toc: false
 sidebar: false

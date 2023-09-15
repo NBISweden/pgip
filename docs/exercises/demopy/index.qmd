@@ -26,7 +26,6 @@ import os
 os.listdir()
 ```
 
-
 ```{python }
 #| label: test-pgip
 #| echo: true

@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD041 -->
+
 ```{r}
 #| label: r-libs-init
 #| echo: false
@@ -16,3 +18,5 @@ bw <- theme_bw(base_size = 18) %+replace%
   ))
 theme_set(bw)
 ```
+
+<!-- markdownlint-enable MD041 -->

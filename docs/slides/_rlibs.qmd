@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD041 -->
+
 ```{r }
 #| label: r-libs-init
 #| echo: false
@@ -8,6 +10,7 @@ library(dotenv)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(latex2exp)
 library(scales)
 library(viridis)
 bw <- theme_bw(base_size = 18) %+replace%
@@ -16,3 +19,5 @@ bw <- theme_bw(base_size = 18) %+replace%
   ))
 theme_set(bw)
 ```
+
+<!-- markdownlint-enable MD041 -->

@@ -1,31 +1,45 @@
 ---
-format: html
+pagetitle: "PGIP 2023"
+toc: false
+date: ""
+sidebar: false
+format:
+  html:
+    number-sections: false
+execute:
+  freeze: false
 ---
 
-# Population genomics in practice
+# [**PGIP** • 2023]{.large}
 
-Welcome to the Population Genomics in Practice homepage!
+### Population genomics in practice
 
-# Preparation
+::: {style="margin-bottom: 1em;"}
 
-::: {.callout-warning}
-
-## FIXME
-
-link / list necessary preparations
+##### 6-10 November 2023, Uppsala, Sweden
 
 :::
 
-## UPPMAX account
+<br>
 
-Registration details
+[**This site is under construction!**]{.largest}
 
-## Readings
+<br>
 
-- @fuller_PopulationGeneticsCoral_2020
-- @johri_RecommendationsImprovingStatistical_2022
+Welcome to the Population Genomics in Practice homepage!
 
-## Tutorials
+This workshop is organised by the National Bioinformatics
+Infrastructure, Sweden (NBIS). NBIS is a platform of the Science for
+Life Laboratory (SciLifeLab).
 
-- Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
-  <https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
+<br>
+
+![](assets/logos/nbis-scilifelab.svg){height="1.2em"}
+
+<br>
+
+---
+
+::: small
+Updated: <?lua.date?> at <?lua.time?>.
+:::

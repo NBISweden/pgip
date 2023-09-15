@@ -17,3 +17,12 @@ jobs:
 
       - name: Run ECLint check
         run: editorconfig-checker -exclude README.md $(find .* -type f | grep -v '.git\|.py\|.md\|json\|yml\|yaml\|html\|css\|work\|build\|log.txt\|Makefile')
+
+      - name: markdownlint-cli2-action
+        uses: DavidAnson/markdownlint-cli2-action@v9
+        with:
+          globs: |
+            *.md
+            **/*.md
+            **/*.qmd
+            !**/LICENSE.md

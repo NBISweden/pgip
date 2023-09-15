@@ -3,16 +3,60 @@
 ## **PGIP • Population genomics in practice**
 
 Course materials for course [Population Genomics in
-Practice](https://uppsala.instructure.com/courses/52168). Please make
+Practice](https://uppsala.instructure.com/courses/86976). Please make
 sure to read the entire README before adding material.
 
-## Installation
+## Installation and setup
 
-Clone the repo
+Clone the repo and cd to directory
 
-    git clone https://github.com/NBISweden/pgip.git
+    git clone git@github.com:NBISweden/workshop-pgip.git
+    cd workshop-pgip
 
-and follow the instructions below.
+Since pushing to the main branch is disallowed, make sure you create a
+development branch named `dev-yourgithubusername`:
+
+    git checkout -b dev-yourgithubusername
+
+Make edits on and push this branch to the repo. For this to work you
+need to properly setup [github
+authentication](https://docs.github.com/en/authentication).
+Alternatively, you can [fork the
+repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+to your own github user account.
+
+Whenever a pull request is accepted, you need to sync your development
+branch with the new main. If you have cloned from NBISweden do
+
+    git fetch -a
+    git checkout main
+    git merge origin/main
+    git checkout dev-yourgithubusername
+    git merge main
+
+If you are working on a forked copy it is easiest to sync the main
+branch via the github interface, after which you can follow the
+previous commands.
+
+### TL;DR
+
+You can change the environment name by modifying the `PGIP`
+environment variable:
+
+    export PGIP=pgip
+    make install-pgip
+    conda activate pgip
+    make install-R
+    make install-kernels
+    make install-bcftools
+    make install-dev
+
+If the above commands have worked without issues you are done and you
+can head over to the section on [rendering
+documents](#local-previewrender). If not, start by reading the
+following sections that describe each installation step in more
+detail. There is also a section on [known installation
+issues](#installation-issues).
 
 ### Create pgip conda environment
 
@@ -28,6 +72,9 @@ The environment can also be installed with the make command `make
 install-pgip`.
 
 ### Install R packages
+
+**UPDATE**: the tinytex distribution causes all kinds of trouble. See
+section Installation issues below.
 
 A number of `R` packages need to be installed manually, notably
 [dotenv](https://www.rdocumentation.org/packages/dotenv/versions/1.0.3),
@@ -94,11 +141,52 @@ enforced), run
 
 From here, pre-commit will be run whenever you attempt to commit code.
 
+### Setup environment variables
+
+Finally, you need to set some environment variables to enable correct
+rendering. For reproducibility, set these in a file `.envrc` in the
+pgip root directory and source it with `source .envrc`.
+
+On a first run you will likely encounter an `MissingEnvVarsError` for
+the `PARTICIPANT_DATA` variable, which has to be set. The first run
+should trigger a setup script that generates the file
+`docs/_environment.local` where `PARTICIPANT_DATA` is initialized.
+Rerunning `quarto preview` in the `docs` folder should suffice. Should
+this for some reason fail, you can always set the variable manually:
+
+    export PARTICIPANT_DATA="foo.csv"
+
+The repo contains custom LaTeX code and the path `src/latex` needs to
+be set via the `TEXINPUTS` variable:
+
+    export TEXINPUTS=${TEXINPUTS}:/path/to/pgip/src/latex
+
+### Installation issues
+
+#### tinytex
+
+The current TinyTeX installation setup causes errors from the TeXLive
+manager `tlmgr` that are difficult to fix. As a workaround, install
+`texlive` and `texlive-latex-extra`. This is the working solution in
+the github CI actions. See .github/workflow/build.yml for details.
+
+#### Missing libz2 and lzma library headers
+
+In case you get errors related to libz2 and lzma it is likely due to
+missing header files. On Ubuntu, run
+
+    sudo apt install libz2-dev
+    sudo apt install liblzma-dev
+
 ## Local preview/render
 
 For local preview (edits to files immediately triggers regeneration of
-output), cd to `docs` directory and run `quarto preview`. There are
-also make rules to render single files or the entire project
+output), cd to `docs` directory and run `quarto preview`. You can
+specify a port to consistently reenter the same local web page:
+
+    quarto preview --port 8888
+
+There are also make rules to render single files or the entire project
 ('production') as they would appear online:
 
     make docs/_site/slides/demo/index.html
@@ -141,12 +229,41 @@ file `environment-dev.yml`.
   guide](https://style.tidyverse.org/)
 - python code should follow [the Black code style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 
+### Bibliographic entries
+
+Bibliographic entries are stored in
+[BibTeX](https://en.wikipedia.org/wiki/BibTeX) format in
+`docs/assets/bibliography.bib`. Add entries when necessary and cite
+using quarto's [citation
+syntax](https://quarto.org/docs/authoring/footnotes-and-citations.html#sec-citations)
+(e.g., [@citation]).
+
 ## Development
 
 Pushing to the `main` branch is prohibited so any updates to the
 online material must be added via pull requests. Create a branch from
 `main` prefixed with `dev-` (e.g., `dev-yourgithubusername`) to use as
 your main development branch.
+
+### Common linting errors
+
+[markdownlint](https://github.com/DavidAnson/markdownlint) is run on
+quarto and regular markdown files. It is possible to [disable a
+linting error by adding a
+comment](https://github.com/DavidAnson/markdownlint#configuration).
+For instance,
+
+    <!-- markdownlint-disable MD013 -->
+
+    Some code here
+
+    <!-- markdownlint-enable MD013 -->
+
+will disable error MD013/line-length between the two comment
+statements above. This is particularly useful for code blocks that are
+difficult to wrap. It can also be convenient to disable error
+MD041/first-line-heading/first-line-h1 when including external files
+before the first heading.
 
 ### Test / development data
 

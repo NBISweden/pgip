@@ -5,7 +5,8 @@ author:
     - "Per Unneberg"
 format:
   revealjs:
-    slide-level: 3
+    slide-level: 2
+    toc: false
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -14,56 +15,15 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-::: {.notes }
-
-NB: maybe not enough time for history; just mention "classical"
-population genetics analyses with reference to Kimura, Gillespie, Nei,
-Yang and others
-
-:::
-
-# A brief history of population genetics
-
-## Mendel's peas
-
-## Galton, Pearson and Bateson
-
-Of blending and particulate inheritance (the latter championed by
-Bateson)
-
-## Morgan's flies
-
-## Fisher and natural selection
-
-## The modern synthesis
-
-## Wright and drift
-
-## Kimura and the diffusion approximation
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(readxl)
+library(curl)
+```
 
 ::: {.notes }
-
-Follow [@casillas_MolecularPopulationGenetics_2017] history?
-
-:::
-
-## The allozyme era
-
-FIXME: picture of allozyme gel
-
-### Development of genetic diversity measures
-
-- *H* (*gene diversity*, *heterozygosity*): average proportion
-  heterozygous loci
-- *P* (*gene polymorphism*): average proportion polymorphic loci
-
-## The nucleotide diversity era
-
-## The population genomics era
-
-# What is population genomics?
-
-## What is population genomics?
 
 Points from [@hahn_MolecularPopulationGenetics_2019]:
 
@@ -86,67 +46,332 @@ Some applications:
 
 [@hartl1997principles p. 469-470]
 
-::: {.notes }
-
 [@li_InferenceHumanPopulation_2011, supplementary notes, p. 6]:
 
-    ...highly consistent except for the very recent history,
-    demonstrating the power of using whole-genome data.
+"...highly consistent except for the very recent history,
+demonstrating the power of using whole-genome data."
 
 :::
 
-## An example from real life - population genetics of coral
+## Example: Population genetics of the coral *Acropora millepora*
 
-:::: {.columns}
+Motivation: corals are facing hard times and to prevent future losses
+of coral cover a better understanding of genetics is warranted.
 
-::: {.column width="33%"}
+<!-- markdownlint-disable MD013 -->
 
-![Genome assembly and sampling](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly height=250}
+::: {.fragment}
 
-:::
+![Genome assembly and sample collection. ](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly height=550 fig-align=center}
 
-::: {.column width="33%"}
-
-![Variation and demographic history](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-corals-variation height=250}
-
-:::
-
-::: {.column width="33%"}
-
-
-![Selection scan](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection height=250}
-
-:::
-
-::::
-
-![Population structure](https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg){#fig-corals-structure height=150 fig-align="center"}
-
-::: { .flushright }
+::: { .flushright .smallest .translatey100}
 
 @fuller_PopulationGeneticsCoral_2020
 
 :::
 
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+::: {.notes }
+
+[@fuller_PopulationGeneticsCoral_2020] is an example of a population
+genomics study that applies methods that could be seen as a basic
+foundation of population genomics. We believe these present a minimum
+toolkit of methods that should be known to anyone starting out in
+population genomics, and that is sufficiently small to be presented in
+a one-week workshop. At the end of this lecture, we will discuss some
+more advanced applications in population genomics.
+
+Walk through steps of the main figures which represent common analyses
+in a population genomics experiment. No need to supply text; better to
+exemplify via the figures.
+
+Genome assembly and sampling
+
+Points to consider:
+
+- choice of reference individual
+- the number of populations
+- the number of samples (more sites better than many samples per
+     population)
+- the geographical distribution of samples
+- sequencing depth (low-coverage often sufficient)
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Motivation: corals are facing hard times and to prevent future losses
+of coral cover a better understanding of genetics is warranted.
+
+![Variation and demographic history inferred from 44 resequenced
+individuals.](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-corals-variation
+height=550 fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: { .flushright .smallest .translatey100}
+
+@fuller_PopulationGeneticsCoral_2020
+
+:::
+
+::: {.notes }
+
+Variation and demographic history
+
+- LD decay: important for imputation (e.g.,
+  stephens_AccountingDecayLinkage_2005)
+- The extent of LD and its decay with genetic distance are useful
+  parameters for determining the number of markers needed to
+  successfully map a QTL, and the resolution with which the trait can
+  be successfully mapped otyama_EvaluationLinkageDisequilibrium_2019
+- 0.363% average pi
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Motivation: corals are facing hard times and to prevent future losses
+of coral cover a better understanding of genetics is warranted.
+
+<!-- markdownlint-disable MD013 -->
+
+![Characterizing population structure and gene flow across 12
+refs](https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg){#fig-corals-structure
+width=550 fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: { .flushright .smallest}
+
+@fuller_PopulationGeneticsCoral_2020
+
+:::
+
+::: {.notes }
+
+Population structure:
+
+- no discernible relationship between geographic distance and genetic
+  differentiation
+- EEMS (Estimated Effective Migration Surfaces) models relationship
+  between genetics and geography
+  petkova_VisualizingSpatialPopulation_2016
+
+Indicative of high connectivity among 12 sampled reefs.
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Motivation: corals are facing hard times and to prevent future losses
+of coral cover a better understanding of genetics is warranted.
+
+<!-- markdownlint-disable MD013 -->
+
+![Genomic scans for local adaptation detect a signal at
+*sacsin*](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection
+height=550 fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: { .flushright .smallest .translatey100}
+
+@fuller_PopulationGeneticsCoral_2020
+
+:::
+
+::: {.notes }
+
+Little differentiation across reefs -> littel population structure
+over hundreds of kilometers. However, there are environmental
+differences (thermal regimes). Scan for pi outliers:
+
+- points to *sacsin* gene
+- h12 measures the frequency of the two most common haplotypes; red
+  indicate 0.01% outlier genome-wide
+- 4C: tree for central 1kb region in *sacsin* deeper than split from
+  *A.digitifera* and *A.tenuis*
+  - variation in *sacsin* has been maintained for long time
+  - co-chaperone for heat-shock protein Hsp70
+
+:::
+
+## Example: Population genetics of the coral *Acropora millepora*
+
+Study highlights common analyses in population genomics study:
+
+::: {.incremental}
+
+1. Genome assembly, resequencing, variant calling and filtering
+2. Description of variation (e.g., $\pi$) and genetic structure (LD)
+3. Description of population structure (admixture, PCA)
+4. Modelling of demographic history (PSMC)
+5. Genome scans for adaptive traits
+
+:::
+
+## Population genetics {.center}
+
+:::: {style="display: grid; grid-template-columns: 300px 200px 200px;
+grid-row-gap: 0px; grid-column-gap: 100px;"}
+
+<div>&nbsp;</div>
+
+:::{.circular-image}
+
+Mutation
+
+![](assets/images/mutation.jpg)
+
+:::
+
+:::{.circular-image}
+
+Selection
+
+![](assets/images/finches.jpg)
+
+:::
+
+<div>&nbsp;</div>
+
+:::{.circular-image}
+
+Recombination
+
+![](assets/images/recombination.jpeg)
+
+:::
+
+:::{.circular-image}
+
+Drift
+
+![](assets/images/genetic-drift.png)
+
+:::
+
+::::
+
+::: {.notes }
+
+Population genetics focuses on the genetic basis of evolution. It is
+mainly a theoretical subject, owing to the slow changes of genetic
+variation. As such, it tries to explain the shape and structure of
+genetic variation from theoretical predictions and models.
+
+:::
+
+## From population genetics to population genomics
+
+<!-- markdownlint-disable MD013 -->
+
+![The variable sites at the *Drosophila melanogaster* ADH locus
+[@kreitman_NucleotidePolymorphismAlcohol_1983]](assets/images/kreitman-1983-table1.png)
+
+<!-- markdownlint-enable MD013 -->
+
+::: {.notes }
+
+- from locus-based studies (e.g., alcohol dehydrogenase in Drosophila
+  [@kreitman_NucleotidePolymorphismAlcohol_1983]) to genome-wide
+  (e.g., Drosophila population genomics
+  [@begun_PopulationGenomicsWholeGenome_2007]
+- note: studied loci have often not been randomly chosen, which is
+  another argument for whole-genome studies
+- enabler: sequencing technology
+
+[@fuller_PopulationGeneticsCoral_2020] paper has population genetics
+in title -> population genetics is a key ingredient.
+
+Refer to Hahn's points about learning something about global patterns:
+
+- selection acts locally, demography globally
+- the structure of genetic variation and how it depends on
+  - recombination landscapes and linked selection
+  - demographic changes
+  - identification of neutral loci
+
+So, not simply about applying 10000 selection tests for multiple loci
+
+Population genetics in title of previous slide => population genomics
+is large-scale population genetics? At the very least, shows the
+foundational role population genetics plays.
+
+All of the points above point to the importance of statistics which
+implies mathematics / computational skills important
+
+:::
+
+## From population genetics to population genomics
+
+![Patterns of polymorphism and divergence [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.g001)
+
+## From population genetics to population genomics
+
+![Numbers of polymorphic and fixed variants [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.t002)
+
+## The technological revolution in **sequencing** and **computing**
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-sequencing-cost
+#| echo: false
+#| eval: true
+#| fig-cap: Sequencing cost ($) per megabase [@wetterstrandka_DNASequencingCosts_]
+#| out-width: 400
+url <- "https://www.genome.gov/sites/default/files/media/files/2021-11/Sequencing_Cost_Data_Table_Aug2021.xls"
+if (!file.exists(basename(url))) {
+  download.file(url, destfile = basename(url))
+}
+data <- read_excel(basename(url))
+colnames(data) <- c("Date", "Mb", "Genome")
+ggplot(data, aes(x = as.Date(Date), y = Mb)) +
+  geom_line() +
+  xlab("") +
+  ylab("") +
+  scale_y_continuous(trans = "log10", labels = comma, n.breaks = 6) +
+  scale_x_date(breaks = "year", labels = date_format("%Y"))
+```
+
+:::
+
+::: {.column width="50%"}
+
+![Moore's law](https://ourworldindata.org/uploads/2022/03/Transistor-Count-over-time.png)
+
+:::
+
+::::
+
 ## Statistical inference in population genomics
 
-[@johri_RecommendationsImprovingStatistical_2022]
+The data deluge requires advanced statistical methods and models to do
+inference. Today data production outpaces theoretical advances.
+Therefore, take care not to attach too much faith to a test that
+explains data well.
 
-# Population genomics in the future
+::: {.fragment}
 
-List stuff we won't have time to go through
+A population genomics study should aim at generating a baseline model
+that takes into account the processes that shape genetic variation
+[@johri_RecommendationsImprovingStatistical_2022]:
 
-## Machine learning and AI for population genomics
+1. mutation
+2. recombination
+3. gene conversion
+4. purifying selection acting on functional regions and its effects on
+   linked variants (background selection)
+5. genetic drift with demographic history and geographic structure
 
-## Ancestral recombination graph methods
-
-- deep population sequencing - tskit was developed to handle data size
-
-## Ancient DNA
-
-## Coalescent and Wright-Fisher simulations
-
-Use to determine significance in genome-wide scans
+:::
 
 ## Bibliography {.unnumbered .unlisted}
 

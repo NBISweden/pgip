@@ -3,11 +3,15 @@ format: html
 engine: knitr
 ---
 
+<!-- markdownlint-disable MD041 -->
+
 {{< include ../_knitr.qmd >}}
 
 {{< include ../_rlibs.qmd >}}
 
 {{< include _rcustom.qmd >}}
+
+<!-- markdownlint-enable MD041 -->
 
 # Genetic diversity {#sec-ex-genetic-diversity}
 
@@ -25,11 +29,10 @@ latter requires GLs for **all** sites. Use Table 4.1 in
 
 ::: {.callout-note}
 
-- use sequence masks (0/1) encoded gz files to enable quick calculations of feature-based stats (e.g. 4d-degenerate sites)
+- use sequence masks (0/1) encoded gz files to enable quick
+  calculations of feature-based stats (e.g. 4d-degenerate sites)
 - use pixy to compare to vcf with all sites present
 
-
 :::
-
 
 FIXME: comparison of pixy and coverage-based filtering approach

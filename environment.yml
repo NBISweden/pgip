@@ -7,32 +7,38 @@ channels:
 dependencies:
   - bash_kernel
   - bedtools
+  - bcftools
   - bokeh
   - ca-certificates
   - csvtk
-  - cyvcf2
+  - cyvcf2=0.30.16
   - demesdraw
   - d4tools
   - gatk4
   - gawk
+  - htslib=1.15.1
   - jupyter
   - jupyter-cache
-  - mosdepth
+  - mosdepth=0.3.3
   - msprime>=1.2
   - pandas
+  - pip
   - pyslim
   - python>=3.10
   - python-newick
   # - r-animation
+  - r-ape
   - r-codetools
   - r-curl
   - r-devtools
   - r-dt
   - r-dygraphs
+  - r-expm
   - r-formatr
   - r-formattable
   - r-gganimate
   - r-ggiraph
+  - r-ggraph
   - r-ggplot2
   - r-gifski
   - r-highcharter
@@ -40,10 +46,11 @@ dependencies:
   # # - r-irkernel
   # # - r-jsonlite
   - r-kableextra
+  - r-latex2exp
   - r-leaflet
   - r-magick
   - r-networkD3
-  # # - r-magick
+  - r-magick
   - r-patchwork
   - r-pdftools
   - r-plotly
@@ -55,7 +62,7 @@ dependencies:
   - r-tidyr
   # # - r-transformr
   - r-viridis
-  - samtools
+  - samtools=1.15.1
   # # - scikit-learn
   # # - scikit-allel
   - slim>=4.0

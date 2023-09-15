@@ -19,7 +19,7 @@ repos:
       - id: check-yaml
       - id: trailing-whitespace
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v3.9.0
+    rev: v3.10.0
     hooks:
       - id: reorder-python-imports
         args:
@@ -28,7 +28,7 @@ repos:
             --unclassifiable-application-module=_tskit,
           ]
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.261"
+    rev: "v0.0.282"
     hooks:
       - id: ruff
         args:
@@ -36,31 +36,42 @@ repos:
             "--per-file-ignores=tests/test_utils.py:E501,manticore/tests/wm/snakemake.py:E501",
           ]
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.7.0
     hooks:
       - id: black
         language_version: python3
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1.13.0
+    rev: 1.15.0
     hooks:
       - id: blacken-docs
         args: [--skip-errors]
         additional_dependencies: [black==22.3.0]
         language_version: python3
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.33.0
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.8.1
     hooks:
-      - id: markdownlint
-        args: ["-i=*.qmd *.md"]
+      - id: markdownlint-cli2
+        files: \.(md|qmd)$
+        types: [file]
+        exclude: LICENSE.md
+      - id: markdownlint-cli2-fix
+        files: \.(md|qmd)$
+        types: [file]
         exclude: LICENSE.md
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: '2.7.1'
+    rev: '2.7.2'
     hooks:
       - id: editorconfig-checker
         alias: ec
         pass_filenames: true
+        exclude: |
+          (?x)^(
+          docs/slides/population_structure/data/DavidReich/AADR\.ind|
+          docs/slides/population_structure/data/DavidReich/AADR\.snp|
+          docs/slides/population_structure/data/DavidReich/AADR\.geno
+          )
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.2
+    rev: v0.3.2.9019
     hooks:
       - id: style-files
         name: style-files
@@ -68,7 +79,15 @@ repos:
         entry: Rscript inst/hooks/exported/style-files.R
         language: r
         files: '(\.[rR]profile|\.[rR]|\.[rR]md|\.[rR]nw|\.[qQ]md)$'
-        exclude: 'renv/activate\.R'
+        exclude: |
+          (?x)^(
+          renv/activate\.R|
+          docs/slides/pgip/index\.qmd|
+          docs/slides/datageneration/index\.qmd|
+          docs/slides/foundations/index\.qmd|
+          docs/exercises/data_filtering/index\.qmd|
+          docs/slides/simulation/index\.qmd
+          )$
         minimum_pre_commit_version: "2.13.0"
       - id: parsable-R
         name: parsable-R

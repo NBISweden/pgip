@@ -14,17 +14,170 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
+::: {.notes }
+
+Outline:
+
+Describe genetic diversity in more detail. Neglected component of
+biodiversity. Key feature: code for phenotypic variation -> adaptive
+potential. Dawkins: natural selection must have variation to act on.
+Low diversity -> low Ne -> 1) more inbreeding 2) nat sel less
+efficient 3) loss of functional variants. Plot overview of diversity
+in species [@leffler_RevisitingOldRiddle_2012]. Look at historical
+descriptions and predictions of diversity? (I'm thinking the
+development of the neutral model; see
+[@hurst_GeneticsUnderstandingSelection_2009]). Provide plot of
+expected heterozygosity under neutral model and compare with observed
+data [@romiguier_ComparativePopulationGenomics_2014;
+@bergeron_EvolutionGermlineMutation_2023]. Link historical to
+contemporary heterozygosity and highlight importance for conservation
+[@webstermatthew_GeneticVariationMountain_2022;
+@desroches_ConservingIntraspecificVariation_2021;
+@willi_ConservationGeneticsManagement_2022]
+
+How to measure? Ne, population structure, inbreeding. Plot Ne for
+examples. NGS -> uprecedented detail; better N_e, F_ST, as well as
+identification of adaptive loci, introgression, demographic history,
+etc. Requires reference genome! N_e can be estimated from Watterson's
+theta, but as it represents harmonic mean, it says nothing of recent
+declines, which is important for conservations studies. Note in
+passing here, and refer to section on demography later on.
+
+[@kimura_1983, p201-202] has a good example of how it is unlikely that
+a rapid decrease of population size during last few generations will
+lead to significant reduction in heterozygosity.
+
+Genetic diversity is not the only issue for conservation however
+[@lewis_BiggestEverStudy_2023]:
+
+>The analysis of all 233 species’ genomes also has implications for
+>conservation. For example, it shows that genetic diversity within a
+>species does not align with its extinction risk1. That’s surprising,
+>says Behie, because lower genetic diversity, which can result from
+>inbreeding when population size diminishes, is widely considered a
+>sign that a species is at risk of extinction. The finding suggests
+>that for some threatened species, populations have declined so fast
+>that there hasn’t been time for inbreeding to occur. This points to
+>factors other than inbreeding — such as habitat destruction — being
+>the greater threat to a species’ resilience.
+
+[@begun_PopulationGenomicsWholeGenome_2007] makes interesting
+statements on the study of variation in the population genetics
+context:
+
+1. small values of *s* may be detected as deviaton from neutral expectation and
+2. enables study of recent (less polymorphism, higher LD) and ancient
+   selection (increased divergence between species)
+
+They also summarize very well the motivation for genome-wide studies
+and that diversity is shaped by a number of factors, including:
+
+1. variation in mutation rates
+2. variation in recombination rates
+3. gene density
+4. natural selection
+
+:::
+
 # Genetic diversity
 
-##
+## Genetic diversity
+
+```{r }
+#| label: genet-diversity-leffler
+#| echo: false
+#| eval: true
+data <- read.table(gzfile("assets/www/Leffler_2012_Dataset_S1.txt.gz"),
+  sep = "\t", fill = TRUE, quote = "", header = TRUE
+)
+colnames(data) <- c(
+  "Latin name", "Common name", "Phylum", "Class",
+  "Total loci", "Mean diversity per bp", "ThetaW or pi",
+  "Chromosome type", "Site feature", "Sampling strategy",
+  "Reference (PMID)", "Mating system", "Habitat",
+  "Range category", "Main analysis", "Sex autosome comparison"
+)
+head(data)
+```
+
+::: {.notes }
+
+Riddle: why is genetic diversity range so narrow? Possibly there are
+lower and upper limits.
+
+Lower limit: censoring effect, i.e., when diversity passes a lower
+limit, population is driven to extinction due to inability to adapt
+
+Upper limit: functional/structural constraints, e.g., impaired
+chromosome pairing or reproductive incompatibilities
+
+Linked selection, that is, variation-reducing selection. Larger
+populations have higher influx of new mutations, so if more draft,
+higher reduction in diversity. Would require strong frequent levels of
+selection; little support for this in literature.
+
+Purifying selection. Nearly neutral model could explain narrow range.
+
+[@ellegren_DeterminantsGeneticDiversity_2016] Upper limit could in
+part be explained by linked selection
+[@corbett-detig_NaturalSelectionConstrains_2015]
+
+:::
+
+## Factors that influence genetic diversity
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r }
+#| label: fig-genetic-diversity-determinants-Ellegren-fig2
+#| echo: false
+#| eval: true
+#| out-height: 500px
+#| fig-cap:
+#|    Overview of determinants of genetic diversity
+#|    [@ellegren_DeterminantsGeneticDiversity_2016, Fig 2]
+knitr::include_graphics("https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fnrg.2016.58/MediaObjects/41576_2016_Article_BFnrg201658_Fig2_HTML.jpg?as=webp")
+```
+
+:::
+
+::: {.column width="40%"}
+
+#### Genetic drift
+
+Reduces diversity at loss $\propto \frac{1}{N}$
+
+#### Selection
+
+Adaptive selection decreases selection, more so if acting on new
+mutations compared to standing variation.
+
+Balancing selection may increase variation.
+
+#### Recombination
+
+Low recombination rates leads to less "reshuffling" of variation and
+hence lower diversity.
+
+:::
+
+::::
+
+::: {.notes }
+
+Note: lower recombination lowers diversity presumably because more
+neutral variants linked to selected sites. There are intriguing
+differences between taxa [@leffler_RevisitingOldRiddle_2012]
+
+:::
 
 ## On missing data in population genetics
 
 [@korunes_PixyUnbiasedEstimation_2021] Fig 4 on real data: strong
 tendency of commonly adopted tools to **underestimate** pi, dxy (even
 for 30X data sets)
-
-
 
 ## Nucleotide diversity revisited
 
@@ -34,9 +187,13 @@ Most textbooks assume full sequence data
 
 Consequence: $\pi$, $d_{XY}$ tend to be downwards biased
 
+<!-- markdownlint-disable MD013 -->
+
 $$
 \pi = \frac{\sum_{i<j}k_{ij}}{n\choose 2} = \frac{c_0c_1}{\frac{n(n-1)}{2}} = \left( \frac{n}{n-1} \right)2\left( \frac{c_0}{n} \right)\left( \frac{c_1}{n} \right)
 $$
+
+<!-- markdownlint-enable MD013 -->
 
 FIXME: include Fig 1A from [@korunes_PixyUnbiasedEstimation_2021]
 

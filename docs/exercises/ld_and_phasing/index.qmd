@@ -21,9 +21,7 @@ output_notebook(hide_banner=True)
   [](@sec-variantfiltering).
 - sgkit pca method does not support missing data - add example?
 
-
 :::
-
 
 Variant data is high-dimensional and some sort of dimensionality
 reduction is often employed to provide a condensed overview of the
@@ -31,7 +29,6 @@ data and as a means to identify potential population structure.
 Principal component analysis (PCA) is one common technique usually
 applied to genetic variation data (e.g.
 [@patterson_PopulationStructureEigenanalysis_2006]).
-
 
 For large data sets, it is common practice to first prune the data to
 remove correlation between data points. In this exercise, you will
@@ -71,7 +68,6 @@ zarr = os.path.join(outdir, "ooa.gatk.zarr")
 sgvcf.vcf_to_zarr(vcf, zarr)
 ```
 
-
 We load the data and remember the original chunk size (needed
 internally for sgkit):
 
@@ -91,10 +87,9 @@ use `python` for plotting and first load the necessary libraries:
 ## Linkage disequilibrium pruning
 
 Depending on the number of variants, it may be necessary to work on a
-subset of variants. Here with only ```{python}
-#| echo: false
-display(Markdown("""{nvar}""".format(nvar = len(ds.variants))))
-``` variants we skip this step.
+subset of variants. Here with only ```{python, echo=FALSE}
+display(Markdown("""{nvar}""".format(nvar = len(ds.variants))))```
+variants we skip this step.
 
 For pruning, we first need to calculate the dosage:
 
@@ -106,6 +101,7 @@ ds['dosage'] = ds['call_genotype'].sum(dim='ploidy')
 ```
 
 and then divide into windows by variants:
+
 ```{python }
 #| label: ld-pruning-sgkit-windows
 #| echo: true
@@ -113,7 +109,6 @@ and then divide into windows by variants:
 ds = sg.window_by_variant(ds, size=200)
 print(ds)
 ```
-
 
 ## PCA
 
@@ -136,7 +131,6 @@ lambda ds: ds.sel(variants=(ds.variant_allele_frequency[:, 1] > 0.01))
 ds = ds.chunk(original_chunk_size)
 ```
 
-
 Now we can perform pca.
 
 ```{python }
@@ -156,8 +150,6 @@ ds_pca["call_alternate_allele_count"] = ds_pca.call_alternate_allele_count.chunk
 )
 ds_pca = sg.pca(ds_pca, n_components=10)
 ```
-
-
 
 We convert the data structure to a pandas dataframe and add various
 metadata, such as sample and population names.
@@ -181,8 +173,6 @@ colors = dict(zip(set(df["population"]), utils._get_palette(n=6)))
 df["color"] = [colors[x] for x in df["population"]]
 ```
 
-
-
 For the purpose of this exercise, we want to also investigate the
 effect of sequencing coverage.
 
@@ -193,14 +183,16 @@ effect of sequencing coverage.
 import io
 import pandas as pd
 import subprocess
-output = subprocess.check_output("samtools depth -a ../data/data/ooa-outgroups/*.chr21.bam", shell=True)
-coverage = pd.read_table(io.StringIO(output.decode()), header=None).loc[:, 2:].mean(axis=0)
+output = subprocess.check_output(
+    "samtools depth -a ../data/data/ooa-outgroups/*.chr21.bam", shell=True
+)
+coverage = pd.read_table(io.StringIO(output.decode()),
+                         header=None).loc[:, 2:].mean(axis=0)
 df["coverage"] = coverage.values
 ```
 
-
-
 Finally, we can plot the pca with bokeh.
+
 ```{python }
 #| label: fig-ld-pruning-sgkit-plot-pca
 #| echo: true
