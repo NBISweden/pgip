@@ -5,75 +5,276 @@ sidebar: false
 format:
   html:
     number-sections: false
+execute:
+  cache: false
 ---
 
-<br>
+[**{{< meta date >}}: Note that the schedule is tentative and subject to change!**]{.large}
 
-[**This site is under construction!**]{.largest}
+```{r }
+#| label: schedule
+#| echo: false
+#| eval: true
+library(lubridate)
+library(dplyr)
+library(kableExtra)
+library(formattable)
+library(yaml)
 
-<br>
+schedule_message <- yaml::read_yaml("_site.yml")$schedule_message
 
-<br>
+color_primary <- "#a7c947"
 
-[**{{< meta date >}}: Note that the schedule is tentative and subject to change!**]{.largest}
+s <- read.csv("schedule.csv",
+  sep = ";", stringsAsFactors = FALSE,
+  header = TRUE, na.strings = "", colClasses = "character"
+)
+# remove rows that are completely NA
+s <- s[!apply(s, 1, function(x) all(is.na(x))), ]
+```
 
-<br>
+```{r }
+#| label: markdown-schedule
+#| echo: false
+#| eval: true
+# Keep as reference; grouping piped tables non-trivial?
+smkd <- s %>%
+  # missing values in date and room are filled
+  tidyr::fill(date, room, link_room, .direction = "down") %>%
+  # convert date characters to date objects
+  dplyr::mutate(date = format(as_datetime(date), "%d-%b-%Y")) %>%
+  dplyr::mutate(day = format(as_datetime(date, format = "%d-%b-%Y"), "%a")) %>%
+  dplyr::group_by(date) %>%
+  dplyr::mutate(
+    start_time = format(as_datetime(start_time, format = "%H:%M:%S"), "%H:%M"),
+    end_time = format(as_datetime(end_time, format = "%H:%M:%S"), "%H:%M")
+  ) %>%
+  as.data.frame() %>%
+  dplyr::mutate(room = ifelse(is.na(link_room), room,
+    paste0("[", room, "](", link_room, ")")
+  )) %>%
+  # create links
+  dplyr::mutate(link_lab = ifelse(
+    is.na(link_lab), NA,
+    gsub(",", "", gsub(
+      "([^,]+)", " **[{{< fa file-alt >}}](\\1)**",
+      link_lab
+    ))
+  )) %>%
+  dplyr::mutate(link_slide = ifelse(
+    is.na(link_slide), NA,
+    paste0("**[{{< fa file-powerpoint >}}](", link_slide, ")**")
+  )) %>%
+  dplyr::mutate(date = paste(
+    "**{{< fa calendar >}}**", date,
+    day, "**{{< fa map-marker-alt >}}**", room
+  )) %>%
+  # style topic
+  dplyr::mutate(topic = ifelse(
+    tolower(topic) == "coffee break" |
+      tolower(topic) == "lunch" |
+      tolower(topic) == "dinner" |
+      tolower(topic) == "coffee and registration",
+    paste0("[", topic, "]{.topic-highlight}"),
+    paste0("[", topic, "]{.topic}")
+  )) %>%
+  # add links to topic
+  dplyr::mutate(topic = ifelse(is.na(link_slide), topic, paste(topic, link_slide))) %>%
+  dplyr::mutate(topic = ifelse(is.na(link_lab), topic, paste(topic, link_lab))) %>%
+  dplyr::mutate(topic = ifelse(is.na(link_youtube), topic,
+    paste(topic, link_youtube, "{{< fa youtube >}}")
+  )) %>%
+  dplyr::mutate(time = paste0(start_time, " - ", end_time)) %>%
+  dplyr::mutate(teacher = ifelse(is.na(teacher), "", teacher)) %>%
+  dplyr::mutate(assistant = ifelse(is.na(assistant), "", assistant)) %>%
+  dplyr::select(date, room, time, topic, teacher, assistant)
 
-<!-- markdownlint-disable MD013 -->
+if (all(is.na(smkd$assistant)) | all(smkd$assistant == "")) smkd$assistant <- NULL
+```
+
+```{r }
+#| label: html-table
+#| echo: false
+#| eval: false
+make_link <- function(link, src) {
+  paste0("<a href='", link, "'>", src, "</a>")
+}
+make_fa_link <- function(link, fa) {
+  src <- paste0("{{< fa ", fa, " >}}")
+  l <- make_link(link, src)
+  paste0("<strong>", l, "</strong>")
+}
+make_fa <- function(fa) {
+  src <- paste0("{{< fa ", fa, " >}}")
+  paste0("<strong>", src, "</strong>")
+}
+make_date <- function(date, day, room, color_primary) {
+  cal <- cat("{{< fa calendar >}}")
+  src <- paste0(
+    "<p class='table-date'><span style='font-weight:bold;'><span style='color:",
+    color_primary, ";'>",
+    make_fa("calendar"), "</span>", date, "</span>", "<span class='day-highlight'>",
+    day, "</span>", "<span style='color:", color_primary, ";'>",
+    make_fa("map-marker-alt"), "</span>", room, "</p>"
+  )
+  src <- paste0(
+    "<p class='table-date'><span style='font-weight:bold;'><span style='color:",
+    color_primary, ";'>",
+    cal, "<i class='fas fa-calendar'></i>", "</span>", date, "</span>", "</p>"
+  )
+  src
+}
+
+s <- s %>%
+  # missing values in date and room are filled
+  tidyr::fill(date, room, link_room, .direction = "down") %>%
+  # convert date characters to date objects
+  dplyr::mutate(date = format(as_datetime(date), "%d-%b-%Y")) %>%
+  dplyr::mutate(day = format(as_datetime(date, format = "%d-%b-%Y"), "%a")) %>%
+  dplyr::group_by(date) %>%
+  dplyr::mutate(
+    start_time = format(as_datetime(start_time, format = "%H:%M:%S"), "%H:%M"),
+    end_time = format(as_datetime(end_time, format = "%H:%M:%S"), "%H:%M")
+  ) %>%
+  as.data.frame() %>%
+  # room link
+  dplyr::mutate(room = ifelse(is.na(link_room), room,
+    make_link(link_room, room)
+  )) %>%
+  # lab link
+  dplyr::mutate(link_lab = ifelse(is.na(link_lab), NA,
+    make_fa_link(link_lab, "file-alt")
+  )) %>%
+  dplyr::mutate(link_slide = ifelse(is.na(link_slide), NA,
+    make_fa_link(link_slide, "file-powerpoint")
+  )) %>%
+  dplyr::mutate(date = paste0(
+    "<p class='table-date'><span style='font-weight:bold;'>",
+    "<span style='color:", color_primary, ";'>",
+    "<i class='fas fa-calendar' ",
+    "style='margin-left:5px;margin-right:5px;'></i>", "</span>", date,
+    "</span>", "<span class='day-highlight'>", day, "</span>",
+    "<span style='color:", color_primary,
+    ";'><i class='fa-solid fa-map-marker-alt' ",
+    "style='margin-left:5px;margin-right:5px;'></i></span>",
+    room, "</p>"
+  )) %>%
+  # style topic
+  dplyr::mutate(topic = ifelse(
+    tolower(topic) == "coffee break" |
+      tolower(topic) == "lunch" |
+      tolower(topic) == "dinner" |
+      tolower(topic) == "coffee and registration",
+    paste0("<span class='topic-highlight'>", topic, "</span>"),
+    paste0("<span style='margin-right:5px;'>", topic, "</span>")
+  )) %>%
+  # add links to topic
+  dplyr::mutate(topic = ifelse(
+    is.na(link_slide), topic,
+    paste(topic, link_slide)
+  )) %>%
+  dplyr::mutate(topic = ifelse(is.na(link_lab), topic, paste(topic, link_lab))) %>%
+  dplyr::mutate(topic = ifelse(
+    is.na(link_youtube), topic,
+    paste(topic, make_fa_link(link_youtube, "youtube"))
+  )) %>%
+  # add stuff to date
+  dplyr::mutate(time = paste0(start_time, " - ", end_time)) %>%
+  dplyr::mutate(teacher = ifelse(is.na(teacher), "", teacher)) %>%
+  dplyr::mutate(assistant = ifelse(is.na(assistant), "", assistant)) %>%
+  dplyr::select(date, room, time, topic, teacher, assistant)
+
+if (all(is.na(s$assistant)) | all(s$assistant == "")) s$assistant <- NULL
+```
+
+```{r }
+#| label: schedule-message
+#| echo: false
+#| eval: true
+#| out-width: 100%
+#| output: asis
+if (!is.null(schedule_message) & nchar(schedule_message) != 0) {
+  cat(paste0("::: {.callout-note}\n", schedule_message, "\n:::"))
+}
+```
 
 ::: {.contents-table .column-body-outset}
 
-| Topic                                      | Time        | Author         | Links                                                                                                                         |
-|--------------------------------------------|-------------|----------------|-------------------------------------------------------------------------------------------------------------------------------|
-| [6-Nov-2023 (Mon)]{.highlight}             |             |                |                                                                                                                               |
-| Coffee and welcome                         | 08:30-09:00 |                |                                                                                                                               |
-| Introduction to PGIP                       | 09:00-09:30 | AS, JH, NO, PU |                                                                                                                               |
-| Population genomics in practice            | 09:30-10:00 | PU             | [Slides](slides/pgip/index.html)                                                                                              |
-| Coffee break                               | 10:00-10:30 |                |                                                                                                                               |
-| Population genetics foundations            | 10:30-12:00 | PU             | [Slides](slides/foundations/index.html)                                                                                       |
-| Lunch                                      | 12:00-13:00 |                |                                                                                                                               |
-| Introduction to the coalescent             | 13:00-15:00 | PU             | [Slides](slides/simulation/index.html), [Instructions]({{< var lab.sim.howto >}}), [Exercise]({{< var lab.sim.coalescent >}}) |
-| Coffee break                               | 15:00-15:30 |                |                                                                                                                               |
-| Introduction to msprime                    | 15:30-17:00 | PU             | [Slides](slides/simulation/index.html), [Exercise]({{< var lab.sim.msprime >}})                                               |
-|                                            |             |                |                                                                                                                               |
-| [7-Nov-2023 (Tue)]{.highlight}             |             |                |                                                                                                                               |
-| Recap day 1                                | 09:00-09:30 | PU             |                                                                                                                               |
-| Variant calling and filtering              | 09:30-10:00 | PU             | Slides, Exercise                                                                                                              |
-| Coffee break                               | 10:00-10:30 |                |                                                                                                                               |
-| Variant calling and filtering, continued   | 10:30-12:00 | PU             | Slides, Exercise                                                                                                              |
-| Lunch                                      | 12:00-13:00 |                |                                                                                                                               |
-| Genetic diversity                          | 13:00-15:00 | PU             | Slides, Exercise                                                                                                              |
-| Coffee break                               | 15:00-15:30 |                |                                                                                                                               |
-| Genetic diversity, continued               | 15:30-17:00 | PU             |                                                                                                                               |
-|                                            |             |                |                                                                                                                               |
-| [8-Nov-2023 (Wed)]{.highlight}             |             |                |                                                                                                                               |
-| Recap day 2                                | 09:00-09:30 | PU             |                                                                                                                               |
-| Population structure                       | 09:30-10:00 | NO             | [Slides](slides/population_structure/index.html)                                                                              |
-| Coffee break                               | 10:00-10:30 |                |                                                                                                                               |
-| Population structure, continued            | 10:30-12:00 | NO             |                                                                                                                               |
-| Lunch                                      | 12:00-13:00 |                |                                                                                                                               |
-| Population structure, continued            | 13:00-15:00 | NO             |                                                                                                                               |
-| Coffee break                               | 15:00-15:30 |                |                                                                                                                               |
-| Population structure, continued            | 15:30-17:00 | NO             |                                                                                                                               |
-|                                            |             |                |                                                                                                                               |
-| [9-Nov-2023 (Thu)]{.highlight}             |             |                |                                                                                                                               |
-| Recap day 3                                | 09:00-09:30 | NO             |                                                                                                                               |
-| Demography                                 | 09:30-10:00 | AS             |                                                                                                                               |
-| Coffee break                               | 10:00-10:30 |                |                                                                                                                               |
-| Demography and psmc                        | 10:30-12:00 | AS             |                                                                                                                               |
-| Lunch                                      | 12:00-13:00 |                |                                                                                                                               |
-| Selection                                  | 13:00-15:00 | JH             |                                                                                                                               |
-| Coffee break                               | 15:00-15:30 |                |                                                                                                                               |
-| Selection                                  | 15:30-17:00 | JH             |                                                                                                                               |
-|                                            |             |                |                                                                                                                               |
-| [10-Nov-2023 (Fri)]{.highlight}            |             |                |                                                                                                                               |
-| Recap                                      | 09:00-10:00 | JH, NO, PU, AS |                                                                                                                               |
-| Coffee break                               | 10:00-10:30 |                |                                                                                                                               |
-| Guest lecture                              | 10:30-11:30 |                |                                                                                                                               |
-| Recap continued                            | 11:30-12:00 | JH, NO, PU, AS |                                                                                                                               |
-| Lunch                                      | 12:00-13:00 |                |                                                                                                                               |
-| Project discussion / networking / own time | 13:00-17:00 |                |                                                                                                                               |
+```{r }
+#| label: schedule-table-markdown-out
+#| echo: false
+#| eval: true
+#| results: asis
+cnames <- c("Date", "Time", "Topic", "Teacher", "Assistant")
+tab <- smkd %>%
+  dplyr::select(, -room) %>%
+  setNames(cnames[1:ncol(.)])
+tabby <- by(tab, tab$Date, function(x) {
+  x
+})
+
+for (date in names(tabby)) {
+  cat(date)
+  cat(
+    print(kable(tabby[[date]][, 2:5], format = "pipe", escape = FALSE, row.names = FALSE)),
+    "\n\n: {.hover .condensed .responsive tbl-colwidths=\"[30, 20, 30, 20]\"}\n\n"
+  )
+}
+```
+
+```{r }
+#| label: schedule-table-html-out
+#| echo: false
+#| eval: false
+#| output: asis
+r <- rle(s$date)$length
+names(r) <- rle(s$date)$values
+cnames <- c("Time", "Topic", "Teacher", "Assistant")
+
+s %>%
+  dplyr::select(-date, -room) %>%
+  setNames(cnames[1:ncol(.)]) %>%
+  kable(format = "html", escape = FALSE) %>%
+  kable_styling(
+    bootstrap_options = c("hover", "condensed", "responsive"),
+    position = "center", full_width = TRUE
+  ) %>%
+  column_spec(1, width = "7em") %>%
+  column_spec(2, width = "16em") %>%
+  pack_rows(index = r, label_row_css = "background:white;", escape = FALSE, indent = FALSE)
+```
+
+<!-- marker legend -->
+<p class="small" style="margin-top:20px;">
+<span>
+<span style="margin-left:6px; margin-right:6px;">
+{{< fa calendar >}} Date </span>
+<span style="margin-left:6px; margin-right:6px;">
+{{< fa map-marker-alt >}} Venue </span>
+<span style="margin-left:6px; margin-right:6px;">
+{{< fa file-powerpoint >}} Slides </span>
+<span style="margin-left:6px; margin-right:6px;">
+{{< fa file-alt >}} Exercises </span>
+</span>
+</p>
+
+```{r }
+#| label: assistant-list
+#| echo: false
+#| eval: true
+#| results: asis
+# add assistant list if present
+asst <- yaml::read_yaml("_site.yml")$assistant
+
+if (!is.null(asst)) {
+  cat(
+    '<p class="small" style="margin-top:20px;">',
+    '<span style="margin-left:4px; margin-right:4px;">',
+    '<i class="fas fa-users" style="margin-left:4px; margin-right:4px;"></i></span>',
+    paste(asst, collapse = ", "),
+    "</p>"
+  )
+}
+```
 
 :::
-
-<!-- markdownlint-enable -->

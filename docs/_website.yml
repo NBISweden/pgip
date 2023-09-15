@@ -1,0 +1,45 @@
+website:
+  title: "Population genomics in practice"
+  navbar:
+    logo: assets/logos/nbislogo-green.svg
+    right:
+      - text: "HOME"
+        href: "index.qmd"
+      - text: "CONTENTS"
+        href: "contents.qmd"
+      - text: PROGRAM
+        href: "program.qmd"
+      - text: SCHEDULE
+        href: "schedule.qmd"
+      - text: ABOUT
+        href: "about.qmd"
+      - text: SLIDES
+        href: "slides/index.qmd"
+      - text: EXERCISES
+        href: "exercises/index.qmd"
+      - text: CODE RECIPES
+        href: "recipes/index.qmd"
+      - icon: "twitter"
+        href: "https://twitter.com/NBISwe"
+      - icon: "github"
+        href: "https://github.com/NBISweden/workshop-pgip"
+  page-footer:
+    border: false
+    left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
+    right: "Published with [Quarto](https://quarto.org/) v<?quarto.version?>"
+  favicon: assets/logos/nbislogo-green.svg
+
+  sidebar:
+    contents:
+      - section: Slides
+        contents:
+          - slides/pgip/index.qmd
+          - slides/foundations/index.qmd
+          - slides/simulation/index.qmd
+          - slides/population_structure/index.qmd
+      - section: Exercises
+        contents:
+          - exercises/simulation/index.qmd
+      - section: Code recipes
+        contents:
+          - recipes/index.qmd
