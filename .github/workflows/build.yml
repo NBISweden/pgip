@@ -74,7 +74,6 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2
         if: ${{ github.event_name == 'pull_request' }}
         with:
-          to: html
           path: docs
 
       - name: "Set environment variables"
