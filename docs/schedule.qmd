@@ -93,101 +93,6 @@ if (all(is.na(smkd$assistant)) | all(smkd$assistant == "")) smkd$assistant <- NU
 ```
 
 ```{r }
-#| label: html-table
-#| echo: false
-#| eval: false
-make_link <- function(link, src) {
-  paste0("<a href='", link, "'>", src, "</a>")
-}
-make_fa_link <- function(link, fa) {
-  src <- paste0("{{< fa ", fa, " >}}")
-  l <- make_link(link, src)
-  paste0("<strong>", l, "</strong>")
-}
-make_fa <- function(fa) {
-  src <- paste0("{{< fa ", fa, " >}}")
-  paste0("<strong>", src, "</strong>")
-}
-make_date <- function(date, day, room, color_primary) {
-  cal <- cat("{{< fa calendar >}}")
-  src <- paste0(
-    "<p class='table-date'><span style='font-weight:bold;'><span style='color:",
-    color_primary, ";'>",
-    make_fa("calendar"), "</span>", date, "</span>", "<span class='day-highlight'>",
-    day, "</span>", "<span style='color:", color_primary, ";'>",
-    make_fa("map-marker-alt"), "</span>", room, "</p>"
-  )
-  src <- paste0(
-    "<p class='table-date'><span style='font-weight:bold;'><span style='color:",
-    color_primary, ";'>",
-    cal, "<i class='fas fa-calendar'></i>", "</span>", date, "</span>", "</p>"
-  )
-  src
-}
-
-s <- s %>%
-  # missing values in date and room are filled
-  tidyr::fill(date, room, link_room, .direction = "down") %>%
-  # convert date characters to date objects
-  dplyr::mutate(date = format(as_datetime(date), "%d-%b-%Y")) %>%
-  dplyr::mutate(day = format(as_datetime(date, format = "%d-%b-%Y"), "%a")) %>%
-  dplyr::group_by(date) %>%
-  dplyr::mutate(
-    start_time = format(as_datetime(start_time, format = "%H:%M:%S"), "%H:%M"),
-    end_time = format(as_datetime(end_time, format = "%H:%M:%S"), "%H:%M")
-  ) %>%
-  as.data.frame() %>%
-  # room link
-  dplyr::mutate(room = ifelse(is.na(link_room), room,
-    make_link(link_room, room)
-  )) %>%
-  # lab link
-  dplyr::mutate(link_lab = ifelse(is.na(link_lab), NA,
-    make_fa_link(link_lab, "file-alt")
-  )) %>%
-  dplyr::mutate(link_slide = ifelse(is.na(link_slide), NA,
-    make_fa_link(link_slide, "file-powerpoint")
-  )) %>%
-  dplyr::mutate(date = paste0(
-    "<p class='table-date'><span style='font-weight:bold;'>",
-    "<span style='color:", color_primary, ";'>",
-    "<i class='fas fa-calendar' ",
-    "style='margin-left:5px;margin-right:5px;'></i>", "</span>", date,
-    "</span>", "<span class='day-highlight'>", day, "</span>",
-    "<span style='color:", color_primary,
-    ";'><i class='fa-solid fa-map-marker-alt' ",
-    "style='margin-left:5px;margin-right:5px;'></i></span>",
-    room, "</p>"
-  )) %>%
-  # style topic
-  dplyr::mutate(topic = ifelse(
-    tolower(topic) == "coffee break" |
-      tolower(topic) == "lunch" |
-      tolower(topic) == "dinner" |
-      tolower(topic) == "coffee and registration",
-    paste0("<span class='topic-highlight'>", topic, "</span>"),
-    paste0("<span style='margin-right:5px;'>", topic, "</span>")
-  )) %>%
-  # add links to topic
-  dplyr::mutate(topic = ifelse(
-    is.na(link_slide), topic,
-    paste(topic, link_slide)
-  )) %>%
-  dplyr::mutate(topic = ifelse(is.na(link_lab), topic, paste(topic, link_lab))) %>%
-  dplyr::mutate(topic = ifelse(
-    is.na(link_youtube), topic,
-    paste(topic, make_fa_link(link_youtube, "youtube"))
-  )) %>%
-  # add stuff to date
-  dplyr::mutate(time = paste0(start_time, " - ", end_time)) %>%
-  dplyr::mutate(teacher = ifelse(is.na(teacher), "", teacher)) %>%
-  dplyr::mutate(assistant = ifelse(is.na(assistant), "", assistant)) %>%
-  dplyr::select(date, room, time, topic, teacher, assistant)
-
-if (all(is.na(s$assistant)) | all(s$assistant == "")) s$assistant <- NULL
-```
-
-```{r }
 #| label: schedule-message
 #| echo: false
 #| eval: true
@@ -220,28 +125,6 @@ for (date in names(tabby)) {
     "\n\n: {.hover .condensed .responsive tbl-colwidths=\"[30, 20, 30, 20]\"}\n\n"
   )
 }
-```
-
-```{r }
-#| label: schedule-table-html-out
-#| echo: false
-#| eval: false
-#| output: asis
-r <- rle(s$date)$length
-names(r) <- rle(s$date)$values
-cnames <- c("Time", "Topic", "Teacher", "Assistant")
-
-s %>%
-  dplyr::select(-date, -room) %>%
-  setNames(cnames[1:ncol(.)]) %>%
-  kable(format = "html", escape = FALSE) %>%
-  kable_styling(
-    bootstrap_options = c("hover", "condensed", "responsive"),
-    position = "center", full_width = TRUE
-  ) %>%
-  column_spec(1, width = "7em") %>%
-  column_spec(2, width = "16em") %>%
-  pack_rows(index = r, label_row_css = "background:white;", escape = FALSE, indent = FALSE)
 ```
 
 <!-- marker legend -->
