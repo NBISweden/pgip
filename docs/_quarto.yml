@@ -1,6 +1,6 @@
 project:
   type: website
-  title: "Population genomics in practice"
+  title: "DDLS Population genomics in practice"
   output-dir: _site
   pre-render:
     - ../scripts/setup-data.sh
@@ -31,6 +31,8 @@ format:
       match: auto
   revealjs:
     quarto-required: ">=1.2.475"
+    theme:
+      - assets/css/style.scss
     toc: true
     toc-depth: 1
     slide-level: 2
@@ -57,8 +59,6 @@ format:
       data-background-image: assets/logos/nbis-scilifelab.svg
       data-background-size: 500px
       data-background-position: top left
-    theme:
-      - assets/css/style.scss
 
 execute:
   freeze: auto

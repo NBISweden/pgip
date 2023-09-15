@@ -32,7 +32,7 @@ $presentation-slide-text-align: left !default;
 
 $primary: $lime;
 $secondary: $lime75;
-$link-color: $lime;
+$link-color: $lime75;
 $body-color: $black;
 $code-block-bg: WhiteSmoke;
 
@@ -54,9 +54,6 @@ $code-block-font-size: 0.95rem;
 $code-bg: $code-block-bg; /* inline code */
 /*$code-color: ; */
 
-/* smaller is somehowe
-$presentation-font-smaller: 1.6 !default;
-
 /* site */
 $navbar-bg: white;
 $footer-bg: white;
@@ -73,7 +70,6 @@ $presentation-h5-font-size: 1.125em;
 $presentation-h6-font-size: 1em;
 
 /*-- scss:rules --*/
-
 :root {
   --color-primary: $lime75;
   --color-primary-dark: $lime;
@@ -123,7 +119,7 @@ pre.sourceCode.src {
   font-size: 1em;
 }
 
-strong {
+.reveal strong {
   color: $lime;
   font-weight: bold;
 }
@@ -345,8 +341,8 @@ dt {
 
 /* link colour */
 a, table a{
-  color: var(--color-primary);
-  text-decoration: none;
+  color: $link-color;
+  text-decoration: underline;
 }
 
 a:hover, table a:hover {

@@ -10,19 +10,61 @@ format:
       - assets/www/title-block.html
 execute:
   freeze: false
+  cache: false
 ---
 
 <!-- markdownlint-disable MD041 -->
 
 ### NBIS • Workshop
 
+### DDLS Population genomics in practice
+
+Welcome to the DDLS Population Genomics in Practice homepage!
+
+#### Important dates
+
+```{r }
+#| label: course-date-info
+#| echo: false
+#| eval: true
+#| results: asis
+library(lubridate)
+library(dplyr)
+library(kableExtra)
+library(formattable)
+library(yaml)
+
+current <- yaml::read_yaml("_course_dates.yml")$current
+session <- yaml::read_yaml("_course_dates.yml")[[as.character(current)]]
+df <- data.frame(
+  title = c("Next round", "Application opens", "Application deadline"),
+  date = c(
+    paste0(
+      format(as_datetime(session$start_time), "%d-%b-%Y"),
+      " - ",
+      format(as_datetime(session$end_time), "%d-%b-%Y")
+    ),
+    format(as_datetime(session$application_opens), "%d-%b-%Y"),
+    format(as_datetime(session$application_closes), "%d-%b-%Y")
+  )
+)
+cat(
+  print(kable(df,
+    format = "pipe", escape = FALSE,
+    row.names = FALSE, col.names = NULL,
+    align = c("l", "c")
+  )),
+  "\n\n: {.hover .condensed .responsive}\n\n"
+)
+```
+
+#### Brief contents
+
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-### DDLS Population genomics in practice
-
-Welcome to the DDLS Population Genomics in Practice homepage!
+This workshop includes the following moments:
 
 - Variant calling and filtering
 - Describing and summarising variation data
@@ -30,6 +72,9 @@ Welcome to the DDLS Population Genomics in Practice homepage!
 - Demographic analysis
 - Selection scans
 - Coalescent simulation
+
+See [syllabus](syllabus.qmd) for a more complete description of course
+contents and [info](info.qmd) for practical information.
 
 :::
 
@@ -41,16 +86,15 @@ Welcome to the DDLS Population Genomics in Practice homepage!
 #| label: ooa-demesdraw-fig
 #| echo: false
 #| eval: true
-#| out-with: 100%
+#| out-width: 100%
 import demes
 import demesdraw
 from matplotlib import pyplot as plt
-fig, ax = plt.subplots(figsize=(4, 5))
-demesfile = "{{< var demes.ooa >}}"
+fig, ax = plt.subplots(figsize=(8, 6))
 ooa = demes.load("data/data/ooa/ooa.demes.yaml")
 ax = demesdraw.tubes(ooa, ax=ax, num_lines_per_migration=6, seed=32)
+ax
 ```
-
 <!-- markdownlint-enable MD013 -->
 
 :::

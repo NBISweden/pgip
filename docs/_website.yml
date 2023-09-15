@@ -1,5 +1,5 @@
 website:
-  title: "Population genomics in practice"
+  title: "DDLS Population genomics in practice"
   navbar:
     logo: assets/logos/nbislogo-green.svg
     right:
@@ -9,12 +9,12 @@ website:
         href: "syllabus.qmd"
       - text: Precourse
         href: "precourse.qmd"
-      - text: "Contents"
+      - text: Contents
         href: "contents.qmd"
       - text: Schedule
         href: "schedule.qmd"
-      - text: About
-        href: "about.qmd"
+      - text: Info
+        href: "info.qmd"
       - text: Slides
         href: "slides/index.qmd"
       - text: Exercises
