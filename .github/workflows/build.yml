@@ -65,6 +65,9 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - run: |
+          quarto --version
+
       - name: Add miniconda path
         run: |
           echo "$(dirname $(which R))" >> $GITHUB_PATH
