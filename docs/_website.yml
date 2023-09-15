@@ -3,21 +3,23 @@ website:
   navbar:
     logo: assets/logos/nbislogo-green.svg
     right:
-      - text: "HOME"
+      - text: "Home"
         href: "index.qmd"
-      - text: "CONTENTS"
+      - text: Syllabus
+        href: "syllabus.qmd"
+      - text: Precourse
+        href: "precourse.qmd"
+      - text: "Contents"
         href: "contents.qmd"
-      - text: PROGRAM
-        href: "program.qmd"
-      - text: SCHEDULE
+      - text: Schedule
         href: "schedule.qmd"
-      - text: ABOUT
+      - text: About
         href: "about.qmd"
-      - text: SLIDES
+      - text: Slides
         href: "slides/index.qmd"
-      - text: EXERCISES
+      - text: Exercises
         href: "exercises/index.qmd"
-      - text: CODE RECIPES
+      - text: Code recipes
         href: "recipes/index.qmd"
       - icon: "twitter"
         href: "https://twitter.com/NBISwe"

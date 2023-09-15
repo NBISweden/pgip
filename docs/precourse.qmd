@@ -1,0 +1,110 @@
+---
+title: "Precourse"
+toc: false
+date: ""
+sidebar: false
+format:
+  html:
+    number-sections: false
+---
+
+
+## Suggested readings
+
+Although not required, it is recommended to briefly go through the
+following papers (in particular @fuller_PopulationGeneticsCoral_2020):
+
+- @fuller_PopulationGeneticsCoral_2020
+- @johri_RecommendationsImprovingStatistical_2022
+
+## UPPMAX account
+
+You will need an [uppmax account](https://www.uppmax.uu.se/) to run
+the exercises. You can apply for an account
+[here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
+
+### Tutorials
+
+Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
+<https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
+for information on how to connect to and work on uppmax.
+
+## Software installation
+
+::: {.callout-important}
+
+Instructions will be updated when a full list of required programs are
+available.
+
+:::
+
+In case there are issues with UPPMAX we ask you to prepare a local
+backup compute environment on your computer. We will use the
+[conda](https://docs.conda.io/en/latest/) package manager to install
+necessary requirements from the package repositories
+[bioconda](https://bioconda.github.io/) and
+[conda-forge](https://conda-forge.org/).
+
+### 1. Install conda
+
+To start using conda, follow the [quick command line install
+instructions](https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install)
+to install the minimal conda installer
+[miniconda](https://docs.conda.io/en/latest/miniconda.html).
+
+### 2. Configure conda
+
+Configure conda to access the package repositories (see also [bioconda
+usage](https://bioconda.github.io/#usage)). This will modify your
+`~/.condarc` file:
+
+```{bash}
+#| label: conda-configuration
+#| echo: true
+#| eval: false
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+::: {.callout-important}
+
+Please note that the order of these commands is important!
+
+:::
+
+### 3. Create an isolated course environment
+
+It is suggested you create and change to a isolated environment `pgip`
+dedicated to the course:
+
+```{bash }
+#| label: create-conda-pgip
+#| echo: true
+#| eval: false
+conda create -n pgip python=3.10 r-base
+conda activate pgip
+```
+
+To deactivate an environment you issue the command `conda deactivate`.
+
+### 4. Install packages
+
+You can install packages as follows (remember to activate `pgip`!):
+
+```{bash }
+#| label: conda-install-packages
+#| echo: true
+#| eval: false
+conda install bcftools angsd mosdepth
+```
+
+::: {.callout-tip}
+
+If installation is slow, you can try the
+[mamba](https://mamba.readthedocs.io/en/latest/mamba-installation.html) installer.
+
+:::
+
+<br>

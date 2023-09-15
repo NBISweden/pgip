@@ -32,7 +32,7 @@ $presentation-slide-text-align: left !default;
 
 $primary: $lime;
 $secondary: $lime75;
-$link-color: $aqua50;
+$link-color: $lime;
 $body-color: $black;
 $code-block-bg: WhiteSmoke;
 
@@ -389,8 +389,6 @@ a:focus, table a:focus{
   border-radius:4px;
   padding:4px;
   background: $grape25;
-  margin-left: 9px;
-  margin-right: 7px;
 }
 .day-highlight {
   color:white;
@@ -403,7 +401,23 @@ a:focus, table a:focus{
 }
 .table-date {
   font-size:110%;
+  font-weight: bold;
   padding-top:10px;
   padding-bottom:5px;
   margin-top:10px;
+}
+
+@media only screen and (max-width: 575px) {
+  .landing {
+    grid-template-columns: 100%;
+    text-align: center;
+  }
+
+  .landing-update {
+    text-align: center;
+  }
+
+  .landing-right {
+    padding: 2em;
+  }
 }

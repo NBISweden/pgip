@@ -1,0 +1,74 @@
+---
+title: "Syllabus"
+toc: false
+date: ""
+sidebar: false
+format:
+  html:
+    number-sections: false
+---
+
+The aim of this workshop is to provide an introduction to commonly
+used methods in population genomics. As the focus of the course is on
+hands-on work, the topics have been designed to cover the fundamental
+analyses that are common in many population genomics studies. The
+course consists of lectures and exercises, with a focus on the
+practical aspects of analyses. Whereas lectures introduce some
+background theory, their primary aim is to set the stage for
+accompanying exercises.
+
+::: {.panel-tabset}
+
+## Covered topics
+
+- Foundations of population genetics
+- Introduction to simulation and the coalescent
+- Basics of variant calling
+- Variant filtering and sequence masks
+- Characterization and intepretation of DNA sequence variation
+- Calculation and interpretation of summary statistics from variation
+  data
+- Investigating population structure with admixture modelling and
+  principal component analyses
+- Demographic modelling using sequentially Markovian coalescent models and linkage disequlibrium
+- Selection scans
+
+## Learning objectives
+
+Upon completion of this course, you will be able to:
+
+- describe the different forces of evolution and how they influence
+  genetic variation
+- understand and interpret genealogical trees and how they relate to
+  genetic variation data
+- describe the basics of the coalescent
+- perform simple coalescent simulations with msprime
+- run simple SLiM forward simulation models
+- describe and run the steps of a variant calling pipeline, including
+  quality control of raw reads, read mapping, and variant calling
+- know how and when to filter raw variant calls using manual coverage
+  filters
+- describe and calculate nucleotide diversity from variation data
+- analyze population structure with admixture modelling and
+  dimensionality reduction methods
+- perform demographic modelling with sequential Markovian coalescent
+  models
+- describe methods that identify regions undergoing adaptation and
+  selection
+- run selection scans, score identified regions and interpret findings
+  in the context of genome annotations
+
+## Requirements
+
+- Basic knowledge in R or Python
+- Basic knowledge of variant calling, or the equivalent of NBIS course
+  "Introduction to Bioinformatics using NGS data"
+- Basic knowledge of population genetics
+- Basic understanding of frequentist statistics
+- A computer
+
+Desirable:
+
+- Experience with analysis of NGS and other omic data
+
+:::

@@ -1907,6 +1907,101 @@ evolutionary forces besides drift, no selective advantages
 
 ## Mutation
 
+1. Figure of dna with lightning bolt
+2. Wright-Fisher image with white -> gray individual
+3. mutation models
+
+::: {.fragment}
+
+<!-- markdownlint-disable MD013 -->
+
+```{r, engine='tikz', fig.ext="svg" }
+#| label: mutation-models
+#| echo: false
+#| eval: true
+\usetikzlibrary{fit,decorations.pathreplacing}
+
+\begin{tikzpicture}[
+  every matrix/.style={matrix of nodes, ampersand replacement=\&,
+    nodes in empty cells},
+  every node/.style={text height=1.5ex},
+  ]
+\tikzstyle{sequence} = [black, font=\sffamily, column sep={.5cm,between origins}]
+  \matrix(seq)[sequence] at (0,0)
+  {
+    T \& T \& A \& C \& A \& A \& T \& C \& C \& G \& A \& T \& C \& G \& C\\
+    T \& T \& A \& C \& G \& A \& T \& G \& C \& G \& C \& T \& C \& G \& C\\
+    T \& C \& A \& C \& A \& A \& T \& G \& C \& G \& A \& T \& G \& G \& A\\
+     T \& T \& A \& C \& G \& A \& T \& G \& C \& G \& C \& T \& C \& G \& T\\
+  };
+\node[fit={(seq-1-2.north west) (seq-4-2.south east)}, inner sep=0, draw=black]{};
+\node[fit={(seq-1-15.north west) (seq-4-15.south east)}, inner sep=0, draw=black]{};
+\node[above of=seq-1-2, node distance=1.2cm] (two-allele) {Two-allele model};
+\draw (seq-1-2.north) -- (two-allele);
+\node[above of=seq-1-15, node distance=1.2cm] (finite) {Finite sites model};
+\draw (seq-1-15.north) -- (finite);
+\draw[decorate,decoration={brace,raise=0.2cm}] (seq-1-15.north east) -- (seq-4-15.south east);
+\node at ($(seq-3-15) !.5! (seq-2-15)$) (seq-right) {};
+\node[anchor=west, text width=1cm, right of=seq-right, node distance=1.2cm] (infinite-alleles) {Inifinite alleles model};
+\node at ($(seq-4-1) !.5! (seq-4-15)$) (seq-low) {};
+\draw[decorate,decoration={brace,mirror,raise=0.2cm}] (seq-4-1.south west) -- (seq-4-15.south east);
+\node[below of=seq-low, node distance=.8cm] (infinite-sites) {Inifinite sites model};
+\end{tikzpicture}
+```
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.notes }
+
+<!-- markdownlint-disable MD013 -->
+
+```{r, engine='tikz', fig.ext='svg' }
+#| label: stepwise-mutation-model
+#| echo: false
+#| eval: true
+#| out-width: 1000px
+\begin{tikzpicture}[
+  every matrix/.style={matrix of nodes, ampersand replacement=\&,
+    nodes in empty cells},
+  every node/.style={text height=2ex},
+  ]
+  \tikzstyle{sequence} = [black, font=\sffamily, column sep={1.5cm,between origins},row sep={.7cm}]
+  \matrix(seq)[sequence] at (0,0)
+  {
+$\mathsf{A}_{i-3}$ \&  $\mathsf{A}_{i-2}$ \&  $\mathsf{A}_{i-1}$ \& $\mathsf{A}_{i}$ \&  $\mathsf{A}_{i+1}$ \&  $\mathsf{A}_{i+2}$ \& $\mathsf{A}_{i+3}$ \\
+  \&   \&  \&   \&   \&  \&  \\
+  };
+\draw[<->] (seq-1-1) -- (seq-1-2);
+\draw[<->] (seq-1-2) -- (seq-1-3);
+\draw[<->] (seq-1-3) -- (seq-1-4);
+\draw[<->] (seq-1-4) -- (seq-1-5);
+\draw[<->] (seq-1-5) -- (seq-1-6);
+\draw[<->] (seq-1-6) -- (seq-1-7);
+\node[left of=seq-1-1, node distance=0.7cm] {...};
+\node[right of=seq-1-7, node distance=0.7cm] {...};
+\draw[thick] (seq-2-1.south) -- (seq-2-1.north)
+(seq-2-2.south) -- (seq-2-2.north)
+(seq-2-3.south) -- (seq-2-3.north)
+(seq-2-4.south) -- (seq-2-4.north)
+(seq-2-5.south) -- (seq-2-5.north)
+(seq-2-6.south) -- (seq-2-6.north)
+(seq-2-7.south) -- (seq-2-7.north);
+
+\draw[thick] (seq-2-1.west) -- (seq-2-7.east);
+\node[above of=seq-1-4] {Stepwise mutation model};
+\end{tikzpicture}
+```
+
+<!-- markdownlint-enable MD013 -->
+
+Model B: mainly for repeats
+
+:::
+
+## Mutation and drift
+
 :::: {.columns}
 
 ::: {.column width="60%"}
@@ -1967,91 +2062,6 @@ Segue: so if drift removes variation, what introduces it? Mutation!
 :::
 
 ## Models of mutation
-
-<!-- markdownlint-disable MD013 -->
-
-```{r, engine='tikz', fig.ext="svg" }
-#| label: mutation-models
-#| echo: false
-#| eval: true
-\usetikzlibrary{fit,decorations.pathreplacing}
-
-\begin{tikzpicture}[
-  every matrix/.style={matrix of nodes, ampersand replacement=\&,
-    nodes in empty cells},
-  every node/.style={text height=1.5ex},
-  ]
-\tikzstyle{sequence} = [black, font=\sffamily, column sep={.5cm,between origins}]
-  \matrix(seq)[sequence] at (0,0)
-  {
-    T \& T \& A \& C \& A \& A \& T \& C \& C \& G \& A \& T \& C \& G \& C\\
-    T \& T \& A \& C \& G \& A \& T \& G \& C \& G \& C \& T \& C \& G \& C\\
-    T \& C \& A \& C \& A \& A \& T \& G \& C \& G \& A \& T \& G \& G \& A\\
-     T \& T \& A \& C \& G \& A \& T \& G \& C \& G \& C \& T \& C \& G \& T\\
-  };
-\node[fit={(seq-1-2.north west) (seq-4-2.south east)}, inner sep=0, draw=black]{};
-\node[fit={(seq-1-15.north west) (seq-4-15.south east)}, inner sep=0, draw=black]{};
-\node[above of=seq-1-2, node distance=1.2cm] (two-allele) {Two-allele model};
-\draw (seq-1-2.north) -- (two-allele);
-\node[above of=seq-1-15, node distance=1.2cm] (finite) {Finite sites model};
-\draw (seq-1-15.north) -- (finite);
-\draw[decorate,decoration={brace,raise=0.2cm}] (seq-1-15.north east) -- (seq-4-15.south east);
-\node at ($(seq-3-15) !.5! (seq-2-15)$) (seq-right) {};
-\node[anchor=west, text width=1cm, right of=seq-right, node distance=1.2cm] (infinite-alleles) {Inifinite alleles model};
-\node at ($(seq-4-1) !.5! (seq-4-15)$) (seq-low) {};
-\draw[decorate,decoration={brace,mirror,raise=0.2cm}] (seq-4-1.south west) -- (seq-4-15.south east);
-\node[below of=seq-low, node distance=.8cm] (infinite-sites) {Inifinite sites model};
-\end{tikzpicture}
-```
-
-::: {.fragment}
-
-```{r, engine='tikz', fig.ext='svg' }
-#| label: stepwise-mutation-model
-#| echo: false
-#| eval: true
-#| out-width: 1000px
-\begin{tikzpicture}[
-  every matrix/.style={matrix of nodes, ampersand replacement=\&,
-    nodes in empty cells},
-  every node/.style={text height=2ex},
-  ]
-  \tikzstyle{sequence} = [black, font=\sffamily, column sep={1.5cm,between origins},row sep={.7cm}]
-  \matrix(seq)[sequence] at (0,0)
-  {
-$\mathsf{A}_{i-3}$ \&  $\mathsf{A}_{i-2}$ \&  $\mathsf{A}_{i-1}$ \& $\mathsf{A}_{i}$ \&  $\mathsf{A}_{i+1}$ \&  $\mathsf{A}_{i+2}$ \& $\mathsf{A}_{i+3}$ \\
-  \&   \&  \&   \&   \&  \&  \\
-  };
-\draw[<->] (seq-1-1) -- (seq-1-2);
-\draw[<->] (seq-1-2) -- (seq-1-3);
-\draw[<->] (seq-1-3) -- (seq-1-4);
-\draw[<->] (seq-1-4) -- (seq-1-5);
-\draw[<->] (seq-1-5) -- (seq-1-6);
-\draw[<->] (seq-1-6) -- (seq-1-7);
-\node[left of=seq-1-1, node distance=0.7cm] {...};
-\node[right of=seq-1-7, node distance=0.7cm] {...};
-\draw[thick] (seq-2-1.south) -- (seq-2-1.north)
-(seq-2-2.south) -- (seq-2-2.north)
-(seq-2-3.south) -- (seq-2-3.north)
-(seq-2-4.south) -- (seq-2-4.north)
-(seq-2-5.south) -- (seq-2-5.north)
-(seq-2-6.south) -- (seq-2-6.north)
-(seq-2-7.south) -- (seq-2-7.north);
-
-\draw[thick] (seq-2-1.west) -- (seq-2-7.east);
-\node[above of=seq-1-4] {Stepwise mutation model};
-\end{tikzpicture}
-```
-
-:::
-
-<!-- markdownlint-enable MD013 -->
-
-::: {.notes }
-
-Model B: mainly for repeats
-
-:::
 
 ## Tracing the evolution of mutations
 
@@ -2281,7 +2291,7 @@ For a list of methods see <https://methodspopgen.com/methods-to-detect-selection
 
 :::
 
-## Selection {.smaller}
+## Selection and fitness {.smaller}
 
 > Much confusion exists in the literature regarding how various types
 > of selection are defined, in particular because some of the
@@ -2301,8 +2311,6 @@ $$
 
 where $\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}$ is the **mean
 fitness**
-
-<br/>
 
 |         |                                        |
 |---------|----------------------------------------|
@@ -2529,14 +2537,14 @@ ggplot(x, aes(x=dnds)) +
 
 ::: {.fragment}
 
-<div style="transform: translate(0, -50px);">
+:::{.translatey50}
 
 Not all mutations fall in genes. Methods for detecting direct
 selection not applicable to studying selection on *single* mutation,
 or e.g., balancing. This requires looking for specific patterns of
 diversity surrounding locus under selection.
 
-</div>
+:::
 
 :::
 
@@ -2940,7 +2948,7 @@ Topology for selection more compressed.
 
 ## Hitchhiking versus background selection
 
-<br>
+:::{}
 
 ```{r, engine='tikz', fig.ext='svg' }
 #| label: fig-hitchhiking-vs-background-selection
@@ -3105,6 +3113,8 @@ Topology for selection more compressed.
 
 \end{tikzpicture}
 ```
+
+:::
 
 ## Summary
 

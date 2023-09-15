@@ -1,10 +1,13 @@
 ---
 title: "Schedule"
 toc: false
+date: last-modified
 sidebar: false
 format:
   html:
     number-sections: false
+    template-partials:
+      - assets/www/title-block.html
 execute:
   cache: false
 ---
@@ -37,7 +40,9 @@ s <- s[!apply(s, 1, function(x) all(is.na(x))), ]
 #| label: markdown-schedule
 #| echo: false
 #| eval: true
-# Keep as reference; grouping piped tables non-trivial?
+format_string <- function(s, fmt) {
+  paste0("[", s, "]{", fmt, "}")
+}
 smkd <- s %>%
   # missing values in date and room are filled
   tidyr::fill(date, room, link_room, .direction = "down") %>%
@@ -66,8 +71,9 @@ smkd <- s %>%
     paste0("**[{{< fa file-powerpoint >}}](", link_slide, ")**")
   )) %>%
   dplyr::mutate(date = paste(
-    "**{{< fa calendar >}}**", date,
-    day, "**{{< fa map-marker-alt >}}**", room
+    "**{{< fa calendar >}}**", format_string(date, ".table-date"),
+    format_string(day, ".day-highlight"), "**{{< fa map-marker-alt >}}**",
+    room
   )) %>%
   # style topic
   dplyr::mutate(topic = ifelse(
@@ -99,11 +105,11 @@ if (all(is.na(smkd$assistant)) | all(smkd$assistant == "")) smkd$assistant <- NU
 #| out-width: 100%
 #| output: asis
 if (!is.null(schedule_message) & nchar(schedule_message) != 0) {
-  cat(paste0("::: {.callout-note}\n", schedule_message, "\n:::"))
+  cat(paste0("::: {.callout-note}\n", schedule_message, "\n:::\n<br>\n"))
 }
 ```
 
-::: {.contents-table .column-body-outset}
+::: {.contents-table}
 
 ```{r }
 #| label: schedule-table-markdown-out
@@ -122,7 +128,7 @@ for (date in names(tabby)) {
   cat(date)
   cat(
     print(kable(tabby[[date]][, 2:5], format = "pipe", escape = FALSE, row.names = FALSE)),
-    "\n\n: {.hover .condensed .responsive tbl-colwidths=\"[30, 20, 30, 20]\"}\n\n"
+    "\n\n: {.hover .condensed .responsive tbl-colwidths=\"[20, 40, 25, 15]\"}\n\n"
   )
 }
 ```
@@ -159,5 +165,15 @@ if (!is.null(asst)) {
   )
 }
 ```
+
+:::
+
+::: {.landing-update}
+
+::: {.smallest}
+
+Last updated on {{< fa calendar-alt >}} {{< meta date >}}
+
+:::
 
 :::

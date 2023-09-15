@@ -1,36 +1,61 @@
 ---
-pagetitle: "PGIP 2023"
+pagetitle: "DDLS PGIP 2023"
 toc: false
-date: ""
+date: last-modified
 sidebar: false
 format:
   html:
     number-sections: false
+    template-partials:
+      - assets/www/title-block.html
 execute:
   freeze: false
 ---
 
-# [**PGIP** • 2023]{.large}
+<!-- markdownlint-disable MD041 -->
 
-### Population genomics in practice
+### NBIS • Workshop
 
-::: {style="margin-bottom: 1em;"}
+:::: {.columns}
 
-##### 6-10 November 2023, Uppsala, Sweden
+::: {.column width="50%"}
+
+### DDLS Population genomics in practice
+
+Welcome to the DDLS Population Genomics in Practice homepage!
+
+- Variant calling and filtering
+- Describing and summarising variation data
+- Population structure
+- Demographic analysis
+- Selection scans
+- Coalescent simulation
 
 :::
 
-<br>
+::: {.column width="50%"}
 
-[**This site is under construction!**]{.largest}
+<!-- markdownlint-disable MD013 -->
 
-<br>
+```{python }
+#| label: ooa-demesdraw-fig
+#| echo: false
+#| eval: true
+#| out-with: 100%
+import demes
+import demesdraw
+from matplotlib import pyplot as plt
+fig, ax = plt.subplots(figsize=(4, 5))
+demesfile = "{{< var demes.ooa >}}"
+ooa = demes.load("data/data/ooa/ooa.demes.yaml")
+ax = demesdraw.tubes(ooa, ax=ax, num_lines_per_migration=6, seed=32)
+```
 
-Welcome to the Population Genomics in Practice homepage!
+<!-- markdownlint-enable MD013 -->
 
-This workshop is organised by the National Bioinformatics
-Infrastructure, Sweden (NBIS). NBIS is a platform of the Science for
-Life Laboratory (SciLifeLab).
+:::
+
+::::
 
 <br>
 
@@ -40,6 +65,14 @@ Life Laboratory (SciLifeLab).
 
 ---
 
-::: small
-Updated: <?lua.date?> at <?lua.time?>.
+::: {.landing-update}
+
+::: {.smallest}
+
+Last updated on {{< fa calendar-alt >}} {{< meta date >}}
+
 :::
+
+:::
+
+<!-- markdownlint-enable MD041 -->

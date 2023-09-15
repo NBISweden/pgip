@@ -1,5 +1,5 @@
 date;room;start_time;end_time;topic;teacher;assistant;link_slide;link_lab;link_youtube;link_room
-2023/11/06;Uppsala;08:30:00;09:30:00;Coffee and registration;;;;;;
+2023/11/06;Uppsala;08:30:00;09:30:00;Coffee and registration;;;;;;https://www.bmc.uu.se/scilifelab-navet/motesrum-i-navet/#anchor-933950
 ;Uppsala;09:00:00;09:30:00;Welcome and general introduction;Per Unneberg;AS, JH, NO;;;;
 ;Uppsala;09:30:00;10:30:00;Population genomics in practice;Per Unneberg;;slides/pgip/index.html;;;
 ;Uppsala;10:30:00;12:00:00;Population genetics foundations;Per Unneberg;;slides/foundations/index.html;;;

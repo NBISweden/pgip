@@ -4,3 +4,6 @@ lab:
     howto: exercises/simulation/index.html#sec-exercise-simulation-howto
     coalescent: exercises/simulation/index.html#sec-exercise-simulation-coalescent
     msprime: exercises/simulation/index.html#sec-exercise-simulation-msprime
+
+demes:
+  ooa: data/data/ooa/ooa.demes.yaml

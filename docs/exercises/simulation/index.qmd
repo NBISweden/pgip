@@ -22,7 +22,7 @@ Start by going through the [HOWTO]({{< var lab.sim.baseurl
 ## 1. Introduction to the coalescent {#sec-exercise-simulation-coalescent}
 
 Work through the [introduction to the coalescent]({{< var
-exercises.simulation.baseurl >}}?path=coalescent.ipynb) workbook.
+lab.sim.baseurl >}}?path=coalescent.ipynb) workbook.
 
 ## 2. Introduction to msprime {#sec-exercise-simulation-msprime}
 
