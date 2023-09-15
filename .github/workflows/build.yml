@@ -81,13 +81,13 @@ jobs:
         run: |
           sudo apt-get install dvisvgm
 
-      - name: Render project without publishing
-        uses: quarto-dev/quarto-actions/render@v2
-        if: ${{ github.event_name == 'pull_request' }}
-        with:
-          path: docs
-          # Dummy target
-          target: html
+      # - name: Render project without publishing
+      #   uses: quarto-dev/quarto-actions/render@v2
+      #   if: ${{ github.event_name == 'pull_request' }}
+      #   with:
+      #     path: docs
+      #     # Dummy target
+      #     target: html
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
