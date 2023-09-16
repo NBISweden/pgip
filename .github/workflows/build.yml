@@ -64,6 +64,7 @@ jobs:
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        version: v1.4.366
 
       - run: |
           quarto --version
