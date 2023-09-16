@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.366">
 
   <meta name="author" content="Per Unneberg">
   <title>DDLS Population genomics in practice - Linked selection</title>
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -99,6 +99,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -243,7 +244,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -415,7 +417,7 @@
   <h1 class="title">Linked selection</h1>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">15-Sep-2023</h4>
+  <h4 class="date">16-Sep-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -452,7 +454,7 @@
 <section id="selective-sweep-1" class="slide level2">
 <h2>Selective sweep</h2>
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_51eacb4a9e001967e6e5faa0749b18cb">
+<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_7bf321d3bd64b63195d682ac772ea183">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
@@ -463,7 +465,7 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-pi-S_0ac81a9830d82c3f476097ddd5bda9d4">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-pi-S_b2dbab5d5ccdde17db4baf7c5f4e7f77">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -475,7 +477,7 @@
 <!-- markdownlint-enable MD013 -->
 </div><div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-tajd_10f9cd685697fe0268731a0084264015">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-tajd_1d084e86f0c31d950f866ddfa3dd382e">
 <div class="cell-output cell-output-error">
 <pre><code>Error in device(files[i], ...): unused arguments (units = "in", res = 192)</code></pre>
 </div>
@@ -504,7 +506,7 @@
 <section id="selective-sweep-2" class="slide level2">
 <h2>Selective sweep</h2>
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_74273fb0acada19733235fc43559f319">
+<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_c78221398b20e4a58ae266799dd4024b">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
@@ -515,7 +517,7 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-pi-S-2_edd6eb2490f27cd49969efbe09901e39">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-pi-S-2_0d39bcbb019e9508a57f51ae6ace867d">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -526,7 +528,7 @@
 </div>
 <!-- markdownlint-enable MD013 -->
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-tajd-2_e49908dce520e7dd249af319f5971b22">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/pgip-slim-sweep-plot-tajd-2_9397b548814da23dde1d2871de3a35c2">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -545,7 +547,7 @@
 <div class="footer footer-default">
 <p>Linked selection</p>
 </div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-charlesworth_EffectsOfSelection_2021" class="csl-entry" role="listitem">
 Charlesworth, B., &amp; Jensen, J. D. (2021). Effects of selection at linked sites on patterns of genetic variability. <em>Annual Review of Ecology, Evolution, and Systematics</em>, <em>52</em>(1), 177–197. <a href="https://doi.org/10.1146/annurev-ecolsys-010621-044528">https://doi.org/10.1146/annurev-ecolsys-010621-044528</a>
 </div>
@@ -581,7 +583,6 @@ Nielsen, R. (2005). Molecular <span>Signatures</span> of <span>Natural Selection
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -881,10 +882,9 @@ Nielsen, R. (2005). Molecular <span>Signatures</span> of <span>Natural Selection
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -894,8 +894,17 @@ Nielsen, R. (2005). Molecular <span>Signatures</span> of <span>Natural Selection
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

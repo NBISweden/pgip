@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.366">
 
   <meta name="author" content="Per Unneberg">
   <title>DDLS Population genomics in practice - Population admixture</title>
@@ -34,6 +34,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -178,7 +179,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -351,7 +353,7 @@
   <h3 class="subtitle">Admixture</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">15-Sep-2023</h4>
+  <h4 class="date">16-Sep-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -379,7 +381,7 @@
 </section>
 <section id="refs" class="slide level2 unnumbered unlisted">
 <h2>Refs</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-lipson_ApplyingF4statisticsAdmixture_2020" class="csl-entry" role="listitem">
 Lipson, M. (2020). Applying F4-statistics and admixture graphs: <span>Theory</span> and examples. <em>Molecular Ecology Resources</em>, <em>20</em>(6), 1658–1667. <a href="https://doi.org/10.1111/1755-0998.13230">https://doi.org/10.1111/1755-0998.13230</a>
 </div>
@@ -425,7 +427,6 @@ Peter, B. M. (2016). Admixture, <span>Population Structure</span>, and <span>F-S
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -725,10 +726,9 @@ Peter, B. M. (2016). Admixture, <span>Population Structure</span>, and <span>F-S
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -738,8 +738,17 @@ Peter, B. M. (2016). Admixture, <span>Population Structure</span>, and <span>F-S
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
