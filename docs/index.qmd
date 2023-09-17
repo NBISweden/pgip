@@ -15,30 +15,39 @@ execute:
 
 <!-- markdownlint-disable MD041 -->
 
-### NBIS • Workshop
-
-### DDLS Population genomics in practice
-
-Welcome to the DDLS Population Genomics in Practice homepage!
-
-#### Important dates
-
 ```{r }
-#| label: course-date-info
+#| label: load-course-date-info
 #| echo: false
 #| eval: true
-#| results: asis
 library(lubridate)
 library(dplyr)
 library(kableExtra)
 library(formattable)
 library(yaml)
 
-current <- yaml::read_yaml("_course_dates.yml")$current
-session <- yaml::read_yaml("_course_dates.yml")[[as.character(current)]]
+current <- yaml::read_yaml("_course_info.yml")$current
+session <- yaml::read_yaml("_course_info.yml")[[as.character(current)]]
+```
+
+### NBIS • Workshop
+
+### DDLS Population genomics in practice
+
+Welcome to the DDLS Population Genomics in Practice homepage!
+
+#### Important dates and information
+
+See the canvas home page for the current course [`r current`](`r
+session$canvas_home_page`) for more information on how to apply.
+
+```{r }
+#| label: print-course-dates
+#| echo: false
+#| eval: true
+#| results: asis
 df <- data.frame(
   title = c("Next round", "Application opens", "Application deadline"),
-  date = c(
+  data = c(
     paste0(
       format(as_datetime(session$start_time), "%d-%b-%Y"),
       " - ",
@@ -74,7 +83,8 @@ This workshop includes the following moments:
 - Coalescent simulation
 
 See [syllabus](syllabus.qmd) for a more complete description of course
-contents and [info](info.qmd) for practical information.
+contents and [info](info.qmd) for practical information on venue and
+hotels.
 
 :::
 
