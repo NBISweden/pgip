@@ -37,8 +37,9 @@ Welcome to the DDLS Population Genomics in Practice homepage!
 
 #### Important dates and information
 
-See the canvas home page for the current course [`r current`](`r
-session$canvas_home_page`) for more information on how to apply.
+See the canvas home page for the current course
+[`r current`](`r session$canvas_home_page`) for more
+information on how to apply.
 
 ```{r }
 #| label: print-course-dates
