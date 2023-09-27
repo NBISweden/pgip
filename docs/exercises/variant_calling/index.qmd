@@ -2,7 +2,17 @@
 format: html
 ---
 
+<!-- markdownlint-disable MD041 -->
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+<!-- markdownlint-enable MD041 -->
+
 # Variant calling {#sec-variantcalling}
+
+In this exercise we will perform the basic steps in variant calling.
 
 ## Best practice pipeline
 

@@ -1,6 +1,5 @@
 ---
 format: html
-number-sections: true
 knitr:
   opts_chunk:
     collapse: true
@@ -32,27 +31,4 @@ For full listing, see [slides/index.html](slides/index.qmd).
 ## SLiM recipes
 
 Collection of SLiM recipes [@hallerben_MesserLabSLiM_2016] used to
-generate figures and examples. SLiM recipes can be run with wrapper
-`pgip-slim` to generate multiple simulations.
-
-```{bash }
-#| label: pgip-slim-help
-#| echo: true
-#| eval: true
-pgip-slim --help
-```
-
-As an example, the following command can be used to generate 10
-simulations using the @sec-recipes-slim-selective-sweep recipe.
-
-```{bash }
-#| label: pgip-slim-example
-#| echo: true
-#| eval: false
-pgip-slim --seed 42 -n 10 -r 1e-6 -m 1e-7 --threads 12 \
-    selective_sweep.slim -l 1000000 --outdir results/slim
-```
-
-### [selective_sweep.slim](slim/selective_sweep.slim) {#sec-recipes-slim-selective-sweep}
-
-Recipe to simulate a selective sweep
+generate figures and examples. See [slim/index.html](slim/index.qmd) for full listing.
