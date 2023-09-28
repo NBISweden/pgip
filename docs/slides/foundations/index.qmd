@@ -8,6 +8,7 @@ format:
     footer: Population genetics foundations
 ---
 
+
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
@@ -28,11 +29,31 @@ library(ggraph)
 library(tidygraph)
 ```
 
-::: {.notes }
+## Intended learning outcomes {.unnumbered .unlisted}
+
+- Introduction to foundations of population genetics
+- Emphasis on genealogies
+
+::: {.notes}
+
+Objective: introduce the foundations of population genetics, with
+an emphasis on genealogies. Framing population genetic concepts in
+trees will facilitate the introduction of the coalescent in the
+afternoon.
+
+The lecture presents sequence data, the Wright-Fisher model,
+genetic drift, mutation, and selection. The focus is to
+familiarise students with concepts and basic theory.
 
 :::
 
 # DNA variation
+
+:::{}
+
+![](assets/images/popgen.svg)
+
+:::
 
 ::: {.notes }
 
@@ -437,7 +458,7 @@ Segue: describing variation fine, but where does it come from and how does it ch
 
 If assumptions of HWE hold, we have no change of variation. However,
 we **want** to look at **change** of variation and disentangle the
-forces that imposes change
+forces that impose change
 
 :::
 
@@ -447,62 +468,14 @@ forces that imposes change
 #| label: fig-hwe-1000genomes
 #| echo: false
 #| eval: true
+#| file: ../../recipes/slides/foundations/hwe.R
 #| fig-height: 6
 #| fig-width: 12
 #| fig-cap:
 #|     Hardy-Weinberg proportions in 10,000 SNPs on chromosome
 #|     22 from three populations based on 1000 genomes data.
-#|     Illustration inspired by @cooplab_PopulationGeneticsCourse_2011
-pops <- c("CEU", "CHB", "YRI")
-fn <- file.path("data/Homo_sapiens/1000g/genotypes", paste0(pops, ".22:17000000-20000000.hwe.gz"))
-names(fn) <- pops
-x <- do.call(
-    "rbind", lapply(pops, function(p) {
-      y <- cbind(population=p, read.table(fn[[p]], header=TRUE))
-      geno <- do.call("rbind", lapply(strsplit(y$GENO, "/"), as.numeric))
-      n <- round(nrow(geno)/2)
-      geno <- rbind(geno[1:n,], geno[(n+1):nrow(geno), 3:1])
-      colnames(geno) <- c("AA.cnt", "Aa.cnt", "aa.cnt")
-      geno.frq <- as.data.frame(geno / apply(geno, 1, sum))
-      colnames(geno.frq) <- c("AA", "Aa", "aa")
-      allele.frq <- as.data.frame(cbind(geno.frq$AA + 0.5*geno.frq$Aa,
-                                        geno.frq$aa + 0.5*geno.frq$Aa))
-      colnames(allele.frq) <- c("p", "q")
-      cbind(y, geno, geno.frq, allele.frq)
-    }))
-x <- pivot_longer(x, cols=c("AA", "Aa", "aa"), names_to="genotype")
-p <- seq(0, 1, 0.01)
-n <- 10000
-z <- do.call("rbind", by(x, x$population, function(y) {
-  y[sample(nrow(y), 10000),]}))
-
-vend <- 0.8
-cols.hwe <- c(viridis_pal(end=vend)(3), "black", "black")
-lt.hwe <- c(rep("blank", 3), "dashed", "solid")
-shape.hwe <- c(rep(16, 3), NA, NA)
-cnames <- c("aa", "Aa", "AA", "Hardy Weinberg Expectation", "Mean")
-names(cols.hwe) <- cnames
-names(lt.hwe) <- cnames
-names(shape.hwe) <- cnames
-
-ggplot(z, aes(x=p, y=value)) +
-  geom_point(size=2, alpha=.6, aes(color=genotype)) +
-  geom_smooth(method="loess", linewidth=1, show.legend=TRUE,
-              lty="dashed", aes(group=genotype, color="Mean")) +
-  geom_line(inherit.aes=FALSE, aes(x=p, y=p**2,
-                                   color="Hardy Weinberg Expectation")) +
-  geom_line(inherit.aes=FALSE, aes(x=p, y=2*p*(1-p),
-                                   color="Hardy Weinberg Expectation")) +
-  geom_line(inherit.aes=FALSE, aes(x=p, y=(1-p)**2,
-                                   color="Hardy Weinberg Expectation")) +
-  xlab("allele frequency") + ylab("genotype frequency") +
-  facet_grid(. ~ population) + scale_color_viridis_d(end=vend) +
-  scale_color_manual(name=NULL, values=cols.hwe,
-                     guide = guide_legend(
-                         override.aes = list(
-                             linetype = lt.hwe,
-                             shape = shape.hwe
-                         )))
+#|     Illustration inspired by @cooplab_PopulationGeneticsCourse_2011.
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl >}}#sec-recipe-slides-hwe)
 ```
 
 ::: {.notes }
@@ -1383,6 +1356,47 @@ i.e., 2N in this case.
 :::
 
 # Origin and change of variation
+
+:::: {style="display: grid; grid-template-columns: 300px 200px 200px;
+grid-row-gap: 0px; grid-column-gap: 100px;"}
+
+<div>&nbsp;</div>
+
+:::{.circular-image}
+
+Mutation
+
+![](assets/images/mutation.jpg)
+
+:::
+
+:::{.circular-image}
+
+Selection
+
+![](assets/images/finches.jpg)
+
+:::
+
+<div>&nbsp;</div>
+
+:::{.circular-image}
+
+Recombination
+
+![](assets/images/recombination.jpeg)
+
+:::
+
+:::{.circular-image}
+
+Drift
+
+![](assets/images/genetic-drift.png)
+
+:::
+
+::::
 
 ## Genetic drift with alleles
 

@@ -6,6 +6,13 @@ Course materials for course [Population Genomics in
 Practice](https://uppsala.instructure.com/courses/86976). Please make
 sure to read the entire README before adding material.
 
+## Terms of use
+
+You are free to use the course material for online learning, journal
+clubs, or whatever way you see fit. If you find errors or would like
+to suggest improvements, please consider filing a [github
+issue](https://github.com/NBISweden/workshop-pgip/issues).
+
 ## Installation and setup, TL;DR
 
 Clone the repo and cd to directory
