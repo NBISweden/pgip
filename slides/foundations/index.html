@@ -8,7 +8,9 @@
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.366">
 
   <meta name="author" content="Per Unneberg">
@@ -418,7 +420,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">19-Sep-2023</h4>
+  <h4 class="date">28-Sep-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -431,9 +433,33 @@
 </nav>
 </section>
 
+<section id="intended-learning-outcomes" class="slide level2 unnumbered unlisted">
+<h2>Intended learning outcomes</h2>
+<ul>
+<li>Introduction to foundations of population genetics</li>
+<li>Emphasis on genealogies</li>
+</ul>
+<aside class="notes">
+<p>Objective: introduce the foundations of population genetics, with an emphasis on genealogies. Framing population genetic concepts in trees will facilitate the introduction of the coalescent in the afternoon.</p>
+<p>The lecture presents sequence data, the Wright-Fisher model, genetic drift, mutation, and selection. The focus is to familiarise students with concepts and basic theory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section>
 <section id="dna-variation" class="title-slide slide level1 center">
 <h1>DNA variation</h1>
+<div>
+<p><img data-src="assets/images/popgen.svg"></p>
+</div>
 <aside class="notes">
 <p>Goal of section: look at the data that forms the foundation for population genomic analyses</p>
 <p>From <span class="citation" data-cites="nei_MolecularEvolutionPhylogenetics_2000">(<a href="#/bibliography" role="doc-biblioref" onclick="">Nei &amp; Kumar, 2000, p. 231</a>)</span>:</p>
@@ -1501,7 +1527,7 @@ q = q^2 + pq
       }</style></aside>
 <aside class="notes">
 <p>Segue: describing variation fine, but where does it come from and how does it change?</p>
-<p>If assumptions of HWE hold, we have no change of variation. However, we <strong>want</strong> to look at <strong>change</strong> of variation and disentangle the forces that imposes change</p>
+<p>If assumptions of HWE hold, we have no change of variation. However, we <strong>want</strong> to look at <strong>change</strong> of variation and disentangle the forces that impose change</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1517,7 +1543,7 @@ q = q^2 + pq
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
 
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <!-- markdownlint-disable MD013 -->
 <p>See <a href="https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines" class="uri">https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines</a> for legend customization.</p>
 <!-- markdownlint-enable MD013 -->
@@ -2004,7 +2030,30 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 <section>
 <section id="origin-and-change-of-variation" class="title-slide slide level1 center">
 <h1>Origin and change of variation</h1>
-
+<div style="display: grid; grid-template-columns: 300px 200px 200px; grid-row-gap: 0px; grid-column-gap: 100px;">
+<div>
+&nbsp;
+</div>
+<div class="circular-image">
+<p>Mutation</p>
+<p><img data-src="assets/images/mutation.jpg"></p>
+</div>
+<div class="circular-image">
+<p>Selection</p>
+<p><img data-src="assets/images/finches.jpg"></p>
+</div>
+<div>
+&nbsp;
+</div>
+<div class="circular-image">
+<p>Recombination</p>
+<p><img data-src="assets/images/recombination.jpeg"></p>
+</div>
+<div class="circular-image">
+<p>Drift</p>
+<p><img data-src="assets/images/genetic-drift.png"></p>
+</div>
+</div>
 </section>
 <section id="genetic-drift-with-alleles" class="slide level2">
 <h2>Genetic drift with alleles</h2>

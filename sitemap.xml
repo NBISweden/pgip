@@ -2,194 +2,198 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/syllabus.html</loc>
-    <lastmod>2023-09-19T06:55:44.443Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.521Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/recap_day4/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.427Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.501Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/recap_day2/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.427Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.501Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/population_structure/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.427Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.501Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/linked_selection/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.403Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.469Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/introduction/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.403Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.469Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/genetic_diversity/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.403Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.469Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/direct_selection/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.395Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.461Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/demo/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.395Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.461Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/applications_selection/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/schedule.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
   </url>
   <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/recipes/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/lectures/genetic_diversity/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/info.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/variant_calling/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/preparation.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/msmc/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/ld_pruning/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/genetic_diversity/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/fst_divergence/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/demopy/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/data_filtering/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/admixture/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/contents.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/data.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/demo/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/direct_selection/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/fstatistics/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/gl/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/ld_and_phasing/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/linked_selection/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/popgen_primer/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/exercises/simulation/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NBISweden.github.io/workshop-pgip/lectures/datageneration/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
+    <loc>https://NBISweden.github.io/workshop-pgip/recipes/slim/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/precourse.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/lectures/datageneration/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/simulation/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/popgen_primer/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/linked_selection/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/ld_and_phasing/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/gl/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/fstatistics/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/direct_selection/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/demo/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/data.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/contents.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/admixture/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/data_filtering/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/demopy/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/fst_divergence/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/genetic_diversity/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/ld_pruning/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/msmc/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/preparation.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/exercises/variant_calling/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/info.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/lectures/genetic_diversity/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NBISweden.github.io/workshop-pgip/recipes/index.html</loc>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/references.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/admixture/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.387Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.449Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/datageneration/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.391Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.457Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/demography/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.395Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.461Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/foundations/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.403Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.469Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.403Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.469Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/ld_and_recombination/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.403Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.469Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/pgip/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.407Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.473Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/recap_day1/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.427Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.501Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/recap_day3/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.427Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.501Z</lastmod>
   </url>
   <url>
     <loc>https://NBISweden.github.io/workshop-pgip/slides/simulation/index.html</loc>
-    <lastmod>2023-09-19T06:55:44.443Z</lastmod>
+    <lastmod>2023-09-28T01:44:59.521Z</lastmod>
   </url>
 </urlset>

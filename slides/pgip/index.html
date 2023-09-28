@@ -353,9 +353,75 @@
   <h3 class="subtitle">What is population genomics?</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">19-Sep-2023</h4>
+  <h4 class="date">28-Sep-2023</h4>
 </section>
 
+<section id="intended-learning-outcomes" class="slide level2">
+<h2>Intended learning outcomes</h2>
+<h3 id="course">Course</h3>
+<ul>
+<li>Present minimum toolkit of methods that should be known to anyone starting out in population genomics</li>
+<li>Sufficiently small for one-week workshop</li>
+</ul>
+<h3 id="lecture">Lecture</h3>
+<ul>
+<li>Present practical example of toolkit as applied in <span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Fuller et al., 2020</a>)</span></li>
+<li>Briefly discuss baseline model <span class="citation" data-cites="johri_RecommendationsImprovingStatistical_2022">(<a href="#/bibliography" role="doc-biblioref" onclick="">Johri et al., 2022</a>)</span></li>
+</ul>
+<h3 data-visibility="hidden" id="section"></h3>
+<aside class="notes">
+<p>Aim of lecture is to:</p>
+<ul>
+<li>present a practical application of commonly used methods in population genomics</li>
+<li>link population genomics to population genetics</li>
+<li>discuss statistical inference and the need of a baseline model with which to compare observations and conclusions</li>
+</ul>
+<p><strong>What is population genomics?</strong></p>
+<p>Points from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, pp. 249–250</a>)</span>:</p>
+<ul>
+<li>whole-genome data instead of single loci - population genomics is population genetics for whole-genome sequences
+<ul>
+<li>if only this, not too exciting</li>
+</ul></li>
+<li>major promise: enables analyses not possible for single loci or that require genomic context</li>
+<li>addresses interactions between different forces, notably selection and demographic history</li>
+</ul>
+<p><strong>Some applications</strong></p>
+<ul>
+<li>genome-wide scans for selection
+<ul>
+<li>selection vs demography (p.&nbsp;251)</li>
+</ul></li>
+<li>methods for genome-wide scans (p.&nbsp;258)</li>
+</ul>
+<p><strong>Caveats</strong></p>
+<ul>
+<li>non-independence (p.&nbsp;267)
+<ul>
+<li>different statistics rely on similar input</li>
+<li>overlapping peaks from different statistics <em>not</em> independent</li>
+</ul></li>
+</ul>
+<p><strong>General points</strong></p>
+<p><span class="citation" data-cites="hartl1997principles">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hartl &amp; Clark, 1997, pp. 469–470</a>)</span>:</p>
+<ul>
+<li>more emphasis on differences within populations</li>
+<li>goal: understand differences among genomes -&gt; requires complete sequence data from multiple individuals</li>
+</ul>
+<p><span class="citation" data-cites="li_InferenceHumanPopulation_2011">(<a href="#/bibliography" role="doc-biblioref" onclick="">Li &amp; Durbin, 2011</a>, supplementary notes, p.&nbsp;6)</span> on the use of PSMC on autosomes:</p>
+<p>“…highly consistent except for the very recent history, demonstrating the power of using whole-genome data.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="example-population-genetics-of-the-coral-acropora-millepora" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
@@ -374,8 +440,8 @@
 <!-- markdownlint-enable MD013 -->
 <aside class="notes">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Fuller et al., 2020</a>)</span> is an example of a population genomics study that applies methods that could be seen as a basic foundation of population genomics. We believe these present a minimum toolkit of methods that should be known to anyone starting out in population genomics, and that is sufficiently small to be presented in a one-week workshop. At the end of this lecture, we will discuss some more advanced applications in population genomics.</p>
-<p>Walk through steps of the main figures which represent common analyses in a population genomics experiment. No need to supply text; better to exemplify via the figures.</p>
-<p>Genome assembly and sampling</p>
+<p><strong>Genome assembly and sampling</strong></p>
+<p>Why: most analyses require a <em>reference sequence</em> with which to compare <em>resequenced samples</em></p>
 <p>Points to consider:</p>
 <ul>
 <li>choice of reference individual</li>
@@ -410,11 +476,14 @@
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 <aside class="notes">
-<p>Variation and demographic history</p>
+<p><strong>Variation and demographic history</strong></p>
+<p>Why: summarizing <em>diversity</em> provides (indirect) information on population size and more, as does the <em>linkage structure</em>. Estimate <em>demographic history</em> since fluctuating population size may produce signals similar to those of selection</p>
 <ul>
 <li>LD decay: important for imputation (e.g., stephens_AccountingDecayLinkage_2005)</li>
 <li>The extent of LD and its decay with genetic distance are useful parameters for determining the number of markers needed to successfully map a QTL, and the resolution with which the trait can be successfully mapped otyama_EvaluationLinkageDisequilibrium_2019</li>
-<li>0.363% average pi</li>
+<li>0.363% average pi, but large variation.</li>
+<li>many psmc plots show decline in population size, which could be an effect of bottleneck during pleistocene. Also population divergence (ghost ancestral populations, splits, extinction) can affect population size</li>
+<li>in aDNA studies missingness is common (i.e., heterozygotes are underestimated) and has to be accounted for since coalescence times are affected and may influence estimate of population size</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -438,9 +507,13 @@
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 <aside class="notes">
-<p>Population structure:</p>
+<p><strong>Population structure:</strong></p>
+<p>Why: many reasons: 1) identifying populations for contrasts in e.g. selection scans 2) identify admixed individuals that should be removed from analyses 3) identify barriers to gene flow etc</p>
 <ul>
-<li>no discernible relationship between geographic distance and genetic differentiation</li>
+<li>no discernible relationship between geographic distance and genetic differentiation -&gt; gene flow
+<ul>
+<li>for this reason, Fst between populations is low</li>
+</ul></li>
 <li>EEMS (Estimated Effective Migration Surfaces) models relationship between genetics and geography petkova_VisualizingSpatialPopulation_2016</li>
 </ul>
 <p>Indicative of high connectivity among 12 sampled reefs.</p>
@@ -471,7 +544,9 @@
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 <aside class="notes">
-<p>Little differentiation across reefs -&gt; littel population structure over hundreds of kilometers. However, there are environmental differences (thermal regimes). Scan for pi outliers:</p>
+<p><strong>Selection scan</strong></p>
+<p>Why: identify loci associated with adaptation / selection</p>
+<p>Little differentiation across reefs -&gt; little population structure over hundreds of kilometers. However, there are environmental differences (thermal regimes). Scan for pi outliers:</p>
 <ul>
 <li>points to <em>sacsin</em> gene</li>
 <li>h12 measures the frequency of the two most common haplotypes; red indicate 0.01% outlier genome-wide</li>
@@ -533,6 +608,7 @@
 </div>
 </div>
 <aside class="notes">
+<p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Fuller et al., 2020</a>)</span> paper has population genetics in title -&gt; population genetics is a key ingredient.</p>
 <p>Population genetics focuses on the genetic basis of evolution. It is mainly a theoretical subject, owing to the slow changes of genetic variation. As such, it tries to explain the shape and structure of genetic variation from theoretical predictions and models.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -569,7 +645,6 @@
 </ul></li>
 </ul>
 <p>So, not simply about applying 10000 selection tests for multiple loci</p>
-<p>Population genetics in title of previous slide =&gt; population genomics is large-scale population genetics? At the very least, shows the foundational role population genetics plays.</p>
 <p>All of the points above point to the importance of statistics which implies mathematics / computational skills important</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -586,11 +661,37 @@
 <section id="from-population-genetics-to-population-genomics-1" class="slide level2">
 <h2>From population genetics to population genomics</h2>
 
-<img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.g001" class="r-stretch quarto-figure-left"><p class="caption">Patterns of polymorphism and divergence <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></p></section>
+<img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.g001" class="r-stretch quarto-figure-left"><p class="caption">Patterns of polymorphism and divergence <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></p><aside class="notes">
+<p><span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">Begun et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span> study: same system (<em>Drosophila</em>) but more individuals and whole genome</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="from-population-genetics-to-population-genomics-2" class="slide level2">
 <h2>From population genetics to population genomics</h2>
 
-<img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.t002" class="r-stretch quarto-figure-left"><p class="caption">Numbers of polymorphic and fixed variants <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></p></section>
+<img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.t002" class="r-stretch quarto-figure-left"><p class="caption">Numbers of polymorphic and fixed variants <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></p><aside class="notes">
+<p>Novelty: now possible to do <em>genome-wide</em> characterization of variation in different functional contexts</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="the-technological-revolution-in-sequencing-and-computing" class="slide level2">
 <h2>The technological revolution in <strong>sequencing</strong> and <strong>computing</strong></h2>
 <div class="columns">
@@ -628,24 +729,67 @@
 <li>genetic drift with demographic history and geographic structure</li>
 </ol>
 </div>
+<aside class="notes">
+<p>Caution against adaptationist storytelling; always compare to a baseline model that takes potential confounding factors into account</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="applications-of-population-genomics" class="slide level2">
 <h2>Applications of population genomics</h2>
-<p>FIXME: end by listing some applications (see <a href="https://link-springer-com.ezproxy.its.uu.se/book/10.1007/978-3-030-04589-0#toc" class="uri">https://link-springer-com.ezproxy.its.uu.se/book/10.1007/978-3-030-04589-0#toc</a>)</p>
-<ul>
-<li>conservation genomics (corals, Matt’s bees -&gt; segue to his talk)</li>
-<li>speciation genomics (Monkeyflower paper)</li>
-<li>disentangle forces that create variation (Monkeyflower; great apes)</li>
-<li>epigenomics (corona virus)</li>
-<li>paloegenomics (aDNA)</li>
-<li>GWAS</li>
-<li>domestication</li>
-<li>ecology</li>
-</ul>
+<div style="display: grid; grid-template-columns: 80px 420px 80px 420px; grid-row-gap: 0px; grid-column-gap: 30px; align-items: center;">
+<div>
+<p><img data-src="assets/images/apis-mellifera.png"></p>
+</div>
+<div>
+<p>conservation genomics <span class="citation" data-cites="webster_PopulationGenomicsInsect_2023">(<a href="#/bibliography" role="doc-biblioref" onclick="">Webster et al., 2023</a>)</span></p>
+</div>
+<div class="fragment" data-fragment-index="1">
+<p><img data-src="assets/images/mimulus.png"></p>
+</div>
+<div class="fragment" data-fragment-index="1">
+<p>speciation genomics <span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Stankowski et al., 2019</a>)</span></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p><img data-src="assets/images/gorilla.png"></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p>disentangle forces that create variation <span class="citation" data-cites="rodrigues_SharedEvolutionaryProcesses_2023">(<a href="#/bibliography" role="doc-biblioref" onclick="">Rodrigues et al., 2023</a>)</span></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p><img data-src="assets/images/mammuth.png"></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p>paleogenomics (aDNA) <span class="citation" data-cites="vandervalk_MillionyearoldDNASheds_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">van der Valk et al., 2021</a>)</span></p>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p><img data-src="assets/images/cow.png"></p>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p>domestication <span class="citation" data-cites="barrera-redondo_GenomicTranscriptomicEpigenomic_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Barrera-Redondo et al., 2020</a>)</span></p>
+</div>
+<div class="fragment" data-fragment-index="5">
+<p><img data-src="assets/images/krill.png"></p>
+</div>
+<div class="fragment" data-fragment-index="5">
+<p>ecology <span class="citation" data-cites="hohenlohe_PopulationGenomicsProvides_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hohenlohe et al., 2019</a>)</span></p>
+</div>
+</div>
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-barrera-redondo_GenomicTranscriptomicEpigenomic_2020" class="csl-entry" role="listitem">
+Barrera-Redondo, J., Piñero, D., &amp; Eguiarte, L. E. (2020). Genomic, <span>Transcriptomic</span> and <span>Epigenomic Tools</span> to <span>Study</span> the <span>Domestication</span> of <span>Plants</span> and <span>Animals</span>: <span>A Field Guide</span> for <span>Beginners</span>. <em>Frontiers in Genetics</em>, <em>11</em>.
+</div>
 <div id="ref-begun_PopulationGenomicsWholeGenome_2007" class="csl-entry" role="listitem">
 Begun, D. J., Holloway, A. K., Stevens, K., Hillier, L. W., Poh, Y.-P., Hahn, M. W., Nista, P. M., Jones, C. D., Kern, A. D., Dewey, C. N., Pachter, L., Myers, E., &amp; Langley, C. H. (2007). Population <span>Genomics</span>: <span>Whole-Genome Analysis</span> of <span>Polymorphism</span> and <span>Divergence</span> in <span>Drosophila</span> simulans. <em>PLOS Biology</em>, <em>5</em>(11), e310. <a href="https://doi.org/10.1371/journal.pbio.0050310">https://doi.org/10.1371/journal.pbio.0050310</a>
 </div>
@@ -658,6 +802,9 @@ Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <s
 <div id="ref-hartl1997principles" class="csl-entry" role="listitem">
 Hartl, D. L., &amp; Clark, A. G. (1997). <em>Principles of population genetics</em>. <span>Sinauer Associates</span>.
 </div>
+<div id="ref-hohenlohe_PopulationGenomicsProvides_2019" class="csl-entry" role="listitem">
+Hohenlohe, P. A., Hand, B. K., Andrews, K. R., &amp; Luikart, G. (2019). Population <span>Genomics Provides Key Insights</span> in <span>Ecology</span> and <span>Evolution</span>. In O. P. Rajora (Ed.), <em>Population <span>Genomics</span>: <span>Concepts</span>, <span>Approaches</span> and <span>Applications</span></em> (pp. 483–510). <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/13836_2018_20">https://doi.org/10.1007/13836_2018_20</a>
+</div>
 <div id="ref-johri_RecommendationsImprovingStatistical_2022" class="csl-entry" role="listitem">
 Johri, P., Aquadro, C. F., Beaumont, M., Charlesworth, B., Excoffier, L., Eyre-Walker, A., Keightley, P. D., Lynch, M., McVean, G., Payseur, B. A., Pfeifer, S. P., Stephan, W., &amp; Jensen, J. D. (2022). Recommendations for improving statistical inference in population genomics. <em>PLOS Biology</em>, <em>20</em>(5), e3001669. <a href="https://doi.org/10.1371/journal.pbio.3001669">https://doi.org/10.1371/journal.pbio.3001669</a>
 </div>
@@ -666,6 +813,18 @@ Kreitman, M. (1983). Nucleotide polymorphism at the alcohol dehydrogenase locus 
 </div>
 <div id="ref-li_InferenceHumanPopulation_2011" class="csl-entry" role="listitem">
 Li, H., &amp; Durbin, R. (2011). Inference of human population history from individual whole-genome sequences. <em>Nature</em>, <em>475</em>(7357), 493–496. <a href="https://doi.org/10.1038/nature10231">https://doi.org/10.1038/nature10231</a>
+</div>
+<div id="ref-rodrigues_SharedEvolutionaryProcesses_2023" class="csl-entry" role="listitem">
+Rodrigues, M. F., Kern, A. D., &amp; Ralph, P. L. (2023). <em>Shared evolutionary processes shape landscapes of genomic variation in the great apes</em> (p. 2023.02.07.527547). <span>bioRxiv</span>. <a href="https://doi.org/10.1101/2023.02.07.527547">https://doi.org/10.1101/2023.02.07.527547</a>
+</div>
+<div id="ref-stankowski_WidespreadSelectionGene_2019" class="csl-entry" role="listitem">
+Stankowski, S., Chase, M. A., Fuiten, A. M., Rodrigues, M. F., Ralph, P. L., &amp; Streisfeld, M. A. (2019). Widespread selection and gene flow shape the genomic landscape during a radiation of monkeyflowers. <em>PLOS Biology</em>, <em>17</em>(7), e3000391. <a href="https://doi.org/10.1371/journal.pbio.3000391">https://doi.org/10.1371/journal.pbio.3000391</a>
+</div>
+<div id="ref-vandervalk_MillionyearoldDNASheds_2021" class="csl-entry" role="listitem">
+van der Valk, T., Pečnerová, P., Díez-del-Molino, D., Bergström, A., Oppenheimer, J., Hartmann, S., Xenikoudakis, G., Thomas, J. A., Dehasque, M., Sağlıcan, E., Fidan, F. R., Barnes, I., Liu, S., Somel, M., Heintzman, P. D., Nikolskiy, P., Shapiro, B., Skoglund, P., Hofreiter, M., … Dalén, L. (2021). Million-year-old <span>DNA</span> sheds light on the genomic history of mammoths. <em>Nature</em>, <em>591</em>(7849), 265–269. <a href="https://doi.org/10.1038/s41586-021-03224-9">https://doi.org/10.1038/s41586-021-03224-9</a>
+</div>
+<div id="ref-webster_PopulationGenomicsInsect_2023" class="csl-entry" role="listitem">
+Webster, M. T., Beaurepaire, A., Neumann, P., &amp; Stolle, E. (2023). Population <span>Genomics</span> for <span>Insect Conservation</span>. <em>Annual Review of Animal Biosciences</em>, <em>11</em>(1), 115–140. <a href="https://doi.org/10.1146/annurev-animal-122221-075025">https://doi.org/10.1146/annurev-animal-122221-075025</a>
 </div>
 <div id="ref-wetterstrandka_DNASequencingCosts_" class="csl-entry" role="listitem">
 Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from the <span>NHGRI Genome Sequencing Program</span> (<span>GSP</span>)</em>. <a href="https://www.genome.gov/sequencingcostsdata">www.genome.gov/sequencingcostsdata</a>
