@@ -435,9 +435,15 @@
 
 <section id="intended-learning-outcomes" class="slide level2 unnumbered unlisted">
 <h2>Intended learning outcomes</h2>
+<p>Introduction to foundations of population genetics with an emphasis on genealogies</p>
 <ul>
-<li>Introduction to foundations of population genetics</li>
-<li>Emphasis on genealogies</li>
+<li>Description of DNA variation data</li>
+<li>Wright-Fisher population model and genealogies</li>
+<li>Genetic drift</li>
+<li>Wright-Fisher model with mutation</li>
+<li>Mutation-drift balance</li>
+<li>Neutral theory</li>
+<li>Selection basics</li>
 </ul>
 <aside class="notes">
 <p>Objective: introduce the foundations of population genetics, with an emphasis on genealogies. Framing population genetic concepts in trees will facilitate the introduction of the coalescent in the afternoon.</p>
@@ -1487,6 +1493,9 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 </section>
+<section id="observed-dive" class="slide level2">
+<h2>Observed dive</h2>
+</section>
 <section id="in-absence-of-evolutionary-forces-alleles-are-in-equilibrium" class="slide level2">
 <h2>In absence of evolutionary forces alleles are in equilibrium</h2>
 <h3 id="the-hardy-weinberg-equilibrium">The Hardy-Weinberg equilibrium</h3>
@@ -1543,7 +1552,7 @@ q = q^2 + pq
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
 
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.qmd#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <!-- markdownlint-disable MD013 -->
 <p>See <a href="https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines" class="uri">https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines</a> for legend customization.</p>
 <!-- markdownlint-enable MD013 -->
@@ -1923,11 +1932,11 @@ q = q^2 + pq
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_13e9749bff22bfa6b555da284f622749">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_659d402d0b4caf455a5a85d61d61cdbc">
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;4: WF model tracing the genealogies of three extant genes</figcaption>
+<figcaption>Figure&nbsp;4: WF model tracing the genealogies of three extant chromosomes</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" width="960"></p>
 </figure>
 </div>
@@ -1975,7 +1984,7 @@ P(v=k) \approx \frac{1}{k!}e^{-k}
 </section>
 <section id="properties-of-wright-fisher-sampling-2" class="slide level2">
 <h2>Properties of Wright-Fisher sampling</h2>
-<h3 id="probability-that-two-sequences-pick-same-parent">Probability that two sequences pick same parent</h3>
+<h3 id="sec-prob-sequence-pick-same-parent">Probability that two sequences pick same parent</h3>
 
 <img data-src="index_files/figure-revealjs/wf-prob-parents-identical-fig-1.svg" width="800" class="r-stretch quarto-figure-center"><p>Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be two sequences. Pick a parent <span class="math inline">\(p_u\)</span> of <span class="math inline">\(u\)</span>. Then the probability that <span class="math inline">\(v\)</span> picks the same parent is (solid lines)</p>
 <p><span class="math display">\[
@@ -2258,7 +2267,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p>Let <span class="math inline">\(\mathcal{H}_t\)</span> be the probability that two alleles are <strong>different by state</strong>. The time course evolution of <span class="math inline">\(\mathcal{H}_t\)</span> in a randomly mating population consisting of <span class="math inline">\(N\)</span> diploid hermaphroditic individuals is</p>
+<p>Let <span class="math inline">\(\mathcal{H}_t\)</span> be the probability that two alleles are <strong>different by state</strong>. One can show that the time course evolution of <span class="math inline">\(\mathcal{H}_t\)</span> in a randomly mating population consisting of <span class="math inline">\(N\)</span> diploid hermaphroditic individuals is</p>
 <p><span class="math display">\[
 \mathcal{H}_t = \mathcal{H}_0 \left( 1 - \frac{1}{2N} \right)^t
 \]</span></p>
@@ -2268,6 +2277,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <aside class="notes">
 <p>Alleles in generation <span class="math inline">\(n\)</span> are IDB but not IBS</p>
 <p>Motivation: mathematical description of genetic drift complicated for populations with more than one individual. Easier to study the evolution of heterozygosity.</p>
+<p>Equation presented without details. Derivation by <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, pp. 25–27</a>)</span> starts from G=probability that two alleles are IBS</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2283,32 +2293,57 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <section id="heterozygosity-dynamics-1" class="slide level2">
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-gillespie-2.4_ce31117e8821809065d21a0316723752">
+<div class="column" style="width:40%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-gillespie-2.4_b96400bb025b28697632ffadd9300e5f">
 <div class="cell-output-display">
 <div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating how loss depends on population size</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:70.0%"></p>
+<figcaption>Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:60%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_f2396f1ebddba9e4394a20ea2271a00b">
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_dce834875d33557f2e68ce064ab1ba41">
 <div class="cell-output-display">
 <div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span></figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:70.0%"></p>
+<figcaption>Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, fig. 4.5</a>)</span></figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:30%;">
+<p><img data-src="assets/images/ferret.svg" style="width:100.0%"></p>
+<p>Example of how rapid decline in population size can affect heterozygosity</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<aside class="notes">
+<p>Dependency on population size: for large enough populations the decline will be <strong>very</strong> slow (drift speed ~ 1/2N)</p>
+<p>Practical example shows loss of heterozygosity tell-tale signature of population decline; conversely, <strong>not</strong> easy to show population decline in large populations (e.g., marine species with large <span class="math inline">\(N_e\)</span>)</p>
+<p>From <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, p. 64</a>)</span></p>
+<blockquote>
+<p>To see how a decline in population size can affect levels of het- erozygosity, let’s consider the case of black-footed ferrets (Mustela nigripes). The black-footed ferret population has declined dramatically through the twentieth century due to destruction of their habitat and sylvatic plague. In 1979, when the last known black-footed ferret died in captivity, they were thought to be extinct. In 1981, a very small wild population was rediscovered (40 individuals), but in 1985 this population suffered a number of disease outbreaks. At that point of the 18 remaining wild individuals were brought into captivity, 7 of which reproduced. Thanks to intense captive breeding efforts and conservation work, a wild population of over 300 individuals has been established since. However, because all of these individuals are descended from those 7 individuals who survived the bottleneck, diversity levels remain low. Wisely et al.&nbsp;measured heterozygosity at a number of microsatellites in individuals from museum collections, showing the sharp drop in diversity as population sizes crashed (see Figure 4.5).</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="effective-population-size" class="slide level2">
 <h2>Effective population size</h2>
@@ -2338,11 +2373,32 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </section>
 <section id="mutation" class="slide level2">
 <h2>Mutation</h2>
-<ol type="1">
-<li>Figure of dna with lightning bolt</li>
-<li>Wright-Fisher image with white -&gt; gray individual</li>
-<li>mutation models</li>
-</ol>
+<div class="columns">
+<div class="column" style="width:30%;">
+<table>
+<tbody><tr>
+<td>
+<div style="transform: translate(50px, -40px);">
+<i class="fa-solid fa-bolt fa-2x fa-rotate-90"></i>
+</div>
+</td>
+<td>
+<i class="fa-solid fa-dna fa-5x"></i>
+</td>
+</tr>
+</tbody></table>
+</div><div class="column" style="width:70%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/allele-sampling-model-mutation-1.svg" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="fragment">
 <!-- markdownlint-disable MD013 -->
 <div class="cell" data-hash="index_cache/revealjs/mutation-models_1626c54422b988dad38ce27b062fca8c">
@@ -2353,6 +2409,14 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <!-- markdownlint-enable MD013 -->
 </div>
 <aside class="notes">
+<p>Mutations are generated randomly as changes in DNA. In WF model will be highlighted in black.</p>
+<p>The mutation models are:</p>
+<ul>
+<li>two-allele model: used to derive popgen statistics</li>
+<li>finite sites model: recurrent mutations may occur, an assumption that is often omitted to facilitate calculations (e.g., coalescent)</li>
+<li>inifinite alleles model: every mutation leads to new allele (e.g., protein electrophoresis)</li>
+<li>infinite sites model: model commonly used for long DNA sequences</li>
+</ul>
 <!-- markdownlint-disable MD013 -->
 <div class="cell" data-hash="index_cache/revealjs/stepwise-mutation-model_65b90197405bd136cddd761546b1341c">
 <div class="cell-output-display">
@@ -2412,9 +2476,6 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="models-of-mutation" class="slide level2">
-<h2>Models of mutation</h2>
 </section>
 <section id="tracing-the-evolution-of-mutations" class="slide level2">
 <h2>Tracing the evolution of mutations</h2>
@@ -2508,8 +2569,8 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           display:block!important;
       }</style></aside>
 </section>
-<section id="molecular-evolution-and-rate-of-substitution" class="slide level2">
-<h2>Molecular evolution and rate of substitution</h2>
+<section id="mutation-rate-can-be-estimated-from-substitution-rate" class="slide level2">
+<h2>Mutation rate can be estimated from substitution rate</h2>
 <p>Mutation enters populations and may be fixed by drift. Therefore, with time there will be fixed differences, or <strong>substitions</strong> (typically in the evolution of species) between populations, or species. In molecular evolution, the <strong>substition rate</strong>, <strong><span class="math inline">\(\rho\)</span></strong>, is the most interesting quantity.</p>
 <div class="fragment">
 <p>The total number of new mutations in every generation is <span class="math inline">\(2N\mu\)</span> (total number of gametes times mutation rate)</p>
@@ -2524,9 +2585,18 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 \]</span></p>
 <p>which is independent of population size!</p>
 </div>
+<div class="fragment">
+<p>Practical implication: we can <em>estimate mutation rate from the substitution rate</em> at neutrally evolving sites (e.g., <span class="citation" data-cites="kumar_MutationRatesMammalian_2002">Kumar &amp; Subramanian (<a href="#/bibliography" role="doc-biblioref" onclick="">2002</a>)</span>)</p>
+</div>
 <aside class="notes">
+<p>What happens when sufficient amount of time passes? Mutations <strong>fix</strong> and generate <strong>substitutions</strong> between species. This slide presents Kimura’s remarkable result regarding mutation rate and substitution rate!</p>
 <p>On <span class="math inline">\(2N\mu\)</span>: the larger the population, the larger the number of mutations that can fix</p>
 <p>If <span class="math inline">\(4N\mu&gt;&gt;0\)</span> no new mutations can fix. Issue here is there is no explicit mention of DNA sequence -&gt; introduction of infinite sites model</p>
+<p>For practical note on estimation of mutation rate see e.g., <span class="citation" data-cites="hubisz_InferenceAncestralRecombination_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hubisz &amp; Siepel, 2020, p. 247</a>)</span></p>
+<p><span class="citation" data-cites="kumar_MutationRatesMammalian_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kumar &amp; Subramanian, 2002</a>, first paragraph)</span>:</p>
+<blockquote>
+<p>Rates of point mutation can be determined indirectly by estimating the rate at which the neutral substitutions accumulate in protein-coding genes</p>
+</blockquote>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2542,6 +2612,9 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <section>
 <section id="selection" class="title-slide slide level1 center">
 <h1>Selection</h1>
+<div class="center">
+<p><img data-src="assets/images/gould_finches.jpg" width="700"></p>
+</div>
 <aside class="notes">
 <p>For a list of methods see <a href="https://methodspopgen.com/methods-to-detect-selection/" class="uri">https://methodspopgen.com/methods-to-detect-selection/</a></p>
 <style type="text/css">
@@ -2817,6 +2890,9 @@ cooplab. (2011). Population genetics course resources: <span>Hardy-Weinberg Eq</
 <div id="ref-gillespie_PopulationGeneticsConcise_2004" class="csl-entry" role="listitem">
 Gillespie, J. H. (2004). <em>Population <span>Genetics</span>: <span>A Concise Guide</span></em> (2nd edition). <span>Johns Hopkins University Press</span>.
 </div>
+<div id="ref-grahamcoop_NotesPopulationGenetics_2020" class="csl-entry" role="listitem">
+Graham Coop. (2020). <em>Notes on <span>Population Genetics</span></em>. http://cooplab.github.io/popgen-notes/.
+</div>
 <div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="listitem">
 Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
 </div>
@@ -2829,6 +2905,9 @@ Hein, J., Schierup, M., &amp; Wiuf, C. (2004). Gene genealogies, variation and e
 <div id="ref-hermisson_MathematicalPopulationGenetics_2017" class="csl-entry" role="listitem">
 Hermisson, J. (2017). <em>Mathematical population genetics</em>. <a href="https://www.mabs.at/teaching/files/Lecture%20Notes%202017.pdf">https://www.mabs.at/teaching/files/Lecture%20Notes%202017.pdf</a>
 </div>
+<div id="ref-hubisz_InferenceAncestralRecombination_2020" class="csl-entry" role="listitem">
+Hubisz, M., &amp; Siepel, A. (2020). Inference of <span>Ancestral Recombination Graphs Using ARGweaver</span>. In J. Y. Dutheil (Ed.), <em>Statistical <span>Population Genomics</span></em> (pp. 231–266). <span>Springer US</span>. <a href="https://doi.org/10.1007/978-1-0716-0199-0_10">https://doi.org/10.1007/978-1-0716-0199-0_10</a>
+</div>
 <div id="ref-hurst_GeneticsUnderstandingSelection_2009" class="csl-entry" role="listitem">
 Hurst, L. D. (2009). Genetics and the understanding of selection. <em>Nature Reviews Genetics</em>, <em>10</em>(2), 83–93. <a href="https://doi.org/10.1038/nrg2506">https://doi.org/10.1038/nrg2506</a>
 </div>
@@ -2837,6 +2916,9 @@ Kimura, M. (1983). <em>The neutral theory of molecular evolution</em>. <span>Cam
 </div>
 <div id="ref-kimura_ProteinPolymorphismPhase_1971" class="csl-entry" role="listitem">
 Kimura, M., &amp; Ohta, T. (1971). Protein <span>Polymorphism</span> as a <span>Phase</span> of <span>Molecular Evolution</span>. <em>Nature</em>, <em>229</em>(5285), 467–469. <a href="https://doi.org/10.1038/229467a0">https://doi.org/10.1038/229467a0</a>
+</div>
+<div id="ref-kumar_MutationRatesMammalian_2002" class="csl-entry" role="listitem">
+Kumar, S., &amp; Subramanian, S. (2002). Mutation rates in mammalian genomes. <em>Proceedings of the National Academy of Sciences</em>, <em>99</em>(2), 803–808. <a href="https://doi.org/10.1073/pnas.022629899">https://doi.org/10.1073/pnas.022629899</a>
 </div>
 <div id="ref-leffler_RevisitingOldRiddle_2012" class="csl-entry" role="listitem">
 Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venkat, A., Andolfatto, P., &amp; Przeworski, M. (2012). Revisiting an <span>Old Riddle</span>: <span>What Determines Genetic Diversity Levels</span> within <span>Species</span>? <em>PLOS Biology</em>, <em>10</em>(9), e1001388. <a href="https://doi.org/10.1371/journal.pbio.1001388">https://doi.org/10.1371/journal.pbio.1001388</a>
