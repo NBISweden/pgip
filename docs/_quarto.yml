@@ -8,7 +8,29 @@ project:
     - ../scripts/setup-exercise-data.sh
     - ../scripts/prepare.py
   render:
-    - "*.qmd"
+    # Root
+    - "index.qmd"
+    - "contents.qmd"
+    - "info.qmd"
+    - "precourse.qmd"
+    - "references.qmd"
+    - "schedule.qmd"
+    - "syllabus.qmd"
+    # Exercises
+    - "exercises/data.qmd"
+    - "exercises/index.qmd"
+    - "exercises/simulation/index.qmd"
+    # Slides
+    - "slides/index.qmd"
+    - "slides/pgip/index.qmd"
+    - "slides/foundations/index.qmd"
+    - "slides/simulation/index.qmd"
+    - "slides/population_structure/index.qmd"
+    # Recipes
+    - "recipes/index.qmd"
+    - "recipes/slim/index.qmd"
+    - "recipes/slides/index.qmd"
+    # Exclude
     - "!lectures/*.qmd"
     - "*.ipynb"
 

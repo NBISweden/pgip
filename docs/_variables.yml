@@ -9,4 +9,4 @@ demes:
   ooa: data/data/ooa/ooa.demes.yaml
 
 recipes:
-  baseurl: /recipes/slides/index.html
+  baseurl: /recipes/slides/index.qmd

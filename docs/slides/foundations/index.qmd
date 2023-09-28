@@ -31,8 +31,16 @@ library(tidygraph)
 
 ## Intended learning outcomes {.unnumbered .unlisted}
 
-- Introduction to foundations of population genetics
-- Emphasis on genealogies
+Introduction to foundations of population genetics with an emphasis on
+genealogies
+
+- Description of DNA variation data
+- Wright-Fisher population model and genealogies
+- Genetic drift
+- Wright-Fisher model with mutation
+- Mutation-drift balance
+- Neutral theory
+- Selection basics
 
 ::: {.notes}
 
@@ -419,6 +427,8 @@ $$
 :::
 
 ::::
+
+## Observed dive
 
 ## In absence of evolutionary forces alleles are in equilibrium
 
@@ -1092,7 +1102,7 @@ wf %>% ggplot_wf(.) +
 #| label: fig-wf-model-genealogy
 #| echo: false
 #| eval: true
-#| fig-cap: "WF model tracing the genealogies of three extant genes"
+#| fig-cap: "WF model tracing the genealogies of three extant chromosomes"
 obj <- wf
 i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
 E(obj)$color <- "lightgray"
@@ -1215,7 +1225,7 @@ descendants
 
 ## Properties of Wright-Fisher sampling
 
-### Probability that two sequences pick same parent
+### Probability that two sequences pick same parent {#sec-prob-sequence-pick-same-parent}
 
 ```{r, engine="tikz", fig.ext="svg" }
 #| label: wf-prob-parents-identical-fig
@@ -1812,9 +1822,9 @@ grid.arrange(
 ::: {.column width="50%"}
 
 Let $\mathcal{H}_t$ be the probability that two alleles are
-**different by state**. The time course evolution of $\mathcal{H}_t$
-in a randomly mating population consisting of $N$ diploid
-hermaphroditic individuals is
+**different by state**. One can show that the time course evolution of
+$\mathcal{H}_t$ in a randomly mating population consisting of $N$
+diploid hermaphroditic individuals is
 
 $$
 \mathcal{H}_t = \mathcal{H}_0 \left( 1 - \frac{1}{2N} \right)^t
@@ -1835,22 +1845,26 @@ Motivation: mathematical description of genetic drift complicated for
 populations with more than one individual. Easier to study the
 evolution of heterozygosity.
 
+Equation presented without details. Derivation by
+[@gillespie_PopulationGeneticsConcise_2004, pp. 25-27] starts from
+G=probability that two alleles are IBS
+
 :::
 
 ## Heterozygosity dynamics
 
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ```{r }
 #| label: fig-gillespie-2.4
 #| echo: false
 #| eval: true
 #| fig-cap:
-#|    Plot of $\mathcal{H}_t$ illustrating how loss depends
+#|    Plot of $\mathcal{H}_t$ illustrating dependency
 #|    on population size
-#| out-width: 70%
+#| out-width: 90%
 het_t <- function(N=1, t=0:100, H0=1) {
   H0 * (1 - 1/(2*N))^t
 }
@@ -1867,36 +1881,91 @@ data <- data.frame(
 )
 ggplot(data, aes(x=tn, y=het, shape=factor(population_size))) +
   geom_point(size=3) + geom_line() + xlab("generation") +
-  ylab("heterozygosity") + guides(shape=guide_legend(title="Size"))
+  ylab("heterozygosity") + guides(shape=guide_legend(title="Size")) +
+  theme(text=element_text(size=28))
 ```
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="60%"}
 
 ::: {.fragment}
+
+:::: {.columns}
+
+::: {.column width="70%"}
 
 ```{r }
 #| label: fig-black-footed-ferret
 #| echo: false
 #| eval: true
-#| out-width: 70%
-#| fig-cap: Heterozygosity in black-footed ferret [@wisely_GeneticDiversityFitness_2002]
+#| out-width: 80%
+#| fig-cap: Heterozygosity in black-footed ferret
+#|     [@wisely_GeneticDiversityFitness_2002].
+#|     Example from [@grahamcoop_NotesPopulationGenetics_2020, Fig. 4.5]
 # cf: https://github.com/cooplab/popgen-notes/blob/master/Journal_figs/genetic_drift/black_footed_ferrets/black-footed-ferrets_He.csv
 data <- data.frame(date=c(1891, 1972, 1985, 1986),
                    He=c(0.231284916, 0.210335196,
                         0.101396648, 0.067877095),
                    N=c("N>10k", "N=62", "N=40", "N=7")
                    )
-ggplot(data, aes(x=date, y=He, label=N)) + geom_line() + geom_point() +
-  xlab("year") + ylab("heterozygosity") + geom_text(nudge_y=.005, nudge_x=2)
+ggplot(data, aes(x=date, y=He, label=N)) +
+  geom_line(size=1.2) + geom_point(size=4) +
+  xlab("year") + ylab("heterozygosity") +
+  geom_text(nudge_y=0.005, nudge_x=c(12, 12, 12, 10), size=12) +
+  theme(text=element_text(size=30)) + xlim(1880, 2005)
 ```
+
+:::
+
+::: {.column width="30%"}
+
+![](assets/images/ferret.svg){width=100%}
+
+Example of how rapid decline in population size can affect
+heterozygosity
+
+:::
+
+::::
 
 :::
 
 :::
 
 ::::
+
+::: {.notes}
+
+Dependency on population size: for large enough populations the
+decline will be **very** slow (drift speed ~ 1/2N)
+
+Practical example shows loss of heterozygosity tell-tale signature of
+population decline; conversely, **not** easy to show population
+decline in large populations (e.g., marine species with large $N_e$)
+
+From [@grahamcoop_NotesPopulationGenetics_2020, p. 64]
+
+> To see how a decline in population size can affect levels of het-
+> erozygosity, let’s consider the case of black-footed ferrets
+> (Mustela nigripes). The black-footed ferret population has declined
+> dramatically through the twentieth century due to destruction of
+> their habitat and sylvatic plague. In 1979, when the last known
+> black-footed ferret died in captivity, they were thought to be
+> extinct. In 1981, a very small wild population was rediscovered (40
+> individuals), but in 1985 this population suffered a number of
+> disease outbreaks. At that point of the 18 remaining wild
+> individuals were brought into captivity, 7 of which reproduced.
+> Thanks to intense captive breeding efforts and conservation work, a
+> wild population of over 300 individuals has been established since.
+> However, because all of these individuals are descended from those 7
+> individuals who survived the bottleneck, diversity levels remain
+> low. Wisely et al. measured heterozygosity at a number of
+> microsatellites in individuals from museum collections, showing the
+> sharp drop in diversity as population sizes crashed (see Figure
+> 4.5).
+
+:::
 
 ## Effective population size
 
@@ -1922,9 +1991,38 @@ evolutionary forces besides drift, no selective advantages
 
 ## Mutation
 
-1. Figure of dna with lightning bolt
-2. Wright-Fisher image with white -> gray individual
-3. mutation models
+:::: {.columns}
+
+::: {.column width="30%"}
+
+<table>
+<tr>
+<td><div style="transform: translate(50px, -40px);"><i class="fa-solid fa-bolt fa-2x fa-rotate-90"></i></div></td>
+<td><i class="fa-solid fa-dna fa-5x"></i></td>
+</tr>
+</table>
+
+:::
+
+::: {.column width="70%"}
+
+```{r }
+#| label: allele-sampling-model-mutation
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-height: 3
+#| fig-width: 12
+#| fig-align: center
+set.seed(1212)
+wf <- wright_fisher_pop(n = 6, generations = 2, mu = 0.02)
+ggplot_wf(wf, fill = allele, size=6) +
+  scale_fill_manual(values = c("a" = "white", "A" = "black"))
+```
+
+:::
+
+::::
 
 ::: {.fragment}
 
@@ -1969,6 +2067,17 @@ evolutionary forces besides drift, no selective advantages
 :::
 
 ::: {.notes }
+
+Mutations are generated randomly as changes in DNA. In WF model will be highlighted in black.
+
+The mutation models are:
+
+- two-allele model: used to derive popgen statistics
+- finite sites model: recurrent mutations may occur, an assumption
+  that is often omitted to facilitate calculations (e.g., coalescent)
+- inifinite alleles model: every mutation leads to new allele (e.g.,
+  protein electrophoresis)
+- infinite sites model: model commonly used for long DNA sequences
 
 <!-- markdownlint-disable MD013 -->
 
@@ -2075,8 +2184,6 @@ ggplot_wf(wf, fill = allele) +
 Segue: so if drift removes variation, what introduces it? Mutation!
 
 :::
-
-## Models of mutation
 
 ## Tracing the evolution of mutations
 
@@ -2254,7 +2361,7 @@ of evolution (on protein level) too high (Haldane's dilemma)
 
 :::
 
-## Molecular evolution and rate of substitution
+## Mutation rate can be estimated from substitution rate
 
 Mutation enters populations and may be fixed by drift. Therefore, with
 time there will be fixed differences, or **substitions** (typically in
@@ -2287,7 +2394,20 @@ which is independent of population size!
 
 :::
 
+::: {.fragment}
+
+Practical implication: we can *estimate mutation rate from the
+substitution rate* at neutrally evolving sites (e.g.,
+@kumar_MutationRatesMammalian_2002)
+
+:::
+
 ::: {.notes }
+
+What happens when sufficient amount of time passes? Mutations **fix**
+and generate **substitutions** between species. This slide presents
+Kimura's remarkable result regarding mutation rate and substitution
+rate!
 
 On $2N\mu$: the larger the population, the larger the number of
 mutations that can fix
@@ -2296,9 +2416,24 @@ If $4N\mu>>0$ no new mutations can fix. Issue here is there is no
 explicit mention of DNA sequence -> introduction of infinite sites
 model
 
+For practical note on estimation of mutation rate see e.g.,
+[@hubisz_InferenceAncestralRecombination_2020, p. 247]
+
+[@kumar_MutationRatesMammalian_2002, first paragraph]:
+
+> Rates of point mutation can be determined indirectly by estimating
+> the rate at which the neutral substitutions accumulate in
+> protein-coding genes
+
 :::
 
 # Selection
+
+:::{.center}
+
+![](assets/images/gould_finches.jpg){width=700px}
+
+:::
 
 ::: {.notes }
 
