@@ -417,3 +417,8 @@ a:focus, table a:focus{
     padding: 2em;
   }
 }
+@media print {
+  .logo-button {
+    display: none!important;
+  }
+}

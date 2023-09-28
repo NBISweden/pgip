@@ -8,7 +8,6 @@ format:
     footer: Population genetics foundations
 ---
 
-
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
 
 {{< include ../_knitr.qmd >}}
