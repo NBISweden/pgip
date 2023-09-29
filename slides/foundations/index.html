@@ -11,7 +11,7 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.388">
 
   <meta name="author" content="Per Unneberg">
   <title>DDLS Population genomics in practice - Population genetics</title>
@@ -34,7 +34,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -101,6 +101,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -246,7 +247,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -463,7 +465,13 @@
 <section id="dna-variation" class="title-slide slide level1 center">
 <h1>DNA variation</h1>
 <div>
-<p><img data-src="assets/images/popgen.svg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/popgen.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-1">
+</div>
+</figure>
+</div>
 </div>
 <aside class="notes">
 <p>Goal of section: look at the data that forms the foundation for population genomic analyses</p>
@@ -1551,7 +1559,9 @@ q = q^2 + pq
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
 
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.qmd#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">
+Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.qmd#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a>
+</p><aside class="notes">
 <!-- markdownlint-disable MD013 -->
 <p>See <a href="https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines" class="uri">https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines</a> for legend customization.</p>
 <!-- markdownlint-enable MD013 -->
@@ -1669,7 +1679,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-1-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-1-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-2" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1696,7 +1712,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-2-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-2-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-3" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1724,7 +1746,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.0-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-3.0-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-4" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1752,7 +1780,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.1-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-3.1-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-5" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1780,7 +1814,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.1b-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-3.1b-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-6" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1808,7 +1848,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.2-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-3.2-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-7" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1836,7 +1882,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-3-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-8" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1864,7 +1916,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3-untangled-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-3-untangled-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-9" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1892,7 +1950,13 @@ q = q^2 + pq
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-4-1.svg" width="672"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="quarto-figure quarto-figure-left" width="672">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-4-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-10" width="672">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1901,7 +1965,9 @@ q = q^2 + pq
 <section id="wright-fisher-model-10" class="slide level2 smaller">
 <h2>Wright-Fisher model</h2>
 
-<img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-.gif" width="14" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;2: Wright-Fisher model</p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-.gif" width="14" class="r-stretch quarto-figure-left"><p class="caption">
+Figure&nbsp;2: Wright-Fisher model
+</p><aside class="notes">
 <p>See <a href="https://mikeyharper.uk/animated-plots-with-r/" class="uri">https://mikeyharper.uk/animated-plots-with-r/</a></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1919,24 +1985,32 @@ q = q^2 + pq
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wright-fisher-model-gganimation-last_78fe16f7075885cb9b994f809091dd66">
+<div class="cell" data-hash="index_cache/revealjs/fig-wright-fisher-model-gganimation-last_ec553c13a2f14a818fcebe4b70de03e5">
 <div class="cell-output-display">
-<div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;3: WF model indicating time direction from past (top) to present (bottom).</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:100.0%"></p>
+<div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left" width="100%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-wright-fisher-model-gganimation-last-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: WF model indicating time direction from past (top) to present (bottom).
+</figcaption>
+<div aria-describedby="fig-wright-fisher-model-gganimation-last-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:100.0%">
+</div>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_559de7c785316a6ebd0c6023db219f87">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_659d402d0b4caf455a5a85d61d61cdbc">
 <div class="cell-output-display">
-<div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;4: WF model tracing the genealogies of three extant chromosomes</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" width="960"></p>
+<div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left" width="960">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-wf-model-genealogy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: WF model tracing the genealogies of three extant chromosomes
+</figcaption>
+<div aria-describedby="fig-wf-model-genealogy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" width="960">
+</div>
 </figure>
 </div>
 </div>
@@ -1964,7 +2038,7 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 <h3 id="the-expected-number-of-offspring-is-one">The expected number of offspring is one</h3>
 <p><br></p>
 
-<img data-src="index_files/figure-revealjs/wf-expected-number-of-offspring-1.svg" width="960" class="r-stretch quarto-figure-center"><p><br></p>
+<img data-src="index_files/figure-revealjs/wf-expected-number-of-offspring-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="quarto-figure-center r-stretch" width="960"><p><br></p>
 <p><span class="math display">\[
 E(v) = mp = 2N\frac{1}{2N} = 1
 \]</span></p>
@@ -1974,7 +2048,7 @@ E(v) = mp = 2N\frac{1}{2N} = 1
 <h3 id="poisson-approximation-for-large-n">Poisson approximation for large <span class="math inline">\(N\)</span></h3>
 <p><br></p>
 
-<img data-src="index_files/figure-revealjs/wf-poisson-approximation-large-n-1.svg" width="960" class="r-stretch quarto-figure-center"><p><br></p>
+<img data-src="index_files/figure-revealjs/wf-poisson-approximation-large-n-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-12" class="quarto-figure-center r-stretch" width="960"><p><br></p>
 <p>When <span class="math inline">\(2N\)</span> large it holds that the probability that sequence <span class="math inline">\(v\)</span> has <span class="math inline">\(k\)</span> offspring is</p>
 <p><span class="math display">\[
 P(v=k) \approx \frac{1}{k!}e^{-k}
@@ -1985,7 +2059,7 @@ P(v=k) \approx \frac{1}{k!}e^{-k}
 <h2>Properties of Wright-Fisher sampling</h2>
 <h3 id="sec-prob-sequence-pick-same-parent">Probability that two sequences pick same parent</h3>
 
-<img data-src="index_files/figure-revealjs/wf-prob-parents-identical-fig-1.svg" width="800" class="r-stretch quarto-figure-center"><p>Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be two sequences. Pick a parent <span class="math inline">\(p_u\)</span> of <span class="math inline">\(u\)</span>. Then the probability that <span class="math inline">\(v\)</span> picks the same parent is (solid lines)</p>
+<img data-src="index_files/figure-revealjs/wf-prob-parents-identical-fig-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-13" class="quarto-figure-center r-stretch" width="800"><p>Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be two sequences. Pick a parent <span class="math inline">\(p_u\)</span> of <span class="math inline">\(u\)</span>. Then the probability that <span class="math inline">\(v\)</span> picks the same parent is (solid lines)</p>
 <p><span class="math display">\[
 P(p_u=p_v) = \frac{1}{2N}
 \]</span></p>
@@ -2001,12 +2075,16 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 <div class="column" style="width:25%;">
 
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-wf-two-chrom-find-common-ancestor_82ba764843e6b721f6e4621fc4653bb9">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-wf-two-chrom-find-common-ancestor_0b75db8a394b378017c6cdcc370ba52d">
 <div class="cell-output-display">
-<div id="fig-wf-two-chrom-find-common-ancestor" class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Figure&nbsp;5: Illustration of two sequences finding a common ancestor after five generations; four failures with probability <span class="math inline">\(1-1/2N\)</span>, one success with probability 1/2N</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-two-chrom-find-common-ancestor-1.svg" style="width:70.0%"></p>
+<div id="fig-wf-two-chrom-find-common-ancestor" class="quarto-figure quarto-figure-center" data-fig-align="center" width="70%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-wf-two-chrom-find-common-ancestor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Illustration of two sequences finding a common ancestor after five generations; four failures with probability <span class="math inline">\(1-1/2N\)</span>, one success with probability 1/2N
+</figcaption>
+<div aria-describedby="fig-wf-two-chrom-find-common-ancestor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-wf-two-chrom-find-common-ancestor-1.svg" class="quarto-figure-center" style="width:70.0%">
+</div>
 </figure>
 </div>
 </div>
@@ -2044,22 +2122,46 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 </div>
 <div class="circular-image">
 <p>Mutation</p>
-<p><img data-src="assets/images/mutation.jpg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-14" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/mutation.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-14">
+</div>
+</figure>
+</div>
 </div>
 <div class="circular-image">
 <p>Selection</p>
-<p><img data-src="assets/images/finches.jpg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-15" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/finches.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-15">
+</div>
+</figure>
+</div>
 </div>
 <div>
 &nbsp;
 </div>
 <div class="circular-image">
 <p>Recombination</p>
-<p><img data-src="assets/images/recombination.jpeg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-16" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/recombination.jpeg" id="fig-539a35d47e664c97a50115a146a7f1bd-16">
+</div>
+</figure>
+</div>
 </div>
 <div class="circular-image">
 <p>Drift</p>
-<p><img data-src="assets/images/genetic-drift.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-17" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/genetic-drift.png" id="fig-539a35d47e664c97a50115a146a7f1bd-17">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2069,13 +2171,25 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 <div class="column" style="width:35%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-1-1.svg" width="960"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-18" class="quarto-figure quarto-figure-left" width="960">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-1-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-18" width="960">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column fragment" style="width:35%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-2-1.svg" width="960"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-19" class="quarto-figure quarto-figure-left" width="960">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-2-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-19" width="960">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div><p>Wright-Fisher model showing the evolution of population of 10 genes over 16 generations. Allele variants are shown in white and black. Starting frequency black variant is 0.3.</p>
@@ -2098,7 +2212,7 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 <section id="sampling-model-again" class="slide level2">
 <h2>Sampling model again</h2>
 
-<img data-src="index_files/figure-revealjs/allele-sampling-model-1.svg" width="1152" class="r-stretch quarto-figure-center"><p>We assume two gene variants <span class="math inline">\(A\)</span>, <span class="math inline">\(a\)</span>, each with <span class="math inline">\(i\)</span> and <span class="math inline">\(j=2N-i\)</span> copies in generation <span class="math inline">\(t\)</span>. Let <span class="math inline">\(p_t=i/2N\)</span> be the <em>frequency</em> of <span class="math inline">\(A\)</span> in generation <span class="math inline">\(t\)</span>, and <span class="math inline">\(q_t=1-p_t\)</span> the frequency of <span class="math inline">\(a\)</span>.</p>
+<img data-src="index_files/figure-revealjs/allele-sampling-model-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-20" class="quarto-figure-center r-stretch" width="1152"><p>We assume two gene variants <span class="math inline">\(A\)</span>, <span class="math inline">\(a\)</span>, each with <span class="math inline">\(i\)</span> and <span class="math inline">\(j=2N-i\)</span> copies in generation <span class="math inline">\(t\)</span>. Let <span class="math inline">\(p_t=i/2N\)</span> be the <em>frequency</em> of <span class="math inline">\(A\)</span> in generation <span class="math inline">\(t\)</span>, and <span class="math inline">\(q_t=1-p_t\)</span> the frequency of <span class="math inline">\(a\)</span>.</p>
 <p>The sampling model for next generation <span class="math inline">\(t+1\)</span> is then</p>
 <p><span class="math display">\[
 p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
@@ -2124,7 +2238,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="column" style="width:50%;">
 <p>To capture dynamics, follow allele frequency trajectory as function of time.</p>
 <div class="smallr">
-<div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_fc6a9d0852d57471ad01989470464bdb">
+<div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_7e18ac7726df9926ae54de704b7e4d95">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="do">##'</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
@@ -2145,7 +2259,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <p>Note dependency of variance on population size 2N</p>
 </div>
 </div><div class="column fragment" data-fragment-index="1" style="width:50%;">
-<div class="cell" data-animation.hook="gifski" data-hash="index_cache/revealjs/fig-genetic-drift-N-10_a530be6e13075e2dae772e4bb6c617ec">
+<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-N-10_80161eea65ed3245d4aa2cfe07700ac7">
 <div class="cell-output cell-output-error">
 <pre><code>Error in device(files[i], ...): unused arguments (units = "in", res = 192)</code></pre>
 </div>
@@ -2171,12 +2285,16 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="columns">
 <div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-many-repetitions_e77d7c2b8179e5e687200e1a47a30dfd">
+<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-many-repetitions_3bc97e521383ee6b83472ad1b89a8c5a">
 <div class="cell-output-display">
-<div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;6: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.svg" width="560" height="380"></p>
+<div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left" height="380" width="560">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-genetic-drift-many-repetitions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.
+</figcaption>
+<div aria-describedby="fig-genetic-drift-many-repetitions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.svg" width="560" height="380">
+</div>
 </figure>
 </div>
 </div>
@@ -2192,11 +2310,13 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 <div class="fragment">
 <div class="center">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/gas-particle-drift_674263fbb995b2e89763594279313bd6">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/gas-particle-drift_6ade6e44630735feccb0a4a0833279a1">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="index_files/figure-revealjs/gas-particle-drift-1.svg" width="960" height="200"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-21" class="quarto-figure quarto-figure-center" height="200" data-fig-align="center" width="960">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/gas-particle-drift-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-21" class="quarto-figure-center" width="960" height="200">
+</div>
 </figure>
 </div>
 </div>
@@ -2227,23 +2347,31 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Genetic drift as allele frequency distributions</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-histogram-plot_2f4b9aa16e595291cde140bbc27d6fb9">
+<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-histogram-plot_d0f4ab4a3f979e44ce965706da5c9e99">
 <div class="cell-output-display">
-<div id="fig-genetic-drift-histogram-plot" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;7: Histogram <span class="citation" data-cites="kimura_1983">Kimura (<a href="#/bibliography" role="doc-biblioref" onclick="">1983</a>)</span>, Fig. 3.4</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-histogram-plot-1.svg" width="960"></p>
+<div id="fig-genetic-drift-histogram-plot" class="quarto-figure quarto-figure-left" width="960">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-genetic-drift-histogram-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Histogram <span class="citation" data-cites="kimura_1983">Kimura (<a href="#/bibliography" role="doc-biblioref" onclick="">1983</a>)</span>, Fig. 3.4
+</figcaption>
+<div aria-describedby="fig-genetic-drift-histogram-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-genetic-drift-histogram-plot-1.svg" width="960">
+</div>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-buri-table-14_d90b5d2bcf32b315da9a357b81bc4cff">
+<div class="cell" data-hash="index_cache/revealjs/fig-buri-table-14_0fbd0bd6515e285452b1ba799af1675a">
 <div class="cell-output-display">
-<div id="fig-buri-table-14" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;8: Buri experiment</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-buri-table-14-1.svg" style="width:70.0%"></p>
+<div id="fig-buri-table-14" class="quarto-figure quarto-figure-left" width="70%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-buri-table-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Buri experiment
+</figcaption>
+<div aria-describedby="fig-buri-table-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-buri-table-14-1.svg" style="width:70.0%">
+</div>
 </figure>
 </div>
 </div>
@@ -2255,12 +2383,16 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-identity-by-state-and-descent_68793df2e3436679ae674958c36e2819">
+<div class="cell" data-hash="index_cache/revealjs/fig-identity-by-state-and-descent_471d812833562320c8934ac1572f021d">
 <div class="cell-output-display">
-<div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;9: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-identity-by-state-and-descent-1.svg" style="width:70.0%"></p>
+<div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left" width="70%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-identity-by-state-and-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.
+</figcaption>
+<div aria-describedby="fig-identity-by-state-and-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-identity-by-state-and-descent-1.svg" style="width:70.0%">
+</div>
 </figure>
 </div>
 </div>
@@ -2293,12 +2425,16 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-gillespie-2.4_6c1dc4ae053a5395b90d141b2393a73f">
+<div class="cell" data-hash="index_cache/revealjs/fig-gillespie-2.4_b96400bb025b28697632ffadd9300e5f">
 <div class="cell-output-display">
-<div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:90.0%"></p>
+<div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left" width="90%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-gillespie-2.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size
+</figcaption>
+<div aria-describedby="fig-gillespie-2.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:90.0%">
+</div>
 </figure>
 </div>
 </div>
@@ -2307,18 +2443,28 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="fragment">
 <div class="columns">
 <div class="column" style="width:70%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_3b4fb9d265dae9daaea3c3f3839cdc0d">
+<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_dce834875d33557f2e68ce064ab1ba41">
 <div class="cell-output-display">
-<div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, fig. 4.5</a>)</span></figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:80.0%"></p>
+<div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left" width="80%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-black-footed-ferret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, fig. 4.5</a>)</span>
+</figcaption>
+<div aria-describedby="fig-black-footed-ferret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:80.0%">
+</div>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
-<p><img data-src="assets/images/ferret.svg" style="width:100.0%"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-22" class="quarto-figure quarto-figure-left" width="100%">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/ferret.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-22" style="width:100.0%">
+</div>
+</figure>
+</div>
 <p>Example of how rapid decline in population size can affect heterozygosity</p>
 </div>
 </div>
@@ -2374,28 +2520,26 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Mutation</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-
 <table>
 <tbody><tr>
 <td>
-<div style="transform: translate(50px, 0px);">
+<div style="transform: translate(50px, -40px);">
 <i class="fa-solid fa-bolt fa-2x fa-rotate-90"></i>
 </div>
 </td>
 <td>
-<div style="transform: translate(0px, 40px);">
 <i class="fa-solid fa-dna fa-5x"></i>
-</div>
 </td>
 </tr>
-
 </tbody></table>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="index_files/figure-revealjs/allele-sampling-model-mutation-1.svg" width="1152"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-23" class="quarto-figure quarto-figure-center" data-fig-align="center" width="1152">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/allele-sampling-model-mutation-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-23" class="quarto-figure-center" width="1152">
+</div>
 </figure>
 </div>
 </div>
@@ -2403,36 +2547,19 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div>
 <div class="fragment">
-<div class="columns">
-<div class="column" style="width:70%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/mutation-models_ae9c567c3453d82184cb7050ec753bce">
+<div class="cell" data-hash="index_cache/revealjs/mutation-models_1626c54422b988dad38ce27b062fca8c">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/mutation-models-1.svg" width="960"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-24" class="quarto-figure quarto-figure-left" width="960">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/mutation-models-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-24" width="960">
+</div>
+</figure>
+</div>
 </div>
 </div>
 <!-- markdownlint-enable MD013 -->
-</div><div class="column" style="width:30%;">
-<dl>
-<dt>Two-allele</dt>
-<dd>
-Derive popgen stats
-</dd>
-<dt>Finite sites</dt>
-<dd>
-Recurrent mutations
-</dd>
-<dt>Infinite alleles</dt>
-<dd>
-Protein electrophoresis
-</dd>
-<dt>Inifinite sites</dt>
-<dd>
-DNA sequences
-</dd>
-</dl>
-</div>
-</div>
 </div>
 <aside class="notes">
 <p>Mutations are generated randomly as changes in DNA. In WF model will be highlighted in black.</p>
@@ -2444,9 +2571,15 @@ DNA sequences
 <li>infinite sites model: model commonly used for long DNA sequences</li>
 </ul>
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/stepwise-mutation-model_89d608c5a4dcd526167ec279c52e1b92">
+<div class="cell" data-hash="index_cache/revealjs/stepwise-mutation-model_65b90197405bd136cddd761546b1341c">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/stepwise-mutation-model-1.svg" width="1000"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-25" class="quarto-figure quarto-figure-left" width="1000px">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/stepwise-mutation-model-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-25" width="1000">
+</div>
+</figure>
+</div>
 </div>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -2476,12 +2609,16 @@ DNA sequences
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-mutation_4ca99b382c6fd197b3201ef624c87768">
+<div class="cell" data-hash="index_cache/revealjs/fig-wf-mutation_9e688381490c384e2e1611d4108fdbe3">
 <div class="cell-output-display">
-<div id="fig-wf-mutation" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;12: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-mutation-1.svg" width="400" height="500"></p>
+<div id="fig-wf-mutation" class="quarto-figure quarto-figure-left" height="500px" width="400px">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-wf-mutation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.
+</figcaption>
+<div aria-describedby="fig-wf-mutation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-wf-mutation-1.svg" width="400" height="500">
+</div>
 </figure>
 </div>
 </div>
@@ -2507,12 +2644,16 @@ DNA sequences
 <h2>Tracing the evolution of mutations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-tracing-evolution-of-mutations_1bc17eaa98df7a6b892b2339ac0de881">
+<div class="cell" data-hash="index_cache/revealjs/fig-tracing-evolution-of-mutations_c37d0846299da67ceeda55c85d1f166a">
 <div class="cell-output-display">
-<div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" width="500" height="500"></p>
+<div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-left" height="500" width="500">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-tracing-evolution-of-mutations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.
+</figcaption>
+<div aria-describedby="fig-tracing-evolution-of-mutations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" width="500" height="500">
+</div>
 </figure>
 </div>
 </div>
@@ -2567,12 +2708,16 @@ DNA sequences
 <p><strong>Nearly neutral theory</strong> later developed to explain failure to predict scaling of polymorphism with population size.</p>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-heterozygosity-function-ne_efb1fe2d6480cf5fe59a9fdf8d6f715f">
+<div class="cell" data-hash="index_cache/revealjs/fig-heterozygosity-function-ne_140afa084e0f11f15adf1eb475749c71">
 <div class="cell-output-display">
-<div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
+<div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left" width="60%">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-heterozygosity-function-ne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.
+</figcaption>
+<div aria-describedby="fig-heterozygosity-function-ne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%">
+</div>
 </figure>
 </div>
 </div>
@@ -2639,7 +2784,13 @@ DNA sequences
 <section id="selection" class="title-slide slide level1 center">
 <h1>Selection</h1>
 <div class="center">
-<p><img data-src="assets/images/gould_finches.jpg" width="700"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-26" class="quarto-figure quarto-figure-left" width="700px">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/gould_finches.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-26" width="700">
+</div>
+</figure>
+</div>
 </div>
 <aside class="notes">
 <p>For a list of methods see <a href="https://methodspopgen.com/methods-to-detect-selection/" class="uri">https://methodspopgen.com/methods-to-detect-selection/</a></p>
@@ -2703,15 +2854,27 @@ DNA sequences
 \]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/selection-fig-dp_09954b95cc695378df78593afb959b14">
+<div class="cell" data-hash="index_cache/revealjs/selection-fig-dp_42b49a3361a7eb37ec0772dc3ffa43a7">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/selection-fig-dp-1.svg" width="500" height="500"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-27" class="quarto-figure quarto-figure-left" height="500" width="500">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/selection-fig-dp-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-27" width="500" height="500">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/selection-fig-p_1c97444a571d25c897b3a3cf0029cdf1">
+<div class="cell" data-hash="index_cache/revealjs/selection-fig-p_085ed63dec4bf6ec62e2694e9b1aa3f7">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/selection-fig-p-1.svg" width="500" height="500"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-28" class="quarto-figure quarto-figure-left" height="500" width="500">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/selection-fig-p-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-28" width="500" height="500">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2721,12 +2884,16 @@ DNA sequences
 <h2>Selection and drift - population size matters</h2>
 <div class="columns">
 <div class="column" style="width:80%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-selection-and-drift_8b1e5d6222596fc6ccd4cd0fd703bb44">
+<div class="cell" data-hash="index_cache/revealjs/fig-selection-and-drift_38b367f27ff3f82ccddb60cb88b373de">
 <div class="cell-output-display">
-<div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;15: The fixation probability relative to the neutral probability of fixation under the assumption <span class="math inline">\(s&lt;0.1\)</span>.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152"></p>
+<div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left" width="1152">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-selection-and-drift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: The fixation probability relative to the neutral probability of fixation under the assumption <span class="math inline">\(s&lt;0.1\)</span>.
+</figcaption>
+<div aria-describedby="fig-selection-and-drift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152">
+</div>
 </figure>
 </div>
 </div>
@@ -2775,12 +2942,16 @@ positive selection
 </dd>
 </dl>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_9b17cb34d13306fb8efc5b28c3ca467d">
+<div class="cell" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_221c3612fe4fb83798e76866ee608280">
 <div class="cell-output-display">
-<div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;16: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400"></p>
+<div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left" height="400" width="768">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-ensembl-hsapiens-rat-dnds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs.
+</figcaption>
+<div aria-describedby="fig-ensembl-hsapiens-rat-dnds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400">
+</div>
 </figure>
 </div>
 </div>
@@ -2809,12 +2980,16 @@ positive selection
 </section>
 <section id="linked-selection" class="slide level2">
 <h2>Linked selection</h2>
-<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_42c6060ad4ea112d2f8e88d7986d3d60">
+<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_84c4bc437dd2de0aa4daffa8836ac733">
 <div class="cell-output-display">
-<div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;17: A selective sweep of an advantageous mutation (gray dot).</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
+<div id="fig-selective-sweep" class="quarto-figure quarto-figure-left" height="300" width="960">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-selective-sweep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: A selective sweep of an advantageous mutation (gray dot).
+</figcaption>
+<div aria-describedby="fig-selective-sweep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300">
+</div>
 </figure>
 </div>
 </div>
@@ -2837,20 +3012,34 @@ positive selection
 <section id="recombination-breaks-upp-association-between-loci" class="slide level2">
 <h2>Recombination breaks upp association between loci</h2>
 
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;18: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" class="quarto-figure-center r-stretch" width="600"><p class="caption">
+Figure&nbsp;18: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.
+</p></section>
 <section id="distinguishing-selection-from-drift-via-topology" class="slide level2">
 <h2>Distinguishing selection from drift via topology</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-drift-genealogy_2be9e99a84832937e327dbe7b65db510">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-drift-genealogy_db478158d7f2ac1d3c0851838d014f28">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-model-drift-genealogy-1.svg" width="960" height="600"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-29" class="quarto-figure quarto-figure-left" height="600" width="960">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-model-drift-genealogy-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-29" width="960" height="600">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-selection-genealogy_85646a60770d8c75d9f5c088afddd23d">
+<div class="cell" data-hash="index_cache/revealjs/wf-model-selection-genealogy_c6976a725d318d7f46cbe59afb5f198b">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-model-selection-genealogy-1.svg" width="960" height="600"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-30" class="quarto-figure quarto-figure-left" height="600" width="960">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="index_files/figure-revealjs/wf-model-selection-genealogy-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-30" width="960" height="600">
+</div>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2871,12 +3060,16 @@ positive selection
 </section>
 <section id="the-phases-of-a-selective-sweep" class="slide level2">
 <h2>The phases of a selective sweep</h2>
-<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep-phases_1c334fc387646d680bcda7651aa0d29c">
+<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep-phases_f4728a10d3698e1bd88946c91d53991b">
 <div class="cell-output-display">
-<div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;19: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
+<div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left" height="500" width="960">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-selective-sweep-phases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1
+</figcaption>
+<div aria-describedby="fig-selective-sweep-phases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500">
+</div>
 </figure>
 </div>
 </div>
@@ -2885,12 +3078,16 @@ positive selection
 <section id="hitchhiking-versus-background-selection" class="slide level2">
 <h2>Hitchhiking versus background selection</h2>
 <div>
-<div class="cell" data-hash="index_cache/revealjs/fig-hitchhiking-vs-background-selection_4ad83f5070647c5f848aa80ac1a6988c">
+<div class="cell" data-hash="index_cache/revealjs/fig-hitchhiking-vs-background-selection_d33f60c7012ed2b16ac65db44af1f31b">
 <div class="cell-output-display">
-<div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;20: Hitchhiking (left) versus background selection (right).</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="800"></p>
+<div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left" width="800">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-hitchhiking-vs-background-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: Hitchhiking (left) versus background selection (right).
+</figcaption>
+<div aria-describedby="fig-hitchhiking-vs-background-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="800">
+</div>
 </figure>
 </div>
 </div>
@@ -2906,7 +3103,7 @@ positive selection
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-casillas_MolecularPopulationGenetics_2017" class="csl-entry" role="listitem">
 Casillas, S., &amp; Barbadilla, A. (2017). Molecular <span>Population Genetics</span>. <em>Genetics</em>, <em>205</em>(3), 1003–1035. <a href="https://doi.org/10.1534/genetics.116.196493">https://doi.org/10.1534/genetics.116.196493</a>
 </div>
@@ -2996,7 +3193,6 @@ Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander,
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -3187,17 +3383,17 @@ Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander,
       function hyperlink_logo() {
         var button = document.createElement( 'div' );
         button.className = "logo-button";
-        button.id = "logo-button";
+        button.id = "logo-chalkboard";
         button.style.visibility = "visible";
         button.style.position = "absolute";
         button.style.zIndex = 30;
         button.style.fontSize = "24px";
-        button.style.left = "130px";
-        button.style.bottom = "14px";
+        button.style.left = "auto";
+        button.style.bottom = "16px";
         button.style.top = "auto";
-        button.style.right = "auto";
+        button.style.right = "50px";
 
-        button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Slides listing"><i class="fa fa-home"></i></a>';
+        button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Main slides menu"><i class="fa fa-home"></i></a>';
         document.querySelector( ".reveal" ).appendChild( button );
       }
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -3318,10 +3514,9 @@ Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander,
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -3331,8 +3526,17 @@ Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander,
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
