@@ -54,7 +54,7 @@ format:
   revealjs:
     quarto-required: ">=1.2.475"
     toc: true
-#    include-after-body: assets/www/logo-hyperlink.html
+    include-after-body: assets/www/logo-hyperlink.html
     toc-depth: 1
     slide-level: 2
     slide-number: true
@@ -82,6 +82,12 @@ format:
       data-background-position: top left
     theme:
       - assets/css/custom.scss
+    pointer:
+      pointerSize: 8
+      alwaysVisible: false
+      color: red
+revealjs-plugins:
+  - pointer
 
 execute:
   freeze: auto
