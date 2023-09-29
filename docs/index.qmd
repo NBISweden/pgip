@@ -1,36 +1,116 @@
 ---
-pagetitle: "PGIP 2023"
+pagetitle: "DDLS PGIP 2023"
 toc: false
-date: ""
+date: last-modified
 sidebar: false
 format:
   html:
     number-sections: false
+    template-partials:
+      - assets/www/title-block.html
 execute:
   freeze: false
+  cache: false
 ---
 
-# [**PGIP** • 2023]{.large}
+<!-- markdownlint-disable MD041 -->
 
-### Population genomics in practice
+```{r }
+#| label: load-course-date-info
+#| echo: false
+#| eval: true
+library(lubridate)
+library(dplyr)
+library(kableExtra)
+library(formattable)
+library(yaml)
 
-::: {style="margin-bottom: 1em;"}
+current <- yaml::read_yaml("_course_info.yml")$current
+session <- yaml::read_yaml("_course_info.yml")[[as.character(current)]]
+```
 
-##### 6-10 November 2023, Uppsala, Sweden
+### NBIS • Workshop
+
+### DDLS Population genomics in practice
+
+Welcome to the DDLS Population Genomics in Practice homepage!
+
+#### Important dates and information
+
+See the canvas home page for the current course
+[`r current`](`r session$canvas_home_page`) for more
+information on how to apply.
+
+```{r }
+#| label: print-course-dates
+#| echo: false
+#| eval: true
+#| results: asis
+df <- data.frame(
+  title = c("Next round", "Application opens", "Application deadline"),
+  data = c(
+    paste0(
+      format(as_datetime(session$start_time), "%d-%b-%Y"),
+      " - ",
+      format(as_datetime(session$end_time), "%d-%b-%Y")
+    ),
+    format(as_datetime(session$application_opens), "%d-%b-%Y"),
+    format(as_datetime(session$application_closes), "%d-%b-%Y")
+  )
+)
+cat(
+  print(kable(df,
+    format = "pipe", escape = FALSE,
+    row.names = FALSE, col.names = NULL,
+    align = c("l", "c")
+  )),
+  "\n\n: {.hover .condensed .responsive}\n\n"
+)
+```
+
+#### Brief contents
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+This workshop includes the following moments:
+
+- Variant calling and filtering
+- Describing and summarising variation data
+- Population structure
+- Demographic analysis
+- Selection scans
+- Coalescent simulation
+
+See [syllabus](syllabus.qmd) for a more complete description of course
+contents and [info](info.qmd) for practical information on venue and
+hotels.
 
 :::
 
-<br>
+::: {.column width="50%"}
 
-[**This site is under construction!**]{.largest}
+<!-- markdownlint-disable MD013 -->
 
-<br>
+```{python }
+#| label: ooa-demesdraw-fig
+#| echo: false
+#| eval: true
+#| out-width: 100%
+import demes
+import demesdraw
+from matplotlib import pyplot as plt
+fig, ax = plt.subplots(figsize=(8, 6))
+ooa = demes.load("data/data/ooa/ooa.demes.yaml")
+ax = demesdraw.tubes(ooa, ax=ax, num_lines_per_migration=6, seed=32)
+ax
+```
+<!-- markdownlint-enable MD013 -->
 
-Welcome to the Population Genomics in Practice homepage!
+:::
 
-This workshop is organised by the National Bioinformatics
-Infrastructure, Sweden (NBIS). NBIS is a platform of the Science for
-Life Laboratory (SciLifeLab).
+::::
 
 <br>
 
@@ -40,6 +120,14 @@ Life Laboratory (SciLifeLab).
 
 ---
 
-::: small
-Updated: <?lua.date?> at <?lua.time?>.
+::: {.landing-update}
+
+::: {.smallest}
+
+Last updated on {{< fa calendar-alt >}} {{< meta date >}}
+
 :::
+
+:::
+
+<!-- markdownlint-enable MD041 -->

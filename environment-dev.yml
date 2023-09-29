@@ -8,7 +8,9 @@ dependencies:
   - pip
   - pre-commit
   - r-docopt
+  - r-fontawesome
   - r-languageserver
+  - r-leaflet
   - r-lintr
   - r-precommit
   - pip:

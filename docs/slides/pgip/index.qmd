@@ -5,6 +5,7 @@ author:
     - "Per Unneberg"
 format:
   revealjs:
+    page-layout: custom
     slide-level: 2
     toc: false
 ---
@@ -23,9 +24,36 @@ library(readxl)
 library(curl)
 ```
 
+## Intended learning outcomes
+
+### Course
+
+- Present minimum toolkit of methods that should be known to anyone
+  starting out in population genomics
+- Sufficiently small for one-week workshop
+
+### Lecture
+
+- Present practical example of toolkit as applied in
+  [@fuller_PopulationGeneticsCoral_2020]
+- Briefly discuss baseline model
+  [@johri_RecommendationsImprovingStatistical_2022]
+
+### {visibility="hidden"}
+
 ::: {.notes }
 
-Points from [@hahn_MolecularPopulationGenetics_2019]:
+Aim of lecture is to:
+
+- present a practical application of commonly used methods in
+  population genomics
+- link population genomics to population genetics
+- discuss statistical inference and the need of a baseline model with
+  which to compare observations and conclusions
+
+**What is population genomics?**
+
+Points from [@hahn_MolecularPopulationGenetics_2019, pp. 249-250]:
 
 - whole-genome data instead of single loci - population genomics is
   population genetics for whole-genome sequences
@@ -35,18 +63,28 @@ Points from [@hahn_MolecularPopulationGenetics_2019]:
 - addresses interactions between different forces, notably selection
   and demographic history
 
-Some applications:
+**Some applications**
 
 - genome-wide scans for selection
-  - selection vs demography
-- methods for genome-wide scans
-- non-independence
+  - selection vs demography (p. 251)
+- methods for genome-wide scans (p. 258)
+
+**Caveats**
+
+- non-independence (p. 267)
   - different statistics rely on similar input
   - overlapping peaks from different statistics *not* independent
 
-[@hartl1997principles p. 469-470]
+**General points**
 
-[@li_InferenceHumanPopulation_2011, supplementary notes, p. 6]:
+[@hartl1997principles p. 469-470]:
+
+- more emphasis on differences within populations
+- goal: understand differences among genomes -> requires complete
+  sequence data from multiple individuals
+
+[@li_InferenceHumanPopulation_2011, supplementary notes, p. 6] on the
+use of PSMC on autosomes:
 
 "...highly consistent except for the very recent history,
 demonstrating the power of using whole-genome data."
@@ -84,11 +122,9 @@ population genomics, and that is sufficiently small to be presented in
 a one-week workshop. At the end of this lecture, we will discuss some
 more advanced applications in population genomics.
 
-Walk through steps of the main figures which represent common analyses
-in a population genomics experiment. No need to supply text; better to
-exemplify via the figures.
+**Genome assembly and sampling**
 
-Genome assembly and sampling
+Why: most analyses require a *reference sequence* with which to compare *resequenced samples*
 
 Points to consider:
 
@@ -120,7 +156,12 @@ height=550 fig-align=center}
 
 ::: {.notes }
 
-Variation and demographic history
+**Variation and demographic history**
+
+Why: summarizing *diversity* provides (indirect) information on
+population size and more, as does the *linkage structure*. Estimate
+*demographic history* since fluctuating population size may produce
+signals similar to those of selection
 
 - LD decay: important for imputation (e.g.,
   stephens_AccountingDecayLinkage_2005)
@@ -128,7 +169,14 @@ Variation and demographic history
   parameters for determining the number of markers needed to
   successfully map a QTL, and the resolution with which the trait can
   be successfully mapped otyama_EvaluationLinkageDisequilibrium_2019
-- 0.363% average pi
+- 0.363% average pi, but large variation.
+- many psmc plots show decline in population size, which could be an
+  effect of bottleneck during pleistocene. Also population divergence
+  (ghost ancestral populations, splits, extinction) can affect
+  population size
+- in aDNA studies missingness is common (i.e., heterozygotes are
+  underestimated) and has to be accounted for since coalescence times
+  are affected and may influence estimate of population size
 
 :::
 
@@ -153,10 +201,15 @@ width=550 fig-align=center}
 
 ::: {.notes }
 
-Population structure:
+**Population structure:**
+
+Why: many reasons: 1) identifying populations for contrasts in e.g.
+selection scans 2) identify admixed individuals that should be removed
+from analyses 3) identify barriers to gene flow etc
 
 - no discernible relationship between geographic distance and genetic
-  differentiation
+  differentiation -> gene flow
+  - for this reason, Fst between populations is low
 - EEMS (Estimated Effective Migration Surfaces) models relationship
   between genetics and geography
   petkova_VisualizingSpatialPopulation_2016
@@ -186,7 +239,11 @@ height=550 fig-align=center}
 
 ::: {.notes }
 
-Little differentiation across reefs -> littel population structure
+**Selection scan**
+
+Why: identify loci associated with adaptation / selection
+
+Little differentiation across reefs -> little population structure
 over hundreds of kilometers. However, there are environmental
 differences (thermal regimes). Scan for pi outliers:
 
@@ -259,6 +316,9 @@ Drift
 
 ::: {.notes }
 
+[@fuller_PopulationGeneticsCoral_2020] paper has population genetics
+in title -> population genetics is a key ingredient.
+
 Population genetics focuses on the genetic basis of evolution. It is
 mainly a theoretical subject, owing to the slow changes of genetic
 variation. As such, it tries to explain the shape and structure of
@@ -298,10 +358,6 @@ Refer to Hahn's points about learning something about global patterns:
 
 So, not simply about applying 10000 selection tests for multiple loci
 
-Population genetics in title of previous slide => population genomics
-is large-scale population genetics? At the very least, shows the
-foundational role population genetics plays.
-
 All of the points above point to the importance of statistics which
 implies mathematics / computational skills important
 
@@ -311,9 +367,23 @@ implies mathematics / computational skills important
 
 ![Patterns of polymorphism and divergence [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.g001)
 
+::: {.notes}
+
+@begun_PopulationGenomicsWholeGenome_2007 study: same system
+(*Drosophila*) but more individuals and whole genome
+
+:::
+
 ## From population genetics to population genomics
 
 ![Numbers of polymorphic and fixed variants [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.t002)
+
+::: {.notes}
+
+Novelty: now possible to do *genome-wide* characterization of
+variation in different functional contexts
+
+:::
 
 ## The technological revolution in **sequencing** and **computing**
 
@@ -372,6 +442,69 @@ that takes into account the processes that shape genetic variation
 5. genetic drift with demographic history and geographic structure
 
 :::
+
+::: {.notes}
+
+Caution against adaptationist storytelling; always compare to a
+baseline model that takes potential confounding factors into account
+
+:::
+
+## Applications of population genomics
+
+:::: {style="display: grid; grid-template-columns: 80px 420px 80px 420px;
+grid-row-gap: 0px; grid-column-gap: 30px; align-items: center;"}
+
+:::{}
+![](assets/images/apis-mellifera.png)
+:::
+
+:::{}
+conservation genomics [@webster_PopulationGenomicsInsect_2023]
+:::
+
+:::{.fragment fragment-index=1}
+![](assets/images/mimulus.png)
+:::
+
+:::{.fragment fragment-index=1}
+speciation genomics [@stankowski_WidespreadSelectionGene_2019]
+:::
+
+:::{.fragment fragment-index=2}
+![](assets/images/gorilla.png)
+:::
+
+:::{.fragment fragment-index=2}
+disentangle forces that create variation
+[@rodrigues_SharedEvolutionaryProcesses_2023]
+:::
+
+:::{.fragment fragment-index=3}
+![](assets/images/mammuth.png)
+:::
+
+:::{.fragment fragment-index=3}
+paleogenomics (aDNA) [@vandervalk_MillionyearoldDNASheds_2021]
+:::
+
+:::{.fragment fragment-index=4}
+![](assets/images/cow.png)
+:::
+
+:::{.fragment fragment-index=4}
+domestication [@barrera-redondo_GenomicTranscriptomicEpigenomic_2020]
+:::
+
+:::{.fragment fragment-index=5}
+![](assets/images/krill.png)
+:::
+
+:::{.fragment fragment-index=5}
+ecology [@hohenlohe_PopulationGenomicsProvides_2019]
+:::
+
+::::
 
 ## Bibliography {.unnumbered .unlisted}
 

@@ -1,6 +1,6 @@
 project:
   type: website
-  title: "Population genomics in practice"
+  title: "DDLS Population genomics in practice"
   output-dir: _site
   pre-render:
     - ../scripts/setup-data.sh
@@ -8,58 +8,38 @@ project:
     - ../scripts/setup-exercise-data.sh
     - ../scripts/prepare.py
   render:
-    - "*.qmd"
+    # Root
+    - "index.qmd"
+    - "contents.qmd"
+    - "info.qmd"
+    - "precourse.qmd"
+    - "references.qmd"
+    - "schedule.qmd"
+    - "syllabus.qmd"
+    # Exercises
+    - "exercises/data.qmd"
+    - "exercises/index.qmd"
+    - "exercises/simulation/index.qmd"
+    # Slides
+    - "slides/index.qmd"
+    - "slides/pgip/index.qmd"
+    - "slides/foundations/index.qmd"
+    - "slides/simulation/index.qmd"
+    - "slides/population_structure/index.qmd"
+    # Recipes
+    - "recipes/index.qmd"
+    - "recipes/slim/index.qmd"
+    - "recipes/slides/index.qmd"
+    # Exclude
     - "!lectures/*.qmd"
     - "*.ipynb"
 
-website:
-  title: "Population genomics in practice"
-  navbar:
-    logo: assets/logos/nbislogo-green.svg
-    right:
-      - text: "HOME"
-        href: "index.qmd"
-      - text: "CONTENTS"
-        href: "contents.qmd"
-      - text: PROGRAM
-        href: "program.qmd"
-      - text: SCHEDULE
-        href: "schedule.qmd"
-      - text: ABOUT
-        href: "about.qmd"
-      - text: SLIDES
-        href: "slides/index.qmd"
-      - text: EXERCISES
-        href: "exercises/index.qmd"
-      - text: CODE RECIPES
-        href: "recipes/index.qmd"
-      - icon: "twitter"
-        href: "https://twitter.com/NBISwe"
-      - icon: "github"
-        href: "https://github.com/NBISweden/workshop-pgip"
-  page-footer:
-    border: false
-    left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
-    right: "Published with [Quarto](https://quarto.org/) v<?quarto.version?>"
-  favicon: assets/logos/nbislogo-green.svg
-
-  sidebar:
-    contents:
-      - section: Slides
-        contents:
-          - slides/pgip/index.qmd
-          - slides/foundations/index.qmd
-          - slides/simulation/index.qmd
-          - slides/population_structure/index.qmd
-      - section: Exercises
-        contents:
-          - exercises/simulation/index.qmd
-      - section: Code recipes
-        contents:
-          - recipes/index.qmd
+metadata-files:
+  - _website.yml
 
 bibliography: assets/bibliography.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+from: markdown+emoji
 
 format:
   html:
@@ -74,6 +54,7 @@ format:
   revealjs:
     quarto-required: ">=1.2.475"
     toc: true
+    include-after-body: assets/www/logo-hyperlink.html
     toc-depth: 1
     slide-level: 2
     slide-number: true
@@ -101,11 +82,14 @@ format:
       data-background-position: top left
     theme:
       - assets/css/custom.scss
-
-from: markdown+emoji
+    pointer:
+      pointerSize: 8
+      alwaysVisible: false
+      color: red
+revealjs-plugins:
+  - pointer
 
 execute:
-  freeze: auto
   cache: true
   echo: true
   warning: false
