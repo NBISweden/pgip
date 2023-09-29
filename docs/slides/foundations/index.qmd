@@ -427,8 +427,6 @@ $$
 
 ::::
 
-## Observed dive
-
 ## In absence of evolutionary forces alleles are in equilibrium
 
 ### The Hardy-Weinberg equilibrium
@@ -1133,16 +1131,17 @@ more extensive treatment, see
 assume
 
 1. a single locus in a haploid population of size $2N$ (or diploid of
-   size $N$ when random mationg)
+   size $N$ when random mating)
 2. no mutation and selection
 3. discrete generations
 
 Each generation we sample $2N$ new chromosomes from the previous
 generation. The probability of choosing a chromosome $v$ is $1/2N$
 (coin flip with probability of success $1/2N$). Since the trials are
-independent, and we perform $2N$ trials, the number of offspring of a
-given chromosome $v$ is *binomially distributed* $\mathrm{Bin}(m, p)$,
-with parameters $m=2N$ and probability of success $p=\frac{1}{2N}$:
+independent, and we perform $2N$ trials, the number of offspring $k$
+of a given chromosome $v$ is *binomially distributed* $\mathrm{Bin}(m,
+p)$, with parameters $m=2N$ and probability of success
+$p=\frac{1}{2N}$:
 
 $$
 P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
@@ -1176,6 +1175,9 @@ $$
 ```
 
 <br>
+
+The expected value of a $\mathrm{Bin}(m,p)$ (binomially distributed)
+variable with parameters $m=2N$ and $p=\frac{1}{2N}$ is mp, hence:
 
 $$
 E(v) = mp = 2N\frac{1}{2N} = 1

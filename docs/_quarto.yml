@@ -46,7 +46,7 @@ format:
     theme:
       - assets/css/custom.scss
     toc: true
-    embed-resources: true
+    embed-resources: false
     date: last-modified
     date-format: "DD-MMM-YYYY"
     lightbox:
