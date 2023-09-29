@@ -1996,8 +1996,8 @@ evolutionary forces besides drift, no selective advantages
 
 <table>
 <tr>
-<td><div style="transform: translate(50px, -40px);"><i class="fa-solid fa-bolt fa-2x fa-rotate-90"></i></div></td>
-<td><i class="fa-solid fa-dna fa-5x"></i></td>
+<td><div style="transform: translate(50px, 0px);"><i class="fa-solid fa-bolt fa-2x fa-rotate-90"></i></div></td>
+<td><div style="transform: translate(0px, 40px);"><i class="fa-solid fa-dna fa-5x"></i></div></td>
 </tr>
 </table>
 
@@ -2024,6 +2024,10 @@ ggplot_wf(wf, fill = allele, size=6) +
 ::::
 
 ::: {.fragment}
+
+:::: {.columns}
+
+::: {.column width="70%"}
 
 <!-- markdownlint-disable MD013 -->
 
@@ -2062,6 +2066,26 @@ ggplot_wf(wf, fill = allele, size=6) +
 ```
 
 <!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.column width="30%"}
+
+Two-allele
+: Derive popgen stats
+
+Finite sites
+: Recurrent mutations
+
+Infinite alleles
+: Protein electrophoresis
+
+Inifinite sites
+: DNA sequences
+
+:::
+
+::::
 
 :::
 
