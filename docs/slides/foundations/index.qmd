@@ -1139,9 +1139,10 @@ Each generation we sample $2N$ new chromosomes from the previous
 generation. The probability of choosing a chromosome $v$ is $1/2N$
 (coin flip with probability of success $1/2N$). Since the trials are
 independent, and we perform $2N$ trials, the number of offspring $k$
-of a given chromosome $v$ is *binomially distributed* $\mathrm{Bin}(m,
-p)$, with parameters $m=2N$ and probability of success
-$p=\frac{1}{2N}$:
+of a given chromosome $v$ is [*binomially
+distributed*](https://en.wikipedia.org/wiki/Binomial_distribution)
+$\mathrm{Bin}(m, p)$, with parameters $m=2N$ and probability of
+success $p=\frac{1}{2N}$:
 
 $$
 P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
@@ -1177,7 +1178,7 @@ $$
 <br>
 
 The expected value of a $\mathrm{Bin}(m,p)$ (binomially distributed)
-variable with parameters $m=2N$ and $p=\frac{1}{2N}$ is mp, hence:
+variable with parameters $m=2N$ and $p=\frac{1}{2N}$ is $mp$, hence:
 
 $$
 E(v) = mp = 2N\frac{1}{2N} = 1
@@ -1409,7 +1410,7 @@ Drift
 
 ::::
 
-## Genetic drift with alleles
+## Wright-Fisher model with alleles
 
 :::: {.columns .compact}
 
@@ -1443,6 +1444,13 @@ ggplot_wf(g, fill = allele) + ggtitle("Allele loss") +
 
 :::
 
+:::{.column width=30% .fragment}
+
+Alleles can randomly *fix* or be *lost* through process called
+**genetic drift**
+
+:::
+
 Wright-Fisher model showing the evolution of population of 10 genes
 over 16 generations. Allele variants are shown in white and black.
 Starting frequency black variant is 0.3.
@@ -1451,11 +1459,13 @@ Starting frequency black variant is 0.3.
 
 ::: {.notes }
 
-Enter allelic variants; we are looking at two variants
+(To avoid confusion: previously black was used to indicate parent,
+here black/white will refer to different alleles)
 
-Important: point out that the fate of any allele under drift is to be
-**lost** or **fixed**, which ultimately means variation is **lost**
-with drift
+Enter allelic variants; we are looking at two alleles
+
+Important: the fate of any allele under drift is to be **lost** or
+**fixed**, which ultimately means variation is **lost** with drift
 
 :::
 
@@ -1509,17 +1519,27 @@ time.
 #| eval: false
 ```
 
+```{r }
+#| label: wright-fisher-plot
+#| echo: true
+#| eval: false
+# Example simulation and plot
+set.seed(1223)
+generations <- 100
+n <- 100 # NB: haploid population size!
+plot(1:generations,
+     wright_fisher(0.5, n, generations),
+     type="l", ylab="frequency",
+     xlab="generation", ylim=c(0, 1))
+```
+
 :::
 
-::: {.fragment fragment-index=2}
-
-Note dependency of variance on population size 2N
-
 :::
 
-:::
+::: {.column width="50%"}
 
-::: {.column width="50%" .fragment fragment-index=1}
+::: {.fragment}
 
 ```{r }
 #| label: genetic-drift-example
@@ -1551,11 +1571,15 @@ wf$sample <- factor(wf$sample)
 #| echo: false
 #| eval: true
 #| fig-show: animate
+#| fig-format: png
 #| fig-keep: all
-#| out-width: 60%
-#| fig-cap: |
-#|    Genetic drift for different population sizes,
-#|    starting frequency $p_0$=0.5
+#| out-width: 80%
+#| fig-height: 6
+#| fig-width: 6
+#| fig-cap:
+#|    Genetic drift for different haploid(!) population sizes,
+#|    starting frequency $p_0$=0.5. Note dependency of variance
+#|    on population size N.
 ggplot(
   subset(wf, wf$sample == 1 & wf$p0 == 0.5),
   aes(x = generation, y = frequency)
@@ -1566,6 +1590,8 @@ ggplot(
   facet_wrap(. ~ N) +
   transition_reveal(generation)
 ```
+
+:::
 
 :::
 
@@ -1894,13 +1920,13 @@ ggplot(data, aes(x=tn, y=het, shape=factor(population_size))) +
 
 :::: {.columns}
 
-::: {.column width="70%"}
+::: {.column width="60%"}
 
 ```{r }
 #| label: fig-black-footed-ferret
 #| echo: false
 #| eval: true
-#| out-width: 80%
+#| out-width: 90%
 #| fig-cap: Heterozygosity in black-footed ferret
 #|     [@wisely_GeneticDiversityFitness_2002].
 #|     Example from [@grahamcoop_NotesPopulationGenetics_2020, Fig. 4.5]
@@ -1919,12 +1945,24 @@ ggplot(data, aes(x=date, y=He, label=N)) +
 
 :::
 
-::: {.column width="30%"}
+::: {.column width="40%"}
 
-![](assets/images/ferret.svg){width=100%}
+![](assets/images/ferret.svg){width=40%}
 
 Example of how rapid decline in population size can affect
-heterozygosity
+heterozygosity.
+
+::: {.fragment}
+
+Population size influences genetic diversity!
+
+:::
+
+::: {.fragment}
+
+However, *census* population size not (always) the correct measure.
+
+:::
 
 :::
 
@@ -1965,6 +2003,9 @@ From [@grahamcoop_NotesPopulationGenetics_2020, p. 64]
 > microsatellites in individuals from museum collections, showing the
 > sharp drop in diversity as population sizes crashed (see Figure
 > 4.5).
+
+Segue: population size important; however, *census* population size is
+not always the measure we want when relating to genetic diversity
 
 :::
 
@@ -2093,7 +2134,9 @@ Inifinite sites
 
 ::: {.notes }
 
-Mutations are generated randomly as changes in DNA. In WF model will be highlighted in black.
+Mutations are generated randomly as changes in DNA. In WF model will
+be highlighted in black. We assume mutations are described by a
+Poisson process with rate $\mu$ (per generation).
 
 The mutation models are:
 
@@ -2157,8 +2200,9 @@ Model B: mainly for repeats
 
 Genetic drift "moves" frequencies to the point that variation is lost
 via allele fixation or loss. New variation is introduced through
-**mutation**. We typically assume mutations are described by a Poisson
-process with rate $\mu$ (per generation).
+**mutation**. We typically assume mutations are described by a
+[Poisson process](https://en.wikipedia.org/wiki/Poisson_point_process)
+with rate $\mu$ (per generation).
 
 ::: {.fragment}
 
@@ -2835,7 +2879,7 @@ Topologies become important when we discuss sweeps
 
 :::
 
-## Recombination breaks upp association between loci
+## Recombination breaks up association between loci
 
 ```{r }
 #| label: pgip-load-slim-data
