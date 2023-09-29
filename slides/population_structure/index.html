@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.388">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Nikolay Oskolkov">
   <meta name="author" content="(uses material from lectures of Ben Peter, Anders Albrechtsen, Ida Moltke, Graham Coop)">
@@ -33,7 +33,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -100,7 +100,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -247,8 +246,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -428,19 +426,13 @@
 <section id="pca-in-population-genetics-cavalli-sforza" class="slide level2 center">
 <h2>PCA in population genetics: Cavalli-Sforza</h2>
 
-<img data-src="assets/Cavalli_Sforza.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" style="width:90.0%" class="r-stretch quarto-figure-center"><p><span class="citation" data-cites="Cavalli_Sforza_1978">(<a href="" role="doc-biblioref" onclick="return false;">Menozzi P, 1978</a>)</span> noticed that genetic distances seem to correlate with geographical distances</p>
+<img data-src="assets/Cavalli_Sforza.png" style="width:90.0%" class="r-stretch"><p><span class="citation" data-cites="Cavalli_Sforza_1978">(<a href="" role="doc-biblioref" onclick="return false;">Menozzi P, 1978</a>)</span> noticed that genetic distances seem to correlate with geographical distances</p>
 </section>
 <section id="pca-in-population-genetics-john-novembre" class="slide level2 center">
 <h2>PCA in population genetics: John Novembre</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center" height="510">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/Novembre.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" height="510">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/Novembre.png" height="510"></p>
 <p><span class="citation" data-cites="Novembre_2008">(<a href="" role="doc-biblioref" onclick="return false;">Novembre J, 2008</a>)</span></p>
 </div><div class="column" style="width:40%;">
 <ul>
@@ -454,12 +446,12 @@
 <section id="pca-and-mds-are-matrix-factorization-techniques" class="slide level2 center">
 <h2>PCA and MDS are matrix factorization techniques</h2>
 
-<img data-src="assets/MatrixFactor.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure-center r-stretch"></section>
+<img data-src="assets/MatrixFactor.png" class="r-stretch quarto-figure-center"></section>
 <section id="toy-example-of-pca-for-population-genetics" class="slide level2 center">
 <h2>Toy example of PCA for population genetics</h2>
 <div class="columns">
 <div class="column" style="width:49%;">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-3_ad86f7a1a48e1bb102fd61223d460cf0">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-3_4419d81d8b9f66d4c5a8a98f9ccba484">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>gen <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>,</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="dv">5</span>, <span class="at">by =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">colnames</span>(gen) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Ind"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
@@ -477,35 +469,23 @@ SNP7    2    2    1    1    0</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-4_4fce6e780b85f2bad083b289c9aef922">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-4_c0f7b93fdcf26942f62ae5c8c7477d48">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>gen_centered <span class="ot">&lt;-</span> <span class="fu">scale</span>(gen, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>covariance <span class="ot">&lt;-</span> <span class="fu">t</span>(gen_centered) <span class="sc">%*%</span> gen_centered</span>
 <span id="cb3-3"><a href="#cb3-3"></a>eig <span class="ot">&lt;-</span> <span class="fu">eigen</span>(covariance)</span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="fu">barplot</span>(eig<span class="sc">$</span>values<span class="sc">/</span><span class="fu">sum</span>(eig<span class="sc">$</span>values), <span class="at">names =</span> <span class="fu">paste0</span>(<span class="st">"PC"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center" width="960">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-4" width="960">
-</div>
-</figure>
-</div>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.svg" width="960"></p>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:51%;">
 <div class="fragment">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-5_8dc22791779eb7d1221ef34b65a0cac8">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-5_4ed22ec2b10ae780484196d36fd72870">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">plot</span>(eig<span class="sc">$</span>vectors[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">xlab =</span> <span class="st">"PC1"</span>, <span class="at">ylab =</span> <span class="st">"PC2"</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="dv">5</span>, <span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">points</span>(eig<span class="sc">$</span>vectors[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">pch =</span> <span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center" width="960">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-5" width="960">
-</div>
-</figure>
-</div>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="960"></p>
 </div>
 </div>
 <p>Idea: project the data into a low dimensional space that explains the largest amount of variance</p>
@@ -516,12 +496,12 @@ SNP7    2    2    1    1    0</code></pre>
 <section id="variance-maximization-and-eigen-value-decomposition" class="slide level2 center">
 <h2>Variance maximization and eigen value decomposition</h2>
 
-<img data-src="assets/max_variance.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure-center r-stretch"></section>
+<img data-src="assets/max_variance.png" class="r-stretch quarto-figure-center"></section>
 <section id="toy-example-of-mds-for-population-genetics" class="slide level2 center">
 <h2>Toy example of MDS for population genetics</h2>
 <div class="columns">
 <div class="column" style="width:49%;">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-6_f38c44d7b154fa17d1add83bd16b408a">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-6_f1702d8b8c4a4eb73a323f61349e0179">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>gen <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>,</span>
 <span id="cb5-2"><a href="#cb5-2"></a>    <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="dv">5</span>, <span class="at">by =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">colnames</span>(gen) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Ind"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
@@ -539,7 +519,7 @@ SNP7    2    2    1    1    0</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-7_9fc0105a70edaba9de41ff39cadc4fc9">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-7_01f6f2c3967e82f94ca91658ee1923f5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>my_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">t</span>(gen), <span class="at">method =</span> <span class="st">"manhattan"</span>, <span class="at">upper =</span> <span class="cn">TRUE</span>, <span class="at">diag =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a>my_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -564,17 +544,11 @@ Ind5  4.847612 -0.8919238</code></pre>
 </div>
 </div><div class="column" style="width:51%;">
 <div class="fragment">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-8_3a22070a653bf89c0caec526ab2cb1e0">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-8_84323eeee01e66e4b917aee7d86d77d5">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">plot</span>(my_mds, <span class="at">xlab =</span> <span class="st">"MDS1"</span>, <span class="at">ylab =</span> <span class="st">"MDS2"</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="dv">5</span>, <span class="at">col =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">2</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="fu">points</span>(my_mds, <span class="at">pch =</span> <span class="fu">as.character</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-center" width="960">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-7" width="960">
-</div>
-</figure>
-</div>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="960"></p>
 </div>
 </div>
 <p>Idea: project the data into a low dimensional space that preserves distances</p>
@@ -587,18 +561,18 @@ Ind5  4.847612 -0.8919238</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>We will use ANGSD <span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span> and compute genotype likelihoods on 435 bam-files from the 1000G project.</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-9_0b845eba97a355006dd24ccb527ebf66">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-9_95447516b70ac77698d53309927a20b6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="bu">cd</span> /home/nikolay/Documents/Teaching/PopGen_2023/data/1000G_bam_files</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">find</span> <span class="va">$PWD</span> <span class="at">-name</span> <span class="st">'*.bam'</span> <span class="op">&gt;</span> 1000G_bam_list.txt</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="ex">angsd</span> <span class="at">-bam</span> 1000G_bam_list.txt <span class="at">-GL</span> 2 <span class="at">-doMajorMinor</span> 1 <span class="at">-doMaf</span> 1 <span class="at">-SNP_pval</span> 2e-6 <span class="dt">\</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a>-minMapQ 30 <span class="at">-minQ</span> 20 <span class="at">-minInd</span> 25 <span class="at">-minMaf</span> 0.05 <span class="at">-doGlf</span> 2 <span class="at">-out</span> 1000G <span class="at">-P</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we will run PCAANGSD to infer admixures proportions:</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-10_5a3662a4f5de3e4c938330c9e659972f">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-10_32baac443cb84b15ce537f11638228b5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pcangsd</span> <span class="at">-b</span> 1000G.beagle.gz <span class="at">-o</span> pca_1000G <span class="at">-t</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and finally we will plots the results using custom R scripts:</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-11_44f14b6454887354b28988d34d27b48c">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-11_e87769179ab4faf6d024491f96365b70">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>C <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.table</span>(<span class="st">"pca_1000G.cov"</span>))</span>
 <span id="cb14-2"><a href="#cb14-2"></a>e <span class="ot">&lt;-</span> <span class="fu">eigen</span>(C)</span>
 <span id="cb14-3"><a href="#cb14-3"></a>pops <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"1000G_bam_list.txt"</span>)</span>
@@ -614,25 +588,19 @@ Ind5  4.847612 -0.8919238</code></pre>
 <span id="cb14-13"><a href="#cb14-13"></a>    <span class="st">"green"</span>, <span class="st">"brown"</span>, <span class="st">"magenta"</span>), <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">inset =</span> <span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-center" width="200%">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/pca_1000G.png" id="fig-539a35d47e664c97a50115a146a7f1bd-8" style="width:200.0%">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/pca_1000G.png" style="width:200.0%"></p>
 </div>
 </div>
 </section>
 <section id="angsd-genotype-likelihood-tool-for-low-coverage-data" class="slide level2 center">
 <h2>ANGSD: genotype likelihood tool for low-coverage data</h2>
 
-<img data-src="assets/angsd_publ.png" id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="quarto-figure-center r-stretch"><p><span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span></p>
+<img data-src="assets/angsd_publ.png" class="r-stretch quarto-figure-center"><p><span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span></p>
 </section>
 <section id="hard-genotype-calls-vs.-genotype-likelihoods" class="slide level2 center">
 <h2>Hard genotype calls vs.&nbsp;genotype likelihoods</h2>
 
-<img data-src="assets/likes.png" id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="quarto-figure-center r-stretch"><div class="fragment">
+<img data-src="assets/likes.png" class="r-stretch quarto-figure-center"><div class="fragment">
 <ul>
 <li>Minor allele frequency based on hard calls: <span class="math display">\[\rm{MAF_{hc}}=\frac{1+1+2}{2*5}=\frac{4}{10}\]</span></li>
 </ul>
@@ -647,11 +615,9 @@ Ind5  4.847612 -0.8919238</code></pre>
 <h2>A known pitfall of PCA: uneven sampling</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="quarto-figure quarto-figure-center" height="510" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/McVean.png" id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="quarto-figure-center" height="510">
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/McVean.png" height="510"></p>
 </figure>
 </div>
 <p><span class="citation" data-cites="McVean_2009">(<a href="" role="doc-biblioref" onclick="return false;">McVean, 2009</a>)</span></p>
@@ -669,22 +635,10 @@ Ind5  4.847612 -0.8919238</code></pre>
 <h2>Example of uneven sampling from 1000G project</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-12" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/Downsampled_Europeans.png" id="fig-539a35d47e664c97a50115a146a7f1bd-12">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/Downsampled_Europeans.png"></p>
 <p><strong>Downsampled Europeans</strong></p>
 </div><div class="column" style="width:50%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-13" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/Downsampled_Asians.png" id="fig-539a35d47e664c97a50115a146a7f1bd-13">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/Downsampled_Asians.png"></p>
 <p><strong>Downsampled Asians</strong></p>
 </div>
 </div>
@@ -693,13 +647,7 @@ Ind5  4.847612 -0.8919238</code></pre>
 <h2>Admixture: underlying assumtions</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-14" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/IBD.png" id="fig-539a35d47e664c97a50115a146a7f1bd-14">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/IBD.png"></p>
 </div><div class="column" style="width:30%;">
 <ul>
 <li>genetic clustering algorithm</li>
@@ -716,26 +664,14 @@ Ind5  4.847612 -0.8919238</code></pre>
 <section id="q-and-f-outputs-of-admixture-analysis" class="slide level2 center">
 <h2>Q and F outputs of admixture analysis</h2>
 
-<img data-src="assets/QF.png" id="fig-539a35d47e664c97a50115a146a7f1bd-15" class="quarto-figure-center r-stretch"></section>
+<img data-src="assets/QF.png" class="r-stretch quarto-figure-center"></section>
 <section id="ngsadmix-vs.-admixture" class="slide level2 center">
 <h2>NGSadmix vs.&nbsp;ADMIXTURE</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-16" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/NGSadmix_publ.png" id="fig-539a35d47e664c97a50115a146a7f1bd-16">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/NGSadmix_publ.png"></p>
 </div><div class="column" style="width:55%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-17" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/NGSadmix_vs_Admixture.png" id="fig-539a35d47e664c97a50115a146a7f1bd-17">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/NGSadmix_vs_Admixture.png"></p>
 </div>
 </div>
 </section>
@@ -744,18 +680,18 @@ Ind5  4.847612 -0.8919238</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>We will use ANGSD <span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span> and compute genotype likelihoods on 435 bam-files from the 1000G project.</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-12_f38d9954517b319b81dd216443dd08e7">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-12_b5cd5a89b17ea6d089248da997878ed1">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="bu">cd</span> /home/nikolay/Documents/Teaching/PopGen_2023/data/1000G_bam_files</span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">find</span> <span class="va">$PWD</span> <span class="at">-name</span> <span class="st">'*.bam'</span> <span class="op">&gt;</span> 1000G_bam_list.txt</span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="ex">angsd</span> <span class="at">-bam</span> 1000G_bam_list.txt <span class="at">-GL</span> 2 <span class="at">-doMajorMinor</span> 1 <span class="at">-doMaf</span> 1 <span class="at">-SNP_pval</span> 2e-6 <span class="dt">\</span></span>
 <span id="cb15-4"><a href="#cb15-4"></a>-minMapQ 30 <span class="at">-minQ</span> 20 <span class="at">-minInd</span> 25 <span class="at">-minMaf</span> 0.05 <span class="at">-doGlf</span> 2 <span class="at">-out</span> 1000G <span class="at">-P</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we will run NGSadmix to infer admixures proportions:</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-13_905bc3253a8b5d1c7bcca8618ae6543a">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-13_c6823072c8e73154c59aa183aac9e060">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">NGSadmix</span> <span class="at">-likes</span> 1000G.beagle.gz <span class="at">-K</span> 3 <span class="at">-minMaf</span> 0.05 <span class="at">-seed</span> 1 <span class="at">-o</span> 1000G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and finally we will plots the results using custom R scripts:</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-14_3be4744e6e0c55804e86f7a20d3da268">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-14_4ac9af9ca4fd84610ed13970648ad0a3">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>pops <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"1000G_bam_list.txt"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2"></a>pops <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(pops, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>), <span class="cf">function</span>(x) x[<span class="dv">6</span>])</span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/GenisGE/evalAdmix/master/visFuns.R"</span>)</span>
@@ -769,30 +705,22 @@ Ind5  4.847612 -0.8919238</code></pre>
 <span id="cb17-11"><a href="#cb17-11"></a>})), <span class="at">col =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="fl">1.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-18" class="quarto-figure quarto-figure-center" width="200%">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/admixture_1000G.png" id="fig-539a35d47e664c97a50115a146a7f1bd-18" style="width:200.0%">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/admixture_1000G.png" style="width:200.0%"></p>
 </div>
 </div>
 </section>
 <section id="admixture-bar-plots-should-not-be-over-interpreted" class="slide level2 center">
 <h2>Admixture bar plots should not be over-interpreted</h2>
 
-<img data-src="assets/Falush.png" id="fig-539a35d47e664c97a50115a146a7f1bd-19" class="quarto-figure-center r-stretch"><p><span class="citation" data-cites="Lawson_2018">(<a href="" role="doc-biblioref" onclick="return false;">Lawson DJ, 2018</a>)</span></p>
+<img data-src="assets/Falush.png" class="r-stretch quarto-figure-center"><p><span class="citation" data-cites="Lawson_2018">(<a href="" role="doc-biblioref" onclick="return false;">Lawson DJ, 2018</a>)</span></p>
 </section>
 <section id="haplotype-clustering" class="slide level2 center">
 <h2>Haplotype clustering</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-20" class="quarto-figure quarto-figure-center" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/haplo_clustering.png" id="fig-539a35d47e664c97a50115a146a7f1bd-20" class="quarto-figure-center">
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/haplo_clustering.png"></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
@@ -819,7 +747,7 @@ Ind5  4.847612 -0.8919238</code></pre>
 F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 \frac{\sigma_{subpops}^2}{\sigma_{total}^2}
 \]</span></p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-15_24c4611f3377fb1330e5c4ee95657e69">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-15_6524748472d00d9867e1111e398bb319">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(<span class="st">"admixtools"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
 <span id="cb18-3"><a href="#cb18-3"></a></span>
@@ -839,13 +767,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb18-17"><a href="#cb18-17"></a><span class="fu">pheatmap</span>(mat, <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:55%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-21" class="quarto-figure quarto-figure-center" width="200%">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/fst_heatmap.png" id="fig-539a35d47e664c97a50115a146a7f1bd-21" style="width:200.0%">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/fst_heatmap.png" style="width:200.0%"></p>
 </div>
 </div>
 </section>
@@ -854,10 +776,10 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <!-- markdownlint-disable MD013 -->
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="assets/AADR.png" class="quarto-figure-center"> <a href="https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data">https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data</a></p>
+<p><img data-src="assets/AADR.png" data-fig-align="center"> <a href="https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data">https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data</a></p>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-16_23432d74352006704580a9856c2fc469">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-16_b6011e0b67dfb184003ab3006c92b76b">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">head</span> data/DavidReich/AADR.ind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             ALT-116 M    Tubalar
@@ -872,7 +794,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
              GEO-020 M   Georgian</code></pre>
 </div>
 </div>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-17_e04da224335f05aea544f151597cc099">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-17_8ccd9921646a544d8bb8560ce3d003f5">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">head</span> <span class="at">-n</span> 8 data/DavidReich/AADR.snp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           rs3094315     1        0.020130          752566 G A
@@ -885,7 +807,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
            rs4970405     1        0.026674         1048955 A G</code></pre>
 </div>
 </div>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-18_3ef9951a6a93ccd813bafec93d312869">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-18_ac3883211112d9017bb043d81d92e0a0">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">head</span> data/DavidReich/AADR.geno</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>12109000100001100012110220021200101020000110010200001011011000011010000011000111000011011010212912100101100100011102112122221212221110000010100000001002291001111100000011000010000000100000000001100001100000111102222220111211202221121121120000001210110100001000100000001111111021222210000000000110000001011122010100011000101120101211000000010100000000000000101010100111100110011000100000011001100011001111111110110211120012021102222101112011222221122222222221212110011001100011010000000001100101011001000111011009001122112010011121112112102101010000001000000010100001000000000000101100011001000010000000000000002000000001011000000001911001
@@ -910,7 +832,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>We will use ANGSD <span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span> and compute Fst between CEU and YRI populations from the 1000G project.</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-19_7c20ae8b5427f327a4342eac6aad1730">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-19_8f1c419d72ed0c54b7d5b8ba03e1ad9c">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">angsd</span> <span class="at">-b</span> 1000G_CEU_bam_list.txt <span class="at">-anc</span> anc.fa <span class="at">-out</span> CEU <span class="at">-dosaf</span> 1 <span class="at">-gl</span> 1</span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="ex">angsd</span> <span class="at">-b</span> 1000G_YRI_bam_list.txt <span class="at">-anc</span> anc.fa <span class="at">-out</span> YRI <span class="at">-dosaf</span> 1 <span class="at">-gl</span> 1</span>
 <span id="cb25-3"><a href="#cb25-3"></a><span class="ex">realSFS</span> CEU.saf.idx YRI.saf.idx <span class="op">&gt;</span> CEU.YRI.ml</span>
@@ -919,7 +841,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb25-6"><a href="#cb25-6"></a><span class="ex">realSFS</span> fst stats2 CEU_YRI.fst.idx <span class="at">-win</span> 50 <span class="at">-step</span> 10 <span class="op">&gt;</span> slidingwindow_win50_step10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and finally we will plots the results using custom R scripts:</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-20_036e6e47292ea9404697056ceca31ebc">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-20_52514b93b885e66bebc724aaeac13a88">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"slidingwindow_win50_step10"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb26-2"><a href="#cb26-2"></a>df <span class="ot">&lt;-</span> df[<span class="sc">-</span><span class="dv">1</span>, ]</span>
 <span id="cb26-3"><a href="#cb26-3"></a>df<span class="sc">$</span>V2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>V2)</span>
@@ -932,13 +854,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb26-10"><a href="#cb26-10"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">1</span>, <span class="at">at =</span> myticks, <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">21</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-22" class="quarto-figure quarto-figure-center" width="200%">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/Fst_1000G.png" id="fig-539a35d47e664c97a50115a146a7f1bd-22" style="width:200.0%">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/Fst_1000G.png" style="width:200.0%"></p>
 </div>
 </div>
 </section>
@@ -946,13 +862,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <h2>F-statistics: underlying assumtions</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-23" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/fstat_tree.png" id="fig-539a35d47e664c97a50115a146a7f1bd-23">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/fstat_tree.png"></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li><p>Treeness test: are populations related in a tree-like fashion (Reich et al.&nbsp;2009)?</p></li>
@@ -981,21 +891,9 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <ul>
 <li>Outgroup <span class="math inline">\(F_3\)</span>-statistic: for an unknown population <span class="math inline">\(P_X\)</span> find the closest population from a panel <span class="math inline">\(P_i\)</span> computing the distances via an outgroup <span class="math inline">\(P_O\)</span>.</li>
 </ul>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-24" class="quarto-figure quarto-figure-center" width="30%">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/F3_outgroup.png" id="fig-539a35d47e664c97a50115a146a7f1bd-24" style="width:30.0%">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/F3_outgroup.png" style="width:30.0%"></p>
 </div><div class="column" style="width:35%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-25" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/F3_tree.png" id="fig-539a35d47e664c97a50115a146a7f1bd-25">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/F3_tree.png"></p>
 </div>
 </div>
 </section>
@@ -1004,7 +902,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <div class="columns">
 <div class="column" style="width:53%;">
 <p>We will use the AADR dataset and compute F3-statistic for a (presumably!) European population, which is marked as <strong>Unknown</strong> in the dataset, with respect to a panel of other World populations using a Mbuti as an outgroup population.</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-21_aa40791fe97b2679d6e0b79df6ff6aaf">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-21_cd05e6bcc3a0ce054a45391722fa3e1b">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(<span class="st">"admixtools"</span>)</span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3"></a></span>
@@ -1030,30 +928,22 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 </div>
 <p><strong>Can you guess what was the Unknown population?</strong></p>
 </div><div class="column" style="width:47%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-26" class="quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/f3.png" id="fig-539a35d47e664c97a50115a146a7f1bd-26">
-</div>
-</figure>
-</div>
+<p><img data-src="assets/f3.png"></p>
 </div>
 </div>
 </section>
 <section id="relation-between-f-statistics-and-pca" class="slide level2 center">
 <h2>Relation between F-statistics and PCA</h2>
 
-<img data-src="assets/F_stats_PCA.png" id="fig-539a35d47e664c97a50115a146a7f1bd-27" class="quarto-figure-center r-stretch"><p><span class="citation" data-cites="Peter_2022">(<a href="" role="doc-biblioref" onclick="return false;">Peter, 2022</a>)</span></p>
+<img data-src="assets/F_stats_PCA.png" class="r-stretch quarto-figure-center"><p><span class="citation" data-cites="Peter_2022">(<a href="" role="doc-biblioref" onclick="return false;">Peter, 2022</a>)</span></p>
 </section>
 <section id="f4-statistic-d-statistic-abba-baba-test" class="slide level2 center">
 <h2>F4-statistic, D-statistic: ABBA-BABA test</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-28" class="quarto-figure quarto-figure-center" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="assets/D_stat_tree.png" id="fig-539a35d47e664c97a50115a146a7f1bd-28" class="quarto-figure-center">
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/D_stat_tree.png"></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
@@ -1077,7 +967,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>We will use ANGSD <span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span> and compute D-statistic in irder to test potential Neanderthal introgression to European (CEU) and African (YRI) populations from the 1000G project.</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-22_2d6b522ccc7837afd2b9da2fe7d8f7e3">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-22_ff8f0514ce4af98514fd3a9cee6dbbde">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">echo</span> Neandertal.bam <span class="op">&gt;</span> bams</span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="fu">find</span> <span class="va">$PWD</span> <span class="at">-name</span> <span class="st">'*YRI*.bam'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span> <span class="op">&gt;&gt;</span> bams</span>
 <span id="cb28-3"><a href="#cb28-3"></a><span class="fu">find</span> <span class="va">$PWD</span> <span class="at">-name</span> <span class="st">'*CEU*.bam'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span> <span class="op">&gt;&gt;</span> bams</span>
@@ -1085,7 +975,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb28-5"><a href="#cb28-5"></a><span class="ex">Rscript</span> jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and, finally, we will display the resulting table of D-statistics and plot the ABBA and BABA counts using custom R scripts:</p>
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-24_d53df3335a0dd9ed1280950e6966015b">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-24_7f6f1a6787bbc41348714b9ae5d96ee8">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="fu">file.path</span>(path, <span class="st">"out_abbababa_results.txt"</span>), <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
 <span id="cb29-2"><a href="#cb29-2"></a>df <span class="ot">&lt;-</span> df[<span class="fu">grepl</span>(<span class="st">"Neandertal"</span>, <span class="fu">as.character</span>(df<span class="sc">$</span>H3)), ]</span>
 <span id="cb29-3"><a href="#cb29-3"></a>df <span class="ot">&lt;-</span> df[<span class="fu">grepl</span>(<span class="st">"CEU"</span>, <span class="fu">as.character</span>(df<span class="sc">$</span>H2)), ]</span>
@@ -1109,16 +999,10 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-26_8a1576aede438db4e4c111eeed7ed0a5">
+<div class="cell my_code_size_abitsmaller" data-hash="index_cache/revealjs/unnamed-chunk-26_ef0fcc7cc11950ea39e93eca64ee3f80">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>nABBA, df<span class="sc">$</span>nBABA, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"ABBA"</span>, <span class="st">"BABA"</span>), <span class="at">ylab =</span> <span class="st">"COUNTS"</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-29" class="quarto-figure quarto-figure-center" width="960">
-<figure class="quarto-float quarto-float-fig">
-<div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.svg" id="fig-539a35d47e664c97a50115a146a7f1bd-29" width="960">
-</div>
-</figure>
-</div>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.svg" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">wilcox.test</span>(df<span class="sc">$</span>nABBA, df<span class="sc">$</span>nBABA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1135,7 +1019,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </section>
 <section id="refs" class="slide level2 unnumbered unlisted center">
 <h2>Refs</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-Lawson_2012" class="csl-entry" role="listitem">
 D. Lawson, S. M., G. Hellenthal. (2012). Inference of population structure using dense haplotype data. <em>PLoS Genet. 8(1):e1002453</em>. <a href="https://doi.org/doi: 10.1371/journal.pgen.1002453">https://doi.org/doi: 10.1371/journal.pgen.1002453</a>
 </div>
@@ -1197,6 +1081,7 @@ Schraiber, J., &amp; Akey, J. (2015). Methods and models for unravelling human e
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1518,9 +1403,10 @@ Schraiber, J., &amp; Akey, J. (2015). Methods and models for unravelling human e
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1530,17 +1416,8 @@ Schraiber, J., &amp; Akey, J. (2015). Methods and models for unravelling human e
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
