@@ -1950,7 +1950,7 @@ q = q^2 + pq
 <li>no mutation and selection</li>
 <li>discrete generations</li>
 </ol>
-<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring <span class="math inline">\(k\)</span> of a given chromosome <span class="math inline">\(v\)</span> is <em>binomially distributed</em> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
+<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring <span class="math inline">\(k\)</span> of a given chromosome <span class="math inline">\(v\)</span> is <a href="https://en.wikipedia.org/wiki/Binomial_distribution"><em>binomially distributed</em></a> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
 <p><span class="math display">\[
 P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 \left(1 - \frac{1}{2N} \right)^{(2N - k)}
@@ -1962,7 +1962,7 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 <p><br></p>
 
 <img data-src="index_files/figure-revealjs/wf-expected-number-of-offspring-1.svg" width="960" class="r-stretch quarto-figure-center"><p><br></p>
-<p>The expected value of a <span class="math inline">\(\mathrm{Bin}(m,p)\)</span> (binomially distributed) variable with parameters <span class="math inline">\(m=2N\)</span> and <span class="math inline">\(p=\frac{1}{2N}\)</span> is mp, hence:</p>
+<p>The expected value of a <span class="math inline">\(\mathrm{Bin}(m,p)\)</span> (binomially distributed) variable with parameters <span class="math inline">\(m=2N\)</span> and <span class="math inline">\(p=\frac{1}{2N}\)</span> is <span class="math inline">\(mp\)</span>, hence:</p>
 <p><span class="math display">\[
 E(v) = mp = 2N\frac{1}{2N} = 1
 \]</span></p>
@@ -2061,8 +2061,8 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 </div>
 </div>
 </section>
-<section id="genetic-drift-with-alleles" class="slide level2">
-<h2>Genetic drift with alleles</h2>
+<section id="wright-fisher-model-with-alleles" class="slide level2">
+<h2>Wright-Fisher model with alleles</h2>
 <div class="columns compact">
 <div class="column" style="width:35%;">
 <div class="cell">
@@ -2076,11 +2076,14 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 <p><img data-src="index_files/figure-revealjs/wright-fisher-drift-0.3-2-1.svg" width="960"></p>
 </div>
 </div>
+</div><div class="column fragment" style="width:30%;">
+<p>Alleles can randomly <em>fix</em> or be <em>lost</em> through process called <strong>genetic drift</strong></p>
 </div><p>Wright-Fisher model showing the evolution of population of 10 genes over 16 generations. Allele variants are shown in white and black. Starting frequency black variant is 0.3.</p>
 </div>
 <aside class="notes">
-<p>Enter allelic variants; we are looking at two variants</p>
-<p>Important: point out that the fate of any allele under drift is to be <strong>lost</strong> or <strong>fixed</strong>, which ultimately means variation is <strong>lost</strong> with drift</p>
+<p>(To avoid confusion: previously black was used to indicate parent, here black/white will refer to different alleles)</p>
+<p>Enter allelic variants; we are looking at two alleles</p>
+<p>Important: the fate of any allele under drift is to be <strong>lost</strong> or <strong>fixed</strong>, which ultimately means variation is <strong>lost</strong> with drift</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2138,14 +2141,26 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <span id="cb2-13"><a href="#cb2-13"></a>    x</span>
 <span id="cb2-14"><a href="#cb2-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell" data-hash="index_cache/revealjs/wright-fisher-plot_6499baaaee1d16b3debdc278a724c026">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example simulation and plot</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="fragment" data-fragment-index="2">
-<p>Note dependency of variance on population size 2N</p>
 </div>
-</div><div class="column fragment" data-fragment-index="1" style="width:50%;">
-<div class="cell" data-animation.hook="gifski" data-hash="index_cache/revealjs/fig-genetic-drift-N-10_a530be6e13075e2dae772e4bb6c617ec">
-<div class="cell-output cell-output-error">
-<pre><code>Error in device(files[i], ...): unused arguments (units = "in", res = 192)</code></pre>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell" data-animation.hook="gifski" data-hash="index_cache/revealjs/fig-genetic-drift-N-10_92895623153bceedc7a63fb5f59e9b2f">
+<div class="cell-output-display">
+<div id="fig-genetic-drift-N-10" class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Figure&nbsp;6: Genetic drift for different haploid(!) population sizes, starting frequency <span class="math inline">\(p_0\)</span>=0.5. Note dependency of variance on population size N.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-N-10-1.gif" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2173,7 +2188,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;6: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
+<figcaption>Figure&nbsp;7: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.svg" width="560" height="380"></p>
 </figure>
 </div>
@@ -2229,7 +2244,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-genetic-drift-histogram-plot" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;7: Histogram <span class="citation" data-cites="kimura_1983">Kimura (<a href="#/bibliography" role="doc-biblioref" onclick="">1983</a>)</span>, Fig. 3.4</figcaption>
+<figcaption>Figure&nbsp;8: Histogram <span class="citation" data-cites="kimura_1983">Kimura (<a href="#/bibliography" role="doc-biblioref" onclick="">1983</a>)</span>, Fig. 3.4</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genetic-drift-histogram-plot-1.svg" width="960"></p>
 </figure>
 </div>
@@ -2240,7 +2255,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-buri-table-14" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;8: Buri experiment</figcaption>
+<figcaption>Figure&nbsp;9: Buri experiment</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-buri-table-14-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2257,7 +2272,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;9: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
+<figcaption>Figure&nbsp;10: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-identity-by-state-and-descent-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2295,7 +2310,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
+<figcaption>Figure&nbsp;11: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
@@ -2304,20 +2319,26 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div><div class="column" style="width:60%;">
 <div class="fragment">
 <div class="columns">
-<div class="column" style="width:70%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_3b4fb9d265dae9daaea3c3f3839cdc0d">
+<div class="column" style="width:60%;">
+<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_37c9986e58cd7619fd26c07389790c1e">
 <div class="cell-output-display">
 <div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, fig. 4.5</a>)</span></figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:80.0%"></p>
+<figcaption>Figure&nbsp;12: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, fig. 4.5</a>)</span></figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:30%;">
-<p><img data-src="assets/images/ferret.svg" style="width:100.0%"></p>
-<p>Example of how rapid decline in population size can affect heterozygosity</p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="assets/images/ferret.svg" style="width:40.0%"></p>
+<p>Example of how rapid decline in population size can affect heterozygosity.</p>
+<div class="fragment">
+<p>Population size influences genetic diversity!</p>
+</div>
+<div class="fragment">
+<p>However, <em>census</em> population size not (always) the correct measure.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2330,6 +2351,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <blockquote>
 <p>To see how a decline in population size can affect levels of het- erozygosity, let’s consider the case of black-footed ferrets (Mustela nigripes). The black-footed ferret population has declined dramatically through the twentieth century due to destruction of their habitat and sylvatic plague. In 1979, when the last known black-footed ferret died in captivity, they were thought to be extinct. In 1981, a very small wild population was rediscovered (40 individuals), but in 1985 this population suffered a number of disease outbreaks. At that point of the 18 remaining wild individuals were brought into captivity, 7 of which reproduced. Thanks to intense captive breeding efforts and conservation work, a wild population of over 300 individuals has been established since. However, because all of these individuals are descended from those 7 individuals who survived the bottleneck, diversity levels remain low. Wisely et al.&nbsp;measured heterozygosity at a number of microsatellites in individuals from museum collections, showing the sharp drop in diversity as population sizes crashed (see Figure 4.5).</p>
 </blockquote>
+<p>Segue: population size important; however, <em>census</em> population size is not always the measure we want when relating to genetic diversity</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2433,7 +2455,7 @@ DNA sequences
 </div>
 </div>
 <aside class="notes">
-<p>Mutations are generated randomly as changes in DNA. In WF model will be highlighted in black.</p>
+<p>Mutations are generated randomly as changes in DNA. In WF model will be highlighted in black. We assume mutations are described by a Poisson process with rate <span class="math inline">\(\mu\)</span> (per generation).</p>
 <p>The mutation models are:</p>
 <ul>
 <li>two-allele model: used to derive popgen statistics</li>
@@ -2465,7 +2487,7 @@ DNA sequences
 <h2>Mutation and drift</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>Genetic drift “moves” frequencies to the point that variation is lost via allele fixation or loss. New variation is introduced through <strong>mutation</strong>. We typically assume mutations are described by a Poisson process with rate <span class="math inline">\(\mu\)</span> (per generation).</p>
+<p>Genetic drift “moves” frequencies to the point that variation is lost via allele fixation or loss. New variation is introduced through <strong>mutation</strong>. We typically assume mutations are described by a <a href="https://en.wikipedia.org/wiki/Poisson_point_process">Poisson process</a> with rate <span class="math inline">\(\mu\)</span> (per generation).</p>
 <div class="fragment">
 <p>The <strong>mutation rate</strong> is denoted <span class="math inline">\(\mu\)</span>, and the <strong>population scaled</strong> mutation rate is <span class="math inline">\(2N_e\mu\)</span> for haploid populations, <span class="math inline">\(4N_e\mu\)</span> for diploid, where <span class="math inline">\(N_e\)</span> is the <strong>effective population size</strong>.</p>
 </div>
@@ -2478,7 +2500,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-wf-mutation" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;12: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
+<figcaption>Figure&nbsp;13: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-mutation-1.svg" width="400" height="500"></p>
 </figure>
 </div>
@@ -2509,7 +2531,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
+<figcaption>Figure&nbsp;14: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" width="500" height="500"></p>
 </figure>
 </div>
@@ -2569,7 +2591,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
+<figcaption>Figure&nbsp;15: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -2723,7 +2745,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;15: The fixation probability relative to the neutral probability of fixation under the assumption <span class="math inline">\(s&lt;0.1\)</span>.</figcaption>
+<figcaption>Figure&nbsp;16: The fixation probability relative to the neutral probability of fixation under the assumption <span class="math inline">\(s&lt;0.1\)</span>.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152"></p>
 </figure>
 </div>
@@ -2777,7 +2799,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;16: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs.</figcaption>
+<figcaption>Figure&nbsp;17: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400"></p>
 </figure>
 </div>
@@ -2811,7 +2833,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;17: A selective sweep of an advantageous mutation (gray dot).</figcaption>
+<figcaption>Figure&nbsp;18: A selective sweep of an advantageous mutation (gray dot).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
 </figure>
 </div>
@@ -2832,10 +2854,10 @@ positive selection
           display:block!important;
       }</style></aside>
 </section>
-<section id="recombination-breaks-upp-association-between-loci" class="slide level2">
-<h2>Recombination breaks upp association between loci</h2>
+<section id="recombination-breaks-up-association-between-loci" class="slide level2">
+<h2>Recombination breaks up association between loci</h2>
 
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;18: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;19: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
 <section id="distinguishing-selection-from-drift-via-topology" class="slide level2">
 <h2>Distinguishing selection from drift via topology</h2>
 <div class="columns">
@@ -2873,7 +2895,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;19: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<figcaption>Figure&nbsp;20: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
 </figure>
 </div>
@@ -2887,7 +2909,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;20: Hitchhiking (left) versus background selection (right).</figcaption>
+<figcaption>Figure&nbsp;21: Hitchhiking (left) versus background selection (right).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="800"></p>
 </figure>
 </div>

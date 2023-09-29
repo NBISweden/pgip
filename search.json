@@ -368,7 +368,7 @@
     "href": "slides/foundations/index.html#properties-of-wright-fisher-sampling",
     "title": "Population genetics",
     "section": "Properties of Wright-Fisher sampling",
-    "text": "Properties of Wright-Fisher sampling\nThe expected number of offspring is one\n\n\n\nThe expected value of a \\(\\mathrm{Bin}(m,p)\\) (binomially distributed) variable with parameters \\(m=2N\\) and \\(p=\\frac{1}{2N}\\) is mp, hence:\n\\[\nE(v) = mp = 2N\\frac{1}{2N} = 1\n\\]"
+    "text": "Properties of Wright-Fisher sampling\nThe expected number of offspring is one\n\n\n\nThe expected value of a \\(\\mathrm{Bin}(m,p)\\) (binomially distributed) variable with parameters \\(m=2N\\) and \\(p=\\frac{1}{2N}\\) is \\(mp\\), hence:\n\\[\nE(v) = mp = 2N\\frac{1}{2N} = 1\n\\]"
   },
   {
     "objectID": "slides/foundations/index.html#properties-of-wright-fisher-sampling-1",
@@ -392,11 +392,11 @@
     "text": "Properties of Wright-Fisher sampling\nTime for two sequences to coalesce\n\n\n\n\n\n\n\n\nFigure 5: Illustration of two sequences finding a common ancestor after five generations; four failures with probability \\(1-1/2N\\), one success with probability 1/2N\n\n\n\n\n\n\n\n\n\nTime for two sequences \\(u\\) and \\(v\\) to find common ancestor distributed as \\((1 - \\frac{1}{2N})^{j-1}\\frac{1}{2N}\\) (\\(j-1\\) failures followed by success). This is the geometric distribution \\(Ge(p)\\), with parameter \\(p=\\frac{1}{2N}\\), and expected value \\(\\frac{1}{p}={2N}\\). That is, the expected number of generations for two sequences to find a common ancestor (i.e., coalesce) is \\(2N\\) generations.\n\nSince a large fraction of genes lack descendants, very quickly (compared to 2N) a population will descend from a small proportion of genes.\nDerivation of average time to having same parent (i.e., coalescence) requires knowledge of geometric distribution. The probability that the genes find common parent \\(j\\) generations ago is\n\\[\n(1-\\frac{1}{2N})^{(j-1)}\\frac{1}{2N}\n\\]\ndue to independence between generations. This is the geometric distribution \\(Ge(p)\\) with \\(p=1/2N\\), which has expected value \\(1/p\\), i.e., 2N in this case."
   },
   {
-    "objectID": "slides/foundations/index.html#genetic-drift-with-alleles",
-    "href": "slides/foundations/index.html#genetic-drift-with-alleles",
+    "objectID": "slides/foundations/index.html#wright-fisher-model-with-alleles",
+    "href": "slides/foundations/index.html#wright-fisher-model-with-alleles",
     "title": "Population genetics",
-    "section": "Genetic drift with alleles",
-    "text": "Genetic drift with alleles\n\n\n\n\n\n\n\n\n\n\n\n\n\nWright-Fisher model showing the evolution of population of 10 genes over 16 generations. Allele variants are shown in white and black. Starting frequency black variant is 0.3.\n\n\nEnter allelic variants; we are looking at two variants\nImportant: point out that the fate of any allele under drift is to be lost or fixed, which ultimately means variation is lost with drift"
+    "section": "Wright-Fisher model with alleles",
+    "text": "Wright-Fisher model with alleles\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlleles can randomly fix or be lost through process called genetic drift\nWright-Fisher model showing the evolution of population of 10 genes over 16 generations. Allele variants are shown in white and black. Starting frequency black variant is 0.3.\n\n\n(To avoid confusion: previously black was used to indicate parent, here black/white will refer to different alleles)\nEnter allelic variants; we are looking at two alleles\nImportant: the fate of any allele under drift is to be lost or fixed, which ultimately means variation is lost with drift"
   },
   {
     "objectID": "slides/foundations/index.html#sampling-model-again",
@@ -410,35 +410,35 @@
     "href": "slides/foundations/index.html#genetic-drift",
     "title": "Population genetics",
     "section": "Genetic drift",
-    "text": "Genetic drift\n\n\nTo capture dynamics, follow allele frequency trajectory as function of time.\n\n\n##' Wright Fisher model - follow allele frequency distribution\n##'\n##' @param p0 Starting frequency\n##' @param n Population size\n##' @param generations Number of generations to simulate\n##'\nwright_fisher &lt;- function(p0, n, generations) {\n    x &lt;- vector(mode = \"numeric\", length = generations)\n    x[1] &lt;- p0\n    for (i in seq(2, length(x))) {\n        x[i] &lt;- rbinom(1, size = n, prob = x[i - 1])/n\n    }\n    x\n}\n\n\n\nNote dependency of variance on population size 2N\n\n\n\n\nError in device(files[i], ...): unused arguments (units = \"in\", res = 192)\n\n\n\n\n\nMention neutral here as this is how alleles behave under drift: like gas particle diffusing up and down. Allele is eventually either fixed or lost."
+    "text": "Genetic drift\n\n\nTo capture dynamics, follow allele frequency trajectory as function of time.\n\n\n##' Wright Fisher model - follow allele frequency distribution\n##'\n##' @param p0 Starting frequency\n##' @param n Population size\n##' @param generations Number of generations to simulate\n##'\nwright_fisher &lt;- function(p0, n, generations) {\n    x &lt;- vector(mode = \"numeric\", length = generations)\n    x[1] &lt;- p0\n    for (i in seq(2, length(x))) {\n        x[i] &lt;- rbinom(1, size = n, prob = x[i - 1])/n\n    }\n    x\n}\n\n\n# Example simulation and plot\nset.seed(1223)\ngenerations &lt;- 100\nn &lt;- 100  # NB: haploid population size!\nplot(1:generations, wright_fisher(0.5, n, generations), type = \"l\", ylab = \"frequency\",\n    xlab = \"generation\", ylim = c(0, 1))\n\n\n\n\n\n\n\n\nFigure 6: Genetic drift for different haploid(!) population sizes, starting frequency \\(p_0\\)=0.5. Note dependency of variance on population size N.\n\n\n\n\n\n\n\n\n\nMention neutral here as this is how alleles behave under drift: like gas particle diffusing up and down. Allele is eventually either fixed or lost."
   },
   {
     "objectID": "slides/foundations/index.html#genetic-drift-1",
     "href": "slides/foundations/index.html#genetic-drift-1",
     "title": "Population genetics",
     "section": "Genetic drift",
-    "text": "Genetic drift\n\n\n\n\n\n\n\nFigure 6: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.\n\n\n\n\n\n\n\n\n\nfate of allele: fixation or loss \\(\\rightarrow\\) eventually loss of variation\nprobability of fixation \\(\\pi(p)=p\\), where \\(p\\) is the current frequency\nrate of drift (loss of variation) \\(\\propto \\frac{1}{2N}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMathematical treatment of drift can become complicated: easier to study dynamics of heterozygosity\n\n\nSimplifying assumptions -&gt; rate of drift \\(propto \\frac{1}{N}\\) (Leffler et al., 2012)\nIn reality population fluctuates and therefore Ne is substituted for N. Larger Ne -&gt; smaller fluctuation in allele frequency (as evidenced in plots) -&gt; maintain larger genetic diversity"
+    "text": "Genetic drift\n\n\n\n\n\n\n\nFigure 7: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.\n\n\n\n\n\n\n\n\n\nfate of allele: fixation or loss \\(\\rightarrow\\) eventually loss of variation\nprobability of fixation \\(\\pi(p)=p\\), where \\(p\\) is the current frequency\nrate of drift (loss of variation) \\(\\propto \\frac{1}{2N}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMathematical treatment of drift can become complicated: easier to study dynamics of heterozygosity\n\n\nSimplifying assumptions -&gt; rate of drift \\(propto \\frac{1}{N}\\) (Leffler et al., 2012)\nIn reality population fluctuates and therefore Ne is substituted for N. Larger Ne -&gt; smaller fluctuation in allele frequency (as evidenced in plots) -&gt; maintain larger genetic diversity"
   },
   {
     "objectID": "slides/foundations/index.html#genetic-drift-as-allele-frequency-distributions",
     "href": "slides/foundations/index.html#genetic-drift-as-allele-frequency-distributions",
     "title": "Population genetics",
     "section": "Genetic drift as allele frequency distributions",
-    "text": "Genetic drift as allele frequency distributions\n\n\n\n\n\n\nFigure 7: Histogram Kimura (1983), Fig. 3.4\n\n\n\n\n\n\n\n\n\n\nFigure 8: Buri experiment"
+    "text": "Genetic drift as allele frequency distributions\n\n\n\n\n\n\nFigure 8: Histogram Kimura (1983), Fig. 3.4\n\n\n\n\n\n\n\n\n\n\nFigure 9: Buri experiment"
   },
   {
     "objectID": "slides/foundations/index.html#heterozygosity-dynamics",
     "href": "slides/foundations/index.html#heterozygosity-dynamics",
     "title": "Population genetics",
     "section": "Heterozygosity dynamics",
-    "text": "Heterozygosity dynamics\n\n\n\n\n\n\nFigure 9: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation \\(n\\) are IBD but not IBS.\n\n\n\n\n\n\nLet \\(\\mathcal{H}_t\\) be the probability that two alleles are different by state. One can show that the time course evolution of \\(\\mathcal{H}_t\\) in a randomly mating population consisting of \\(N\\) diploid hermaphroditic individuals is\n\\[\n\\mathcal{H}_t = \\mathcal{H}_0 \\left( 1 - \\frac{1}{2N} \\right)^t\n\\]\nImportant consequence: heterozygosity in WF population lost at rate \\(1/2N\\).\n\n\n\nAlleles in generation \\(n\\) are IDB but not IBS\nMotivation: mathematical description of genetic drift complicated for populations with more than one individual. Easier to study the evolution of heterozygosity.\nEquation presented without details. Derivation by (Gillespie, 2004, pp. 25–27) starts from G=probability that two alleles are IBS"
+    "text": "Heterozygosity dynamics\n\n\n\n\n\n\nFigure 10: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation \\(n\\) are IBD but not IBS.\n\n\n\n\n\n\nLet \\(\\mathcal{H}_t\\) be the probability that two alleles are different by state. One can show that the time course evolution of \\(\\mathcal{H}_t\\) in a randomly mating population consisting of \\(N\\) diploid hermaphroditic individuals is\n\\[\n\\mathcal{H}_t = \\mathcal{H}_0 \\left( 1 - \\frac{1}{2N} \\right)^t\n\\]\nImportant consequence: heterozygosity in WF population lost at rate \\(1/2N\\).\n\n\n\nAlleles in generation \\(n\\) are IDB but not IBS\nMotivation: mathematical description of genetic drift complicated for populations with more than one individual. Easier to study the evolution of heterozygosity.\nEquation presented without details. Derivation by (Gillespie, 2004, pp. 25–27) starts from G=probability that two alleles are IBS"
   },
   {
     "objectID": "slides/foundations/index.html#heterozygosity-dynamics-1",
     "href": "slides/foundations/index.html#heterozygosity-dynamics-1",
     "title": "Population genetics",
     "section": "Heterozygosity dynamics",
-    "text": "Heterozygosity dynamics\n\n\n\n\n\n\nFigure 10: Plot of \\(\\mathcal{H}_t\\) illustrating dependency on population size\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 11: Heterozygosity in black-footed ferret (Wisely et al., 2002). Example from (Graham Coop, 2020, fig. 4.5)\n\n\n\n\n\n\n\nExample of how rapid decline in population size can affect heterozygosity\n\n\n\n\n\n\nDependency on population size: for large enough populations the decline will be very slow (drift speed ~ 1/2N)\nPractical example shows loss of heterozygosity tell-tale signature of population decline; conversely, not easy to show population decline in large populations (e.g., marine species with large \\(N_e\\))\nFrom (Graham Coop, 2020, p. 64)\n\nTo see how a decline in population size can affect levels of het- erozygosity, let’s consider the case of black-footed ferrets (Mustela nigripes). The black-footed ferret population has declined dramatically through the twentieth century due to destruction of their habitat and sylvatic plague. In 1979, when the last known black-footed ferret died in captivity, they were thought to be extinct. In 1981, a very small wild population was rediscovered (40 individuals), but in 1985 this population suffered a number of disease outbreaks. At that point of the 18 remaining wild individuals were brought into captivity, 7 of which reproduced. Thanks to intense captive breeding efforts and conservation work, a wild population of over 300 individuals has been established since. However, because all of these individuals are descended from those 7 individuals who survived the bottleneck, diversity levels remain low. Wisely et al. measured heterozygosity at a number of microsatellites in individuals from museum collections, showing the sharp drop in diversity as population sizes crashed (see Figure 4.5)."
+    "text": "Heterozygosity dynamics\n\n\n\n\n\n\nFigure 11: Plot of \\(\\mathcal{H}_t\\) illustrating dependency on population size\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12: Heterozygosity in black-footed ferret (Wisely et al., 2002). Example from (Graham Coop, 2020, fig. 4.5)\n\n\n\n\n\n\n\nExample of how rapid decline in population size can affect heterozygosity.\n\nPopulation size influences genetic diversity!\n\n\nHowever, census population size not (always) the correct measure.\n\n\n\n\n\n\n\nDependency on population size: for large enough populations the decline will be very slow (drift speed ~ 1/2N)\nPractical example shows loss of heterozygosity tell-tale signature of population decline; conversely, not easy to show population decline in large populations (e.g., marine species with large \\(N_e\\))\nFrom (Graham Coop, 2020, p. 64)\n\nTo see how a decline in population size can affect levels of het- erozygosity, let’s consider the case of black-footed ferrets (Mustela nigripes). The black-footed ferret population has declined dramatically through the twentieth century due to destruction of their habitat and sylvatic plague. In 1979, when the last known black-footed ferret died in captivity, they were thought to be extinct. In 1981, a very small wild population was rediscovered (40 individuals), but in 1985 this population suffered a number of disease outbreaks. At that point of the 18 remaining wild individuals were brought into captivity, 7 of which reproduced. Thanks to intense captive breeding efforts and conservation work, a wild population of over 300 individuals has been established since. However, because all of these individuals are descended from those 7 individuals who survived the bottleneck, diversity levels remain low. Wisely et al. measured heterozygosity at a number of microsatellites in individuals from museum collections, showing the sharp drop in diversity as population sizes crashed (see Figure 4.5).\n\nSegue: population size important; however, census population size is not always the measure we want when relating to genetic diversity"
   },
   {
     "objectID": "slides/foundations/index.html#effective-population-size",
@@ -452,21 +452,21 @@
     "href": "slides/foundations/index.html#mutation",
     "title": "Population genetics",
     "section": "Mutation",
-    "text": "Mutation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTwo-allele\n\nDerive popgen stats\n\nFinite sites\n\nRecurrent mutations\n\nInfinite alleles\n\nProtein electrophoresis\n\nInifinite sites\n\nDNA sequences\n\n\n\n\n\n\nMutations are generated randomly as changes in DNA. In WF model will be highlighted in black.\nThe mutation models are:\n\ntwo-allele model: used to derive popgen statistics\nfinite sites model: recurrent mutations may occur, an assumption that is often omitted to facilitate calculations (e.g., coalescent)\ninifinite alleles model: every mutation leads to new allele (e.g., protein electrophoresis)\ninfinite sites model: model commonly used for long DNA sequences\n\n\n\n\n\n\n\n\nModel B: mainly for repeats"
+    "text": "Mutation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTwo-allele\n\nDerive popgen stats\n\nFinite sites\n\nRecurrent mutations\n\nInfinite alleles\n\nProtein electrophoresis\n\nInifinite sites\n\nDNA sequences\n\n\n\n\n\n\nMutations are generated randomly as changes in DNA. In WF model will be highlighted in black. We assume mutations are described by a Poisson process with rate \\(\\mu\\) (per generation).\nThe mutation models are:\n\ntwo-allele model: used to derive popgen statistics\nfinite sites model: recurrent mutations may occur, an assumption that is often omitted to facilitate calculations (e.g., coalescent)\ninifinite alleles model: every mutation leads to new allele (e.g., protein electrophoresis)\ninfinite sites model: model commonly used for long DNA sequences\n\n\n\n\n\n\n\n\nModel B: mainly for repeats"
   },
   {
     "objectID": "slides/foundations/index.html#mutation-and-drift",
     "href": "slides/foundations/index.html#mutation-and-drift",
     "title": "Population genetics",
     "section": "Mutation and drift",
-    "text": "Mutation and drift\n\n\nGenetic drift “moves” frequencies to the point that variation is lost via allele fixation or loss. New variation is introduced through mutation. We typically assume mutations are described by a Poisson process with rate \\(\\mu\\) (per generation).\n\nThe mutation rate is denoted \\(\\mu\\), and the population scaled mutation rate is \\(2N_e\\mu\\) for haploid populations, \\(4N_e\\mu\\) for diploid, where \\(N_e\\) is the effective population size.\n\n\nThe mutation - drift balance is when the diversity lost due to drift equals the diversity gained due to mutation.\n\n\n\n\n\n\n\nFigure 12: Variation is introduced by mutations (black) at rate \\(\\mu=1e^{-4}\\) and is occasionally lost through genetic drift.\n\n\n\n\n\n\n\n\n\nSegue: so if drift removes variation, what introduces it? Mutation!"
+    "text": "Mutation and drift\n\n\nGenetic drift “moves” frequencies to the point that variation is lost via allele fixation or loss. New variation is introduced through mutation. We typically assume mutations are described by a Poisson process with rate \\(\\mu\\) (per generation).\n\nThe mutation rate is denoted \\(\\mu\\), and the population scaled mutation rate is \\(2N_e\\mu\\) for haploid populations, \\(4N_e\\mu\\) for diploid, where \\(N_e\\) is the effective population size.\n\n\nThe mutation - drift balance is when the diversity lost due to drift equals the diversity gained due to mutation.\n\n\n\n\n\n\n\nFigure 13: Variation is introduced by mutations (black) at rate \\(\\mu=1e^{-4}\\) and is occasionally lost through genetic drift.\n\n\n\n\n\n\n\n\n\nSegue: so if drift removes variation, what introduces it? Mutation!"
   },
   {
     "objectID": "slides/foundations/index.html#tracing-the-evolution-of-mutations",
     "href": "slides/foundations/index.html#tracing-the-evolution-of-mutations",
     "title": "Population genetics",
     "section": "Tracing the evolution of mutations",
-    "text": "Tracing the evolution of mutations\n\n\n\n\n\n\nFigure 13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.\n\n\n\n\n\n\n\nObservation: most mutations are in fact lost\n\n\nRecall: fixation probability \\(\\pi(p)=p\\)\n\n\n\n::::\n\nDifference to previous figure: here we highlight the genealogies"
+    "text": "Tracing the evolution of mutations\n\n\n\n\n\n\nFigure 14: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.\n\n\n\n\n\n\n\nObservation: most mutations are in fact lost\n\n\nRecall: fixation probability \\(\\pi(p)=p\\)\n\n\n\n::::\n\nDifference to previous figure: here we highlight the genealogies"
   },
   {
     "objectID": "slides/foundations/index.html#mutation-drift-balance",
@@ -480,7 +480,7 @@
     "href": "slides/foundations/index.html#the-neutral-theory-of-evolution",
     "title": "Population genetics",
     "section": "The neutral theory of evolution",
-    "text": "The neutral theory of evolution\n\n\nMutation drift balance, together with the observation during 50’s-60’s that polymorphism was more common than expected, is the foundation of the neutral theory of evolution: allele frequencies may change and fix due to chance alone and not selection.\n\nNearly neutral theory later developed to explain failure to predict scaling of polymorphism with population size.\n\n\n\n\n\n\nFigure 14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. \\(N_e\\mu\\) range is higher than predicted from plot. From Hurst (2009), Fig 1.\n\n\n\n\n\n\n\n\nRelated to rate of substitution and molecular evolution is the work of Kimura that lead to the development of the neutral theory.\nMotivation: if polymorphic sites deleterious, should not expect much polymorphism.\nLow levels of polymorphism expected assuming little balancing selection (Hurst, 2009, p. 87); however electrophoretic studies showed polymorphism common. Would lead to detrimental load (Kimura & Ohta, 1971) -&gt; therefore majority of polymorphism must evolve neutrally (dynamics). Also: rate of evolution (on protein level) too high (Haldane’s dilemma)"
+    "text": "The neutral theory of evolution\n\n\nMutation drift balance, together with the observation during 50’s-60’s that polymorphism was more common than expected, is the foundation of the neutral theory of evolution: allele frequencies may change and fix due to chance alone and not selection.\n\nNearly neutral theory later developed to explain failure to predict scaling of polymorphism with population size.\n\n\n\n\n\n\nFigure 15: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. \\(N_e\\mu\\) range is higher than predicted from plot. From Hurst (2009), Fig 1.\n\n\n\n\n\n\n\n\nRelated to rate of substitution and molecular evolution is the work of Kimura that lead to the development of the neutral theory.\nMotivation: if polymorphic sites deleterious, should not expect much polymorphism.\nLow levels of polymorphism expected assuming little balancing selection (Hurst, 2009, p. 87); however electrophoretic studies showed polymorphism common. Would lead to detrimental load (Kimura & Ohta, 1971) -&gt; therefore majority of polymorphism must evolve neutrally (dynamics). Also: rate of evolution (on protein level) too high (Haldane’s dilemma)"
   },
   {
     "objectID": "slides/foundations/index.html#mutation-rate-can-be-estimated-from-substitution-rate",
@@ -508,28 +508,28 @@
     "href": "slides/foundations/index.html#selection-and-drift---population-size-matters",
     "title": "Population genetics",
     "section": "Selection and drift - population size matters",
-    "text": "Selection and drift - population size matters\n\n\n\n\n\n\nFigure 15: The fixation probability relative to the neutral probability of fixation under the assumption \\(s&lt;0.1\\).\n\n\n\n\n\n\n\n\n\n\nSegue: note on the strength of s and the relation to \\(N_e\\).\nEven if a new mutation has, say, \\(s=0.01\\), it still needs to overcome effects of drift. Only has 2% change of fixation.\nIn figure, we assume \\(s&lt;0.1\\), which is almost always the case.\n(Hahn, 2019, p. 133)"
+    "text": "Selection and drift - population size matters\n\n\n\n\n\n\nFigure 16: The fixation probability relative to the neutral probability of fixation under the assumption \\(s&lt;0.1\\).\n\n\n\n\n\n\n\n\n\n\nSegue: note on the strength of s and the relation to \\(N_e\\).\nEven if a new mutation has, say, \\(s=0.01\\), it still needs to overcome effects of drift. Only has 2% change of fixation.\nIn figure, we assume \\(s&lt;0.1\\), which is almost always the case.\n(Hahn, 2019, p. 133)"
   },
   {
     "objectID": "slides/foundations/index.html#substitutions-and-direct-selection",
     "href": "slides/foundations/index.html#substitutions-and-direct-selection",
     "title": "Population genetics",
     "section": "Substitutions and direct selection",
-    "text": "Substitutions and direct selection\n\n\n\n\\(\\mathbf{d_N/d_S &lt;&lt; 1}\\)\n\nnegative (purifying) selection\n\n\\(\\mathbf{d_N/d_S &lt; 1}\\)\n\nmajority nonsynonymous deleterious, some advantageous\n\n\\(\\mathbf{d_N/d_S = 1}\\)\n\nneutral or mix neutral / advantageous / deleterious mutations\n\n\\(\\mathbf{d_N/d_S &gt; 1}\\)\n\npositive selection\n\n\n\n\n\n\n\nFigure 16: \\(d_n/d_s\\) comparisons for human-rat orthologs.\n\n\n\n\n\n\n\n\n\nNot all mutations fall in genes. Methods for detecting direct selection not applicable to studying selection on single mutation, or e.g., balancing. This requires looking for specific patterns of diversity surrounding locus under selection.\n\n\n\nSegue: how do we detect selection?\nNot all mutations in genes. Also want to look at single advantageous mutations, or balanced polymorphisms. Must therefore look at tell-tale signs of linked neutral variants."
+    "text": "Substitutions and direct selection\n\n\n\n\\(\\mathbf{d_N/d_S &lt;&lt; 1}\\)\n\nnegative (purifying) selection\n\n\\(\\mathbf{d_N/d_S &lt; 1}\\)\n\nmajority nonsynonymous deleterious, some advantageous\n\n\\(\\mathbf{d_N/d_S = 1}\\)\n\nneutral or mix neutral / advantageous / deleterious mutations\n\n\\(\\mathbf{d_N/d_S &gt; 1}\\)\n\npositive selection\n\n\n\n\n\n\n\nFigure 17: \\(d_n/d_s\\) comparisons for human-rat orthologs.\n\n\n\n\n\n\n\n\n\nNot all mutations fall in genes. Methods for detecting direct selection not applicable to studying selection on single mutation, or e.g., balancing. This requires looking for specific patterns of diversity surrounding locus under selection.\n\n\n\nSegue: how do we detect selection?\nNot all mutations in genes. Also want to look at single advantageous mutations, or balanced polymorphisms. Must therefore look at tell-tale signs of linked neutral variants."
   },
   {
     "objectID": "slides/foundations/index.html#linked-selection",
     "href": "slides/foundations/index.html#linked-selection",
     "title": "Population genetics",
     "section": "Linked selection",
-    "text": "Linked selection\n\n\n\n\nFigure 17: A selective sweep of an advantageous mutation (gray dot).\n\n\n\n\n\nPrevious example showed a selective sweep. If a sweep completes at a locus, it will become monomorphic.\n\nTopologies become important when we discuss sweeps"
+    "text": "Linked selection\n\n\n\n\nFigure 18: A selective sweep of an advantageous mutation (gray dot).\n\n\n\n\n\nPrevious example showed a selective sweep. If a sweep completes at a locus, it will become monomorphic.\n\nTopologies become important when we discuss sweeps"
   },
   {
-    "objectID": "slides/foundations/index.html#recombination-breaks-upp-association-between-loci",
-    "href": "slides/foundations/index.html#recombination-breaks-upp-association-between-loci",
+    "objectID": "slides/foundations/index.html#recombination-breaks-up-association-between-loci",
+    "href": "slides/foundations/index.html#recombination-breaks-up-association-between-loci",
     "title": "Population genetics",
-    "section": "Recombination breaks upp association between loci",
-    "text": "Recombination breaks upp association between loci\n\nFigure 18: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow."
+    "section": "Recombination breaks up association between loci",
+    "text": "Recombination breaks up association between loci\n\nFigure 19: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow."
   },
   {
     "objectID": "slides/foundations/index.html#distinguishing-selection-from-drift-via-topology",
@@ -543,14 +543,14 @@
     "href": "slides/foundations/index.html#the-phases-of-a-selective-sweep",
     "title": "Population genetics",
     "section": "The phases of a selective sweep",
-    "text": "The phases of a selective sweep\n\n\n\n\nFigure 19: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from Hahn (2019), Figure 8.1"
+    "text": "The phases of a selective sweep\n\n\n\n\nFigure 20: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from Hahn (2019), Figure 8.1"
   },
   {
     "objectID": "slides/foundations/index.html#hitchhiking-versus-background-selection",
     "href": "slides/foundations/index.html#hitchhiking-versus-background-selection",
     "title": "Population genetics",
     "section": "Hitchhiking versus background selection",
-    "text": "Hitchhiking versus background selection\n\n\n\n\n\nFigure 20: Hitchhiking (left) versus background selection (right)."
+    "text": "Hitchhiking versus background selection\n\n\n\n\n\nFigure 21: Hitchhiking (left) versus background selection (right)."
   },
   {
     "objectID": "slides/foundations/index.html#summary",
