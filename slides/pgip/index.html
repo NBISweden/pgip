@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.388">
 
   <meta name="author" content="Per Unneberg">
   <title>DDLS Population genomics in practice - Population genomics in practice</title>
@@ -34,6 +34,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -56,6 +57,7 @@
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -178,7 +180,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -351,7 +354,7 @@
   <h3 class="subtitle">What is population genomics?</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">28-Sep-2023</h4>
+  <h4 class="date">29-Sep-2023</h4>
 </section>
 
 <section id="intended-learning-outcomes" class="slide level2">
@@ -425,10 +428,14 @@
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="fragment">
-<div id="fig-corals-assembly" class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Figure&nbsp;1: Genome assembly and sample collection.</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" height="550"></p>
+<div id="fig-corals-assembly" class="quarto-figure quarto-figure-center" height="550" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-corals-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Genome assembly and sample collection.
+</figcaption>
+<div aria-describedby="fig-corals-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" class="quarto-figure-center" height="550">
+</div>
 </figure>
 </div>
 <div class="flushright smallest translatey100">
@@ -463,10 +470,14 @@
 <section id="example-population-genetics-of-the-coral-acropora-millepora-1" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
-<div id="fig-corals-variation" class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Figure&nbsp;2: Variation and demographic history inferred from 44 resequenced individuals.</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" height="550"></p>
+<div id="fig-corals-variation" class="quarto-figure quarto-figure-center" height="550" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-corals-variation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Variation and demographic history inferred from 44 resequenced individuals.
+</figcaption>
+<div aria-describedby="fig-corals-variation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="quarto-figure-center" height="550">
+</div>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -501,7 +512,9 @@
 <!-- markdownlint-disable MD013 -->
 
 <!-- markdownlint-enable MD013 -->
-<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg" width="550" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;3: Characterizing population structure and gene flow across 12 refs</p><div class="flushright smallest">
+<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg" class="quarto-figure-center r-stretch" width="550"><p class="caption">
+Figure&nbsp;3: Characterizing population structure and gene flow across 12 refs
+</p><div class="flushright smallest">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 <aside class="notes">
@@ -531,10 +544,14 @@
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
 <!-- markdownlint-disable MD013 -->
-<div id="fig-corals-selection" class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Figure&nbsp;4: Genomic scans for local adaptation detect a signal at <em>sacsin</em></figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg" height="550"></p>
+<div id="fig-corals-selection" class="quarto-figure quarto-figure-center" height="550" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-corals-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Genomic scans for local adaptation detect a signal at <em>sacsin</em>
+</figcaption>
+<div aria-describedby="fig-corals-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg" class="quarto-figure-center" height="550">
+</div>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -587,22 +604,46 @@
 </div>
 <div class="circular-image">
 <p>Mutation</p>
-<p><img data-src="assets/images/mutation.jpg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/mutation.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-1">
+</div>
+</figure>
+</div>
 </div>
 <div class="circular-image">
 <p>Selection</p>
-<p><img data-src="assets/images/finches.jpg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/finches.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-2">
+</div>
+</figure>
+</div>
 </div>
 <div>
 &nbsp;
 </div>
 <div class="circular-image">
 <p>Recombination</p>
-<p><img data-src="assets/images/recombination.jpeg"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/recombination.jpeg" id="fig-539a35d47e664c97a50115a146a7f1bd-3">
+</div>
+</figure>
+</div>
 </div>
 <div class="circular-image">
 <p>Drift</p>
-<p><img data-src="assets/images/genetic-drift.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/genetic-drift.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4">
+</div>
+</figure>
+</div>
 </div>
 </div>
 <aside class="notes">
@@ -694,12 +735,16 @@
 <h2>The technological revolution in <strong>sequencing</strong> and <strong>computing</strong></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-sequencing-cost_2d091b67a95916cbdc4fdf1400238231">
+<div class="cell" data-hash="index_cache/revealjs/fig-sequencing-cost_6611422ce721a6a4178eec26aa690942">
 <div class="cell-output-display">
-<div id="fig-sequencing-cost" class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>Figure&nbsp;5: Sequencing cost ($) per megabase <span class="citation" data-cites="wetterstrandka_DNASequencingCosts_">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wetterstrand, KA</a>)</span></figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-sequencing-cost-1.svg" width="400"></p>
+<div id="fig-sequencing-cost" class="quarto-figure quarto-figure-left" width="400">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sequencing-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Sequencing cost ($) per megabase <span class="citation" data-cites="wetterstrandka_DNASequencingCosts_">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wetterstrand, KA</a>)</span>
+</figcaption>
+<div aria-describedby="fig-sequencing-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="index_files/figure-revealjs/fig-sequencing-cost-1.svg" width="400">
+</div>
 </figure>
 </div>
 </div>
@@ -745,37 +790,73 @@
 <h2>Applications of population genomics</h2>
 <div style="display: grid; grid-template-columns: 80px 420px 80px 420px; grid-row-gap: 0px; grid-column-gap: 30px; align-items: center;">
 <div>
-<p><img data-src="assets/images/apis-mellifera.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/apis-mellifera.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5">
+</div>
+</figure>
+</div>
 </div>
 <div>
 <p>conservation genomics <span class="citation" data-cites="webster_PopulationGenomicsInsect_2023">(<a href="#/bibliography" role="doc-biblioref" onclick="">Webster et al., 2023</a>)</span></p>
 </div>
 <div class="fragment" data-fragment-index="1">
-<p><img data-src="assets/images/mimulus.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/mimulus.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6">
+</div>
+</figure>
+</div>
 </div>
 <div class="fragment" data-fragment-index="1">
 <p>speciation genomics <span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Stankowski et al., 2019</a>)</span></p>
 </div>
 <div class="fragment" data-fragment-index="2">
-<p><img data-src="assets/images/gorilla.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/gorilla.png" id="fig-539a35d47e664c97a50115a146a7f1bd-7">
+</div>
+</figure>
+</div>
 </div>
 <div class="fragment" data-fragment-index="2">
 <p>disentangle forces that create variation <span class="citation" data-cites="rodrigues_SharedEvolutionaryProcesses_2023">(<a href="#/bibliography" role="doc-biblioref" onclick="">Rodrigues et al., 2023</a>)</span></p>
 </div>
 <div class="fragment" data-fragment-index="3">
-<p><img data-src="assets/images/mammuth.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/mammuth.png" id="fig-539a35d47e664c97a50115a146a7f1bd-8">
+</div>
+</figure>
+</div>
 </div>
 <div class="fragment" data-fragment-index="3">
 <p>paleogenomics (aDNA) <span class="citation" data-cites="vandervalk_MillionyearoldDNASheds_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">van der Valk et al., 2021</a>)</span></p>
 </div>
 <div class="fragment" data-fragment-index="4">
-<p><img data-src="assets/images/cow.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/cow.png" id="fig-539a35d47e664c97a50115a146a7f1bd-9">
+</div>
+</figure>
+</div>
 </div>
 <div class="fragment" data-fragment-index="4">
 <p>domestication <span class="citation" data-cites="barrera-redondo_GenomicTranscriptomicEpigenomic_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Barrera-Redondo et al., 2020</a>)</span></p>
 </div>
 <div class="fragment" data-fragment-index="5">
-<p><img data-src="assets/images/krill.png"></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-fig">
+<div>
+<img data-src="assets/images/krill.png" id="fig-539a35d47e664c97a50115a146a7f1bd-10">
+</div>
+</figure>
+</div>
 </div>
 <div class="fragment" data-fragment-index="5">
 <p>ecology <span class="citation" data-cites="hohenlohe_PopulationGenomicsProvides_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hohenlohe et al., 2019</a>)</span></p>
@@ -784,7 +865,7 @@
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-barrera-redondo_GenomicTranscriptomicEpigenomic_2020" class="csl-entry" role="listitem">
 Barrera-Redondo, J., Piñero, D., &amp; Eguiarte, L. E. (2020). Genomic, <span>Transcriptomic</span> and <span>Epigenomic Tools</span> to <span>Study</span> the <span>Domestication</span> of <span>Plants</span> and <span>Animals</span>: <span>A Field Guide</span> for <span>Beginners</span>. <em>Frontiers in Genetics</em>, <em>11</em>.
 </div>
@@ -844,6 +925,7 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
   <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
   <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -860,13 +942,13 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'pointer': {"key":"q","color":"red","pointerSize":8,"alwaysVisible":false},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1037,7 +1119,7 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1045,6 +1127,27 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
           RevealZoom
         ]
       });
+    </script>
+    <script type="text/javascript">
+      function hyperlink_logo() {
+        var button = document.createElement( 'div' );
+        button.className = "logo-button";
+        button.id = "logo-chalkboard";
+        button.style.visibility = "visible";
+        button.style.position = "absolute";
+        button.style.zIndex = 30;
+        button.style.fontSize = "24px";
+        button.style.left = "auto";
+        button.style.bottom = "16px";
+        button.style.top = "auto";
+        button.style.right = "50px";
+
+        button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Main slides menu"><i class="fa fa-home"></i></a>';
+        document.querySelector( ".reveal" ).appendChild( button );
+      }
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      hyperlink_logo();
+    });
     </script>
     
     <script>
@@ -1160,10 +1263,9 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1173,8 +1275,17 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
