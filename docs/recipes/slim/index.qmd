@@ -31,4 +31,8 @@ pgip-slim --seed 42 -n 10 -r 1e-6 -m 1e-7 --threads 12 \
 
 ## [selective_sweep.slim](selective_sweep.slim) {#sec-slim-recipe-selective-sweep}
 
-Recipe to simulate a selective sweep
+Recipe to simulate a selective sweep.
+
+## [neutral.slim](neutral.slim)
+
+Recipe to simulate a neutrally evolving locus.
