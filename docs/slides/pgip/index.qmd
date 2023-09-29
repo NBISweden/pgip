@@ -5,9 +5,8 @@ author:
     - "Per Unneberg"
 format:
   revealjs:
-    page-layout: custom
-    slide-level: 2
     toc: false
+    footer: Population genomics in practice
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
