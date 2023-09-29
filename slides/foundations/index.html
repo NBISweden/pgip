@@ -1492,9 +1492,6 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 </div>
 </div>
 </section>
-<section id="observed-dive" class="slide level2">
-<h2>Observed dive</h2>
-</section>
 <section id="in-absence-of-evolutionary-forces-alleles-are-in-equilibrium" class="slide level2">
 <h2>In absence of evolutionary forces alleles are in equilibrium</h2>
 <h3 id="the-hardy-weinberg-equilibrium">The Hardy-Weinberg equilibrium</h3>
@@ -1551,7 +1548,7 @@ q = q^2 + pq
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
 
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.qmd#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <!-- markdownlint-disable MD013 -->
 <p>See <a href="https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines" class="uri">https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines</a> for legend customization.</p>
 <!-- markdownlint-enable MD013 -->
@@ -1949,11 +1946,11 @@ q = q^2 + pq
 <h2>The Wright-Fisher sampling model</h2>
 <p>Let’s formalise the sampling process of the Wright-Fisher model<sup>1</sup>. We assume</p>
 <ol type="1">
-<li>a single locus in a haploid population of size <span class="math inline">\(2N\)</span> (or diploid of size <span class="math inline">\(N\)</span> when random mationg)</li>
+<li>a single locus in a haploid population of size <span class="math inline">\(2N\)</span> (or diploid of size <span class="math inline">\(N\)</span> when random mating)</li>
 <li>no mutation and selection</li>
 <li>discrete generations</li>
 </ol>
-<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring of a given chromosome <span class="math inline">\(v\)</span> is <em>binomially distributed</em> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
+<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring <span class="math inline">\(k\)</span> of a given chromosome <span class="math inline">\(v\)</span> is <em>binomially distributed</em> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
 <p><span class="math display">\[
 P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 \left(1 - \frac{1}{2N} \right)^{(2N - k)}
@@ -1965,6 +1962,7 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 <p><br></p>
 
 <img data-src="index_files/figure-revealjs/wf-expected-number-of-offspring-1.svg" width="960" class="r-stretch quarto-figure-center"><p><br></p>
+<p>The expected value of a <span class="math inline">\(\mathrm{Bin}(m,p)\)</span> (binomially distributed) variable with parameters <span class="math inline">\(m=2N\)</span> and <span class="math inline">\(p=\frac{1}{2N}\)</span> is mp, hence:</p>
 <p><span class="math display">\[
 E(v) = mp = 2N\frac{1}{2N} = 1
 \]</span></p>
