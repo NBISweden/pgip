@@ -1,0 +1,55 @@
+---
+format:
+  html:
+    fontsize: 0.8em
+
+number-sections: true
+knitr:
+  opts_chunk:
+    collapse: true
+    code-fold: true
+---
+
+# Recipes in slides {#sec-recipe-slides}
+
+## Hardy-Weinberg Equilibrium {#sec-recipe-slides-hwe}
+
+Code to generate Hardy-Weinberg equilibrium plot.
+
+```{bash}
+#| label: recipe-slides-hwe-bash
+#| echo: true
+#| eval: false
+#| code-summary: Bash script to download data from 1000 genomes
+#| file: foundations/hwe.sh
+```
+
+```{r }
+#| label: recipe-slides-hwe-r
+#| echo: true
+#| eval: false
+#| code-summary: R code to plot HWE proportions
+#| file: foundations/hwe.R
+```
+
+## Genetic drift as allele frequency distributions {#sec-recipe-slides-allele-frequency-distribution}
+
+```{r }
+#| label: recipe-slides-allele-frequency-distribution
+#| echo: true
+#| eval: false
+#| code-summary: R code to generate and plot allele frequency distribution
+#| file: foundations/genetic-drift-histogram.R
+```
+
+## dn/ds ratios of human versus rat
+
+```{r }
+#| label: recipe-slides-dn-ds-ration-human-rat
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     R code to download dn/ds data for *H.sapiens* versus
+#|     *R.norvegicus* from ensembl and plot
+#| file: foundations/hsapiens-rat-dnds.R
+```

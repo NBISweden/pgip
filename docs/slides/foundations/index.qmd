@@ -528,6 +528,23 @@ obsession for a long time, even before DNA was known -> back to basics
 
 # Models of populations
 
+:::{}
+
+```{r }
+#| label: wright-fisher-drift-models-of-population
+#| echo: false
+#| eval: true
+#| cache: false
+#| fig-align: center
+#| out-width: 30%
+set.seed(1974)
+g <- wright_fisher_pop(n = 8, generations = 8, p0 = 3)
+ggplot_wf(g, fill = allele) +
+  scale_fill_manual(values = c("a" = "white", "A" = "black"))
+```
+
+:::
+
 ::: {.notes }
 
 Segue: take a step back to the days before the nature of genetic
@@ -1685,11 +1702,14 @@ study dynamics of *heterozygosity*
 ::: {.notes }
 
 Simplifying assumptions -> rate of drift $propto \frac{1}{N}$
-[@leffler_RevisitingOldRiddle_2012]
+($frac{1}{2N}$ in our treatment) [@leffler_RevisitingOldRiddle_2012]
 
 In reality population fluctuates and therefore Ne is substituted for
 N. Larger Ne -> smaller fluctuation in allele frequency (as evidenced
 in plots) -> maintain larger genetic diversity
+
+Drift can be thought of as a force acting on a buoyant gas particle
+floating up and down at random.
 
 :::
 
@@ -1739,7 +1759,15 @@ plot_drift_histogram <- function(t, P) {
 #| label: fig-genetic-drift-histogram-plot
 #| echo: false
 #| eval: true
-#| fig-cap: Histogram @kimura_1983, Fig. 3.4
+#| out-width: 80%
+#| fig-cap: |
+#|     Histogram showing the course of change of the gene
+#|     frequency distribution with time [@kimura_1983, Fig. 3.4].
+#|     When N large ($\gtrsim 100$) histogram can be approximated
+#|     by continuous distribution (diffusion theory). Try recipe
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-slides-allele-frequency-distribution).
+#|     for different values of N.
 grid.arrange(
     plot_drift_histogram(t=1, P=P),
     plot_drift_histogram(t=5, P=P),
@@ -1759,7 +1787,10 @@ grid.arrange(
 #| out-width: 70%
 #| fig-width: 12
 #| fig-height: 12
-#| fig-cap: Buri experiment
+#| fig-cap: |
+#|    Random drift in replicate experimental populations
+#|    of *Drosophila melanogaster* (8 {{< fa venus >}},
+#|    8 {{< fa mars >}}) [@buri_GeneFrequencySmall_1956]
 data <- read.csv("assets/data/buri-table14.csv", header=TRUE, fill=0)
 colnames(data)[3:35] <- as.character(0:32)
 data <- data %>% replace(., is.na(.), 0)
@@ -1811,6 +1842,29 @@ grid.arrange(
 :::
 
 ::::
+
+::: {.notes}
+
+Kimura's plot illustrates the allelic frequency distribution of
+replicate populations each consisting of N=10 sequences. There are two
+allelic types. The x axis corresponds to the proportion of populations
+in a given state (e.g., the y value for x=3/10 corresponds to the
+proportion of populations with 3 alleles of one type and 7 of the
+other). At $t=0$ all populations are in state 5/10.
+
+Kimura's plot is very instructive and students are encouraged to test
+the recipe code, increasing the number of states incrementally. For
+large enough N, the histograms can be approximated by continuous
+distributions. This observation led Kimura to apply diffusion theory
+to obtain probability densities of allele frequencies, leading in turn
+to compact expressions of fixation probabilities, expected ages of
+alleles, and more. A treatment of diffusion theory is outside the
+scope of this course; the interested reader can consult e.g.,
+[@warrenewens_MathematicalPopulationGenetics_2006].
+
+The Buri experiment is an empirical demonstration of Kimura's plot.
+
+:::
 
 ## Heterozygosity dynamics
 
@@ -1982,6 +2036,11 @@ decline will be **very** slow (drift speed ~ 1/2N)
 Practical example shows loss of heterozygosity tell-tale signature of
 population decline; conversely, **not** easy to show population
 decline in large populations (e.g., marine species with large $N_e$)
+
+[@barton2007evolution, p. 369] "The relation between genetic diversity
+and population size is difficult to discern, in part, because it is
+extremely hard to estimate the numbers of most species and because the
+number that matters is an average back into the distant past"(!)
 
 From [@grahamcoop_NotesPopulationGenetics_2020, p. 64]
 
@@ -2379,7 +2438,7 @@ predict scaling of polymorphism with population size.
 #| fig-cap:
 #|     Heterozygosity predicted by the neutral theory.
 #|     Shaded region shows typical heterozygosities in animals.
-#|     $N_e\mu$ range is higher than predicted from plot.
+#|     The observed $N_e\mu$ range is higher than predicted from plot.
 #|     From @hurst_GeneticsUnderstandingSelection_2009, Fig 1.
 NeMu <- c(
     seq(0.001, 0.999, 0.001),
@@ -2498,9 +2557,9 @@ For practical note on estimation of mutation rate see e.g.,
 
 # Selection
 
-:::{.center}
+:::{}
 
-![](assets/images/gould_finches.jpg){width=700px}
+![](assets/images/gould_finches.jpg){width=700px fig-align=center}
 
 :::
 
@@ -2549,10 +2608,6 @@ $$
 #| label: allele-frequency-dynamics
 #| echo: false
 #| eval: true
-#| out-height: 400px
-#| out-width: 200px
-#| fig-width: 8
-#| fig-height: 4
 dp <- function(h, s, p) {
   q <- 1 - p
   wbar <- 1 - 2 * p * q * h * s - q * q * s
@@ -2605,13 +2660,39 @@ selection_labeller <- function(variable, value) {
 ::: {.column width="50%"}
 
 ```{r }
-#| label: selection-fig-dp
+#| label: fig-selection-fig-p
 #| echo: false
 #| eval: true
-#| out-height: 500
-#| out-width: 500
+#| out-height: 400
+#| out-width: 400
 #| fig-height: 8
 #| fig-width: 8
+#| fig-align: center
+#| fig-cap:
+#|    Allele frequency change over time for directional,
+#|    balancing, and disruptive selection, for different
+#|    values of $p_0$.
+ggplot(data2, aes(x=generation, y=p, linetype=p0)) + geom_line(linewidth=1.2) +
+  facet_grid(selection ~ ., labeller=selection_labeller)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: fig-selection-fig-dp
+#| echo: false
+#| eval: true
+#| out-height: 400
+#| out-width: 400
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+#| fig-cap: |
+#|    Rate of allele frequency change as a function of
+#|    allele frequency for directional,
+#|    balancing, and disruptive selection.
 ggplot(data, aes(x = p, y = dp)) +
   geom_line(linewidth=1.2) +
   facet_grid(selection ~ ., labeller=selection_labeller) +
@@ -2620,23 +2701,27 @@ ggplot(data, aes(x = p, y = dp)) +
 
 :::
 
-::: {.column width="50%"}
+::::
 
-```{r }
-#| label: selection-fig-p
-#| echo: false
-#| eval: true
-#| out-height: 500
-#| out-width: 500
-#| fig-height: 8
-#| fig-width: 8
-ggplot(data2, aes(x=generation, y=p, linetype=p0)) + geom_line(linewidth=1.2) +
-  facet_grid(selection ~ ., labeller=selection_labeller)
-```
+::: {.notes}
+
+Equation relates allele frequency change to viabilities for different
+genotypes. It is instructive to study the equation and plot
+trajectories to gain an intuition for how allele frequencies evolve
+given the different selection regimes.
+
+The left panel shows that the three modes of selection have different
+equilibrium points: for directional selection the favored homozygote
+will eventually attain 100%, balancing selection has a stable
+equilibrium point (attractor) for a given allelic ratio (here 25:75),
+and disruptive selection has an *unstable* equilibrium point
+(repeller) for a given allelic ratio.
+
+The right panel shows the rate of *change* as a function of allele
+frequency. Note how the directionality changes at the equilibrium
+point for balancing and directional selection.
 
 :::
-
-::::
 
 ## Selection and drift - population size matters
 
@@ -2652,7 +2737,9 @@ ggplot(data2, aes(x=generation, y=p, linetype=p0)) + geom_line(linewidth=1.2) +
 #| fig-height: 6
 #| fig-cap:
 #|     The fixation probability relative to the neutral
-#|     probability of fixation under the assumption $s<0.1$.
+#|     probability of fixation ($p=1/2N$) under the assumption $s<0.1$.
+#|     Red highlights region where $|N_es|<0.05$.
+#|     Adapted from @lynch_OriginsGenomeArchitecture_2007, Fig. 4.2.
 Ne_s <- seq(-2, 2, 0.01)
 # Lynch p. 74
 thetaf <- 4*Ne_s / (1-exp(-4*Ne_s))
@@ -2660,7 +2747,7 @@ data <- as.data.frame(cbind(Ne_s, thetaf))
 ggplot(data, aes(x=Ne_s, y=thetaf)) + geom_line() +
   ylab(expression("Relative fixation probability" ~ theta[f])) +
   xlab(expression(N[e]* s)) + geom_hline(yintercept=1, linetype="dashed") +
-  geom_rect(inherit.aes=FALSE, data = data.frame(xstart=c(-0.1), xend=c(0.1)),
+  geom_rect(inherit.aes=FALSE, data = data.frame(xstart=c(-0.05), xend=c(0.05)),
             aes(xmin = xstart, xmax = xend, ymin = -Inf,
                 ymax = Inf, fill = "red"), alpha = 0.4,
             show.legend=FALSE)
@@ -2669,6 +2756,12 @@ ggplot(data, aes(x=Ne_s, y=thetaf)) + geom_line() +
 :::
 
 ::: {.column width="20%"}
+
+In red region ($|N_es|<0.005$) the probability of fixation is within
+10% of neutral fixation.
+
+**Consequence**: for any population size there exists range of
+selection coefficients where mutant alleles $\approx$ neutral (**effective neutrality**).
 
 :::
 
@@ -2681,7 +2774,8 @@ Segue: note on the strength of s and the relation to $N_e$.
 Even if a new mutation has, say, $s=0.01$, it still needs to overcome
 effects of drift. Only has 2% change of fixation.
 
-In figure, we assume $s<0.1$, which is almost always the case.
+In figure, we assume $s<0.1$, which is almost always the case
+[@lynch_OriginsGenomeArchitecture_2007, p.74].
 
 [@hahn_MolecularPopulationGenetics_2019, p. 133]
 
@@ -2692,6 +2786,9 @@ In figure, we assume $s<0.1$, which is almost always the case.
 :::: {.columns}
 
 ::: {.column width="50%"}
+
+For genes, the ratio of non-synonymous to synonymous substitutions can
+tell us about protein evolution.
 
 **$\mathbf{d_N/d_S << 1}$**
 : negative (purifying) selection
@@ -2716,38 +2813,12 @@ In figure, we assume $s<0.1$, which is almost always the case.
 #| out-height: 400
 #| fig-width: 8
 #| fig-height: 6
-#| fig-cap: $d_n/d_s$ comparisons for human-rat orthologs.
-fn <- "assets/data/hsapiens_rat.dnds.tsv"
-if (!file.exists(fn)) {
-  library(biomaRt)
-  ensembl = useEnsembl(version = 99,
-                       biomart = 'ENSEMBL_MART_ENSEMBL',
-                       dataset = 'hsapiens_gene_ensembl')
-  genes <- getBM(mart=ensembl, attributes=c("ensembl_gene_id"))
-  hsapiens_rat <- getBM(attributes=c("ensembl_gene_id",
-                                     "rnorvegicus_homolog_ensembl_gene",
-                                     "rnorvegicus_homolog_dn",
-                                     "rnorvegicus_homolog_ds",
-                                     "rnorvegicus_homolog_orthology_type"),
-                        filters="ensembl_gene_id",
-                        values=genes$ensembl_gene_id,
-                        mart=ensembl)
-  hsapiens_rat <- subset(hsapiens_rat,
-                         !is.na(rnorvegicus_homolog_ds) &
-                         !is.na(rnorvegicus_homolog_dn) &
-                         rnorvegicus_homolog_orthology_type == "ortholog_one2one")
-  hsapiens_rat$dnds <- hsapiens_rat$rnorvegicus_homolog_dn /
-    hsapiens_rat$rnorvegicus_homolog_ds
-  hsapiens_rat <- subset(hsapiens_rat, !is.nan(dnds))
-  write.table(hsapiens_rat, file="assets/data/hsapiens_rat.dnds.tsv",
-              sep="\t", quote=FALSE, row.names=FALSE)
-}
-x <- read.table(fn, header=TRUE)
-ggplot(x, aes(x=dnds)) +
-  geom_histogram(bins=100, aes(y=..count../sum(..count..)), fill="white",
-                 color="black") + xlim(0, 2) +
-  xlab(expression(d[n]~"/"~d[s])) + ylab("Frequency") +
-  ggtitle(paste0(nrow(x), " human-rat orthologue pairs"))
+#| fig-cap: |
+#|     $d_n/d_s$ comparisons for human-rat orthologs. For
+#|     most genes, $d_n/d_s << 1$ indicating purifying selection. A handful
+#|     of genes (n=9) have $d_n/d_s > 1.0$ which could indicate
+#|     positive selection.
+#| file: ../../recipes/slides/foundations/hsapiens-rat-dnds.R
 ```
 
 :::
@@ -2776,6 +2847,15 @@ mutations, or balanced polymorphisms. Must therefore look at tell-tale
 signs of linked neutral variants.
 
 :::
+
+## Recombination breaks coupling between sites   {visibility="hidden" .unnumbered .unlisted}
+
+1. illustration of recombination
+2. illustration from Gillespie with alleles and outcomes
+
+## Linkage disequilibrium  {visibility="hidden" .unnumbered .unlisted}
+
+1. LD distribution plot, preferably from 1000 genomes
 
 ## Linked selection
 
