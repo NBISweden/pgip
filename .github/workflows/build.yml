@@ -88,8 +88,12 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         with:
           path: docs
-          # Dummy target
-          target: html
+
+      - name: Render project and publishing
+        uses: quarto-dev/quarto-actions/render@v2
+        if:  ${{ github.ref_name == 'main' || github.ref_name == 'test-build' }}
+        with:
+          path: docs
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
@@ -97,5 +101,6 @@ jobs:
         with:
           target: gh-pages
           path: docs
+          render: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
