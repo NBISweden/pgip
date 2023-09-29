@@ -1598,6 +1598,17 @@ q = q^2 + pq
 <section>
 <section id="models-of-populations" class="title-slide slide level1 center">
 <h1>Models of populations</h1>
+<div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wright-fisher-drift-models-of-population-1.svg" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <aside class="notes">
 <p>Segue: take a step back to the days before the nature of genetic inheritance was known. First focus on the population.</p>
 <p>Goal of lecture is also to understand genetic relationships in the context of genealogies -&gt; coalescent.</p>
@@ -2222,8 +2233,9 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <p>Mathematical treatment of drift can become complicated: easier to study dynamics of <em>heterozygosity</em></p>
 </div>
 <aside class="notes">
-<p>Simplifying assumptions -&gt; rate of drift <span class="math inline">\(propto \frac{1}{N}\)</span> <span class="citation" data-cites="leffler_RevisitingOldRiddle_2012">(<a href="#/bibliography" role="doc-biblioref" onclick="">Leffler et al., 2012</a>)</span></p>
+<p>Simplifying assumptions -&gt; rate of drift <span class="math inline">\(propto \frac{1}{N}\)</span> (<span class="math inline">\(frac{1}{2N}\)</span> in our treatment) <span class="citation" data-cites="leffler_RevisitingOldRiddle_2012">(<a href="#/bibliography" role="doc-biblioref" onclick="">Leffler et al., 2012</a>)</span></p>
 <p>In reality population fluctuates and therefore Ne is substituted for N. Larger Ne -&gt; smaller fluctuation in allele frequency (as evidenced in plots) -&gt; maintain larger genetic diversity</p>
+<p>Drift can be thought of as a force acting on a buoyant gas particle floating up and down at random.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2240,22 +2252,22 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Genetic drift as allele frequency distributions</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-histogram-plot_2f4b9aa16e595291cde140bbc27d6fb9">
+<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-histogram-plot_362c708182b0a3c07ee2065576ce40b7">
 <div class="cell-output-display">
 <div id="fig-genetic-drift-histogram-plot" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;8: Histogram <span class="citation" data-cites="kimura_1983">Kimura (<a href="#/bibliography" role="doc-biblioref" onclick="">1983</a>)</span>, Fig. 3.4</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-histogram-plot-1.svg" width="960"></p>
+<figcaption>Figure&nbsp;8: Histogram showing the course of change of the gene frequency distribution with time <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983, fig. 3.4</a>)</span>. When N large (<span class="math inline">\(\gtrsim 100\)</span>) histogram can be approximated by continuous distribution (diffusion theory). Try recipe <a href="../../recipes/slides/index.html#sec-recipe-slides-allele-frequency-distribution"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a>. for different values of N.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-genetic-drift-histogram-plot-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-buri-table-14_d90b5d2bcf32b315da9a357b81bc4cff">
+<div class="cell" data-hash="index_cache/revealjs/fig-buri-table-14_864a948bf709329774f20876095bfb30">
 <div class="cell-output-display">
 <div id="fig-buri-table-14" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;9: Buri experiment</figcaption>
+<figcaption>Figure&nbsp;9: Random drift in replicate experimental populations of <em>Drosophila melanogaster</em> (8 <i class="fa-solid fa-venus" aria-label="venus"></i>, 8 <i class="fa-solid fa-mars" aria-label="mars"></i>) <span class="citation" data-cites="buri_GeneFrequencySmall_1956">(<a href="#/bibliography" role="doc-biblioref" onclick="">Buri, 1956</a>)</span></figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-buri-table-14-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2263,6 +2275,21 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Kimura’s plot illustrates the allelic frequency distribution of replicate populations each consisting of N=10 sequences. There are two allelic types. The x axis corresponds to the proportion of populations in a given state (e.g., the y value for x=3/10 corresponds to the proportion of populations with 3 alleles of one type and 7 of the other). At <span class="math inline">\(t=0\)</span> all populations are in state 5/10.</p>
+<p>Kimura’s plot is very instructive and students are encouraged to test the recipe code, increasing the number of states incrementally. For large enough N, the histograms can be approximated by continuous distributions. This observation led Kimura to apply diffusion theory to obtain probability densities of allele frequencies, leading in turn to compact expressions of fixation probabilities, expected ages of alleles, and more. A treatment of diffusion theory is outside the scope of this course; the interested reader can consult e.g., <span class="citation" data-cites="warrenewens_MathematicalPopulationGenetics_2006">(<a href="#/bibliography" role="doc-biblioref" onclick="">Warren Ewens, 2006</a>)</span>.</p>
+<p>The Buri experiment is an empirical demonstration of Kimura’s plot.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="heterozygosity-dynamics" class="slide level2">
 <h2>Heterozygosity dynamics</h2>
@@ -2347,6 +2374,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <aside class="notes">
 <p>Dependency on population size: for large enough populations the decline will be <strong>very</strong> slow (drift speed ~ 1/2N)</p>
 <p>Practical example shows loss of heterozygosity tell-tale signature of population decline; conversely, <strong>not</strong> easy to show population decline in large populations (e.g., marine species with large <span class="math inline">\(N_e\)</span>)</p>
+<p><span class="citation" data-cites="barton2007evolution">(<a href="#/bibliography" role="doc-biblioref" onclick="">Barton et al., 2007, p. 369</a>)</span> “The relation between genetic diversity and population size is difficult to discern, in part, because it is extremely hard to estimate the numbers of most species and because the number that matters is an average back into the distant past”(!)</p>
 <p>From <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Graham Coop, 2020, p. 64</a>)</span></p>
 <blockquote>
 <p>To see how a decline in population size can affect levels of het- erozygosity, let’s consider the case of black-footed ferrets (Mustela nigripes). The black-footed ferret population has declined dramatically through the twentieth century due to destruction of their habitat and sylvatic plague. In 1979, when the last known black-footed ferret died in captivity, they were thought to be extinct. In 1981, a very small wild population was rediscovered (40 individuals), but in 1985 this population suffered a number of disease outbreaks. At that point of the 18 remaining wild individuals were brought into captivity, 7 of which reproduced. Thanks to intense captive breeding efforts and conservation work, a wild population of over 300 individuals has been established since. However, because all of these individuals are descended from those 7 individuals who survived the bottleneck, diversity levels remain low. Wisely et al.&nbsp;measured heterozygosity at a number of microsatellites in individuals from museum collections, showing the sharp drop in diversity as population sizes crashed (see Figure 4.5).</p>
@@ -2587,11 +2615,11 @@ DNA sequences
 <p><strong>Nearly neutral theory</strong> later developed to explain failure to predict scaling of polymorphism with population size.</p>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-heterozygosity-function-ne_efb1fe2d6480cf5fe59a9fdf8d6f715f">
+<div class="cell" data-hash="index_cache/revealjs/fig-heterozygosity-function-ne_d3b39bdf13e8b5ad73f0303a5f0fb4ec">
 <div class="cell-output-display">
 <div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;15: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
+<figcaption>Figure&nbsp;15: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -2658,8 +2686,12 @@ DNA sequences
 <section>
 <section id="selection" class="title-slide slide level1 center">
 <h1>Selection</h1>
-<div class="center">
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
 <p><img data-src="assets/images/gould_finches.jpg" width="700"></p>
+</figure>
+</div>
 </div>
 <aside class="notes">
 <p>For a list of methods see <a href="https://methodspopgen.com/methods-to-detect-selection/" class="uri">https://methodspopgen.com/methods-to-detect-selection/</a></p>
@@ -2723,42 +2755,68 @@ DNA sequences
 \]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/selection-fig-dp_09954b95cc695378df78593afb959b14">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-selection-fig-p_ffc6058520bca56f38360a2c5d16f5d0">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/selection-fig-dp-1.svg" width="500" height="500"></p>
+<div id="fig-selection-fig-p" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;16: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-selection-fig-p-1.svg" width="400" height="400"></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/selection-fig-p_1c97444a571d25c897b3a3cf0029cdf1">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-selection-fig-dp_7b2c079c909312c4bb1a686638dc3f16">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/selection-fig-p-1.svg" width="500" height="500"></p>
+<div id="fig-selection-fig-dp" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;17: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-selection-fig-dp-1.svg" width="400" height="400"></p>
+</figure>
 </div>
 </div>
 </div>
 </div>
+</div>
+<aside class="notes">
+<p>Equation relates allele frequency change to viabilities for different genotypes. It is instructive to study the equation and plot trajectories to gain an intuition for how allele frequencies evolve given the different selection regimes.</p>
+<p>The left panel shows that the three modes of selection have different equilibrium points: for directional selection the favored homozygote will eventually attain 100%, balancing selection has a stable equilibrium point (attractor) for a given allelic ratio (here 25:75), and disruptive selection has an <em>unstable</em> equilibrium point (repeller) for a given allelic ratio.</p>
+<p>The right panel shows the rate of <em>change</em> as a function of allele frequency. Note how the directionality changes at the equilibrium point for balancing and directional selection.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="selection-and-drift---population-size-matters" class="slide level2">
 <h2>Selection and drift - population size matters</h2>
 <div class="columns">
 <div class="column" style="width:80%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-selection-and-drift_8b1e5d6222596fc6ccd4cd0fd703bb44">
+<div class="cell" data-hash="index_cache/revealjs/fig-selection-and-drift_41d281d469119a489a2c966e92ca2d4d">
 <div class="cell-output-display">
 <div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;16: The fixation probability relative to the neutral probability of fixation under the assumption <span class="math inline">\(s&lt;0.1\)</span>.</figcaption>
+<figcaption>Figure&nbsp;18: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:20%;">
-
+<p>In red region (<span class="math inline">\(|N_es|&lt;0.005\)</span>) the probability of fixation is within 10% of neutral fixation.</p>
+<p><strong>Consequence</strong>: for any population size there exists range of selection coefficients where mutant alleles <span class="math inline">\(\approx\)</span> neutral (<strong>effective neutrality</strong>).</p>
 </div>
 </div>
 <aside class="notes">
 <p>Segue: note on the strength of s and the relation to <span class="math inline">\(N_e\)</span>.</p>
 <p>Even if a new mutation has, say, <span class="math inline">\(s=0.01\)</span>, it still needs to overcome effects of drift. Only has 2% change of fixation.</p>
-<p>In figure, we assume <span class="math inline">\(s&lt;0.1\)</span>, which is almost always the case.</p>
+<p>In figure, we assume <span class="math inline">\(s&lt;0.1\)</span>, which is almost always the case <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Lynch, 2007, p. 74</a>)</span>.</p>
 <p><span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 133</a>)</span></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2776,6 +2834,7 @@ DNA sequences
 <h2>Substitutions and direct selection</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
+<p>For genes, the ratio of non-synonymous to synonymous substitutions can tell us about protein evolution.</p>
 <dl>
 <dt><strong><span class="math inline">\(\mathbf{d_N/d_S &lt;&lt; 1}\)</span></strong></dt>
 <dd>
@@ -2795,11 +2854,11 @@ positive selection
 </dd>
 </dl>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_9b17cb34d13306fb8efc5b28c3ca467d">
+<div class="cell" data-file="../../recipes/slides/foundations/hsapiens-rat-dnds.R" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_162ba1ef7f42f47a58c11579d25b5c3d">
 <div class="cell-output-display">
 <div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;17: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs.</figcaption>
+<figcaption>Figure&nbsp;19: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400"></p>
 </figure>
 </div>
@@ -2827,13 +2886,15 @@ positive selection
           display:block!important;
       }</style></aside>
 </section>
+
+
 <section id="linked-selection" class="slide level2">
 <h2>Linked selection</h2>
 <div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_42c6060ad4ea112d2f8e88d7986d3d60">
 <div class="cell-output-display">
 <div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;18: A selective sweep of an advantageous mutation (gray dot).</figcaption>
+<figcaption>Figure&nbsp;20: A selective sweep of an advantageous mutation (gray dot).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
 </figure>
 </div>
@@ -2857,7 +2918,7 @@ positive selection
 <section id="recombination-breaks-up-association-between-loci" class="slide level2">
 <h2>Recombination breaks up association between loci</h2>
 
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;19: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;21: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
 <section id="distinguishing-selection-from-drift-via-topology" class="slide level2">
 <h2>Distinguishing selection from drift via topology</h2>
 <div class="columns">
@@ -2895,7 +2956,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;20: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<figcaption>Figure&nbsp;22: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
 </figure>
 </div>
@@ -2909,7 +2970,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;21: Hitchhiking (left) versus background selection (right).</figcaption>
+<figcaption>Figure&nbsp;23: Hitchhiking (left) versus background selection (right).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="800"></p>
 </figure>
 </div>
@@ -2927,6 +2988,12 @@ positive selection
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-barton2007evolution" class="csl-entry" role="listitem">
+Barton, N. H., Briggs, D. E. G., Eisen, J. A., Goldstein, D. B., &amp; Patel, N. H. (2007). <em>Evolution</em>. <span>Cold Spring Harbor Laboratory Press</span>.
+</div>
+<div id="ref-buri_GeneFrequencySmall_1956" class="csl-entry" role="listitem">
+Buri, P. (1956). Gene <span>Frequency</span> in <span>Small Populations</span> of <span>Mutant Drosophila</span>. <em>Evolution</em>, <em>10</em>(4), 367–402. <a href="https://doi.org/10.1111/j.1558-5646.1956.tb02864.x">https://doi.org/10.1111/j.1558-5646.1956.tb02864.x</a>
+</div>
 <div id="ref-casillas_MolecularPopulationGenetics_2017" class="csl-entry" role="listitem">
 Casillas, S., &amp; Barbadilla, A. (2017). Molecular <span>Population Genetics</span>. <em>Genetics</em>, <em>205</em>(3), 1003–1035. <a href="https://doi.org/10.1534/genetics.116.196493">https://doi.org/10.1534/genetics.116.196493</a>
 </div>
@@ -2969,6 +3036,9 @@ Kumar, S., &amp; Subramanian, S. (2002). Mutation rates in mammalian genomes. <e
 <div id="ref-leffler_RevisitingOldRiddle_2012" class="csl-entry" role="listitem">
 Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venkat, A., Andolfatto, P., &amp; Przeworski, M. (2012). Revisiting an <span>Old Riddle</span>: <span>What Determines Genetic Diversity Levels</span> within <span>Species</span>? <em>PLOS Biology</em>, <em>10</em>(9), e1001388. <a href="https://doi.org/10.1371/journal.pbio.1001388">https://doi.org/10.1371/journal.pbio.1001388</a>
 </div>
+<div id="ref-lynch_OriginsGenomeArchitecture_2007" class="csl-entry" role="listitem">
+Lynch, M. (2007). <em>The origins of genome architecture</em>. <span>Sinauer Associates</span>.
+</div>
 <div id="ref-nei_MolecularEvolutionPhylogenetics_2000" class="csl-entry" role="listitem">
 Nei, M., &amp; Kumar, S. (2000). <em>Molecular <span>Evolution</span> and <span>Phylogenetics</span></em>. <span>Oxford University Press</span>.
 </div>
@@ -2977,6 +3047,9 @@ Nielsen, R. (2005). Molecular <span>Signatures</span> of <span>Natural Selection
 </div>
 <div id="ref-waples_WhatNeAnyway_2022" class="csl-entry" role="listitem">
 Waples, R. S. (2022). What <span>Is Ne</span>, <span>Anyway</span>? <em>Journal of Heredity</em>, <em>113</em>(4), 371–379. <a href="https://doi.org/10.1093/jhered/esac023">https://doi.org/10.1093/jhered/esac023</a>
+</div>
+<div id="ref-warrenewens_MathematicalPopulationGenetics_2006" class="csl-entry" role="listitem">
+Warren Ewens. (2006). <em>Mathematical <span>Population Genetics</span></em>.
 </div>
 <div id="ref-wisely_GeneticDiversityFitness_2002" class="csl-entry" role="listitem">
 Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander, E. A. (2002). Genetic <span>Diversity</span> and <span>Fitness</span> in <span>Black-Footed Ferrets Before</span> and <span>During</span> a <span>Bottleneck</span>. <em>Journal of Heredity</em>, <em>93</em>(4), 231–237. <a href="https://doi.org/10.1093/jhered/93.4.231">https://doi.org/10.1093/jhered/93.4.231</a>
