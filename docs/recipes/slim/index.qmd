@@ -4,6 +4,7 @@ number-sections: true
 knitr:
   opts_chunk:
     collapse: true
+    code-fold: true
 ---
 
 # SLiM recipes {#sec-slim-recipes}
@@ -29,10 +30,32 @@ pgip-slim --seed 42 -n 10 -r 1e-6 -m 1e-7 --threads 12 \
     selective_sweep.slim -l 1000000 --outdir results/slim
 ```
 
-## [selective_sweep.slim](selective_sweep.slim) {#sec-slim-recipe-selective-sweep}
+## Selective sweep {#sec-slim-recipe-selective-sweep}
+
+```{r }
+#| label: slim-recipe-selective-sweep
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     slim code to simulate a selective sweep at a locus
+#|     on a 1Mbp chromosome, with mutation rate $\mu=10^{-8}$,
+#|     recombination rate $\rho=10^{-8}$, and $N_e=5,000$.
+#| file: selective_sweep.slim
+```
 
 Recipe to simulate a selective sweep.
 
-## [neutral.slim](neutral.slim)
+## Neutral simulation {#sec-slim-recipe-neutral}
+
+```{r }
+#| label: slim-recipe-neutral
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     slim code to simulate a neutrally evolving locus
+#|     on a 100kbp chromosome, with mutation rate $\mu=10^{-8}$,
+#|     recombination rate $\rho=10^{-8}$, and $N_e=5,000$.
+#| file: neutral.slim
+```
 
 Recipe to simulate a neutrally evolving locus.

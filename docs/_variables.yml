@@ -10,3 +10,4 @@ demes:
 
 recipes:
   baseurl: /recipes/slides/index.html
+  slimurl: /recipes/slim/index.html
