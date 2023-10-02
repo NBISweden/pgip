@@ -85,7 +85,8 @@ From [@nei_MolecularEvolutionPhylogenetics_2000, p. 231]:
 
 > Population geneticists spend most of their time doing one of two
 > things: describing the genetic structure of populations or
-> theorizing on the evolutionary forces acting on populations
+> theorizing on the evolutionary forces acting on populations. On a
+> good day, these two activities mesh and true insights emerge.
 
 :::
 
@@ -286,30 +287,13 @@ $p_i$, where the sum of all allele frequencies is 1. For instance, at
 site 1, $p_T=1$ (and by extension $p_A=p_C=p_G=0$), and at site 2
 $p_C=1/4$ and $p_T=3/4$.
 
-::: {.notes }
-
-::: {.dna }
-
-| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:--:|
-| T | T | A | C | A | A | T | C | C | G  | A  | T  | C  | G  | T  |
-| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
-| T | C | A | C | A | A | T | G | C | G  | A  | T  | G  | G  | A  |
-| T | T | A | C | G | A | T | G | C | G  | C  | T  | C  | G  | T  |
-
-: {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,25]"}
-
-:::
-
-:::
-
 :::: {.columns}
 
 ::: {.column width="50%"}
 
 ::: {.fragment}
 
-#### Heterozygosity
+<h4>Heterozygosity</h4>
 
 The *heterozygosity* at a site $j$ is given by
 
@@ -328,7 +312,7 @@ the $i$-th allele
 
 ::: {.fragment}
 
-#### Exercise: calculate the heterozygosity at sites 1, 2 and 5
+<h4>Exercise: calculate the heterozygosity at sites 1, 2 and 5</h4>
 
 :::
 
@@ -349,6 +333,16 @@ $$
 :::
 
 ::::
+
+::: {.notes}
+
+In a randomly mating population, the heterozygosity is equal to the
+frequency of heterozygotes. Note however that the definition of
+heterozygosity only relies on allele frequencies, which means it can
+be applied to populations that are not in Hardy-Weinberg equilibrium.
+It can also be applied to haploid organisms, like bacteria.
+
+:::
 
 ## Describing DNA variation - nucleotide diversity
 
@@ -372,7 +366,7 @@ $$
 
 ::: {.fragment}
 
-### Nucleotide diversity $\pi$
+<h3>Nucleotide diversity $\pi$</h3>
 
 The *nucleotide diversity* is the sum of site heterozygosities:
 
@@ -390,7 +384,7 @@ where $S$ is the number of segregating sites
 
 ::: {.fragment}
 
-### Calculate the nucleotide diversity
+<h3>Calculate the nucleotide diversity</h3>
 
 :::
 
@@ -427,6 +421,27 @@ $$
 
 ::::
 
+::: {.notes}
+
+@hahn_MolecularPopulationGenetics_2019 implicitly assumes we are
+looking at DNA polymorphism. The expression actually holds for any
+genetic variation at a locus, and is sometimes called the *gene
+diversity* [@nei_MolecularEvolutionPhylogenetics_2000, p. 245].
+
+Under the infinite sites model, $E(\pi)=\theta=4N_e\mu$, for which
+reason $\pi$ sometimes is called $\theta_\pi$. The measure gives the
+average number of pairwise nucleotide differences between two
+sequences, so an alternative expression is
+
+$$
+\pi = \frac{\sum_{i<j}k_{ij}}{n(n-1)/2}
+$$
+
+The latter expression is called the *nucleotide diversity*
+[@nei_MolecularEvolutionPhylogenetics_2000 p. 251].
+
+:::
+
 ## In absence of evolutionary forces alleles are in equilibrium
 
 ### The Hardy-Weinberg equilibrium
@@ -452,20 +467,21 @@ $$
 
 ::: {.notes }
 
-Segue: apart from describing the variation we want to model how allele
-frequencies *change* in time. As
+Segue: apart from describing the variation via e.g., diversity
+measures, we want to model how allele frequencies *change* in time. As
 [@gillespie_PopulationGeneticsConcise_2004, preface p. xi] points out,
 "While genotype frequencies are easily measured, their change is not"
 
-:::
-
-::: {.notes }
-
-Segue: describing variation fine, but where does it come from and how does it change?
+IOW: describing variation fine, but where does it come from and how
+does it change?
 
 If assumptions of HWE hold, we have no change of variation. However,
 we **want** to look at **change** of variation and disentangle the
 forces that impose change
+
+HWE assumption gives us a way to calculate allele frequencies from
+genotype frequencies. How well do these assumptions hold in real data?
+See next slide.
 
 :::
 
@@ -522,7 +538,8 @@ From HWE: we want to look a the creation, maintenance and loss of
 variation and what forces affect it
 
 Goal: describe theory behind evolving populations. This has been an
-obsession for a long time, even before DNA was known -> back to basics
+obsession for a long time, even before DNA was known. We need to get
+back to basics.
 
 :::
 
@@ -1166,6 +1183,22 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 \left(1 - \frac{1}{2N} \right)^{(2N - k)}
 $$
 
+::: {.notes}
+
+We assume some familiarity with the Binomial distribution. Some mathematical formality follows.
+
+Let $p$ be the probability of heads (=1) of a coin flip, and $q=1-p$
+the probability of tails (=0). A coin flip can be modelled by a random
+variable (r.v.) $X$ that follows a *Bernoulli distribution*, where
+$\mathrm{Pr(}X=1\mathrm{)}=p$, $\mathrm{Pr(}X=0\mathrm{)}=1-p=q$. One
+can show (e.g., with transforms such as the [probability-generating
+function](https://en.wikipedia.org/wiki/Probability-generating_function))
+that a binomially distributed variable $Y\sim Bin(n, p)$ is the sum of
+$n$ independent Bernoulli variables $X$ ("Bernoulli trials"), or
+$Y=\sum^nX$. In our case, there are $2N$ trials, each with $p=1/2N$.
+
+:::
+
 ## Properties of Wright-Fisher sampling
 
 ### The expected number of offspring is one
@@ -1482,7 +1515,8 @@ here black/white will refer to different alleles)
 Enter allelic variants; we are looking at two alleles
 
 Important: the fate of any allele under drift is to be **lost** or
-**fixed**, which ultimately means variation is **lost** with drift
+**fixed**, which ultimately means variation is **lost** (decays) with
+drift
 
 :::
 
@@ -1506,7 +1540,8 @@ We assume two gene variants $A$, $a$, each with $i$ and $j=2N-i$
 copies in generation $t$. Let $p_t=i/2N$ be the *frequency* of $A$ in
 generation $t$, and $q_t=1-p_t$ the frequency of $a$.
 
-The sampling model for next generation $t+1$ is then
+The sampling model for next generation $t+1$, *given* $i$ $A$ alleles
+in generation $t$, is then
 
 $$
 p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
@@ -1515,7 +1550,176 @@ $$
 
 ::: {.notes }
 
-NB: we here slightly change notation, with $p_{t+1} = P(X=k)$ p
+NB: we here slightly change notation, with $p_{t+1} = P(X=k)$. Also,
+we have omitted an index $i$ in the expressions of $p$. The
+probability of observing $k$ $A$ alleles in generation $t+1$ will of
+course depend on the number $i$ $A$ alleles in the previous
+generation.
+
+:::
+
+## Probability distributions of allele frequencies
+
+```{r }
+#| label: allele-frequency-histogram
+#| echo: false
+#| eval: true
+n <- 10
+x <- vector(mode="numeric", length=n + 1)
+# Start with n major = n minor
+n_a <- ceiling(length(x)/2)
+x[n_a] <- 1
+class <- c("absorbing", rep("normal", n - 1), "absorbing")
+# Make transition matrix
+P <- do.call("rbind", lapply(0:n, function(i) {dbinom(0:n, n, i/n)}))
+
+plot_drift_histogram <- function(t, P) {
+  data <- t(x %*% (P%^%t))
+  xlabels <- unlist(lapply(0:n, function(x) {
+    sprintf("frac(%i, %i)", x, n)
+  }))
+  p <- data.frame(n=0:n, class=class, obs=data) %>%
+    ggplot(aes(y=obs, x=n, fill=class)) +
+    geom_bar(stat="identity", color="black", width=1) +
+    xlab("") + ylab("") +
+    annotate("text", label = paste("t =", t), fontface="italic",
+             x = n/2, y = 1.2*max(data), size = 10) +
+    scale_fill_manual(values=list("absorbing"="black", "normal"="white")) +
+    theme(legend.position="none",
+          axis.text.y = element_text(size=16),
+          axis.text.x = element_text(size=16, angle=0, hjust=0.5, vjust=0)) +
+    scale_x_continuous(
+        breaks=0:n,
+        labels=do.call(c, lapply(xlabels, function(l) {parse(text=l)}))) +
+    ylim(c(0, 1.3*max(data)))
+  p
+}
+```
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{r }
+#| label: fig-allele-frequency-histogram-plot
+#| echo: false
+#| eval: true
+#| out-width: 80%
+#| fig-cap: |
+#|     Histogram showing the course of change of the allele
+#|     frequency distribution with time [@kimura_1983, Fig. 3.4].
+#|     When N large ($\gtrsim 100$) histogram can be approximated
+#|     by continuous distribution (diffusion theory). Try recipe
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-slides-allele-frequency-distribution)
+#|     for different values of N.
+grid.arrange(
+    plot_drift_histogram(t=1, P=P),
+    plot_drift_histogram(t=5, P=P),
+    plot_drift_histogram(t=10, P=P),
+    plot_drift_histogram(t=20, P=P),
+    ncol=2)
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r }
+#| label: fig-buri-table-14
+#| echo: false
+#| eval: true
+#| out-width: 70%
+#| fig-width: 12
+#| fig-height: 12
+#| fig-align: center
+#| fig-cap: |
+#|    Frequency distributions of the brown eye ($bw^{75}$)
+#|    allele in replicate experimental populations ($n\sim 100$)
+#|    of *Drosophila melanogaster* (8 {{< fa venus >}},
+#|    8 {{< fa mars >}}) [@buri_GeneFrequencySmall_1956]
+data <- read.csv("assets/data/buri-table14.csv", header=TRUE, fill=0)
+colnames(data)[3:35] <- as.character(0:32)
+data <- data %>% replace(., is.na(.), 0)
+data$`32` <- data$`32` + data$Total.fixed.bw.75
+data$`0` <- data$`0` + data$Total.fixed.bw
+plot_buri <- function(t, xaxis=FALSE, yaxis=FALSE, title=TRUE) {
+  labels <- lapply(0:32, function(x) {
+    ""
+  })
+  names(labels) <- as.character(0:32)
+  labels$`0` <- 0
+  labels$`32` <- 1
+  p <- ggplot(stack(subset(data[2:20,c(1, 2:36)], Generation==t)[ , 3:35]),
+              aes(x=ind, y=values)) +
+    geom_bar(stat="identity") +
+    theme(legend.position="none",
+          axis.ticks=element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          plot.margin = unit(c(0, 0, 0, 0), "null"),
+          panel.spacing = unit(c(0, 0, 0, 0), "null")) +
+    ylab("") + xlab("") + ylim(0, 30)
+  if (title) {
+    p <- p + annotate("text", label = paste("t =", t), fontface="italic",
+                      x = 2, y = 28, size = 8)
+  }
+  if (xaxis)  {
+    p <- p + scale_x_discrete(breaks=0:32, labels=labels) +
+      xlab("Frequency") +
+      theme(axis.text.x = element_text(size=16, angle=0,
+                                       hjust=0.5, vjust=0))
+  }
+  if (yaxis) {
+    p <- p + ylab("Count") +
+      theme(axis.text.y = element_text(size=16))
+  }
+  p
+}
+grid.arrange(
+    plot_buri(1),# plot_buri(2), plot_buri(3),
+    plot_buri(5),# plot_buri(5), plot_buri(6),
+    plot_buri(10),# plot_buri(8), plot_buri(9),
+    plot_buri(15),# plot_buri(11), plot_buri(12),
+    plot_buri(19),
+    ncol=1, padding=0
+)
+```
+
+:::
+
+::::
+
+::: {.notes}
+
+Kimura's plot illustrates the allelic frequency distribution of
+replicate populations each consisting of N=10 sequences. There are two
+allelic types. The x axis corresponds to the proportion of populations
+in a given state (e.g., the y value for x=3/10 corresponds to the
+proportion of populations with 3 alleles of one type and 7 of the
+other). At $t=0$ all populations are in state 5/10.
+
+Kimura's plot is very instructive and students are encouraged to test
+the recipe code, increasing the number of states incrementally. For
+large enough N, the histograms can be approximated by continuous
+distributions. This observation led Kimura (even though diffusion
+equations were originally introduced to genetics by Fisher in 1922) to
+apply diffusion theory to obtain probability densities of allele
+frequencies, leading in turn to compact expressions of fixation
+probabilities, expected ages of alleles, and more. A treatment of
+diffusion theory is outside the scope of this course; the interested
+reader can consult e.g.,
+[@warrenewens_MathematicalPopulationGenetics_2006].
+
+The Buri experiment is an empirical demonstration of Kimura's plot.
+
+On the sampling model, [@charlesworth_ElementsEvolutionaryGenetics_2010, p. 231] says:
+
+> It is, however, impossible to write down a simple algebraic
+> expression for P, even without selection and mutation. [The
+> equation] is useful for obtaining numerical results for relatively
+> small populations, but becomes computationally demanding when N
+> becomes very large.
 
 :::
 
@@ -1701,8 +1905,8 @@ study dynamics of *heterozygosity*
 
 ::: {.notes }
 
-Simplifying assumptions -> rate of drift $propto \frac{1}{N}$
-($frac{1}{2N}$ in our treatment) [@leffler_RevisitingOldRiddle_2012]
+Simplifying assumptions -> rate of drift $\propto \frac{1}{N}$
+($\frac{1}{2N}$ in our treatment) [@leffler_RevisitingOldRiddle_2012]
 
 In reality population fluctuates and therefore Ne is substituted for
 N. Larger Ne -> smaller fluctuation in allele frequency (as evidenced
@@ -1710,161 +1914,6 @@ in plots) -> maintain larger genetic diversity
 
 Drift can be thought of as a force acting on a buoyant gas particle
 floating up and down at random.
-
-:::
-
-## Genetic drift as allele frequency distributions
-
-```{r }
-#| label: genetic-drift-histogram
-#| echo: false
-#| eval: true
-n <- 10
-x <- vector(mode="numeric", length=n + 1)
-# Start with n major = n minor
-n_a <- ceiling(length(x)/2)
-x[n_a] <- 1
-class <- c("absorbing", rep("normal", n - 1), "absorbing")
-# Make transition matrix
-P <- do.call("rbind", lapply(0:n, function(i) {dbinom(0:n, n, i/n)}))
-
-plot_drift_histogram <- function(t, P) {
-  data <- t(x %*% (P%^%t))
-  xlabels <- unlist(lapply(0:n, function(x) {
-    sprintf("frac(%i, %i)", x, n)
-  }))
-  p <- data.frame(n=0:n, class=class, obs=data) %>%
-    ggplot(aes(y=obs, x=n, fill=class)) +
-    geom_bar(stat="identity", color="black", width=1) +
-    xlab("") + ylab("") +
-    annotate("text", label = paste("t =", t), fontface="italic",
-             x = n/2, y = 1.2*max(data), size = 10) +
-    scale_fill_manual(values=list("absorbing"="black", "normal"="white")) +
-    theme(legend.position="none",
-          axis.text.y = element_text(size=16),
-          axis.text.x = element_text(size=16, angle=0, hjust=0.5, vjust=0)) +
-    scale_x_continuous(
-        breaks=0:n,
-        labels=do.call(c, lapply(xlabels, function(l) {parse(text=l)}))) +
-    ylim(c(0, 1.3*max(data)))
-  p
-}
-```
-
-:::: {.columns}
-
-::: {.column width="40%"}
-
-```{r }
-#| label: fig-genetic-drift-histogram-plot
-#| echo: false
-#| eval: true
-#| out-width: 80%
-#| fig-cap: |
-#|     Histogram showing the course of change of the gene
-#|     frequency distribution with time [@kimura_1983, Fig. 3.4].
-#|     When N large ($\gtrsim 100$) histogram can be approximated
-#|     by continuous distribution (diffusion theory). Try recipe
-#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
-#|     >}}#sec-recipe-slides-allele-frequency-distribution).
-#|     for different values of N.
-grid.arrange(
-    plot_drift_histogram(t=1, P=P),
-    plot_drift_histogram(t=5, P=P),
-    plot_drift_histogram(t=10, P=P),
-    plot_drift_histogram(t=20, P=P),
-    ncol=2)
-```
-
-:::
-
-::: {.column width="60%"}
-
-```{r }
-#| label: fig-buri-table-14
-#| echo: false
-#| eval: true
-#| out-width: 70%
-#| fig-width: 12
-#| fig-height: 12
-#| fig-cap: |
-#|    Random drift in replicate experimental populations
-#|    of *Drosophila melanogaster* (8 {{< fa venus >}},
-#|    8 {{< fa mars >}}) [@buri_GeneFrequencySmall_1956]
-data <- read.csv("assets/data/buri-table14.csv", header=TRUE, fill=0)
-colnames(data)[3:35] <- as.character(0:32)
-data <- data %>% replace(., is.na(.), 0)
-data$`32` <- data$`32` + data$Total.fixed.bw.75
-data$`0` <- data$`0` + data$Total.fixed.bw
-plot_buri <- function(t, xaxis=FALSE, yaxis=FALSE, title=TRUE) {
-  labels <- lapply(0:32, function(x) {
-    ""
-  })
-  names(labels) <- as.character(0:32)
-  labels$`0` <- 0
-  labels$`32` <- 1
-  p <- ggplot(stack(subset(data[2:20,c(1, 2:36)], Generation==t)[ , 3:35]),
-              aes(x=ind, y=values)) +
-    geom_bar(stat="identity") +
-    theme(legend.position="none",
-          axis.ticks=element_blank(),
-          axis.text.x = element_blank(),
-          axis.text.y = element_blank(),
-          plot.margin = unit(c(0, 0, 0, 0), "null"),
-          panel.spacing = unit(c(0, 0, 0, 0), "null")) +
-    ylab("") + xlab("") + ylim(0, 30)
-  if (title) {
-    p <- p + annotate("text", label = paste("t =", t), fontface="italic",
-                      x = 2, y = 28, size = 8)
-  }
-  if (xaxis)  {
-    p <- p + scale_x_discrete(breaks=0:32, labels=labels) +
-      xlab("Frequency") +
-      theme(axis.text.x = element_text(size=16, angle=0,
-                                       hjust=0.5, vjust=0))
-  }
-  if (yaxis) {
-    p <- p + ylab("Count") +
-      theme(axis.text.y = element_text(size=16))
-  }
-  p
-}
-grid.arrange(
-    plot_buri(1),# plot_buri(2), plot_buri(3),
-    plot_buri(5),# plot_buri(5), plot_buri(6),
-    plot_buri(10),# plot_buri(8), plot_buri(9),
-    plot_buri(15),# plot_buri(11), plot_buri(12),
-    plot_buri(19),
-    ncol=1, padding=0
-)
-```
-
-:::
-
-::::
-
-::: {.notes}
-
-Kimura's plot illustrates the allelic frequency distribution of
-replicate populations each consisting of N=10 sequences. There are two
-allelic types. The x axis corresponds to the proportion of populations
-in a given state (e.g., the y value for x=3/10 corresponds to the
-proportion of populations with 3 alleles of one type and 7 of the
-other). At $t=0$ all populations are in state 5/10.
-
-Kimura's plot is very instructive and students are encouraged to test
-the recipe code, increasing the number of states incrementally. For
-large enough N, the histograms can be approximated by continuous
-distributions. This observation led Kimura (even though diffusion
-equations were originally introduced to genetics by Fisher in 1922) to
-apply diffusion theory to obtain probability densities of allele
-frequencies, leading in turn to compact expressions of fixation
-probabilities, expected ages of alleles, and more. A treatment of
-diffusion theory is outside the scope of this course; the interested
-reader can consult e.g.,
-[@warrenewens_MathematicalPopulationGenetics_2006].
-
-The Buri experiment is an empirical demonstration of Kimura's plot.
 
 :::
 
@@ -1985,7 +2034,7 @@ ggplot(data, aes(x=tn, y=het, shape=factor(population_size))) +
 #| out-width: 90%
 #| fig-cap: Heterozygosity in black-footed ferret
 #|     [@wisely_GeneticDiversityFitness_2002].
-#|     Example from [@grahamcoop_NotesPopulationGenetics_2020, Fig. 4.5]
+#|     Example from @grahamcoop_NotesPopulationGenetics_2020, Fig. 4.5
 # cf: https://github.com/cooplab/popgen-notes/blob/master/Journal_figs/genetic_drift/black_footed_ferrets/black-footed-ferrets_He.csv
 data <- data.frame(date=c(1891, 1972, 1985, 1986),
                    He=c(0.231284916, 0.210335196,
@@ -2038,6 +2087,7 @@ decline will be **very** slow (drift speed ~ 1/2N)
 Practical example shows loss of heterozygosity tell-tale signature of
 population decline; conversely, **not** easy to show population
 decline in large populations (e.g., marine species with large $N_e$)
+using heterozygosity as measure
 
 [@barton2007evolution, p. 369] "The relation between genetic diversity
 and population size is difficult to discern, in part, because it is
@@ -2208,6 +2258,9 @@ The mutation models are:
   protein electrophoresis)
 - infinite sites model: model commonly used for long DNA sequences
 
+Additional model not presented here is the stepwise mutation model
+(mainly used to model repeats):
+
 <!-- markdownlint-disable MD013 -->
 
 ```{r, engine='tikz', fig.ext='svg' }
@@ -2248,8 +2301,6 @@ $\mathsf{A}_{i-3}$ \&  $\mathsf{A}_{i-2}$ \&  $\mathsf{A}_{i-1}$ \& $\mathsf{A}_
 ```
 
 <!-- markdownlint-enable MD013 -->
-
-Model B: mainly for repeats
 
 :::
 
@@ -2294,6 +2345,7 @@ equals the diversity gained due to mutation.
 #| fig-width: 12
 #| out-height: 500px
 #| out-width: 400px
+#| fig-align: center
 #| fig-cap: |
 #|   Variation is introduced by mutations (black) at rate $\mu=1e^{-4}$
 #|   and is  occasionally lost through genetic drift.
@@ -2313,6 +2365,9 @@ ggplot_wf(wf, fill = allele) +
 
 Segue: so if drift removes variation, what introduces it? Mutation!
 
+Note that the mutation rate in the WF model is not meaningful; the
+value is simply chosen such that enough mutations show up in plot.
+
 :::
 
 ## Tracing the evolution of mutations
@@ -2329,6 +2384,7 @@ Segue: so if drift removes variation, what introduces it? Mutation!
 #| fig-width: 15
 #| out-height: 500
 #| out-width: 500
+#| fig-align: center
 #| fig-cap: |
 #|   Different mutations suffer different fates.
 #|   Most mutations are lost in a couple of
@@ -2367,8 +2423,6 @@ Recall: fixation probability $\pi(p)=p$
 
 :::
 
-:::
-
 ::::
 
 ::: {.notes }
@@ -2386,7 +2440,7 @@ $\Delta\mathcal{H}=0$.
 
 One can show^[see [@gillespie_PopulationGeneticsConcise_2004, p.29 --
 31] for a concise treatement] the classical formula that the
-equilibrium **heterozysity** value is
+equilibrium **heterozygosity** value is
 
 $$
 \hat{\mathcal{H}} = \frac{4N_e\mu}{1 + 4N_e\mu}
@@ -2406,6 +2460,38 @@ mutation rate** and is commonly named $\theta$ such that
 
 $$
 \hat{\mathcal{H}} = \frac{\theta}{1 + \theta}
+$$
+
+:::
+
+::: {.notes}
+
+@gillespie_PopulationGeneticsConcise_2004, pp. 30--31 uses a
+*difference equation* approach to derive $\mathcal{H}$. Briefly, he
+studies the time evolution of $\mathcal{G}$, the probability that two
+alleles drawn at random without replacement from the population are
+identical by state. Mutations are assumed unique, i.e., the
+*infinite-alleles* model. It holds
+
+$$
+\mathcal{G}^\prime = (1-\mu)^2\left[ \frac{1}{2N} +
+\left( 1 - \frac{1}{2N} \right) \mathcal{G} \right]
+$$
+
+where $(1-\mu)^2$ is the probability that no mutation occur in either
+of the two sampled alleles. Since $\mu$ is small, $(1-\mu)^2 \approx
+1-2\mu$, which after some manipulation gives the desired expression
+for $\mathcal{H} = 1 - \mathcal{G}$.
+
+On pages 46--47, he shows that the expression for \mathcal{H} can be
+derived in a much simpler fashion using coalescent theory. Tracing two
+lineages backwards in time, the probability of coalescence is 1/2N,
+whereas the probability of a mutation is $1-(1-\mu)^2\approx 2\mu$;
+$\mathcal{H}$ is then simply the relative probability of the two
+events
+
+$$
+\mathcal{H} = \frac{2\mu}{2\mu + 1/2N} = \frac{4N\mu}{4N\mu + 1}
 $$
 
 :::
@@ -2488,6 +2574,11 @@ electrophoretic studies showed polymorphism common. Would lead to
 detrimental load [@kimura_ProteinPolymorphismPhase_1971] -> therefore
 majority of polymorphism must evolve neutrally (dynamics). Also: rate
 of evolution (on protein level) too high (Haldane's dilemma)
+
+On the shaded region: the observed range of $N_e\mu$ is larger than
+that which is predicted by the plot, and since $\mu$ is constrained
+within a couple of orders of magnitude, $N_e$ must vary more than
+predicted by the (strictly) neutral theory.
 
 :::
 
@@ -2658,7 +2749,7 @@ Notation follows @gillespie_PopulationGeneticsConcise_2004, pp. 61--64.
 The life cycle figure starts with newborns carrying the $A$ allele at
 frequency $p$, like parents. To reproduce they must reach adulthood,
 but due to selection, the allele frequency of $A$ may shift to
-$p^\prime$ because different genotypes affects survival probabilities.
+$p^\prime$ because different genotypes affect survival probabilities.
 This is typically summarized in genotype *viabilities*.
 
 The Nielsen quote is a reminder that many different notations and
@@ -2918,6 +3009,10 @@ diversity surrounding locus under selection.
 
 Segue: how do we detect selection?
 
+Early approach: look at protein-coding sequence where nucleotide
+substitutions can change the amino acid (non-synonymous, and
+presumably non-neutral) or be silent (synonymous, assumed neutral).
+
 Not all mutations in genes. Also want to look at single advantageous
 mutations, or balanced polymorphisms. Must therefore look at tell-tale
 signs of linked neutral variants.
@@ -3045,7 +3140,7 @@ selection.
 
 <!-- markdownlint-disable MD013 -->
 
-![](https://humanbiology.pressbooks.tru.ca/wp-content/uploads/sites/6/2019/06/MajorEventsInMeiosis_variant_int-1536x921.png){width=80% fig-align=center}
+![](assets/images/meiosis.png){width=80% fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
@@ -3108,11 +3203,11 @@ Main effect: association between loci breaks up.
 \pic (o4) at (0, -4.4) {chrom={a}{B}{below}};
 
 \node[above of=o1_mid, node distance=3ex] (g) {Gametes};
-\node[right of=o1_east] (f1) {$p_AB$};
+\node[right of=o1_east] (f1) {$p_{AB}$};
 \node at (g.mid -| f1) {Frequencies};
-\node[right of=o2_east] (f2) {$p_ab$};
-\node[right of=o3_east] (f3) {$p_Ab$};
-\node[right of=o4_east] (f4) {$p_aB$};
+\node[right of=o2_east] (f2) {$p_{ab}$};
+\node[right of=o3_east] (f3) {$p_{Ab}$};
+\node[right of=o4_east] (f4) {$p_{aB}$};
 
 \draw (p1_a) -- (p2_b);
 \draw (p1_b) -- (p2_a);
@@ -3137,6 +3232,11 @@ The mechanism that breaks up association between loci is
 recombination. Cartoon to right shows the possible (haploid) outcomes
 of meiosis. $r$ (the recombination rate) denotes the probability that
 there is a recombination event between the two loci.
+
+The farther apart two loci on the same chromosome, the larger the
+probability that a recombination event occurs between them. Note that
+this can be applied to loci on different chromosomes as well; they
+segregate independently.
 
 :::
 
@@ -3259,17 +3359,9 @@ p
 
 ::: {.notes }
 
-N=1e4, mu=5e-8, pi=4*N*mu=0.004, seek S=a*pi=0.01, so a=S/pi which
-gives n. Need to ramp up recombination rate to see the dip in TajD
-clearly.
-
-pgip-slim --seed 42 -n 1000 -r 1e-6 -m 5e-8 --threads 12
-recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
-
-2022-11-23: Current results based on mu=1e-7
-
-Q: not clear how Rasmus Nielsen scales statistics to have mean=1
-[@nielsen_MolecularSignaturesNatural_2005]
+Simulation: N=1e4, mu=5e-8, pi=4*N*mu=0.004, seek S=a*pi=0.01, so
+a=S/pi which gives n. One needs to ramp up recombination rate to see
+the dip in TajD clearly.
 
 :::
 
@@ -3304,6 +3396,13 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #|     >}}#sec-recipe-slim-selective-sweep)
 psweep_static + geom_line(data = data_mean, color = "red", linewidth = 1.5)
 ```
+
+::: {.notes}
+
+Important: individual runs show a lot of stochasticity, but the
+signal is clear for the *mean*.
+
+:::
 
 ## The effect of a selective sweep on diversity
 
@@ -3360,6 +3459,13 @@ ggplot(x, aes(windows, value, color = name)) +
     labels = expression("diversity "~pi, theta[W], pi - theta[W])
   )
 ```
+
+::: {.notes}
+
+cf @nielsen_MolecularSignaturesNatural_2005. Not clear how scaling of
+statistics to have mean=1 is done.
+
+:::
 
 ## Distinguishing selection from drift via topology {visibility="hidden" .unnumbered .unlisted}
 
