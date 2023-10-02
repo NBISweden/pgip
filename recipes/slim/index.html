@@ -95,6 +95,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -268,8 +270,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#sec-slim-recipes" id="toc-sec-slim-recipes" class="nav-link active" data-scroll-target="#sec-slim-recipes"><span class="header-section-number">1</span> SLiM recipes</a>
   <ul class="collapse">
-  <li><a href="#sec-slim-recipe-selective-sweep" id="toc-sec-slim-recipe-selective-sweep" class="nav-link" data-scroll-target="#sec-slim-recipe-selective-sweep"><span class="header-section-number">1.1</span> selective_sweep.slim</a></li>
-  <li><a href="#neutral.slim" id="toc-neutral.slim" class="nav-link" data-scroll-target="#neutral.slim"><span class="header-section-number">1.2</span> neutral.slim</a></li>
+  <li><a href="#sec-slim-recipe-selective-sweep" id="toc-sec-slim-recipe-selective-sweep" class="nav-link" data-scroll-target="#sec-slim-recipe-selective-sweep"><span class="header-section-number">1.1</span> Selective sweep</a></li>
+  <li><a href="#sec-slim-recipe-neutral" id="toc-sec-slim-recipe-neutral" class="nav-link" data-scroll-target="#sec-slim-recipe-neutral"><span class="header-section-number">1.2</span> Neutral simulation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -282,7 +284,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-slim-recipes" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> SLiM recipes</h1>
 <p>SLiM recipes can be run with wrapper <code>pgip-slim</code> to generate multiple simulations.</p>
-<div class="cell" data-hash="index_cache/html/pgip-slim-help_198dddb1eed90450f88452a0227afc9c">
+<div class="cell" data-hash="index_cache/html/pgip-slim-help_150ee19b092a27d00113b406bb663784">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgip-slim</span> <span class="at">--help</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Usage: pgip-slim [OPTIONS] SLIM</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## </span></span>
@@ -304,18 +308,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">##   --no-recapitate                 Don't do recapitation</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">##   --debug                         Print debugging info</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">##   --help                          Show this message and exit.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>As an example, the following command can be used to generate 10 simulations using the <a href="@sec-slim-recipe-selective-sweep">selective sweep</a> recipe.</p>
-<div class="cell" data-hash="index_cache/html/pgip-slim-example_f550a982bde4fff68f95a2fed7e276dd">
+<div class="cell" data-hash="index_cache/html/pgip-slim-example_c88d918f4c792e99bf2caac57df0d8e1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 10 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <section id="sec-slim-recipe-selective-sweep" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="sec-slim-recipe-selective-sweep"><span class="header-section-number">1.1</span> <a href="selective_sweep.slim">selective_sweep.slim</a></h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-slim-recipe-selective-sweep"><span class="header-section-number">1.1</span> Selective sweep</h2>
+<div class="cell" data-file="selective_sweep.slim" data-hash="index_cache/html/slim-recipe-selective-sweep_652abf0902e7c204a942e505edbcee09">
+<details>
+<summary>slim code to simulate a selective sweep at a locus on a 1Mbp chromosome, with mutation rate <span class="math inline">\(\mu=10^{-8}\)</span>, recombination rate <span class="math inline">\(\rho=10^{-8}\)</span>, and <span class="math inline">\(N_e=5,000\)</span>.</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initialize</span>() {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">defineConstant</span>(<span class="st">"Nref"</span>, <span class="fl">5e3</span>);</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"seed"</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"seed"</span>, <span class="fu">getSeed</span>());</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">defineConstant</span>(<span class="st">"SimID"</span>, seed);</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"N"</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"N"</span>, Nref);</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"outdir"</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"outdir"</span>, <span class="fu">tempdir</span>());</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"mu"</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"mu"</span>, <span class="fl">1e-8</span>);</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"rho"</span>))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"rho"</span>, <span class="fl">1e-8</span>);</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"seqlength"</span>))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"seqlength"</span>, <span class="fl">1e6</span>);</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"position"</span>))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"position"</span>, <span class="fu">asInteger</span>(seqlength <span class="sc">/</span> <span class="dv">2</span>));</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"outfile"</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"outfile"</span>, outdir <span class="sc">+</span> <span class="st">"slim_"</span> <span class="sc">+</span> SimID <span class="sc">+</span> <span class="st">".rho_"</span> <span class="sc">+</span> rho <span class="sc">+</span> <span class="st">".mu_"</span> <span class="sc">+</span> mu <span class="sc">+</span> <span class="st">".N_"</span> <span class="sc">+</span> N <span class="sc">+</span> <span class="st">".trees"</span>);</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setSeed</span>(seed);</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeTreeSeq</span>(<span class="at">simplificationRatio=</span>INF);</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeMutationRate</span>(<span class="dv">0</span>);</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeMutationType</span>(<span class="st">"m1"</span>, <span class="fl">0.5</span>, <span class="st">"f"</span>, <span class="fl">0.0</span>);</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeMutationType</span>(<span class="st">"m2"</span>, <span class="fl">1.0</span>, <span class="st">"f"</span>, <span class="fl">0.5</span>);  <span class="sc">/</span><span class="er">/</span> introduced mutation</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeGenomicElementType</span>(<span class="st">"g1"</span>, m1, <span class="fl">1.0</span>);</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeGenomicElement</span>(g1, <span class="dv">0</span>, seqlength <span class="sc">-</span> <span class="dv">1</span>);</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeRecombinationRate</span>(rho);</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="fu">early</span>() {</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Chapter <span class="fl">14.9</span><span class="sc">:</span> SLiM models diploid individuals that contain two</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> haploid genomes; this is, at present, a design constraint <span class="cf">in</span> SLiM</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> that cannot be modified. IOW<span class="sc">:</span> N individuals, <span class="dv">2</span><span class="sc">*</span>N genomes</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sim.addSubpop</span>(<span class="st">"p1"</span>, N);</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="dv">1000</span> <span class="fu">late</span>() {</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> introduce the sweep mutation</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  target <span class="ot">=</span> <span class="fu">sample</span>(p1.genomes, <span class="dv">1</span>);</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">target.addNewDrawnMutation</span>(m2, position);</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> save the state of the simulation</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sim.treeSeqOutput</span>(<span class="fu">tempdir</span>() <span class="sc">+</span> <span class="st">"slim_"</span> <span class="sc">+</span> SimID <span class="sc">+</span> <span class="st">".trees"</span>);</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="dv">1000</span><span class="sc">:</span><span class="dv">100000</span> <span class="fu">late</span>() {</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">sim.countOfMutationsOfType</span>(m2) <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>      fixed <span class="ot">=</span> (<span class="fu">sum</span>(sim.substitutions.mutationType <span class="sc">==</span> m2) <span class="sc">==</span> <span class="dv">1</span>);</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (fixed)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(SimID <span class="sc">+</span> <span class="st">": FIXED</span><span class="sc">\n</span><span class="st">"</span>);</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">"Writing output file : "</span> <span class="sc">+</span> outfile <span class="sc">+</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>);</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim.treeSeqOutput</span>(outfile);</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim.simulationFinished</span>();</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>      <span class="cf">else</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(SimID <span class="sc">+</span> <span class="st">": LOST - RESTARTING</span><span class="sc">\n</span><span class="st">"</span>);</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>      <span class="sc">/</span><span class="er">/</span> go back to tick <span class="dv">1000</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim.readFromPopulationFile</span>(<span class="fu">tempdir</span>() <span class="sc">+</span> <span class="st">"slim_"</span> <span class="sc">+</span> SimID <span class="sc">+</span> <span class="st">".trees"</span>);</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>      <span class="fu">setSeed</span>(<span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">asInteger</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">62</span>) <span class="sc">-</span> <span class="dv">1</span>));</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>Recipe to simulate a selective sweep.</p>
 </section>
-<section id="neutral.slim" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="neutral.slim"><span class="header-section-number">1.2</span> <a href="neutral.slim">neutral.slim</a></h2>
+<section id="sec-slim-recipe-neutral" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-slim-recipe-neutral"><span class="header-section-number">1.2</span> Neutral simulation</h2>
+<div class="cell" data-file="neutral.slim" data-hash="index_cache/html/slim-recipe-neutral_11d4a74fa3caa2108fd8961706d1df21">
+<details>
+<summary>slim code to simulate a neutrally evolving locus on a 100kbp chromosome, with mutation rate <span class="math inline">\(\mu=10^{-8}\)</span>, recombination rate <span class="math inline">\(\rho=10^{-8}\)</span>, and <span class="math inline">\(N_e=5,000\)</span>.</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initialize</span>() {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">defineConstant</span>(<span class="st">"Nref"</span>, <span class="fl">5e3</span>);</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"seed"</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"seed"</span>, <span class="fu">getSeed</span>());</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">defineConstant</span>(<span class="st">"SimID"</span>, seed);</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"N"</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"N"</span>, Nref);</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"outdir"</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"outdir"</span>, <span class="fu">tempdir</span>());</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"mu"</span>))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"mu"</span>, <span class="fl">1e-7</span>);</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"rho"</span>))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"rho"</span>, <span class="fl">1e-8</span>);</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"seqlength"</span>))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"seqlength"</span>, <span class="fl">1e5</span>);</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"outfile"</span>))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">defineConstant</span>(<span class="st">"outfile"</span>, outdir <span class="sc">+</span> <span class="st">"slim_"</span> <span class="sc">+</span> SimID <span class="sc">+</span> <span class="st">".rho_"</span> <span class="sc">+</span> rho <span class="sc">+</span> <span class="st">".mu_"</span> <span class="sc">+</span> mu <span class="sc">+</span> <span class="st">".N_"</span> <span class="sc">+</span> N <span class="sc">+</span> <span class="st">".trees"</span>);</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setSeed</span>(seed);</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeTreeSeq</span>(<span class="at">simplificationRatio=</span>INF);</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeMutationRate</span>(<span class="dv">0</span>);</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeMutationType</span>(<span class="st">"m1"</span>, <span class="fl">0.5</span>, <span class="st">"f"</span>, <span class="fl">0.0</span>);</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeGenomicElementType</span>(<span class="st">"g1"</span>, m1, <span class="fl">1.0</span>);</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeGenomicElement</span>(g1, <span class="dv">0</span>, seqlength <span class="sc">-</span> <span class="dv">1</span>);</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">initializeRecombinationRate</span>(rho);</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="fu">early</span>() {</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sim.addSubpop</span>(<span class="st">"p1"</span>, N);</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="dv">10000</span> <span class="fu">early</span>() {</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">"Writing output file : "</span> <span class="sc">+</span> outfile <span class="sc">+</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>);</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim.treeSeqOutput</span>(outfile);</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim.simulationFinished</span>();</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>Recipe to simulate a neutrally evolving locus.</p>
 
 

@@ -419,7 +419,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">29-Sep-2023</h4>
+  <h4 class="date">02-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -2277,7 +2277,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 <aside class="notes">
 <p>Kimura’s plot illustrates the allelic frequency distribution of replicate populations each consisting of N=10 sequences. There are two allelic types. The x axis corresponds to the proportion of populations in a given state (e.g., the y value for x=3/10 corresponds to the proportion of populations with 3 alleles of one type and 7 of the other). At <span class="math inline">\(t=0\)</span> all populations are in state 5/10.</p>
-<p>Kimura’s plot is very instructive and students are encouraged to test the recipe code, increasing the number of states incrementally. For large enough N, the histograms can be approximated by continuous distributions. This observation led Kimura to apply diffusion theory to obtain probability densities of allele frequencies, leading in turn to compact expressions of fixation probabilities, expected ages of alleles, and more. A treatment of diffusion theory is outside the scope of this course; the interested reader can consult e.g., <span class="citation" data-cites="warrenewens_MathematicalPopulationGenetics_2006">(<a href="#/bibliography" role="doc-biblioref" onclick="">Warren Ewens, 2006</a>)</span>.</p>
+<p>Kimura’s plot is very instructive and students are encouraged to test the recipe code, increasing the number of states incrementally. For large enough N, the histograms can be approximated by continuous distributions. This observation led Kimura (even though diffusion equations were originally introduced to genetics by Fisher in 1922) to apply diffusion theory to obtain probability densities of allele frequencies, leading in turn to compact expressions of fixation probabilities, expected ages of alleles, and more. A treatment of diffusion theory is outside the scope of this course; the interested reader can consult e.g., <span class="citation" data-cites="warrenewens_MathematicalPopulationGenetics_2006">(<a href="#/bibliography" role="doc-biblioref" onclick="">Warren Ewens, 2006</a>)</span>.</p>
 <p>The Buri experiment is an empirical demonstration of Kimura’s plot.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2316,7 +2316,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <aside class="notes">
 <p>Alleles in generation <span class="math inline">\(n\)</span> are IDB but not IBS</p>
 <p>Motivation: mathematical description of genetic drift complicated for populations with more than one individual. Easier to study the evolution of heterozygosity.</p>
-<p>Equation presented without details. Derivation by <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, pp. 25–27</a>)</span> starts from G=probability that two alleles are IBS</p>
+<p>Equation presented without details. Derivation in <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, pp. 25–27</a>)</span> starts from G=probability that two alleles are IBS</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2709,9 +2709,14 @@ DNA sequences
 </section>
 <section id="selection-and-fitness" class="slide level2 smaller">
 <h2>Selection and fitness</h2>
+
+<img data-src="index_files/figure-revealjs/fig-selection-model-tikz-1.svg" width="700" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;16: The life cycle used in the fundamental model of selection <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, fig. 3.2</a>)</span></p><div class="fragment">
 <blockquote>
 <p>Much confusion exists in the literature regarding how various types of selection are defined, in particular because some of the terminology is used slightly differently within different scientific communities <span class="citation" data-cites="nielsen_MolecularSignaturesNatural_2005">(<a href="#/bibliography" role="doc-biblioref" onclick="">Nielsen, 2005</a>)</span></p>
 </blockquote>
+</div>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
 <p><span class="math display">\[
 \begin{matrix}
 \mathrm{Genotype} &amp; aa &amp; aA &amp; AA \\
@@ -2722,7 +2727,8 @@ DNA sequences
 \mathrm{Relative\ fitness} &amp; 1 &amp; 1-hs &amp; 1-s\\
 \end{matrix}
 \]</span></p>
-<p>where <span class="math inline">\(\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}\)</span> is the <strong>mean fitness</strong></p>
+<p>where <span class="math inline">\(\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}\)</span> is the <strong>mean fitness</strong>.</p>
+</div><div class="column fragment" style="width:50%;">
 <table>
 <tbody>
 <tr class="odd">
@@ -2747,11 +2753,31 @@ DNA sequences
 </tr>
 </tbody>
 </table>
+<div class="flushright smallr">
+<p>Notation follows <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">Gillespie (<a href="#/bibliography" role="doc-biblioref" onclick="">2004</a>)</span>, pp.&nbsp;61–64.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The life cycle figure starts with newborns carrying the <span class="math inline">\(A\)</span> allele at frequency <span class="math inline">\(p\)</span>, like parents. To reproduce they must reach adulthood, but due to selection, the allele frequency of <span class="math inline">\(A\)</span> may shift to <span class="math inline">\(p^\prime\)</span> because different genotypes affects survival probabilities. This is typically summarized in genotype <em>viabilities</em>.</p>
+<p>The Nielsen quote is a reminder that many different notations and parametrizations exist in the literature.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-most-important-equation-in-population-genetics" class="slide level2">
 <h2>The most important equation in population genetics</h2>
 <p><span class="math display">\[
-\Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} - w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
+p^\prime - p = \Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} -
+w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 \]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -2759,7 +2785,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-selection-fig-p" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;16: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
+<figcaption>Figure&nbsp;17: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-fig-p-1.svg" width="400" height="400"></p>
 </figure>
 </div>
@@ -2770,7 +2796,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-selection-fig-dp" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;17: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
+<figcaption>Figure&nbsp;18: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-fig-dp-1.svg" width="400" height="400"></p>
 </figure>
 </div>
@@ -2779,7 +2805,7 @@ DNA sequences
 </div>
 </div>
 <aside class="notes">
-<p>Equation relates allele frequency change to viabilities for different genotypes. It is instructive to study the equation and plot trajectories to gain an intuition for how allele frequencies evolve given the different selection regimes.</p>
+<p>Given the genotype fitnesses/viabilities, we can work out the difference in allele frequency <span class="math inline">\(p-p^\prime\)</span> between successive generations as a function of viabilities (or relative fitnesses). Equation relates allele frequency change to viabilities for different genotypes. It is instructive to study the equation and plot trajectories to gain an intuition for how allele frequencies evolve given the different selection regimes.</p>
 <p>The left panel shows that the three modes of selection have different equilibrium points: for directional selection the favored homozygote will eventually attain 100%, balancing selection has a stable equilibrium point (attractor) for a given allelic ratio (here 25:75), and disruptive selection has an <em>unstable</em> equilibrium point (repeller) for a given allelic ratio.</p>
 <p>The right panel shows the rate of <em>change</em> as a function of allele frequency. Note how the directionality changes at the equilibrium point for balancing and directional selection.</p>
 <style type="text/css">
@@ -2802,7 +2828,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;18: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
+<figcaption>Figure&nbsp;19: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152"></p>
 </figure>
 </div>
@@ -2814,7 +2840,7 @@ DNA sequences
 </div>
 </div>
 <aside class="notes">
-<p>Segue: note on the strength of s and the relation to <span class="math inline">\(N_e\)</span>.</p>
+<p>Segue: note on the strength of s and the relation to <span class="math inline">\(N_e\)</span>. For small <span class="math inline">\(N_e\)</span> the relation will hold for higher <span class="math inline">\(s\)</span>, meaning small populations will have difficulties purging deleterious mutations.</p>
 <p>Even if a new mutation has, say, <span class="math inline">\(s=0.01\)</span>, it still needs to overcome effects of drift. Only has 2% change of fixation.</p>
 <p>In figure, we assume <span class="math inline">\(s&lt;0.1\)</span>, which is almost always the case <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Lynch, 2007, p. 74</a>)</span>.</p>
 <p><span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 133</a>)</span></p>
@@ -2854,11 +2880,11 @@ positive selection
 </dd>
 </dl>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-file="../../recipes/slides/foundations/hsapiens-rat-dnds.R" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_162ba1ef7f42f47a58c11579d25b5c3d">
+<div class="cell" data-file="../../recipes/slides/foundations/hsapiens-rat-dnds.R" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_12ca98d665704594b3f298179bcb51b6">
 <div class="cell-output-display">
 <div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;19: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection.</figcaption>
+<figcaption>Figure&nbsp;20: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection. <a href="../../recipes/slides/index.html#sec-recipe-slides-dn-ds-ratio-human-rat"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400"></p>
 </figure>
 </div>
@@ -2886,23 +2912,21 @@ positive selection
           display:block!important;
       }</style></aside>
 </section>
-
-
-<section id="linked-selection" class="slide level2">
-<h2>Linked selection</h2>
-<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_42c6060ad4ea112d2f8e88d7986d3d60">
+<section id="linked-selection-reduces-diversity-at-neighbour-loci" class="slide level2">
+<h2>Linked selection reduces diversity at neighbour loci</h2>
+<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_453b993406cec290ffb65804d95cd362">
 <div class="cell-output-display">
 <div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;20: A selective sweep of an advantageous mutation (gray dot).</figcaption>
+<figcaption>Figure&nbsp;21: A selective sweep of an advantageous mutation (gray dot). Adapted from <span class="citation" data-cites="charlesworth_ElementsEvolutionaryGenetics_2010">Charlesworth &amp; Charlesworth (<a href="#/bibliography" role="doc-biblioref" onclick="">2010</a>)</span>, Fig. 8.13</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Previous example showed a selective sweep. If a sweep completes at a locus, it will become monomorphic.</p>
+<p>Example of a selective sweep. If a sweep completes at a locus, it will become monomorphic, as will the <em>neighbouring</em> sites. Mutation could reintroduce variation. Recombination could increase diversity in neighbourhood, but in a manner that depends on the <em>distance</em> from the locus under selection.</p>
 <aside class="notes">
-<p>Topologies become important when we discuss sweeps</p>
+<p>Alternatives to direct selection tests are those that look at linked selection. In essence, we look for characteristic patterns in the vicinity of a selected locus. A sweep leads to the selected site and neigbouring sites being monomorphic (and therefore invisible to tests based on direct selection). Without recombination, mutation could reintroduce variation. In the presence of recombination, the effect of reduced diversity will be dependent on distance from the locus under selection.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2915,29 +2939,82 @@ positive selection
           display:block!important;
       }</style></aside>
 </section>
-<section id="recombination-breaks-up-association-between-loci" class="slide level2">
-<h2>Recombination breaks up association between loci</h2>
-
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;21: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
-<section id="distinguishing-selection-from-drift-via-topology" class="slide level2">
-<h2>Distinguishing selection from drift via topology</h2>
+<section id="recombination-breaks-association-between-loci" class="slide level2">
+<h2>Recombination breaks association between loci</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<!-- markdownlint-disable MD013 -->
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://humanbiology.pressbooks.tru.ca/wp-content/uploads/sites/6/2019/06/MajorEventsInMeiosis_variant_int-1536x921.png" style="width:80.0%"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+<div class="flushright smallr translatey50">
+<p><span class="citation" data-cites="miller_HumanBiology_2020">Miller (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span>, Fig. 5.12.3</p>
+</div>
+<p>Once per chromosome! But: rates vary between loci (hotspots), sex chromosomes vs autosomes, and in some species, recombination only occurs in one sex (e.g., <em>D.melanogaster</em>).</p>
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<p>Main effect: association between loci breaks up.</p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/recombinant-chromosomes_b98e40f3dd9801c06e45466c8cebba3d">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/recombinant-chromosomes-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The mechanism that breaks up association between loci is recombination. Cartoon to right shows the possible (haploid) outcomes of meiosis. <span class="math inline">\(r\)</span> (the recombination rate) denotes the probability that there is a recombination event between the two loci.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="linkage-disequilibrium-and-its-decay" class="slide level2">
+<h2>Linkage disequilibrium and its decay</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-drift-genealogy_2be9e99a84832937e327dbe7b65db510">
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-model-drift-genealogy-1.svg" width="960" height="600"></p>
+<p>Association between loci can be written as:</p>
+<p><span class="math display">\[
+D_{AB} = p_{AB} - p_Ap_B
+\]</span></p>
+<p>Similar expressions hold for other pairs; only need to know one <span class="math inline">\(D_{ij}\)</span> (e.g., <span class="math inline">\(D_{AB}\)</span>) so drop subscript and rewrite:</p>
+<p><span class="math display">\[
+p_{AB}= p_Ap_B + D
+\]</span></p>
+<p>If <span class="math inline">\(D\neq0\)</span> the loci are in <strong>linkage disequilibrium</strong>.</p>
+<div class="fragment">
+<p>Can show that decay over time is</p>
+<p><span class="math display">\[
+D_t = (1-r)^tD_0
+\]</span></p>
+<p>Recombination <em>decreases</em> D (linkage)</p>
 </div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-selection-genealogy_85646a60770d8c75d9f5c088afddd23d">
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-model-selection-genealogy-1.svg" width="960" height="600"></p>
-</div>
+</div><div class="column fragment" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>LD between pairs of autosomal SNPs for human and mouse. From <span class="citation" data-cites="laurie_LinkageDisequilibriumWild_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Laurie et al., 2007, fig. 2</a>)</span></figcaption>
+<p><img data-src="assets/images/ld_mice.png"></p>
+</figure>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>Topology for selection more compressed.</p>
+<p>Handwavy introduction of LD as quantity. There are other equations, but the main point here is to point out that D measures the degree of linkage (disequilibrium); the higher D, the stronger linkage is.</p>
+<p>The figure shows the difference in LD decay among wild populations compared to inbred mouse strains, where LD extends over several megabases. Therefore, LD decay informs about demographic history, and as we will see, evolutionary processes (sweeps -&gt; longer LD blocks).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2950,33 +3027,135 @@ positive selection
           display:block!important;
       }</style></aside>
 </section>
+<section id="the-effect-of-a-selective-sweep-on-diversity" class="slide level2">
+<h2>The effect of a selective sweep on diversity</h2>
+<!-- markdownlint-disable MD013 -->
+<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_51eacb4a9e001967e6e5faa0749b18cb">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<!-- markdownlint-enable MD013 -->
+<!-- markdownlint-disable MD013 -->
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd_45bdce78bc0f2a58623012b8acdfa538">
+<div class="cell-output cell-output-error">
+<pre><code>Error in device(files[i], ...): unused arguments (units = "in", res = 192)</code></pre>
+</div>
+</div>
+<!-- markdownlint-enable MD013 -->
+<aside class="notes">
+<p>N=1e4, mu=5e-8, pi=4<em>N</em>mu=0.004, seek S=a*pi=0.01, so a=S/pi which gives n.&nbsp;Need to ramp up recombination rate to see the dip in TajD clearly.</p>
+<p>pgip-slim –seed 42 -n 1000 -r 1e-6 -m 5e-8 –threads 12 recipes/slim/selective_sweep.slim -l 1000000 –outdir results/slim</p>
+<p>2022-11-23: Current results based on mu=1e-7</p>
+<p>Q: not clear how Rasmus Nielsen scales statistics to have mean=1 <span class="citation" data-cites="nielsen_MolecularSignaturesNatural_2005">(<a href="#/bibliography" role="doc-biblioref" onclick="">Nielsen, 2005</a>)</span></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-effect-of-a-selective-sweep-on-diversity-1" class="slide level2">
+<h2>The effect of a selective sweep on diversity</h2>
+<!-- markdownlint-disable MD013 -->
+<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_74273fb0acada19733235fc43559f319">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<!-- markdownlint-enable MD013 -->
+
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-2-1.svg" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;22: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p></section>
+<section id="the-effect-of-a-selective-sweep-on-diversity-2" class="slide level2">
+<h2>The effect of a selective sweep on diversity</h2>
+
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;23: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p></section>
+
 <section id="the-phases-of-a-selective-sweep" class="slide level2">
 <h2>The phases of a selective sweep</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
 <div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep-phases_1c334fc387646d680bcda7651aa0d29c">
 <div class="cell-output-display">
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;22: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<figcaption>Figure&nbsp;24: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column fragment" style="width:30%;">
+<p>Amount of diversity depends on fixation time. A neutral locus fixes in <span class="math inline">\(4N_e\)</span> generations; for <span class="math inline">\(s=0.0001\)</span>, it takes approximately <span class="math inline">\(0.29N_e\)</span> generations.</p>
+<p>Selections changes the genealogy (different topology, shorter branches), an aspect used in many linkage-based tests for selection.</p>
+</div>
+</div>
+<aside class="notes">
+<p>A selective sweep changes the genealogy (shorter branches, different <em>topology</em>) compared to the neutral case, a fact that can be utilised in linkage-based tests for selection.</p>
+<p>Note that the amount of variation surrounding a sweep depends heavily on the <em>rate</em> of the sweep. <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 167</a>)</span> points out that an advantageous allele with <span class="math inline">\(s=0.0001\)</span> will take approximately <span class="math inline">\(0.29N_e\)</span> generations to fix (compared to <span class="math inline">\(4N_e\)</span> generations for a neutral locus)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="hitchhiking-versus-background-selection" class="slide level2">
-<h2>Hitchhiking versus background selection</h2>
+<section id="linked-selection-may-constrain-levels-of-diversity" class="slide level2">
+<h2>Linked selection may constrain levels of diversity</h2>
 <div>
-<div class="cell" data-hash="index_cache/revealjs/fig-hitchhiking-vs-background-selection_4ad83f5070647c5f848aa80ac1a6988c">
+<div class="cell" data-hash="index_cache/revealjs/fig-hitchhiking-vs-background-selection_4263c63ea2c9c0c7a63ed47196e7fc71">
 <div class="cell-output-display">
 <div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;23: Hitchhiking (left) versus background selection (right).</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="800"></p>
+<figcaption>Figure&nbsp;25: Hitchhiking (left) versus background selection (right).</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="1000"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="hitchhiking">Hitchhiking</h3>
+<ul>
+<li>alleles linked to locus under selection “hitchhike” to high frequencies <span class="citation" data-cites="smith_HitchhikingEffectFavourable_1974">(<a href="#/bibliography" role="doc-biblioref" onclick="">Smith &amp; Haigh, 1974</a>)</span></li>
+<li>evidence: positive correlation between putative neutral diversity and recombination <span class="citation" data-cites="corbett-detig_NaturalSelectionConstrains_2015">(<a href="#/bibliography" role="doc-biblioref" onclick="">Corbett-Detig et al., 2015</a>)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="background-selection">Background selection</h3>
+<ul>
+<li>loci linked to a deleterious locus will be purged from population and thus reduce diversity <span class="citation" data-cites="charlesworth_EffectDeleteriousMutations_1993">(<a href="#/bibliography" role="doc-biblioref" onclick="">Charlesworth et al., 1993</a>)</span></li>
+<li>similar patterns to hitchhiking</li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>Linked selection has been proposed as solution to the low range of diversity seen between species with orders of magnitude ranges in census population sizes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
@@ -2997,8 +3176,17 @@ Buri, P. (1956). Gene <span>Frequency</span> in <span>Small Populations</span> o
 <div id="ref-casillas_MolecularPopulationGenetics_2017" class="csl-entry" role="listitem">
 Casillas, S., &amp; Barbadilla, A. (2017). Molecular <span>Population Genetics</span>. <em>Genetics</em>, <em>205</em>(3), 1003–1035. <a href="https://doi.org/10.1534/genetics.116.196493">https://doi.org/10.1534/genetics.116.196493</a>
 </div>
+<div id="ref-charlesworth_ElementsEvolutionaryGenetics_2010" class="csl-entry" role="listitem">
+Charlesworth, B., &amp; Charlesworth, D. (2010). <em>Elements of <span>Evolutionary Genetics</span></em>. <span>Roberts and Company Publishers</span>.
+</div>
+<div id="ref-charlesworth_EffectDeleteriousMutations_1993" class="csl-entry" role="listitem">
+Charlesworth, B., Morgan, M. T., &amp; Charlesworth, D. (1993). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1205596">The <span>Effect</span> of <span>Deleterious Mutations</span> on <span>Neutral Molecular Variation</span></a>. <em>Genetics</em>, <em>134</em>(4), 1289–1303.
+</div>
 <div id="ref-cooplab_PopulationGeneticsCourse_2011" class="csl-entry" role="listitem">
 cooplab. (2011). Population genetics course resources: <span>Hardy-Weinberg Eq</span>. In <em>gcbias</em>. <a href="https://gcbias.org/2011/10/13/population-genetics-course-resources-hardy-weinberg-eq/">https://gcbias.org/2011/10/13/population-genetics-course-resources-hardy-weinberg-eq/</a>
+</div>
+<div id="ref-corbett-detig_NaturalSelectionConstrains_2015" class="csl-entry" role="listitem">
+Corbett-Detig, R. B., Hartl, D. L., &amp; Sackton, T. B. (2015). Natural <span>Selection Constrains Neutral Diversity</span> across <span>A Wide Range</span> of <span>Species</span>. <em>PLOS Biology</em>, <em>13</em>(4), e1002112. <a href="https://doi.org/10.1371/journal.pbio.1002112">https://doi.org/10.1371/journal.pbio.1002112</a>
 </div>
 <div id="ref-gillespie_PopulationGeneticsConcise_2004" class="csl-entry" role="listitem">
 Gillespie, J. H. (2004). <em>Population <span>Genetics</span>: <span>A Concise Guide</span></em> (2nd edition). <span>Johns Hopkins University Press</span>.
@@ -3033,17 +3221,26 @@ Kimura, M., &amp; Ohta, T. (1971). Protein <span>Polymorphism</span> as a <span>
 <div id="ref-kumar_MutationRatesMammalian_2002" class="csl-entry" role="listitem">
 Kumar, S., &amp; Subramanian, S. (2002). Mutation rates in mammalian genomes. <em>Proceedings of the National Academy of Sciences</em>, <em>99</em>(2), 803–808. <a href="https://doi.org/10.1073/pnas.022629899">https://doi.org/10.1073/pnas.022629899</a>
 </div>
+<div id="ref-laurie_LinkageDisequilibriumWild_2007" class="csl-entry" role="listitem">
+Laurie, C. C., Nickerson, D. A., Anderson, A. D., Weir, B. S., Livingston, R. J., Dean, M. D., Smith, K. L., Schadt, E. E., &amp; Nachman, M. W. (2007). Linkage <span>Disequilibrium</span> in <span>Wild Mice</span>. <em>PLOS Genetics</em>, <em>3</em>(8), e144. <a href="https://doi.org/10.1371/journal.pgen.0030144">https://doi.org/10.1371/journal.pgen.0030144</a>
+</div>
 <div id="ref-leffler_RevisitingOldRiddle_2012" class="csl-entry" role="listitem">
 Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venkat, A., Andolfatto, P., &amp; Przeworski, M. (2012). Revisiting an <span>Old Riddle</span>: <span>What Determines Genetic Diversity Levels</span> within <span>Species</span>? <em>PLOS Biology</em>, <em>10</em>(9), e1001388. <a href="https://doi.org/10.1371/journal.pbio.1001388">https://doi.org/10.1371/journal.pbio.1001388</a>
 </div>
 <div id="ref-lynch_OriginsGenomeArchitecture_2007" class="csl-entry" role="listitem">
 Lynch, M. (2007). <em>The origins of genome architecture</em>. <span>Sinauer Associates</span>.
 </div>
+<div id="ref-miller_HumanBiology_2020" class="csl-entry" role="listitem">
+Miller, C. (2020). <em>Human <span>Biology</span></em>. <span>Thompson Rivers University</span>.
+</div>
 <div id="ref-nei_MolecularEvolutionPhylogenetics_2000" class="csl-entry" role="listitem">
 Nei, M., &amp; Kumar, S. (2000). <em>Molecular <span>Evolution</span> and <span>Phylogenetics</span></em>. <span>Oxford University Press</span>.
 </div>
 <div id="ref-nielsen_MolecularSignaturesNatural_2005" class="csl-entry" role="listitem">
 Nielsen, R. (2005). Molecular <span>Signatures</span> of <span>Natural Selection</span>. <em>Annual Review of Genetics</em>, <em>39</em>(1), 197–218. <a href="https://doi.org/10.1146/annurev.genet.39.073003.112420">https://doi.org/10.1146/annurev.genet.39.073003.112420</a>
+</div>
+<div id="ref-smith_HitchhikingEffectFavourable_1974" class="csl-entry" role="listitem">
+Smith, J. M., &amp; Haigh, J. (1974). The hitch-hiking effect of a favourable gene. <em>Genetics Research</em>, <em>23</em>(1), 23–35. <a href="https://doi.org/10.1017/S0016672300014634">https://doi.org/10.1017/S0016672300014634</a>
 </div>
 <div id="ref-waples_WhatNeAnyway_2022" class="csl-entry" role="listitem">
 Waples, R. S. (2022). What <span>Is Ne</span>, <span>Anyway</span>? <em>Journal of Heredity</em>, <em>113</em>(4), 371–379. <a href="https://doi.org/10.1093/jhered/esac023">https://doi.org/10.1093/jhered/esac023</a>
