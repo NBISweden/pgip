@@ -429,6 +429,18 @@
 </nav>
 </section>
 
+<section id="intended-learning-outcomes" class="slide level2 unnumbered unlisted">
+<h2>Intended learning outcomes</h2>
+<p>Introduction to the coalescent and simulation in msprime, with two exercises on the coalescent and msprime. The students should be able to:</p>
+<ul>
+<li>Describe need for simulations</li>
+<li>Demonstrate the coalescent step by step</li>
+<li>Detail some properties of coalescent trees</li>
+<li>Define the site-frequency spectrum</li>
+<li>Describe the coalescent with recombination</li>
+<li>Perform simple simulations in msprime</li>
+</ul>
+</section>
 <section id="the-wright-fisher-model-and-simulations" class="slide level2">
 <h2>The Wright-Fisher model and simulations</h2>
 <div class="columns">
@@ -444,6 +456,19 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <h3 id="recap">Recap</h3>
 <p>Model of a population describing <strong>genealogies</strong> under the following assumptions</p>
 <ul>
@@ -545,6 +570,20 @@
 </div>
 </div>
 <p>Simulated nodes are filled with black. Genealogy of interest is highlighted in thick black lines.</p>
+<aside class="notes">
+<p>Forward simulations: require that we keep track of the entire population -&gt; computationally challenging.</p>
+<p>Backward simulations: require only tracking the sample -&gt; quicker. However, cannot model selection.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-do-we-want-simulations-anyway" class="slide level2">
 <h2>Why do we want simulations anyway?</h2>
@@ -594,6 +633,19 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>NB: only the samples on the genealogy are needed, but the entire population is shown as a means to compare with forward simulations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="coalescent-simulations-1" class="slide level2">
 <h2>Coalescent simulations</h2>
@@ -622,7 +674,10 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 <li>Simulate ancestry (genealogy)</li>
 <li>Simulate mutations</li>
 </ol>
-<p>Question: how many mutations are common to all samples? How many mutations does sample 1 have? Sample 2?</p>
+<h4>
+Exercise
+</h4>
+<p>How many mutations are common to all samples? How many mutations does sample 1 have? Sample 2?</p>
 <p>Assuming the ancestral state is denoted <code>0</code> (prior to the <em>first</em> generation) and the derived state <code>1</code>, what are the sequences of the samples?</p>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-mutations-1_4c9c887c231fb58d84af52aa07102b87">
@@ -632,6 +687,21 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Answers to exercise: 2 mutations are common to all samples. Sample 1 has 3 mutations, sample 2 has 4.</p>
+<p>(arbitrarily) ordering the sites from top to bottom (oldest mutation comes first), the sequences are:</p>
+<p>1: 11100 2: 11101 3: 11010</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="simulating-genealogies-hahn_molecularpopulationgenetics_2019-p.-115" class="slide level2">
 <h2>Simulating genealogies <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hahn, 2019, p. 115</a>)</span></h2>
@@ -896,35 +966,124 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 <p>The expected <strong>total tree height</strong> is <span class="math inline">\(E(T_{total}) = \sum_{i=2}^n iE(T_i) = 2\sum_{i=2}^n\frac{1}{i-1}\)</span></p>
 </div>
 </div>
+<aside class="notes">
+<p>Note that the parametrization is in 2N generations (continuous time approximation); some use N, others 4N, and so on.</p>
+<p>Expected waiting time: the first expression follows from the fact that the waiting time, given <span class="math inline">\(i\)</span> chromosomes, is exponentially distributed with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span>. For an exponentially distributed variable <span class="math inline">\(X\)</span>, the expected value is simply <span class="math inline">\(E(X)=1/\lambda\)</span>.</p>
+<p>Other relations are most easily derived by studying the tree and summing up relevant branches or time intervals.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="variation-in-topology-and-height" class="slide level2">
-<h2>Variation in topology and height</h2>
-<div style="transform:  translate(-300px, 0);">
-<div style="transform: rotate(180deg);">
-<div class="cell" data-hash="index_cache/revealjs/genealogy-variation_925e10824e0cad6e9e0a49977a31e0f1">
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/genealogy-variation-1.svg" width="960" height="500"></p>
+<section id="coalescent-simulations-vary-in-topology-and-height" class="slide level2">
+<h2>Coalescent simulations vary in topology and height</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> msprime</span>
+<span id="cb1-2"><a href="#cb1-2"></a>seeds <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">34</span>, <span class="dv">63</span>, <span class="dv">30</span>]</span>
+<span id="cb1-3"><a href="#cb1-3"></a>trees <span class="op">=</span> [msprime.sim_ancestry(<span class="dv">3</span>, random_seed<span class="op">=</span>x) <span class="cf">for</span> x <span class="kw">in</span> seeds]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<div class="cell" data-hash="index_cache/revealjs/fig-coalescent-trees-with-msprime_b270e914bd4645972f218bb1bbee940c">
+<svg baseprofile="full" height="262.5576521441852" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(95.625 26.8)"><g class="a10 i1 leaf node n2 p0 sample" transform="translate(34.375 193.958)"><path class="edge" d="M 0 0 V -193.958 H -34.375"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a10 c2 node n9 p0" transform="translate(-34.375 160.079)"><g class="a9 i0 leaf node n0 p0 sample" transform="translate(-31.25 33.8787)"><path class="edge" d="M 0 0 V -33.8787 H 31.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a9 c2 node n8 p0" transform="translate(31.25 9.96887)"><g class="a8 i2 leaf node n4 p0 sample" transform="translate(17.5 23.9099)"><path class="edge" d="M 0 0 V -23.9099 H -17.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 c2 node n7 p0" transform="translate(-17.5 8.81347)"><g class="a7 i2 leaf node n5 p0 sample" transform="translate(15 15.0964)"><path class="edge" d="M 0 0 V -15.0964 H -15"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 c2 node n6 p0" transform="translate(-15 14.3228)"><g class="a6 i0 leaf node n1 p0 sample" transform="translate(-10 0.77358)"><path class="edge" d="M 0 0 V -0.77358 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i1 leaf node n3 p0 sample" transform="translate(10 0.77358)"><path class="edge" d="M 0 0 V -0.77358 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -14.3228 H 15"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -8.81347 H 17.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -9.96887 H -31.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -160.079 H 34.375"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<svg baseprofile="full" height="143.18431650051062" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(105.625 26.8)"><g class="a10 i1 leaf node n2 p0 sample" transform="translate(24.375 74.5843)"><path class="edge" d="M 0 0 V -74.5843 H -24.375"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a10 c2 node n9 p0" transform="translate(-24.375 17.8455)"><g class="a9 i1 leaf node n3 p0 sample" transform="translate(28.75 56.7388)"><path class="edge" d="M 0 0 V -56.7388 H -28.75"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a9 c2 node n8 p0" transform="translate(-28.75 42.5557)"><g class="a8 i0 leaf node n0 p0 sample" transform="translate(-22.5 14.1831)"><path class="edge" d="M 0 0 V -14.1831 H 22.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 c2 node n7 p0" transform="translate(22.5 3.65457)"><g class="a7 i2 leaf node n4 p0 sample" transform="translate(15 10.5285)"><path class="edge" d="M 0 0 V -10.5285 H -15"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 c2 node n6 p0" transform="translate(-15 4.37337)"><g class="a6 i0 leaf node n1 p0 sample" transform="translate(-10 6.15517)"><path class="edge" d="M 0 0 V -6.15517 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n5 p0 sample" transform="translate(10 6.15517)"><path class="edge" d="M 0 0 V -6.15517 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -4.37337 H 15"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -3.65457 H -22.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -42.5557 H 28.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -17.8455 H 24.375"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<svg baseprofile="full" height="150.46109506901013" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(61.25 26.8)"><g class="a10 i0 leaf node n0 p0 sample" transform="translate(-31.25 81.8611)"><path class="edge" d="M 0 0 V -81.8611 H 31.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a10 c2 node n9 p0" transform="translate(31.25 59.5717)"><g class="a9 c2 node n7 p0" transform="translate(27.5 21.1371)"><g class="a7 i1 leaf node n3 p0 sample" transform="translate(-10 1.15234)"><path class="edge" d="M 0 0 V -1.15234 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 i2 leaf node n5 p0 sample" transform="translate(10 1.15234)"><path class="edge" d="M 0 0 V -1.15234 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -21.1371 H -27.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a9 c2 node n8 p0" transform="translate(-27.5 20.74)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-15 1.54941)"><path class="edge" d="M 0 0 V -1.54941 H 15"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 c2 node n6 p0" transform="translate(15 0.689536)"><g class="a6 i1 leaf node n2 p0 sample" transform="translate(-10 0.859874)"><path class="edge" d="M 0 0 V -0.859874 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n4 p0 sample" transform="translate(10 0.859874)"><path class="edge" d="M 0 0 V -0.859874 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.689536 H -15"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -20.74 H 27.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -59.5717 H -31.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<svg baseprofile="full" height="76.60317603443052" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(86.25 26.8)"><g class="a10 c2 node n8 p0" transform="translate(33.75 5.80079)"><g class="a8 i1 leaf node n2 p0 sample" transform="translate(-10 2.20239)"><path class="edge" d="M 0 0 V -2.20239 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(10 2.20239)"><path class="edge" d="M 0 0 V -2.20239 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -5.80079 H -33.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a10 c2 node n9 p0" transform="translate(-33.75 5.45098)"><g class="a9 i0 leaf node n0 p0 sample" transform="translate(-22.5 2.55219)"><path class="edge" d="M 0 0 V -2.55219 H 22.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a9 c2 node n7 p0" transform="translate(22.5 1.98685)"><g class="a7 i1 leaf node n3 p0 sample" transform="translate(15 0.565342)"><path class="edge" d="M 0 0 V -0.565342 H -15"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 c2 node n6 p0" transform="translate(-15 0.539646)"><g class="a6 i0 leaf node n1 p0 sample" transform="translate(-10 0.0256967)"><path class="edge" d="M 0 0 V -0.0256967 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n4 p0 sample" transform="translate(10 0.0256967)"><path class="edge" d="M 0 0 V -0.0256967 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.539646 H 15"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -1.98685 H -22.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -5.45098 H 33.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<svg baseprofile="full" height="87.63214958144492" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(86.25 26.8)"><g class="a10 c2 node n8 p0" transform="translate(-33.75 15.3658)"><g class="a8 i0 leaf node n0 p0 sample" transform="translate(-22.5 3.66634)"><path class="edge" d="M 0 0 V -3.66634 H 22.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 c2 node n7 p0" transform="translate(22.5 2.53288)"><g class="a7 i2 leaf node n5 p0 sample" transform="translate(15 1.13346)"><path class="edge" d="M 0 0 V -1.13346 H -15"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 c2 node n6 p0" transform="translate(-15 0.0368438)"><g class="a6 i1 leaf node n3 p0 sample" transform="translate(-10 1.09662)"><path class="edge" d="M 0 0 V -1.09662 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n4 p0 sample" transform="translate(10 1.09662)"><path class="edge" d="M 0 0 V -1.09662 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.0368438 H 15"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -2.53288 H -22.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -15.3658 H 33.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a10 c2 node n9 p0" transform="translate(33.75 6.02772)"><g class="a9 i0 leaf node n1 p0 sample" transform="translate(-10 13.0044)"><path class="edge" d="M 0 0 V -13.0044 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a9 i1 leaf node n2 p0 sample" transform="translate(10 13.0044)"><path class="edge" d="M 0 0 V -13.0044 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -6.02772 H -33.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<svg baseprofile="full" height="500.0" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(70 26.8)"><g class="a10 c2 node n6 p0" transform="translate(-30 425.824)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-10 5.57571)"><path class="edge" d="M 0 0 V -5.57571 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n4 p0 sample" transform="translate(10 5.57571)"><path class="edge" d="M 0 0 V -5.57571 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -425.824 H 30"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a10 c2 node n9 p0" transform="translate(30 388.351)"><g class="a9 c2 node n7 p0" transform="translate(20 35.4797)"><g class="a7 i1 leaf node n2 p0 sample" transform="translate(-10 7.56884)"><path class="edge" d="M 0 0 V -7.56884 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 i2 leaf node n5 p0 sample" transform="translate(10 7.56884)"><path class="edge" d="M 0 0 V -7.56884 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -35.4797 H -20"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a9 c2 node n8 p0" transform="translate(-20 33.0688)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-10 9.9798)"><path class="edge" d="M 0 0 V -9.9798 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 i1 leaf node n3 p0 sample" transform="translate(10 9.9798)"><path class="edge" d="M 0 0 V -9.9798 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -33.0688 H 20"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -388.351 H -30"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
 </div>
-</div>
-</div>
+<p>Examples of coalescent simulations. Note the variation in tree topology and height.</p>
 </section>
 <section id="diminishing-returns-of-adding-more-samples" class="slide level2">
 <h2>Diminishing returns of adding more samples</h2>
 
-<img data-src="index_files/figure-revealjs/coalescent-diminishing-returns-1.svg" width="1536" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/fig-coalescent-diminishing-returns-1.svg" width="600" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;8: Dependence of <span class="math inline">\(E[T_{MRCA}]\)</span> and <span class="math inline">\(E[T_{total}]\)</span> on the sample size n.&nbsp;Already at low values of n the value of <span class="math inline">\(E[T_{MRCA}]\)</span> is close to its asymptotic value, which has practical consequences for the measurement of DNA variation. Adapted from <span class="citation" data-cites="wakeley_CoalescentTheoryIntroduction_2008">Wakeley (<a href="#/bibliography" role="doc-biblioref" onclick="">2008</a>)</span>, Fig. 3.3.</p><aside class="notes">
+<p>Adding a sample only adds <span class="math inline">\(2/n\)</span> to the total tree length. Also, adding a sample will add little to <span class="math inline">\(T_{MRCA}\)</span>, or equivalently, will most likely add a very recent coalescent event to the tree for large enough <span class="math inline">\(n\)</span>. Note that <span class="math inline">\(n=20\)</span> here is equivalent to 10 diploid individuals.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="adding-mutations" class="slide level2">
 <h2>Adding mutations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell" data-hash="index_cache/revealjs/fig-add-mutations_ba13666372e59133e7b9bcd4a43b0d0e">
 <div class="cell-output-display">
 <div id="fig-add-mutations" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;8: Adding mutations on a coalescent genealogy.</figcaption>
+<figcaption>Figure&nbsp;9: Adding mutations on a coalescent genealogy.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-add-mutations-1.svg" width="500" height="500"></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<p>Mutations are added by placing them on branches, where the probability of ending up on a branch <span class="math inline">\(\tau_i\)</span> is equal to its normalized length, where normalization is by the total tree branch length:</p>
+<p><span class="math display">\[
+P(\text{mutation on branch }i) = \frac{\tau_i}{\sum_j\tau_j} =
+\frac{\tau_i}{T_{total}}
+\]</span></p>
+<p>The total number of segregating sites <span class="math inline">\(S\)</span> to be thrown on the tree is modelled as a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson random variable</a> which expresses the probability of a given number of events in time <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+S = Po(\theta/2T_{total})
+\]</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>Sofar we have looked at genealogies; now add mutations.</p>
+<p>In words: sample a number of segregating sites from the Poisson distribution, and “sprinkle” them on the tree.</p>
+<p>The parametrization <span class="math inline">\(\lambda = \theta / 2\)</span> is defined with reference to the average heterozygosity between two sequences being <span class="math inline">\(\theta\)</span> (by Tajima; see <span class="citation" data-cites="wakeley_CoalescentTheoryIntroduction_2008">Wakeley (<a href="#/bibliography" role="doc-biblioref" onclick="">2008</a>)</span>, p.&nbsp;92)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-coalescent-and-diversity" class="slide level2 smaller">
 <h2>The coalescent and diversity</h2>
@@ -937,43 +1096,59 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 </div>
 </div><div class="column" style="width:50%;">
 <p>Many statistical quantities can be related to the <strong>site frequency spectrum</strong> (<strong>SFS</strong>), which is a summary of the frequencies of the segregating sites. Let <span class="math inline">\(\xi_i\)</span> be the number of chromosomes in the sample with <span class="math inline">\(i\)</span> minor alleles. In the figure we have 6 mutations on <span class="math inline">\(n=4\)</span> chromosomes.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
 <table>
 <thead>
 <tr class="header">
 <th></th>
 <th>Name</th>
-<th>Count</th>
+<th style="text-align: right;">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(\xi_1\)</span></td>
 <td>singleton</td>
-<td>4</td>
+<td style="text-align: right;">4</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\xi_2\)</span></td>
 <td>doubleton</td>
-<td>2</td>
+<td style="text-align: right;">2</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\xi_3\)</span></td>
 <td></td>
-<td>0</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:40%;">
+<div class="translatey50">
+<div class="cell" data-hash="index_cache/revealjs/site-frequency-spectrum-graph_22b59fece5523371f4e7486f6dcf2102">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/site-frequency-spectrum-graph-1.svg" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="translatey100">
 <p>Note that the number of segregating sites is <span class="math inline">\(S=\sum_{i=1}^{n-1}\xi_i\)</span></p>
 <p>In this notation one can show that <span class="math inline">\(\pi\)</span>, the nucleotide diversity, is</p>
 <p><span class="math display">\[
 \pi = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2}
 \]</span></p>
-<div class="fragment">
+</div>
+<div class="fragment translatey100">
 <!-- -->
 <h4 id="exercise">Exercise</h4>
 <p>Calculate the nucleotide diversity and compare the results from the foundation lecture</p>
 </div>
-<div class="fragment">
+<div class="fragment translatey100">
 <p><span class="math display">\[
 \pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2} =
 \frac{1}{6}\left(12 + 8 + 0\right) = 3\frac{1}{3}
@@ -982,7 +1157,11 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 </div>
 </div>
 <aside class="notes">
-<p>Point out that we record the number of mutations per branch which together with</p>
+<p>Exercise:</p>
+<p><span class="math display">\[
+\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2}
+= \frac{3*4 + 4*2 + 3*0}{6} = \frac{20}{6} = \frac{8}{3}
+\]</span></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1000,18 +1179,18 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 <div class="columns">
 <div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="quarto-figure quarto-figure-left">
+<div id="fig-neutrality-interpretation" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Interpretation of neutrality tests <span class="citation" data-cites="ferretti_DecomposingSiteFrequency_2017">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ferretti et al., 2017</a>)</span></figcaption>
-<p><img data-src="assets/images/ferretti-table1.jpg" width="480"></p>
+<figcaption>Figure&nbsp;10: Interpretation of neutrality tests <span class="citation" data-cites="ferretti_DecomposingSiteFrequency_2017">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ferretti et al., 2017</a>)</span></figcaption>
+<p><img data-src="assets/images/ferretti-table1.jpg" width="400"></p>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
 </div><div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="quarto-figure quarto-figure-left">
+<div id="fig-sfs-neutrality-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>The SFS under neutrality and selection</figcaption>
+<figcaption>Figure&nbsp;11: The SFS under neutrality and selection</figcaption>
 <p><img data-src="assets/images/nielsen-fig2-2005.jpeg" width="480"></p>
 </figure>
 </div>
@@ -1053,7 +1232,19 @@ population contraction <em>or</em> balancing selection
 <section>
 <section id="the-coalescent-with-recombination" class="title-slide slide level1 center">
 <h1>The coalescent with recombination</h1>
-
+<aside class="notes">
+<p>Introduce the coalescent with recombination which in practice is a very brief inroduction to the concept of tree sequences.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="on-non-recombining-chromosomes-and-assortment" class="slide level2">
 <h2>On non-recombining chromosomes and assortment</h2>
@@ -1078,18 +1269,27 @@ population contraction <em>or</em> balancing selection
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>NB: the right genealogy is so small the sequences don’t coalesce. The following slide will show a larger genealogy where all sequence coalesce.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-ancestral-recombination-graph" class="slide level2">
 <h2>The ancestral recombination graph</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-left">
-<figure>
-<figcaption>The ancestral recombination graph, <span class="citation" data-cites="hubisz_InferenceAncestralRecombination_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hubisz &amp; Siepel, 2020, fig. 1</a>)</span></figcaption>
-<p><img data-src="assets/images/hejase-2020-fig1.jpg" width="400"></p>
-</figure>
+<p><img data-src="assets/images/brandt-genetics-2022-fig1a.jpeg" data-fig-align="center," height="300"> <img data-src="assets/images/brandt-genetics-2022-fig1b.jpeg" data-fig-align="center," height="300"> <img data-src="assets/images/brandt-genetics-2022-fig1c.jpeg" data-fig-align="center," height="300"></p>
+<div class="flushright">
+<p><span class="citation" data-cites="y.c.brandt_EvaluationMethodsEstimating_2022">Y. C. Brandt et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2022, fig. 1a</a>)</span></p>
 </div>
-</div><div class="column" style="width:50%;">
+<div>
 <p>Properties:</p>
 <ul>
 <li>marginal trees constitute a sequence of trees (<strong>tree sequence</strong>) along a chromosome</li>
@@ -1098,10 +1298,23 @@ population contraction <em>or</em> balancing selection
 </ul>
 <p>Interpretation: chromosomes are mosaics of non-recombining units</p>
 </div>
-</div>
+<aside class="notes">
+<p>Going backwards in time, we now have two events to track. We have already encountered coalescence, that is, the merging of lineages. We now also need to monitor recombination events, at which point a genealogy <em>splits</em> into two separate paths. A recombination event takes place on a sequence, such that the genealogical history of the recombined sequence differs on either side of the recombination breakpoint. In the ARG, by convention the sequence to the left of the breakpoint takes the left path, the sequence to the right the right path.</p>
+<p>The end consequence of recombination is that the chromosome/sequence will consist of non-recombining units with different genealogical histories. However, neighbouring genealogies will be similar - they are <em>correlated</em> - a fact that is of importance for the tree sequence data structure used in msprime.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="the-ancestral-recombination-graph-1" class="slide level2">
-<h2>The ancestral recombination graph</h2>
+<section id="the-ancestral-recombination-graph-as-sequence-of-trees" class="slide level2">
+<h2>The ancestral recombination graph as sequence of trees</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1159,16 +1372,16 @@ population contraction <em>or</em> balancing selection
 <p>From <a href="https://tskit.dev/msprime/docs/stable/quickstart.html">msprime quickstart</a></p>
 <!-- markdownlint-enable MD013 -->
 <div class="cell" data-hash="index_cache/revealjs/sim_ancestry_1935924b18bb915673606e603e734fb6">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> msprime</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Simulate an ancestral history for 3 diploid samples under the coalescent</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># with recombination on a 5kb region with human-like parameters.</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
-<span id="cb1-5"><a href="#cb1-5"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>    recombination_rate<span class="op">=</span><span class="fl">1e-8</span>,</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    sequence_length<span class="op">=</span><span class="dv">5_000</span>,</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    population_size<span class="op">=</span><span class="dv">10_000</span>,</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    random_seed<span class="op">=</span><span class="dv">123456</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="bu">print</span>(ts.draw_svg())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> msprime</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Simulate an ancestral history for 3 diploid samples under the coalescent</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># with recombination on a 5kb region with human-like parameters.</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    recombination_rate<span class="op">=</span><span class="fl">1e-8</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    sequence_length<span class="op">=</span><span class="dv">5_000</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    population_size<span class="op">=</span><span class="dv">10_000</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    random_seed<span class="op">=</span><span class="dv">123456</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="bu">print</span>(ts.draw_svg())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <svg baseprofile="full" height="200" version="1.1" width="800" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}</style>
@@ -1179,15 +1392,15 @@ population contraction <em>or</em> balancing selection
 <section id="simulating-mutations-with-msprime" class="slide level2">
 <h2>Simulating mutations with msprime</h2>
 <div class="cell" data-hash="index_cache/revealjs/sim_mutations_1cb5a04b871d95bbb0fb051e2ed3a1fd">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> msprime</span>
-<span id="cb2-2"><a href="#cb2-2"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    recombination_rate<span class="op">=</span><span class="fl">1e-8</span>,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    sequence_length<span class="op">=</span><span class="dv">5_000</span>,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    population_size<span class="op">=</span><span class="dv">10_000</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    random_seed<span class="op">=</span><span class="dv">123456</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a>mutated_ts <span class="op">=</span> msprime.sim_mutations(ts, rate<span class="op">=</span><span class="fl">1e-8</span>, random_seed<span class="op">=</span><span class="dv">54321</span>)</span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="bu">print</span>(mutated_ts.draw_svg())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> msprime</span>
+<span id="cb3-2"><a href="#cb3-2"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    recombination_rate<span class="op">=</span><span class="fl">1e-8</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    sequence_length<span class="op">=</span><span class="dv">5_000</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    population_size<span class="op">=</span><span class="dv">10_000</span>,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    random_seed<span class="op">=</span><span class="dv">123456</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>mutated_ts <span class="op">=</span> msprime.sim_mutations(ts, rate<span class="op">=</span><span class="fl">1e-8</span>, random_seed<span class="op">=</span><span class="dv">54321</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="bu">print</span>(mutated_ts.draw_svg())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <svg baseprofile="full" height="200" version="1.1" width="800" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}</style>
@@ -1203,7 +1416,19 @@ population contraction <em>or</em> balancing selection
 <section>
 <section id="forward-simulation-in-slim" class="title-slide slide level1 center">
 <h1>Forward simulation in SLiM</h1>
-
+<aside class="notes">
+<p>This is a very brief introduction to SLiM. Future versions of the lecture will add some more detail.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="slim" class="slide level2">
 <h2>SLiM</h2>
@@ -1254,7 +1479,7 @@ population contraction <em>or</em> balancing selection
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy-forward-slim" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;9: Forward simulation.</figcaption>
+<figcaption>Figure&nbsp;12: Forward simulation.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-forward-slim-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -1266,30 +1491,30 @@ population contraction <em>or</em> balancing selection
 <section id="simple-neutral-simulation-in-slim" class="slide level2 smaller">
 <h2>Simple neutral simulation in SLiM</h2>
 <div class="cell" data-hash="index_cache/revealjs/slim-example_6a9fb82c8410a2fdba87b806d53c7017">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">// set up a simple neutral simulation</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>initialize<span class="op">()</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">// set the overall mutation rate</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>initializeMutationRate<span class="op">(</span><span class="fl">1e-7</span><span class="op">);</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">// m1 mutation type: neutral</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>initializeMutationType<span class="op">(</span><span class="st">"m1"</span><span class="op">,</span> <span class="dv">0</span><span class="er">.5</span><span class="op">,</span> <span class="st">"f"</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0</span><span class="op">);</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">// g1 genomic element type: uses m1 for all mutations</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>initializeGenomicElementType<span class="op">(</span><span class="st">"g1"</span><span class="op">,</span> m1<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">// uniform chromosome of length 100 kb</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>initializeGenomicElement<span class="op">(</span>g1<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">99999</span><span class="op">);</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">// uniform recombination along the chromosome</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>initializeRecombinationRate<span class="op">(</span><span class="fl">1e-8</span><span class="op">);</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="op">}</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">// create a population of 500 individuals</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="dv">1</span> early<span class="op">()</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="op">{</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>sim<span class="op">.</span>addSubpop<span class="op">(</span><span class="st">"p1"</span><span class="op">,</span> <span class="dv">500</span><span class="op">);</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="op">}</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">// run to tick 10000</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="dv">10000</span> early<span class="op">()</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="op">{</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>sim<span class="op">.</span>simulationFinished<span class="op">();</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// set up a simple neutral simulation</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>initialize<span class="op">()</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">// set the overall mutation rate</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>initializeMutationRate<span class="op">(</span><span class="fl">1e-7</span><span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">// m1 mutation type: neutral</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>initializeMutationType<span class="op">(</span><span class="st">"m1"</span><span class="op">,</span> <span class="dv">0</span><span class="er">.5</span><span class="op">,</span> <span class="st">"f"</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">// g1 genomic element type: uses m1 for all mutations</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>initializeGenomicElementType<span class="op">(</span><span class="st">"g1"</span><span class="op">,</span> m1<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">// uniform chromosome of length 100 kb</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>initializeGenomicElement<span class="op">(</span>g1<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">99999</span><span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">// uniform recombination along the chromosome</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>initializeRecombinationRate<span class="op">(</span><span class="fl">1e-8</span><span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="op">}</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">// create a population of 500 individuals</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="dv">1</span> early<span class="op">()</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="op">{</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>sim<span class="op">.</span>addSubpop<span class="op">(</span><span class="st">"p1"</span><span class="op">,</span> <span class="dv">500</span><span class="op">);</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="op">}</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">// run to tick 10000</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="dv">10000</span> early<span class="op">()</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="op">{</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>sim<span class="op">.</span>simulationFinished<span class="op">();</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Comes with a huge manual <span class="citation" data-cites="haller_SLiMEvolutionarySimulation_2022">(<a href="#/bibliography" role="doc-biblioref" onclick="">Haller &amp; Messer, 2022</a>)</span> (700+ pages!)</p>
 </section>
@@ -1314,11 +1539,14 @@ Haller, B. C., &amp; Messer, P. W. (2022). <em><span>SLiM</span>: <span>An Evolu
 <div id="ref-hein2005gene" class="csl-entry" role="listitem">
 Hein, J., Schierup, M. H., &amp; Wiuf, C. (2005). <em>Gene genealogies, variation and evolution: <span>A</span> primer in coalescent theory</em>. <span>Oxford University Press</span>. <a href="https://books.google.se/books?id=CCmLNAEACAAJ">https://books.google.se/books?id=CCmLNAEACAAJ</a>
 </div>
-<div id="ref-hubisz_InferenceAncestralRecombination_2020" class="csl-entry" role="listitem">
-Hubisz, M., &amp; Siepel, A. (2020). Inference of <span>Ancestral Recombination Graphs Using ARGweaver</span>. In J. Y. Dutheil (Ed.), <em>Statistical <span>Population Genomics</span></em> (pp. 231–266). <span>Springer US</span>. <a href="https://doi.org/10.1007/978-1-0716-0199-0_10">https://doi.org/10.1007/978-1-0716-0199-0_10</a>
-</div>
 <div id="ref-kelleher_InferringWholegenomeHistories_2019" class="csl-entry" role="listitem">
 Kelleher, J., Wong, Y., Wohns, A. W., Fadil, C., Albers, P. K., &amp; McVean, G. (2019). Inferring whole-genome histories in large population datasets. <em>Nature Genetics</em>, <em>51</em>(9), 1330–1338. <a href="https://doi.org/10.1038/s41588-019-0483-y">https://doi.org/10.1038/s41588-019-0483-y</a>
+</div>
+<div id="ref-wakeley_CoalescentTheoryIntroduction_2008" class="csl-entry" role="listitem">
+Wakeley, J. (2008). <em>Coalescent <span>Theory</span>: <span>An Introduction</span></em> (1st Edition edition). <span>Roberts and Company Publishers</span>.
+</div>
+<div id="ref-y.c.brandt_EvaluationMethodsEstimating_2022" class="csl-entry" role="listitem">
+Y. C. Brandt, D., Wei, X., Deng, Y., Vaughn, A. H., &amp; Nielsen, R. (2022). Evaluation of methods for estimating coalescence times using ancestral recombination graphs. <em>Genetics</em>, iyac044. <a href="https://doi.org/10.1093/genetics/iyac044">https://doi.org/10.1093/genetics/iyac044</a>
 </div>
 </div>
 
