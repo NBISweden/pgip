@@ -42,10 +42,10 @@ Code to generate Hardy-Weinberg equilibrium plot.
 #| file: foundations/genetic-drift-histogram.R
 ```
 
-## dn/ds ratios of human versus rat
+## dn/ds ratios of human versus rat {#sec-recipe-slides-dn-ds-ratio-human-rat}
 
 ```{r }
-#| label: recipe-slides-dn-ds-ration-human-rat
+#| label: recipe-slides-dn-ds-ratio-human-rat
 #| echo: true
 #| eval: false
 #| code-summary: |

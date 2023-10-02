@@ -1855,11 +1855,13 @@ other). At $t=0$ all populations are in state 5/10.
 Kimura's plot is very instructive and students are encouraged to test
 the recipe code, increasing the number of states incrementally. For
 large enough N, the histograms can be approximated by continuous
-distributions. This observation led Kimura to apply diffusion theory
-to obtain probability densities of allele frequencies, leading in turn
-to compact expressions of fixation probabilities, expected ages of
-alleles, and more. A treatment of diffusion theory is outside the
-scope of this course; the interested reader can consult e.g.,
+distributions. This observation led Kimura (even though diffusion
+equations were originally introduced to genetics by Fisher in 1922) to
+apply diffusion theory to obtain probability densities of allele
+frequencies, leading in turn to compact expressions of fixation
+probabilities, expected ages of alleles, and more. A treatment of
+diffusion theory is outside the scope of this course; the interested
+reader can consult e.g.,
 [@warrenewens_MathematicalPopulationGenetics_2006].
 
 The Buri experiment is an empirical demonstration of Kimura's plot.
@@ -1926,7 +1928,7 @@ Motivation: mathematical description of genetic drift complicated for
 populations with more than one individual. Easier to study the
 evolution of heterozygosity.
 
-Equation presented without details. Derivation by
+Equation presented without details. Derivation in
 [@gillespie_PopulationGeneticsConcise_2004, pp. 25-27] starts from
 G=probability that two alleles are IBS
 
@@ -2571,10 +2573,49 @@ For a list of methods see <https://methodspopgen.com/methods-to-detect-selection
 
 ## Selection and fitness {.smaller}
 
+```{r, engine='tikz', fig.ext='svg' }
+#| label: fig-selection-model-tikz
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| out-width: 700px
+#| fig-cap:
+#|     The life cycle used in the fundamental model of selection
+#|     [@gillespie_PopulationGeneticsConcise_2004, Fig. 3.2]
+%%https://tex.stackexchange.com/questions/97201/how-to-anchor-labels-in-tikz-for-baseline-alignment
+\begin{tikzpicture}[>=latex, ultra thick, node distance=8em,
+                    inner sep=0.5ex]
+\tikzstyle{freq} = [anchor=mid, text depth=0pt]
+\tikzstyle{state} = [anchor=mid,
+                     rectangle, draw=black, node distance=12em,
+                     minimum height=4em, align=center,
+                     minimum width=6em, text width=4em]
+%% text depth=0pt,
+\node[state] (t0) {Newborns $p$};
+\node[left of=t0] (pin) {$p$};
+\node[state, right of=t0] (t1) {Adults $p^\prime$};
+\node[right of=t1] (pout) {$p^\prime$};
+\node[draw=black, rectangle, dashed, minimum height=7em,
+      minimum width=24em] (dash) at ($(t0) !.5! (t1)$) {};
+\node[below of=dash, node distance=4.2em] {One generation};
+\draw[->] (pin) -- (t0);
+\draw[->] (t0) -- node[auto, midway] {Selection} (t1);
+\draw[->] (t1) -- (pout);
+\end{tikzpicture}
+```
+
+::: {.fragment}
+
 > Much confusion exists in the literature regarding how various types
 > of selection are defined, in particular because some of the
 > terminology is used slightly differently within different scientific
 > communities [@nielsen_MolecularSignaturesNatural_2005]
+
+:::
+
+:::: {.columns}
+
+::: {.column width="50%" .fragment}
 
 $$
 \begin{matrix}
@@ -2588,7 +2629,11 @@ $$
 $$
 
 where $\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}$ is the **mean
-fitness**
+fitness**.
+
+:::
+
+::: {.column width="50%" .fragment}
 
 |         |                                        |
 |---------|----------------------------------------|
@@ -2598,10 +2643,34 @@ fitness**
 | $h<0$   | overdominance (heterozygote advantage) |
 | $h>1$   | underdominance                         |
 
+::: {.flushright .smallr}
+
+Notation follows @gillespie_PopulationGeneticsConcise_2004, pp. 61--64.
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+The life cycle figure starts with newborns carrying the $A$ allele at
+frequency $p$, like parents. To reproduce they must reach adulthood,
+but due to selection, the allele frequency of $A$ may shift to
+$p^\prime$ because different genotypes affects survival probabilities.
+This is typically summarized in genotype *viabilities*.
+
+The Nielsen quote is a reminder that many different notations and
+parametrizations exist in the literature.
+
+:::
+
 ## The most important equation in population genetics
 
 $$
-\Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} - w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
+p^\prime - p = \Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} -
+w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 $$
 
 ```{r }
@@ -2705,6 +2774,9 @@ ggplot(data, aes(x = p, y = dp)) +
 
 ::: {.notes}
 
+Given the genotype fitnesses/viabilities, we can work out the
+difference in allele frequency $p-p^\prime$ between successive
+generations as a function of viabilities (or relative fitnesses).
 Equation relates allele frequency change to viabilities for different
 genotypes. It is instructive to study the equation and plot
 trajectories to gain an intuition for how allele frequencies evolve
@@ -2769,7 +2841,9 @@ selection coefficients where mutant alleles $\approx$ neutral (**effective neutr
 
 ::: {.notes }
 
-Segue: note on the strength of s and the relation to $N_e$.
+Segue: note on the strength of s and the relation to $N_e$. For small
+$N_e$ the relation will hold for higher $s$, meaning small populations
+will have difficulties purging deleterious mutations.
 
 Even if a new mutation has, say, $s=0.01$, it still needs to overcome
 effects of drift. Only has 2% change of fixation.
@@ -2818,6 +2892,8 @@ tell us about protein evolution.
 #|     most genes, $d_n/d_s << 1$ indicating purifying selection. A handful
 #|     of genes (n=9) have $d_n/d_s > 1.0$ which could indicate
 #|     positive selection.
+#|     [{{< fa rectangle-list >}}](
+#|     {{< var recipes.baseurl >}}#sec-recipe-slides-dn-ds-ratio-human-rat)
 #| file: ../../recipes/slides/foundations/hsapiens-rat-dnds.R
 ```
 
@@ -2848,16 +2924,7 @@ signs of linked neutral variants.
 
 :::
 
-## Recombination breaks coupling between sites   {visibility="hidden" .unnumbered .unlisted}
-
-1. illustration of recombination
-2. illustration from Gillespie with alleles and outcomes
-
-## Linkage disequilibrium  {visibility="hidden" .unnumbered .unlisted}
-
-1. LD distribution plot, preferably from 1000 genomes
-
-## Linked selection
+## Linked selection reduces diversity at neighbour loci
 
 ```{r, engine='tikz', fig.ext='svg' }
 #| label: fig-selective-sweep
@@ -2865,6 +2932,7 @@ signs of linked neutral variants.
 #| eval: true
 #| out-height: 300
 #| fig-cap: A selective sweep of an advantageous mutation (gray dot).
+#|    Adapted from @charlesworth_ElementsEvolutionaryGenetics_2010, Fig. 8.13
 \begin{tikzpicture}
   \tikzstyle{mut} = [circle, minimum height=0.4cm, fill=gray, draw];
   \tikzstyle{neutral} = [circle, minimum height=0.4cm, draw, fill=white];
@@ -2950,19 +3018,297 @@ signs of linked neutral variants.
 \end{tikzpicture}
 ```
 
-Previous example showed a selective sweep. If a sweep completes at a
-locus, it will become monomorphic.
+Example of a selective sweep. If a sweep completes at a locus, it will
+become monomorphic, as will the *neighbouring* sites. Mutation could
+reintroduce variation. Recombination could increase diversity in
+neighbourhood, but in a manner that depends on the *distance* from the
+locus under selection.
 
 ::: {.notes }
 
-Topologies become important when we discuss sweeps
+Alternatives to direct selection tests are those that look at linked
+selection. In essence, we look for characteristic patterns in the
+vicinity of a selected locus. A sweep leads to the selected site and
+neigbouring sites being monomorphic (and therefore invisible to tests
+based on direct selection). Without recombination, mutation could
+reintroduce variation. In the presence of recombination, the effect of
+reduced diversity will be dependent on distance from the locus under
+selection.
 
 :::
 
-## Recombination breaks up association between loci
+## Recombination breaks association between loci
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![](https://humanbiology.pressbooks.tru.ca/wp-content/uploads/sites/6/2019/06/MajorEventsInMeiosis_variant_int-1536x921.png){width=80% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: {.flushright .smallr .translatey50}
+
+@miller_HumanBiology_2020, Fig. 5.12.3
+
+:::
+
+Once per chromosome! But: rates vary between loci (hotspots), sex
+chromosomes vs autosomes, and in some species, recombination only
+occurs in one sex (e.g., *D.melanogaster*).
+
+:::
+
+::: {.column width="40%"}
+
+::: {.fragment}
+
+Main effect: association between loci breaks up.
+
+```{r, engine="tikz", fig.ext="svg" }
+#| label: recombinant-chromosomes
+#| echo: false
+#| eval: true
+#| out-width: 80%
+#| fig-align: center
+\begin{tikzpicture}[>=latex, thick, anchor=mid]
+\tikzset{
+  pics/chrom/.default={A}{B}{below},
+  pics/chrom/.style={
+    font=\bfseries\Huge,
+  },
+  pics/chrom/.style n args = {3}{
+    code = {
+      \draw[rounded corners=1pt] (0, -.05) rectangle (2, .05);
+      \draw (.4, -0.1) -- (.4, 0.1);
+      \draw (1.6, -0.1) -- (1.6, 0.1);
+      \node (_east) at (2, 0) {};
+      \node (_west) at (0, 0) {};
+      \node (_mid) at (1, 0) {};
+      \ifnum\pdfstrcmp{#3}{below}=0
+      \node (_a) at (.4, -0.3) {#1};
+        \node (_b) at (1.6, -0.3) {#2};
+\fi
+      \ifnum\pdfstrcmp{#3}{above}=0
+      \node (_a) at (.4, 0.3) {#1};
+        \node (_b) at (1.6, 0.3) {#2};
+          \fi
+    },
+  },
+}
+
+\pic (p1) at (0, 0) {chrom={A}{B}{above}};
+\pic (p2) at (0, -.3) {chrom={a}{b}{below}};
+
+\pic (o1) at (0, -2) {chrom={A}{B}{below}};
+\pic (o2) at (0, -2.8) {chrom={a}{b}{below}};
+\pic (o3) at (0, -3.6) {chrom={A}{b}{below}};
+\pic (o4) at (0, -4.4) {chrom={a}{B}{below}};
+
+\node[above of=o1_mid, node distance=3ex] (g) {Gametes};
+\node[right of=o1_east] (f1) {$p_AB$};
+\node at (g.mid -| f1) {Frequencies};
+\node[right of=o2_east] (f2) {$p_ab$};
+\node[right of=o3_east] (f3) {$p_Ab$};
+\node[right of=o4_east] (f4) {$p_aB$};
+
+\draw (p1_a) -- (p2_b);
+\draw (p1_b) -- (p2_a);
+
+\node[above of=p1_west, node distance=5ex] (r) {};
+\node[above of=p1_mid, node distance=5ex] (rmid) {r};
+\draw[<-] (r -| p1_a) -- (rmid);
+\draw[->] (rmid) -- (r -| p1_b);
+
+\end{tikzpicture}
+```
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+The mechanism that breaks up association between loci is
+recombination. Cartoon to right shows the possible (haploid) outcomes
+of meiosis. $r$ (the recombination rate) denotes the probability that
+there is a recombination event between the two loci.
+
+:::
+
+## Linkage disequilibrium and its decay
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Association between loci can be written as:
+
+$$
+D_{AB} = p_{AB} - p_Ap_B
+$$
+
+Similar expressions hold for other pairs; only need to know one
+$D_{ij}$ (e.g., $D_{AB}$) so drop subscript and rewrite:
+
+$$
+p_{AB}= p_Ap_B + D
+$$
+
+If $D\neq0$ the loci are in **linkage disequilibrium**.
+
+::: {.fragment}
+
+Can show that decay over time is
+
+$$
+D_t = (1-r)^tD_0
+$$
+
+Recombination *decreases* D (linkage)
+
+:::
+
+:::
+
+::: {.column width="50%" .fragment}
+
+![LD between pairs of autosomal SNPs for human and mouse. From [@laurie_LinkageDisequilibriumWild_2007, Fig. 2]](assets/images/ld_mice.png)
+
+:::
+
+::::
+
+::: {.notes}
+
+Handwavy introduction of LD as quantity. There are other equations,
+but the main point here is to point out that D measures the degree of
+linkage (disequilibrium); the higher D, the stronger linkage is.
+
+The figure shows the difference in LD decay among wild populations
+compared to inbred mouse strains, where LD extends over several
+megabases. Therefore, LD decay informs about demographic history, and
+as we will see, evolutionary processes (sweeps -> longer LD blocks).
+
+:::
+
+## The effect of a selective sweep on diversity
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: pgip-slim-sweep-command
+#| echo: true
+#| eval: false
+#| code-fold: true
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
+```
 
 ```{r }
 #| label: pgip-load-slim-data
+#| echo: false
+#| eval: true
+data <- tidyr::tibble(read.csv("../../data/results/slim/selective_sweep.w500.csv.gz", header = TRUE))
+a <- sum(1 / seq(10 - 1))
+data$thetaW <- data$S / a
+data_mean <- as.data.frame(data) %>%
+  select(windows, TajD, pi, S, thetaW) %>%
+  group_by(windows) %>%
+  summarise(TajD = mean(TajD, na.rm = TRUE), pi = mean(pi, na.rm = TRUE), S = mean(S, na.rm = TRUE), thetaW = mean(thetaW, na.rm = TRUE)) %>%
+  mutate(fn = "mean", pi_minus_thetaW = pi - thetaW)
+L <- 1e6
+xi <- L / 2
+```
+
+<!-- markdownlint-enable MD013 -->
+
+<!-- markdownlint-disable MD013 -->
+
+```{r }
+#| label: fig-pgip-slim-sweep-plot-tajd
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+#| fig-cap: The effect of a selective sweep on
+#|     diversity. The arrow points to the site under selection.
+#|     The y-axis shows Tajima's D which is proportional to the
+#|     difference between two measures of diversity, nucleotide
+#|     diversity $\pi$ and Watterson's $\theta_W$.
+#|     [{{< fa rectangle-list >}}]({{< var recipes.slimurl
+#|     >}}#sec-recipe-slim-selective-sweep)
+x <- subset(data, fn %in% levels(factor(data$fn))[1:50])
+psweep_static <- ggplot(x, aes(windows, TajD, group = fn)) +
+  geom_line(color = "lightgray", linewidth = 0.5) +
+  xlab("Chromosomal position") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+  geom_segment(aes(x = xi, y = -2, xend = xi, yend = -2.5), arrow = arrow(length = unit(0.4, "cm"), type = "closed")) +
+  scale_y_continuous(expand = c(0, 0), limits = c(-2.5, 2.5)) +
+  scale_x_continuous(expand = c(0, 0), limits = c(0, L))
+p <- psweep_static + transition_manual(fn, cumulative = TRUE)
+p
+```
+
+<!-- markdownlint-enable MD013 -->
+
+::: {.notes }
+
+N=1e4, mu=5e-8, pi=4*N*mu=0.004, seek S=a*pi=0.01, so a=S/pi which
+gives n. Need to ramp up recombination rate to see the dip in TajD
+clearly.
+
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 5e-8 --threads 12
+recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+
+2022-11-23: Current results based on mu=1e-7
+
+Q: not clear how Rasmus Nielsen scales statistics to have mean=1
+[@nielsen_MolecularSignaturesNatural_2005]
+
+:::
+
+## The effect of a selective sweep on diversity
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: pgip-slim-sweep-command-2
+#| echo: true
+#| eval: false
+#| code-fold: true
+pgip-slim --seed 42 -n 1000 -r 1e-6 -m 1e-7 --threads 12 recipes/slim/selective_sweep.slim -l 1000000 --outdir results/slim
+pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 --threads 10 | gzip -v - > results/slim/selective_sweep.w500.csv.gz
+```
+
+<!-- markdownlint-enable MD013 -->
+
+```{r}
+#| label: fig-pgip-slim-sweep-plot-tajd-2
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-height: 5
+#| fig-width: 10
+#| fig-cap: The effect of a selective sweep on
+#|     diversity. The arrow points to the site under selection.
+#|     The y-axis shows Tajima's D which is proportional to the
+#|     difference between two measures of diversity, nucleotide
+#|     diversity $\pi$ and Watterson's $\theta_W$.
+#|     [{{< fa rectangle-list >}}]({{< var recipes.slimurl
+#|     >}}#sec-recipe-slim-selective-sweep)
+psweep_static + geom_line(data = data_mean, color = "red", linewidth = 1.5)
+```
+
+## The effect of a selective sweep on diversity
+
+```{r }
+#| label: pgip-load-slim-data2
 #| echo: false
 #| eval: true
 data <- tidyr::tibble(read.csv("../../data/results/slim/selective_sweep.w500.csv.gz",
@@ -3015,7 +3361,7 @@ ggplot(x, aes(windows, value, color = name)) +
   )
 ```
 
-## Distinguishing selection from drift via topology
+## Distinguishing selection from drift via topology {visibility="hidden" .unnumbered .unlisted}
 
 :::: {.columns}
 
@@ -3091,11 +3437,17 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 ::: {.notes }
 
-Topology for selection more compressed.
+Even though the WF model assumes neutrality, we model an allele with a
+slight selective advantage. Note that the topology for selection is
+more compressed (=faster coalescence) than in the neutral case.
 
 :::
 
 ## The phases of a selective sweep
+
+:::: {.columns}
+
+::: {.column width="70%"}
 
 ```{R, engine="tikz", fig.ext="svg" }
 #| label: fig-selective-sweep-phases
@@ -3245,7 +3597,36 @@ Topology for selection more compressed.
 \end{tikzpicture}
 ```
 
-## Hitchhiking versus background selection
+:::
+
+::: {.column width="30%" .fragment}
+
+Amount of diversity depends on fixation time. A neutral locus fixes in
+$4N_e$ generations; for $s=0.0001$, it takes approximately $0.29N_e$
+generations.
+
+Selections changes the genealogy (different topology, shorter
+branches), an aspect used in many linkage-based tests for selection.
+
+:::
+
+::::
+
+::: {.notes}
+
+A selective sweep changes the genealogy (shorter branches, different
+*topology*) compared to the neutral case, a fact that can be utilised
+in linkage-based tests for selection.
+
+Note that the amount of variation surrounding a sweep depends heavily
+on the *rate* of the sweep. [@hahn_MolecularPopulationGenetics_2019,
+p. 167] points out that an advantageous allele with $s=0.0001$ will
+take approximately $0.29N_e$ generations to fix (compared to $4N_e$
+generations for a neutral locus)
+
+:::
+
+## Linked selection may constrain levels of diversity
 
 :::{}
 
@@ -3253,7 +3634,7 @@ Topology for selection more compressed.
 #| label: fig-hitchhiking-vs-background-selection
 #| echo: false
 #| eval: true
-#| out-width: 800
+#| out-width: 1000px
 #| fig-cap: Hitchhiking (left) versus background selection (right).
 \begin{tikzpicture}
   \tikzstyle{mut} = [circle, minimum height=0.4cm, fill=gray, draw];
@@ -3412,6 +3793,39 @@ Topology for selection more compressed.
 
 \end{tikzpicture}
 ```
+
+:::
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Hitchhiking
+
+- alleles linked to locus under selection "hitchhike" to high
+  frequencies [@smith_HitchhikingEffectFavourable_1974]
+- evidence: positive correlation between putative neutral diversity
+  and recombination [@corbett-detig_NaturalSelectionConstrains_2015]
+
+:::
+
+::: {.column width="50%"}
+
+### Background selection
+
+- loci linked to a deleterious locus will be purged from population
+  and thus reduce diversity [@charlesworth_EffectDeleteriousMutations_1993]
+- similar patterns to hitchhiking
+
+:::
+
+::::
+
+::: {.notes}
+
+Linked selection has been proposed as solution to the low range of
+diversity seen between species with orders of magnitude ranges in
+census population sizes.
 
 :::
 
