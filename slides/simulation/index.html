@@ -8,7 +8,9 @@
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Per Unneberg">
@@ -417,7 +419,7 @@
   <h3 class="subtitle">Primer on the coalescent and forward simulation</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">02-Oct-2023</h4>
+  <h4 class="date">03-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -425,6 +427,7 @@
 <li><a href="#/the-coalescent" id="/toc-the-coalescent">The coalescent</a></li>
 <li><a href="#/the-coalescent-with-recombination" id="/toc-the-coalescent-with-recombination">The coalescent with recombination</a></li>
 <li><a href="#/forward-simulation-in-slim" id="/toc-forward-simulation-in-slim">Forward simulation in SLiM</a></li>
+<li><a href="#/applications" id="/toc-applications">Applications</a></li>
 </ul>
 </nav>
 </section>
@@ -1417,7 +1420,7 @@ population contraction <em>or</em> balancing selection
 <section id="forward-simulation-in-slim" class="title-slide slide level1 center">
 <h1>Forward simulation in SLiM</h1>
 <aside class="notes">
-<p>This is a very brief introduction to SLiM. Future versions of the lecture will add some more detail.</p>
+<p>This is currently a <em>very</em> brief introduction to SLiM. Future versions of the lecture will add some more detail.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1487,6 +1490,37 @@ population contraction <em>or</em> balancing selection
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>SLiM works forward in time according to a <em>tick cycle</em>, which basically is a counter of time steps.</p>
+<p><span class="citation" data-cites="haller_SLiMForwardGenetic_2019">Haller &amp; Messer (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, pp.&nbsp;603–610 describes the steps in more details; some clarifying comments are added belowe wrt to the slide flowchart. There is <strong>a lot</strong> to unpack here, and the summary flowchart captures most of the essentials.</p>
+<ol start="0" type="1">
+<li>first events: prior to generation of offspring; don’t affect fitness. Rare use.</li>
+<li>early: catch-all event to do things before generation of offspring</li>
+<li>generation of offspring
+<ol type="1">
+<li>Choose source subpop for parental individuals, based on migration rates</li>
+<li>Choose parent 1, based on cached fitness values</li>
+<li>Choose parent 2, based on fitness and any defined <code>mateChoice()</code> callbacks</li>
+<li>Generate the candidate offspring, with mutation and recombination (including <code>mutation()</code> and <code>recombination()</code> callbacks)</li>
+<li>Suppress/modify the candidate, using defined <code>modifyChild()</code> callbacks</li>
+</ol></li>
+<li>Removal of fixed mutations unless <code>convertToSubstitution==F</code> - for simulation efficiency reasons</li>
+<li>Offspring become parents</li>
+<li>Execution of <code>late()</code> events - e.g., changing of selection or dominance coefficients</li>
+<li>Fitness recalculation using <code>mutationEffect()</code> and <code>fitnessEffect()</code> callbacks</li>
+<li>Tick/cycle count increment</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="simple-neutral-simulation-in-slim" class="slide level2 smaller">
 <h2>Simple neutral simulation in SLiM</h2>
@@ -1518,11 +1552,180 @@ population contraction <em>or</em> balancing selection
 </div>
 <p>Comes with a huge manual <span class="citation" data-cites="haller_SLiMEvolutionarySimulation_2022">(<a href="#/bibliography" role="doc-biblioref" onclick="">Haller &amp; Messer, 2022</a>)</span> (700+ pages!)</p>
 </section>
+<section id="recapitation---combining-the-best-of-two-worlds" class="slide level2">
+<h2>Recapitation - combining the best of two worlds</h2>
+<div style="display: grid; grid-template-columns: 4fr 3fr 3fr; grid-row-gap: 0px; grid-column-gap: 20px;">
+<div>
+<p>A recent addition to SLiM is that it records data in <em>tree sequence format</em> (as in msprime) <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> we can combine backward and forward simulations!</p>
+</div>
+<div>
+<div class="fragment" data-fragment-index="2">
+<p>Backward simulation that adds coalescent (neutral) history</p>
+</div>
+</div>
+<div>
+<div class="fragment" data-fragment-index="2">
+<div style="transform: translate(0, 60px);">
+<div class="cell" data-hash="index_cache/revealjs/backward-simulation-recapitation_4fdd9db660f3ad5fcf784ea9d80f07c1">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/backward-simulation-recapitation-1.svg" style="width:70.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+
+</div>
+<div>
+<div class="fragment" data-fragment-index="1">
+<p>Forward simulation with selection or some other process that isn’t supported by the coalescent</p>
+</div>
+</div>
+<div>
+<div class="fragment" data-fragment-index="1">
+<div class="translatey50">
+<div class="cell" data-hash="index_cache/revealjs/forward-simulation-recapitation_673a9a6d74280bd68122d94903fa0ccc">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/forward-simulation-recapitation-1.svg" style="width:70.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="applications" class="title-slide slide level1 center">
+<h1>Applications</h1>
+
+</section>
+<section id="simulation-of-null-distributions" class="slide level2">
+<h2>Simulation of null distributions</h2>
+<div class="compact">
+<div id="fig-pope-2023-clr" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;13: Empirical distribution function of SweepFinder2 composite likelihood ratio (CLR) scores from observed data versus null simulations for three populations of squash bee (<em>E. pruinosa</em>). msprime was used to simulate data (without selection) using the inferred demographic model and recombination map. The eastern population in particular shows signs of selective sweeps. <span class="citation" data-cites="pope_ExpansionAgricultureHas_2023">Pope et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2023</a>)</span>, Fig S8.</figcaption>
+<p><img data-src="assets/images/pope_2023_figs8.png" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+<div>
+<p>Authors inferred demographic history and recombination map. The inferred values were used to simulate data with msprime. SweepFinder2 <span class="citation" data-cites="degiorgio_SweepFinder2IncreasedSensitivity_2016">(<a href="#/bibliography" role="doc-biblioref" onclick="">DeGiorgio et al., 2016</a>)</span> was used to calculate composite likelihood ratio (CLR) scores on both observed and simulated data to assess significance quantiles.</p>
+</div>
+<aside class="notes">
+<p>The details of the sweep finding / paper are not the main point here; rather, we want to highlight the use of simulations to generate null distribution scores (here, for CLR values) such that significance quantiles can be derived and applied to the observed data.</p>
+<p>Original figure legend:</p>
+<blockquote>
+<p>Empiricial distribution functions of SWEEPFINDER 2 composite likelihood ratio (CLR) scores from the observed data and null simulations for each major E. pruinosa lineage (log-transformed for visualization). The null simulations were generated using the inferred demographic model and recombination maps (see Methods in main text). The observed and null distributions match each other quite closely in the Mexican lineage (MX). In the Western lineage (CO), the tail of the CLR score distribution deviates slightly from the null simulations. In the Eastern lineage (PA), the tail of the observed CLR score distribution is extremely heavy relative to the null. This suggests the existence of selective sweeps in both CO and PA, but especially in PA</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="simulations-of-genomic-landscapes-in-monkeyflower" class="slide level2">
+<h2>Simulations of genomic landscapes in monkeyflower</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<!-- markdownlint-disable MD013 -->
+<div id="fig-stankowski-figs2" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;14: Sampling locations</figcaption>
+<p><img data-src="assets/images/stankowski-2019-figs2.jpg" style="width:80.0%"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div><div class="column" style="width:70%;">
+<!-- markdownlint-disable MD013 -->
+<div id="fig-stankowski-fig7" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;15: Genomic landscapes simulated under different divergence histories.</figcaption>
+<p><img data-src="assets/images/stankowski-2019-fig7.png" style="width:70.0%"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div>
+</div>
+<p>Monkeyflower (<em>Mimulus aurantiacus</em>) radiation in California shows wide adaptive range and phenotypic diversity. <span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span> <em>et al</em> use simulations (SLiM and msprime) to shed light on processes that shape genomic landscapes, which are correlated between species.</p>
+<div class="fragment">
+<p>We will look more closely at this system tomorrow.</p>
+</div>
+<aside class="notes">
+<p>Simulations are based on variations of a neutral base model that starts out with an ancestral population (N=10,000) that after 10N generation splits to two daughter populations (N=10,000 each) and are simulated another 10N generations. The chromosome is 21Mbp (similar in size to a monkeyflower chromosome) consisting of a central neutrally evolving region flanked by two regions where non-neutral processes are “allowed”. Models are:</p>
+<ol type="1">
+<li>neutral</li>
+<li>BGS (non-neutral mutations are deleterious)</li>
+<li>Bateson-Dobzhansky-Muller incompatibility (BDMI); after split, fraction variants deleterious in one population, neutral in other</li>
+<li>positive selection</li>
+<li>BGS and positive selection</li>
+<li>local adaptation; 4 but also after split some variants beneficial in one population, neutral in other</li>
+</ol>
+<p>Figure caption:</p>
+<blockquote>
+<p>Fig 7. Genomic landscapes simulated under different divergence histories. Each row of plots shows patterns of within- and between-population variation (π, dxy, and FST) across the chromosome (500-kb windows) at 5 time points (N generations, where N = 10,000) during one of the scenarios The selection parameter (Ns, where s = Ns/N), proportion of deleterious (−) and positive mutations (+), and number of migrants per generation (Nm; 0 unless stated) for these simulations are as follows: (i) neutral divergence (no selection), (ii) BGS (−Ns = 100; −prop = 0.1), (iii) BDMI (−Ns = 100, −prop = 0.05, Nm = 0.1), (iv) positive selection (+Ns = 100, +prop = 0.001), (v) BGS and positive selection (−Ns = 100, −prop = 0.1; +Ns = 100, +prop = 0.005), and (vi) local adaptation (+Ns = 100, +prop = 0.001, Nm = 0.1). The gray boxes in the first column show the areas of the chromosome that are experiencing selection, while the white central area evolves neutrally. Note that π (in populations a and b) and dxy have been mean centered so they can be viewed on the same scale. Uncentered values and additional simulations with different parameter combinations and more time points can be found in S13 Fig. BDMI, Bateson-Dobzhansky-Muller incompatibility; BGS, background selection.</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="neural-network-recombination-landscape-prediction" class="slide level2">
+<h2>Neural network recombination landscape prediction</h2>
+<!-- markdownlint-disable MD013 -->
+<div>
+<div id="fig-adrion-2020-fig1" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;16: Cartoon of Recombination Landscape Estimation using Recurrent Neural Networks (ReLERNN) workflow <span class="citation" data-cites="adrion_PredictingLandscapeRecombination_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Adrion et al., 2020</a>)</span></figcaption>
+<p><img data-src="assets/images/adrion-2020-fig1.jpg" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+<!-- markdownlint-enable MD013 -->
+<p>Use msprime simulations to generate training data for neural network.</p>
+<aside class="notes">
+<p>Methods paper; one of the first examples of using msprime simulations to generate training data for a neural network.</p>
+<p>Figure caption:</p>
+<blockquote>
+<p>A cartoon depicting a typical workflow using ReLERNN’s four modules (shaded boxes) for (A) individually sequenced genomes or (B) pooled sequences. ReLERNN can optionally (dotted lines) utilize output from stairwayplot, SMC++, and MSMC to simulate under a demographic history with msprime. Training inlays show the network architectures used, with the GRU inlay in (B) depicting the gated connections within each hidden unit. Here, r, z, ht, and ht˜ are the reset gate, update gate, activation, and candidate activation, respectively (Cho et al.&nbsp;2014). The genotype matrix encodes alleles as reference (−1), alternative (1), or padded/missing data (0; not shown). Variant positions are encoded along the real number line (0–1).</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-adrion_PredictingLandscapeRecombination_2020" class="csl-entry" role="listitem">
+Adrion, J. R., Galloway, J. G., &amp; Kern, A. D. (2020). Predicting the <span>Landscape</span> of <span>Recombination Using Deep Learning</span>. <em>Molecular Biology and Evolution</em>, <em>37</em>(6), 1790–1808. <a href="https://doi.org/10.1093/molbev/msaa038">https://doi.org/10.1093/molbev/msaa038</a>
+</div>
 <div id="ref-baumdicker_EfficientAncestryMutation_2022" class="csl-entry" role="listitem">
 Baumdicker, F., Bisschop, G., Goldstein, D., Gower, G., Ragsdale, A. P., Tsambos, G., Zhu, S., Eldon, B., Ellerman, E. C., Galloway, J. G., Gladstein, A. L., Gorjanc, G., Guo, B., Jeffery, B., Kretzschumar, W. W., Lohse, K., Matschiner, M., Nelson, D., Pope, N. S., … Kelleher, J. (2022). Efficient ancestry and mutation simulation with msprime 1.0. <em>Genetics</em>, <em>220</em>(3), iyab229. <a href="https://doi.org/10.1093/genetics/iyab229">https://doi.org/10.1093/genetics/iyab229</a>
+</div>
+<div id="ref-degiorgio_SweepFinder2IncreasedSensitivity_2016" class="csl-entry" role="listitem">
+DeGiorgio, M., Huber, C. D., Hubisz, M. J., Hellmann, I., &amp; Nielsen, R. (2016). <span>SweepFinder2</span>: Increased sensitivity, robustness and flexibility. <em>Bioinformatics</em>, <em>32</em>(12), 1895–1897. <a href="https://doi.org/10.1093/bioinformatics/btw051">https://doi.org/10.1093/bioinformatics/btw051</a>
 </div>
 <div id="ref-ferretti_DecomposingSiteFrequency_2017" class="csl-entry" role="listitem">
 Ferretti, L., Ledda, A., Wiehe, T., Achaz, G., &amp; Ramos-Onsins, S. E. (2017). Decomposing the <span>Site Frequency Spectrum</span>: <span>The Impact</span> of <span>Tree Topology</span> on <span>Neutrality Tests</span>. <em>Genetics</em>, <em>207</em>(1), 229–240. <a href="https://doi.org/10.1534/genetics.116.188763">https://doi.org/10.1534/genetics.116.188763</a>
@@ -1541,6 +1744,12 @@ Hein, J., Schierup, M. H., &amp; Wiuf, C. (2005). <em>Gene genealogies, variatio
 </div>
 <div id="ref-kelleher_InferringWholegenomeHistories_2019" class="csl-entry" role="listitem">
 Kelleher, J., Wong, Y., Wohns, A. W., Fadil, C., Albers, P. K., &amp; McVean, G. (2019). Inferring whole-genome histories in large population datasets. <em>Nature Genetics</em>, <em>51</em>(9), 1330–1338. <a href="https://doi.org/10.1038/s41588-019-0483-y">https://doi.org/10.1038/s41588-019-0483-y</a>
+</div>
+<div id="ref-pope_ExpansionAgricultureHas_2023" class="csl-entry" role="listitem">
+Pope, N. S., Singh, A., Childers, A. K., Kapheim, K. M., Evans, J. D., &amp; López-Uribe, M. M. (2023). The expansion of agriculture has shaped the recent evolutionary history of a specialized squash pollinator. <em>Proceedings of the National Academy of Sciences</em>, <em>120</em>(15), e2208116120. <a href="https://doi.org/10.1073/pnas.2208116120">https://doi.org/10.1073/pnas.2208116120</a>
+</div>
+<div id="ref-stankowski_WidespreadSelectionGene_2019" class="csl-entry" role="listitem">
+Stankowski, S., Chase, M. A., Fuiten, A. M., Rodrigues, M. F., Ralph, P. L., &amp; Streisfeld, M. A. (2019). Widespread selection and gene flow shape the genomic landscape during a radiation of monkeyflowers. <em>PLOS Biology</em>, <em>17</em>(7), e3000391. <a href="https://doi.org/10.1371/journal.pbio.3000391">https://doi.org/10.1371/journal.pbio.3000391</a>
 </div>
 <div id="ref-wakeley_CoalescentTheoryIntroduction_2008" class="csl-entry" role="listitem">
 Wakeley, J. (2008). <em>Coalescent <span>Theory</span>: <span>An Introduction</span></em> (1st Edition edition). <span>Roberts and Company Publishers</span>.
