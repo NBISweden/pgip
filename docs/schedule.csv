@@ -4,8 +4,9 @@ date;room;start_time;end_time;topic;teacher;assistant;link_slide;link_lab;link_y
 ;Uppsala;09:30:00;10:30:00;Population genomics in practice;Per Unneberg;;slides/pgip/index.html;;;
 ;Uppsala;10:30:00;12:00:00;Population genetics foundations;Per Unneberg;;slides/foundations/index.html;;;
 ;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
-;Uppsala;13:00:00;15:00:00;Introduction to the coalescent;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
-;Uppsala;15:00:00;17:00:00;Introduction to msprime;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
+;Uppsala;13:00:00;14:45:00;Introduction to the coalescent;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
+;Uppsala;14:45:00;16:30:00;Introduction to msprime;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
+;Uppsala;16:30:00;17:00:00;Overview of SLiM; general applications;Per Unneberg;;slides/simulation/index.html;;;
 2023/11/07;Uppsala;09:00:00;09:30:00;Recap day 1;Per Unneberg;;;;;
 ;Uppsala;09:30:00;12:00:00;Variant calling and filtering;Per Unneberg;AS, JH, NO;;;;
 ;Uppsala;12:00:00;13:00:00;Lunch;;;;;;

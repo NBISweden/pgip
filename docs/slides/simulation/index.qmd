@@ -2492,8 +2492,8 @@ print(mutated_ts.draw_svg())
 
 ::: {.notes}
 
-This is a very brief introduction to SLiM. Future versions of the
-lecture will add some more detail.
+This is currently a *very* brief introduction to SLiM. Future versions
+of the lecture will add some more detail.
 
 :::
 
@@ -2619,6 +2619,41 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 ::::
 
+::: {.notes}
+
+SLiM works forward in time according to a *tick cycle*, which
+basically is a counter of time steps.
+
+@haller_SLiMForwardGenetic_2019, pp. 603--610 describes the steps in
+more details; some clarifying comments are added belowe wrt to the
+slide flowchart. There is **a lot** to unpack here, and the summary
+flowchart captures most of the essentials.
+
+0. first events: prior to generation of offspring; don't affect
+   fitness. Rare use.
+1. early: catch-all event to do things before generation of offspring
+2. generation of offspring
+   1. Choose source subpop for parental individuals, based on
+      migration rates
+   2. Choose parent 1, based on cached fitness values
+   3. Choose parent 2, based on fitness and any defined `mateChoice()`
+      callbacks
+   4. Generate the candidate offspring, with mutation and
+      recombination (including `mutation()` and `recombination()`
+      callbacks)
+   5. Suppress/modify the candidate, using defined `modifyChild()`
+      callbacks
+3. Removal of fixed mutations unless `convertToSubstitution==F` - for
+   simulation efficiency reasons
+4. Offspring become parents
+5. Execution of `late()` events - e.g., changing of selection or
+   dominance coefficients
+6. Fitness recalculation using `mutationEffect()` and `fitnessEffect()`
+   callbacks
+7. Tick/cycle count increment
+
+:::
+
 ## Simple neutral simulation in SLiM {.smaller}
 
 ```{r engine="c"}
@@ -2653,6 +2688,291 @@ sim.simulationFinished();
 
 Comes with a huge manual [@haller_SLiMEvolutionarySimulation_2022] (700+
 pages!)
+
+## Recapitation - combining the best of two worlds
+
+:::: {style="display: grid; grid-template-columns: 4fr 3fr 3fr;
+grid-row-gap: 0px; grid-column-gap: 20px;"}
+
+:::{}
+
+A recent addition to SLiM is that it records data in *tree sequence
+format* (as in msprime) {{< fa arrow-right >}} we can combine backward
+and forward simulations!
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=2}
+
+Backward simulation that adds coalescent (neutral) history
+
+:::
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=2}
+
+:::{style="transform: translate(0, 60px);"}
+
+```{r }
+#| label: backward-simulation-recapitation
+#| echo: false
+#| eval: true
+#| out-width: 70%
+set.seed(5)
+wf <- wright_fisher_pop(n = 10, generations = 11)
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+indices <- (max(V(obj)) - 10 + 1):max(V(obj))
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = indices, mode = "in"))]
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "black"
+  )) +
+  geom_node_point(fill = "black", color = "black", shape = 21, size = 3) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+:::
+
+:::
+
+:::{}
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=1}
+
+Forward simulation with selection or some other process that isn't
+supported by the coalescent
+
+:::
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=1}
+
+::: {.translatey50}
+
+```{r }
+#| label: forward-simulation-recapitation
+#| echo: false
+#| eval: true
+#| out-width: 70%
+set.seed(252)
+wf <- wright_fisher_pop(n = 10, generations = 6)
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "black"
+  )) +
+  geom_node_point(fill = "black", color = "black", shape = 21, size = 3) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+:::
+
+:::
+
+::::
+
+# Applications
+
+## Simulation of null distributions
+
+:::{.compact}
+
+![Empirical distribution function of SweepFinder2 composite likelihood
+ratio (CLR) scores from observed data versus null simulations for
+three populations of squash bee (*E. pruinosa*). msprime was used to
+simulate data (without selection) using the inferred demographic model
+and recombination map. The eastern population in particular shows
+signs of selective sweeps. @pope_ExpansionAgricultureHas_2023, Fig
+S8.](assets/images/pope_2023_figs8.png){#fig-pope-2023-clr width=90%
+fig-align=center}
+
+:::
+
+:::{}
+
+Authors inferred demographic history and recombination map. The
+inferred values were used to simulate data with msprime. SweepFinder2
+[@degiorgio_SweepFinder2IncreasedSensitivity_2016] was used to
+calculate composite likelihood ratio (CLR) scores on both observed and
+simulated data to assess significance quantiles.
+
+:::
+
+::: {.notes}
+
+The details of the sweep finding / paper are not the main point here;
+rather, we want to highlight the use of simulations to generate null
+distribution scores (here, for CLR values) such that significance
+quantiles can be derived and applied to the observed data.
+
+Original figure legend:
+
+> Empiricial distribution functions of SWEEPFINDER 2 composite
+> likelihood ratio (CLR) scores from the observed data and null
+> simulations for each major E. pruinosa lineage (log-transformed for
+> visualization). The null simulations were generated using the
+> inferred demographic model and recombination maps (see Methods in
+> main text). The observed and null distributions match each other
+> quite closely in the Mexican lineage (MX). In the Western lineage
+> (CO), the tail of the CLR score distribution deviates slightly from
+> the null simulations. In the Eastern lineage (PA), the tail of the
+> observed CLR score distribution is extremely heavy relative to the
+> null. This suggests the existence of selective sweeps in both CO and
+> PA, but especially in PA
+
+:::
+
+## Simulations of genomic landscapes in monkeyflower
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![Sampling locations](assets/images/stankowski-2019-figs2.jpg){#fig-stankowski-figs2 width=80% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.column width="70%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![Genomic landscapes simulated under different divergence histories.](assets/images/stankowski-2019-fig7.png){#fig-stankowski-fig7 width=70% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::::
+
+Monkeyflower (*Mimulus aurantiacus*) radiation in California shows
+wide adaptive range and phenotypic diversity.
+@stankowski_WidespreadSelectionGene_2019 *et al* use simulations (SLiM
+and msprime) to shed light on processes that shape genomic landscapes,
+which are correlated between species.
+
+::: {.fragment}
+
+We will look more closely at this system tomorrow.
+
+:::
+
+::: {.notes}
+
+Simulations are based on variations of a neutral base model that
+starts out with an ancestral population (N=10,000) that after 10N
+generation splits to two daughter populations (N=10,000 each) and are
+simulated another 10N generations. The chromosome is 21Mbp (similar in
+size to a monkeyflower chromosome) consisting of a central neutrally
+evolving region flanked by two regions where non-neutral processes are
+"allowed". Models are:
+
+1. neutral
+2. BGS (non-neutral mutations are deleterious)
+3. Bateson-Dobzhansky-Muller incompatibility (BDMI); after split,
+   fraction variants deleterious in one population, neutral in other
+4. positive selection
+5. BGS and positive selection
+6. local adaptation; 4 but also after split some variants beneficial
+   in one population, neutral in other
+
+Figure caption:
+
+> Fig 7. Genomic landscapes simulated under different divergence
+> histories. Each row of plots shows patterns of within- and
+> between-population variation (π, dxy, and FST) across the chromosome
+> (500-kb windows) at 5 time points (N generations, where N = 10,000)
+> during one of the scenarios The selection parameter (Ns, where s =
+> Ns/N), proportion of deleterious (−) and positive mutations (+), and
+> number of migrants per generation (Nm; 0 unless stated) for these
+> simulations are as follows: (i) neutral divergence (no selection),
+> (ii) BGS (−Ns = 100; −prop = 0.1), (iii) BDMI (−Ns = 100, −prop =
+> 0.05, Nm = 0.1), (iv) positive selection (+Ns = 100, +prop = 0.001),
+> (v) BGS and positive selection (−Ns = 100, −prop = 0.1; +Ns = 100,
+> +prop = 0.005), and (vi) local adaptation (+Ns = 100, +prop = 0.001,
+> Nm = 0.1). The gray boxes in the first column show the areas of the
+> chromosome that are experiencing selection, while the white central
+> area evolves neutrally. Note that π (in populations a and b) and dxy
+> have been mean centered so they can be viewed on the same scale.
+> Uncentered values and additional simulations with different
+> parameter combinations and more time points can be found in S13 Fig.
+> BDMI, Bateson-Dobzhansky-Muller incompatibility; BGS, background
+> selection.
+
+:::
+
+## Neural network recombination landscape prediction
+
+<!-- markdownlint-disable MD013 -->
+
+:::{}
+
+![Cartoon of Recombination Landscape Estimation using Recurrent Neural
+Networks (ReLERNN) workflow
+[@adrion_PredictingLandscapeRecombination_2020]](assets/images/adrion-2020-fig1.jpg){#fig-adrion-2020-fig1
+fig-align=center width=60%}
+
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+Use msprime simulations to generate training data for neural network.
+
+::: {.notes}
+
+Methods paper; one of the first examples of using msprime simulations
+to generate training data for a neural network.
+
+Figure caption:
+
+> A cartoon depicting a typical workflow using ReLERNN’s four modules
+> (shaded boxes) for (A) individually sequenced genomes or (B) pooled
+> sequences. ReLERNN can optionally (dotted lines) utilize output from
+> stairwayplot, SMC++, and MSMC to simulate under a demographic
+> history with msprime. Training inlays show the network architectures
+> used, with the GRU inlay in (B) depicting the gated connections
+> within each hidden unit. Here, r, z, ht, and ht˜ are the reset gate,
+> update gate, activation, and candidate activation, respectively (Cho
+> et al. 2014). The genotype matrix encodes alleles as reference (−1),
+> alternative (1), or padded/missing data (0; not shown). Variant
+> positions are encoded along the real number line (0–1).
+
+:::
 
 ## Bibliography {.unnumbered .unlisted}
 
