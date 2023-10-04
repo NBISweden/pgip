@@ -12,8 +12,8 @@ listing:
     - pgip/index.qmd
     - foundations/index.qmd
     - simulation/index.qmd
-    - variant_calling/index.qmd
-    - slides/datageneration/index.qmd
+    # - variant_calling/index.qmd
+    # - slides/datageneration/index.qmd
     - population_structure/index.qmd
 date: ""
 toc: false

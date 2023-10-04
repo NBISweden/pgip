@@ -11,8 +11,8 @@ listing:
   contents:
     - datasets/monkeyflowers.qmd
     - simulation/index.qmd
-    - variant_calling/index.qmd
-    - data_filtering/index.qmd
+    # - variant_calling/index.qmd
+    # - data_filtering/index.qmd
 date: ""
 toc: false
 sidebar: false
