@@ -39,9 +39,13 @@ website:
           - slides/foundations/index.qmd
           - slides/simulation/index.qmd
           - slides/population_structure/index.qmd
+          - slides/variant_calling/index.qmd
+          - slides/datageneration/index.qmd
       - section: Exercises
         contents:
           - exercises/simulation/index.qmd
+          - exercises/variant_calling/index.qmd
+          - exercises/data_filtering/index.qmd
       - section: Code recipes
         contents:
           - recipes/index.qmd

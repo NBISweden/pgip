@@ -1,0 +1,35 @@
+# Listing of pgip-data source files to setup for lectures and
+# exercises
+
+# Double underscore keys map to datasets that are recurrently used
+__red_ubam__:
+  ELF.unmapped.bam: monkeyflower/work/SRR9309791.PUN-ELF11-2016/SRR9309791.PUN-ELF11-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  JMC.unmapped.bam: monkeyflower/work/SRR9309467.PUN-JMC19-2016/SRR9309467.PUN-JMC19-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  LH.unmapped.bam: monkeyflower/work/SRR9309468.PUN-LH19-2016/SRR9309468.PUN-LH19-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  MT.unmapped.bam: monkeyflower/work/SRR9309470.PUN-MT10-2016/SRR9309470.PUN-MT10-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  UCSD.unmapped.bam: monkeyflower/work/SRR9309473.PUN-UCSD13-2016/SRR9309473.PUN-UCSD13-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+
+__yellow_ubam__:
+  BCRD.unmapped.bam: monkeyflower/work/SRR9309788.PUN-BCRD11-2016/SRR9309788.PUN-BCRD11-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  INJ.unmapped.bam: monkeyflower/work/SRR9309790.PUN-INJ10-2016/SRR9309790.PUN-INJ10-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  LO.unmapped.bam: monkeyflower/work/SRR9309469.PUN-LO4-2016/SRR9309469.PUN-LO4-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  PCT.unmapped.bam: monkeyflower/work/SRR9309471.PUN-PCT7-2016/SRR9309471.PUN-PCT7-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+  POTR.unmapped.bam: monkeyflower/work/SRR9309472.PUN-POTR15-2016/SRR9309472.PUN-POTR15-2016.sort.md.LG4:12000000-12100000.unmapped.bam
+
+__reference__:
+  M_aurantiacus_v1.fasta: monkeyflower/work/M_aurantiacus_v1_splitline_ordered.LG4:12000000-12100000.fasta
+
+__sampleinfo__:
+  sampleinfo.csv: monkeyflower/sampleinfo.csv
+
+
+# Exercise/slide data sections
+exercises/variant_calling:
+  __data__:
+    - __red_ubam__
+    - __yellow_ubam__
+    - __reference__
+    - __sampleinfo__
+
+slides/foundations:
+  data/Homo_sapiens: Homo_sapiens

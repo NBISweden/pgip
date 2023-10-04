@@ -3,12 +3,16 @@ title: "Exercises"
 subtitle: " 2023 PGIP • Population Genomics in Practice"
 description: "List of all exercises"
 listing:
+  id: exercise-listings
   type: grid
   grid-columns: 4
   fields: [title, subtitle, author]
   sort: false
   contents:
+    - datasets/monkeyflowers.qmd
     - simulation/index.qmd
+    - variant_calling/index.qmd
+    - data_filtering/index.qmd
 date: ""
 toc: false
 sidebar: false

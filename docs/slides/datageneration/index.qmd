@@ -1,11 +1,11 @@
 ---
 title: "Data generation and processing"
-subtitle: "Sequencing protocols, best practice variant calling and filtering"
+subtitle: "Sequencing protocols and variant calling"
 author:
     - "Per Unneberg"
 format:
   revealjs:
-    footer: Data processing
+    footer: Variant calling
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}

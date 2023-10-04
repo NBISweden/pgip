@@ -1,0 +1,30 @@
+---
+title: Monkeyflowers dataset
+subtitle: Speciation genomics and simulation
+author:
+  - Per Unneberg
+format: html
+---
+
+:::{}
+
+<!-- markdownlint-disable MD013 -->
+
+![](https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg){fig-alt="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)"}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+## The monkeyflower model system {#sec-monkeyflower-model-system}
+
+Monkeyflowers (*Mimulus*) have recently become a key model in
+evolution and plant biology [@pennisi_AllureMonkeyflowers_2019].
+
+## The monkeyflower genomic landscape
+
+:::{.column-margin}
+
+![](../../slides/simulation/assets/images/stankowski-2019-figs2.jpg){}
+
+:::
