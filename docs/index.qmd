@@ -102,7 +102,7 @@ import demes
 import demesdraw
 from matplotlib import pyplot as plt
 fig, ax = plt.subplots(figsize=(8, 6))
-ooa = demes.load("data/data/ooa/ooa.demes.yaml")
+ooa = demes.load("pgip_data/data/ooa/ooa.demes.yaml")
 ax = demesdraw.tubes(ooa, ax=ax, num_lines_per_migration=6, seed=32)
 ax
 ```
