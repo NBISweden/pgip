@@ -242,6 +242,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Introduction to simulation</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/variant_calling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -287,6 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-slim-recipes" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> SLiM recipes</h1>
 <p>SLiM recipes can be run with wrapper <code>pgip-slim</code> to generate multiple simulations.</p>
+<div>
 <div class="cell" data-hash="index_cache/html/pgip-slim-help_150ee19b092a27d00113b406bb663784">
 <details>
 <summary>Code</summary>
@@ -317,7 +324,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">## AttributeError: module jsonschema has no attribute _validators. Did you mean: 'validators'?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</div>
 <p>As an example, the following command can be used to generate 10 simulations using the <a href="@sec-slim-recipe-selective-sweep">selective sweep</a> recipe.</p>
+<div>
 <div class="cell" data-hash="index_cache/html/pgip-slim-example_c88d918f4c792e99bf2caac57df0d8e1">
 <details>
 <summary>Code</summary>
@@ -325,8 +334,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</div>
 <section id="sec-slim-recipe-selective-sweep" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="sec-slim-recipe-selective-sweep"><span class="header-section-number">1.1</span> Selective sweep</h2>
+<div>
 <div class="cell" data-file="selective_sweep.slim" data-hash="index_cache/html/slim-recipe-selective-sweep_652abf0902e7c204a942e505edbcee09">
 <details>
 <summary>slim code to simulate a selective sweep at a locus on a 1Mbp chromosome, with mutation rate <span class="math inline">\(\mu=10^{-8}\)</span>, recombination rate <span class="math inline">\(\rho=10^{-8}\)</span>, and <span class="math inline">\(N_e=5,000\)</span>.</summary>
@@ -397,10 +408,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</div>
 <p>Recipe to simulate a selective sweep.</p>
 </section>
 <section id="sec-slim-recipe-neutral" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="sec-slim-recipe-neutral"><span class="header-section-number">1.2</span> Neutral simulation</h2>
+<div>
 <div class="cell" data-file="neutral.slim" data-hash="index_cache/html/slim-recipe-neutral_11d4a74fa3caa2108fd8961706d1df21">
 <details>
 <summary>slim code to simulate a neutrally evolving locus on a 100kbp chromosome, with mutation rate <span class="math inline">\(\mu=10^{-8}\)</span>, recombination rate <span class="math inline">\(\rho=10^{-8}\)</span>, and <span class="math inline">\(N_e=5,000\)</span>.</summary>
@@ -440,9 +453,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</div>
 <p>Recipe to simulate a neutrally evolving locus.</p>
+<div>
 
+</div>
+<div>
 
+</div>
 </section>
 </section>
 
