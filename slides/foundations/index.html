@@ -419,7 +419,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">03-Oct-2023</h4>
+  <h4 class="date">05-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1449,8 +1449,21 @@ q = q^2 + pq
 </section>
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
-
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<div class="cell" data-file="../../recipes/slides/foundations/hwe.R" data-hash="index_cache/revealjs/fig-hwe-1000genomes_57a5dc7d2d4ecdda7def670cd4f23dc1">
+<div class="cell-output cell-output-error">
+<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in pivot_longer(x, cols = c("AA", "Aa", "aa"), names_to = "genotype"): object 'x' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in by(x, x$population, function(y) {: object 'x' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in ggplot(z, aes(x = p, y = value)): object 'z' not found</code></pre>
+</div>
+</div>
+<aside class="notes">
 <!-- markdownlint-disable MD013 -->
 <p>See <a href="https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines" class="uri">https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines</a> for legend customization.</p>
 <!-- markdownlint-enable MD013 -->
@@ -1811,7 +1824,7 @@ q = q^2 + pq
 <section id="wright-fisher-model-10" class="slide level2 smaller">
 <h2>Wright-Fisher model</h2>
 
-<img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-.gif" width="14" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;2: Wright-Fisher model</p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-.gif" width="14" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;1: Wright-Fisher model</p><aside class="notes">
 <p>See <a href="https://mikeyharper.uk/animated-plots-with-r/" class="uri">https://mikeyharper.uk/animated-plots-with-r/</a></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1833,7 +1846,7 @@ q = q^2 + pq
 <div class="cell-output-display">
 <div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;3: WF model indicating time direction from past (top) to present (bottom).</figcaption>
+<figcaption>Figure&nbsp;2: WF model indicating time direction from past (top) to present (bottom).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:100.0%"></p>
 </figure>
 </div>
@@ -1845,7 +1858,7 @@ q = q^2 + pq
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;4: WF model tracing the genealogies of three extant chromosomes</figcaption>
+<figcaption>Figure&nbsp;3: WF model tracing the genealogies of three extant chromosomes</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" width="960"></p>
 </figure>
 </div>
@@ -1930,7 +1943,7 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 <div class="cell-output-display">
 <div id="fig-wf-two-chrom-find-common-ancestor" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;5: Illustration of two sequences finding a common ancestor after five generations; four failures with probability <span class="math inline">\(1-1/2N\)</span>, one success with probability 1/2N</figcaption>
+<figcaption>Figure&nbsp;4: Illustration of two sequences finding a common ancestor after five generations; four failures with probability <span class="math inline">\(1-1/2N\)</span>, one success with probability 1/2N</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-two-chrom-find-common-ancestor-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2054,7 +2067,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-allele-frequency-histogram-plot" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;6: Histogram showing the course of change of the allele frequency distribution with time <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983, fig. 3.4</a>)</span>. When N large (<span class="math inline">\(\gtrsim 100\)</span>) histogram can be approximated by continuous distribution (diffusion theory). Try recipe <a href="../../recipes/slides/index.html#sec-recipe-slides-allele-frequency-distribution"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a> for different values of N.</figcaption>
+<figcaption>Figure&nbsp;5: Histogram showing the course of change of the allele frequency distribution with time <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983, fig. 3.4</a>)</span>. When N large (<span class="math inline">\(\gtrsim 100\)</span>) histogram can be approximated by continuous distribution (diffusion theory). Try recipe <a href="../../recipes/slides/index.html#sec-recipe-slides-allele-frequency-distribution"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a> for different values of N.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-allele-frequency-histogram-plot-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
@@ -2065,7 +2078,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-buri-table-14" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;7: Frequency distributions of the brown eye (<span class="math inline">\(bw^{75}\)</span>) allele in replicate experimental populations (<span class="math inline">\(n\sim 100\)</span>) of <em>Drosophila melanogaster</em> (8 <i class="fa-solid fa-venus" aria-label="venus"></i>, 8 <i class="fa-solid fa-mars" aria-label="mars"></i>) <span class="citation" data-cites="buri_GeneFrequencySmall_1956">(<a href="#/bibliography" role="doc-biblioref" onclick="">Buri, 1956</a>)</span></figcaption>
+<figcaption>Figure&nbsp;6: Frequency distributions of the brown eye (<span class="math inline">\(bw^{75}\)</span>) allele in replicate experimental populations (<span class="math inline">\(n\sim 100\)</span>) of <em>Drosophila melanogaster</em> (8 <i class="fa-solid fa-venus" aria-label="venus"></i>, 8 <i class="fa-solid fa-mars" aria-label="mars"></i>) <span class="citation" data-cites="buri_GeneFrequencySmall_1956">(<a href="#/bibliography" role="doc-biblioref" onclick="">Buri, 1956</a>)</span></figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-buri-table-14-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2100,28 +2113,28 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <p>To capture dynamics, follow allele frequency trajectory as function of time.</p>
 <div class="smallr">
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_fc6a9d0852d57471ad01989470464bdb">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="do">##'</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="do">##' @param n Population size</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="do">##'</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
-<span id="cb2-11"><a href="#cb2-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    }</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    x</span>
-<span id="cb2-14"><a href="#cb2-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="do">##'</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="do">##' @param n Population size</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="do">##'</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
+<span id="cb6-10"><a href="#cb6-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
+<span id="cb6-11"><a href="#cb6-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    }</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    x</span>
+<span id="cb6-14"><a href="#cb6-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-plot_6499baaaee1d16b3debdc278a724c026">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example simulation and plot</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Example simulation and plot</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -2130,7 +2143,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-genetic-drift-N-10" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;8: Genetic drift for different haploid(!) population sizes, starting frequency <span class="math inline">\(p_0\)</span>=0.5. Note dependency of variance on population size N.</figcaption>
+<figcaption>Figure&nbsp;7: Genetic drift for different haploid(!) population sizes, starting frequency <span class="math inline">\(p_0\)</span>=0.5. Note dependency of variance on population size N.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genetic-drift-N-10-1.gif" style="width:80.0%"></p>
 </figure>
 </div>
@@ -2162,7 +2175,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;9: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
+<figcaption>Figure&nbsp;8: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.svg" width="560" height="380"></p>
 </figure>
 </div>
@@ -2219,7 +2232,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;10: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
+<figcaption>Figure&nbsp;9: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-identity-by-state-and-descent-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2257,7 +2270,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;11: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
+<figcaption>Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
@@ -2271,7 +2284,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;12: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">Graham Coop (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span>, Fig. 4.5</figcaption>
+<figcaption>Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">Graham Coop (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span>, Fig. 4.5</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
@@ -2448,7 +2461,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-wf-mutation" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;13: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
+<figcaption>Figure&nbsp;12: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-mutation-1.svg" width="400" height="500"></p>
 </figure>
 </div>
@@ -2480,7 +2493,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;14: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
+<figcaption>Figure&nbsp;13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" width="500" height="500"></p>
 </figure>
 </div>
@@ -2561,7 +2574,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;15: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
+<figcaption>Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -2653,7 +2666,7 @@ DNA sequences
 <section id="selection-and-fitness" class="slide level2 smaller">
 <h2>Selection and fitness</h2>
 
-<img data-src="index_files/figure-revealjs/fig-selection-model-tikz-1.svg" width="700" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;16: The life cycle used in the fundamental model of selection <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, fig. 3.2</a>)</span></p><div class="fragment">
+<img data-src="index_files/figure-revealjs/fig-selection-model-tikz-1.svg" width="700" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;15: The life cycle used in the fundamental model of selection <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, fig. 3.2</a>)</span></p><div class="fragment">
 <blockquote>
 <p>Much confusion exists in the literature regarding how various types of selection are defined, in particular because some of the terminology is used slightly differently within different scientific communities <span class="citation" data-cites="nielsen_MolecularSignaturesNatural_2005">(<a href="#/bibliography" role="doc-biblioref" onclick="">Nielsen, 2005</a>)</span></p>
 </blockquote>
@@ -2728,7 +2741,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <div class="cell-output-display">
 <div id="fig-selection-fig-p" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;17: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
+<figcaption>Figure&nbsp;16: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-fig-p-1.svg" width="400" height="400"></p>
 </figure>
 </div>
@@ -2739,7 +2752,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <div class="cell-output-display">
 <div id="fig-selection-fig-dp" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;18: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
+<figcaption>Figure&nbsp;17: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-fig-dp-1.svg" width="400" height="400"></p>
 </figure>
 </div>
@@ -2771,7 +2784,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <div class="cell-output-display">
 <div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;19: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
+<figcaption>Figure&nbsp;18: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152"></p>
 </figure>
 </div>
@@ -2827,7 +2840,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;20: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection. <a href="../../recipes/slides/index.html#sec-recipe-slides-dn-ds-ratio-human-rat"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></figcaption>
+<figcaption>Figure&nbsp;19: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection. <a href="../../recipes/slides/index.html#sec-recipe-slides-dn-ds-ratio-human-rat"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400"></p>
 </figure>
 </div>
@@ -2862,7 +2875,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;21: A selective sweep of an advantageous mutation (gray dot). Adapted from <span class="citation" data-cites="charlesworth_ElementsEvolutionaryGenetics_2010">Charlesworth &amp; Charlesworth (<a href="#/bibliography" role="doc-biblioref" onclick="">2010</a>)</span>, Fig. 8.13</figcaption>
+<figcaption>Figure&nbsp;20: A selective sweep of an advantageous mutation (gray dot). Adapted from <span class="citation" data-cites="charlesworth_ElementsEvolutionaryGenetics_2010">Charlesworth &amp; Charlesworth (<a href="#/bibliography" role="doc-biblioref" onclick="">2010</a>)</span>, Fig. 8.13</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
 </figure>
 </div>
@@ -2978,15 +2991,28 @@ D_t = (1-r)^tD_0
 <div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_51eacb4a9e001967e6e5faa0749b18cb">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/pgip-load-slim-data_3ac66aeeaa40c52c4eda503c1ba06518">
+<div class="cell-output cell-output-error">
+<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `$&lt;-.data.frame`(`*tmp*`, thetaW, value = numeric(0)): replacement has 0 rows, data has 401</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `select()`:
+! Can't subset columns that don't exist.
+✖ Column `windows` doesn't exist.</code></pre>
+</div>
 </div>
 <!-- markdownlint-enable MD013 -->
 <!-- markdownlint-disable MD013 -->
 <div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd_45bdce78bc0f2a58623012b8acdfa538">
 <div class="cell-output cell-output-error">
-<pre><code>Error in device(files[i], ...): unused arguments (units = "in", res = 192)</code></pre>
+<pre><code>Error in FUN(X[[i]], ...): object 'windows' not found</code></pre>
 </div>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -3010,13 +3036,17 @@ D_t = (1-r)^tD_0
 <div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_74273fb0acada19733235fc43559f319">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- markdownlint-enable MD013 -->
-
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-2-1.svg" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;22: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd-2_27c4821634a05a67f6a8904a2345b981">
+<div class="cell-output cell-output-error">
+<pre><code>Error in fortify(data): object 'data_mean' not found</code></pre>
+</div>
+</div>
+<aside class="notes">
 <p>Important: individual runs show a lot of stochasticity, but the signal is clear for the <em>mean</em>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3032,8 +3062,32 @@ D_t = (1-r)^tD_0
 </section>
 <section id="the-effect-of-a-selective-sweep-on-diversity-2" class="slide level2">
 <h2>The effect of a selective sweep on diversity</h2>
-
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;23: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p><aside class="notes">
+<div class="cell" data-hash="index_cache/revealjs/pgip-load-slim-data2_d3d5b29b7f3d29b2a54ab05fe2bc46b9">
+<div class="cell-output cell-output-error">
+<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `$&lt;-.data.frame`(`*tmp*`, thetaW, value = numeric(0)): replacement has 0 rows, data has 401</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `dplyr::select()`:
+! Can't subset columns that don't exist.
+✖ Column `windows` doesn't exist.</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-pi-S_ffe777f64e408c17cbe5c6cfc5c74287">
+<div class="cell-output cell-output-error">
+<pre><code>Error in pivot_longer(., cols = c("pi", "thetaW", "pi_minus_thetaW"), : object 'data_mean' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `geom_line()`:
+! Problem while computing aesthetics.
+ℹ Error occurred in the 2nd layer.
+Caused by error in `FUN()`:
+! object 'windows' not found</code></pre>
+</div>
+</div>
+<aside class="notes">
 <p>cf <span class="citation" data-cites="nielsen_MolecularSignaturesNatural_2005">Nielsen (<a href="#/bibliography" role="doc-biblioref" onclick="">2005</a>)</span>. Not clear how scaling of statistics to have mean=1 is done.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3056,7 +3110,7 @@ D_t = (1-r)^tD_0
 <div class="cell-output-display">
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;24: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<figcaption>Figure&nbsp;21: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
 </figure>
 </div>
@@ -3089,7 +3143,7 @@ D_t = (1-r)^tD_0
 <div class="cell-output-display">
 <div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;25: Hitchhiking (left) versus background selection (right).</figcaption>
+<figcaption>Figure&nbsp;22: Hitchhiking (left) versus background selection (right).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="1000"></p>
 </figure>
 </div>
@@ -3149,9 +3203,6 @@ Charlesworth, B., &amp; Charlesworth, D. (2010). <em>Elements of <span>Evolution
 </div>
 <div id="ref-charlesworth_EffectDeleteriousMutations_1993" class="csl-entry" role="listitem">
 Charlesworth, B., Morgan, M. T., &amp; Charlesworth, D. (1993). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1205596">The <span>Effect</span> of <span>Deleterious Mutations</span> on <span>Neutral Molecular Variation</span></a>. <em>Genetics</em>, <em>134</em>(4), 1289–1303.
-</div>
-<div id="ref-cooplab_PopulationGeneticsCourse_2011" class="csl-entry" role="listitem">
-cooplab. (2011). Population genetics course resources: <span>Hardy-Weinberg Eq</span>. In <em>gcbias</em>. <a href="https://gcbias.org/2011/10/13/population-genetics-course-resources-hardy-weinberg-eq/">https://gcbias.org/2011/10/13/population-genetics-course-resources-hardy-weinberg-eq/</a>
 </div>
 <div id="ref-corbett-detig_NaturalSelectionConstrains_2015" class="csl-entry" role="listitem">
 Corbett-Detig, R. B., Hartl, D. L., &amp; Sackton, T. B. (2015). Natural <span>Selection Constrains Neutral Diversity</span> across <span>A Wide Range</span> of <span>Species</span>. <em>PLOS Biology</em>, <em>13</em>(4), e1002112. <a href="https://doi.org/10.1371/journal.pbio.1002112">https://doi.org/10.1371/journal.pbio.1002112</a>
@@ -3454,8 +3505,11 @@ Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander,
         button.style.bottom = "14px";
         button.style.top = "auto";
         button.style.right = "auto";
-
-        button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Slides listing"><i class="fa fa-home"></i></a>';
+        if (window.location.host.startsWith("localhost")) {
+          button.innerHTML = `<a href="http://${window.location.host}/slides" title="Slides listing"><i class="fa fa-home"></i></a>`
+        } else {
+          button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Slides listing"><i class="fa fa-home"></i></a>';
+        }
         document.querySelector( ".reveal" ).appendChild( button );
       }
     window.document.addEventListener("DOMContentLoaded", function (event) {

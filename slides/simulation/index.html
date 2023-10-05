@@ -419,7 +419,7 @@
   <h3 class="subtitle">Primer on the coalescent and forward simulation</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">03-Oct-2023</h4>
+  <h4 class="date">05-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1991,8 +1991,11 @@ Y. C. Brandt, D., Wei, X., Deng, Y., Vaughn, A. H., &amp; Nielsen, R. (2022). Ev
         button.style.bottom = "14px";
         button.style.top = "auto";
         button.style.right = "auto";
-
-        button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Slides listing"><i class="fa fa-home"></i></a>';
+        if (window.location.host.startsWith("localhost")) {
+          button.innerHTML = `<a href="http://${window.location.host}/slides" title="Slides listing"><i class="fa fa-home"></i></a>`
+        } else {
+          button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Slides listing"><i class="fa fa-home"></i></a>';
+        }
         document.querySelector( ".reveal" ).appendChild( button );
       }
     window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -222,6 +222,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Population structure</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+ <span class="menu-text">slides/variant_calling/index.qmd</span>
+  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -288,26 +291,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgip-slim</span> <span class="at">--help</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Usage: pgip-slim [OPTIONS] SLIM</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">##   pgip slim simulator CLI.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">## </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">##   Wrapper that runs slim on SLIM controlfile.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">## </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Options:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">##   -o, --outdir PATH               Output directory</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">##   -N, --population-size INTEGER   Population size</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">##   -r, --recombination_rate FLOAT  Recombination rate</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">##   -m, --mutation_rate FLOAT       Mutation rate</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">##   -l, --sequence_length INTEGER   Sequence length</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">##   -n, --repetitions INTEGER RANGE</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">##                                   Number of repetitions  [x&gt;=1]</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">##   --seed TEXT                     Random seed</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">##   --threads INTEGER RANGE         Number of parallel threads to run  [x&gt;=1]</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">##   --prefix TEXT                   File output prefix</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">##   --no-recapitate                 Don't do recapitation</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">##   --debug                         Print debugging info</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">##   --help                          Show this message and exit.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Traceback (most recent call last):</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/bin/pgip-slim", line 5, in &lt;module&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">##     from pgip.tools.slim import cli</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/pgip/tools/slim.py", line 20, in &lt;module&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">##     import pyslim</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/pyslim/__init__.py", line 4, in &lt;module&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">##     from pyslim.slim_metadata import *       # </span><span class="al">NOQA</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/pyslim/slim_metadata.py", line 438, in &lt;module&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">##     slim_metadata_schemas = {k: tskit.MetadataSchema(_raw_slim_metadata_schemas[k]) for k in _raw_slim_metadata_schemas}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/pyslim/slim_metadata.py", line 438, in &lt;dictcomp&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">##     slim_metadata_schemas = {k: tskit.MetadataSchema(_raw_slim_metadata_schemas[k]) for k in _raw_slim_metadata_schemas}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/tskit/metadata.py", line 639, in __init__</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">##     codec_instance = codec_cls(schema)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/tskit/metadata.py", line 580, in __init__</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">##     StructCodecSchemaValidator.check_schema(schema)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/jsonschema/validators.py", line 301, in check_schema</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">##     for error in validator.iter_errors(schema):</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/jsonschema/validators.py", line 368, in iter_errors</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">##     for error in errors:</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/tskit/metadata.py", line 196, in binary_format_validator</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">##     yield from jsonschema._validators.type(validator, types, instance, schema)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "/home/runner/micromamba/envs/pgip/lib/python3.10/site-packages/jsonschema/__init__.py", line 105, in __getattr__</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">##     raise AttributeError(f"module {__name__} has no attribute {name}")</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">## AttributeError: module jsonschema has no attribute _validators. Did you mean: 'validators'?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>As an example, the following command can be used to generate 10 simulations using the <a href="@sec-slim-recipe-selective-sweep">selective sweep</a> recipe.</p>
