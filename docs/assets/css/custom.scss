@@ -1,5 +1,6 @@
 // SciLife color scheme: see https://www.scilifelab.se/community-pages/resources/visual-identity/
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Nunito:ital,wght@0,400;0,600;1,400;1,600&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
 
 $lime: #a7c947;
 $lime25: #e9f2d1;
@@ -68,6 +69,12 @@ $presentation-h3-font-size: 1.424em;
 $presentation-h4-font-size: 1.266em;
 $presentation-h5-font-size: 1.125em;
 $presentation-h6-font-size: 1em;
+
+$callout-color-note: $lime;
+$callout-color-tip: $teal;
+// $callout-color-caution: #D62828;
+// $callout-color-warning: #D62828;
+// $callout-color-important: $grape;
 
 /*-- scss:rules --*/
 :root {
@@ -422,4 +429,60 @@ a:focus, table a:focus{
   .logo-button {
     display: none!important;
   }
+}
+
+.nbisbtn {
+  background-color: $grape75;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+// Exercise callout styling
+div.callout-exercise.callout {
+  border-left-color: $lime;
+}
+
+div.callout-exercise.callout-style-default > .callout-header {
+  background-color: $lime25;
+}
+
+.callout-exercise > .callout-header::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f303";
+  margin-right: 10px;
+}
+
+
+// Answer callout styling
+.callout-answer > .callout-header::before {
+  font-family: "Font Awesome\ 5 Free";
+  content: "\f002 ";
+  margin-right: 10px;
+  font-weight: 900;
+}
+
+div.callout-answer.callout {
+  border-left-color: $grape;
+}
+
+div.callout-answer.callout-style-default > .callout-header {
+  background-color: $grape25;
+}
+
+// Hint callout styling
+.callout-hint > .callout-header::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f12e";
+  margin-right: 10px;
+}
+
+div.callout-hint.callout {
+  border-left-color: $aqua;
+}
+
+div.callout-hint.callout-style-default > .callout-header {
+  background-color: $aqua25;
 }
