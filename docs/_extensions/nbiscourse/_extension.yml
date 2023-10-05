@@ -1,0 +1,7 @@
+title: NBIS course template
+author: Per Unneberg
+version: 0.1.0
+contributes:
+  filters:
+    - callout_exercise.lua
+    - nbisbtn.lua

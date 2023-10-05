@@ -1,4 +1,6 @@
 ---
+title: Variant calling
+author: Per Unneberg
 format: html
 ---
 
@@ -7,6 +9,19 @@ format: html
 {{< include ../_knitr.qmd >}}
 
 {{< include ../_rlibs.qmd >}}
+
+```{bash }
+#| label: variant-calling-init-data
+#| echo: false
+#| eval: true
+fastqc -o . INJ*.fastq.gz > /dev/null 2>&1
+if [ ! -e INJ_R1_fastqc ]; then
+    unzip INJ_R1_fastqc.zip > /dev/null 2>&1
+fi
+if [ ! -e INJ_R2_fastqc ]; then
+    unzip INJ_R2_fastqc.zip > /dev/null 2>&1
+fi
+```
 
 <!-- markdownlint-enable MD041 -->
 
@@ -28,24 +43,161 @@ commands, your results will differ from those presented here!
 
 :::
 
-## Best practice pipeline
+::: {.callout-tip collapse=true}
 
-Briefly describe best practice pipeline (e.g. GATK, bcftools,
-freebayes), highlighting some of the problems with natural
-populations:
+## Learning objectives
 
-- many workflows are human-centric and don't scale to non-model
-  organisms (e.g. chromosome numbers in GATK)
+- Perform qc on sequencing reads and interpret results
+- Prepare reference for read mapping
+- Map reads to reference
+- Mark duplicates
+- Perform raw variant calling to generate a set of sites to exclude
+  from recalibration
+- Perform base quality score recalibration
+- Perform variant calling on base recalibrated data
+- Do genotyping on all samples and combine results to a raw variant
+  call set
 
-Workflows begin with mapping; do this as common step. Then, move on to
-variant calling and present three alternatives to highlight differences:
+:::
 
-1. GATK (human-centric; highlight problems)
-2. freebayes
-3. ANGSD - especially for low-coverage, however need to work with
-   genotype likelihoods
+::: {.callout-note collapse=true}
 
-Make 2 and 3 optional.
+## Tools
+
+In this exercise we will use the following tools:
+
+- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
+- [GATK](https://gatk.broadinstitute.org/hc/en-us) [@depristo_FrameworkVariationDiscovery_2011]
+- [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
+- [csvtk](https://bioinf.shenwei.me/csvtk/)
+- [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
+- [seqkit](https://bioinf.shenwei.me/seqkit/) [@shen_SeqKitCrossPlatformUltrafast_2016]
+
+:::
+
+## Variant calling overview
+
+A generic variant calling workflow consists of the following basic
+steps:
+
+0. read quality control and filtering
+1. read mapping
+2. removal / marking of duplicate reads
+3. joint / sample-based variant calling
+
+There are different tweaks and additions to each of these steps,
+depending on application and method.
+
+### Read quality control
+
+:::{.column-margin}
+
+:::{#fig-fastqc-base-quality}
+
+![](INJ_R1_fastqc/Images/per_base_quality.png)
+![](INJ_R2_fastqc/Images/per_base_quality.png)
+
+Fastqc per base quality scores, read 1 (upper) and read 2 (lower
+panel).
+
+:::
+
+:::
+
+DNA sequencers score the quality of each sequenced base as [phred
+quality scores](https://en.wikipedia.org/wiki/Phred_quality_score),
+which is equivalent to the probability $P$ that the call is incorrect.
+The base quality scores, denoted $Q$, are defined as
+
+$$
+Q = -10 \log_{10} P
+$$
+
+Hence, a base quality score $Q=20$ corresponds to a 1% probability
+that the call is incorrect. The base qualities typically drop towards
+the end of the reads (@fig-fastqc-base-quality). Prior to mapping it
+may therefore be prudent to remove reads that display too high drop in
+quality, too low mean quality, or on some other quality metric
+reported by the qc software.
+
+The quality scores are encoded using ASCII codes. An example of a
+[fastq](https://en.wikipedia.org/wiki/FASTQ_format) sequence is given
+below.
+
+```{bash }
+#| label: cat-fastq
+#| echo: false
+#| eval: true
+#| fig-cap: |
+zcat INJ_R1.fastq.gz | head -n 4 | cut -c -30
+```
+
+A fastq entry consists of four lines:
+
+1. sequence id (prefixed by `@`)
+2. DNA sequence
+3. separator (`+`)
+4. phred base quality scores
+
+### Read mapping
+
+Read mapping consists of aligning sequence reads, typically from
+individuals in a population (a.k.a. resequencing) to a reference
+sequence. The choice of read mapper depends, partly on preference, but
+mostly on the sequencing read length. For short reads, a common choice
+is [bwa-mem](https://github.com/lh3/bwa), and for longer reads
+[minimap2](https://github.com/lh3/minimap2).
+
+In what follows, we will assume that the sequencing protocol generates
+paired-end short reads (e.g., from
+[Illumina](https://ngisweden.scilifelab.se/technologies/illumina/)).
+In practice, this means a DNA fragment has been sequence from both
+ends, where fragment sizes have been selected such that reads do not
+overlap (i.e., there is an *insert size*).
+
+The final output of read mapping is an alignment file in [binary
+alignment map
+(bam)](https://en.wikipedia.org/wiki/Binary_Alignment_Map) format or variants thereof.
+
+### Removal / marking of duplicate reads
+
+During sample preparation or DNA amplification with PCR, it may happen
+that a single DNA fragment is present in multiple copies and therefore
+produces redundant sequencing reads. This shows up as alignments with
+identical start and stop coordinates. These so-called duplicate reads
+should be marked prior to any downstream analyses. The most commonly
+used tools for this purpose are `samtools markdup` and `picard
+MarkDuplicates`.
+
+### Variant calling
+
+Once bam files have been produced, it is time for variant calling.
+There are many different variant callers, of which we will mention
+four.
+
+[bcftools](https://samtools.github.io/bcftools/bcftools.html) is a
+toolkit to process variant call files, but also has a variant caller
+command.
+
+[freebayes](https://github.com/freebayes/freebayes) uses a Bayesian
+model to call variants. It may be very time-consuming in high-coverage
+regions, and one therefore may have to mask repetitive and other
+low-complexity regions.
+
+[ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD) is optimized for
+low-coverage data. Genotypes aren't called directly; rather, genotype
+likelihoods form the basis for all downstream analyses, such as
+calculation of diversity or other statistics.
+
+Finally, [GATK
+HaplotypeCaller](https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller)
+performs local realignment around variant candidates, which avoids the
+need to run the legacy GATK IndelRealigner. Realignment improves
+results but requires more time to run. GATK is optimized for human
+data. For instance, performance drops dramatically if the reference
+sequence consists of many short scaffolds/contigs, and there is a size
+limit to how large the chromosomes can be.
 
 ## Preparation
 
@@ -84,7 +236,7 @@ bwa index M_aurantiacus_v1.fasta
 #| label: fastqc-red
 #| echo: true
 #| eval: true
-fastqc
+# fastqc
 ```
 
 ## Read mapping
@@ -100,9 +252,5 @@ Picard MarkDuplicates or bamUtil dedup (samtools rmdup deprecated)
 ### GATK workflow
 
 [@hansen_VariantCallingNext_2016]
-
-### Freebayes (optional)
-
-### ANGSD (optional)
 
 # References
