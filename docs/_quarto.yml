@@ -3,10 +3,9 @@ project:
   title: "DDLS Population genomics in practice"
   output-dir: _site
   pre-render:
-    - ../scripts/setup-data.sh
-    - ../scripts/setup-slides-data.sh
-    - ../scripts/setup-exercise-data.sh
-    - ../scripts/prepare.py
+    - ../scripts/init-site.sh
+    - ../scripts/setup-pgip-data.sh
+    - ../scripts/setup-data.py
   render:
     # Root
     - "index.qmd"
@@ -17,14 +16,19 @@ project:
     - "schedule.qmd"
     - "syllabus.qmd"
     # Exercises
-    - "exercises/data.qmd"
+    # - "exercises/data.qmd"
+    - "exercises/datasets/monkeyflowers.qmd"
     - "exercises/index.qmd"
     - "exercises/simulation/index.qmd"
+    # - "exercises/variant_calling/index.qmd"
+    # - "exercises/data_filtering/index.qmd"
     # Slides
     - "slides/index.qmd"
     - "slides/pgip/index.qmd"
     - "slides/foundations/index.qmd"
     - "slides/simulation/index.qmd"
+    # - "slides/variant_calling/index.qmd"
+    # - "slides/datageneration/index.qmd"
     - "slides/population_structure/index.qmd"
     # Recipes
     - "recipes/index.qmd"

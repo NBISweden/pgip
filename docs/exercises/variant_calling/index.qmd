@@ -12,7 +12,21 @@ format: html
 
 # Variant calling {#sec-variantcalling}
 
-In this exercise we will perform the basic steps in variant calling.
+In this exercise we will produce a variant call set, going through the
+basic steps from quality control, read mapping to variant calling. We
+will be working on the [Monkeyflowers
+dataset](../datasets/monkeyflowers.qmd). Make sure to read the dataset
+document before running any commands as it will give you the
+biological background and instructions on how to access and setup the
+data. We will focus on the *red* and *yellow* ecotypes in what follows.
+
+::: {.callout-important}
+
+NB! The commands of this document have been run on a subset (a
+subregion) of the data. Therefore, although you will use the same
+commands, your results will differ from those presented here!
+
+:::
 
 ## Best practice pipeline
 
@@ -33,7 +47,49 @@ variant calling and present three alternatives to highlight differences:
 
 Make 2 and 3 optional.
 
+## Preparation
+
+### Reference
+
+#### Create fasta index
+
+```{bash }
+#| label: samtools-faidx
+#| echo: true
+#| eval: true
+samtools faidx M_aurantiacus_v1.fasta
+```
+
+#### Create sequence dictionary
+
+```{bash }
+#| label: create-sequence-dictionary
+#| echo: true
+#| eval: true
+picard CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
+```
+
+#### Create bwa index
+
+```{bash }
+#| label: bwa-index
+#| echo: true
+#| eval: true
+bwa index M_aurantiacus_v1.fasta
+```
+
+## Read quality control
+
+```{bash }
+#| label: fastqc-red
+#| echo: true
+#| eval: true
+fastqc
+```
+
 ## Read mapping
+
+### Fastq
 
 ### Duplicate removal
 
