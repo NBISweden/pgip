@@ -110,7 +110,7 @@ bioproject
 [PRJNA549183](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA549183)
 and mapped to the reference sequence
 [M_aurantiacus_v1_splitline_ordered.fasta](http://mimubase.org/FTP/Genomes/Maurantiacus_v1.0/).
-Reads that mapped to the ROI were extracted and constitutes the
+Reads that mapped to the ROI were extracted and constitute the
 sequence data that will be used during the exercises.
 
 ```{r }

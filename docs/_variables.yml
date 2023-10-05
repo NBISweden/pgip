@@ -6,7 +6,7 @@ lab:
     msprime: exercises/simulation/index.html#sec-exercise-simulation-msprime
 
 demes:
-  ooa: data/data/ooa/ooa.demes.yaml
+  ooa: pgip_data/data/ooa/ooa.demes.yaml
 
 recipes:
   baseurl: /recipes/slides/index.html

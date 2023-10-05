@@ -1,6 +1,5 @@
 ---
 title: "Precourse"
-toc: false
 date: ""
 sidebar: false
 format:
@@ -10,16 +9,28 @@ format:
 
 ## Suggested readings
 
-Although not required, it is recommended to briefly go through the
-following papers (in particular @fuller_PopulationGeneticsCoral_2020):
+The first sessions consist of lectures that aim to introduce concepts
+and theory from population genetics
 
-- @fuller_PopulationGeneticsCoral_2020
+[Population genomics in practice](slides/pgip/index.qmd) provides a
+quick overview of population genomics. Although not required, it is
+recommended to briefly go through the following papers that will be
+discussed in the lecture:
+
+- @fuller_PopulationGeneticsCoral_2020 (most important)
 - @johri_RecommendationsImprovingStatistical_2022
+
+[Population genetics](slides/foundations/index.qmd) introduces the
+foundations of population genetics. This lecture contains a lot of
+material and we strongly recommend you review the slides to be fully
+prepared for the lecture. See [notes on
+usage](slides/index.qmd#a-note-on-usage) for instructions how to view
+slides.
 
 ## UPPMAX account
 
 You will need an [uppmax account](https://www.uppmax.uu.se/) to run
-the exercises. You can apply for an account
+some of the exercises. You can apply for an account
 [here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
 
 ### Tutorials
@@ -105,5 +116,57 @@ If installation is slow, you can try the
 [mamba](https://mamba.readthedocs.io/en/latest/mamba-installation.html) installer.
 
 :::
+
+## Resources
+
+### Literature
+
+Lecture notes have been prepared based on the literature listed below.
+
+#### Online
+
+Graham Coop's notes on population genetics [@grahamcoop_NotesPopulationGenetics_2020]
+: Comprehensive introduction to population genetics. Contains many
+  biological examples and code snippets.
+
+Joachim Hermisson's notes on mathematical population genetics
+[@hermisson_MathematicalPopulationGenetics_2017;
+@hermisson_MathematicalPopulationGenetics_2018]
+: Introduction to mathematical population genetics.
+
+#### Books
+
+Population Genetics: A Concise Guide [@gillespie_PopulationGeneticsConcise_2004]
+: John Gillespie's short but excellent introduction to population
+  genetics.
+
+Molecular Population Genetics [@hahn_MolecularPopulationGenetics_2019]
+: A more recent introduction to population genetics with more focus on
+  the analyses of sequencing data.
+
+Molecular Evolution and Phylogenetics [@nei_MolecularEvolutionPhylogenetics_2000]
+: Over view of molecular evolution and population genetics, and also
+  phylogenetics.
+
+Mathematical Population Genetics I [@ewens_MathematicalPopulationGenetics_2004]
+: A great reference when it comes to the mathematical treatment of
+  population genetics.
+
+Principles of Population Genetics [@hartl1997principles]
+: A comprehensive textbook covering most topics of population
+  genetics.
+
+Elements of Evolutionary Genetics [@charlesworth_ElementsEvolutionaryGenetics_2010]
+: Introduction to evolutionary genetics.
+
+Evolution [@barton2007evolution]
+: Great comprehensive textbook covering evolution.
+
+Coalescent Theory: An Introduction [@wakeley_CoalescentTheoryIntroduction_2008]
+: A great introduction to coalescent theory.
+
+Gene Genealogies, Variation and Evolution: A Primer in Coalescent Theory [@hein2005gene]
+: Alternative introduction to coalescent with more focus on the
+  Wright-Fisher model
 
 <br>
