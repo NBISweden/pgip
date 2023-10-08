@@ -23,3 +23,42 @@ format:
 execute:
   freeze: false
 ---
+
+## On self-assessment exercise blocks
+
+Scattered throughout the documents are exercise blocks, with hidden
+answers, and in some cases, hints. The exercises are for
+self-assessment of your understanding, but they are not mandatory.
+
+Some of the exercises (labelled with the linux penguin {{< fa
+brands linux >}}) are related to the usage of the command line
+interfaces (CLI), and how to obtain information about what a program
+does. This is an essential skill when working in Linux/UNIX
+environments! These exercises can be skipped if you are an experienced
+Linux/UNIX user.
+
+An example exercise is provided here:
+
+::: {.callout-exercise}
+
+## Example exercise block
+
+{{< fa brands linux >}} The `ls` command is used to list the contents
+of a directory. What option provides a so-called long listing format?
+
+::: {.callout-hint}
+
+Type `ls --help` to show the options to `ls`.
+
+:::
+
+::: {.callout-answer}
+
+The `-l` option uses the long listing format, i.e., the command to use
+is `ls -l`.
+
+:::
+
+:::
+
+## Exercises

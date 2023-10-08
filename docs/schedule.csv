@@ -6,9 +6,10 @@ date;room;start_time;end_time;topic;teacher;assistant;link_slide;link_lab;link_y
 ;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
 ;Uppsala;13:00:00;14:45:00;Introduction to the coalescent;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
 ;Uppsala;14:45:00;16:30:00;Introduction to msprime;Per Unneberg;AS, JH, NO;slides/simulation/index.html;exercises/simulation/index.html;;
-;Uppsala;16:30:00;17:00:00;Overview of SLiM; general applications;Per Unneberg;;slides/simulation/index.html;;;
+;Uppsala;16:30:00;17:00:00;Overview of SLiM, general applications;Per Unneberg;AS, JH, NO;;slides/simulation/index.html;;
 2023/11/07;Uppsala;09:00:00;09:30:00;Recap day 1;Per Unneberg;;;;;
-;Uppsala;09:30:00;12:00:00;Variant calling and filtering;Per Unneberg;AS, JH, NO;;;;
+;Uppsala;09:30:00;11:00:00;Variant calling;Per Unneberg;AS, JH, NO;;exercises/variant_calling/index.html;;
+;Uppsala;11:00:00;12:00:00;Variant filtering;Per Unneberg;AS, JH, NO;;;;
 ;Uppsala;12:00:00;13:00:00;Lunch;;;;;;
 ;Uppsala;13:00:00;17:00:00;Genetic diversity, summarizing variation data;Per Unneberg;AS, JH, NO;;;;
 2023/11/08;Uppsala;09:00:00;09:30:00;Recap day 2;Per Unneberg;;;;;

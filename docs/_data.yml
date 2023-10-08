@@ -3,25 +3,24 @@
 
 # Double underscore keys map to datasets that are recurrently used
 __red_ubam__:
-  ELF.unmapped.bam: monkeyflower/tiny/SRR9309791/SRR9309791.PUN-ELF11-2016.unmapped.bam
-  JMC.unmapped.bam: monkeyflower/tiny/SRR9309467/SRR9309467.PUN-JMC19-2016.unmapped.bam
-  LH.unmapped.bam: monkeyflower/tiny/SRR9309468/SRR9309468.PUN-LH19-2016.unmapped.bam
-  MT.unmapped.bam: monkeyflower/tiny/SRR9309470/SRR9309470.PUN-MT10-2016.unmapped.bam
-  UCSD.unmapped.bam: monkeyflower/tiny/SRR9309473/SRR9309473.PUN-UCSD13-2016.unmapped.bam
+  ELF.unmapped.bam: monkeyflower/tiny/PUN-ELF11-2016/SRR9309791.unmapped.bam
+  JMC.unmapped.bam: monkeyflower/tiny/PUN-JMC19-2016/SRR9309467.unmapped.bam
+  LH.unmapped.bam: monkeyflower/tiny/PUN-LH19-2016/SRR9309468.unmapped.bam
+  MT.unmapped.bam: monkeyflower/tiny/PUN-MT10-2016/SRR9309470.unmapped.bam
+  UCSD.unmapped.bam: monkeyflower/tiny/PUN-UCSD13-2016/SRR9309473.unmapped.bam
 
 __yellow_ubam__:
-  BCRD.unmapped.bam: monkeyflower/tiny/SRR9309788/SRR9309788.PUN-BCRD11-2016.unmapped.bam
-  INJ.unmapped.bam: monkeyflower/tiny/SRR9309790/SRR9309790.PUN-INJ10-2016.unmapped.bam
-  LO.unmapped.bam: monkeyflower/tiny/SRR9309469/SRR9309469.PUN-LO4-2016.unmapped.bam
-  PCT.unmapped.bam: monkeyflower/tiny/SRR9309471/SRR9309471.PUN-PCT7-2016.unmapped.bam
-  POTR.unmapped.bam: monkeyflower/tiny/SRR9309472/SRR9309472.PUN-POTR15-2016.unmapped.bam
+  BCRD.unmapped.bam: monkeyflower/tiny/PUN-BCRD11-2016/SRR9309788.unmapped.bam
+  INJ.unmapped.bam: monkeyflower/tiny/PUN-INJ10-2016/SRR9309790.unmapped.bam
+  LO.unmapped.bam: monkeyflower/tiny/PUN-LO4-2016/SRR9309469.unmapped.bam
+  PCT.unmapped.bam: monkeyflower/tiny/PUN-PCT7-2016/SRR9309471.unmapped.bam
+  POTR.unmapped.bam: monkeyflower/tiny/PUN-POTR15-2016/SRR9309472.unmapped.bam
 
 __red_fastq__:
-  BCRD_R1.fastq.gz: monkeyflower/tiny/SRR9309788/SRR9309788.PUN-BCRD11-2016_R1.fastq.gz
-  BCRD_R2.fastq.gz: monkeyflower/tiny/SRR9309788/SRR9309788.PUN-BCRD11-2016_R2.fastq.gz
-  INJ_R1.fastq.gz: monkeyflower/tiny/SRR9309790/SRR9309790.PUN-INJ10-2016_R1.fastq.gz
-  INJ_R2.fastq.gz: monkeyflower/tiny/SRR9309790/SRR9309790.PUN-INJ10-2016_R2.fastq.gz
-
+  BCRD_R1.fastq.gz: monkeyflower/tiny/PUN-BCRD11-2016/SRR9309788_R1.fastq.gz
+  BCRD_R2.fastq.gz: monkeyflower/tiny/PUN-BCRD11-2016/SRR9309788_R2.fastq.gz
+  INJ_R1.fastq.gz: monkeyflower/tiny/PUN-INJ10-2016/SRR9309790_R1.fastq.gz
+  INJ_R2.fastq.gz: monkeyflower/tiny/PUN-INJ10-2016/SRR9309790_R2.fastq.gz
 
 __reference__:
   M_aurantiacus_v1.fasta: monkeyflower/tiny/M_aurantiacus_v1_splitline_ordered.fasta
@@ -29,7 +28,6 @@ __reference__:
 __sampleinfo__:
   sampleinfo.csv: monkeyflower/sampleinfo.csv
   sraruninfo.csv: monkeyflower/sampleinfo.csv
-
 
 # Exercise/slide data sections
 exercises/datasets:

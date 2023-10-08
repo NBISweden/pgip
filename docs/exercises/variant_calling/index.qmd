@@ -2,6 +2,8 @@
 title: Variant calling
 author: Per Unneberg
 format: html
+execute:
+  cache: false
 ---
 
 <!-- markdownlint-disable MD041 -->
@@ -9,6 +11,13 @@ format: html
 {{< include ../_knitr.qmd >}}
 
 {{< include ../_rlibs.qmd >}}
+
+```{r }
+#| label: custom-libraries
+#| echo: false
+#| eval: true
+library(fastqcr)
+```
 
 ```{bash }
 #| label: variant-calling-init-data
@@ -23,6 +32,12 @@ if [ ! -e INJ_R2_fastqc ]; then
 fi
 ```
 
+::: {.callout-important}
+
+{{< meta date >}}: This exercise is WIP!
+
+:::
+
 <!-- markdownlint-enable MD041 -->
 
 # Variant calling {#sec-variantcalling}
@@ -32,8 +47,9 @@ basic steps from quality control, read mapping to variant calling. We
 will be working on the [Monkeyflowers
 dataset](../datasets/monkeyflowers.qmd). Make sure to read the dataset
 document before running any commands as it will give you the
-biological background and instructions on how to access and setup the
-data. We will focus on the *red* and *yellow* ecotypes in what follows.
+biological background and general information about where to find and
+how to setup the data. We will focus on the *red* and *yellow*
+ecotypes in what follows.
 
 ::: {.callout-important}
 
@@ -62,17 +78,96 @@ commands, your results will differ from those presented here!
 
 ::: {.callout-note collapse=true}
 
+## Data setup
+
+Create an exercise directory and `cd` to it:
+
+```{bash }
+#| label: create-monkeyflower-directory
+#| echo: true
+#| eval: false
+mkdir -p monkeyflower
+cd monkeyflower
+```
+
+Then download the zip archives and unzip them.
+
+:::: {style="display: grid; grid-template-columns: 1fr 1fr 1fr;
+grid-row-gap: 0px ; grid-column-gap: 0px;"}
+
+:::{.text-center}
+
+Fastq and bam files.
+
+:::{.btn .btn-primary .btn-sm .nbisbtn}
+
+[{{< fa download >}}](path) Download
+
+:::
+
+:::
+
+:::{.text-center}
+
+Reference data
+
+:::{.btn .btn-primary .btn-sm .nbisbtn}
+
+[{{< fa download >}}](path) Download
+
+:::
+
+:::
+
+:::{}
+
+:::
+
+::::
+
+:::
+
+::: {.callout-note collapse=true}
+
 ## Tools
 
-In this exercise we will use the following tools:
+In this exercise we will use the tools listed below. See [software
+installation](/precourse.html#sec-software-installation) for
+instructions on how to install.
+
+:::{.panel-tabset}
+
+### Listing
 
 - [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 - [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
 - [GATK](https://gatk.broadinstitute.org/hc/en-us) [@depristo_FrameworkVariationDiscovery_2011]
+- [picard](https://github.com/broadinstitute/picard) [@Picard2019toolkit]
 - [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
 - [csvtk](https://bioinf.shenwei.me/csvtk/)
 - [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
 - [seqkit](https://bioinf.shenwei.me/seqkit/) [@shen_SeqKitCrossPlatformUltrafast_2016]
+- [multiqc](https://multiqc.info/) [@ewels_MultiQCSummarizeAnalysis_2016]
+
+### Conda file
+
+```{bash }
+#| label: cat-yaml-file
+#| echo: false
+#| eval: true
+cat environment.yaml
+```
+
+### UPPMAX modules
+
+```{lang="text"}
+bwa
+multiqc
+picard
+samtools
+```
+
+:::
 
 :::
 
@@ -123,11 +218,22 @@ reported by the qc software.
 
 The quality scores are encoded using ASCII codes. An example of a
 [fastq](https://en.wikipedia.org/wiki/FASTQ_format) sequence is given
-below.
+below. The code snippet shows an example of shell commands^[For any
+shell command, use the option `--help` to print information about the
+commands and its options. `zcat` is a variant of the `cat` command
+that prints the contents of a file on the terminal; the `z` prefix
+shows the command works on compressed files, a common naming
+convention. `head` views the first lines of a file, and `cut` can be
+used to cut out columns from a tab-delimited file, or in this case,
+cut the longest strings to 30 characters width.] that are separated by
+a so-called pipe (`|`) character which takes the output from one
+process and sends it as input to the next^[For more information, see
+[unix pipelines {{< fa brands wikipedia-w
+>}}](<https://en.wikipedia.org/wiki/Pipeline_(Unix)>)].
 
 ```{bash }
 #| label: cat-fastq
-#| echo: false
+#| echo: true
 #| eval: true
 #| fig-cap: |
 zcat INJ_R1.fastq.gz | head -n 4 | cut -c -30
@@ -140,21 +246,42 @@ A fastq entry consists of four lines:
 3. separator (`+`)
 4. phred base quality scores
 
+::: {.callout-exercise}
+
+{{< fa brands linux >}} Use the command `wc` to determine how many sequences are in `INJ_R1.fastq.gz`.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: wc-exercise-answer
+#| echo: true
+#| eval: false
+zcat INJ_R1.fastq.gz | wc -l
+```
+
+Since there are four lines per sequence (id, sequence, `+` separator,
+qualities) you need to divide the final number by four (622744 / 4).
+
+:::
+
+:::
+
 ### Read mapping
 
 Read mapping consists of aligning sequence reads, typically from
 individuals in a population (a.k.a. resequencing) to a reference
 sequence. The choice of read mapper depends, partly on preference, but
-mostly on the sequencing read length. For short reads, a common choice
-is [bwa-mem](https://github.com/lh3/bwa), and for longer reads
-[minimap2](https://github.com/lh3/minimap2).
+mostly on the sequencing read length and application. For short reads,
+a common choice is [bwa-mem](https://github.com/lh3/bwa), and for
+longer reads [minimap2](https://github.com/lh3/minimap2).
 
 In what follows, we will assume that the sequencing protocol generates
 paired-end short reads (e.g., from
 [Illumina](https://ngisweden.scilifelab.se/technologies/illumina/)).
 In practice, this means a DNA fragment has been sequence from both
 ends, where fragment sizes have been selected such that reads do not
-overlap (i.e., there is an *insert size*).
+overlap (i.e., there is unsequenced DNA between the reads of a given
+*insert size*).
 
 The final output of read mapping is an alignment file in [binary
 alignment map
@@ -199,53 +326,231 @@ data. For instance, performance drops dramatically if the reference
 sequence consists of many short scaffolds/contigs, and there is a size
 limit to how large the chromosomes can be.
 
-## Preparation
+### GATK best practice variant calling
 
-### Reference
+We will base our work on the GATK [Germline short variant discovery
+workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-).
+In addition to the steps outlined above, there is a step where quality
+scores are recalibrated in an attempt to correct errors produced by
+the base calling procedure itself.
 
-#### Create fasta index
+## Preparation: reference sequence index and read QC
+
+Prior to mapping we need to create a database index. We also generate
+a fasta index and a sequence dictionary for use with the picard
+toolkit.
 
 ```{bash }
 #| label: samtools-faidx
 #| echo: true
 #| eval: true
+#| results: hide
 samtools faidx M_aurantiacus_v1.fasta
-```
-
-#### Create sequence dictionary
-
-```{bash }
-#| label: create-sequence-dictionary
-#| echo: true
-#| eval: true
 picard CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
-```
-
-#### Create bwa index
-
-```{bash }
-#| label: bwa-index
-#| echo: true
-#| eval: true
 bwa index M_aurantiacus_v1.fasta
 ```
 
-## Read quality control
+We can generate fastqc reports for all input fastq files
+simultaneously, setting the output directory with the `-o` flag:
 
 ```{bash }
 #| label: fastqc-red
 #| echo: true
 #| eval: true
-# fastqc
+#| results: hide
+# Make fastqc output directory; -p avoids error if it already exists
+mkdir -p fastqc
+fastqc -o fastqc *fastq.gz
 ```
+
+::: {.callout-exercise}
+
+`cd` to the output directory and look at the `html` reports. Do you
+notice any difference between read 1 (R1) and read 2 (R2)?
+
+::: {.callout-answer}
+
+```{bash }
+#| label: fastqc-exercise-answer
+#| echo: true
+#| eval: false
+cd fastqc
+open INJ_R1_fastqc.html
+open INJ_R2_fastqc.html
+```
+
+The traffic light summary indicates whether a given quality metric has
+passed or not. Typically, read 2 has slightly lower quality and more
+quality metrics with warnings. Since these reads have been deposited
+in SRA, it is likely they were filtered prior to upload, and we will
+not take any further action here.
+
+:::
+
+:::
+
+We will use `multiqc` later on to combine the results from several
+output reports.
 
 ## Read mapping
 
-### Fastq
+We will start by mapping `fastq` read pairs to the reference. We will
+use the `bwa` read mapper together with `samtools` to process the
+resulting output.
 
-### Duplicate removal
+### Read group information identifies sequence sets
 
-Picard MarkDuplicates or bamUtil dedup (samtools rmdup deprecated)
+Some of the downstream processes require that reads have been assigned
+`read groups` [@_ReadGroups_2023], which is a compact string
+representation of a set of reads that originate from a sequencing unit
+and sample. Assigning read groups becomes particularly important for
+multiplexing protocols, or when a sample has been sequenced on
+different lanes or platform units, as it allows for the identification
+of sequence batch issues (e.g., poor sequencing quality). Here, we
+want to assign a unique `ID`, the sample id (`SM`), and the sequencing
+platform (`PL`), where the latter informs the algorithms on what error
+model to apply. The read group is formatted as
+`@RG\tID:uniqueid\tSM:sampleid\tPU:platform`, where `\t` is the tab
+character. More fields can be added; see the SAM specification,
+section 1.3 [@*HTSFormatSpecifications*] for a complete list.
+
+Sample information is available in the `sampleinfo.csv` file:
+
+```{bash }
+#| label: head-sampleinfo
+#| echo: true
+#| eval: true
+head -n 3 sampleinfo.csv
+```
+
+We will use the `Run` column as unique `ID`, `SampleName` as the
+sample id `SM`, and `ILLUMINA` as the platform `PL`.
+
+### Read mapping with bwa and conversion to bam format with samtools
+
+Let's map the fastq files corresponding to sample `BCRD`:
+
+```{bash }
+#| label: map-bcrd-with-bwa
+#| echo: true
+#| eval: true
+#| results: hide
+bwa mem -R "@RG\tID:SRR9309788\tSM:BCRD\tPL:ILLUMINA" -t 4 \
+ -M M_aurantiacus_v1.fasta BCRD_R1.fastq.gz BCRD_R2.fastq.gz | \
+ samtools sort - | samtools view -h -o BCRD.sort.bam
+```
+
+There's a lot to unpack here. First, the `-R` flag to `bwa mem` passes
+the read group information to the mapper. `-t` sets the number of
+threads, and `-M` marks shorter split hits as secondary, which is for
+Picard compatibility^[Simply type `man bwa mem` at the command line
+for general help and a complete list of options.]. The first
+positional argument is the reference sequence, followed by the fastq
+files for read 1 and 2, respectively.
+
+The output would be printed on the screen (try running the command
+alone!), but we pipe the output to `samtools sort` to sort the
+mappings (by default by coordinate). The `-` simply means "read from
+the pipe".
+
+Finally, `samtools view` converts the text output to binary format
+(default), including the header information (option `-h`). You can use
+the same command to view the resulting output on your screen:
+
+```{bash }
+#| label: samtools-view-example
+#| echo: true
+#| eval: true
+samtools view BCRD.sort.bam | head -n 2
+```
+
+::: {.callout-exercise}
+
+Look at the header information of the output bam file. What does the
+`@SQ` tag stand for, and what does the information on that line tell
+you?
+
+::: {.callout-hint}
+
+To get a list of options, type `samtools view`. The `-H` option views
+the header only.
+
+:::
+
+::: {.callout-answer}
+
+```{bash }
+#| label: samtools-view-answer
+#| echo: true
+#| eval: true
+samtools view -H BCRD.sort.bam
+```
+
+Although you can probably figure it out by looking at the data, do
+have a glance at the SAM format specification mentioned above. The
+`@SQ` tag corresponds to the reference sequence dictionary and tells
+you what region you are looking at (chromosome `LG4` from position
+12000001 to 12100000, which has a length `LN` 100000 bases).
+
+:::
+
+:::
+
+### Mapping from uBAM file
+
+There is an alternative storage format for the fastq files called
+[`uBAM`](https://gatk.broadinstitute.org/hc/en-us/articles/360035532132-uBAM-Unmapped-BAM-Format)
+(unmapped BAM format). The GATK developers promote its use in lieu of
+fastq files as BAM files can store more metadata associated with
+sequencing runs. The workflow is slightly more complex, but the files
+have been prepared for you so you don't need to worry about generating
+the uBAM files.
+
+To facilitate downstream processing, we will from now on make use of
+[environment
+variables](https://en.wikipedia.org/wiki/Environment_variable) to
+refer to a sample and the reference sequence. Retrieve the SRR id from
+the sampleinfo file.
+
+```{bash }
+#| label: map-ubam-with-envvars
+#| echo: true
+#| eval: true
+#| results: hide
+export SRR=SRR9309790
+export SAMPLE=INJ
+export REF=M_aurantiacus_v1.fasta
+samtools fastq ${SAMPLE}.unmapped.bam | \
+bwa mem -R "@RG\tID:${SRR}\tSM:${SAMPLE}\tPL:ILLUMINA" -t 4 -p -M ${REF} - | \
+ samtools sort - | samtools view -h -o ${SAMPLE}.sort.bam
+```
+
+Note that we here need to use the command `samtools fastq` to read the
+contents of `{bash}${SAMPLE}.unmapped.bam` and pipe the output to `bwa
+mem`.
+
+### Mark duplicate reads with Picard MarkDuplicates
+
+Once mapping is completed, we must find and mark duplicate reads. We
+here use `Picard MarkDuplicates`^[The actual command call will depend
+on how Picard was installed. The conda installation provides access
+via the `picard` wrapper, whereas on UPPMAX you must point `java` to
+the actual jar file (`java -jar $PICARD_ROOT/picard.jar`)]:
+
+```{bash }
+#| label: picard-mark-duplicates
+#| echo: true
+#| eval: true
+#| results: hide
+picard MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
+    --METRICS_FILE ${SAMPLE}.sort.dup_metrics.txt \
+    --OUTPUT ${SAMPLE}.sort.dup.bam
+```
+
+The metrics output file contains information on the rate of
+duplication.
+
+### Call raw variants with GATK HaplotypeCaller
 
 ## Variant calling
 
