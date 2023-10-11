@@ -1,0 +1,5 @@
+image: condaforge/mambaforge:23.3.1-1
+tasks:
+  - name: Install pgip environment
+    command: |
+      mamba env create -f environment.yml

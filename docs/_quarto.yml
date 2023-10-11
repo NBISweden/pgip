@@ -17,11 +17,12 @@ project:
     - "syllabus.qmd"
     # Exercises
     # - "exercises/data.qmd"
+    - "exercises/compute_environment/index.qmd"
     - "exercises/datasets/monkeyflowers.qmd"
     - "exercises/index.qmd"
     - "exercises/simulation/index.qmd"
     - "exercises/variant_calling/index.qmd"
-    # - "exercises/data_filtering/index.qmd"
+    - "exercises/data_filtering/index.qmd"
     # Slides
     - "slides/index.qmd"
     - "slides/pgip/index.qmd"

@@ -9,10 +9,11 @@ listing:
   fields: [title, subtitle, author]
   sort: false
   contents:
+    - compute_environment/index.qmd
     - datasets/monkeyflowers.qmd
     - simulation/index.qmd
     - variant_calling/index.qmd
-    # - data_filtering/index.qmd
+    - data_filtering/index.qmd
 date: ""
 toc: false
 sidebar: false

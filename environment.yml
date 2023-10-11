@@ -22,6 +22,7 @@ dependencies:
   - jupyter-cache
   - mosdepth=0.3.3
   - msprime>=1.2
+  - multiqc
   - pandas
   - pip
   - pyslim
@@ -43,6 +44,8 @@ dependencies:
   - r-ggraph
   - r-ggplot2
   - r-gifski
+  - r-gplots
+  - r-gsalib
   - r-highcharter
   - r-igraph
   # # - r-irkernel
@@ -69,5 +72,6 @@ dependencies:
   - slim>=4.0
   - sgkit
   - tskit>=0.5.0
+  - vcftools
   # # - tqdm
   # # - yarl

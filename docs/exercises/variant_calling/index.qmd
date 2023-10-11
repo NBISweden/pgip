@@ -40,8 +40,6 @@ fi
 
 <!-- markdownlint-enable MD041 -->
 
-# Variant calling {#sec-variantcalling}
-
 In this exercise we will produce a variant call set, going through the
 basic steps from quality control, read mapping to variant calling. We
 will be working on the [Monkeyflowers
@@ -101,7 +99,7 @@ Fastq and bam files.
 
 :::{.btn .btn-primary .btn-sm .nbisbtn}
 
-[{{< fa download >}}](path) Download
+[{{< fa download >}} Download]({{< var webexport >}}/small/M_aurantiacus_v1_splitline_ordered.fasta)
 
 :::
 
@@ -113,7 +111,7 @@ Reference data
 
 :::{.btn .btn-primary .btn-sm .nbisbtn}
 
-[{{< fa download >}}](path) Download
+[{{< fa download >}} Download]({{< var webexport >}}/small/M_aurantiacus_v1_splitline_ordered.fasta)
 
 :::
 
@@ -141,30 +139,44 @@ instructions on how to install.
 
 - [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 - [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
-- [GATK](https://gatk.broadinstitute.org/hc/en-us) [@depristo_FrameworkVariationDiscovery_2011]
+- [Genome Analysis ToolKit
+  (GATK)](https://gatk.broadinstitute.org/hc/en-us)
+  [@depristo_FrameworkVariationDiscovery_2011]
 - [picard](https://github.com/broadinstitute/picard) [@Picard2019toolkit]
 - [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
-- [csvtk](https://bioinf.shenwei.me/csvtk/)
-- [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
-- [seqkit](https://bioinf.shenwei.me/seqkit/) [@shen_SeqKitCrossPlatformUltrafast_2016]
 - [multiqc](https://multiqc.info/) [@ewels_MultiQCSummarizeAnalysis_2016]
+- [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
 
-### Conda file
+### Conda
 
-```{bash }
-#| label: cat-yaml-file
-#| echo: false
-#| eval: true
-cat environment.yaml
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - bcftools=1.15.1
+  - gatk4=4.4.0.0
+  - bwa=0.7.17
+  - fastqc=0.12.1
+  - multiqc=1.16
+  - picard=3.1.0
+  - samtools=1.15.1
 ```
 
 ### UPPMAX modules
 
-```{lang="text"}
-bwa
-multiqc
-picard
-samtools
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools GATK/4.3.0.0 bwa/0.7.17 FastQC/0.11.9 \
+    MultiQC/1.12 picard/2.27.5 samtools/1.17 bcftools/1.17
 ```
 
 :::
@@ -305,7 +317,8 @@ four.
 
 [bcftools](https://samtools.github.io/bcftools/bcftools.html) is a
 toolkit to process variant call files, but also has a variant caller
-command.
+command. We will use bcftools to look at and summarize the variant
+files.
 
 [freebayes](https://github.com/freebayes/freebayes) uses a Bayesian
 model to call variants. It may be very time-consuming in high-coverage
@@ -324,7 +337,9 @@ need to run the legacy GATK IndelRealigner. Realignment improves
 results but requires more time to run. GATK is optimized for human
 data. For instance, performance drops dramatically if the reference
 sequence consists of many short scaffolds/contigs, and there is a size
-limit to how large the chromosomes can be.
+limit to how large the chromosomes can be. It also requires some
+parameter optimization and has a fairly complicated workflow
+[@hansen_VariantCallingNext_2016].
 
 ### GATK best practice variant calling
 
@@ -333,6 +348,8 @@ workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germlin
 In addition to the steps outlined above, there is a step where quality
 scores are recalibrated in an attempt to correct errors produced by
 the base calling procedure itself.
+
+GATK comes with a large set of tools. For a complete list and documentation, see the @_ToolDocumentationIndex_2023.
 
 ## Preparation: reference sequence index and read QC
 
@@ -448,8 +465,8 @@ for general help and a complete list of options.]. The first
 positional argument is the reference sequence, followed by the fastq
 files for read 1 and 2, respectively.
 
-The output would be printed on the screen (try running the command
-alone!), but we pipe the output to `samtools sort` to sort the
+The output would be printed on the screen (try running the `bwa mem`
+command alone!), but we pipe the output to `samtools sort` to sort the
 mappings (by default by coordinate). The `-` simply means "read from
 the pipe".
 
@@ -501,14 +518,16 @@ you what region you are looking at (chromosome `LG4` from position
 There is an alternative storage format for the fastq files called
 [`uBAM`](https://gatk.broadinstitute.org/hc/en-us/articles/360035532132-uBAM-Unmapped-BAM-Format)
 (unmapped BAM format). The GATK developers promote its use in lieu of
-fastq files as BAM files can store more metadata associated with
+fastq files since BAM files can store more metadata associated with
 sequencing runs. The workflow is slightly more complex, but the files
 have been prepared for you so you don't need to worry about generating
 the uBAM files.
 
 To facilitate downstream processing, we will from now on make use of
 [environment
-variables](https://en.wikipedia.org/wiki/Environment_variable) to
+variables](https://en.wikipedia.org/wiki/Environment_variable)^[Briefly,
+environment variables are a great way to generalise commands. To reuse
+the command, one only needs to modify the value of the variable.] to
 refer to a sample and the reference sequence. Retrieve the SRR id from
 the sampleinfo file.
 
@@ -521,21 +540,29 @@ export SRR=SRR9309790
 export SAMPLE=INJ
 export REF=M_aurantiacus_v1.fasta
 samtools fastq ${SAMPLE}.unmapped.bam | \
-bwa mem -R "@RG\tID:${SRR}\tSM:${SAMPLE}\tPL:ILLUMINA" -t 4 -p -M ${REF} - | \
+ bwa mem -R "@RG\tID:${SRR}\tSM:${SAMPLE}\tPL:ILLUMINA" -t 4 -p -M ${REF} - | \
  samtools sort - | samtools view -h -o ${SAMPLE}.sort.bam
 ```
 
+```{r }
+#| label: set-sample-envvars
+#| echo: false
+#| eval: true
+Sys.setenv(SRR = "SRR9309790", SAMPLE = "INJ", REF = "M_aurantiacus_v1.fasta")
+```
+
 Note that we here need to use the command `samtools fastq` to read the
-contents of `{bash}${SAMPLE}.unmapped.bam` and pipe the output to `bwa
-mem`.
+contents of `${SAMPLE}.unmapped.bam` and pipe the output to `bwa mem`.
 
 ### Mark duplicate reads with Picard MarkDuplicates
 
-Once mapping is completed, we must find and mark duplicate reads. We
-here use `Picard MarkDuplicates`^[The actual command call will depend
-on how Picard was installed. The conda installation provides access
-via the `picard` wrapper, whereas on UPPMAX you must point `java` to
-the actual jar file (`java -jar $PICARD_ROOT/picard.jar`)]:
+Once mapping is completed, we must find and mark duplicate reads as
+these can distort the results of downstream analyses, such as variant
+calling. We here use `Picard MarkDuplicates`^[The actual command call
+will depend on how Picard was installed. The conda installation
+provides access via the `picard` wrapper, whereas on UPPMAX you must
+point `java` to the actual jar file (`java -jar
+$PICARD_ROOT/picard.jar`)]:
 
 ```{bash }
 #| label: picard-mark-duplicates
@@ -548,14 +575,315 @@ picard MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
 ```
 
 The metrics output file contains information on the rate of
-duplication.
+duplication. We will include the output in the final `multiqc` report.
 
-### Call raw variants with GATK HaplotypeCaller
+### Generate high quality known sites for BQSR
 
-## Variant calling
+Once we have a duplicate marked bam file, we can proceed with Base
+Quality Score Recalibration (BQSR). The purpose here is to correct any
+systematic errors made by the sequencing machine. This is done by
+applying a machine learning model. Before we do so, however, we need
+to generate a list of *known sites* that should not be
+recalibrated^[If we don't supply a list of known sites, the variants
+will be treated as errors and therefore recalibrated to the reference
+state.] Therefore, we will first perform a preliminary round of
+variant calling and filtering to generate a known sites callset.
 
-### GATK workflow
+```{bash }
+#| label: gatk-known-sites-callset
+#| echo: true
+#| eval: true
+#| results: hide
+gatk HaplotypeCaller -OVI true \
+  --emit-ref-confidence GVCF \
+  --annotation FisherStrand -A QualByDepth -A MappingQuality -G StandardAnnotation \
+  --input ${SAMPLE}.sort.dup.bam --output ${SAMPLE}.sort.dup.raw.hc.g.vcf.gz \
+  --reference ${REF}
+gatk VariantFiltration -OVI true \
+  --variant ${SAMPLE}.sort.dup.raw.hc.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+     --filter-name FisherStrand --filter 'FS > 50.0' \
+  --filter-name QualByDepth --filter 'QD < 4.0' \
+  --filter-name MappingQuality --filter 'MQ < 50.0'
+```
 
-[@hansen_VariantCallingNext_2016]
+[`HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/articles/360037422451-HaplotypeCaller)
+is GATK's variant caller that calls both SNPs and indels by realigning
+sequences in the vicinity of sites that harbor variation. We apply the
+`-ERC` option to generate `GVCF` output format, a condensed VCF format
+that includes non-variant sites as well as variant sites. The
+`--annotation` (`-A`) option adds annotations to the output that are
+used in the subsequent filtering step.
 
-# References
+::: {.callout-exercise}
+
+{{< fa brands linux >}} What does the `-OVI` parameter do?
+
+::: {.callout-answer}
+
+Either go to the `HaplotypeCaller` documentation page or type^[Some
+programs, such as GATK, print their help output to `stderr`, one of
+two so-called [standard output
+streams](https://en.wikipedia.org/wiki/Standard_streams) (the other
+being `stdout`). The `2>&1` is a construct that *redirects* (`>`) the
+output from stderr (`2`) to stdout (`1`) and does so in the background
+(`&`). By piping to `less` we can scroll through the documentation.]
+
+```{bash }
+#| echo: true
+#| eval: false
+gatk HaplotypeCaller --help 2>&1 | less
+```
+
+and look for `-OVI`. This option is shorthand for
+`--create-output-variant-index` and makes `HaplotypeCaller` create a
+VCF index.
+
+:::
+
+:::
+
+[`VariantFiltration`](https://gatk.broadinstitute.org/hc/en-us/articles/13832750065947-VariantFiltration)
+does what its name suggests. The `--filter-name` / `--filter` option
+pairs apply named filters to the input data. For instance, we here
+remove variants whose mapping quality is below 50.0.
+
+::: {.callout-exercise}
+
+Go to the [Tool Documentation
+Index](https://gatk.broadinstitute.org/hc/en-us/articles/13832655155099--Tool-Documentation-Index)
+and look up the documentation for the `FisherStrand` and `QualByDepth`
+variant annotations. What do they do and why do you think the filters
+are applied as they are?
+
+:::
+
+Now we have *per-sample* known sites callsets that can be used as
+input to BQSR.
+
+### Base quality score recalibration
+
+Base quality score recalibration consists of two commands:
+
+```{bash }
+#| label: bqsr
+#| echo: true
+#| eval: true
+#| results: hide
+gatk BaseRecalibrator -I ${SAMPLE}.sort.dup.bam \
+  -R ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+  -O ${SAMPLE}.sort.dup.recal.table
+gatk ApplyBQSR -bqsr ${SAMPLE}.sort.dup.recal.table \
+  -I ${SAMPLE}.sort.dup.bam -O ${SAMPLE}.sort.dup.recal.bam
+```
+
+[BaseRecalibrator](https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator)
+compiles empirical data for all non-variant sites for an input bam
+file for a number of covariates (e.g., nucleotide context). The basic
+idea is to fit a probability of error (i.e., a quality score of
+sorts), to observed covariate combinations, which is recorded in a
+*recalibration table* file. The probability is then used correct the
+quality scores reported by the sequencing machine in
+[ApplyBQSR](https://gatk.broadinstitute.org/hc/en-us/articles/13832692459163-ApplyBQSR).
+
+### OPTIONAL: Examine the output of BQSR
+
+We can investigate how well BQSR has performed by applying two more
+commands. First, we generate a calibration table for the recalibrated
+bam file:
+
+```{bash }
+#| label: bqsr-make-after-covariate-table
+#| echo: true
+#| eval: true
+#| results: hide
+gatk BaseRecalibrator -I ${SAMPLE}.sort.dup.recal.bam \
+  -R ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+  -O ${SAMPLE}.sort.dup.recal.after.table
+```
+
+Then we use the two calibration tables as input to
+[AnalyzeCovariates](https://gatk.broadinstitute.org/hc/en-us/articles/13832627271963-AnalyzeCovariates)
+to generate a pdf output (and a csv file that we will use in the next
+code block):
+
+```{bash }
+#| label: bqsr-analyze-covariates
+#| echo: true
+#| eval: true
+#| results: hide
+gatk AnalyzeCovariates -before ${SAMPLE}.sort.dup.recal.table \
+  -after ${SAMPLE}.sort.dup.recal.after.table \
+  -plots ${SAMPLE}.sort.dup.recal.after.pdf \
+  -csv ${SAMPLE}.sort.dup.recal.after.csv
+```
+
+@fig-bqsr-analyze-covariates-plot shows an example plot of quality
+values for base substitutions. There are more plots and summaries in
+the pdf output file.
+
+```{r }
+#| label: fig-bqsr-analyze-covariates-plot
+#| echo: false
+#| eval: true
+#| fig-width: 10
+#| fig-height: 5
+#| column: margin
+#| fig-cap: |
+#|    Plot of base substitution empirical and recalibrated
+#|    quality scores. Note how the empirical quality scores after recalibration
+#|    follow the reported qualities.
+sample <- Sys.getenv("SAMPLE")
+data <- read.csv(paste0(sample, ".sort.dup.recal.after.csv"))
+ggplot(
+  subset(data, EventType == "Base Substitution" & CovariateName == "QualityScore"),
+  aes(AverageReportedQuality, EmpiricalQuality, color = Recalibration)
+) +
+  geom_point(size = 3) +
+  geom_abline()
+```
+
+Several rounds of generating known sites followed by BQSR can be
+applied until convergence. This means that running BQSR can be
+time-consuming, and one side effect is that the resulting bam output
+files can become very large, which may or not be a problem. Also,
+sequencing technologies keep improving, potentially eliminating
+concerns of biased quality scores. This begs the question: is it worth
+running BQSR? For the time being, the GATK developers do recommend
+that BQSR always be run. Keep in mind though, that for non-model
+organisms, one issue is that there seldom is a catalogue of known
+sites, which means the user has to bootstrap such a call set, like we
+did above. For a more complete discussion, see the [technical
+documentation on
+BQSR](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-).
+
+## Variant calling and genotyping
+
+After we have generated the recalibrated bam files, we can proceed
+with the "real" variant calling. We once again run GATK
+`HaplotypeCaller` and `VariantFiltration`.
+
+::: {.callout-exercise}
+
+Run GATK `HaplotypeCaller` on the recalibrated bam file, followed by
+`VariantFiltration`. For the latter, modify the filters to
+
+- filterName: FisherStrand, filter: FS > 60.0
+- filterName: QualByDepth, filter: QD < 2.0
+- filterName: MappingQuality, filter: MQ < 40.0
+
+Change the output file label from `raw` to `recal` (i.e.,
+`.sort.dup.raw` becomes `.sort.dup.recal`).
+
+::: {.callout-answer}
+
+```{bash }
+#| label: variant-calling-on-recal
+#| echo: true
+#| eval: true
+#| results: hide
+gatk HaplotypeCaller -OVI true \
+  --emit-ref-confidence GVCF \
+  --annotation FisherStrand -A QualByDepth -A MappingQuality -G StandardAnnotation \
+  --input ${SAMPLE}.sort.dup.recal.bam --output ${SAMPLE}.sort.dup.recal.hc.g.vcf.gz \
+  --reference ${REF}
+gatk VariantFiltration -OVI true \
+  --variant ${SAMPLE}.sort.dup.recal.hc.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.recal.hc.filtered.g.vcf.gz \
+     --filter-name FisherStrand --filter 'FS > 60.0' \
+  --filter-name QualByDepth --filter 'QD < 2.0' \
+  --filter-name MappingQuality --filter 'MQ < 40.0'
+```
+
+:::
+
+:::
+
+That concludes the sample-specific part of the variant calling
+workflow! Now we need to combine the samples and perform genotyping.
+To do so, we need to run the same commands, from mapping to variant
+calling and filtering on recalibrated files, for all samples.
+
+::: {.callout-exercise}
+
+If time permits, run the workflow on some more samples (e.g., `ELF`).
+
+::: {.callout-important}
+
+There are prepared gvcf files for download so there's no need to run
+the workflow on all samples.
+
+:::
+
+:::
+
+### Compile QC metrics
+
+Identifying sample quality issues is crucial for downstream
+processing. Quality metrics that indicate problems with a sample could
+potentially lead to its removal entirely from subsequent analyses.
+Many programs generate QC metrics, but as it is difficult to get an
+overview by sifting through all separate QC reports, it is recommended
+that you compile them with `MultiQC`. Running `MultiQC` is as simple
+as
+
+```{bash }
+#| label: multiqc
+#| echo: true
+#| eval: true
+#| results: hide
+multiqc .
+```
+
+Open the report `multiqc_report.html` to quickly QC your data. There
+are lots of ways you can interactively modify the report to make more
+logical groupings (e.g., grouping reports by sample^[MultiQC does a
+fairly good job at this as it is, but it does so by guessing sample
+names from file names. You may need to help it along the way by using
+the rename tab.]) , but we won't go into this topic in more detail
+here.
+
+### Combine genomic VCF files and genotype
+
+We are now at the stage where we can do genotyping of our samples.
+This done by first combining individual sample gvcf files with GATK
+`CombineGVCFs`, followed by genotyping with `GenotypeGVCFs`.
+
+```{bash }
+#| label: combine-genotype-gvcfs
+#| echo: true
+#| eval: true
+#| results: hide
+gatk CombineGVCFs -OVI true --output combine.g.vcf.gz --reference ${REF} \
+  -V INJ.sort.dup.recal.hc.g.vcf.gz \
+  -V ELF.sort.dup.recal.hc.g.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
+  -O allsites.vcf.gz --all-sites
+```
+
+::: {.callout-exercise}
+
+Create `allsites.vcf.gz` but for all the red and yellow samples.
+
+::: {.callout-hint}
+
+You need to specify all gvcf input files via the `--variants` (`-V`)
+option. To get the sample names, look at the first column of
+`sampleinfo.csv`:
+
+```{bash }
+#| label: get-yellow-samples
+#| echo: true
+#| eval: true
+cat sampleinfo.csv | grep yellow | cut -f 1 -d ","
+```
+
+:::
+
+:::
+
+## Variant post-processing
+
+### Summarize and QC variants
+
+## References

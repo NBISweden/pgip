@@ -15,6 +15,13 @@ issue](https://github.com/NBISweden/workshop-pgip/issues).
 
 ## Installation and setup, TL;DR
 
+{% note %}
+
+**Note:** this is only for developers! To view the website, navigate
+to <https://nbisweden.github.io/workshop-pgip/>.
+
+{% endnote %}
+
 Clone the repo and cd to directory
 
     git clone git@github.com:NBISweden/workshop-pgip.git
