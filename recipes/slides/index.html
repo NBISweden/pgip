@@ -220,9 +220,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Population structure</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
- <span class="menu-text">slides/variant_calling/index.qmd</span>
-  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -244,6 +241,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../exercises/variant_calling/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/data_filtering/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering of resequencing data</span></a>
   </div>
 </li>
       </ul>
@@ -294,7 +297,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-recipe-slides-hwe" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="sec-recipe-slides-hwe"><span class="header-section-number">1.1</span> Hardy-Weinberg Equilibrium</h2>
 <p>Code to generate Hardy-Weinberg equilibrium plot.</p>
-<div>
 <div class="cell" data-file="foundations/hwe.sh" data-hash="index_cache/html/recipe-slides-hwe-bash_271a0a2478856649592dcedc946f4a1a">
 <details>
 <summary>Bash script to download data from 1000 genomes</summary>
@@ -320,8 +322,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</div>
-<div>
 <div class="cell" data-file="foundations/hwe.R" data-hash="index_cache/html/recipe-slides-hwe-r_a5761353121330df704bef328eea38de">
 <details>
 <summary>R code to plot HWE proportions</summary>
@@ -368,11 +368,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> shape_hwe)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</div>
 </section>
 <section id="sec-recipe-slides-allele-frequency-distribution" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="sec-recipe-slides-allele-frequency-distribution"><span class="header-section-number">1.2</span> Genetic drift as allele frequency distributions</h2>
-<div>
 <div class="cell" data-file="foundations/genetic-drift-histogram.R" data-hash="index_cache/html/recipe-slides-allele-frequency-distribution_42398449785d9a20d451afeed7785700">
 <details>
 <summary>R code to generate and plot allele frequency distribution</summary>
@@ -427,11 +425,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="at">height =</span> data, <span class="at">beside =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> class_col, <span class="at">names.arg =</span> xl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</div>
 </section>
 <section id="sec-recipe-slides-dn-ds-ratio-human-rat" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="sec-recipe-slides-dn-ds-ratio-human-rat"><span class="header-section-number">1.3</span> dn/ds ratios of human versus rat</h2>
-<div>
 <div class="cell" data-file="foundations/hsapiens-rat-dnds.R" data-hash="index_cache/html/recipe-slides-dn-ds-ratio-human-rat_bb3f4cc9bbfdf9ac76509894332ae22d">
 <details>
 <summary>R code to download dn/ds data for <em>H.sapiens</em> versus <em>R.norvegicus</em> from ensembl and plot</summary>
@@ -456,13 +452,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    d[s])) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="fu">nrow</span>(x), <span class="st">" human-rat orthologue pairs"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</div>
-<div>
 
-</div>
-<div>
 
-</div>
 </section>
 </section>
 

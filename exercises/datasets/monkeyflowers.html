@@ -214,9 +214,6 @@ div.csl-indent {
  <span class="menu-text">Population structure</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
- <span class="menu-text">slides/variant_calling/index.qmd</span>
-  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -238,6 +235,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../../exercises/variant_calling/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/data_filtering/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering of resequencing data</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +305,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">05-Oct-2023</p>
+      <p class="date">11-Oct-2023</p>
     </div>
   </div>
   
@@ -314,29 +317,18 @@ div.csl-indent {
 
 <!-- markdownlint-disable MD041 -->
 <!-- markdownlint-disable MD041 -->
-<div>
-
-</div>
 <!-- markdownlint-enable MD041 -->
 <!-- markdownlint-disable MD041 -->
-<div>
-
-</div>
 <!-- markdownlint-enable MD041 -->
-<div>
-
-</div>
 <!-- markdownlint-enable MD041 -->
-<div>
 <div>
 <!-- markdownlint-disable MD013 -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg" class="lightbox" title="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)" data-gallery="quarto-lightbox-gallery-1"><img src="https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg" class="img-fluid figure-img" alt="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)"></a></p>
+<p><a href="https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)"><img src="https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg" class="img-fluid figure-img" alt="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)"></a></p>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
-</div>
 </div>
 <section id="sec-monkeyflower-model-system" class="level2">
 <h2 class="anchored" data-anchor-id="sec-monkeyflower-model-system">The monkeyflower model system</h2>
@@ -348,22 +340,20 @@ div.csl-indent {
 <p>They performed whole-genome resequencing of 37 individuals from 7 subspecies and 2 ecotypes of <em>Mimulus aurantiacus</em> and its sister taxon <em>M. clevelandii</em> (<a href="#fig-evolutionary-relationship">Figure&nbsp;1</a>), all sampled in California (<a href="#fig-monkeyflower-sampling-location">Figure&nbsp;2</a>).</p>
 <div id="fig-evolutionary-relationship" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><a href="assets/images/stankowski-2019-fig1A.png" class="lightbox" title="Evolutionary relationships across the radiation" data-gallery="quarto-lightbox-gallery-2"><img src="assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
+<p><a href="assets/images/stankowski-2019-fig1A.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Evolutionary relationships across the radiation"><img src="assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Evolutionary relationships across the radiation</figcaption>
 </figure>
 </div>
-<div class="page-columns page-full">
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div id="fig-monkeyflower-sampling-location" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" title="Sampling locations" data-gallery="quarto-lightbox-gallery-3"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Sampling locations"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Sampling locations</figcaption>
 </figure>
 </div>
-</div></div></div>
-<p>Genomewide statistics, such as diversity (<span class="math inline">\(\pi\)</span>), divergence (<span class="math inline">\(d_{XY}\)</span>) and differentiation <span class="math inline">\(F_{ST}\)</span>, were calculated within and between taxa to generate genomic diversity landscapes. The landscapes were highly similar across taxa, and local variation in genomic features, such as gene density and recombination rate, was predictive of variation in landscape patterns. These features suggest the influence of selection, in particular BGS.</p>
-<p>Although many characteristics were predicted by a model where BGS is one of the main causes, there were deviations. Therefore, the authors performed simulations in SLiM <span class="citation" data-cites="haller_SLiMForwardGenetic_2019">(<a href="#ref-haller_SLiMForwardGenetic_2019" role="doc-biblioref">Haller &amp; Messer, 2019</a>)</span> with alternative models to see whether other factors could influence the observed patterns.</p>
+</div></div><p>Genomewide statistics, such as diversity (<span class="math inline">\(\pi\)</span>), divergence (<span class="math inline">\(d_{XY}\)</span>) and differentiation <span class="math inline">\(F_{ST}\)</span>, were calculated within and between taxa to generate genomic diversity landscapes. The landscapes were highly similar across taxa, and local variation in genomic features, such as gene density and recombination rate, was predictive of variation in landscape patterns. These features suggest the influence of selection, in particular BGS.</p>
+<p>Although many characteristics were predicted by a model where BGS is one of the main causes, there were deviations. Therefore, the authors performed simulations in SLiM <span class="citation" data-cites="haller_SLiMForwardGenetic_2019">(<a href="#ref-haller_SLiMForwardGenetic_2019" role="doc-biblioref">Haller &amp; Messer, 2019</a>)</span> with alternative models to see whether other factors could explain the observed patterns.</p>
 <p>In all, six scenarios were studied:</p>
 <ol type="1">
 <li>neutral evolution</li>
@@ -376,7 +366,7 @@ div.csl-indent {
 <p><a href="#fig-slim-simulations">Figure&nbsp;3</a> shows typical results of the simulations.</p>
 <div id="fig-slim-simulations" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><a href="../../slides/simulation/assets/images/stankowski-2019-fig7.png" class="lightbox" title="Genomic landscapes simulated under different divergence histories." data-gallery="quarto-lightbox-gallery-4"><img src="../../slides/simulation/assets/images/stankowski-2019-fig7.png" class="img-fluid figure-img"></a></p>
+<p><a href="../../slides/simulation/assets/images/stankowski-2019-fig7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Genomic landscapes simulated under different divergence histories."><img src="../../slides/simulation/assets/images/stankowski-2019-fig7.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Genomic landscapes simulated under different divergence histories.</figcaption>
 </figure>
 </div>
@@ -386,9 +376,7 @@ div.csl-indent {
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>The dataset consists of 37 samples (see <a href="#tbl-monkeyflower-data">Table&nbsp;1</a> for example information). Raw sequence reads were downloaded from <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive</a> (SRA), bioproject <a href="https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA549183">PRJNA549183</a> and mapped to the reference sequence <a href="http://mimubase.org/FTP/Genomes/Maurantiacus_v1.0/">M_aurantiacus_v1_splitline_ordered.fasta</a>. Reads that mapped to the ROI were extracted and constitute the sequence data that will be used during the exercises.</p>
-<div>
 <div class="cell" data-hash="monkeyflowers_cache/html/tbl-monkeyflower-data_d9edacb6594733f5476b2f537ae4f18b">
-<div>
 <div class="cell-output-display">
 <div id="tbl-monkeyflower-data" class="anchored">
 <div class="table-responsive">
@@ -468,8 +456,6 @@ div.csl-indent {
 
 </div>
 </div>
-</div>
-</div>
 <section id="uppmax-webexport" class="level3">
 <h3 class="anchored" data-anchor-id="uppmax-webexport">UPPMAX webexport</h3>
 <p>FIXME: Add link to datasets</p>
@@ -479,12 +465,8 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="github">Github</h3>
 <p>The github repository <a href="https://github.com/NBISweden/pgip-data">pgip-data</a> contains reference sequence and read data for 37 monkeyflower individuals for the region <code>LG4:12,000,000-12,100,000</code>. The smaller region is motivated by the fact that even the ROI generates files that are too large to commit to github. The data resides in the <a href="https://github.com/NBISweden/pgip-data/tree/main/data/monkeyflower/tiny">data/monkeyflower/tiny</a> subdirectory. This data set is used as input data to render the website.</p>
 <p>The repository hosts a <a href="https://github.com/NBISweden/pgip-data/tree/main/data/monkeyflower/workflow">Snakemake workflow</a> to generate all data needed for the exercises.</p>
-<div>
 
-</div>
-<div>
 
-</div>
 
 </section>
 </section>
@@ -746,7 +728,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
 
 
 
