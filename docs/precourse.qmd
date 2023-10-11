@@ -39,7 +39,7 @@ Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
 <https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
 for information on how to connect to and work on uppmax.
 
-## Software installation
+## Software installation{#sec-software-installation}
 
 ::: {.callout-important}
 
@@ -125,48 +125,48 @@ Lecture notes have been prepared based on the literature listed below.
 
 #### Online
 
-Graham Coop's notes on population genetics [@grahamcoop_NotesPopulationGenetics_2020]
+Graham Coop's notes on population genetics
 : Comprehensive introduction to population genetics. Contains many
-  biological examples and code snippets.
+biological examples and code snippets.
+[@grahamcoop_NotesPopulationGenetics_2020].
 
 Joachim Hermisson's notes on mathematical population genetics
-[@hermisson_MathematicalPopulationGenetics_2017;
-@hermisson_MathematicalPopulationGenetics_2018]
-: Introduction to mathematical population genetics.
+: Introduction to mathematical population genetics [@hermisson_MathematicalPopulationGenetics_2017;
+@hermisson_MathematicalPopulationGenetics_2018].
 
 #### Books
 
-Population Genetics: A Concise Guide [@gillespie_PopulationGeneticsConcise_2004]
+Population Genetics: A Concise Guide
 : John Gillespie's short but excellent introduction to population
-  genetics.
+  genetics [@gillespie_PopulationGeneticsConcise_2004].
 
-Molecular Population Genetics [@hahn_MolecularPopulationGenetics_2019]
+Molecular Population Genetics
 : A more recent introduction to population genetics with more focus on
-  the analyses of sequencing data.
+  the analyses of sequencing data  [@hahn_MolecularPopulationGenetics_2019].
 
-Molecular Evolution and Phylogenetics [@nei_MolecularEvolutionPhylogenetics_2000]
+Molecular Evolution and Phylogenetics
 : Over view of molecular evolution and population genetics, and also
-  phylogenetics.
+  phylogenetics [@nei_MolecularEvolutionPhylogenetics_2000].
 
-Mathematical Population Genetics I [@ewens_MathematicalPopulationGenetics_2004]
+Mathematical Population Genetics I
 : A great reference when it comes to the mathematical treatment of
-  population genetics.
+  population genetics [@ewens_MathematicalPopulationGenetics_2004].
 
-Principles of Population Genetics [@hartl1997principles]
+Principles of Population Genetics
 : A comprehensive textbook covering most topics of population
-  genetics.
+  genetics [@hartl1997principles].
 
-Elements of Evolutionary Genetics [@charlesworth_ElementsEvolutionaryGenetics_2010]
-: Introduction to evolutionary genetics.
+Elements of Evolutionary Genetics
+: Introduction to evolutionary genetics [@charlesworth_ElementsEvolutionaryGenetics_2010].
 
-Evolution [@barton2007evolution]
-: Great comprehensive textbook covering evolution.
+Evolution
+: Great comprehensive textbook covering evolution [@barton2007evolution].
 
-Coalescent Theory: An Introduction [@wakeley_CoalescentTheoryIntroduction_2008]
-: A great introduction to coalescent theory.
+Coalescent Theory: An Introduction
+: A great introduction to coalescent theory [@wakeley_CoalescentTheoryIntroduction_2008].
 
-Gene Genealogies, Variation and Evolution: A Primer in Coalescent Theory [@hein2005gene]
+Gene Genealogies, Variation and Evolution: A Primer in Coalescent Theory
 : Alternative introduction to coalescent with more focus on the
-  Wright-Fisher model
+  Wright-Fisher model [@hein2005gene].
 
 <br>

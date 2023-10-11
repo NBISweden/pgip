@@ -1,0 +1,14 @@
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - gatk4
+  - bedtools
+  - bwa
+  - csvtk
+  - fastqc
+  - multiqc
+  - picard
+  - samtools
+  - seqkit

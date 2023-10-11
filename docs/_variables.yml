@@ -5,6 +5,9 @@ lab:
     coalescent: exercises/simulation/index.html#sec-exercise-simulation-coalescent
     msprime: exercises/simulation/index.html#sec-exercise-simulation-msprime
 
+webexport: https://export.uppmax.uu.se/uppstore2017171/workshops/pgip/monkeyflower
+
+
 demes:
   ooa: pgip_data/data/ooa/ooa.demes.yaml
 

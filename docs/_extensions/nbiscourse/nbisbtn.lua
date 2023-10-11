@@ -1,8 +1,10 @@
 function Div(div)
   -- process exercise
-  local content = "content"
   if div.classes:includes("nbisbtn") then
-    div.content = pandoc.utils.stringify(div.content)
+    if div.c[1].t == "Para" then
+      local newcontent = div.c[1].c
+      div.content = newcontent
+    end
   end
-  return pandoc.Div(div)
+  return div
 end
