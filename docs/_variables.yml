@@ -1,6 +1,6 @@
 lab:
   sim:
-    baseurl: https://percyfal.github.io/pgip-jlite/lab
+    baseurl: https://nbisweden.github.io/pgip-jlite/lab
     howto: exercises/simulation/index.html#sec-exercise-simulation-howto
     coalescent: exercises/simulation/index.html#sec-exercise-simulation-coalescent
     msprime: exercises/simulation/index.html#sec-exercise-simulation-msprime

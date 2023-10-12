@@ -12,13 +12,6 @@ execute:
 
 {{< include ../_rlibs.qmd >}}
 
-```{r }
-#| label: custom-libraries
-#| echo: false
-#| eval: true
-library(fastqcr)
-```
-
 ```{bash }
 #| label: variant-calling-init-data
 #| echo: false
@@ -349,7 +342,7 @@ In addition to the steps outlined above, there is a step where quality
 scores are recalibrated in an attempt to correct errors produced by
 the base calling procedure itself.
 
-GATK comes with a large set of tools. For a complete list and documentation, see the @_ToolDocumentationIndex_2023.
+GATK comes with a large set of tools. For a complete list and documentation, see the @ToolDocumentationIndex_2023.
 
 ## Preparation: reference sequence index and read QC
 
@@ -418,7 +411,7 @@ resulting output.
 ### Read group information identifies sequence sets
 
 Some of the downstream processes require that reads have been assigned
-`read groups` [@_ReadGroups_2023], which is a compact string
+`read groups` [@ReadGroups_2023], which is a compact string
 representation of a set of reads that originate from a sequencing unit
 and sample. Assigning read groups becomes particularly important for
 multiplexing protocols, or when a sample has been sequenced on
@@ -429,7 +422,7 @@ platform (`PL`), where the latter informs the algorithms on what error
 model to apply. The read group is formatted as
 `@RG\tID:uniqueid\tSM:sampleid\tPU:platform`, where `\t` is the tab
 character. More fields can be added; see the SAM specification,
-section 1.3 [@*HTSFormatSpecifications*] for a complete list.
+section 1.3 [@HTSFormatSpecifications_2023] for a complete list.
 
 Sample information is available in the `sampleinfo.csv` file:
 
