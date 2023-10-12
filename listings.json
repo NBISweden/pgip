@@ -2,6 +2,7 @@
   {
     "listing": "/exercises/index.html",
     "items": [
+      "/exercises/compute_environment/index.html",
       "/exercises/datasets/monkeyflowers.html",
       "/exercises/simulation/index.html",
       "/exercises/variant_calling/index.html",

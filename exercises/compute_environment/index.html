@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Per Unneberg">
 
-<title>DDLS Population genomics in practice – index</title>
+<title>DDLS Population genomics in practice - Compute environment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -42,23 +77,23 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../assets/logos/nbislogo-green.svg" rel="icon" type="image/svg+xml">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/logos/nbislogo-green.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,10 +125,10 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">DDLS Population genomics in practice</span>
     </a>
   </div>
@@ -104,39 +139,39 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus.html" rel="" target="">
+    <a class="nav-link" href="../../syllabus.html" rel="" target="">
  <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../precourse.html" rel="" target="">
+    <a class="nav-link" href="../../precourse.html" rel="" target="">
  <span class="menu-text">Precourse</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contents.html" rel="" target="">
+    <a class="nav-link" href="../../contents.html" rel="" target="">
  <span class="menu-text">Contents</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule.html" rel="" target="">
+    <a class="nav-link" href="../../schedule.html" rel="" target="">
  <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../info.html" rel="" target="">
+    <a class="nav-link" href="../../info.html" rel="" target="">
  <span class="menu-text">Info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../slides/index.html" rel="" target="">
+    <a class="nav-link" href="../../slides/index.html" rel="" target="">
  <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../exercises/index.html" rel="" target="">
+    <a class="nav-link" href="../../exercises/index.html" rel="" target="">
  <span class="menu-text">Exercises</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../recipes/index.html" rel="" target="" aria-current="page">
+    <a class="nav-link active" href="../../recipes/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Code recipes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -160,7 +195,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../recipes/index.html">Code recipes</a></li><li class="breadcrumb-item"><a href="../recipes/index.html">Code recipes</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Compute environment</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -183,25 +218,25 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/pgip/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../slides/pgip/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population genomics in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/foundations/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../slides/foundations/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population genetics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/simulation/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../slides/simulation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/population_structure/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../slides/population_structure/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population structure</span></a>
   </div>
 </li>
@@ -218,19 +253,19 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/simulation/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../exercises/simulation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to simulation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/variant_calling/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../exercises/variant_calling/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variant calling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/data_filtering/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../exercises/data_filtering/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Filtering of resequencing data</span></a>
   </div>
 </li>
@@ -247,7 +282,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../recipes/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../recipes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code recipes</span></a>
   </div>
 </li>
@@ -263,24 +298,132 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#code-recipes" id="toc-code-recipes" class="nav-link active" data-scroll-target="#code-recipes">Code recipes</a>
+  <li><a href="#gitpod" id="toc-gitpod" class="nav-link active" data-scroll-target="#gitpod">gitpod</a></li>
+  <li><a href="#jupyterlite" id="toc-jupyterlite" class="nav-link" data-scroll-target="#jupyterlite">JupyterLite</a></li>
+  <li><a href="#conda-1" id="toc-conda-1" class="nav-link" data-scroll-target="#conda-1">conda</a>
   <ul class="collapse">
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#slim-recipes" id="toc-slim-recipes" class="nav-link" data-scroll-target="#slim-recipes">SLiM recipes</a></li>
+  <li><a href="#install-conda" id="toc-install-conda" class="nav-link" data-scroll-target="#install-conda">1. Install conda</a></li>
+  <li><a href="#configure-conda" id="toc-configure-conda" class="nav-link" data-scroll-target="#configure-conda">2. Configure conda</a></li>
+  <li><a href="#create-an-isolated-course-environment" id="toc-create-an-isolated-course-environment" class="nav-link" data-scroll-target="#create-an-isolated-course-environment">3. Create an isolated course environment</a></li>
+  <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">4. Install packages</a></li>
   </ul></li>
+  <li><a href="#uppmax" id="toc-uppmax" class="nav-link" data-scroll-target="#uppmax">UPPMAX</a>
+  <ul class="collapse">
+  <li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
+  </ul></li>
+  <li><a href="#brief-introduction-to-bash" id="toc-brief-introduction-to-bash" class="nav-link" data-scroll-target="#brief-introduction-to-bash">Brief introduction to bash</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Compute environment</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Per Unneberg </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">12-Oct-2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
 
 <!-- markdownlint-disable MD041 -->
-<p><span class="large"><strong>12-Oct-2023: This page is under construction!</strong></span></p>
+<!-- markdownlint-disable MD041 -->
 <!-- markdownlint-enable MD041 -->
-<section id="code-recipes" class="level1">
-<h1>Code recipes</h1>
+<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-enable MD041 -->
+<!-- markdownlint-enable MD041 -->
+<p>Computer exercise requirements are listed in <code>Tools</code> callout blocks in each exercise. We will primarily use gitpod and JupyterLite for exercises, which ideally means you do not need to install any software dependencies yourself. The <code>Tools</code> callout block contains listings of programs, along with specifications for two fallback solutions, whenever relevant:</p>
+<ol type="1">
+<li>a <a href="https://docs.conda.io/en/latest/">conda</a> environment file</li>
+<li>a list of <a href="https://www.uppmax.uu.se">UPPMAX</a> modules</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tools - example
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Example Tools block.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Conda</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">UPPMAX modules</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<ul>
+<li><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a></li>
+<li><a href="https://github.com/lh3/bwa">bwa</a> <span class="citation" data-cites="li_AligningSequenceReads_2013">(<a href="#ref-li_AligningSequenceReads_2013" role="doc-biblioref">Li, 2013</a>)</span></li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Copy the contents to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
+<pre lang="text"><code>channels:
+  - conda-forge
+  - bioconda
+  - defauts
+dependencies:
+  - bwa=0.7.17
+  - fastqc=0.12.1</code></pre>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Execute the following command to load modules:</p>
+<div class="cell" data-hash="index_cache/html/uppmax-load-modules_02a733ba2a6121b24695ad06c5a84e9e">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="gitpod" class="level2">
+<h2 class="anchored" data-anchor-id="gitpod">gitpod</h2>
+</section>
+<section id="jupyterlite" class="level2">
+<h2 class="anchored" data-anchor-id="jupyterlite">JupyterLite</h2>
+</section>
+<section id="conda-1" class="level2">
+<h2 class="anchored" data-anchor-id="conda-1">conda</h2>
+<p>The first fallback option is to install software packages locally on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
+<section id="install-conda" class="level3">
+<h3 class="anchored" data-anchor-id="install-conda">1. Install conda</h3>
+<p>To start using conda, follow the <a href="https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install">quick command line install instructions</a> to install the minimal conda installer <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>.</p>
+</section>
+<section id="configure-conda" class="level3">
+<h3 class="anchored" data-anchor-id="configure-conda">2. Configure conda</h3>
+<p>Configure conda to access the package repositories (see also <a href="https://bioconda.github.io/#usage">bioconda usage</a>). This will modify your <code>~/.condarc</code> file:</p>
+<div class="cell" data-hash="index_cache/html/conda-configuration_da7b194a03e43165443025d4e2a641dd">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -291,25 +434,52 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Disclaimer: although the code posted here has at some point been used to generate figures and data, in some cases it may be out of date and not work out of the box. Please report any bugs or inconsistencies by posting an issue at <a href="https://github.com/NBISweden/workshop-pgip/issues" class="uri">https://github.com/NBISweden/workshop-pgip/issues</a>.</p>
+<p>Please note that the order of these commands is important!</p>
 </div>
 </div>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>Collection of recipes to generate data and figures for lecture notes. For full listing, see <a href="../recipes/slides/index.html">slides/index.html</a>.</p>
 </section>
-<section id="slim-recipes" class="level2">
-<h2 class="anchored" data-anchor-id="slim-recipes">SLiM recipes</h2>
-<p>Collection of SLiM recipes <span class="citation" data-cites="hallerben_MesserLabSLiM_2016">(<a href="#ref-hallerben_MesserLabSLiM_2016" role="doc-biblioref">Haller, Ben, 2016</a>)</span> used to generate figures and examples. See <a href="../recipes/slim/index.html">slim/index.html</a> for full listing.</p>
-
-
-
+<section id="create-an-isolated-course-environment" class="level3">
+<h3 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h3>
+<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. We also suggest you use <a href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a> package manager to install programs as this is much quicker.</p>
+<div class="cell" data-hash="index_cache/html/create-conda-pgip_7fd67199afb77e409aee4393e7ac07a7">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> pgip python=3.10 r-base</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To deactivate an environment you issue the command <code>mamba deactivate</code>.</p>
 </section>
+<section id="install-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-packages">4. Install packages</h3>
+<p>You can install packages as follows (remember to activate <code>pgip</code>!):</p>
+<div class="cell" data-hash="index_cache/html/conda-install-packages_a791e4cdf7b6363d8a201ca5a5ca1877">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or if you have packages listed in an environment file</p>
+<div class="cell" data-hash="index_cache/html/conda-install-packages-from-environment-file_b737b19f676d94a36f25480ad7e32a21">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env update <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="uppmax" class="level2">
+<h2 class="anchored" data-anchor-id="uppmax">UPPMAX</h2>
+<p>As another fallback option, you may need an <a href="https://www.uppmax.uu.se/">uppmax account</a> to run some of the exercises. You can apply for an account <a href="https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/">here</a>.</p>
+<section id="tutorials" class="level3">
+<h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
+<p>Look at <a href="https://www.uppmax.uu.se/support/user-guides/" class="uri">https://www.uppmax.uu.se/support/user-guides/</a>, in particular <a href="https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/" class="uri">https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/</a> for information on how to connect to and work on uppmax.</p>
+</section>
+</section>
+<section id="brief-introduction-to-bash" class="level2">
+<h2 class="anchored" data-anchor-id="brief-introduction-to-bash">Brief introduction to bash</h2>
+</section>
+<section id="references" class="level2">
+
+
+
+
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-hallerben_MesserLabSLiM_2016" class="csl-entry" role="listitem">
-Haller, Ben. (2016). Messer <span>Lab</span> <span>SLiM</span>. In <em>Messer Lab</em>. <a href="https://messerlab.org/slim/">https://messerlab.org/slim/</a>
+<div id="ref-li_AligningSequenceReads_2013" class="csl-entry" role="listitem">
+Li, H. (2013). Aligning sequence reads, clone sequences and assembly contigs with <span>BWA-MEM</span>. <em>arXiv:1303.3997 [q-Bio]</em>. <a href="https://arxiv.org/abs/1303.3997">https://arxiv.org/abs/1303.3997</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
