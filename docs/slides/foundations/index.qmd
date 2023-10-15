@@ -442,23 +442,396 @@ The latter expression is called the *nucleotide diversity*
 
 :::
 
+## Alleles as algebraic entities
+
+Recall: **alleles** refer to *different variants* of a sequence at a
+locus (genomic position).
+
+::: {.fragment}
+
+Whatever the underlying molecular nature (gene, chromosome,
+nucleotide, protein), let's represent a locus by a letter, e.g., $A$
+($B$ if two loci, and so on)
+
+:::
+
+::: {.fragment}
+
+If locus has many alleles $1, 2, ...$ , could use indexing $A_1, A_2, ...$.
+
+:::
+
+::: {.fragment}
+
+Will use combination $A$, $a$ for *bi-allelic* loci from now on
+
+:::
+
+::: {.fragment .large}
+
+::: {.callout-important appearance="simple" icon=false}
+
+### Example: gene coding for flower color
+
+:::::: {.columns}
+
+::::: {.column width="30%"}
+
+[{{< fa solid circle >}}]{style="color: #ff2a2a;"} $A$ red color
+
+{{< fa regular circle >}} $a$ white color
+
+:::::
+
+:::::{.column width="5%"}
+
+:::::
+
+:::::{.column width="20%" .fragment}
+
+[Punnett square](https://en.wikipedia.org/wiki/Punnett_square)
+
+:::: {style="display: grid; grid-template-columns: auto auto auto;
+grid-row-gap: 0px; grid-column-gap: 0px; text-align: center; align-items: center;"}
+
+:::{}
+
+{{< fa venus >}} \\ {{< fa mars >}}
+
+:::
+
+:::{}
+
+A
+
+:::
+
+:::{}
+
+a
+
+:::
+
+:::{}
+
+A
+
+:::
+
+:::{}
+
+![](assets/images/flower-red.svg){width=100}
+
+:::
+
+:::{}
+
+![](assets/images/flower-pink.svg){width=100}
+
+:::
+
+:::{}
+
+a
+
+:::
+
+:::{}
+
+![](assets/images/flower-pink.svg){width=100}
+
+:::
+
+:::{}
+
+![](assets/images/flower-white.svg){width=100}
+
+:::
+
+::::
+
+:::::
+
+:::::{.column width="5%"}
+
+:::::
+
+::::: {.column width="40%" .fragment}
+
+:::: {style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+grid-row-gap: 0px; grid-column-gap: 10px; text-align: center; align-items: center;"}
+
+:::{}
+
+Genotype
+
+:::
+
+:::{}
+
+aa
+
+:::
+
+:::{}
+
+Aa
+
+:::
+
+:::{}
+
+AA
+
+:::
+
+:::{}
+
+Phenotype
+
+:::
+
+:::{}
+
+![](assets/images/flower-white.svg){width=100}
+
+:::
+
+:::{}
+
+![](assets/images/flower-pink.svg){width=100}
+
+:::
+
+:::{}
+
+![](assets/images/flower-red.svg){width=100}
+
+:::
+
+::::
+
+Heterozygote has intermediate color phenotype (pink).
+
+:::::
+
+::::::
+
+:::
+
+:::
+
+::: {.notes}
+
+Until now the examples have been based on nucleotide sequences.
+However, much of population genetic theory was developed before the
+nature of heredity (DNA) was known. In these early days, an allele
+would refer to variant forms of a gene, observed as differences in
+phenotypes. Genes, or loci, would be denoted using alphabetic
+characters, such as $A$, and allelic types could be referenced with
+indices, e.g., $A_1, A_2, ..., A_n$.
+
+To simplify calculations, we often look at one locus and we assume two
+alleles, whereby we skip the indices and denote the allelic pairs $A$
+and $a$ (although note that notations differs from author to author;
+for instance @gillespie_PopulationGeneticsConcise_2004 uses $A_1, A_2$
+for bi-allelic loci). For two-locus systems we simply denote the
+second allele with $B, b$, and so on.
+
+The example shows a hypothetical locus having two alleles $A$ and $a$
+that have phenotypes red and white flower color, and where
+heterozygotes are colored pink. The *Punnett square* shows how gamete
+combinations form genotypes and their corresponding phenotypes.
+
+:::
+
+## Alleles and frequencies
+
+We will be interested in looking at the dynamics of alleles, i.e., how
+their abundances in the population change over time. Therefore we want
+to measure the *frequencies* of alleles $A$ and $a$.
+
+:::::: {.columns}
+
+::::: {.column width="55%"}
+
+::: {.fragment fragment-index=1}
+
+::: {.callout-important appearance="simple" icon=false}
+
+### Example
+
+Assume following population ($n=10$, with $n_{AA}=5$, $n_{Aa}=4$,
+$n_{aa}=1$):
+
+![](assets/images/flower-red.svg){width=50}
+![](assets/images/flower-red.svg){width=50}
+![](assets/images/flower-red.svg){width=50}
+![](assets/images/flower-red.svg){width=50}
+![](assets/images/flower-red.svg){width=50}
+![](assets/images/flower-pink.svg){width=50}
+![](assets/images/flower-pink.svg){width=50}
+![](assets/images/flower-pink.svg){width=50}
+![](assets/images/flower-pink.svg){width=50}
+![](assets/images/flower-white.svg){width=50}
+
+::: {.fragment fragment-index=2}
+
+Let **$p$** be frequency of $A$ alleles, **$q=1-p$** frequency of $a$ alleles; then
+
+5 $AA$ individuals, 4 $Aa$ individuals $\Rightarrow p=\frac{5\cdot2 +
+4\cdot1}{10\cdot2}=\frac{14}{20}=0.7$
+
+and $q=1-p=\frac{6}{20}=0.3$
+
+:::
+
+::: {.fragment fragment-index=3}
+
+Inserting frequencies into **Punnett square** gives expected frequency
+of offspring genotypes.
+
+:::
+
+:::
+
+:::
+
+:::::
+
+::::: {.column width="45%"}
+
+:::: {.fragment fragment-index=4}
+
+:::: {style="display: grid; grid-template-columns: auto auto auto;
+grid-row-gap: 0px; grid-column-gap: 0px; text-align: center;
+align-items: center; font-size: 0.8em;"}
+
+:::{}
+
+{{< fa venus >}} \\ {{< fa mars >}}
+
+:::
+
+:::{}
+
+$A$ ($p=0.7$)
+
+:::
+
+:::{}
+
+$a$ ($q=0.3$)
+
+:::
+
+:::{}
+
+$A$ ($p=0.7$)
+
+:::
+
+:::{}
+
+![](assets/images/flower-red.svg){width=50}
+
+$p\cdot p = 0.49$
+
+:::
+
+:::{}
+
+![](assets/images/flower-pink.svg){width=50}
+
+$p\cdot q = 0.21$
+
+:::
+
+:::{}
+
+$a$ ($q=0.3$)
+
+:::
+
+:::{}
+
+![](assets/images/flower-pink.svg){width=50}
+
+$q\cdot p = 0.21$
+
+:::
+
+:::{}
+
+![](assets/images/flower-white.svg){width=50}
+
+$q\cdot q = 0.09$
+
+:::
+
+::::
+
+::::
+
+::: {.fragment fragment-index=5}
+
+**Expected** allele frequencies after mating: $p=p^2 + pq=0.7$, $q=1-p=0.3$
+
+:::
+
+:::::
+
+::::::
+
+::: {.notes}
+
+Given $n$ diploid individuals, there are $2n$ alleles in the
+population. The frequency of allele $A$ is then the homozygote $AA$
+times two, plus one times the individuals carrying one $A$.
+
+The Punnett square shows that the expected homozygote frequencies are
+$0.49$ and $0.09$ for $AA$ and $aa$, and hence, the frequency of $Aa$ is
+$1 - 0.49 - 0.09 = 0.42 = 0.21 + 0.21 = 2pq$
+
+:::
+
 ## In absence of evolutionary forces alleles are in equilibrium
 
 ### The Hardy-Weinberg equilibrium
 
-For a locus, let $A$ and $a$ be two different alleles and let $p$
-be the frequency of the $A$ allele and $q=1-p$ the frequency of the
-$a$ allele. In the **absence** of **mutation**, **drift**,
-**migration**, and other evolutionary processes, the equilibrium state
-is given by the **Hardy-Weinberg equilibrium** (**HWE**).
+For a locus, let $A$ and $a$ be two different alleles and let $p$ be
+the frequency of the $A$ allele and $q=1-p$ the frequency of the $a$
+allele. In the **absence** of **mutation**, **drift**, **migration**,
+and other evolutionary processes, the equilibrium state is given by
+the **Hardy-Weinberg equilibrium** (**HWE**).
+
+:::: {.columns=center}
+
+::: {.column width="45%"}
 
 |            |       |       |       |
 |------------|-------|-------|-------|
 | Genotype:  | $AA$  | $Aa$  | $aa$  |
 | Frequency: | $p^2$ | $2pq$ | $q^2$ |
 
-Importantly, under the HWE assumption, we can calculate allele
-frequencies from genotype frequencies and vice versa:
+:::
+
+::: {.column width="45%"}
+
+|           | $A$ ($p$) | $a$ ($q$) |
+|-----------|-----------|-----------|
+| $A$ ($p$) | $p^2$     | $pq$      |
+| $a$ ($q$) | $qp$      | $q^2$     |
+
+:::
+
+::::
+
+Under HWE assumption, neither allele nor genotype frequencies change
+over time.
+
+Importantly, we can calculate allele frequencies from genotype
+frequencies and vice versa:
 
 $$
 p = p^2 + pq\\
@@ -494,14 +867,32 @@ See next slide.
 #| file: ../../recipes/slides/foundations/hwe.R
 #| fig-height: 6
 #| fig-width: 12
+#| fig-align: center
 #| fig-cap:
 #|     Hardy-Weinberg proportions in 10,000 SNPs on chromosome
 #|     22 from three populations based on 1000 genomes data.
+#|     For each SNP, genotypes are given as counts (minor/heterozygote/major),
+#|     converted to frequencies and plotted on the y-axis. Allele
+#|     frequencies are obtained from genotype frequencies and
+#|     plotted on the x-axis. Most observations follow HWE proportions.
+#|     Deviations from HWE can indicate sample QC issues, or that
+#|     there is population structure.
 #|     Illustration inspired by @cooplab_PopulationGeneticsCourse_2011.
 #|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl >}}#sec-recipe-slides-hwe)
 ```
 
 ::: {.notes }
+
+So how do the HWE assumptions hold up in real data? The figure shows
+three human populations from the 1000 genomes data, for which 10,000
+SNPs have been selected. For each SNP, we know the genotype
+frequencies $AA$, $Aa$, $aa$ and can therefore calculate the allele
+frequencies for $A$ and $a$ using the equations on the preceding
+slide (e.g., $p=p_{AA}+p_{Aa}/2$).
+
+Note that 1000 genomes data have sorted genotype frequencies, so to
+produce nice symmetrical plots, half the genotype frequencies have
+been reversed (minor/het/major -> major/het/minor).
 
 <!-- markdownlint-disable MD013 -->
 
@@ -523,12 +914,92 @@ Population genetics is about [@gillespie_PopulationGeneticsConcise_2004]
 
 ::: {.fragment}
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 Questions to ponder:
 
 - why does variation look the way it does?
 - how is variation maintained?
 - how does variation change over time ($\Delta p$)?
 - what forces shape the genetic structure of *populations*?
+
+:::
+
+::: {.column width="50%" .fragment}
+
+:::: {style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+grid-row-gap: 0px; grid-column-gap: 0px; align-items: center;"}
+
+:::{}
+
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+
+$p=0.1$
+
+:::
+
+:::{}
+
+$\large\rightarrow$
+
+:::
+
+:::{}
+
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+
+$p=0.5$
+
+:::
+
+:::{}
+
+$\large\rightarrow$
+
+:::
+
+:::{}
+
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-red.svg){width=30}
+![](assets/images/flower-white.svg){width=30}
+
+$p=0.9$
+
+:::
+
+::::
+
+:::
+
+::::
 
 :::
 
@@ -1176,16 +1647,12 @@ independent, and we perform $2N$ trials, the number of offspring $k$
 of a given chromosome $v$ is [*binomially
 distributed*](https://en.wikipedia.org/wiki/Binomial_distribution)
 $\mathrm{Bin}(m, p)$, with parameters $m=2N$ and probability of
-success $p=\frac{1}{2N}$:
-
-$$
-P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
-\left(1 - \frac{1}{2N} \right)^{(2N - k)}
-$$
+success $p=\frac{1}{2N}$.
 
 ::: {.notes}
 
-We assume some familiarity with the Binomial distribution. Some mathematical formality follows.
+We assume some familiarity with Binomial sampling. For reference, some
+mathematical formality follows.
 
 Let $p$ be the probability of heads (=1) of a coin flip, and $q=1-p$
 the probability of tails (=0). A coin flip can be modelled by a random
@@ -1197,19 +1664,27 @@ that a binomially distributed variable $Y\sim Bin(n, p)$ is the sum of
 $n$ independent Bernoulli variables $X$ ("Bernoulli trials"), or
 $Y=\sum^nX$. In our case, there are $2N$ trials, each with $p=1/2N$.
 
+$$
+P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
+\left(1 - \frac{1}{2N} \right)^{(2N - k)}
+$$
+
 :::
 
 ## Properties of Wright-Fisher sampling
 
-### The expected number of offspring is one
+:::: {.columns}
 
-<br>
+::: {.column width="50%"}
+
+##### The expected number of offspring is one
 
 ```{r, engine='tikz', fig.ext='svg' }
 #| label: wf-expected-number-of-offspring
 #| echo: false
 #| eval: true
 #| fig-align: center
+#| out-width: 70%
 \begin{tikzpicture}
   \tikzstyle{wf} = [circle, inner sep=0, minimum size=0.2cm, fill=white, draw]
   \tikzstyle{neutral} = [fill=white];
@@ -1225,20 +1700,7 @@ $Y=\sum^nX$. In our case, there are $2N$ trials, each with $p=1/2N$.
 \end{tikzpicture}
 ```
 
-<br>
-
-The expected value of a $\mathrm{Bin}(m,p)$ (binomially distributed)
-variable with parameters $m=2N$ and $p=\frac{1}{2N}$ is $mp$, hence:
-
-$$
-E(v) = mp = 2N\frac{1}{2N} = 1
-$$
-
-## Properties of Wright-Fisher sampling
-
-### Poisson approximation for large $N$
-
-<br>
+##### Poisson approximation for large $N$
 
 ```{r, engine='tikz', fig.ext='svg' }
 #| label: wf-poisson-approximation-large-n
@@ -1263,21 +1725,15 @@ $$
 \end{tikzpicture}
 ```
 
-<br>
-
-When $2N$ large it holds that the probability that sequence $v$ has
-$k$ offspring is
-
 $$
 P(v=k) \approx \frac{1}{k!}e^{-k}
 $$
 
-Since $P(v=0) = e^{-1} \approx 0.37$, a fraction 0.37 of sequences lack
-descendants
+:::
 
-## Properties of Wright-Fisher sampling
+::: {.column width="50%"}
 
-### Probability that two sequences pick same parent {#sec-prob-sequence-pick-same-parent}
+##### P(pick same parent) = 1/2N{#sec-prob-sequence-pick-same-parent}
 
 ```{r, engine="tikz", fig.ext="svg" }
 #| label: wf-prob-parents-identical-fig
@@ -1311,41 +1767,22 @@ descendants
 \end{tikzpicture}
 ```
 
-Let $u$ and $v$ be two sequences. Pick a parent $p_u$ of $u$. Then the
-probability that $v$ picks the same parent is (solid lines)
-
-$$
-P(p_u=p_v) = \frac{1}{2N}
-$$
-
-The probability that they pick different parents is
-
-$$
-P(p_u \neq p_v) = 1 - \frac{1}{2N}
-$$
-
-## Properties of Wright-Fisher sampling {.smaller}
-
-### Time for two sequences to coalesce
+##### Time for two sequences to coalesce $\sim 1/2N$
 
 :::: {.columns}
 
-::: {.column width="25%"}
+::: {.column width="15%"}
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="70%"}
 
 ```{r, engine="tikz", fig.ext="svg" }
-#| label: fig-wf-two-chrom-find-common-ancestor
+#| label: wf-two-chrom-find-common-ancestor
 #| echo: false
 #| eval: true
 #| fig-align: center
-#| out-width: 70%
-#| fig-cap: Illustration of two sequences finding a
-#|     common ancestor after five generations; four failures
-#|     with probability $1-1/2N$, one success with probability
-#|     1/2N
+#| out-width: 100%
 \begin{tikzpicture}[>=latex,thick]
   \tikzstyle{wf} = [circle, inner sep=0, minimum size=0.2cm, fill=white, draw]
   \tikzstyle{u} = [fill=black];
@@ -1382,11 +1819,60 @@ $$
 
 :::
 
-::: {.column width="25%"}
+::: {.column width="15%"}
 
 :::
 
 ::::
+
+:::
+
+::::
+
+::: {.notes}
+
+Many of the results above follow from standard results in probability
+theory and are provided here in brevity for reference to the
+interested reader. The details are not necessary to understand in
+detail.
+
+#### Expected number of offspring
+
+The expected value of a $\mathrm{Bin}(m,p)$ (binomially distributed)
+variable with parameters $m=2N$ and $p=\frac{1}{2N}$ is $mp$, hence:
+
+$$
+E(v) = mp = 2N\frac{1}{2N} = 1
+$$
+
+#### Poisson approximation
+
+When $2N$ large it holds that the probability that sequence $v$ has
+$k$ offspring is
+
+$$
+P(v=k) \approx \frac{1}{k!}e^{-k}
+$$
+
+Since $P(v=0) = e^{-1} \approx 0.37$, a fraction 0.37 of sequences lack
+descendants
+
+#### Probability that two sequences pick same parent
+
+Let $u$ and $v$ be two sequences. Pick a parent $p_u$ of $u$. Then the
+probability that $v$ picks the same parent is (solid lines)
+
+$$
+P(p_u=p_v) = \frac{1}{2N}
+$$
+
+The probability that they pick different parents is
+
+$$
+P(p_u \neq p_v) = 1 - \frac{1}{2N}
+$$
+
+##### Time for two sequences to coalescent
 
 Time for two sequences $u$ and $v$ to find common ancestor
 distributed as $(1 - \frac{1}{2N})^{j-1}\frac{1}{2N}$ ($j-1$ failures
@@ -1396,8 +1882,6 @@ $Ge(p)$, with parameter $p=\frac{1}{2N}$, and expected value
 $\frac{1}{p}={2N}$. That is, the **expected number of generations for
 two sequences to find a common ancestor (i.e., coalesce) is $2N$
 generations**.
-
-::: {.notes }
 
 Since a large fraction of genes lack descendants, very quickly
 (compared to 2N) a population will descend from a small proportion of
