@@ -419,7 +419,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">12-Oct-2023</h4>
+  <h4 class="date">15-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1405,10 +1405,202 @@ Calculate the nucleotide diversity
           display:block!important;
       }</style></aside>
 </section>
+<section id="alleles-as-algebraic-entities" class="slide level2">
+<h2>Alleles as algebraic entities</h2>
+<p>Recall: <strong>alleles</strong> refer to <em>different variants</em> of a sequence at a locus (genomic position).</p>
+<div class="fragment">
+<p>Whatever the underlying molecular nature (gene, chromosome, nucleotide, protein), let’s represent a locus by a letter, e.g., <span class="math inline">\(A\)</span> (<span class="math inline">\(B\)</span> if two loci, and so on)</p>
+</div>
+<div class="fragment">
+<p>If locus has many alleles <span class="math inline">\(1, 2, ...\)</span> , could use indexing <span class="math inline">\(A_1, A_2, ...\)</span>.</p>
+</div>
+<div class="fragment">
+<p>Will use combination <span class="math inline">\(A\)</span>, <span class="math inline">\(a\)</span> for <em>bi-allelic</em> loci from now on</p>
+</div>
+<div class="fragment large">
+<div class="callout callout-important no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Example: gene coding for flower color</strong></p>
+</div>
+<div class="callout-content">
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="color: #ff2a2a;"><i class="fa-solid fa-circle" aria-label="circle"></i></span> <span class="math inline">\(A\)</span> red color</p>
+<p><i class="fa-regular fa-circle" aria-label="circle"></i> <span class="math inline">\(a\)</span> white color</p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column fragment" style="width:20%;">
+<p><a href="https://en.wikipedia.org/wiki/Punnett_square">Punnett square</a></p>
+<div style="display: grid; grid-template-columns: auto auto auto; grid-row-gap: 0px; grid-column-gap: 0px; text-align: center; align-items: center;">
+<div>
+<p><i class="fa-solid fa-venus" aria-label="venus"></i> \ <i class="fa-solid fa-mars" aria-label="mars"></i></p>
+</div>
+<div>
+<p>A</p>
+</div>
+<div>
+<p>a</p>
+</div>
+<div>
+<p>A</p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-red.svg" width="100"></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-pink.svg" width="100"></p>
+</div>
+<div>
+<p>a</p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-pink.svg" width="100"></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-white.svg" width="100"></p>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column fragment" style="width:40%;">
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-row-gap: 0px; grid-column-gap: 10px; text-align: center; align-items: center;">
+<div>
+<p>Genotype</p>
+</div>
+<div>
+<p>aa</p>
+</div>
+<div>
+<p>Aa</p>
+</div>
+<div>
+<p>AA</p>
+</div>
+<div>
+<p>Phenotype</p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-white.svg" width="100"></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-pink.svg" width="100"></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-red.svg" width="100"></p>
+</div>
+</div>
+<p>Heterozygote has intermediate color phenotype (pink).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Until now the examples have been based on nucleotide sequences. However, much of population genetic theory was developed before the nature of heredity (DNA) was known. In these early days, an allele would refer to variant forms of a gene, observed as differences in phenotypes. Genes, or loci, would be denoted using alphabetic characters, such as <span class="math inline">\(A\)</span>, and allelic types could be referenced with indices, e.g., <span class="math inline">\(A_1, A_2, ..., A_n\)</span>.</p>
+<p>To simplify calculations, we often look at one locus and we assume two alleles, whereby we skip the indices and denote the allelic pairs <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> (although note that notations differs from author to author; for instance <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">Gillespie (<a href="#/bibliography" role="doc-biblioref" onclick="">2004</a>)</span> uses <span class="math inline">\(A_1, A_2\)</span> for bi-allelic loci). For two-locus systems we simply denote the second allele with <span class="math inline">\(B, b\)</span>, and so on.</p>
+<p>The example shows a hypothetical locus having two alleles <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> that have phenotypes red and white flower color, and where heterozygotes are colored pink. The <em>Punnett square</em> shows how gamete combinations form genotypes and their corresponding phenotypes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="alleles-and-frequencies" class="slide level2">
+<h2>Alleles and frequencies</h2>
+<p>We will be interested in looking at the dynamics of alleles, i.e., how their abundances in the population change over time. Therefore we want to measure the <em>frequencies</em> of alleles <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-important no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Example</strong></p>
+</div>
+<div class="callout-content">
+<p>Assume following population (<span class="math inline">\(n=10\)</span>, with <span class="math inline">\(n_{AA}=5\)</span>, <span class="math inline">\(n_{Aa}=4\)</span>, <span class="math inline">\(n_{aa}=1\)</span>):</p>
+<p><img data-src="assets/images/flower-red.svg" width="50"> <img data-src="assets/images/flower-red.svg" width="50"> <img data-src="assets/images/flower-red.svg" width="50"> <img data-src="assets/images/flower-red.svg" width="50"> <img data-src="assets/images/flower-red.svg" width="50"> <img data-src="assets/images/flower-pink.svg" width="50"> <img data-src="assets/images/flower-pink.svg" width="50"> <img data-src="assets/images/flower-pink.svg" width="50"> <img data-src="assets/images/flower-pink.svg" width="50"> <img data-src="assets/images/flower-white.svg" width="50"></p>
+<div class="fragment" data-fragment-index="2">
+<p>Let <strong><span class="math inline">\(p\)</span></strong> be frequency of <span class="math inline">\(A\)</span> alleles, <strong><span class="math inline">\(q=1-p\)</span></strong> frequency of <span class="math inline">\(a\)</span> alleles; then</p>
+<p>5 <span class="math inline">\(AA\)</span> individuals, 4 <span class="math inline">\(Aa\)</span> individuals <span class="math inline">\(\Rightarrow p=\frac{5\cdot2 + 4\cdot1}{10\cdot2}=\frac{14}{20}=0.7\)</span></p>
+<p>and <span class="math inline">\(q=1-p=\frac{6}{20}=0.3\)</span></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p>Inserting frequencies into <strong>Punnett square</strong> gives expected frequency of offspring genotypes.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment" data-fragment-index="4">
+<div style="display: grid; grid-template-columns: auto auto auto; grid-row-gap: 0px; grid-column-gap: 0px; text-align: center; align-items: center; font-size: 0.8em;">
+<div>
+<p><i class="fa-solid fa-venus" aria-label="venus"></i> \ <i class="fa-solid fa-mars" aria-label="mars"></i></p>
+</div>
+<div>
+<p><span class="math inline">\(A\)</span> (<span class="math inline">\(p=0.7\)</span>)</p>
+</div>
+<div>
+<p><span class="math inline">\(a\)</span> (<span class="math inline">\(q=0.3\)</span>)</p>
+</div>
+<div>
+<p><span class="math inline">\(A\)</span> (<span class="math inline">\(p=0.7\)</span>)</p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-red.svg" width="50"></p>
+<p><span class="math inline">\(p\cdot p = 0.49\)</span></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-pink.svg" width="50"></p>
+<p><span class="math inline">\(p\cdot q = 0.21\)</span></p>
+</div>
+<div>
+<p><span class="math inline">\(a\)</span> (<span class="math inline">\(q=0.3\)</span>)</p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-pink.svg" width="50"></p>
+<p><span class="math inline">\(q\cdot p = 0.21\)</span></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-white.svg" width="50"></p>
+<p><span class="math inline">\(q\cdot q = 0.09\)</span></p>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="5">
+<p><strong>Expected</strong> allele frequencies after mating: <span class="math inline">\(p=p^2 + pq=0.7\)</span>, <span class="math inline">\(q=1-p=0.3\)</span></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Given <span class="math inline">\(n\)</span> diploid individuals, there are <span class="math inline">\(2n\)</span> alleles in the population. The frequency of allele <span class="math inline">\(A\)</span> is then the homozygote <span class="math inline">\(AA\)</span> times two, plus one times the individuals carrying one <span class="math inline">\(A\)</span>.</p>
+<p>The Punnett square shows that the expected homozygote frequencies are <span class="math inline">\(0.49\)</span> and <span class="math inline">\(0.09\)</span> for <span class="math inline">\(AA\)</span> and <span class="math inline">\(aa\)</span>, and hence, the frequency of <span class="math inline">\(Aa\)</span> is <span class="math inline">\(1 - 0.49 - 0.09 = 0.42 = 0.21 + 0.21 = 2pq\)</span></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="in-absence-of-evolutionary-forces-alleles-are-in-equilibrium" class="slide level2">
 <h2>In absence of evolutionary forces alleles are in equilibrium</h2>
 <h3 id="the-hardy-weinberg-equilibrium">The Hardy-Weinberg equilibrium</h3>
 <p>For a locus, let <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> be two different alleles and let <span class="math inline">\(p\)</span> be the frequency of the <span class="math inline">\(A\)</span> allele and <span class="math inline">\(q=1-p\)</span> the frequency of the <span class="math inline">\(a\)</span> allele. In the <strong>absence</strong> of <strong>mutation</strong>, <strong>drift</strong>, <strong>migration</strong>, and other evolutionary processes, the equilibrium state is given by the <strong>Hardy-Weinberg equilibrium</strong> (<strong>HWE</strong>).</p>
+<div class="{.columns=center}">
+<div class="column" style="width:45%;">
 <table>
 <tbody>
 <tr class="odd">
@@ -1425,7 +1617,33 @@ Calculate the nucleotide diversity
 </tr>
 </tbody>
 </table>
-<p>Importantly, under the HWE assumption, we can calculate allele frequencies from genotype frequencies and vice versa:</p>
+</div>
+<div class="column" style="width:45%;">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(A\)</span> (<span class="math inline">\(p\)</span>)</th>
+<th><span class="math inline">\(a\)</span> (<span class="math inline">\(q\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span> (<span class="math inline">\(p\)</span>)</td>
+<td><span class="math inline">\(p^2\)</span></td>
+<td><span class="math inline">\(pq\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a\)</span> (<span class="math inline">\(q\)</span>)</td>
+<td><span class="math inline">\(qp\)</span></td>
+<td><span class="math inline">\(q^2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Under HWE assumption, neither allele nor genotype frequencies change over time.</p>
+<p>Importantly, we can calculate allele frequencies from genotype frequencies and vice versa:</p>
 <p><span class="math display">\[
 p = p^2 + pq\\
 q = q^2 + pq
@@ -1449,7 +1667,7 @@ q = q^2 + pq
 </section>
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
-<div class="cell" data-file="../../recipes/slides/foundations/hwe.R" data-hash="index_cache/revealjs/fig-hwe-1000genomes_57a5dc7d2d4ecdda7def670cd4f23dc1">
+<div class="cell" data-layout-align="center" data-file="../../recipes/slides/foundations/hwe.R" data-hash="index_cache/revealjs/fig-hwe-1000genomes_980f99e3e8547d1e9879d6f34ae87dbd">
 <div class="cell-output cell-output-error">
 <pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
 </div>
@@ -1460,10 +1678,18 @@ q = q^2 + pq
 <pre><code>Error in by(x, x$population, function(y) {: object 'x' not found</code></pre>
 </div>
 <div class="cell-output cell-output-error">
+<pre><code>Error in factor(z$population): object 'z' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in levels(z$population) &lt;- c("European", "Chinese", "Yoruban"): object 'z' not found</code></pre>
+</div>
+<div class="cell-output cell-output-error">
 <pre><code>Error in ggplot(z, aes(x = p, y = value)): object 'z' not found</code></pre>
 </div>
 </div>
 <aside class="notes">
+<p>So how do the HWE assumptions hold up in real data? The figure shows three human populations from the 1000 genomes data, for which 10,000 SNPs have been selected. For each SNP, we know the genotype frequencies <span class="math inline">\(AA\)</span>, <span class="math inline">\(Aa\)</span>, <span class="math inline">\(aa\)</span> and can therefore calculate the allele frequencies for <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> using the equations on the preceding slide (e.g., <span class="math inline">\(p=p_{AA}+p_{Aa}/2\)</span>).</p>
+<p>Note that 1000 genomes data have sorted genotype frequencies, so to produce nice symmetrical plots, half the genotype frequencies have been reversed (minor/het/major -&gt; major/het/minor).</p>
 <!-- markdownlint-disable MD013 -->
 <p>See <a href="https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines" class="uri">https://stackoverflow.com/questions/26587940/ggplot2-different-legend-symbols-for-points-and-lines</a> for legend customization.</p>
 <!-- markdownlint-enable MD013 -->
@@ -1487,6 +1713,8 @@ q = q^2 + pq
 <li>constructing theories on the forces that influence genetic variation</li>
 </ol>
 <div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Questions to ponder:</p>
 <ul>
 <li>why does variation look the way it does?</li>
@@ -1494,6 +1722,29 @@ q = q^2 + pq
 <li>how does variation change over time (<span class="math inline">\(\Delta p\)</span>)?</li>
 <li>what forces shape the genetic structure of <em>populations</em>?</li>
 </ul>
+</div><div class="column fragment" style="width:50%;">
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; grid-row-gap: 0px; grid-column-gap: 0px; align-items: center;">
+<div>
+<p><img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"></p>
+<p><span class="math inline">\(p=0.1\)</span></p>
+</div>
+<div>
+<p><span class="math inline">\(\large\rightarrow\)</span></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"></p>
+<p><span class="math inline">\(p=0.5\)</span></p>
+</div>
+<div>
+<p><span class="math inline">\(\large\rightarrow\)</span></p>
+</div>
+<div>
+<p><img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"></p>
+<p><span class="math inline">\(p=0.9\)</span></p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <aside class="notes">
 <p>From HWE: we want to look a the creation, maintenance and loss of variation and what forces affect it</p>
@@ -1876,14 +2127,14 @@ q = q^2 + pq
 <li>no mutation and selection</li>
 <li>discrete generations</li>
 </ol>
-<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring <span class="math inline">\(k\)</span> of a given chromosome <span class="math inline">\(v\)</span> is <a href="https://en.wikipedia.org/wiki/Binomial_distribution"><em>binomially distributed</em></a> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>:</p>
+<p>Each generation we sample <span class="math inline">\(2N\)</span> new chromosomes from the previous generation. The probability of choosing a chromosome <span class="math inline">\(v\)</span> is <span class="math inline">\(1/2N\)</span> (coin flip with probability of success <span class="math inline">\(1/2N\)</span>). Since the trials are independent, and we perform <span class="math inline">\(2N\)</span> trials, the number of offspring <span class="math inline">\(k\)</span> of a given chromosome <span class="math inline">\(v\)</span> is <a href="https://en.wikipedia.org/wiki/Binomial_distribution"><em>binomially distributed</em></a> <span class="math inline">\(\mathrm{Bin}(m, p)\)</span>, with parameters <span class="math inline">\(m=2N\)</span> and probability of success <span class="math inline">\(p=\frac{1}{2N}\)</span>.</p>
+<aside class="notes">
+<p>We assume some familiarity with Binomial sampling. For reference, some mathematical formality follows.</p>
+<p>Let <span class="math inline">\(p\)</span> be the probability of heads (=1) of a coin flip, and <span class="math inline">\(q=1-p\)</span> the probability of tails (=0). A coin flip can be modelled by a random variable (r.v.) <span class="math inline">\(X\)</span> that follows a <em>Bernoulli distribution</em>, where <span class="math inline">\(\mathrm{Pr(}X=1\mathrm{)}=p\)</span>, <span class="math inline">\(\mathrm{Pr(}X=0\mathrm{)}=1-p=q\)</span>. One can show (e.g., with transforms such as the <a href="https://en.wikipedia.org/wiki/Probability-generating_function">probability-generating function</a>) that a binomially distributed variable <span class="math inline">\(Y\sim Bin(n, p)\)</span> is the sum of <span class="math inline">\(n\)</span> independent Bernoulli variables <span class="math inline">\(X\)</span> (“Bernoulli trials”), or <span class="math inline">\(Y=\sum^nX\)</span>. In our case, there are <span class="math inline">\(2N\)</span> trials, each with <span class="math inline">\(p=1/2N\)</span>.</p>
 <p><span class="math display">\[
 P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 \left(1 - \frac{1}{2N} \right)^{(2N - k)}
 \]</span></p>
-<aside class="notes">
-<p>We assume some familiarity with the Binomial distribution. Some mathematical formality follows.</p>
-<p>Let <span class="math inline">\(p\)</span> be the probability of heads (=1) of a coin flip, and <span class="math inline">\(q=1-p\)</span> the probability of tails (=0). A coin flip can be modelled by a random variable (r.v.) <span class="math inline">\(X\)</span> that follows a <em>Bernoulli distribution</em>, where <span class="math inline">\(\mathrm{Pr(}X=1\mathrm{)}=p\)</span>, <span class="math inline">\(\mathrm{Pr(}X=0\mathrm{)}=1-p=q\)</span>. One can show (e.g., with transforms such as the <a href="https://en.wikipedia.org/wiki/Probability-generating_function">probability-generating function</a>) that a binomially distributed variable <span class="math inline">\(Y\sim Bin(n, p)\)</span> is the sum of <span class="math inline">\(n\)</span> independent Bernoulli variables <span class="math inline">\(X\)</span> (“Bernoulli trials”), or <span class="math inline">\(Y=\sum^nX\)</span>. In our case, there are <span class="math inline">\(2N\)</span> trials, each with <span class="math inline">\(p=1/2N\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1898,32 +2149,77 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 <aside><ol class="aside-footnotes"><li id="fn1"><p>For a more extensive treatment, see <span class="citation" data-cites="hermisson_MathematicalPopulationGenetics_2017">Hermisson (<a href="#/bibliography" role="doc-biblioref" onclick="">2017</a>)</span> or <span class="citation" data-cites="hein2005gene">Hein et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2005</a>)</span></p></li></ol></aside></section>
 <section id="properties-of-wright-fisher-sampling" class="slide level2">
 <h2>Properties of Wright-Fisher sampling</h2>
-<h3 id="the-expected-number-of-offspring-is-one">The expected number of offspring is one</h3>
-<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h5 id="the-expected-number-of-offspring-is-one">The expected number of offspring is one</h5>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-expected-number-of-offspring_487f4cf9a5a4c2bcff0b5d6170f97d7e">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-expected-number-of-offspring-1.svg" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<h5 id="poisson-approximation-for-large-n">Poisson approximation for large <span class="math inline">\(N\)</span></h5>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-poisson-approximation-large-n_ef661f1a23e8edfc1e8cd9974fa0fc43">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-poisson-approximation-large-n-1.svg" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[
+P(v=k) \approx \frac{1}{k!}e^{-k}
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<h5 id="sec-prob-sequence-pick-same-parent">P(pick same parent) = 1/2N</h5>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-prob-parents-identical-fig_48adb348ad9b576e57ee763cecd6a719">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-prob-parents-identical-fig-1.svg" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<h5 id="time-for-two-sequences-to-coalesce-sim-12n">Time for two sequences to coalesce <span class="math inline">\(\sim 1/2N\)</span></h5>
+<div class="columns">
+<div class="column" style="width:15%;">
 
-<img data-src="index_files/figure-revealjs/wf-expected-number-of-offspring-1.svg" width="960" class="r-stretch quarto-figure-center"><p><br></p>
+</div><div class="column" style="width:70%;">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-two-chrom-find-common-ancestor_9b9a33c5b90970aa9d8b98996a3a4268">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-two-chrom-find-common-ancestor-1.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:15%;">
+
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Many of the results above follow from standard results in probability theory and are provided here in brevity for reference to the interested reader. The details are not necessary to understand in detail.</p>
+<h4 id="expected-number-of-offspring">Expected number of offspring</h4>
 <p>The expected value of a <span class="math inline">\(\mathrm{Bin}(m,p)\)</span> (binomially distributed) variable with parameters <span class="math inline">\(m=2N\)</span> and <span class="math inline">\(p=\frac{1}{2N}\)</span> is <span class="math inline">\(mp\)</span>, hence:</p>
 <p><span class="math display">\[
 E(v) = mp = 2N\frac{1}{2N} = 1
 \]</span></p>
-</section>
-<section id="properties-of-wright-fisher-sampling-1" class="slide level2">
-<h2>Properties of Wright-Fisher sampling</h2>
-<h3 id="poisson-approximation-for-large-n">Poisson approximation for large <span class="math inline">\(N\)</span></h3>
-<p><br></p>
-
-<img data-src="index_files/figure-revealjs/wf-poisson-approximation-large-n-1.svg" width="960" class="r-stretch quarto-figure-center"><p><br></p>
+<h4 id="poisson-approximation">Poisson approximation</h4>
 <p>When <span class="math inline">\(2N\)</span> large it holds that the probability that sequence <span class="math inline">\(v\)</span> has <span class="math inline">\(k\)</span> offspring is</p>
 <p><span class="math display">\[
 P(v=k) \approx \frac{1}{k!}e^{-k}
 \]</span></p>
 <p>Since <span class="math inline">\(P(v=0) = e^{-1} \approx 0.37\)</span>, a fraction 0.37 of sequences lack descendants</p>
-</section>
-<section id="properties-of-wright-fisher-sampling-2" class="slide level2">
-<h2>Properties of Wright-Fisher sampling</h2>
-<h3 id="sec-prob-sequence-pick-same-parent">Probability that two sequences pick same parent</h3>
-
-<img data-src="index_files/figure-revealjs/wf-prob-parents-identical-fig-1.svg" width="800" class="r-stretch quarto-figure-center"><p>Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be two sequences. Pick a parent <span class="math inline">\(p_u\)</span> of <span class="math inline">\(u\)</span>. Then the probability that <span class="math inline">\(v\)</span> picks the same parent is (solid lines)</p>
+<h4 id="probability-that-two-sequences-pick-same-parent">Probability that two sequences pick same parent</h4>
+<p>Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be two sequences. Pick a parent <span class="math inline">\(p_u\)</span> of <span class="math inline">\(u\)</span>. Then the probability that <span class="math inline">\(v\)</span> picks the same parent is (solid lines)</p>
 <p><span class="math display">\[
 P(p_u=p_v) = \frac{1}{2N}
 \]</span></p>
@@ -1931,30 +2227,8 @@ P(p_u=p_v) = \frac{1}{2N}
 <p><span class="math display">\[
 P(p_u \neq p_v) = 1 - \frac{1}{2N}
 \]</span></p>
-</section>
-<section id="properties-of-wright-fisher-sampling-3" class="slide level2 smaller">
-<h2>Properties of Wright-Fisher sampling</h2>
-<h3 id="time-for-two-sequences-to-coalesce">Time for two sequences to coalesce</h3>
-<div class="columns">
-<div class="column" style="width:25%;">
-
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-wf-two-chrom-find-common-ancestor_82ba764843e6b721f6e4621fc4653bb9">
-<div class="cell-output-display">
-<div id="fig-wf-two-chrom-find-common-ancestor" class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Figure&nbsp;4: Illustration of two sequences finding a common ancestor after five generations; four failures with probability <span class="math inline">\(1-1/2N\)</span>, one success with probability 1/2N</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-two-chrom-find-common-ancestor-1.svg" style="width:70.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:25%;">
-
-</div>
-</div>
+<h5 id="time-for-two-sequences-to-coalescent">Time for two sequences to coalescent</h5>
 <p>Time for two sequences <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> to find common ancestor distributed as <span class="math inline">\((1 - \frac{1}{2N})^{j-1}\frac{1}{2N}\)</span> (<span class="math inline">\(j-1\)</span> failures followed by success). This is the <a href="https://en.wikipedia.org/wiki/Geometric_distribution">geometric distribution</a> <span class="math inline">\(Ge(p)\)</span>, with parameter <span class="math inline">\(p=\frac{1}{2N}\)</span>, and expected value <span class="math inline">\(\frac{1}{p}={2N}\)</span>. That is, the <strong>expected number of generations for two sequences to find a common ancestor (i.e., coalesce) is <span class="math inline">\(2N\)</span> generations</strong>.</p>
-<aside class="notes">
 <p>Since a large fraction of genes lack descendants, very quickly (compared to 2N) a population will descend from a small proportion of genes.</p>
 <p>Derivation of average time to having same parent (i.e., coalescence) requires knowledge of geometric distribution. The probability that the genes find common parent <span class="math inline">\(j\)</span> generations ago is</p>
 <p><span class="math display">\[
@@ -2067,7 +2341,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-allele-frequency-histogram-plot" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;5: Histogram showing the course of change of the allele frequency distribution with time <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983, fig. 3.4</a>)</span>. When N large (<span class="math inline">\(\gtrsim 100\)</span>) histogram can be approximated by continuous distribution (diffusion theory). Try recipe <a href="../../recipes/slides/index.html#sec-recipe-slides-allele-frequency-distribution"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a> for different values of N.</figcaption>
+<figcaption>Figure&nbsp;4: Histogram showing the course of change of the allele frequency distribution with time <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983, fig. 3.4</a>)</span>. When N large (<span class="math inline">\(\gtrsim 100\)</span>) histogram can be approximated by continuous distribution (diffusion theory). Try recipe <a href="../../recipes/slides/index.html#sec-recipe-slides-allele-frequency-distribution"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a> for different values of N.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-allele-frequency-histogram-plot-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
@@ -2078,7 +2352,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-buri-table-14" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;6: Frequency distributions of the brown eye (<span class="math inline">\(bw^{75}\)</span>) allele in replicate experimental populations (<span class="math inline">\(n\sim 100\)</span>) of <em>Drosophila melanogaster</em> (8 <i class="fa-solid fa-venus" aria-label="venus"></i>, 8 <i class="fa-solid fa-mars" aria-label="mars"></i>) <span class="citation" data-cites="buri_GeneFrequencySmall_1956">(<a href="#/bibliography" role="doc-biblioref" onclick="">Buri, 1956</a>)</span></figcaption>
+<figcaption>Figure&nbsp;5: Frequency distributions of the brown eye (<span class="math inline">\(bw^{75}\)</span>) allele in replicate experimental populations (<span class="math inline">\(n\sim 100\)</span>) of <em>Drosophila melanogaster</em> (8 <i class="fa-solid fa-venus" aria-label="venus"></i>, 8 <i class="fa-solid fa-mars" aria-label="mars"></i>) <span class="citation" data-cites="buri_GeneFrequencySmall_1956">(<a href="#/bibliography" role="doc-biblioref" onclick="">Buri, 1956</a>)</span></figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-buri-table-14-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2113,28 +2387,28 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <p>To capture dynamics, follow allele frequency trajectory as function of time.</p>
 <div class="smallr">
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_fc6a9d0852d57471ad01989470464bdb">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="do">##'</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="do">##' @param n Population size</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="do">##'</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
-<span id="cb6-9"><a href="#cb6-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
-<span id="cb6-10"><a href="#cb6-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
-<span id="cb6-11"><a href="#cb6-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
-<span id="cb6-12"><a href="#cb6-12"></a>    }</span>
-<span id="cb6-13"><a href="#cb6-13"></a>    x</span>
-<span id="cb6-14"><a href="#cb6-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="do">##'</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="do">##' @param n Population size</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="do">##'</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
+<span id="cb8-11"><a href="#cb8-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    }</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    x</span>
+<span id="cb8-14"><a href="#cb8-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-plot_6499baaaee1d16b3debdc278a724c026">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Example simulation and plot</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Example simulation and plot</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -2143,7 +2417,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-genetic-drift-N-10" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;7: Genetic drift for different haploid(!) population sizes, starting frequency <span class="math inline">\(p_0\)</span>=0.5. Note dependency of variance on population size N.</figcaption>
+<figcaption>Figure&nbsp;6: Genetic drift for different haploid(!) population sizes, starting frequency <span class="math inline">\(p_0\)</span>=0.5. Note dependency of variance on population size N.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genetic-drift-N-10-1.gif" style="width:80.0%"></p>
 </figure>
 </div>
@@ -2175,7 +2449,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;8: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
+<figcaption>Figure&nbsp;7: Genetic drift for different combinations of starting frequency and population size for n=50 repetitions per parameter combination. Note how variation and time to fixation depends on population size and starting frequency.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-genetic-drift-many-repetitions-1.svg" width="560" height="380"></p>
 </figure>
 </div>
@@ -2232,7 +2506,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;9: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
+<figcaption>Figure&nbsp;8: Illustration of identity by descent (IBD) and state (IBS). Alleles in generation <span class="math inline">\(n\)</span> are IBD but not IBS.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-identity-by-state-and-descent-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
@@ -2270,7 +2544,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;10: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
+<figcaption>Figure&nbsp;9: Plot of <span class="math inline">\(\mathcal{H}_t\)</span> illustrating dependency on population size</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-gillespie-2.4-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
@@ -2284,7 +2558,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="cell-output-display">
 <div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;11: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">Graham Coop (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span>, Fig. 4.5</figcaption>
+<figcaption>Figure&nbsp;10: Heterozygosity in black-footed ferret <span class="citation" data-cites="wisely_GeneticDiversityFitness_2002">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wisely et al., 2002</a>)</span>. Example from <span class="citation" data-cites="grahamcoop_NotesPopulationGenetics_2020">Graham Coop (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span>, Fig. 4.5</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-black-footed-ferret-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
@@ -2461,7 +2735,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-wf-mutation" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;12: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
+<figcaption>Figure&nbsp;11: Variation is introduced by mutations (black) at rate <span class="math inline">\(\mu=1e^{-4}\)</span> and is occasionally lost through genetic drift.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-mutation-1.svg" width="400" height="500"></p>
 </figure>
 </div>
@@ -2493,7 +2767,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
+<figcaption>Figure&nbsp;12: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" width="500" height="500"></p>
 </figure>
 </div>
@@ -2574,7 +2848,7 @@ DNA sequences
 <div class="cell-output-display">
 <div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
+<figcaption>Figure&nbsp;13: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals. The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -2666,7 +2940,7 @@ DNA sequences
 <section id="selection-and-fitness" class="slide level2 smaller">
 <h2>Selection and fitness</h2>
 
-<img data-src="index_files/figure-revealjs/fig-selection-model-tikz-1.svg" width="700" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;15: The life cycle used in the fundamental model of selection <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, fig. 3.2</a>)</span></p><div class="fragment">
+<img data-src="index_files/figure-revealjs/fig-selection-model-tikz-1.svg" width="700" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;14: The life cycle used in the fundamental model of selection <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, fig. 3.2</a>)</span></p><div class="fragment">
 <blockquote>
 <p>Much confusion exists in the literature regarding how various types of selection are defined, in particular because some of the terminology is used slightly differently within different scientific communities <span class="citation" data-cites="nielsen_MolecularSignaturesNatural_2005">(<a href="#/bibliography" role="doc-biblioref" onclick="">Nielsen, 2005</a>)</span></p>
 </blockquote>
@@ -2741,7 +3015,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <div class="cell-output-display">
 <div id="fig-selection-fig-p" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;16: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
+<figcaption>Figure&nbsp;15: Allele frequency change over time for directional, balancing, and disruptive selection, for different values of <span class="math inline">\(p_0\)</span>.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-fig-p-1.svg" width="400" height="400"></p>
 </figure>
 </div>
@@ -2752,7 +3026,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <div class="cell-output-display">
 <div id="fig-selection-fig-dp" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;17: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
+<figcaption>Figure&nbsp;16: Rate of allele frequency change as a function of allele frequency for directional, balancing, and disruptive selection.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-fig-dp-1.svg" width="400" height="400"></p>
 </figure>
 </div>
@@ -2784,7 +3058,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <div class="cell-output-display">
 <div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;18: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
+<figcaption>Figure&nbsp;17: The fixation probability relative to the neutral probability of fixation (<span class="math inline">\(p=1/2N\)</span>) under the assumption <span class="math inline">\(s&lt;0.1\)</span>. Red highlights region where <span class="math inline">\(|N_es|&lt;0.05\)</span>. Adapted from <span class="citation" data-cites="lynch_OriginsGenomeArchitecture_2007">Lynch (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span>, Fig. 4.2.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selection-and-drift-1.svg" width="1152"></p>
 </figure>
 </div>
@@ -2840,7 +3114,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;19: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection. <a href="../../recipes/slides/index.html#sec-recipe-slides-dn-ds-ratio-human-rat"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></figcaption>
+<figcaption>Figure&nbsp;18: <span class="math inline">\(d_n/d_s\)</span> comparisons for human-rat orthologs. For most genes, <span class="math inline">\(d_n/d_s &lt;&lt; 1\)</span> indicating purifying selection. A handful of genes (n=9) have <span class="math inline">\(d_n/d_s &gt; 1.0\)</span> which could indicate positive selection. <a href="../../recipes/slides/index.html#sec-recipe-slides-dn-ds-ratio-human-rat"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-ensembl-hsapiens-rat-dnds-1.svg" width="768" height="400"></p>
 </figure>
 </div>
@@ -2875,7 +3149,7 @@ positive selection
 <div class="cell-output-display">
 <div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;20: A selective sweep of an advantageous mutation (gray dot). Adapted from <span class="citation" data-cites="charlesworth_ElementsEvolutionaryGenetics_2010">Charlesworth &amp; Charlesworth (<a href="#/bibliography" role="doc-biblioref" onclick="">2010</a>)</span>, Fig. 8.13</figcaption>
+<figcaption>Figure&nbsp;19: A selective sweep of an advantageous mutation (gray dot). Adapted from <span class="citation" data-cites="charlesworth_ElementsEvolutionaryGenetics_2010">Charlesworth &amp; Charlesworth (<a href="#/bibliography" role="doc-biblioref" onclick="">2010</a>)</span>, Fig. 8.13</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-1.svg" width="960" height="300"></p>
 </figure>
 </div>
@@ -2991,8 +3265,8 @@ D_t = (1-r)^tD_0
 <div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_51eacb4a9e001967e6e5faa0749b18cb">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/pgip-load-slim-data_3ac66aeeaa40c52c4eda503c1ba06518">
@@ -3036,8 +3310,8 @@ D_t = (1-r)^tD_0
 <div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_74273fb0acada19733235fc43559f319">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -3110,7 +3384,7 @@ Caused by error in `FUN()`:
 <div class="cell-output-display">
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;21: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<figcaption>Figure&nbsp;20: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
 </figure>
 </div>
@@ -3143,7 +3417,7 @@ Caused by error in `FUN()`:
 <div class="cell-output-display">
 <div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;22: Hitchhiking (left) versus background selection (right).</figcaption>
+<figcaption>Figure&nbsp;21: Hitchhiking (left) versus background selection (right).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="1000"></p>
 </figure>
 </div>
