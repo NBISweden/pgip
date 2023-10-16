@@ -1677,6 +1677,8 @@ $$
 
 ::: {.column width="50%"}
 
+:::{.fragment}
+
 ##### The expected number of offspring is one
 
 ```{r, engine='tikz', fig.ext='svg' }
@@ -1699,6 +1701,10 @@ $$
 \node[lab, above of=n13] {$v$};
 \end{tikzpicture}
 ```
+
+:::
+
+:::{.fragment}
 
 ##### Poisson approximation for large $N$
 
@@ -1731,9 +1737,13 @@ $$
 
 :::
 
+:::
+
 ::: {.column width="50%"}
 
-##### P(pick same parent) = 1/2N{#sec-prob-sequence-pick-same-parent}
+:::{.fragment}
+
+##### Prob(pick same parent) = 1/2N{#sec-prob-sequence-pick-same-parent}
 
 ```{r, engine="tikz", fig.ext="svg" }
 #| label: wf-prob-parents-identical-fig
@@ -1766,6 +1776,10 @@ $$
 \path[->] (n06) edge[dotted] node[above left] {$1-\frac{1}{2N}$} (n213);
 \end{tikzpicture}
 ```
+
+:::
+
+:::{.fragment}
 
 ##### Time for two sequences to coalesce $\sim 1/2N$
 
@@ -1824,6 +1838,8 @@ $$
 :::
 
 ::::
+
+:::
 
 :::
 
@@ -2004,13 +2020,14 @@ drift
 
 :::
 
-## Sampling model again
+## Binomial process models allele sampling
 
 ```{r }
 #| label: allele-sampling-model
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 60%
 #| fig-height: 3
 #| fig-width: 12
 #| fig-align: center
@@ -2020,19 +2037,107 @@ y_range <- range(V(wf)$y)
 ggplot_wf(wf, fill=allele)
 ```
 
-We assume two gene variants $A$, $a$, each with $i$ and $j=2N-i$
-copies in generation $t$. Let $p_t=i/2N$ be the *frequency* of $A$ in
-generation $t$, and $q_t=1-p_t$ the frequency of $a$.
+:::: {.columns .fragment}
+
+::: {.column width="50%"}
+
+We assume two alleles $A$, $a$, each with $i$ and $j=2N-i$ copies in
+generation $t$.
+
+:::
+
+::: {.column width="50%"}
+
+:::: {style="display: grid; grid-template-columns: 1fr 1fr;
+grid-row-gap: 0px; grid-column-gap: 0px; align-items: center;"}
+
+:::{}
+
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+
+:::
+
+:::{}
+
+$i=8$, $j=2\cdot 6-8=4$
+
+:::
+
+::::
+
+:::
+
+::::
+
+:::: {.columns .fragment}
+
+::: {.column width="50%"}
+
+Let $p_t=i/2N$ be the *frequency* of $A$ in generation $t$, and
+$q_t=1-p_t$ the frequency of $a$.
+
+:::
+
+::: {.column width="50%"}
+
+:::: {style="display: grid; grid-template-columns: 1fr 1fr;
+grid-row-gap: 0px; grid-column-gap: 0px;"}
+
+:::{}
+
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+
+$p_t = 8/12$
+
+:::
+
+:::{}
+
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-red.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+![](assets/images/flower-white.svg){width=20}
+
+$p_{t+1} = 4/12$
+
+:::
+
+::::
+
+:::
+
+::::
+
+::: {.fragment}
+
+Prob($k$ $A$ alleles in next generation) is $\mathsf{Bin}(2N,
+\frac{i}{2N})$
+
+:::
+
+::: {.notes }
+
+A more formal mathematical description goes as follows:
 
 The sampling model for next generation $t+1$, *given* $i$ $A$ alleles
-in generation $t$, is then
+in generation $t$, is
 
 $$
 p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 \left(1 - \frac{i}{2N} \right)^{(2N - k)} = \mathsf{Bin}(2N, \frac{i}{2N})
 $$
-
-::: {.notes }
 
 NB: we here slightly change notation, with $p_{t+1} = P(X=k)$. Also,
 we have omitted an index $i$ in the expressions of $p$. The
@@ -2042,178 +2147,14 @@ generation.
 
 :::
 
-## Probability distributions of allele frequencies
-
-```{r }
-#| label: allele-frequency-histogram
-#| echo: false
-#| eval: true
-n <- 10
-x <- vector(mode="numeric", length=n + 1)
-# Start with n major = n minor
-n_a <- ceiling(length(x)/2)
-x[n_a] <- 1
-class <- c("absorbing", rep("normal", n - 1), "absorbing")
-# Make transition matrix
-P <- do.call("rbind", lapply(0:n, function(i) {dbinom(0:n, n, i/n)}))
-
-plot_drift_histogram <- function(t, P) {
-  data <- t(x %*% (P%^%t))
-  xlabels <- unlist(lapply(0:n, function(x) {
-    sprintf("frac(%i, %i)", x, n)
-  }))
-  p <- data.frame(n=0:n, class=class, obs=data) %>%
-    ggplot(aes(y=obs, x=n, fill=class)) +
-    geom_bar(stat="identity", color="black", width=1) +
-    xlab("") + ylab("") +
-    annotate("text", label = paste("t =", t), fontface="italic",
-             x = n/2, y = 1.2*max(data), size = 10) +
-    scale_fill_manual(values=list("absorbing"="black", "normal"="white")) +
-    theme(legend.position="none",
-          axis.text.y = element_text(size=16),
-          axis.text.x = element_text(size=16, angle=0, hjust=0.5, vjust=0)) +
-    scale_x_continuous(
-        breaks=0:n,
-        labels=do.call(c, lapply(xlabels, function(l) {parse(text=l)}))) +
-    ylim(c(0, 1.3*max(data)))
-  p
-}
-```
-
-:::: {.columns}
-
-::: {.column width="40%"}
-
-```{r }
-#| label: fig-allele-frequency-histogram-plot
-#| echo: false
-#| eval: true
-#| out-width: 80%
-#| fig-cap: |
-#|     Histogram showing the course of change of the allele
-#|     frequency distribution with time [@kimura_1983, Fig. 3.4].
-#|     When N large ($\gtrsim 100$) histogram can be approximated
-#|     by continuous distribution (diffusion theory). Try recipe
-#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
-#|     >}}#sec-recipe-slides-allele-frequency-distribution)
-#|     for different values of N.
-grid.arrange(
-    plot_drift_histogram(t=1, P=P),
-    plot_drift_histogram(t=5, P=P),
-    plot_drift_histogram(t=10, P=P),
-    plot_drift_histogram(t=20, P=P),
-    ncol=2)
-```
-
-:::
-
-::: {.column width="60%"}
-
-```{r }
-#| label: fig-buri-table-14
-#| echo: false
-#| eval: true
-#| out-width: 70%
-#| fig-width: 12
-#| fig-height: 12
-#| fig-align: center
-#| fig-cap: |
-#|    Frequency distributions of the brown eye ($bw^{75}$)
-#|    allele in replicate experimental populations ($n\sim 100$)
-#|    of *Drosophila melanogaster* (8 {{< fa venus >}},
-#|    8 {{< fa mars >}}) [@buri_GeneFrequencySmall_1956]
-data <- read.csv("assets/data/buri-table14.csv", header=TRUE, fill=0)
-colnames(data)[3:35] <- as.character(0:32)
-data <- data %>% replace(., is.na(.), 0)
-data$`32` <- data$`32` + data$Total.fixed.bw.75
-data$`0` <- data$`0` + data$Total.fixed.bw
-plot_buri <- function(t, xaxis=FALSE, yaxis=FALSE, title=TRUE) {
-  labels <- lapply(0:32, function(x) {
-    ""
-  })
-  names(labels) <- as.character(0:32)
-  labels$`0` <- 0
-  labels$`32` <- 1
-  p <- ggplot(stack(subset(data[2:20,c(1, 2:36)], Generation==t)[ , 3:35]),
-              aes(x=ind, y=values)) +
-    geom_bar(stat="identity") +
-    theme(legend.position="none",
-          axis.ticks=element_blank(),
-          axis.text.x = element_blank(),
-          axis.text.y = element_blank(),
-          plot.margin = unit(c(0, 0, 0, 0), "null"),
-          panel.spacing = unit(c(0, 0, 0, 0), "null")) +
-    ylab("") + xlab("") + ylim(0, 30)
-  if (title) {
-    p <- p + annotate("text", label = paste("t =", t), fontface="italic",
-                      x = 2, y = 28, size = 8)
-  }
-  if (xaxis)  {
-    p <- p + scale_x_discrete(breaks=0:32, labels=labels) +
-      xlab("Frequency") +
-      theme(axis.text.x = element_text(size=16, angle=0,
-                                       hjust=0.5, vjust=0))
-  }
-  if (yaxis) {
-    p <- p + ylab("Count") +
-      theme(axis.text.y = element_text(size=16))
-  }
-  p
-}
-grid.arrange(
-    plot_buri(1),# plot_buri(2), plot_buri(3),
-    plot_buri(5),# plot_buri(5), plot_buri(6),
-    plot_buri(10),# plot_buri(8), plot_buri(9),
-    plot_buri(15),# plot_buri(11), plot_buri(12),
-    plot_buri(19),
-    ncol=1, padding=0
-)
-```
-
-:::
-
-::::
-
-::: {.notes}
-
-Kimura's plot illustrates the allelic frequency distribution of
-replicate populations each consisting of N=10 sequences. There are two
-allelic types. The x axis corresponds to the proportion of populations
-in a given state (e.g., the y value for x=3/10 corresponds to the
-proportion of populations with 3 alleles of one type and 7 of the
-other). At $t=0$ all populations are in state 5/10.
-
-Kimura's plot is very instructive and students are encouraged to test
-the recipe code, increasing the number of states incrementally. For
-large enough N, the histograms can be approximated by continuous
-distributions. This observation led Kimura (even though diffusion
-equations were originally introduced to genetics by Fisher in 1922) to
-apply diffusion theory to obtain probability densities of allele
-frequencies, leading in turn to compact expressions of fixation
-probabilities, expected ages of alleles, and more. A treatment of
-diffusion theory is outside the scope of this course; the interested
-reader can consult e.g., [@ewens_MathematicalPopulationGenetics_2004].
-
-The Buri experiment is an empirical demonstration of Kimura's plot.
-
-On the sampling model, [@charlesworth_ElementsEvolutionaryGenetics_2010, p. 231] says:
-
-> It is, however, impossible to write down a simple algebraic
-> expression for P, even without selection and mutation. [The
-> equation] is useful for obtaining numerical results for relatively
-> small populations, but becomes computationally demanding when N
-> becomes very large.
-
-:::
-
 ## Genetic drift
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-To capture dynamics, follow allele frequency trajectory as function of
-time.
+To capture dynamics, follow allele frequency trajectory ($p_t$) as
+function of time.
 
 ::: {.smallr}
 
@@ -2379,13 +2320,6 @@ ggplot(wf, aes(x = generation, y = frequency, group = sample)) +
 
 ::::
 
-::: {.fragment}
-
-Mathematical treatment of drift can become complicated: easier to
-study dynamics of *heterozygosity*
-
-:::
-
 ::: {.notes }
 
 Simplifying assumptions -> rate of drift $\propto \frac{1}{N}$
@@ -2397,6 +2331,181 @@ in plots) -> maintain larger genetic diversity
 
 Drift can be thought of as a force acting on a buoyant gas particle
 floating up and down at random.
+
+:::
+
+## Allele frequency distribution for
+
+## Probability distributions of allele frequencies
+
+```{r }
+#| label: allele-frequency-histogram
+#| echo: false
+#| eval: true
+n <- 10
+x <- vector(mode="numeric", length=n + 1)
+# Start with n major = n minor
+n_a <- ceiling(length(x)/2)
+x[n_a] <- 1
+class <- c("absorbing", rep("normal", n - 1), "absorbing")
+# Make transition matrix
+P <- do.call("rbind", lapply(0:n, function(i) {dbinom(0:n, n, i/n)}))
+
+plot_drift_histogram <- function(t, P) {
+  data <- t(x %*% (P%^%t))
+  xlabels <- unlist(lapply(0:n, function(x) {
+    sprintf("frac(%i, %i)", x, n)
+  }))
+  p <- data.frame(n=0:n, class=class, obs=data) %>%
+    ggplot(aes(y=obs, x=n, fill=class)) +
+    geom_bar(stat="identity", color="black", width=1) +
+    xlab("") + ylab("") +
+    annotate("text", label = paste("t =", t), fontface="italic",
+             x = n/2, y = 1.2*max(data), size = 10) +
+    scale_fill_manual(values=list("absorbing"="black", "normal"="white")) +
+    theme(legend.position="none",
+          axis.text.y = element_text(size=16),
+          axis.text.x = element_text(size=16, angle=0, hjust=0.5, vjust=0)) +
+    scale_x_continuous(
+        breaks=0:n,
+        labels=do.call(c, lapply(xlabels, function(l) {parse(text=l)}))) +
+    ylim(c(0, 1.3*max(data)))
+  p
+}
+```
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{r }
+#| label: fig-allele-frequency-histogram-plot
+#| echo: false
+#| eval: true
+#| out-width: 100%
+#| fig-width: 12
+#| fig-height: 8
+#| fig-cap: |
+#|     Histogram showing the course of change of the allele
+#|     frequency distribution with time [@kimura_1983, Fig. 3.4].
+#|     When N large ($\gtrsim 100$) histogram can be approximated
+#|     by continuous distribution (diffusion theory). Try recipe
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-slides-allele-frequency-distribution)
+#|     for different values of N.
+grid.arrange(
+    plot_drift_histogram(t=1, P=P),
+    plot_drift_histogram(t=5, P=P),
+    plot_drift_histogram(t=10, P=P),
+    plot_drift_histogram(t=20, P=P),
+    ncol=2)
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r }
+#| label: fig-buri-table-14
+#| echo: false
+#| eval: true
+#| out-width: 60%
+#| fig-width: 12
+#| fig-height: 10
+#| fig-align: center
+#| fig-cap: |
+#|    Frequency distributions of the brown eye ($bw^{75}$)
+#|    allele in replicate experimental populations ($n\sim 100$)
+#|    of *Drosophila melanogaster* (8 {{< fa venus >}},
+#|    8 {{< fa mars >}}) [@buri_GeneFrequencySmall_1956]
+data <- read.csv("assets/data/buri-table14.csv", header=TRUE, fill=0)
+colnames(data)[3:35] <- as.character(0:32)
+data <- data %>% replace(., is.na(.), 0)
+data$`32` <- data$`32` + data$Total.fixed.bw.75
+data$`0` <- data$`0` + data$Total.fixed.bw
+plot_buri <- function(t, xaxis=FALSE, yaxis=FALSE, title=TRUE) {
+  labels <- lapply(0:32, function(x) {
+    ""
+  })
+  names(labels) <- as.character(0:32)
+  labels$`0` <- 0
+  labels$`32` <- 1
+  p <- ggplot(stack(subset(data[2:20,c(1, 2:36)], Generation==t)[ , 3:35]),
+              aes(x=ind, y=values)) +
+    geom_bar(stat="identity") +
+    theme(legend.position="none",
+          axis.ticks=element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          plot.margin = unit(c(0, 0, 0, 0), "null"),
+          panel.spacing = unit(c(0, 0, 0, 0), "null")) +
+    ylab("") + xlab("") + ylim(0, 30)
+  if (title) {
+    p <- p + annotate("text", label = paste("t =", t), fontface="italic",
+                      x = 2, y = 28, size = 8)
+  }
+  if (xaxis)  {
+    p <- p + scale_x_discrete(breaks=0:32, labels=labels) +
+      xlab("Frequency") +
+      theme(axis.text.x = element_text(size=16, angle=0,
+                                       hjust=0.5, vjust=0))
+  }
+  if (yaxis) {
+    p <- p + ylab("Count") +
+      theme(axis.text.y = element_text(size=16))
+  }
+  p
+}
+grid.arrange(
+    plot_buri(1),# plot_buri(2), plot_buri(3),
+    plot_buri(5),# plot_buri(5), plot_buri(6),
+    plot_buri(10),# plot_buri(8), plot_buri(9),
+    plot_buri(15),# plot_buri(11), plot_buri(12),
+    plot_buri(19),
+    ncol=1, padding=0
+)
+```
+
+:::
+
+::::
+
+::: {.fragment}
+
+Mathematical treatment of drift can become complicated: easier to
+study dynamics of *heterozygosity*
+
+:::
+
+::: {.notes}
+
+Kimura's plot illustrates the allelic frequency distribution of
+replicate populations each consisting of N=10 sequences. There are two
+allelic types. The x axis corresponds to the proportion of populations
+in a given state (e.g., the y value for x=3/10 corresponds to the
+proportion of populations with 3 alleles of one type and 7 of the
+other). At $t=0$ all populations are in state 5/10.
+
+Kimura's plot is very instructive and students are encouraged to test
+the recipe code, increasing the number of states incrementally. For
+large enough N, the histograms can be approximated by continuous
+distributions. This observation led Kimura (even though diffusion
+equations were originally introduced to genetics by Fisher in 1922) to
+apply diffusion theory to obtain probability densities of allele
+frequencies, leading in turn to compact expressions of fixation
+probabilities, expected ages of alleles, and more. A treatment of
+diffusion theory is outside the scope of this course; the interested
+reader can consult e.g., [@ewens_MathematicalPopulationGenetics_2004].
+
+The Buri experiment is an empirical demonstration of Kimura's plot.
+
+On the sampling model, [@charlesworth_ElementsEvolutionaryGenetics_2010, p. 231] says:
+
+> It is, however, impossible to write down a simple algebraic
+> expression for P, even without selection and mutation. [The
+> equation] is useful for obtaining numerical results for relatively
+> small populations, but becomes computationally demanding when N
+> becomes very large.
 
 :::
 
@@ -2987,13 +3096,15 @@ $$
 
 Mutation drift balance, together with the observation during 50's-60's
 that polymorphism was more common than expected, is the foundation of
-the **neutral theory** of evolution: allele frequencies may change and
-fix due to chance alone and not selection.
+the **neutral theory** of evolution [@kimura_1983]: allele frequencies
+may change and fix due to chance alone and not selection.
 
 ::: {.fragment}
 
-**Nearly neutral theory** later developed to explain failure to
-predict scaling of polymorphism with population size.
+**Nearly neutral theory** [@ohta_SlightlyDeleteriousMutant_1973] was
+later developed to explain failure to predict scaling of polymorphism
+with population size: most mutations are not neutral but *slightly
+deleterious* and *purged* from population by natural selection.
 
 :::
 
@@ -3008,7 +3119,7 @@ predict scaling of polymorphism with population size.
 #| out-width: 60%
 #| fig-cap:
 #|     Heterozygosity predicted by the neutral theory.
-#|     Shaded region shows typical heterozygosities in animals.
+#|     Shaded region shows typical heterozygosities in animals (y-axis).
 #|     The observed $N_e\mu$ range is higher than predicted from plot.
 #|     From @hurst_GeneticsUnderstandingSelection_2009, Fig 1.
 NeMu <- c(
@@ -3062,6 +3173,13 @@ On the shaded region: the observed range of $N_e\mu$ is larger than
 that which is predicted by the plot, and since $\mu$ is constrained
 within a couple of orders of magnitude, $N_e$ must vary more than
 predicted by the (strictly) neutral theory.
+
+The general idea nearly neutral theory is that most mutations are
+slightly deleterious and therefore purged by natural selection,
+thereby reducing observed variation. The efficacy of purging depends
+in turn on the effective population size, such that species with small
+$N_e$ will have a harder time getting rid of potentially damaging
+variants.
 
 :::
 
@@ -3429,7 +3547,7 @@ In figure, we assume $s<0.1$, which is almost always the case
 
 :::
 
-## Substitutions and direct selection
+## Direct selection can be inferred from protein substitutions
 
 :::: {.columns}
 
@@ -3612,6 +3730,9 @@ based on direct selection). Without recombination, mutation could
 reintroduce variation. In the presence of recombination, the effect of
 reduced diversity will be dependent on distance from the locus under
 selection.
+
+Note here that every sequence can be treated as an allele, such that
+we in essence are looking multi- and not a bi-allelic locus.
 
 :::
 
