@@ -15,26 +15,11 @@ def abspath(path):
     return os.path.normpath(os.path.abspath(path))
 
 
-def safe_mkdir(src, dst):
-    """Make destination directory if missing"""
-    path = dst
-    if not os.path.isdir(src):
-        path = os.path.dirname(dst)
-    if path == "":
-        return
-    try:
-        os.makedirs(path, exist_ok=True)
-    except Exception as e:
-        print(e)
-        raise
-
-
 def safe_link(src, dst, dir_fd):
     logging.debug(f"Link {dst} -> {src}")
     if not os.path.exists(src):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), src)
     try:
-        safe_mkdir(src, dst)
         os.symlink(src, dst, dir_fd=dir_fd)
     except FileExistsError:
         logging.debug(f"Path {dst} exists; skipping")
@@ -72,9 +57,11 @@ def main():
             else:
                 data[k] = v
         for dst, src in data.items():
+            session = os.path.join(session, os.path.dirname(dst))
+            os.makedirs(session, exist_ok=True)
             dir_fd = os.open(session, os.O_RDONLY)
             src = abspath(os.path.join(DATAROOT, src))
-            safe_link(src, dst, dir_fd)
+            safe_link(src, os.path.basename(dst), dir_fd)
 
 
 if __name__ == "__main__":

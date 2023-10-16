@@ -1,0 +1,50 @@
+---
+title: "Variant calling"
+subtitle: "Variant calling"
+author:
+  - "Per Unneberg"
+format:
+  revealjs:
+    footer: Variant calling
+---
+
+## Setup {visibility="hidden" .unnumbered .unlisted}
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+::: {.notes}
+
+Testing title notes
+
+:::
+
+## On data
+
+Some text and more
+
+::: {.notes}
+
+## About
+
+We have previously looked at how to simulate sequence data and
+performed some simple calculations on data that are "well-behaved" in
+some sense. This lecture will focus on how data is generated through
+the process of *variant calling*, starting from a set of reads and a
+reference sequence (it does *not* cover sequencing technologies or
+assembly).
+
+## Aims
+
+## The monkeyflower system
+
+From <https://jgi.doe.gov/csp-2021-genomic-resources-for-mimulus/>
+
+> Plants in the genus Mimulus inhabit highly variable habitats and are
+> famous for their extraordinary ecological diversity. Mimulus is now
+> a powerful system for ecological genomic studies, thanks to its
+> experimental tractability, rapidly growing research community, and
+> the JGI-generated reference genome for M. guttatus.
+
+:::
