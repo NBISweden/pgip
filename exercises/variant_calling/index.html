@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Per Unneberg">
-
 <title>DDLS Population genomics in practice - Variant calling</title>
 <style>
 code{white-space: pre-wrap;}
@@ -76,7 +73,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -98,8 +94,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -118,23 +113,15 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo">
-    </a>
+    <img src="../../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">DDLS Population genomics in practice</span>
     </a>
@@ -145,7 +132,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
@@ -192,13 +179,11 @@ div.csl-indent {
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -206,15 +191,11 @@ div.csl-indent {
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Slides</span></a>
@@ -222,8 +203,8 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../slides/pgip/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population genomics in practice</span></a>
@@ -248,7 +229,7 @@ div.csl-indent {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -257,8 +238,8 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/simulation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to simulation</span></a>
@@ -277,7 +258,7 @@ div.csl-indent {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
@@ -286,62 +267,67 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../recipes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code recipes</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#variant-calling-overview" id="toc-variant-calling-overview" class="nav-link active" data-scroll-target="#variant-calling-overview">Variant calling overview</a>
+<li>
+<a href="#variant-calling-overview" id="toc-variant-calling-overview" class="nav-link active" data-scroll-target="#variant-calling-overview">Variant calling overview</a>
   <ul class="collapse">
-  <li><a href="#read-quality-control" id="toc-read-quality-control" class="nav-link" data-scroll-target="#read-quality-control">Read quality control</a></li>
+<li><a href="#read-quality-control" id="toc-read-quality-control" class="nav-link" data-scroll-target="#read-quality-control">Read quality control</a></li>
   <li><a href="#read-mapping" id="toc-read-mapping" class="nav-link" data-scroll-target="#read-mapping">Read mapping</a></li>
   <li><a href="#removal-marking-of-duplicate-reads" id="toc-removal-marking-of-duplicate-reads" class="nav-link" data-scroll-target="#removal-marking-of-duplicate-reads">Removal / marking of duplicate reads</a></li>
   <li><a href="#variant-calling" id="toc-variant-calling" class="nav-link" data-scroll-target="#variant-calling">Variant calling</a></li>
   <li><a href="#gatk-best-practice-variant-calling" id="toc-gatk-best-practice-variant-calling" class="nav-link" data-scroll-target="#gatk-best-practice-variant-calling">GATK best practice variant calling</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#preparation-reference-sequence-index-and-read-qc" id="toc-preparation-reference-sequence-index-and-read-qc" class="nav-link" data-scroll-target="#preparation-reference-sequence-index-and-read-qc">Preparation: reference sequence index and read QC</a></li>
-  <li><a href="#read-mapping-1" id="toc-read-mapping-1" class="nav-link" data-scroll-target="#read-mapping-1">Read mapping</a>
+  <li>
+<a href="#read-mapping-1" id="toc-read-mapping-1" class="nav-link" data-scroll-target="#read-mapping-1">Read mapping</a>
   <ul class="collapse">
-  <li><a href="#read-group-information-identifies-sequence-sets" id="toc-read-group-information-identifies-sequence-sets" class="nav-link" data-scroll-target="#read-group-information-identifies-sequence-sets">Read group information identifies sequence sets</a></li>
+<li><a href="#read-group-information-identifies-sequence-sets" id="toc-read-group-information-identifies-sequence-sets" class="nav-link" data-scroll-target="#read-group-information-identifies-sequence-sets">Read group information identifies sequence sets</a></li>
   <li><a href="#read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" id="toc-read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="nav-link" data-scroll-target="#read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to bam format with samtools</a></li>
   <li><a href="#mapping-from-ubam-file" id="toc-mapping-from-ubam-file" class="nav-link" data-scroll-target="#mapping-from-ubam-file">Mapping from uBAM file</a></li>
   <li><a href="#mark-duplicate-reads-with-picard-markduplicates" id="toc-mark-duplicate-reads-with-picard-markduplicates" class="nav-link" data-scroll-target="#mark-duplicate-reads-with-picard-markduplicates">Mark duplicate reads with Picard MarkDuplicates</a></li>
   <li><a href="#generate-high-quality-known-sites-for-bqsr" id="toc-generate-high-quality-known-sites-for-bqsr" class="nav-link" data-scroll-target="#generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</a></li>
   <li><a href="#base-quality-score-recalibration" id="toc-base-quality-score-recalibration" class="nav-link" data-scroll-target="#base-quality-score-recalibration">Base quality score recalibration</a></li>
   <li><a href="#optional-examine-the-output-of-bqsr" id="toc-optional-examine-the-output-of-bqsr" class="nav-link" data-scroll-target="#optional-examine-the-output-of-bqsr">OPTIONAL: Examine the output of BQSR</a></li>
-  </ul></li>
-  <li><a href="#variant-calling-and-genotyping" id="toc-variant-calling-and-genotyping" class="nav-link" data-scroll-target="#variant-calling-and-genotyping">Variant calling and genotyping</a>
-  <ul class="collapse">
-  <li><a href="#compile-qc-metrics" id="toc-compile-qc-metrics" class="nav-link" data-scroll-target="#compile-qc-metrics">Compile QC metrics</a></li>
-  <li><a href="#combine-genomic-vcf-files-and-genotype" id="toc-combine-genomic-vcf-files-and-genotype" class="nav-link" data-scroll-target="#combine-genomic-vcf-files-and-genotype">Combine genomic VCF files and genotype</a></li>
-  </ul></li>
-  <li><a href="#variant-post-processing" id="toc-variant-post-processing" class="nav-link" data-scroll-target="#variant-post-processing">Variant post-processing</a>
-  <ul class="collapse">
-  <li><a href="#summarize-and-qc-variants" id="toc-summarize-and-qc-variants" class="nav-link" data-scroll-target="#summarize-and-qc-variants">Summarize and QC variants</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-</nav>
+</li>
+  <li>
+<a href="#variant-calling-and-genotyping" id="toc-variant-calling-and-genotyping" class="nav-link" data-scroll-target="#variant-calling-and-genotyping">Variant calling and genotyping</a>
+  <ul class="collapse">
+<li><a href="#compile-qc-metrics" id="toc-compile-qc-metrics" class="nav-link" data-scroll-target="#compile-qc-metrics">Compile QC metrics</a></li>
+  <li><a href="#combine-genomic-vcf-files-and-genotype" id="toc-combine-genomic-vcf-files-and-genotype" class="nav-link" data-scroll-target="#combine-genomic-vcf-files-and-genotype">Combine genomic VCF files and genotype</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#looking-closer-at-variants-with-bcftools" id="toc-looking-closer-at-variants-with-bcftools" class="nav-link" data-scroll-target="#looking-closer-at-variants-with-bcftools">Looking closer at variants with bcftools</a>
+  <ul class="collapse">
+<li><a href="#compiling-statistics" id="toc-compiling-statistics" class="nav-link" data-scroll-target="#compiling-statistics">Compiling statistics</a></li>
+  <li><a href="#looking-inside-the-vcf" id="toc-looking-inside-the-vcf" class="nav-link" data-scroll-target="#looking-inside-the-vcf">Looking inside the VCF</a></li>
+  <li><a href="#viewing-variants-and-regions" id="toc-viewing-variants-and-regions" class="nav-link" data-scroll-target="#viewing-variants-and-regions">Viewing variants and regions</a></li>
+  <li><a href="#selecting-samples" id="toc-selecting-samples" class="nav-link" data-scroll-target="#selecting-samples">Selecting samples</a></li>
+  </ul>
+</li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Variant calling</h1>
 </div>
 
@@ -359,7 +345,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">16-Oct-2023</p>
+      <p class="date">17-Oct-2023</p>
     </div>
   </div>
   
@@ -367,28 +353,20 @@ div.csl-indent {
   </div>
   
 
-</header>
-
-<!-- markdownlint-disable MD041 -->
-<!-- markdownlint-disable MD041 -->
-<!-- markdownlint-enable MD041 -->
-<!-- markdownlint-disable MD041 -->
-<!-- markdownlint-enable MD041 -->
-<div class="callout callout-style-default callout-important callout-titled">
+</header><!-- markdownlint-disable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-enable MD041 --><p>In this exercise we will produce a variant call set, going through the basic steps from quality control, read mapping to variant calling. We will be working on the <a href="../../exercises/datasets/monkeyflowers.html">Monkeyflowers dataset</a>. Make sure to read the dataset document before running any commands as it will give you the biological background and general information about where to find and how to setup the data. We will focus on the <em>red</em> and <em>yellow</em> ecotypes in what follows.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>16-Oct-2023: This exercise is WIP!</p>
+<p>This is a technical exercise, where the focus is not so much on the biology as on getting programs to run and interpreting the outputs.</p>
 </div>
 </div>
-<!-- markdownlint-enable MD041 -->
-<p>In this exercise we will produce a variant call set, going through the basic steps from quality control, read mapping to variant calling. We will be working on the <a href="../../exercises/datasets/monkeyflowers.html">Monkeyflowers dataset</a>. Make sure to read the dataset document before running any commands as it will give you the biological background and general information about where to find and how to setup the data. We will focus on the <em>red</em> and <em>yellow</em> ecotypes in what follows.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -479,17 +457,33 @@ Tools
 <div class="callout-body-container callout-body">
 <p>In this exercise we will use the tools listed below. See <a href="../../precourse.html#sec-software-installation">software installation</a> for instructions on how to install.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Conda</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">UPPMAX modules</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Conda</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">UPPMAX modules</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <ul>
 <li><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a></li>
-<li><a href="https://github.com/lh3/bwa">bwa</a> <span class="citation" data-cites="li_AligningSequenceReads_2013">(<a href="#ref-li_AligningSequenceReads_2013" role="doc-biblioref">Li, 2013</a>)</span></li>
-<li><a href="https://gatk.broadinstitute.org/hc/en-us">Genome Analysis ToolKit (GATK)</a> <span class="citation" data-cites="depristo_FrameworkVariationDiscovery_2011">(<a href="#ref-depristo_FrameworkVariationDiscovery_2011" role="doc-biblioref">DePristo et al., 2011</a>)</span></li>
-<li><a href="https://github.com/broadinstitute/picard">picard</a> <span class="citation" data-cites="Picard2019toolkit">(<a href="#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit,”</span> 2019</a>)</span></li>
-<li><a href="https://github.com/samtools/samtools">samtools</a> <span class="citation" data-cites="danecek_TwelveYearsSAMtools_2021">(<a href="#ref-danecek_TwelveYearsSAMtools_2021" role="doc-biblioref">Danecek et al., 2021</a>)</span></li>
-<li><a href="https://multiqc.info/">multiqc</a> <span class="citation" data-cites="ewels_MultiQCSummarizeAnalysis_2016">(<a href="#ref-ewels_MultiQCSummarizeAnalysis_2016" role="doc-biblioref">Ewels et al., 2016</a>)</span></li>
-<li><a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> <span class="citation" data-cites="danecek_TwelveYearsSAMtools_2021">(<a href="#ref-danecek_TwelveYearsSAMtools_2021" role="doc-biblioref">Danecek et al., 2021</a>)</span></li>
+<li>
+<a href="https://github.com/lh3/bwa">bwa</a> <span class="citation" data-cites="li_AligningSequenceReads_2013">(<a href="#ref-li_AligningSequenceReads_2013" role="doc-biblioref">Li, 2013</a>)</span>
+</li>
+<li>
+<a href="https://gatk.broadinstitute.org/hc/en-us">Genome Analysis ToolKit (GATK)</a> <span class="citation" data-cites="depristo_FrameworkVariationDiscovery_2011">(<a href="#ref-depristo_FrameworkVariationDiscovery_2011" role="doc-biblioref">DePristo et al., 2011</a>)</span>
+</li>
+<li>
+<a href="https://github.com/broadinstitute/picard">picard</a> <span class="citation" data-cites="Picard2019toolkit">(<a href="#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit,”</span> 2019</a>)</span>
+</li>
+<li>
+<a href="https://github.com/samtools/samtools">samtools</a> <span class="citation" data-cites="danecek_TwelveYearsSAMtools_2021">(<a href="#ref-danecek_TwelveYearsSAMtools_2021" role="doc-biblioref">Danecek et al., 2021</a>)</span>
+</li>
+<li>
+<a href="https://multiqc.info/">multiqc</a> <span class="citation" data-cites="ewels_MultiQCSummarizeAnalysis_2016">(<a href="#ref-ewels_MultiQCSummarizeAnalysis_2016" role="doc-biblioref">Ewels et al., 2016</a>)</span>
+</li>
+<li>
+<a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> <span class="citation" data-cites="danecek_TwelveYearsSAMtools_2021">(<a href="#ref-danecek_TwelveYearsSAMtools_2021" role="doc-biblioref">Danecek et al., 2021</a>)</span>
+</li>
 </ul>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
@@ -519,8 +513,7 @@ dependencies:
 </div>
 </div>
 </div>
-<section id="variant-calling-overview" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="variant-calling-overview">Variant calling overview</h2>
+<section id="variant-calling-overview" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="variant-calling-overview">Variant calling overview</h2>
 <p>A generic variant calling workflow consists of the following basic steps:</p>
 <ol start="0" type="1">
 <li>read quality control and filtering</li>
@@ -529,15 +522,12 @@ dependencies:
 <li>joint / sample-based variant calling</li>
 </ol>
 <p>There are different tweaks and additions to each of these steps, depending on application and method.</p>
-<section id="read-quality-control" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="read-quality-control">Read quality control</h3>
+<section id="read-quality-control" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="read-quality-control">Read quality control</h3>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div id="fig-fastqc-base-quality" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><a href="INJ_R1_fastqc/Images/per_base_quality.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="INJ_R1_fastqc/Images/per_base_quality.png" class="img-fluid figure-img"></a> <a href="INJ_R2_fastqc/Images/per_base_quality.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="INJ_R2_fastqc/Images/per_base_quality.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Fastqc per base quality scores, read 1 (upper) and read 2 (lower panel).</figcaption>
-</figure>
+<figure class="figure"><p><a href="PUN-Y-INJ_R1_fastqc/Images/per_base_quality.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="PUN-Y-INJ_R1_fastqc/Images/per_base_quality.png" class="img-fluid figure-img"></a> <a href="PUN-Y-INJ_R2_fastqc/Images/per_base_quality.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="PUN-Y-INJ_R2_fastqc/Images/per_base_quality.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Fastqc per base quality scores, read 1 (upper) and read 2 (lower panel).</figcaption></figure>
 </div>
 </div></div><p>DNA sequencers score the quality of each sequenced base as <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred quality scores</a>, which is equivalent to the probability <span class="math inline">\(P\)</span> that the call is incorrect. The base quality scores, denoted <span class="math inline">\(Q\)</span>, are defined as</p>
 <p><span class="math display">\[
@@ -546,12 +536,9 @@ Q = -10 \log_{10} P
 <p>Hence, a base quality score <span class="math inline">\(Q=20\)</span> corresponds to a 1% probability that the call is incorrect. The base qualities typically drop towards the end of the reads (<a href="#fig-fastqc-base-quality">Figure&nbsp;1</a>). Prior to mapping it may therefore be prudent to remove reads that display too high drop in quality, too low mean quality, or on some other quality metric reported by the qc software.</p>
 <p>The quality scores are encoded using ASCII codes. An example of a <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> sequence is given below. The code snippet shows an example of shell commands<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that are separated by a so-called pipe (<code>|</code>) character which takes the output from one process and sends it as input to the next<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> INJ_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 4 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c</span> <span class="at">-30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> PUN-Y-INJ_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 4 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c</span> <span class="at">-30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@SRR9309790.10003134
-TAAATCGATTCGTTTTTGCTATCTTCGTCT
-+
-AAFFFJJJJJJJFJJJJJJJJJJJJJJJJJ</code></pre>
+<pre><code>gzip: PUN-Y-INJ_R1.fastq.gz: No such file or directory</code></pre>
 </div>
 </div>
 <p>A fastq entry consists of four lines:</p>
@@ -575,7 +562,7 @@ Exercise
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p><i class="fa-brands fa-linux" aria-label="linux"></i> Use the command <code>wc</code> to determine how many sequences are in <code>INJ_R1.fastq.gz</code>.</p>
+<p><i class="fa-brands fa-linux" aria-label="linux"></i> Use the command <code>wc</code> to determine how many sequences are in <code>PUN-Y-INJ_R1.fastq.gz</code>.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -591,7 +578,7 @@ Answer
 <div>
 <div class="callout-answer">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> INJ_R1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> PUN-Y-INJ_R1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since there are four lines per sequence (id, sequence, <code>+</code> separator, qualities) you need to divide the final number by four (622744 / 4).</p>
 </div>
@@ -604,33 +591,22 @@ Answer
 </div>
 </div>
 </div>
-</section>
-<section id="read-mapping" class="level3">
-<h3 class="anchored" data-anchor-id="read-mapping">Read mapping</h3>
+</section><section id="read-mapping" class="level3"><h3 class="anchored" data-anchor-id="read-mapping">Read mapping</h3>
 <p>Read mapping consists of aligning sequence reads, typically from individuals in a population (a.k.a. resequencing) to a reference sequence. The choice of read mapper depends, partly on preference, but mostly on the sequencing read length and application. For short reads, a common choice is <a href="https://github.com/lh3/bwa">bwa-mem</a>, and for longer reads <a href="https://github.com/lh3/minimap2">minimap2</a>.</p>
 <p>In what follows, we will assume that the sequencing protocol generates paired-end short reads (e.g., from <a href="https://ngisweden.scilifelab.se/technologies/illumina/">Illumina</a>). In practice, this means a DNA fragment has been sequence from both ends, where fragment sizes have been selected such that reads do not overlap (i.e., there is unsequenced DNA between the reads of a given <em>insert size</em>).</p>
 <p>The final output of read mapping is an alignment file in <a href="https://en.wikipedia.org/wiki/Binary_Alignment_Map">binary alignment map (bam)</a> format or variants thereof.</p>
-</section>
-<section id="removal-marking-of-duplicate-reads" class="level3">
-<h3 class="anchored" data-anchor-id="removal-marking-of-duplicate-reads">Removal / marking of duplicate reads</h3>
+</section><section id="removal-marking-of-duplicate-reads" class="level3"><h3 class="anchored" data-anchor-id="removal-marking-of-duplicate-reads">Removal / marking of duplicate reads</h3>
 <p>During sample preparation or DNA amplification with PCR, it may happen that a single DNA fragment is present in multiple copies and therefore produces redundant sequencing reads. This shows up as alignments with identical start and stop coordinates. These so-called duplicate reads should be marked prior to any downstream analyses. The most commonly used tools for this purpose are <code>samtools markdup</code> and <code>picard MarkDuplicates</code>.</p>
-</section>
-<section id="variant-calling" class="level3">
-<h3 class="anchored" data-anchor-id="variant-calling">Variant calling</h3>
+</section><section id="variant-calling" class="level3"><h3 class="anchored" data-anchor-id="variant-calling">Variant calling</h3>
 <p>Once bam files have been produced, it is time for variant calling. There are many different variant callers, of which we will mention four.</p>
 <p><a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> is a toolkit to process variant call files, but also has a variant caller command. We will use bcftools to look at and summarize the variant files.</p>
 <p><a href="https://github.com/freebayes/freebayes">freebayes</a> uses a Bayesian model to call variants. It may be very time-consuming in high-coverage regions, and one therefore may have to mask repetitive and other low-complexity regions.</p>
 <p><a href="http://www.popgen.dk/angsd/index.php/ANGSD">ANGSD</a> is optimized for low-coverage data. Genotypes aren’t called directly; rather, genotype likelihoods form the basis for all downstream analyses, such as calculation of diversity or other statistics.</p>
 <p>Finally, <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller">GATK HaplotypeCaller</a> performs local realignment around variant candidates, which avoids the need to run the legacy GATK IndelRealigner. Realignment improves results but requires more time to run. GATK is optimized for human data. For instance, performance drops dramatically if the reference sequence consists of many short scaffolds/contigs, and there is a size limit to how large the chromosomes can be. It also requires some parameter optimization and has a fairly complicated workflow <span class="citation" data-cites="hansen_VariantCallingNext_2016">(<a href="#ref-hansen_VariantCallingNext_2016" role="doc-biblioref">Hansen, 2016</a>)</span>.</p>
-</section>
-<section id="gatk-best-practice-variant-calling" class="level3">
-<h3 class="anchored" data-anchor-id="gatk-best-practice-variant-calling">GATK best practice variant calling</h3>
+</section><section id="gatk-best-practice-variant-calling" class="level3"><h3 class="anchored" data-anchor-id="gatk-best-practice-variant-calling">GATK best practice variant calling</h3>
 <p>We will base our work on the GATK <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-">Germline short variant discovery workflow</a>. In addition to the steps outlined above, there is a step where quality scores are recalibrated in an attempt to correct errors produced by the base calling procedure itself.</p>
 <p>GATK comes with a large set of tools. For a complete list and documentation, see the <span class="citation" data-cites="ToolDocumentationIndex_2023"><span>“<span>Tool Documentation Index</span>”</span> (<a href="#ref-ToolDocumentationIndex_2023" role="doc-biblioref">2023</a>)</span>.</p>
-</section>
-</section>
-<section id="preparation-reference-sequence-index-and-read-qc" class="level2">
-<h2 class="anchored" data-anchor-id="preparation-reference-sequence-index-and-read-qc">Preparation: reference sequence index and read QC</h2>
+</section></section><section id="preparation-reference-sequence-index-and-read-qc" class="level2"><h2 class="anchored" data-anchor-id="preparation-reference-sequence-index-and-read-qc">Preparation: reference sequence index and read QC</h2>
 <p>Prior to mapping we need to create a database index. We also generate a fasta index and a sequence dictionary for use with the picard toolkit.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx M_aurantiacus_v1.fasta</span>
@@ -674,12 +650,10 @@ Answer
 <div class="callout-answer">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fastqc</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> INJ_R1_fastqc.html</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> INJ_R2_fastqc.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> PUN-Y-INJ_R1_fastqc.html</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> PUN-Y-INJ_R2_fastqc.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The traffic light summary indicates whether a given quality metric has passed or not. Typically, read 2 has slightly lower quality and more quality metrics with warnings. Since these reads have been deposited in SRA, it is likely they were filtered prior to upload, and we will not take any further action here.</p>
-</div>
-</div>
+<p>The traffic light summary indicates whether a given quality metric has passed or not. Typically, read 2 has slightly lower quality and more quality metrics with warnings. Since these reads have been deposited in the <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive</a> (SRA), it is likely they were filtered prior to upload, and we will not take any further action here.</p>
 </div>
 </div>
 </div>
@@ -688,41 +662,36 @@ Answer
 </div>
 </div>
 </div>
-<p>We will use <code>multiqc</code> later on to combine the results from several output reports.</p>
-</section>
-<section id="read-mapping-1" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="read-mapping-1">Read mapping</h2>
+</div>
+</div>
+<p>We will use <code>MultiQC</code> later on to combine the results from several output reports.</p>
+</section><section id="read-mapping-1" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="read-mapping-1">Read mapping</h2>
 <p>We will start by mapping <code>fastq</code> read pairs to the reference. We will use the <code>bwa</code> read mapper together with <code>samtools</code> to process the resulting output.</p>
-<section id="read-group-information-identifies-sequence-sets" class="level3">
-<h3 class="anchored" data-anchor-id="read-group-information-identifies-sequence-sets">Read group information identifies sequence sets</h3>
+<section id="read-group-information-identifies-sequence-sets" class="level3"><h3 class="anchored" data-anchor-id="read-group-information-identifies-sequence-sets">Read group information identifies sequence sets</h3>
 <p>Some of the downstream processes require that reads have been assigned <code>read groups</code> <span class="citation" data-cites="ReadGroups_2023">(<a href="#ref-ReadGroups_2023" role="doc-biblioref"><span>“Read Groups,”</span> 2023</a>)</span>, which is a compact string representation of a set of reads that originate from a sequencing unit and sample. Assigning read groups becomes particularly important for multiplexing protocols, or when a sample has been sequenced on different lanes or platform units, as it allows for the identification of sequence batch issues (e.g., poor sequencing quality). Here, we want to assign a unique <code>ID</code>, the sample id (<code>SM</code>), and the sequencing platform (<code>PL</code>), where the latter informs the algorithms on what error model to apply. The read group is formatted as <code>@RG\tID:uniqueid\tSM:sampleid\tPU:platform</code>, where <code>\t</code> is the tab character. More fields can be added; see the SAM specification, section 1.3 <span class="citation" data-cites="HTSFormatSpecifications_2023">(<a href="#ref-HTSFormatSpecifications_2023" role="doc-biblioref"><em><span>HTS</span> Format Specifications</em>, 2023</a>)</span> for a complete list.</p>
 <p>Sample information is available in the <code>sampleinfo.csv</code> file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 sampleinfo.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Sample,Taxon,Latitude,Longitude,% Reads aligned,Seq. Depth,Run,ScientificName,SampleName
-159_83,ssp. aridus,32.663,-116.223,91.7,21.12,SRR9309722,Diplacus aridus,ARI-159_83
-159_84,ssp. aridus,32.663,-116.223,89.3,21.98,SRR9309721,Diplacus aridus,ARI-159_84</code></pre>
+<pre><code>head: cannot open 'sampleinfo.csv' for reading: No such file or directory</code></pre>
 </div>
 </div>
-<p>We will use the <code>Run</code> column as unique <code>ID</code>, <code>SampleName</code> as the sample id <code>SM</code>, and <code>ILLUMINA</code> as the platform <code>PL</code>.</p>
-</section>
-<section id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="level3">
-<h3 class="anchored" data-anchor-id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to bam format with samtools</h3>
-<p>Let’s map the fastq files corresponding to sample <code>BCRD</code>:</p>
+<p>The sample information is a combination of the run information obtained from the SRA (BioProject <code>PRJNA549183</code>) and the sample sheet provided with the article. An additional column <code>SampleAlias</code> has been added that names samples using a three-letter abbreviation for population hyphenated with the sample identifier. For the <em>ssp. puniceus</em>, an additional one-letter character denoting the color ecotype is inserted between population and sample id. <code>PUN-Y-BCRD</code> then is a sample from the <em>puniceus</em> subspecies with the yellow ecotype. We will use the <code>Run</code> column as unique <code>ID</code>, <code>SampleAlias</code> as the sample id <code>SM</code>, and <code>ILLUMINA</code> as the platform <code>PL</code>.</p>
+</section><section id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="level3"><h3 class="anchored" data-anchor-id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to bam format with samtools</h3>
+<p>Let’s map the fastq files corresponding to sample <code>PUN-Y-BCRD</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-R</span> <span class="st">"@RG\tID:SRR9309788\tSM:BCRD\tPL:ILLUMINA"</span> <span class="at">-t</span> 4 <span class="dt">\</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a> <span class="at">-M</span> M_aurantiacus_v1.fasta BCRD_R1.fastq.gz BCRD_R2.fastq.gz <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-h</span> <span class="at">-o</span> BCRD.sort.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-R</span> <span class="st">"@RG\tID:SRR9309788\tSM:PUN-Y-BCRD\tPL:ILLUMINA"</span> <span class="at">-t</span> 4 <span class="dt">\</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a> <span class="at">-M</span> M_aurantiacus_v1.fasta PUN-Y-BCRD_R1.fastq.gz PUN-Y-BCRD_R2.fastq.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-h</span> <span class="at">-o</span> PUN-Y-BCRD.sort.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There’s a lot to unpack here. First, the <code>-R</code> flag to <code>bwa mem</code> passes the read group information to the mapper. <code>-t</code> sets the number of threads, and <code>-M</code> marks shorter split hits as secondary, which is for Picard compatibility<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. The first positional argument is the reference sequence, followed by the fastq files for read 1 and 2, respectively.</p>
 <p>The output would be printed on the screen (try running the <code>bwa mem</code> command alone!), but we pipe the output to <code>samtools sort</code> to sort the mappings (by default by coordinate). The <code>-</code> simply means “read from the pipe”.</p>
 <p>Finally, <code>samtools view</code> converts the text output to binary format (default), including the header information (option <code>-h</code>). You can use the same command to view the resulting output on your screen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view BCRD.sort.bam <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view PUN-Y-BCRD.sort.bam <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[E::hts_open_format] Failed to open file "BCRD.sort.bam" : No such file or directory
-samtools view: failed to open "BCRD.sort.bam" for reading: No such file or directory</code></pre>
+<pre><code>[E::hts_open_format] Failed to open file "PUN-Y-BCRD.sort.bam" : No such file or directory
+samtools view: failed to open "PUN-Y-BCRD.sort.bam" for reading: No such file or directory</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
@@ -775,16 +744,13 @@ Answer
 <div>
 <div class="callout-answer">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view <span class="at">-H</span> BCRD.sort.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view <span class="at">-H</span> PUN-Y-BCRD.sort.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[E::hts_open_format] Failed to open file "BCRD.sort.bam" : No such file or directory
-samtools view: failed to open "BCRD.sort.bam" for reading: No such file or directory</code></pre>
+<pre><code>[E::hts_open_format] Failed to open file "PUN-Y-BCRD.sort.bam" : No such file or directory
+samtools view: failed to open "PUN-Y-BCRD.sort.bam" for reading: No such file or directory</code></pre>
 </div>
 </div>
-<p>Although you can probably figure it out by looking at the data, do have a glance at the SAM format specification mentioned above. The <code>@SQ</code> tag corresponds to the reference sequence dictionary and tells you what region you are looking at (chromosome <code>LG4</code> from position 12000001 to 12100000, which has a length <code>LN</code> 100000 bases).</p>
-</div>
-</div>
-</div>
+<p>Although you can probably figure it out by looking at the data, do have a glance at the SAM format specification mentioned above. The <code>@SQ</code> tag corresponds to the reference sequence dictionary and tells you what region you are looking at (chromosome <code>LG4</code>, which has a length <code>LN</code> 100000 bases; the example reference sequence was created by extracting the region on <code>LG4</code> from position 12000000 to 12100000).</p>
 </div>
 </div>
 </div>
@@ -792,23 +758,22 @@ samtools view: failed to open "BCRD.sort.bam" for reading: No such file or direc
 </div>
 </div>
 </div>
-</section>
-<section id="mapping-from-ubam-file" class="level3">
-<h3 class="anchored" data-anchor-id="mapping-from-ubam-file">Mapping from uBAM file</h3>
+</div>
+</div>
+</div>
+</section><section id="mapping-from-ubam-file" class="level3"><h3 class="anchored" data-anchor-id="mapping-from-ubam-file">Mapping from uBAM file</h3>
 <p>There is an alternative storage format for the fastq files called <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035532132-uBAM-Unmapped-BAM-Format"><code>uBAM</code></a> (unmapped BAM format). The GATK developers promote its use in lieu of fastq files since BAM files can store more metadata associated with sequencing runs. The workflow is slightly more complex, but the files have been prepared for you so you don’t need to worry about generating the uBAM files.</p>
 <p>To facilitate downstream processing, we will from now on make use of <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to refer to a sample and the reference sequence. Retrieve the SRR id from the sampleinfo file.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SRR</span><span class="op">=</span>SRR9309790</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SAMPLE</span><span class="op">=</span>INJ</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SAMPLE</span><span class="op">=</span>PUN-Y-INJ</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">REF</span><span class="op">=</span>M_aurantiacus_v1.fasta</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> fastq <span class="va">${SAMPLE}</span>.unmapped.bam <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">bwa</span> mem <span class="at">-R</span> <span class="st">"@RG\tID:</span><span class="va">${SRR}</span><span class="st">\tSM:</span><span class="va">${SAMPLE}</span><span class="st">\tPL:ILLUMINA"</span> <span class="at">-t</span> 4 <span class="at">-p</span> <span class="at">-M</span> <span class="va">${REF}</span> <span class="at">-</span> <span class="kw">|</span> <span class="dt">\</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-h</span> <span class="at">-o</span> <span class="va">${SAMPLE}</span>.sort.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that we here need to use the command <code>samtools fastq</code> to read the contents of <code>${SAMPLE}.unmapped.bam</code> and pipe the output to <code>bwa mem</code>.</p>
-</section>
-<section id="mark-duplicate-reads-with-picard-markduplicates" class="level3">
-<h3 class="anchored" data-anchor-id="mark-duplicate-reads-with-picard-markduplicates">Mark duplicate reads with Picard MarkDuplicates</h3>
+</section><section id="mark-duplicate-reads-with-picard-markduplicates" class="level3"><h3 class="anchored" data-anchor-id="mark-duplicate-reads-with-picard-markduplicates">Mark duplicate reads with Picard MarkDuplicates</h3>
 <p>Once mapping is completed, we must find and mark duplicate reads as these can distort the results of downstream analyses, such as variant calling. We here use <code>Picard MarkDuplicates</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">picard</span> MarkDuplicates <span class="at">--INPUT</span> <span class="va">${SAMPLE}</span>.sort.bam <span class="dt">\</span></span>
@@ -816,9 +781,7 @@ samtools view: failed to open "BCRD.sort.bam" for reading: No such file or direc
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--OUTPUT</span> <span class="va">${SAMPLE}</span>.sort.dup.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The metrics output file contains information on the rate of duplication. We will include the output in the final <code>multiqc</code> report.</p>
-</section>
-<section id="generate-high-quality-known-sites-for-bqsr" class="level3">
-<h3 class="anchored" data-anchor-id="generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</h3>
+</section><section id="generate-high-quality-known-sites-for-bqsr" class="level3"><h3 class="anchored" data-anchor-id="generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</h3>
 <p>Once we have a duplicate marked bam file, we can proceed with Base Quality Score Recalibration (BQSR). The purpose here is to correct any systematic errors made by the sequencing machine. This is done by applying a machine learning model. Before we do so, however, we need to generate a list of <em>known sites</em> that should not be recalibrated<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Therefore, we will first perform a preliminary round of variant calling and filtering to generate a known sites callset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> HaplotypeCaller <span class="at">-OVI</span> true <span class="dt">\</span></span>
@@ -900,9 +863,7 @@ Exercise
 </div>
 </div>
 <p>Now we have <em>per-sample</em> known sites callsets that can be used as input to BQSR.</p>
-</section>
-<section id="base-quality-score-recalibration" class="level3">
-<h3 class="anchored" data-anchor-id="base-quality-score-recalibration">Base quality score recalibration</h3>
+</section><section id="base-quality-score-recalibration" class="level3"><h3 class="anchored" data-anchor-id="base-quality-score-recalibration">Base quality score recalibration</h3>
 <p>Base quality score recalibration consists of two commands:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> BaseRecalibrator <span class="at">-I</span> <span class="va">${SAMPLE}</span>.sort.dup.bam <span class="dt">\</span></span>
@@ -912,9 +873,7 @@ Exercise
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-I</span> <span class="va">${SAMPLE}</span>.sort.dup.bam <span class="at">-O</span> <span class="va">${SAMPLE}</span>.sort.dup.recal.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator">BaseRecalibrator</a> compiles empirical data for all non-variant sites for an input bam file for a number of covariates (e.g., nucleotide context). The basic idea is to fit a probability of error (i.e., a quality score of sorts), to observed covariate combinations, which is recorded in a <em>recalibration table</em> file. The probability is then used correct the quality scores reported by the sequencing machine in <a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832692459163-ApplyBQSR">ApplyBQSR</a>.</p>
-</section>
-<section id="optional-examine-the-output-of-bqsr" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="optional-examine-the-output-of-bqsr">OPTIONAL: Examine the output of BQSR</h3>
+</section><section id="optional-examine-the-output-of-bqsr" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="optional-examine-the-output-of-bqsr">OPTIONAL: Examine the output of BQSR</h3>
 <p>We can investigate how well BQSR has performed by applying two more commands. First, we generate a calibration table for the recalibrated bam file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> BaseRecalibrator <span class="at">-I</span> <span class="va">${SAMPLE}</span>.sort.dup.recal.bam <span class="dt">\</span></span>
@@ -938,10 +897,7 @@ Exercise
 <pre><code>Error in subset.default(data, EventType == "Base Substitution" &amp; CovariateName == : object 'EventType' not found</code></pre>
 </div>
 </div></div><p>Several rounds of generating known sites followed by BQSR can be applied until convergence. This means that running BQSR can be time-consuming, and one side effect is that the resulting bam output files can become very large, which may or not be a problem. Also, sequencing technologies keep improving, potentially eliminating concerns of biased quality scores. This begs the question: is it worth running BQSR? For the time being, the GATK developers do recommend that BQSR always be run. Keep in mind though, that for non-model organisms, one issue is that there seldom is a catalogue of known sites, which means the user has to bootstrap such a call set, like we did above. For a more complete discussion, see the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-">technical documentation on BQSR</a>.</p>
-</section>
-</section>
-<section id="variant-calling-and-genotyping" class="level2">
-<h2 class="anchored" data-anchor-id="variant-calling-and-genotyping">Variant calling and genotyping</h2>
+</section></section><section id="variant-calling-and-genotyping" class="level2"><h2 class="anchored" data-anchor-id="variant-calling-and-genotyping">Variant calling and genotyping</h2>
 <p>After we have generated the recalibrated bam files, we can proceed with the “real” variant calling. We once again run GATK <code>HaplotypeCaller</code> and <code>VariantFiltration</code>.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
@@ -957,7 +913,7 @@ Exercise
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Run GATK <code>HaplotypeCaller</code> on the recalibrated bam file, followed by <code>VariantFiltration</code>. For the latter, modify the filters to</p>
+<p>Using the code in section <a href="../../exercises/variant_calling/index.html#generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</a> as a template, run GATK <code>HaplotypeCaller</code> on the recalibrated bam file, followed by <code>VariantFiltration</code>. For the latter, modify the filters to</p>
 <ul>
 <li>filterName: FisherStrand, filter: FS &gt; 60.0</li>
 <li>filterName: QualByDepth, filter: QD &lt; 2.0</li>
@@ -1016,7 +972,7 @@ Exercise
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>If time permits, run the workflow on some more samples (e.g., <code>ELF</code>).</p>
+<p>If time permits, run the workflow on some more samples (e.g., <code>PUN-R-ELF</code>).</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1027,7 +983,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are prepared gvcf files for download so there’s no need to run the workflow on all samples.</p>
+<p>There are prepared gVCF files for download so there’s no need to run the workflow on all samples.</p>
 </div>
 </div>
 </div>
@@ -1035,26 +991,23 @@ Important
 </div>
 </div>
 </div>
-<section id="compile-qc-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="compile-qc-metrics">Compile QC metrics</h3>
+<section id="compile-qc-metrics" class="level3"><h3 class="anchored" data-anchor-id="compile-qc-metrics">Compile QC metrics</h3>
 <p>Identifying sample quality issues is crucial for downstream processing. Quality metrics that indicate problems with a sample could potentially lead to its removal entirely from subsequent analyses. Many programs generate QC metrics, but as it is difficult to get an overview by sifting through all separate QC reports, it is recommended that you compile them with <code>MultiQC</code>. Running <code>MultiQC</code> is as simple as</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Open the report <code>multiqc_report.html</code> to quickly QC your data. There are lots of ways you can interactively modify the report to make more logical groupings (e.g., grouping reports by sample<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>) , but we won’t go into this topic in more detail here.</p>
-</section>
-<section id="combine-genomic-vcf-files-and-genotype" class="level3">
-<h3 class="anchored" data-anchor-id="combine-genomic-vcf-files-and-genotype">Combine genomic VCF files and genotype</h3>
-<p>We are now at the stage where we can do genotyping of our samples. This done by first combining individual sample gvcf files with GATK <code>CombineGVCFs</code>, followed by genotyping with <code>GenotypeGVCFs</code>.</p>
+</section><section id="combine-genomic-vcf-files-and-genotype" class="level3"><h3 class="anchored" data-anchor-id="combine-genomic-vcf-files-and-genotype">Combine genomic VCF files and genotype</h3>
+<p>We are now at the stage where we can do genotyping of our samples. This done by first combining individual sample gVCF files with GATK <code>CombineGVCFs</code>, followed by genotyping with <code>GenotypeGVCFs</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> CombineGVCFs <span class="at">-OVI</span> true <span class="at">--output</span> combine.g.vcf.gz <span class="at">--reference</span> <span class="va">${REF}</span> <span class="dt">\</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-V</span> INJ.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-V</span> ELF.sort.dup.recal.hc.g.vcf.gz</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.g.vcf.gz <span class="dt">\</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-O</span> allsites.vcf.gz <span class="at">--all-sites</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> CombineGVCFs <span class="at">-OVI</span> true <span class="at">--output</span> combine.subset.g.vcf.gz <span class="at">--reference</span> <span class="va">${REF}</span> <span class="dt">\</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-V</span> PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-V</span> PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.subset.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-O</span> allsites.subset.vcf.gz <span class="at">--all-sites</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1063,11 +1016,11 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse show">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Create <code>allsites.vcf.gz</code> but for all the red and yellow samples.</p>
+<p>Create a variant call set <code>allsites.vcf.gz</code> but for all the red and yellow samples.</p>
 <div class="callout callout-style-default callout-hint no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1082,15 +1035,46 @@ Hint
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-hint">
-<p>You need to specify all gvcf input files via the <code>--variants</code> (<code>-V</code>) option. To get the sample names, look at the first column of <code>sampleinfo.csv</code>:</p>
+<p>You need to specify all gVCF input files via the <code>--variants</code> (<code>-V</code>) option. To get the sample names, look at the first column of <code>sampleinfo.csv</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sampleinfo.csv <span class="kw">|</span> <span class="fu">grep</span> yellow <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1 <span class="at">-d</span> <span class="st">","</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>BCRD
-INJ
-LO
-PCT
-POTR</code></pre>
+<pre><code>cat: sampleinfo.csv: No such file or directory</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-answer no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-answer">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> CombineGVCFs <span class="at">-OVI</span> true <span class="at">--output</span> combine.subset.g.vcf.gz <span class="at">--reference</span> <span class="va">${REF}</span> <span class="dt">\</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-R-JMC.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-R-LH.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-R-MT.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-R-UCSD.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-BCRD.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-LO.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-PCT.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-POTR.sort.dup.recal.hc.g.vcf.gz</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-O</span> allsites.vcf.gz <span class="at">--all-sites</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1102,24 +1086,180 @@ POTR</code></pre>
 </div>
 </div>
 </div>
+</section></section><section id="looking-closer-at-variants-with-bcftools" class="level2"><h2 class="anchored" data-anchor-id="looking-closer-at-variants-with-bcftools">Looking closer at variants with bcftools</h2>
+<p>As a final step, let’s run a couple of commands to view variants and summarize variant statistics.</p>
+<section id="compiling-statistics" class="level3"><h3 class="anchored" data-anchor-id="compiling-statistics">Compiling statistics</h3>
+<p>First out is <code>bcftools stats</code>, which compiles a summary of statistics, such as number of variants, quality distribution over variants, indel distributions and more.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats allsites.vcf.gz <span class="op">&gt;</span> allsites.vcf.gz.stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
 </div>
-</section>
-</section>
-<section id="variant-post-processing" class="level2">
-<h2 class="anchored" data-anchor-id="variant-post-processing">Variant post-processing</h2>
-<section id="summarize-and-qc-variants" class="level3">
-<h3 class="anchored" data-anchor-id="summarize-and-qc-variants">Summarize and QC variants</h3>
-</section>
-</section>
-<section id="references" class="level2">
+</div>
+<p>The output text file consists of report sections that can be easily extracted with the <code>grep</code> command by virtue of the fact that the first column corresponds to a shortcode of the statistic. For instance, <code>SN</code> corresponds to Summary numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^SN"</span> allsites.vcf.gz.stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, we can see that we have included non-variant sites (<code>no-ALTs</code>), that there are indels, and that a number of sites are multiallelic (more than two alleles).</p>
+<p>Rerunning MultiQC will automatically add this report.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use -f to overwrite old report</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">-f</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will use bcftools stats in the next exercise to look more closely at variant quality metrics.</p>
+</section><section id="looking-inside-the-vcf" class="level3"><h3 class="anchored" data-anchor-id="looking-inside-the-vcf">Looking inside the VCF</h3>
+<p>A Variant Call Format (VCF) file consists of three sections: meta-information lines (prefixed with <code>##</code>), a header line (prefixed with <code>#</code>), followed by the data. The meta-information contains provenance information detailing how the file was generated, <code>FILTER</code> specification, <code>INFO</code> fields that provide additional information to genotypes, <code>FORMAT</code> specification fields that define genotype entries, and more. You can print the header with the command <code>bcftools view -h</code>. An example of each is given below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> FILTER <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> INFO <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> FORMAT <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory
+[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory
+[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+<p>The header field consists of eight mandatory columns <code>CHROM</code>, <code>POS</code>, <code>ID</code>, <code>REF</code>, <code>ALT</code>, <code>QUAL</code>, <code>FILTER</code> and <code>INFO</code>, followed by <code>FORMAT</code> and sample columns that contain the called genotypes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> CHROM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+<p>Let’s look at the first SNP entry (here, the first line extracts the position of the SNP):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="va">pos</span><span class="op">=</span><span class="va">$(</span><span class="ex">bcftools</span> view <span class="at">-v</span> snps <span class="at">-s</span> PUN-R-JMC allsites.vcf.gz <span class="at">-H</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1 <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2<span class="va">)</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-v</span> snps <span class="at">-s</span> PUN-R-JMC allsites.vcf.gz LG4:<span class="va">$pos</span> <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory
+[E::_regions_init_string] Could not parse the region(s): LG4:
+Failed to read the regions: LG4:</code></pre>
+</div>
+</div>
+<p>The most important columns are <code>CHROM</code>, which indicates the sequence (<code>LG4</code>), the genome position <code>POS</code>, the reference allele <code>REF</code> (i.e., the nucleotide in the reference sequence), and the alternate allele <code>ALT</code>, which is the called variant. <code>QUAL</code> is a Phred-scaled quality of the call and can be used to filter low-quality calls. The <code>FILTER</code> column can be used to set filter flags. The <code>INFO</code> column contains metadata concerning the site; for instance, <code>DP</code> is the approximate read depth, the definition of which is included in the meta-information:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> INFO <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"ID=DP"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+<p>Finally, the columns following <code>FORMAT</code> pertain to the samples and contain the genotype calls, formatted according to the - you guessed it - <code>FORMAT</code> column. The example above contains a number of fields, where <code>GT</code> is the genotype:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> FORMAT <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"ID=GT"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+<p>For diploid samples, the genotype format is <code>#/#</code>, or <code>#|#</code> for phased data, where the hash marks are numbers that refer to the reference (0) and alternate (1 or higher) alleles. A <code>.</code> indicates a missing call.</p>
+</section><section id="viewing-variants-and-regions" class="level3"><h3 class="anchored" data-anchor-id="viewing-variants-and-regions">Viewing variants and regions</h3>
+<p>The <code>bcftools view</code> command allows for quick access and viewing of file contents. A prerequisite is that we first index the file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> index allsites.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>after which we can view, say, the first three indel variants in the region 12,010,000-12,010,100, corresponding to VCF coordinates 10,000-10,100<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-v</span> indels <span class="at">-H</span> allsites.vcf.gz LG4:10000-10100</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+<p>bcftools view has many options for subsetting and filtering variants. Remember to consult the help pages!</p>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<p><i class="fa-brands fa-linux" aria-label="linux"></i> How many SNPs are there in region LG4:12010000-12000100?</p>
+<div class="callout callout-style-default callout-hint no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-hint">
+<p>Look in the help page for option <code>-v</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-answer no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-answer">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option -H omits the header information</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-H</span> <span class="at">-v</span> snps allsites.vcf.gz LG4:10000-10100</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Could also use wc -l to count the number of lines</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-H</span> <span class="at">-v</span> snps allsites.vcf.gz LG4:10000-10100 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="selecting-samples" class="level3"><h3 class="anchored" data-anchor-id="selecting-samples">Selecting samples</h3>
+<p>Finally, we look at how we can select samples from a variant file. To list the samples in a file, we can run <code>bcftools query</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-l</span> allsites.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+<p>Selecting indel variants for a given sample, say <code>PUN-Y-BCRD</code>, and region <code>LG4:12001000-12001100</code> can then be done as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-H</span> <span class="at">-s</span> PUN-Y-BCRD <span class="at">-v</span> indels allsites.vcf.gz LG4:1000-1100</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[E::hts_open_format] Failed to open file "allsites.vcf.gz" : No such file or directory
+Failed to read from allsites.vcf.gz: No such file or directory</code></pre>
+</div>
+</div>
+</section></section><section id="references" class="level2">
 
 
 
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-danecek_TwelveYearsSAMtools_2021" class="csl-entry" role="listitem">
 Danecek, P., Bonfield, J. K., Liddle, J., Marshall, J., Ohan, V., Pollard, M. O., Whitwham, A., Keane, T., McCarthy, S. A., Davies, R. M., &amp; Li, H. (2021). Twelve years of <span>SAMtools</span> and <span>BCFtools</span>. <em>GigaScience</em>, <em>10</em>(2), giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>
 </div>
@@ -1148,7 +1288,6 @@ Read groups. (2023). In <em>GATK</em>. <a href="https://gatk.broadinstitute.org/
 <span>Tool Documentation Index</span>. (2023). In <em>GATK</em>. <a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832655155099--Tool-Documentation-Index">https://gatk.broadinstitute.org/hc/en-us/articles/13832655155099--Tool-Documentation-Index</a>
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
 <ol>
 <li id="fn1"><p>For any shell command, use the option <code>--help</code> to print information about the commands and its options. <code>zcat</code> is a variant of the <code>cat</code> command that prints the contents of a file on the terminal; the <code>z</code> prefix shows the command works on compressed files, a common naming convention. <code>head</code> views the first lines of a file, and <code>cut</code> can be used to cut out columns from a tab-delimited file, or in this case, cut the longest strings to 30 characters width.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For more information, see <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)">unix pipelines <i class="fa-brands fa-wikipedia-w" aria-label="wikipedia-w"></i></a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1158,9 +1297,8 @@ Read groups. (2023). In <em>GATK</em>. <a href="https://gatk.broadinstitute.org/
 <li id="fn6"><p>If we don’t supply a list of known sites, the variants will be treated as errors and therefore recalibrated to the reference state.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>Some programs, such as GATK, print their help output to <code>stderr</code>, one of two so-called <a href="https://en.wikipedia.org/wiki/Standard_streams">standard output streams</a> (the other being <code>stdout</code>). The <code>2&gt;&amp;1</code> is a construct that <em>redirects</em> (<code>&gt;</code>) the output from stderr (<code>2</code>) to stdout (<code>1</code>) and does so in the background (<code>&amp;</code>). By piping to <code>less</code> we can scroll through the documentation.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>MultiQC does a fairly good job at this as it is, but it does so by guessing sample names from file names. You may need to help it along the way by using the rename tab.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<li id="fn9"><p>Although the reference sequence corresponds to region LG4:12000000-12100000, the coordinates in <code>allsites.vcf.gz</code> start from 1<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1394,17 +1532,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">2023 <a href="about.html">NBIS</a> | <a href="https://choosealicense.com/licenses/gpl-3.0/">GPL-3 License</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
+    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
-
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 </body></html>
