@@ -54,6 +54,8 @@ format:
     embed-resources: false
     date: last-modified
     date-format: "DD-MMM-YYYY"
+    code-link: true
+    code-block-border-left: "#a7c947"
     lightbox:
       match: auto
   revealjs:

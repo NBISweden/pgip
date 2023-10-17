@@ -16,20 +16,14 @@ execute:
 #| label: variant-calling-init-data
 #| echo: false
 #| eval: true
-fastqc -o . INJ*.fastq.gz > /dev/null 2>&1
-if [ ! -e INJ_R1_fastqc ]; then
-    unzip INJ_R1_fastqc.zip > /dev/null 2>&1
+fastqc -o . PUN-Y-INJ*.fastq.gz > /dev/null 2>&1
+if [ ! -e PUN-Y-INJ_R1_fastqc ]; then
+    unzip PUN-Y-INJ_R1_fastqc.zip > /dev/null 2>&1
 fi
-if [ ! -e INJ_R2_fastqc ]; then
-    unzip INJ_R2_fastqc.zip > /dev/null 2>&1
+if [ ! -e PUN-Y-INJ_R2_fastqc ]; then
+    unzip PUN-Y-INJ_R2_fastqc.zip > /dev/null 2>&1
 fi
 ```
-
-::: {.callout-important}
-
-{{< meta date >}}: This exercise is WIP!
-
-:::
 
 <!-- markdownlint-enable MD041 -->
 
@@ -41,6 +35,13 @@ document before running any commands as it will give you the
 biological background and general information about where to find and
 how to setup the data. We will focus on the *red* and *yellow*
 ecotypes in what follows.
+
+::: {.callout-note}
+
+This is a technical exercise, where the focus is not so much on the
+biology as on getting programs to run and interpreting the outputs.
+
+:::
 
 ::: {.callout-important}
 
@@ -195,8 +196,8 @@ depending on application and method.
 
 :::{#fig-fastqc-base-quality}
 
-![](INJ_R1_fastqc/Images/per_base_quality.png)
-![](INJ_R2_fastqc/Images/per_base_quality.png)
+![](PUN-Y-INJ_R1_fastqc/Images/per_base_quality.png)
+![](PUN-Y-INJ_R2_fastqc/Images/per_base_quality.png)
 
 Fastqc per base quality scores, read 1 (upper) and read 2 (lower
 panel).
@@ -241,7 +242,7 @@ process and sends it as input to the next^[For more information, see
 #| echo: true
 #| eval: true
 #| fig-cap: |
-zcat INJ_R1.fastq.gz | head -n 4 | cut -c -30
+zcat PUN-Y-INJ_R1.fastq.gz | head -n 4 | cut -c -30
 ```
 
 A fastq entry consists of four lines:
@@ -253,7 +254,7 @@ A fastq entry consists of four lines:
 
 ::: {.callout-exercise}
 
-{{< fa brands linux >}} Use the command `wc` to determine how many sequences are in `INJ_R1.fastq.gz`.
+{{< fa brands linux >}} Use the command `wc` to determine how many sequences are in `PUN-Y-INJ_R1.fastq.gz`.
 
 ::: {.callout-answer}
 
@@ -261,7 +262,7 @@ A fastq entry consists of four lines:
 #| label: wc-exercise-answer
 #| echo: true
 #| eval: false
-zcat INJ_R1.fastq.gz | wc -l
+zcat PUN-Y-INJ_R1.fastq.gz | wc -l
 ```
 
 Since there are four lines per sequence (id, sequence, `+` separator,
@@ -385,21 +386,22 @@ notice any difference between read 1 (R1) and read 2 (R2)?
 #| echo: true
 #| eval: false
 cd fastqc
-open INJ_R1_fastqc.html
-open INJ_R2_fastqc.html
+open PUN-Y-INJ_R1_fastqc.html
+open PUN-Y-INJ_R2_fastqc.html
 ```
 
 The traffic light summary indicates whether a given quality metric has
 passed or not. Typically, read 2 has slightly lower quality and more
 quality metrics with warnings. Since these reads have been deposited
-in SRA, it is likely they were filtered prior to upload, and we will
+in the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
+(SRA), it is likely they were filtered prior to upload, and we will
 not take any further action here.
 
 :::
 
 :::
 
-We will use `multiqc` later on to combine the results from several
+We will use `MultiQC` later on to combine the results from several
 output reports.
 
 ## Read mapping
@@ -433,21 +435,29 @@ Sample information is available in the `sampleinfo.csv` file:
 head -n 3 sampleinfo.csv
 ```
 
-We will use the `Run` column as unique `ID`, `SampleName` as the
-sample id `SM`, and `ILLUMINA` as the platform `PL`.
+The sample information is a combination of the run information
+obtained from the SRA (BioProject `PRJNA549183`) and the sample sheet
+provided with the article. An additional column `SampleAlias` has been
+added that names samples using a three-letter abbreviation for
+population hyphenated with the sample identifier. For the *ssp.
+puniceus*, an additional one-letter character denoting the color
+ecotype is inserted between population and sample id. `PUN-Y-BCRD`
+then is a sample from the *puniceus* subspecies with the yellow
+ecotype. We will use the `Run` column as unique `ID`, `SampleAlias` as
+the sample id `SM`, and `ILLUMINA` as the platform `PL`.
 
 ### Read mapping with bwa and conversion to bam format with samtools
 
-Let's map the fastq files corresponding to sample `BCRD`:
+Let's map the fastq files corresponding to sample `PUN-Y-BCRD`:
 
 ```{bash }
-#| label: map-bcrd-with-bwa
+#| label: map-pun-y-bcrd-with-bwa
 #| echo: true
 #| eval: true
 #| results: hide
-bwa mem -R "@RG\tID:SRR9309788\tSM:BCRD\tPL:ILLUMINA" -t 4 \
- -M M_aurantiacus_v1.fasta BCRD_R1.fastq.gz BCRD_R2.fastq.gz | \
- samtools sort - | samtools view -h -o BCRD.sort.bam
+bwa mem -R "@RG\tID:SRR9309788\tSM:PUN-Y-BCRD\tPL:ILLUMINA" -t 4 \
+ -M M_aurantiacus_v1.fasta PUN-Y-BCRD_R1.fastq.gz PUN-Y-BCRD_R2.fastq.gz | \
+ samtools sort - | samtools view -h -o PUN-Y-BCRD.sort.bam
 ```
 
 There's a lot to unpack here. First, the `-R` flag to `bwa mem` passes
@@ -471,7 +481,7 @@ the same command to view the resulting output on your screen:
 #| label: samtools-view-example
 #| echo: true
 #| eval: true
-samtools view BCRD.sort.bam | head -n 2
+samtools view PUN-Y-BCRD.sort.bam | head -n 2
 ```
 
 ::: {.callout-exercise}
@@ -493,14 +503,15 @@ the header only.
 #| label: samtools-view-answer
 #| echo: true
 #| eval: true
-samtools view -H BCRD.sort.bam
+samtools view -H PUN-Y-BCRD.sort.bam
 ```
 
 Although you can probably figure it out by looking at the data, do
 have a glance at the SAM format specification mentioned above. The
 `@SQ` tag corresponds to the reference sequence dictionary and tells
-you what region you are looking at (chromosome `LG4` from position
-12000001 to 12100000, which has a length `LN` 100000 bases).
+you what region you are looking at (chromosome `LG4`, which has a
+length `LN` 100000 bases; the example reference sequence was created
+by extracting the region on `LG4` from position 12000000 to 12100000).
 
 :::
 
@@ -530,7 +541,7 @@ the sampleinfo file.
 #| eval: true
 #| results: hide
 export SRR=SRR9309790
-export SAMPLE=INJ
+export SAMPLE=PUN-Y-INJ
 export REF=M_aurantiacus_v1.fasta
 samtools fastq ${SAMPLE}.unmapped.bam | \
  bwa mem -R "@RG\tID:${SRR}\tSM:${SAMPLE}\tPL:ILLUMINA" -t 4 -p -M ${REF} - | \
@@ -541,7 +552,7 @@ samtools fastq ${SAMPLE}.unmapped.bam | \
 #| label: set-sample-envvars
 #| echo: false
 #| eval: true
-Sys.setenv(SRR = "SRR9309790", SAMPLE = "INJ", REF = "M_aurantiacus_v1.fasta")
+Sys.setenv(SRR = "SRR9309790", SAMPLE = "PUN-Y-INJ", REF = "M_aurantiacus_v1.fasta")
 ```
 
 Note that we here need to use the command `samtools fastq` to read the
@@ -758,8 +769,10 @@ with the "real" variant calling. We once again run GATK
 
 ::: {.callout-exercise}
 
-Run GATK `HaplotypeCaller` on the recalibrated bam file, followed by
-`VariantFiltration`. For the latter, modify the filters to
+Using the code in section [Generate high quality known sites for
+BQSR](index.qmd#generate-high-quality-known-sites-for-bqsr) as a
+template, run GATK `HaplotypeCaller` on the recalibrated bam file,
+followed by `VariantFiltration`. For the latter, modify the filters to
 
 - filterName: FisherStrand, filter: FS > 60.0
 - filterName: QualByDepth, filter: QD < 2.0
@@ -799,11 +812,11 @@ calling and filtering on recalibrated files, for all samples.
 
 ::: {.callout-exercise}
 
-If time permits, run the workflow on some more samples (e.g., `ELF`).
+If time permits, run the workflow on some more samples (e.g., `PUN-R-ELF`).
 
 ::: {.callout-important}
 
-There are prepared gvcf files for download so there's no need to run
+There are prepared gVCF files for download so there's no need to run
 the workflow on all samples.
 
 :::
@@ -821,10 +834,17 @@ that you compile them with `MultiQC`. Running `MultiQC` is as simple
 as
 
 ```{bash }
-#| label: multiqc
-#| echo: true
+#| label: multiqc-run
+#| echo: false
 #| eval: true
 #| results: hide
+multiqc -f .
+```
+
+```{bash }
+#| label: multiqc
+#| echo: true
+#| eval: false
 multiqc .
 ```
 
@@ -839,7 +859,7 @@ here.
 ### Combine genomic VCF files and genotype
 
 We are now at the stage where we can do genotyping of our samples.
-This done by first combining individual sample gvcf files with GATK
+This done by first combining individual sample gVCF files with GATK
 `CombineGVCFs`, followed by genotyping with `GenotypeGVCFs`.
 
 ```{bash }
@@ -847,20 +867,21 @@ This done by first combining individual sample gvcf files with GATK
 #| echo: true
 #| eval: true
 #| results: hide
-gatk CombineGVCFs -OVI true --output combine.g.vcf.gz --reference ${REF} \
-  -V INJ.sort.dup.recal.hc.g.vcf.gz \
-  -V ELF.sort.dup.recal.hc.g.vcf.gz
-gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
-  -O allsites.vcf.gz --all-sites
+gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} \
+  -V PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
+  -V PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.subset.g.vcf.gz \
+  -O allsites.subset.vcf.gz --all-sites
 ```
 
 ::: {.callout-exercise}
 
-Create `allsites.vcf.gz` but for all the red and yellow samples.
+Create a variant call set `allsites.vcf.gz` but for all the red and
+yellow samples.
 
 ::: {.callout-hint}
 
-You need to specify all gvcf input files via the `--variants` (`-V`)
+You need to specify all gVCF input files via the `--variants` (`-V`)
 option. To get the sample names, look at the first column of
 `sampleinfo.csv`:
 
@@ -873,10 +894,228 @@ cat sampleinfo.csv | grep yellow | cut -f 1 -d ","
 
 :::
 
+::: {.callout-answer}
+
+```{bash }
+#| label: combine-red-yellow-samples
+#| echo: true
+#| eval: false
+gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} \
+     -V PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-JMC.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-LH.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-MT.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-UCSD.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-BCRD.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-LO.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-PCT.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-POTR.sort.dup.recal.hc.g.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
+  -O allsites.vcf.gz --all-sites
+```
+
 :::
 
-## Variant post-processing
+:::
 
-### Summarize and QC variants
+## Looking closer at variants with bcftools
+
+As a final step, let's run a couple of commands to view variants and
+summarize variant statistics.
+
+### Compiling statistics
+
+First out is `bcftools stats`, which compiles a summary of statistics,
+such as number of variants, quality distribution over variants, indel
+distributions and more.
+
+```{bash }
+#| label: bcftools-stats-allsites
+#| echo: true
+#| eval: true
+bcftools stats allsites.vcf.gz > allsites.vcf.gz.stats
+```
+
+The output text file consists of report sections that can be easily
+extracted with the `grep` command by virtue of the fact that the first
+column corresponds to a shortcode of the statistic. For instance, `SN`
+corresponds to Summary numbers:
+
+```{bash }
+#| label: bcftools-stats-greps-SN
+#| echo: true
+#| eval: true
+grep "^SN" allsites.vcf.gz.stats
+```
+
+Here, we can see that we have included non-variant sites (`no-ALTs`),
+that there are indels, and that a number of sites are multiallelic
+(more than two alleles).
+
+Rerunning MultiQC will automatically add this report.
+
+```{bash }
+#| label: rerun-multiqc-bcftools-stats
+#| echo: true
+#| eval: true
+#| results: hide
+# Use -f to overwrite old report
+multiqc -f .
+```
+
+We will use bcftools stats in the next exercise to look more closely
+at variant quality metrics.
+
+### Looking inside the VCF
+
+A Variant Call Format (VCF) file consists of three sections:
+meta-information lines (prefixed with `##`), a header line (prefixed
+with `#`), followed by the data. The meta-information contains
+provenance information detailing how the file was generated, `FILTER`
+specification, `INFO` fields that provide additional information to
+genotypes, `FORMAT` specification fields that define genotype entries,
+and more. You can print the header with the command `bcftools view
+-h`. An example of each is given below:
+
+```{bash }
+#| label: looking-inside-vcf-meta
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep FILTER | head -n 1
+bcftools view -h allsites.vcf.gz | grep INFO | head -n 1
+bcftools view -h allsites.vcf.gz | grep FORMAT | head -n 1
+```
+
+The header field consists of eight mandatory columns
+`CHROM`, `POS`, `ID`, `REF`, `ALT`, `QUAL`, `FILTER` and `INFO`,
+followed by `FORMAT` and sample columns that contain the called
+genotypes:
+
+```{bash }
+#| label: looking-inside-vcf-header
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep CHROM
+```
+
+Let's look at the first SNP entry (here, the first line extracts the
+position of the SNP):
+
+```{bash }
+#| label: bcftools-view-vcf
+#| echo: true
+#| eval: true
+pos=$(bcftools view -v snps -s PUN-R-JMC allsites.vcf.gz -H | head -n 1 | cut -f 2)
+bcftools view -v snps -s PUN-R-JMC allsites.vcf.gz LG4:$pos | tail -n 2
+```
+
+The most important columns are `CHROM`, which indicates the sequence
+(`LG4`), the genome position `POS`, the reference allele `REF` (i.e.,
+the nucleotide in the reference sequence), and the alternate allele
+`ALT`, which is the called variant. `QUAL` is a Phred-scaled quality
+of the call and can be used to filter low-quality calls. The `FILTER`
+column can be used to set filter flags. The `INFO` column contains
+metadata concerning the site; for instance, `DP` is the approximate
+read depth, the definition of which is included in the
+meta-information:
+
+```{bash }
+#| label: vcf-meta-information-info-dp
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep INFO | grep "ID=DP"
+```
+
+Finally, the columns following `FORMAT` pertain to the samples and
+contain the genotype calls, formatted according to the - you guessed
+it - `FORMAT` column. The example above contains a number of fields, where `GT` is the genotype:
+
+```{bash }
+#| label: vcf-meta-information-gt-format
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep FORMAT | grep "ID=GT"
+```
+
+For diploid samples, the genotype format is `#/#`, or `#|#` for phased
+data, where the hash marks are numbers that refer to the reference (0)
+and alternate (1 or higher) alleles. A `.` indicates a missing call.
+
+### Viewing variants and regions
+
+The `bcftools view` command allows for quick access and viewing of
+file contents. A prerequisite is that we first index the file:
+
+```{bash }
+#| label: bcftools-index-allsites
+#| echo: true
+#| eval: false
+bcftools index allsites.vcf.gz
+```
+
+after which we can view, say, the first three indel variants in
+the region 12,010,000-12,010,100, corresponding to VCF coordinates
+10,000-10,100^[Although the reference sequence corresponds to region
+LG4:12000000-12100000, the coordinates in `allsites.vcf.gz` start from
+1]:
+
+```{bash }
+#| label: bcftools-view-region
+#| echo: true
+#| eval: true
+bcftools view -v indels -H allsites.vcf.gz LG4:10000-10100
+```
+
+bcftools view has many options for subsetting and filtering variants.
+Remember to consult the help pages!
+
+::: {.callout-exercise}
+
+{{< fa brands linux >}} How many SNPs are there in region LG4:12010000-12000100?
+
+::: {.callout-hint}
+
+Look in the help page for option `-v`.
+
+:::
+
+::: {.callout-answer}
+
+```{bash }
+#| label: ex-bcftools-view-count-snps
+#| echo: true
+#| eval: false
+# Option -H omits the header information
+bcftools view -H -v snps allsites.vcf.gz LG4:10000-10100
+# Could also use wc -l to count the number of lines
+bcftools view -H -v snps allsites.vcf.gz LG4:10000-10100 | wc -l
+```
+
+:::
+
+:::
+
+### Selecting samples
+
+Finally, we look at how we can select samples from a variant file. To
+list the samples in a file, we can run `bcftools query`:
+
+```{bash }
+#| label: bcftools-query-l
+#| echo: true
+#| eval: true
+bcftools query -l allsites.vcf.gz
+```
+
+Selecting indel variants for a given sample, say `PUN-Y-BCRD`, and
+region `LG4:12001000-12001100` can then be done as follows:
+
+```{bash }
+#| label: bcftools-view-region-sample
+#| echo: true
+#| eval: true
+bcftools view -H -s PUN-Y-BCRD -v indels allsites.vcf.gz LG4:1000-1100
+```
 
 ## References
