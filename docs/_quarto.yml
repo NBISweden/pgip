@@ -22,7 +22,7 @@ project:
     - "exercises/index.qmd"
     - "exercises/simulation/index.qmd"
     - "exercises/variant_calling/index.qmd"
-    - "exercises/data_filtering/index.qmd"
+    - "exercises/variant_filtering/index.qmd"
     # Slides
     - "slides/index.qmd"
     - "slides/pgip/index.qmd"
