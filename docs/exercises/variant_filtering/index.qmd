@@ -203,6 +203,27 @@ files to in turn generate sequence masks that can be used in
 conjunction with the variant file. This is the topic for the second
 session (@sec-advanced-filtering).
 
+Regardless of approach, the end result is a set of regions that are
+discarded (masked) for a given analysis. They can be given either as a
+bed file, or a sequence mask, which is a FASTA-like file consisting of
+integer digits (between 0 and 9) for each position on a chromosome.
+Then, by setting a cutoff, an application can mask positions higher
+than that cutoff. We will generate mask files with `0` and `1` digits,
+an example of which is shown below, where the central 10 bases of the
+reference (top) are masked (bottom).
+
+```{bash }
+#| label: sequence-mask-example
+#| echo: false
+#| eval: true
+head -n 2 M_aurantiacus_v1.fasta | cut -c -30
+echo
+echo -e "LG4\t10\t20" | \
+ bedtools maskfasta -fi <(echo -e "LG4\t0\t30" | \
+   bedtools maskfasta -fi M_aurantiacus_v1.fasta -bed - -fo /dev/stdout -mc 0 | \
+   head -n 2 | cut -c -30) -bed - -fo /dev/stdout -mc 1
+```
+
 ## Basic filtering {#sec-basic-filtering}
 
 FIXME: add basic filtering commands with `vcftools`
@@ -305,7 +326,8 @@ the start and end coordinates of a region.
 
 The second is `csvtk`, a program that provides tools for dealing with
 tab- or comma-separated text files. Avid `R` users will see that many
-of the subcommands are similar to those of the `tidyverse` ecosystem.
+of the subcommands are similar to those in the [`tidyverse
+dplyr`](https://dplyr.tidyverse.org/) package.
 
 We can use these programs in a one-liner to generate a simple coverage
 plot (@fig-plot-coverage)^[The one-liner combines the results of
@@ -392,7 +414,9 @@ In this section, we will summarize coverage information for different
 sample sets, the motivation being that different filters may be
 warranted depending on what samples are being analysed. For instance,
 the coverage cutoffs for all samples will most likely be different
-from those applied to the subpopulations.
+from those applied to the subpopulations. In practice this means
+summing coverage tracks like those in @fig-plot-coverage for all
+samples.
 
 We can combine the coverage output from different samples with
 `bedtools unionbedg`. We begin by generating a coverage file for all
@@ -402,7 +426,11 @@ matching bed file names to pass as arguments to options `-names` and
 `-i`, respectively. Also, we include positions with no coverage
 (`-empty`) which requires the use of a genome file (option `-g`). The
 bed output is piped to `bgzip` which compresses the output, before
-finally indexing with `tabix`:
+finally indexing with `tabix`^[Instead of using the command
+substitution, you could look into the sample info file and set the
+sample names manually: `SAMPLES="PUN-Y-BCRD PUN-R-ELF PUN-Y-INJ
+PUN-R-JMC PUN-R-LH PUN-Y-LO PUN-R-MT PUN-Y-PCT PUN-Y-POTR
+PUN-R-UCSD"`].
 
 <!-- markdownlint-disable MD013 -->
 
@@ -451,8 +479,8 @@ population coverage files.
 
 You only need to modify the code that generates `SAMPLES` by grepping
 for each population separately (`csvtk grep -f Taxon -r -p red` and so
-on). Remember also to modify the output file name (e.g.,
-`red.bg.gz`).
+on), or setting them manually. Remember also to modify the output file
+name (e.g., `red.bg.gz`).
 
 :::
 
@@ -714,6 +742,26 @@ done
 Zoomed in coverage distribution for red and yellow ecotypes.
 :::
 
+Based on @fig-plot-population-coverage-distribution, we generate bed
+files with depths passing cutoffs:
+
+```{bash }
+#| label: bedtools-genomecov-population-depth-files
+#| echo: true
+#| eval: true
+# red filter: 20-60
+csvtk filter -t -H red.sum.bed.gz -f '4>20' | \
+ csvtk filter -t -H -f '4<60' | \
+ bgzip -c > red.sum.depth.bed.gz
+bedtools genomecov -i red.sum.depth.bed.gz -g ${REF}.fai  | grep genome
+
+# yellow filter: 20-55
+csvtk filter -t -H yellow.sum.bed.gz -f '4>20' | \
+ csvtk filter -t -H -f '4<55' | \
+ bgzip -c > yellow.sum.depth.bed.gz
+bedtools genomecov -i yellow.sum.depth.bed.gz -g ${REF}.fai  | grep genome
+```
+
 :::
 
 :::
@@ -744,11 +792,28 @@ bgzip -c -d ALL.bg.gz | \
 tabix -f -p bed ALL.ind.bed.gz
 ```
 
+::: {.callout-exercise}
+
+Use `bedtools genomecov` to determine the proportion of bases that are
+filtered out. Use `${REF}.fai` as the argument to the required option
+`-g`.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: bedtools-genomecov-individual-filter
+#| echo: true
+#| eval: true
+bedtools genomecov -i ALL.ind.bed.gz -g ${REF}.fai
+```
+
+:::
+
+:::
+
 <!-- markdownlint-enable MD013 -->
 
 ::: {.callout-exercise}
-
-## Exercise
 
 Generate coverage sums for red and yellow sample sets.
 
@@ -759,9 +824,8 @@ Generate coverage sums for red and yellow sample sets.
 ```{bash }
 #| label: awk-filter-50pct-sample-set
 #| echo: true
-#| eval: false
-#| code-fold: true
-for pop in CEU CHB YRI; do
+#| eval: true
+for pop in red yellow; do
   bgzip -c -d $pop.bed.gz | awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | bgzip > $pop.ind.bed.gz
   tabix -f -p bed $pop.ind.bed.gz
 done
@@ -775,38 +839,66 @@ done
 
 ### Sequence masks
 
-Finally, for each sample set, we will use `bedtools intersect` to
-generate combined bed files for total sum coverages and the filter on
-number of individuals. `bedtools intersect` makes it easy to combine
-multiple bed files, so other filters could be added.
-
-FIXME: make coverage filter above and intersect with ROI files
-
-```{bash }
-#| label: bedtools-intersect-all
-#| echo: true
-#| eval: false
-# bedtools intersect -a ALL.sum.bed.gz -b ALL.ind.bed.gz \
-# -g ${REF}.fai | bgzip > ALL.mask.bed.gz
-#tabix -f -p bed ALL.mask.bed.gz
-```
-
-Now we can use the command `bedtools makefasta` to make a sequence
-mask file in fasta format. The file will consist of characters `0` and
-`1`, where the latter are regions that will be masked out in
-subsequent analyses. First, we make a mask file that consists solely
-of `1`'s:
-
-<!-- markdownlint-disable MD013 -->
+Finally, in addition to the bed output files, we will generate
+sequence masks. First we use the command `bedtools makefasta` to make
+a sequence mask file in FASTA format consisting solely of `1`'s:^[We
+need to generate a bed file representation of the FASTA index
+unfortuanely as `bedtools makefasta` doesn't handle FASTA indices
+natively.]
 
 ```{bash }
 #| label: bedtools-maskfasta-make-genome-mask
 #| echo: true
-#| eval: false
+#| eval: true
 awk 'BEGIN {OFS="\t"} {print $1, 0, $2}' ${REF}.fai > ${REF}.bed
 bedtools maskfasta -fi ${REF} -mc 1 -fo ${REF}.mask.fa -bed ${REF}.bed
 ```
 
-<!-- markdownlint-enable MD013 -->
+We generate a file where all positions are masked because the bed
+files contain regions that we want to keep and thus convert
+corresponding positions to zeros. This file will be used as a template
+for all mask files.
+
+Then, for each sample set, we will use `bedtools intersect` to
+intersect the bed files corresponding to the total sum coverage and
+the filter on number of individuals. `bedtools intersect` makes it
+easy to combine multiple bed files, so any other filters, or genomic
+features such as exons, could be added to make a compound mask file.
+The resulting bed files is used as input to `bedtools maskfasta`.
+
+```{bash }
+#| label: bedtools-intersect-all
+#| echo: true
+#| eval: true
+bedtools intersect -a ALL.sum.depth.bed.gz -b ALL.ind.bed.gz \
+   -g ${REF}.fai | bgzip > ALL.unmask.bed.gz
+tabix -f -p bed ALL.unmask.bed.gz
+bedtools maskfasta -fi ${REF}.mask.fa -mc 0 -fo ${REF}.unmask.fa \
+   -bed ALL.unmask.bed.gz
+head -n 3 ${REF}.unmask.fa
+```
+
+::: {.callout-exercise}
+
+Create unmask files for red and yellow populations.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: bedtools-intersect-red-yellow
+#| echo: true
+#| eval: true
+for pop in red yellow; do
+ bedtools intersect -a $pop.sum.depth.bed.gz -b $pop.ind.bed.gz \
+    -g ${REF}.fai | bgzip > $pop.unmask.bed.gz
+ tabix -f -p bed $pop.unmask.bed.gz
+ bedtools maskfasta -fi ${REF}.mask.fa -mc 0 -fo ${REF}.$pop.unmask.fa \
+    -bed $pop.unmask.bed.gz
+done
+```
+
+:::
+
+:::
 
 ## References
