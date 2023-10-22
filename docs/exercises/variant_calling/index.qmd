@@ -45,9 +45,9 @@ biology as on getting programs to run and interpreting the outputs.
 
 ::: {.callout-important}
 
-NB! The commands of this document have been run on a subset (a
-subregion) of the data. Therefore, although you will use the same
-commands, your results will differ from those presented here!
+The commands of this document have been run on a subset (a subregion)
+of the data. Therefore, although you will use the same commands, your
+results will differ from those presented here.
 
 :::
 
@@ -131,15 +131,14 @@ instructions on how to install.
 
 ### Listing
 
-- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
-- [Genome Analysis ToolKit
-  (GATK)](https://gatk.broadinstitute.org/hc/en-us)
-  [@depristo_FrameworkVariationDiscovery_2011]
-- [picard](https://github.com/broadinstitute/picard) [@Picard2019toolkit]
-- [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
-- [multiqc](https://multiqc.info/) [@ewels_MultiQCSummarizeAnalysis_2016]
 - [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
+- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
+- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [Genome Analysis ToolKit  (GATK)](https://gatk.broadinstitute.org/hc/en-us)   [@depristo_FrameworkVariationDiscovery_2011]
+- [multiqc](https://multiqc.info/) [@ewels_MultiQCSummarizeAnalysis_2016]
+- [picard](https://github.com/broadinstitute/picard) [@Picard2019toolkit]
+- [qualimap](http://qualimap.conesalab.org/) [@okonechnikov_QualimapAdvancedMultisample_2016]
+- [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
 
 ### Conda
 
@@ -158,6 +157,7 @@ dependencies:
   - fastqc=0.12.1
   - multiqc=1.16
   - picard=3.1.0
+  - qualimap=2.2.2d
   - samtools=1.15.1
 ```
 
@@ -170,7 +170,7 @@ Execute the following command to load modules:
 #| echo: true
 #| eval: false
 module load uppmax bioinfo-tools GATK/4.3.0.0 bwa/0.7.17 FastQC/0.11.9 \
-    MultiQC/1.12 picard/2.27.5 samtools/1.17 bcftools/1.17
+    MultiQC/1.12 picard/2.27.5 samtools/1.17 bcftools/1.17 QualiMap/2.2.1
 ```
 
 :::
@@ -315,7 +315,7 @@ command. We will use bcftools to look at and summarize the variant
 files.
 
 [freebayes](https://github.com/freebayes/freebayes) uses a Bayesian
-model to call variants. It may be very time-consuming in high-coverage
+model to call variants. It may be time-consuming in high-coverage
 regions, and one therefore may have to mask repetitive and other
 low-complexity regions.
 
@@ -418,8 +418,8 @@ representation of a set of reads that originate from a sequencing unit
 and sample. Assigning read groups becomes particularly important for
 multiplexing protocols, or when a sample has been sequenced on
 different lanes or platform units, as it allows for the identification
-of sequence batch issues (e.g., poor sequencing quality). Here, we
-want to assign a unique `ID`, the sample id (`SM`), and the sequencing
+of sequence batch issues (e.g., poor sequence quality). Here, we want
+to assign a unique `ID`, the sample id (`SM`), and the sequencing
 platform (`PL`), where the latter informs the algorithms on what error
 model to apply. The read group is formatted as
 `@RG\tID:uniqueid\tSM:sampleid\tPU:platform`, where `\t` is the tab
@@ -579,7 +579,45 @@ picard MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
 ```
 
 The metrics output file contains information on the rate of
-duplication. We will include the output in the final `multiqc` report.
+duplication. We will include the output in the final `MultiQC` report.
+
+An additional mapping quality metric of interest is percentage mapped
+reads and average read depth. We can use `qualimap bamqc` to collect
+mapping statistics from a bam file:
+
+```{bash }
+#| label: qualimap-bamqc
+#| echo: true
+#| eval: true
+#| results: hide
+qualimap bamqc -bam ${SAMPLE}.sort.bam
+```
+
+A summary of the results is exported to
+`${SAMPLE}.sort_stats/genome_results.txt`; we show percent mapping and
+average coverage below as examples:
+
+```{bash }
+#| label: qualimap-genome-results-example
+#| echo: true
+#| eval: true
+grep "number of mapped reads" ${SAMPLE}.sort_stats/genome_results.txt
+grep "mean coverageData" ${SAMPLE}.sort_stats/genome_results.txt
+```
+
+::: {.callout-note collapse=true}
+
+## Why does the sample have such low coverage?
+
+If you look at the coverage reported in `sampleinfo.csv`, column `Seq.
+Depth`, you will note that the observed coverage here is much lower.
+This has to do with how the exercise data set was prepared; only read
+pairs where *both* reads mapped within the example region were
+retained.
+
+:::
+
+These statistics will also be picked up by `MultiQC`.
 
 ### Generate high quality known sites for BQSR
 
