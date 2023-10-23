@@ -1,0 +1,1402 @@
+---
+title: Variant filtering
+author:
+  - Per Unneberg
+format: html
+execute:
+  cache: true
+---
+
+<!-- markdownlint-disable MD041 -->
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+<!-- markdownlint-enable MD041 -->
+
+In this exercise we will look at ways of filtering variant data. We
+will begin by applying filters to the variant file containing all
+sites data, followed by a more general approach based on sequencing
+coverage that works also when the variant file lacks information about
+monomorphic sites.
+
+::: {.callout-tip collapse=true}
+
+## Learning objectives
+
+- filter variants by quality, read depth, and other metrics
+- apply filters to a VCF file
+- create per sample, per population, and total depth of coverage
+  profiles
+- generate mask files for downstream processing
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Data setup
+
+Create an exercise directory and `cd` to it:
+
+```{bash }
+#| label: create-monkeyflower-directory
+#| echo: true
+#| eval: false
+mkdir -p monkeyflower
+cd monkeyflower
+```
+
+Then download the zip archives and unzip them.
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Tools
+
+In this exercise we will use the tools listed below. See [compute
+environment](/exercises/compute_environment/index.html) for
+instructions on how to install.
+
+:::{.panel-tabset}
+
+### Listing
+
+- [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
+- [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
+- [csvtk](https://bioinf.shenwei.me/csvtk/)
+- [mosdepth](https://github.com/brentp/mosdepth)  [@pedersen_MosdepthQuickCoverage_2018]
+- [seqkit](https://bioinf.shenwei.me/seqkit/) [@shen_SeqKitCrossPlatformUltrafast_2016]
+- [vcflib](https://github.com/vcflib/vcflib) [@garrison_SpectrumFreeSoftware_2022]
+- [vcftools](https://vcftools.github.io/) [@danecek_VariantCallFormat_2011]
+
+### Conda
+
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - bedtools=2.31.0
+  - bcftools=1.15.1
+  - csvtk=0.28.0
+  - mosdepth=0.3.3
+  - samtools=1.15.1
+  - vcflib=1.0.1
+  - vcftools=0.1.16
+```
+
+### UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools mosdepth/0.3.3 \
+       BEDTools/2.29.2 samtools/1.17 bcftools/1.17 vcftools/0.1.16 \
+    vcflib/1.0.1
+```
+
+Note that `csvtk` may require [manual
+installation](https://bioinf.shenwei.me/csvtk/#installation)^[18-Oct-2023:
+We will aim to make csvtk available via the module system].
+
+:::
+
+:::
+
+## Background
+
+Regardless of how a raw variant call set has been produced, the calls
+will be of varying quality for a number of reasons. For high-coverage
+sequencing, the two most common are incompleteness of the reference
+sequence and misalignments in repetitive regions
+[@li_BetterUnderstandingArtifacts_2014]. Low-coverage sequencing comes
+with its own biases and issues, with the most important being the
+difficulty to accurately call
+genotypes[@maruki_GenotypeCallingPopulationGenomic_2017].
+
+To improve the accuracy of downstream inference, a number of
+analysis-dependent quality control filters should be applied to the
+raw variant call set (for a concise summary, see
+@lou_BeginnerGuideLowcoverage_2021). In this exercise, we will begin
+by applying filters to the variant file containing all sites data,
+followed by a more general approach based on sequencing coverage that
+works also when the variant file lacks information about monomorphic
+sites.
+
+It is worthwhile to spend time thinking about filtering. As we will
+see, there are numerous metrics to filter on, and different
+applications require different filters. This is not as straightforward
+as it may seem, and even experts struggle to get filtering right.
+
+### Read coverage distributions indicate accessibility
+
+```{r, engine='tikz', fig.ext="svg"}
+#| label: fig-coverage-filters
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     Coverage distributions for three hypothetical samples along
+#|     with the cumulative coverage for all samples.
+\addcolumnsum{\coveragetable}{A1,A2,A3}{Asum}
+\addthresholdmask{\coveragetable}{A1}{A1mask}
+\addthresholdmask{\coveragetable}{A2}{A2mask}
+\addthresholdmask{\coveragetable}{A3}{A3mask}
+\addthresholdmask{\coveragetable}{Asum}{Asummask}
+
+\let\Aonemask\empty
+\formatmask{\coveragetable}{\Aonemask}{A1mask}
+\let\Atwomask\empty
+\formatmask{\coveragetable}{\Atwomask}{A2mask}
+\let\Athreemask\empty
+\formatmask{\coveragetable}{\Athreemask}{A3mask}
+\let\Asummask\empty
+\formatmask{\coveragetable}{\Asummask}{Asummask}
+
+\begin{tikzpicture}[x=1pt, y=1pt]
+\pic[at={(0, 0)}] (A1) {coverageplot={\coveragetable}{ref}{A1}{Sample 1}{blue}};
+%%\matrix[mask, anchor=west, at={($(A1.south west)+(3pt, -10pt)$)}] (A1mask) {\Aonemask};
+\pic[yshift=-100pt] (A2) {coverageplot={\coveragetable}{ref}{A2}{Sample 2}{blue}};
+%%\matrix[mask, anchor=west, at={($(A2.south west)+(3pt, -10pt)$)}] (A2mask) {\Atwomask};
+
+\pic[yshift=-200pt] (A3) {coverageplot={\coveragetable}{ref}{A3}{Sample 3}{blue}};
+%%\matrix[mask, anchor=west, at={($(A3.south west)+(3pt, -10pt)$)}] (A3mask) {\Athreemask};
+
+\pgfplotsset{covaxis/.append style={ymax=45}}
+\pic[xshift=250pt,yshift=-120pt](Asum){coverageplot={\coveragetable}{ref}{Asum}{All samples}{red}};
+%%\matrix[mask, anchor=west, at={($(Asum.south west)+(3pt, -10pt)$)}] (Asummask) {\Asummask};
+
+\end{tikzpicture}
+```
+
+@fig-coverage-filters illustrates the sequencing coverage of three
+samples. The important thing to note is that the coverage is uneven.
+Some regions lack coverage entirely, e.g., due to random sampling or
+errors in the reference sequence. Other regions have excessive
+coverage, which could be a sign of repeats that have been collapsed in
+the reference. A general coverage filter could then seek to mask out
+sites where a fraction (50%, say) of individuals have too low or
+excessive coverage.
+
+The right panel illustrates the sum of coverages across all samples.
+Minimum and maximum depth filters could be applied to the aggregate
+coverages of all samples, or samples grouped by population, to
+eliminate sites confounding data support.
+
+The VCF we have produced contains all sites; that is, both monomorphic
+and polymorphic sites are present. Every site contains information
+about depth and other metadata, which makes it possible to apply
+coverage filters directly to the variant file itself. We will make use
+of direct filters in the first session below (@sec-basic-filtering).
+
+However, it may not always be possible to generate a VCF with all
+sites. Species with large genomes will produce files so large that
+they prevent efficient downstream processing. Under these
+circumstances, *ad hoc* coverage filters can be applied to the bam
+files to in turn generate sequence masks that can be used in
+conjunction with the variant file. This is the topic for the second
+session (@sec-advanced-filtering).
+
+Regardless of approach, the end result is a set of regions that are
+discarded (masked) for a given analysis. They can be given either as a
+bed file, or a sequence mask, which is a FASTA-like file consisting of
+integer digits (between `0` and `9`) for each position on a
+chromosome. Then, by setting a cutoff, an application can mask
+positions higher than that cutoff. We will generate mask files with
+`0` and `1` digits, an example of which is shown below, where the
+central 10 bases of the reference (top) are masked (bottom).
+
+```{bash }
+#| label: sequence-mask-example
+#| echo: false
+#| eval: true
+head -n 2 M_aurantiacus_v1.fasta | cut -c -30
+echo
+echo -e "LG4\t10\t20" | \
+ bedtools maskfasta -fi <(echo -e "LG4\t0\t30" | \
+   bedtools maskfasta -fi M_aurantiacus_v1.fasta -bed - -fo /dev/stdout -mc 0 | \
+   head -n 2 | cut -c -30) -bed - -fo /dev/stdout -mc 1
+```
+
+## Basic filtering of a VCF file {#sec-basic-filtering}
+
+We will begin by creating filters for our VCF file. Before we start,
+let's revisit some statistics for the entire (unfiltered) call set:
+
+```{bash }
+#| label: bcftools-stats-allsites
+#| echo: true
+#| eval: true
+bcftools stats allsites.vcf.gz | grep ^SN
+```
+
+Keep track of these numbers as we will use them to evaluate the
+effects of filtering.
+
+### Generate random subset of variants
+
+Depending on the size of a study, both in terms of reference sequence
+and number of samples, the VCF output can become large; a VCF file may
+in fact contain millions of variants. We want to create filters by
+examining distributions of VCF quality metrics and setting reasonable
+cutoffs. In order to decrease run time, we will look at a random
+sample of sites. We use the `vcflib` program `vcfrandomsample` to
+randomly sample approximately 100,000 sites from our VCF file:
+
+```{bash }
+#| label: vcflib-random-subsample-toy
+#| echo: false
+#| eval: true
+bcftools view allsites.vcf.gz | vcfrandomsample -r 1.0 | bgzip -c > allsites.subset.vcf.gz
+bcftools index allsites.subset.vcf.gz
+```
+
+```{bash }
+#| label: vcflib-random-subsample
+#| echo: true
+#| eval: false
+bcftools view allsites.vcf.gz | vcfrandomsample -r 0.03 | bgzip -c > allsites.subset.vcf.gz
+bcftools index allsites.subset.vcf.gz
+```
+
+The `-r` parameter sets the *rate* of sampling which is why we get
+*approximately* 100,000 sites.
+
+We will now use `vcftools` to compile statistics. By default,
+`vcftools` outputs results to files with a prefix `out.` in the
+current directory. You can read up on settings and options by
+consulting the man pages with `man vcftools`^[`vcftools` does **not**
+have a `-h` or `--help` option.]. Therefore, we define a variable
+where we will output our quality metrics.
+
+```{bash }
+#| label: vcftools-set-out-prefix
+#| echo: true
+#| eval: true
+mkdir -p vcftools
+OUT=vcftools/allsites
+VCF=allsites.subset.vcf.gz
+```
+
+```{r }
+#| label: set-vcf-envvars
+#| echo: false
+#| eval: true
+Sys.setenv(
+    OUT = "vcftools/allsites",
+    VCF = "allsites.subset.vcf.gz",
+    OUTVCF = "allsites.subset.filtered.vcf.gz"
+)
+```
+
+### Generate statistics for filters
+
+While `vcftools` can compile many different statistics, we will focus
+on the most important ones. Below we summarize some of the filters
+that @lou_BeginnerGuideLowcoverage_2021 propose, along with required
+metrics:
+
+- **minimum depth**: `vcftools` can output the **read depth**
+  (coverage) at each site. This filter requires a minimum depth.
+- **maximum depth**: Similarly, a maximum depth can be set, to avoid
+  repetitive regions.
+- **minimum number of individuals**: requirement that a minimum number
+  of individuals need a given read depth
+
+We will generate metrics and plot results as we go along, with the
+goal of generating a set of filtering cutoffs to apply to the data.
+
+#### Total depth per site
+
+To get a general overview of depth of coverage, we first generate the
+average depth per *sample*^[The `2>/dev/null` outputs messages from
+`vcftools` to a special file `/dev/null` which is a kind of electronic
+dustbin.]:
+
+```{bash }
+#| label: vcftools-depth
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --depth --out $OUT 2>/dev/null
+cat ${OUT}.idepth
+csvtk summary -t -f MEAN_DEPTH:mean ${OUT}.idepth
+```
+
+```{r }
+#| label: r-csvtk-vcftools-depth-per-site-mean-sd
+#| echo: false
+#| eval: true
+data <- read.table("vcftools/allsites.idepth", header=TRUE)
+LDEPTH_MEAN <- round(mean(data$MEAN_DEPTH), 1)
+```
+
+Note that `vcftools` treats uncalled sites as missing data, which is
+why the number of sites differ between samples. The average coverage
+over all samples is 7.9X. This is in the low range for a
+protocol based on explicitly calling genotypes. At 5X coverage, there
+may be a high probability that only one of the alleles has been
+sampled [@nielsen_GenotypeSNPCalling_2011], whereby sequencing may be
+mistaken for true variation.
+
+Then we calculate depth per site to see if we can identify reasonable depth cutoffs:
+
+```{bash }
+#| label: vcftools-depth-per-site
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --site-depth --out $OUT 2>/dev/null
+head -n 3 ${OUT}.ldepth
+```
+
+So, for each position, we have a value (column `SUM_DEPTH`) for the
+total depth across all samples.
+
+We plot the distribution of depths by counting how many times each
+depth is observed. This can be done with `csvtk summary` where we
+count positions and group (`-g`) by the `SUM_DEPTH` value:
+
+```{bash }
+#| label: csvtk-plot-vcftools-depth-per-site
+#| echo: true
+#| eval: true
+csvtk summary -t -g SUM_DEPTH -f POS:count -w 0 ${OUT}.ldepth |\
+ csvtk sort -t -k 1:n |\
+ csvtk plot line -t - -x SUM_DEPTH -y POS:count \
+    --point-size 0.01 --xlab "Depth of coverage (X)" \
+    --ylab "Genome coverage (bp)" \
+    --width 9.0 --height 3.5 > $OUT.ldepth.png
+```
+
+::: {#fig-csvtk-plot-vcftools-depth-per-site attr-output='.details summary="Output"'}
+
+![](vcftools/allsites.ldepth.png)
+
+Distribution of the total depth per site for all samples.
+
+:::
+
+As @fig-csvtk-plot-vcftools-depth-per-site shows, most sites fall
+within a peak, but also that there are sites with very high coverage,
+up to ten times as high as the depth at the peak maximum. We calculate
+some range statistics to get an idea of the spread. The following
+`csvtk` command will calculate the minimum, first quartile, median,
+mean, third quartile, and maximum of the third column (`SUM_DEPTH`):
+
+```{bash }
+#| label: csvtk-vcftools-depth-per-site-quartiles
+#| echo: true
+#| eval: true
+csvtk summary -t -f 3:min,3:q1,3:median,3:mean,3:q3,3:max vcftools/allsites.ldepth
+```
+
+Indeed, most sites have a depth between 50-100X, with a large number
+of outliers. We redraw the plot to zoom in on the peak:
+
+```{bash }
+#| label: csvtk-plot-vcftools-depth-per-site-zoom-in
+#| echo: false
+#| eval: true
+csvtk summary -t -g SUM_DEPTH -f POS:count -w 0 ${OUT}.ldepth |\
+ csvtk sort -t -k 1:n |\
+ csvtk plot line -t - -x SUM_DEPTH -y POS:count \
+    --point-size 0.01 --xlab "Depth of coverage (X)" \
+    --ylab "Genome coverage (bp)" \
+    --width 9.0 --height 3.5  --x-min 0 --x-max 140 > $OUT.ldepth.zoomin.png
+```
+
+::: {#fig-csvtk-plot-vcftools-depth-per-site-zoom-in attr-output='.details summary="Output"'}
+
+![](vcftools/allsites.ldepth.zoomin.png)
+
+Zoomed in version of @fig-csvtk-plot-vcftools-depth-per-site which was
+achieved by adding the options `--x-min 0 --x-max 140` to the
+plotting call.
+
+:::
+
+We could choose a filter based on the quantile statistics above, or by
+eye-balling the graph. In this example, we could have chosen the range
+50-110X; note that your values will probably be different.
+
+#### Variant quality distribution
+
+Another quantity of interest is the variant quality. Recall, variant
+quality scores are Phred-scaled scores, meaning a value of 10 has a
+10% chance of being wrong, 20 a 1% chance, and so on; you typically
+want to at least filter on 20 or even higher. We extract and plot the
+quality values below:
+
+```{bash }
+#| label: vcftools-quality
+#| echo: true
+#| eval: true
+#| results: hide
+vcftools --gzvcf $VCF --site-quality --out $OUT
+```
+
+```{bash }
+#| label: cvstk-vcftools-site-quality
+#| echo: true
+#| eval: true
+# To improve histogram, filter out extreme quality scores. You
+# may have to fiddle with the exact values
+csvtk filter -t -f "QUAL>0" -f "QUAL<1000" ${OUT}.lqual  | \
+ csvtk summary -t -g QUAL -f POS:count -w 0 - |\
+ csvtk sort -t -k 1:n |\
+ csvtk plot hist -t --bins 100 - \
+          --xlab "Quality value" \
+    --ylab "Count" \
+    --width 9.0 --height 3.5 > $OUT.lqual.png
+```
+
+::: {#fig-csvtk-vcftools-site-quality attr-output='.details summary="Output"'}
+
+![](vcftools/allsites.lqual.png)
+
+Distribution of variant quality scores.
+
+:::
+
+Clearly most quality scores are above 20-30. **We recommend setting 30
+as the cutoff**.
+
+#### Minor allele frequency distribution
+
+Since we are going to calculate nucleotide diversities, we will not
+filter on the minor allele frequency (MAF) here. Nevertheless, we
+generate the distribution and plot for discussion purposes. The
+`--freq2` will output the frequencies only, adding the option
+`--max-alleles 2` to focus only on bi-allelic sites:
+
+```{bash }
+#| label: vcftools-maf
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --freq2 --out $OUT --max-alleles 2 2>/dev/null
+head -n 2 ${OUT}.frq
+cat ${OUT}.frq | awk '{if (NF>5) {print}}' | head -n 3
+```
+
+The last line employs some `awk` magic to print lines with more than 5
+columns to show what variant sites look like. The last two columns are
+frequencies ordered according to the reference allele. Therefore, we
+need to pick the minimum value to get the MAF. We can use `csvtk
+mutate` to create a new column
+
+```{bash }
+#| label: cvstk-vcftools-minor-allele-frequency
+#| echo: true
+#| eval: true
+csvtk fix -t ${OUT}.frq |\
+ csvtk filter -t -f "{FREQ}!=0" -f "{FREQ}!=1" - |\
+ csvtk mutate2 -t -n maf -e '${5} > ${6} ? "${6}" : "${5}" ' - |\
+ csvtk plot hist -t --bins 20 -f maf - \
+         --xlab "Minor allele frequency" \
+    --ylab "Count" \
+    --width 9.0 --height 3.5 > $OUT.frq.png
+```
+
+::: {#fig-cvstk-vcftools-minor-allele-frequency attr-output='.details summary="Output"'}
+
+![](vcftools/allsites.frq.png)
+
+Distribution of minor allele frequencies.
+
+:::
+
+Since our variant file consists of 10 individuals, that is, 20
+chromosomes, there are only so many frequencies that we can observe,
+which is why the histogram looks a bit disconnected. The maximum value
+is 0.5, which is to be expected, as it is a *minor* allele frequency.
+We note that there are more sites with a low minor allele frequency,
+which in practice means there are many *singleton* variants (carried
+only by one individual).
+
+This is where filtering on MAF can get tricky. Singletons may
+correspond to sequencing error, but if too hard a filter is applied,
+the resulting site frequency spectrum (SFS) will be skewed. For
+statistics that are based on the SFS, this may lead biased estimates.
+Since we will be applying such a statistic, we do not filter on the
+MAF here. Note, however, that for other applications, such as
+population structure, it may be warranted to more stringently (say,
+MAF>0.1) filter out low-frequency variants.
+
+#### Missing data for individuals and sites
+
+The proportion missing per individual can indicate whether the input
+DNA was of poor quality, and that the individual should be excluded
+from analysis.
+
+We can calculate the proportion of missing data
+
+```{bash }
+#| label: vcftools-missing-data-individual
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --missing-indv --out $OUT 2>/dev/null
+head -n 3 ${OUT}.imiss
+```
+
+and look at the results, focusing on the `F_MISS` column (proportion missing sites):
+
+```{bash }
+#| label: cvstk-vcftools-proportion-missing-ind
+#| echo: true
+#| eval: true
+csvtk plot hist -t --x-min 0 -f F_MISS ${OUT}.imiss > ${OUT}.imiss.png
+```
+
+::: {#fig-cvstk-vcftools-proportion-missing-ind output='.details summary="Output"'}
+
+![](vcftools/allsites.imiss.png)
+
+Distribution of missingness.
+
+:::
+
+Here, the missingness lies in the range 0.13-0.17 for all samples,
+except `PUN-Y-LO`, which has 0.26, which could be cause for concern.
+However, we refrain from taking any action here.
+
+Similarly, we can look at missingness per site. This is related to the
+filter based on minimum number of individuals suggested by
+@lou_BeginnerGuideLowcoverage_2021. We calculate
+
+```{bash }
+#| label: vcftools-missing-data-site
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --missing-site --out $OUT 2>/dev/null
+head -n 3 ${OUT}.lmiss
+```
+
+and plot to get an idea of if there are sites that lack data.
+
+```{bash }
+#| label: cvstk-vcftools-proportion-missing-site
+#| echo: true
+#| eval: true
+csvtk plot hist --bins 20 -t -f F_MISS ${OUT}.lmiss > ${OUT}.lmiss.png
+```
+
+::: {#fig-cvstk-vcftools-proportion-missing-site output='.details summary="Output"'}
+
+![](vcftools/allsites.lmiss.png)
+
+Distribution of missingness among sites.
+
+:::
+
+As @fig-cvstk-vcftools-proportion-missing-site shows, many individuals
+have no or little missing data, but given the low coverage, there is a
+substantial number of individuals with higher missingness. We
+calculate range statistics to get a feeling for a good cutoff:
+
+```{bash }
+#| label: cvstk-missing-individual-cutoff
+#| echo: true
+#| eval: true
+csvtk summary -t -f 6:min,6:q1,6:median,6:mean,6:q3,6:max vcftools/allsites.lmiss
+```
+
+The mean missingness is 20%, so we have to be a bit lenient and use
+25% missingness as threshold. Typical values of tolerated missingness
+lie in the range 5-25%. Note that when passing this parameter to
+`vcftools`, it has to be inverted to 75%!
+
+#### Heterozygosity
+
+`vcftools` can calculate the heterozygosity per individual. More
+specifically, it estimates the inbreeding coefficient F for each
+individual.
+
+```{bash }
+#| label: vcftools-heterozygosity
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --het --out $OUT 2>/dev/null
+cat ${OUT}.het
+```
+
+Here, F is a measure of how much the observed homozygotes `O(HOM)`
+differ from the expected (`E(HOM)`), and may be negative. `vcftools`
+calculates F from the expression $F=(O-E)/(N-E)$, which you can verify
+by substituting the variables in the output. If F is negative, there
+are fewer observed homozygotes than expected, or conversely, an excess
+of heterozygotes. This could be indicative of poor sequence quality
+(bad mappings) or contamination. If F is positive, there is a deficit
+of heterozygotes, which could be a sign of inbreeding or signs of
+allelic dropout in case of low sequencing coverage. The underlying
+assumption is HWE, which holds for F=0.
+
+In this case, we know that the samples are from two different
+populations, red and yellow. In such cases, we actually expect a
+deficit of heterozygotes (and consequently, positive F) simply due to
+something called the [Wahlund
+effect](https://en.wikipedia.org/wiki/Wahlund_effect).
+
+::: {.callout-exercise}
+
+Use `bcftools view -s SAMPLENAMES | vcftools --vcf - --het --stdout` to
+calculate the heterozygosity for red and yellow samples. Substitute
+`SAMPLENAMES` for a comma-separated list of samples.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: vcftools-heterozygosity-red
+#| echo: true
+#| eval: true
+bcftools view -s PUN-R-ELF,PUN-R-JMC,PUN-R-LH,PUN-R-MT,PUN-R-UCSD allsites.vcf.gz |\
+ vcftools --vcf - --het --stdout 2>/dev/null
+```
+
+:::
+
+:::
+
+### Filtering the VCF
+
+Now that we have decided on filters we can apply them to the VCF. We
+first set the filters as variables:
+
+```{bash }
+#| label: vcf-filter-variables
+#| echo: true
+#| eval: true
+MISS=0.75
+QUAL=30
+MIN_DEPTH=50
+MAX_DEPTH=110
+```
+
+and run `vcftools` as follows:
+
+```{bash }
+#| label: vcftools-apply-filters
+#| echo: true
+#| eval: true
+OUTVCF=${VCF%.vcf.gz}.filtered.vcf.gz
+vcftools --gzvcf $VCF \
+   --remove-indels --max-missing $MISS --minQ $QUAL \
+   --min-meanDP $MIN_DEPTH --max-meanDP $MAX_DEPTH \
+   --minDP $MIN_DEPTH --maxDP $MAX_DEPTH --recode \
+   --stdout 2>/dev/null |
+ gzip -c > $OUTVCF
+```
+
+Compare the results with the original input:
+
+```{bash }
+#| label: bcftools-compare-filter-to-original
+#| echo: true
+#| eval: true
+bcftools stats $OUTVCF | grep "^SN"
+```
+
+## Advanced filtering based coverage analyses {#sec-advanced-filtering}
+
+In this section, we will restrict our attention to coverage-based
+filters, with the aim of generating *sequence masks* to denote regions
+of a reference sequence that contain sufficient information across
+individuals and populations. Furthermore, the masks will be applied in
+the context of genetic diversity calculations, in which case specific
+filters on polymorphic sites (e.g., *p*-value or minimum minor allele
+frequency (MAF)) should **not** be applied (all sites contain
+information).
+
+Mapped reads provide information about how well a given genomic region
+has been represented during sequencing, and this information is
+usually summarized as the sequencing coverage. For any locus, this is
+equivalent to the number of reads mapping to that locus.
+
+Sequencing coverage is typically not uniformly distributed over the
+reference. Reasons may vary but include uneven mapping coverage due to
+repeat regions, low coverage due to mis-assemblies, or coverage biases
+generated in the sequencing process. Importantly, both variable and
+monomorphic sites must be treated identically in the filtering process
+to eliminate biases between the two kinds of sites.
+
+In this part, we will use `mosdepth` and `bedtools` to quickly
+generate depth of coverage profiles of mapped data. `mosdepth` is an
+ultra-fast command line tool for calculating coverage from a bam file.
+By default, it generates a summary of the global distribution, and
+per-base coverage in `bed.gz` format. We will be using the per-base
+coverage for filtering.
+
+Alternatively, `mosdepth` can also output results in a highly
+compressed format `d4`, which has been developed to handle the ever
+increasing size of resequencing projects. Files in d4 format can be
+processed with the [d4-tools](https://github.com/38/d4-format) tool
+[@hou_BalancingEfficientAnalysis_2021]. For instance, `d4tools view`
+will display the coverage in `bed` format. We mention this in passing
+as it may be relevant when working with large genomes or sample sizes,
+but given the size of our sample data, we will be using `bedtools`
+from now on.
+
+### Per sample coverage
+
+We start by calculating per-sample coverages with `mosdepth`. For
+downstream purposes, we need to save the size of the chromosomes we're
+looking at, and for many applications, a fasta index file is
+sufficient.
+
+```{bash }
+#| label: samtools-faidx
+#| echo: true
+#| eval: true
+export REF=M_aurantiacus_v1.fasta
+samtools faidx ${REF}
+```
+
+```{r }
+#| label: set-sample-envvars
+#| echo: false
+#| eval: true
+Sys.setenv(REF="M_aurantiacus_v1.fasta")
+```
+
+The syntax to generate coverage information for a bam file is
+`mosdepth <prefix> <input file>`. Here, we add the `-Q` option to
+exclude reads with a mapping quality less than 20:
+
+```{bash }
+#| label: mosdepth-one-sample
+#| echo: true
+#| eval: true
+mosdepth -Q 20 PUN-Y-INJ PUN-Y-INJ.sort.dup.recal.bam
+```
+
+The per-base coverage output file will be named
+`PUN-Y-INJ.per-base.bed.gz` and can be viewed with `bgzip`:
+
+```{bash }
+#| label: bgzip-view-sample
+#| echo: true
+#| eval: true
+bgzip -c -d PUN-Y-INJ.per-base.bed.gz | head -n 5
+```
+
+To get an idea of what the coverage looks like over the chromsome, we
+will make use of two versatile programs for dealing with genomic
+interval data and delimited text files. Both programs operate on
+streams, enabling the construction of powerful piped commands at the
+command line (see below).
+
+The first is `bedtools`, which consists of a set of tools to perform
+*genome arithmetic* on `bed`-like file formats. The
+[`bed`](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) format is
+a tab-delimited format that at its simplest consists of the three
+columns `chrom` (the chromosome name), `chromStart`, and `chromEnd`,
+the start and end coordinates of a region.
+
+The second is `csvtk`, a program that provides tools for dealing with
+tab- or comma-separated text files. Avid `R` users will see that many
+of the subcommands are similar to those in the [`tidyverse
+dplyr`](https://dplyr.tidyverse.org/) package.
+
+We can use these programs in a one-liner to generate a simple coverage
+plot (@fig-plot-coverage)^[The one-liner combines the results of
+several commands in a pipe stream. Also, [Bash
+redirections](https://www.gnu.org/software/bash/manual/html_node/Redirections.html)
+are used to gather the results from the output of `bedtools
+makewindows` to `bedtools intersect`. The intersection commands
+collects coverage data in 1kb windows that are then summarized by
+`bedtools groupby`.]
+
+```{bash }
+#| label: bash-plot-coverage
+#| echo: true
+#| eval: true
+bedtools intersect -a <(bedtools makewindows -g ${REF}.fai -w 1000) \
+      -b PUN-Y-INJ.per-base.bed.gz -wa -wb | \
+  bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
+  csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
+      --ylab Coverage --width 9.0 --height 3.5 > fig-plot-coverage.png
+```
+
+::: {#fig-plot-coverage attr-output='.details summary="Output"'}
+
+![](fig-plot-coverage.png)
+
+Coverage for sample PUN-Y-INJ in 1kb windows. Experiment changing the
+window size (`-w`) parameter to change smoothing.
+
+:::
+
+Apparently there are some high-coverage regions that could be
+associated with, e.g., collapsed repeat regions in the assembly. Let's
+compile coverage results for all samples, using bash string
+manipulation to generate file prefix^[The `%` operator deletes the shortest
+match of `$substring` from back of `$string`: `${string%substring}`.
+See [Bash string
+manipulation](https://tldp.org/LDP/abs/html/string-manipulation.html)
+for more information.]
+
+```{bash }
+#| label: mosdepth-compile-coverage-data
+#| echo: true
+#| eval: true
+# [A-Z] matches characters A-Z, * is a wildcard character that matches
+# anything
+for f in [A-Z]*.sort.dup.recal.bam; do
+ # Extract the prefix by removing .sort.dup.recal.bam
+ prefix=${f%.sort.dup.recal.bam}
+ mosdepth -Q 20 $prefix $f
+ # Print sample name
+ echo -e -n "$prefix\t"
+ # Get the summary line containing the total coverage
+ cat $prefix.mosdepth.summary.txt | grep total
+done > ALL.mosdepth.summary.txt
+# View the file
+cat ALL.mosdepth.summary.txt
+```
+
+We can calculate the total coverage by summing the values of the fifth
+column with `csvtk` as follows:
+
+```{bash }
+#| label: mosdepth-compile-coverage-data-sum
+#| echo: true
+#| eval: false
+csvtk summary -H -t ALL.mosdepth.summary.txt -f 5:sum
+```
+
+```{r }
+#| label: mosdepth-compile-coverage-data-total
+#| echo: false
+#| eval: true
+x <- read.table("ALL.mosdepth.summary.txt")
+total_coverage <- sum(x$V5)
+
+```
+
+to get the total coverage `r total_coverage`, which gives a hint at
+where the diploid coverage peak should be.
+
+### Sample set coverages
+
+In this section, we will summarize coverage information for different
+sample sets, the motivation being that different filters may be
+warranted depending on what samples are being analysed. For instance,
+the coverage cutoffs for all samples will most likely be different
+from those applied to the subpopulations. In practice this means
+summing coverage tracks like those in @fig-plot-coverage for all
+samples.
+
+We can combine the coverage output from different samples with
+`bedtools unionbedg`. We begin by generating a coverage file for all
+samples, where the output columns will correspond to individual
+samples. To save typing, we collect the sample names and generate
+matching bed file names to pass as arguments to options `-names` and
+`-i`, respectively. Also, we include positions with no coverage
+(`-empty`) which requires the use of a genome file (option `-g`). The
+bed output is piped to `bgzip` which compresses the output, before
+finally indexing with `tabix`^[Instead of using the command
+substitution, you could look into the sample info file and set the
+sample names manually: `SAMPLES="PUN-Y-BCRD PUN-R-ELF PUN-Y-INJ
+PUN-R-JMC PUN-R-LH PUN-Y-LO PUN-R-MT PUN-Y-PCT PUN-Y-POTR
+PUN-R-UCSD"`].
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: bedtools-unionbedg-all
+#| echo: true
+#| eval: true
+SAMPLES=$(csvtk grep -f Taxon -r -p "yellow" -r -p "red" sampleinfo.csv | csvtk cut -f SampleAlias | grep -v SampleAlias | tr "\n" " ")
+BEDGZ=$(for sm in $SAMPLES; do echo -e -n "${sm}.per-base.bed.gz "; done)
+bedtools unionbedg -header -names $SAMPLES -g ${REF}.fai -empty -i $BEDGZ | bgzip > ALL.bg.gz
+tabix -f -p bed -S 1 ALL.bg.gz
+```
+
+::: {.callout-note collapse=true}
+
+## {{< fa brands linux >}} Command line magic
+
+The code above works as follows. We first use `csvtk` to `grep`
+(search) for the population names red and yellow in the `Taxon` column
+in `sampleinfo.csv`, thereby filtering the output to lines where
+`Taxon` matches the population names. Then, we cut out the interesting
+column `SampleAlias` and remove the header (`grep -v SampleAlias`
+matches anything but `SampleAlias`). Finally, `tr` translates newline
+character `\n` to space. The output is stored in the `SAMPLES`
+variable through the command substitution (`$()`) syntax.
+
+We then iterate through the `$SAMPLES` to generate the input file
+names with the `echo` command, storing the output in `$BEDGZ`. These
+variables are passed on to `bedtools unionbedg` to generate a
+[bedgraph file](https://genome.ucsc.edu/goldenPath/help/bedgraph.html)
+combining all samples.
+
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+As mentioned previously, we also need to combine coverages per
+populations yellow and red.
+
+::: {.callout-exercise}
+
+Using the previous command as a template, try to generate per
+population coverage files.
+
+::: {.callout-hint}
+
+You only need to modify the code that generates `SAMPLES` by grepping
+for each population separately (`csvtk grep -f Taxon -r -p red` and so
+on), or setting them manually. Remember also to modify the output file
+name (e.g., `red.bg.gz`).
+
+:::
+
+::: {.callout-answer}
+
+<!-- markdownlint-disable MD013 -->
+
+An example using a for loop is shown here. You could copy-paste the
+code above and explicitly write out the population labels.
+
+```{bash }
+#| label: bedtools-unionbedg-per-population
+#| echo: true
+#| eval: true
+for pop in red yellow; do
+ SAMPLES=$(csvtk grep -f Taxon -r -p $pop sampleinfo.csv | csvtk cut -f SampleAlias | grep -v SampleAlias | tr "\n" " ")
+ BEDGZ=$(for sm in $SAMPLES; do echo -e -n "${sm}.per-base.bed.gz "; done)
+ bedtools unionbedg -header -names $SAMPLES -g ${REF}.fai -empty -i $BEDGZ | bgzip > $pop.bg.gz
+ tabix -f -p bed -S 1 $pop.bg.gz
+done
+```
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+:::
+
+### Total coverage
+
+Since we eventually want to filter on total coverage, we sum per
+sample coverages for each sample set with `awk`^[Unfortunately `csvtk`
+doesn't seem to have support for calculating column margins out of the
+box, which is why we have to resort to this complicated construct]:
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: awk-sum-ALL-coverage
+#| echo: true
+#| eval: true
+bgzip -c -d ALL.bg.gz | \
+ awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=NF; i++) sum+=$i; print $1, $2, $3, sum}' | \
+ bgzip > ALL.sum.bed.gz
+tabix -f -p bed ALL.sum.bed.gz
+```
+
+Here we use `awk` to sum from columns 4 and up (`NF` is the number of
+the last column).
+
+<!-- markdownlint-enable MD013 -->
+
+For illustration, we plot the total coverage:
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: total-coverage
+#| echo: true
+#| eval: true
+#| fig-show: asis
+#| fig-cap: Coverage for ALL samples in 1kb windows. Experiment changing the window size (`-w`) parameter to change smoothing.
+bedtools intersect -a <(bedtools makewindows -g ${REF}.fai -w 1000) \
+    -b ALL.sum.bed.gz -wa -wb | \
+  bedtools groupby -i - -g 1,2,3 -c 7 -o mean | \
+  csvtk plot -t line -x 2 -y 4 --point-size 0.01 --xlab Position \
+    --ylab Coverage --width 9.0 --height 3.5 > fig-plot-total-coverage.png
+```
+
+<!-- markdownlint-enable MD013 -->
+
+::: {#fig-plot-total-coverage attr-output='.details summary="Output"'}
+
+![](fig-plot-total-coverage.png)
+
+Total coverage in 1kb windows.
+
+:::
+
+In order to define thresholds for subsequent filtering, we need to
+know the total coverage distribution. Therefore, we plot the
+proportion of the genome coverage versus depth of coverage (similar to
+k-mer plots in sequence assembly projects). To do so we must summarize
+our coverage file such that we count how many bases have a given
+coverage. This can be achieved by noting that each row in the bed file
+consists of the columns `CHROM`, `START`, `END`, and `COVERAGE`. We
+can generate a histogram table by, for each value of `COVERAGE`,
+summing the length of the regions (`END` - `START`).
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: compile-genome-coverage-for-plot
+#| echo: true
+#| eval: true
+# Add column containing length of region (end - start)
+csvtk mutate2 -t -H -w 0 -e '$3-$2' ALL.sum.bed.gz | \
+ # Sum the regions and *group* by the coverage (fourth column);
+ # this gives the total number of bases with a given coverage
+ csvtk summary -t -H -g 4 -f 5:sum -w 0 | \
+ csvtk sort -t -k 1:n | \
+ awk -v cumsum=0 'BEGIN {OFS=","; cumsum=0} {cumsum += $2; print $1,$2,cumsum}' > ALL.sum.bed.csv
+```
+
+<!-- markdownlint-enable MD013 -->
+
+We plot the coverage distribution below, along with a plot of the
+cumulative coverage.
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: total-depth-of-coverage-distribution
+#| echo: true
+#| eval: true
+csvtk plot line -H ALL.sum.bed.csv -x 1 -y 2 --point-size 0.01 \
+   --xlab "Depth of coverage (X)" --ylab "Genome coverage (bp)" \
+   --width 9.0 --height 3.5 > fig-plot-total-coverage-distribution.png
+csvtk plot line -H ALL.sum.bed.csv -x 1 -y 3 --point-size 0.01 \
+   --xlab "Depth of coverage (X)" --ylab "Cumulative genome coverage (kbp)" \
+   --width 9.0 --height 3.5 > fig-plot-total-coverage-distribution-cumulative.png
+```
+
+::: {#fig-plot-total-coverage-distribution attr-output='.details summary="Output"' layout-nrow=2}
+
+![Genome coverage](fig-plot-total-coverage-distribution.png){#fig-plot-total-coverage-distribution-hist}
+
+![Cumulative genome coverage](fig-plot-total-coverage-distribution-cumulative.png){#fig-plot-total-coverage-distribution-cumulative}
+
+Genome coverage vs depth of coverage.
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+In @fig-plot-total-coverage-distribution a, a diploid peak is evident
+at around coverage X=100; we zoom in on that region to get a better
+view:
+
+```{bash }
+#| label: total-depth-of-coverage-zoom-in
+#| echo: true
+#| eval: false
+csvtk plot line -H ALL.sum.bed.csv -x 1 -y 2 --point-size 0.01 \
+    --xlab "Depth of coverage (X)" --ylab "Genome coverage (bp)" \
+    --width 9.0 --height 3.5 --x-min 40 --x-max 140
+```
+
+```{bash }
+#| label: plot-total-depth-of-coverage-zoom-in
+#| echo: false
+#| eval: true
+csvtk plot line -H ALL.sum.bed.csv -x 1 -y 2 --point-size 0.01 \
+   --xlab "Depth of coverage (X)" --ylab "Genome coverage (bp)" \
+   --width 9.0 --height 3.5 --x-min 40 --x-max 140 > \
+   fig-plot-total-coverage-distribution-hist-zoom-in.png
+```
+
+<!-- markdownlint-disable MD013 -->
+
+::: {#fig-plot-total-coverage-distribution-zoom-in attr-output='.details summary="Output"'}
+
+![Genome coverage](fig-plot-total-coverage-distribution-hist-zoom-in.png){#fig-plot-total-coverage-distribution-hist-zoom-in}
+
+Genome coverage vs depth of coverage.
+
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+[@lou_BeginnerGuideLowcoverage_2021] point out that appropriate
+thresholds depend on the data set, but as a general rule recommend a
+minimum depth threshold at <0.8X average coverage, and a maximum depth
+threshold at mean coverage plus one or two standard deviations. For
+the sake of simplicity, you could here infer a cutoff simply by
+manually inspecting @fig-plot-total-coverage-distribution-zoom-in;
+here, we will use the range 50-110.
+
+We then use these thresholds to generate a bed file containing regions
+that are accessible, i.e., have sufficient coverage for downstream
+analyses. We also calculate the number of bases that pass the
+filtering criteria.
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: filter-all-bed-file-on-coverage
+#| echo: true
+#| eval: true
+#| results: hide
+csvtk filter -t -H ALL.sum.bed.gz -f '4>50' | \
+ csvtk filter -t -H -f '4<110' | \
+ bgzip -c > ALL.sum.depth.bed.gz
+bedtools genomecov -i ALL.sum.depth.bed.gz -g ${REF}.fai  | grep genome
+```
+
+<!-- markdownlint-enable MD013 -->
+
+```{r }
+#| label: r-compute-genome-coverage
+#| echo: false
+#| eval: true
+x <- read.table("ALL.sum.depth.bed.gz", header=FALSE)
+cov <- format(sum(x$V3-x$V2) / 1e5 * 100, digits=3)
+```
+
+Consequently, `r cov`% of the genome is accessible by depth.
+
+::: {.callout-note}
+
+## Exercise
+
+Generate coverage sums for the red and yellow sample sets, and from
+these determine coverage thresholds and apply the thresholds to
+generate bed files with accessible regions.
+
+::: {.callout-answer}
+
+We base the answer on the previous code.
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: awk-sum-sample-set-coverage
+#| echo: true
+#| eval: true
+for pop in red yellow; do
+ bgzip -c -d $pop.bg.gz | \
+  awk -v FS="\t" -v OFS="\t" 'NR > 1 {sum=0; for (i=4; i<=NF; i++) sum+=$i; print $1, $2, $3, sum}' | \
+  bgzip > $pop.sum.bed.gz
+ tabix -f -p bed $pop.sum.bed.gz
+ csvtk mutate2 -t -H -w 0 -e '$3-$2' $pop.sum.bed.gz | \
+ csvtk summary -t -H -g 4 -f 5:sum -w 0 | \
+ csvtk sort -t -k 1:n | \
+ awk -v cumsum=0 'BEGIN {OFS=","; cumsum=0} {cumsum += $2; print $1,$2,cumsum}' > $pop.sum.bed.csv
+done
+```
+
+<!-- markdownlint-enable MD013 -->
+
+```{bash }
+#| label: plot-sum-sample-set-coverage
+#| echo: true
+#| eval: true
+for pop in red yellow; do
+cat ${pop}.sum.bed.csv | \
+  csvtk plot line -x 1 -y 2 --point-size 0.01 \
+    --xlab "Depth of coverage (X)" --ylab "Genome coverage (bp)" \
+    --width 9.0 --height 3.5 --x-min 0 --x-max 100 > \
+    fig-plot-total-coverage-distribution-hist-zoom-in-$pop.png
+done
+```
+
+::: {#fig-plot-population-coverage-distribution attr-output='.details summary="Output"' layout-nrow=2}
+
+![Zoomed in genome coverage, red](fig-plot-total-coverage-distribution-hist-zoom-in-red.png){#fig-plot-total-coverage-distribution-hist-zoom-in-red}
+
+![Zoomed in genome coverage, yellow](fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png){#fig-plot-total-coverage-distribution-hist-zoom-in-yellow}
+
+Zoomed in coverage distribution for red and yellow ecotypes.
+:::
+
+Based on @fig-plot-population-coverage-distribution, we generate bed
+files with depths passing cutoffs:
+
+```{bash }
+#| label: bedtools-genomecov-population-depth-files
+#| echo: true
+#| eval: true
+# red filter: 20-60
+csvtk filter -t -H red.sum.bed.gz -f '4>20' | \
+ csvtk filter -t -H -f '4<60' | \
+ bgzip -c > red.sum.depth.bed.gz
+bedtools genomecov -i red.sum.depth.bed.gz -g ${REF}.fai  | grep genome
+
+# yellow filter: 20-55
+csvtk filter -t -H yellow.sum.bed.gz -f '4>20' | \
+ csvtk filter -t -H -f '4<55' | \
+ bgzip -c > yellow.sum.depth.bed.gz
+bedtools genomecov -i yellow.sum.depth.bed.gz -g ${REF}.fai  | grep genome
+```
+
+:::
+
+:::
+
+Now we have combined total per sample coverage for ALL samples, and
+for sample sets red and yellow. The upcoming task will be to generate
+sequence masks from the total coverage and minimum number of
+individuals with coverage greater than zero.
+
+### Filter on minimum number of individuals
+
+In addition to filtering on total coverage, we will also filter on the
+minimum number of individuals with a minimum depth. This is to account
+for cases where regions that pass the minimum coverage filter
+originate from just a few samples with unusually high coverage. Here,
+we will remove sites where more than 50% of individuals have zero
+coverage.
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: awk-filter-50pct-ALL
+#| echo: true
+#| eval: true
+bgzip -c -d ALL.bg.gz | \
+  awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | \
+  bgzip > ALL.ind.bed.gz
+tabix -f -p bed ALL.ind.bed.gz
+```
+
+::: {.callout-exercise}
+
+Use `bedtools genomecov` to determine the proportion of bases that are
+filtered out. Use `${REF}.fai` as the argument to the required option
+`-g`.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: bedtools-genomecov-individual-filter
+#| echo: true
+#| eval: true
+bedtools genomecov -i ALL.ind.bed.gz -g ${REF}.fai
+```
+
+:::
+
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+::: {.callout-exercise}
+
+Generate coverage sums for red and yellow sample sets.
+
+::: {.callout-answer}
+
+<!-- markdownlint-disable MD013 -->
+
+```{bash }
+#| label: awk-filter-50pct-sample-set
+#| echo: true
+#| eval: true
+for pop in red yellow; do
+  bgzip -c -d $pop.bed.gz | awk -v FS="\t" 'BEGIN {OFS="\t"} NR > 1 {count=0; for (i=4; i<=NF; i++) {if ($i>0) count+=1}; if (count>=((NF-3)*0.5)) {print $1, $2, $3}}' | bgzip > $pop.ind.bed.gz
+  tabix -f -p bed $pop.ind.bed.gz
+done
+```
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+:::
+
+### Sequence masks
+
+Finally, in addition to the bed output files, we will generate
+sequence masks. First we use the command `bedtools makefasta` to make
+a sequence mask file in FASTA format consisting solely of `1`'s:^[We
+need to generate a bed file representation of the FASTA index
+unfortuanely as `bedtools makefasta` doesn't handle FASTA indices
+natively.]
+
+```{bash }
+#| label: bedtools-maskfasta-make-genome-mask
+#| echo: true
+#| eval: true
+awk 'BEGIN {OFS="\t"} {print $1, 0, $2}' ${REF}.fai > ${REF}.bed
+bedtools maskfasta -fi ${REF} -mc 1 -fo ${REF}.mask.fa -bed ${REF}.bed
+```
+
+We generate a file where all positions are masked because the bed
+files contain regions that we want to keep and thus convert
+corresponding positions to zeros. This file will be used as a template
+for all mask files.
+
+Then, for each sample set, we will use `bedtools intersect` to
+intersect the bed files corresponding to the total sum coverage and
+the filter on number of individuals. `bedtools intersect` makes it
+easy to combine multiple bed files, so any other filters, or genomic
+features such as exons, could be added to make a compound mask file.
+The resulting bed files is used as input to `bedtools maskfasta`.
+
+```{bash }
+#| label: bedtools-intersect-all
+#| echo: true
+#| eval: true
+bedtools intersect -a ALL.sum.depth.bed.gz -b ALL.ind.bed.gz \
+   -g ${REF}.fai | bgzip > ALL.unmask.bed.gz
+tabix -f -p bed ALL.unmask.bed.gz
+bedtools maskfasta -fi ${REF}.mask.fa -mc 0 -fo ${REF}.unmask.fa \
+   -bed ALL.unmask.bed.gz
+head -n 3 ${REF}.unmask.fa
+```
+
+We can convince ourselves that this has worked by counting the number of unmasked positions:
+
+```{bash }
+#| label: count-unmasked-positions
+#| echo: true
+#| eval: true
+# tr: -d deletes all characters not (-c, complement) in the character
+# set '0'. wc: -m option counts characters
+cat ${REF}.unmask.fa | tr -d -c '0' | wc -m
+bedtools genomecov -i ALL.unmask.bed.gz -g ${REF}.fai | grep genome
+```
+
+Note that 0 and 1 in the `bedtools genomecov` output refers to
+coverage (i.e., absence/presence) and not unmask/mask as in the mask
+FASTA file.
+
+::: {.callout-exercise}
+
+Create unmask files for red and yellow populations.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: bedtools-intersect-red-yellow
+#| echo: true
+#| eval: true
+for pop in red yellow; do
+ bedtools intersect -a $pop.sum.depth.bed.gz -b $pop.ind.bed.gz \
+    -g ${REF}.fai | bgzip > $pop.unmask.bed.gz
+ tabix -f -p bed $pop.unmask.bed.gz
+ bedtools maskfasta -fi ${REF}.mask.fa -mc 0 -fo ${REF}.$pop.unmask.fa \
+    -bed $pop.unmask.bed.gz
+done
+```
+
+:::
+
+:::
+
+## Conclusion
+
+Congratulations! You have now gone through a set of tedious and
+complex steps to generate output files that determine what regions in
+a reference DNA sequence are amenable to analysis. In the next
+exercise we will use these files as inputs to different programs that
+calculate diversity statistics from population genomic data.
+
+## References

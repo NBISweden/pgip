@@ -106,7 +106,7 @@ exercises/variant_calling:
     - __variants__
     - __redyellow_variants__
 
-exercises/data_filtering:
+exercises/variant_filtering:
   __data__:
     - __red_recal_bam__
     - __yellow_recal_bam__
