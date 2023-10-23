@@ -4,7 +4,7 @@ author:
   - Per Unneberg
 format: html
 execute:
-  cache: false
+  cache: true
 ---
 
 <!-- markdownlint-disable MD041 -->
@@ -111,10 +111,6 @@ We will aim to make csvtk available via the module system].
 :::
 
 :::
-
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
 
 ## Background
 
