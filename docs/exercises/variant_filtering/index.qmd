@@ -340,7 +340,7 @@ LDEPTH_MEAN <- round(mean(data$MEAN_DEPTH), 1)
 
 Note that `vcftools` treats uncalled sites as missing data, which is
 why the number of sites differ between samples. The average coverage
-over all samples is `r LDEPTH_MEAN`X. This is in the low range for a
+over all samples is 7.9X. This is in the low range for a
 protocol based on explicitly calling genotypes. At 5X coverage, there
 may be a high probability that only one of the alleles has been
 sampled [@nielsen_GenotypeSNPCalling_2011], whereby sequencing may be
