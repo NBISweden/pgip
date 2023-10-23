@@ -48,6 +48,7 @@ jobs:
         run: |
           python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
           python -m pip install git+https://github.com/NBISweden/pgip-tools
+          python -m pip install git+https://github.com/ksamuk/pixy.git
 
       - name: Install dotenv
         run: |

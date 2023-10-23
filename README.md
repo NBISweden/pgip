@@ -15,12 +15,8 @@ issue](https://github.com/NBISweden/workshop-pgip/issues).
 
 ## Installation and setup, TL;DR
 
-{% note %}
-
 **Note:** this is only for developers! To view the website, navigate
 to <https://nbisweden.github.io/workshop-pgip/>.
-
-{% endnote %}
 
 Clone the repo and cd to directory
 
@@ -63,6 +59,7 @@ environment variable:
     make install-R
     make install-kernels
     make install-bcftools
+    make install-pixy
     make install-dev
 
 If the above commands have worked without issues you are done and you
@@ -137,6 +134,17 @@ or
     ./scripts/install-bcftools.sh
 
 in the root directory.
+
+### Install pixy
+
+There currently is no pixy conda package for Python>3.9 which requires
+manuall installation with pip:
+
+    make install-pixy
+
+or
+
+    python -m pip install git+https://github.com/ksamuk/pixy.git
 
 ### Development tools
 
