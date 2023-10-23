@@ -13,12 +13,6 @@ execute:
 
 {{< include ../_rlibs.qmd >}}
 
-::: {.callout-important}
-
-{{< meta date >}}: This exercise is WIP!
-
-:::
-
 <!-- markdownlint-enable MD041 -->
 
 In this exercise we will look at ways of filtering variant data. We
@@ -522,7 +516,7 @@ Distribution of minor allele frequencies.
 
 :::
 
-Since our variant file consists of 10 individuals, that is 20
+Since our variant file consists of 10 individuals, that is, 20
 chromosomes, there are only so many frequencies that we can observe,
 which is why the histogram looks a bit disconnected. The maximum value
 is 0.5, which is to be expected, as it is a *minor* allele frequency.
@@ -623,6 +617,55 @@ lie in the range 5-25%. Note that when passing this parameter to
 `vcftools`, it has to be inverted to 75%!
 
 #### Heterozygosity
+
+`vcftools` can calculate the heterozygosity per individual. More
+specifically, it estimates the inbreeding coefficient F for each
+individual.
+
+```{bash }
+#| label: vcftools-heterozygosity
+#| echo: true
+#| eval: true
+vcftools --gzvcf $VCF --het --out $OUT 2>/dev/null
+cat ${OUT}.het
+```
+
+Here, F is a measure of how much the observed homozygotes `O(HOM)`
+differ from the expected (`E(HOM)`), and may be negative. `vcftools`
+calculates F from the expression $F=(O-E)/(N-E)$, which you can verify
+by substituting the variables in the output. If F is negative, there
+are fewer observed homozygotes than expected, or conversely, an excess
+of heterozygotes. This could be indicative of poor sequence quality
+(bad mappings) or contamination. If F is positive, there is a deficit
+of heterozygotes, which could be a sign of inbreeding or signs of
+allelic dropout in case of low sequencing coverage. The underlying
+assumption is HWE, which holds for F=0.
+
+In this case, we know that the samples are from two different
+populations, red and yellow. In such cases, we actually expect a
+deficit of heterozygotes (and consequently, positive F) simply due to
+something called the [Wahlund
+effect](https://en.wikipedia.org/wiki/Wahlund_effect).
+
+::: {.callout-exercise}
+
+Use `bcftools view -s SAMPLENAMES | vcftools --vcf - --het --stdout` to
+calculate the heterozygosity for red and yellow samples. Substitute
+`SAMPLENAMES` for a comma-separated list of samples.
+
+::: {.callout-answer}
+
+```{bash }
+#| label: vcftools-heterozygosity-red
+#| echo: true
+#| eval: true
+bcftools view -s PUN-R-ELF,PUN-R-JMC,PUN-R-LH,PUN-R-MT,PUN-R-UCSD allsites.vcf.gz |\
+ vcftools --vcf - --het --stdout 2>/dev/null
+```
+
+:::
+
+:::
 
 ### Filtering the VCF
 
