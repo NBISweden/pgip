@@ -60,4 +60,7 @@ install-kernels: install-pgip ## Install python and bash kernel
 install-bcftools: ## Install bcftools manually due to issues with conda version 1.8
 	scripts/install-bcftools.sh
 
-.phony: help Makefile project production clean-site clean install-pgip install-dev install-R install-kernels bcftools
+install-pixy: ## Install pixy manually due to missing conda package
+	python -m pip install git+https://github.com/ksamuk/pixy.git
+
+.phony: help Makefile project production clean-site clean install-pgip install-dev install-R install-kernels install-bcftools install-pixy
