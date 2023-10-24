@@ -419,7 +419,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">23-Oct-2023</h4>
+  <h4 class="date">24-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -2482,8 +2482,103 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           display:block!important;
       }</style></aside>
 </section>
-<section id="allele-frequency-distribution-for" class="slide level2">
-<h2>Allele frequency distribution for</h2>
+<section id="allele-frequency-distribution-for-n1" class="slide level2">
+<h2>Allele frequency distribution for N=1</h2>
+<p>Instead of looking at frequencies let’s switch to distributions of alleles for <strong>one</strong> individual, one locus. Then there are three possible genotypes (<strong>states</strong>) <span class="math inline">\(aa\)</span>, <span class="math inline">\(aA\)</span>, and <span class="math inline">\(AA\)</span>. Let <span class="math inline">\(n=0,1,2\)</span> be an integer corresponding to each genotype (i.e., it counts the number of <span class="math inline">\(A\)</span> alleles).</p>
+<p>Assume individual mates with itself at random(!) starting in either of the three states. How does distribution evolve?</p>
+<div class="columns fragment" data-fragment-index="1">
+<div class="column" style="width:10%;">
+<p>t=0</p>
+</div><div class="column" style="width:30%;">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aa_6a12285644573aa3a39be2a55c43e18e">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-aa-1.svg" width="200"></p>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aA_e415ec65ff88cdddab805a09b208df25">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-aA-1.svg" width="200"></p>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-AA_24a7821b3adcac8d4b68a3b6ab2b1cd6">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-AA-1.svg" width="200"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="translatey50">
+<div class="columns">
+<div class="column" style="width:10%;">
+<div class="fragment" data-fragment-index="2">
+<p>t=1</p>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="fragment" data-fragment-index="2">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aa-1_6365ef18aea8e8fc3843740c360ffef9">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-aa-1-1.svg" width="200"></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="fragment" data-fragment-index="4">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aA-1_d2cc0ad6cfadfe7a70eeba7b0e7387df">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-aA-1-1.svg" width="200"></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="fragment" data-fragment-index="3">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-AA-1_311739540a3d170ba20761792bd026c9">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-AA-1-1.svg" width="200"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="translatey100">
+<div class="columns">
+<div class="column" style="width:10%;">
+<div class="fragment" data-fragment-index="5">
+<p>t=2</p>
+</div>
+</div><div class="column" style="width:30%;">
+
+</div><div class="column" style="width:30%;">
+<div class="fragment" data-fragment-index="5">
+<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aA-2_00037b39bced6518d08ea1300115f226">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tikz-afd-aA-2-1.svg" width="200"></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Example from <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004, p. 24</a>)</span>. We look at a single hermaphroditic individual that mates with itself at random. For each generation, given a genotype distribution, we calculate the outcome for the next generation. For instance, starting out in state 0 (only <span class="math inline">\(aa\)</span> genotypes, hence only <span class="math inline">\(a\)</span> alleles), we can only produce new <span class="math inline">\(aa\)</span> genotypes and will therefore never leave state 0. The same holds for state 2. These states are <em>absorbing states</em>.</p>
+<p>Starting from state 1 (<span class="math inline">\(aA\)</span>) we can get <span class="math inline">\(aa\)</span> genotype with 25% probability, since the probability of picking one <span class="math inline">\(a\)</span> is 50%, and we perform two draws. Similarly, we get <span class="math inline">\(AA\)</span> with 25% probability, leaving 50% to <span class="math inline">\(aA\)</span>.</p>
+<p>In the next generation, the <span class="math inline">\(aA\)</span> genotype frequency is 0.5, to be split in fractions 0.25, 0.5, 0.25 as before, and so on.</p>
+<p>To study the system we therefore need to enumerate the probabilistic outcomes from each state (<span class="math inline">\(aa\)</span> -&gt; 1, 0, 0, <span class="math inline">\(aA\)</span> -&gt; 0.25, 0.5, 0.25, <span class="math inline">\(AA\)</span> &lt;- 0, 0, 1). To get the state in next generation, we multiply the current distribution with these outcomes. The next slide gives Kimura’s example for the case where we have N=10 chromosomes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="probability-distributions-of-allele-frequencies" class="slide level2">
 <h2>Probability distributions of allele frequencies</h2>
