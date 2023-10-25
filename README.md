@@ -58,7 +58,6 @@ environment variable:
     conda activate pgip
     make install-R
     make install-kernels
-    make install-bcftools
     make install-pixy
     make install-dev
 
@@ -73,9 +72,9 @@ issues](#installation-issues).
 
 ### Create pgip conda environment
 
-Create a conda environment called `pgip` using the environment file
+Create a conda environment called `pgip` using the conda lock file
 
-    mamba env create --file environment.yml
+    mamba env create -n pgip conda-linux-64.lock
 
 and activate the environment
 
@@ -123,7 +122,10 @@ information.
 
 [Install Quarto](https://quarto.org/docs/get-started) version [Quarto\>=1.2.475](https://quarto.org/docs/download/).
 
-### bcftools manual install
+### bcftools manual install (OBSOLETE)
+
+**OBSOLETE**: installing pgip using `conda-linux-64.lock` obviates the
+need to install bcftools manually.
 
 Due to dependency issues, bcftools has to be manually installed:
 

@@ -720,6 +720,24 @@
   publisher = {{American Association for the Advancement of Science}},
   doi = {10.1126/science.aba4674}
 }
+@article{garrison_SpectrumFreeSoftware_2022,
+  title = {A Spectrum of Free Software Tools for Processing the {{VCF}} Variant Call Format: Vcflib, Bio-Vcf, Cyvcf2, Hts-Nim and Slivar},
+  shorttitle = {A Spectrum of Free Software Tools for Processing the {{VCF}} Variant Call Format},
+  author = {Garrison, Erik and Kronenberg, Zev N. and Dawson, Eric T. and Pedersen, Brent S. and Prins, Pjotr},
+  year = {2022},
+  month = may,
+  journal = {PLOS Computational Biology},
+  volume = {18},
+  number = {5},
+  pages = {e1009123},
+  publisher = {{Public Library of Science}},
+  issn = {1553-7358},
+  doi = {10.1371/journal.pcbi.1009123},
+  urldate = {2023-10-19},
+  abstract = {Since its introduction in 2011 the variant call format (VCF) has been widely adopted for processing DNA and RNA variants in practically all population studies\textemdash as well as in somatic and germline mutation studies. The VCF format can represent single nucleotide variants, multi-nucleotide variants, insertions and deletions, and simple structural variants called and anchored against a reference genome. Here we present a spectrum of over 125 useful, complimentary free and open source software tools and libraries, we wrote and made available through the multiple vcflib, bio-vcf, cyvcf2, hts-nim and slivar projects. These tools are applied for comparison, filtering, normalisation, smoothing and annotation of VCF, as well as output of statistics, visualisation, and transformations of files variants. These tools run everyday in critical biomedical pipelines and countless shell scripts. Our tools are part of the wider bioinformatics ecosystem and we highlight best practices. We shortly discuss the design of VCF, lessons learnt, and how we can address more complex variation through pangenome graph formats, variation that can not easily be represented by the VCF format.},
+  langid = {english},
+  keywords = {Alleles,Bioinformatics,Genome annotation,Genomics,Haplotypes,Population genetics,Programming languages,Variant genotypes},
+}
 @book{gillespie_PopulationGeneticsConcise_2004,
   title = {Population {{Genetics}}: {{A Concise Guide}}},
   shorttitle = {Population {{Genetics}}},
@@ -952,6 +970,7 @@ journal = {Systematic Biology - SYST BIOL}
   pmid = {12175810},
   keywords = {bioinformatics,evolution,genetics,natural selection,neutral drift,nonsynomymous,rate of evolution,sysnoymous,techniques},
 }
+
 @article{johri_RecommendationsImprovingStatistical_2022,
   title = {Recommendations for Improving Statistical Inference in Population Genomics},
   author = {Johri, Parul and Aquadro, Charles F. and Beaumont, Mark and Charlesworth, Brian and Excoffier, Laurent and {Eyre-Walker}, Adam and Keightley, Peter D. and Lynch, Michael and McVean, Gil and Payseur, Bret A. and Pfeifer, Susanne P. and Stephan, Wolfgang and Jensen, Jeffrey D.},
@@ -968,7 +987,6 @@ journal = {Systematic Biology - SYST BIOL}
   langid = {english},
   keywords = {Deletion mutation,Evolutionary processes,Genome analysis,Genomics,Population genetics,Population size,Statistical data,Statistical distributions},
 }
-
 @article{kelleher_InferringWholegenomeHistories_2019,
   title = {Inferring Whole-Genome Histories in Large Population Datasets},
   author = {Kelleher, Jerome and Wong, Yan and Wohns, Anthony W. and Fadil, Chaimaa and Albers, Patrick K. and McVean, Gil},
@@ -1301,6 +1319,20 @@ journal = {Systematic Biology - SYST BIOL}
   abstract = {admixtools},
   langid = {english},
 }
+@article{maruki_GenotypeCallingPopulationGenomic_2017,
+  title = {Genotype {{Calling}} from {{Population-Genomic Sequencing Data}}},
+  author = {Maruki, Takahiro and Lynch, Michael},
+  year = {2017},
+  month = may,
+  journal = {G3 Genes|Genomes|Genetics},
+  volume = {7},
+  number = {5},
+  pages = {1393--1404},
+  issn = {2160-1836},
+  doi = {10.1534/g3.117.039008},
+  urldate = {2023-10-22},
+  abstract = {Genotype calling plays important roles in population-genomic studies, which have been greatly accelerated by sequencing technologies. To take full advantage of the resultant information, we have developed maximum-likelihood (ML) methods for calling genotypes from high-throughput sequencing data. As the statistical uncertainties associated with sequencing data depend on depths of coverage, we have developed two types of genotype callers. One approach is appropriate for low-coverage sequencing data, and incorporates population-level information on genotype frequencies and error rates pre-estimated by an ML method. Performance evaluation using computer simulations and human data shows that the proposed framework yields less biased estimates of allele frequencies and more accurate genotype calls than current widely used methods. Another type of genotype caller applies to high-coverage sequencing data, requires no prior genotype-frequency estimates, and makes no assumption on the number of alleles at a polymorphic site. Using computer simulations, we determine the depth of coverage necessary to accurately characterize polymorphisms using this second method. We applied the proposed method to high-coverage (mean 18\texttimes ) sequencing data of 83 clones from a population of Daphnia pulex. The results show that the proposed method enables conservative and reasonably powerful detection of polymorphisms with arbitrary numbers of alleles. We have extended the proposed method to the analysis of genomic data for polyploid organisms, showing that calling accurate polyploid genotypes requires much higher coverage than diploid genotypes.},
+}
 @article{mary-huard_FastAccurateJoint_2023,
   title = {Fast and Accurate Joint Inference of Coancestry Parameters for Populations and/or Individuals},
   author = {{Mary-Huard}, Tristan and Balding, David},
@@ -1367,6 +1399,23 @@ journal = {Systematic Biology - SYST BIOL}
   abstract = {This book presents the statistical methods that are useful in the study of molecular evolution and illustrates how to use them in actual data analysis. Molecular evolution has been developing at a great pace over the past decade or so, driven by the huge increase in genetic sequence data from many organisms, the improvement of high-speed microcomputers, and the development of several new methods for phylogenetic analysis. This book for graduate students and researchers, assuming a basic knowledge of evolution, molecular biology, and elementary statistics, should make it possible for many investigators to incorporate refined statistical analysis of large-scale data in their own work. Nei is one of the leading workers in this area. He and Kumar have developed a computer program called MEGA, which has been sold for about \$20 to over 1900 users. For the book, the authors are thoroughly revising MEGA and will make it available via FTP. The book also included analysis using the other most popular programs for phylogenetic studies, including PAUP, PHYLIP, MOLPHY, and PAML.},
   isbn = {978-0-19-513585-5},
 }
+@article{nielsen_GenotypeSNPCalling_2011,
+  title = {Genotype and {{SNP}} Calling from Next-Generation Sequencing Data},
+  author = {Nielsen, Rasmus and Paul, Joshua S. and Albrechtsen, Anders and Song, Yun S.},
+  year = {2011},
+  month = jun,
+  journal = {Nature Reviews Genetics},
+  volume = {12},
+  number = {6},
+  pages = {443--451},
+  publisher = {{Nature Publishing Group}},
+  issn = {1471-0064},
+  doi = {10.1038/nrg2986},
+  urldate = {2022-09-19},
+  abstract = {Converting next-generation sequencing (NGS) image files into a set of called SNPs involves a number of steps including image analysis, alignment and assembly, SNP calling and genotype calling.Genotype probabilities for a single individual can be calculated from alignments using recalibrated quality scores.SNP calling and genotype calling is best done using information from multiple individuals simultaneously. The pattern of linkage disequilibrium should be used to call SNPs and genotypes when possible.Analyses of low coverage data can proceed by taking uncertainty in the genotype calls into account, rather than assuming any particular genotype call is correct.The methods used for calling SNPs and for taking uncertainty in SNP genotypes into account can have a strong effect on downstream analyses, including association mapping analyses.},
+  langid = {english},
+  keywords = {Bioinformatics,Genomics,Next-generation sequencing,Population genetics,Technology},
+}
 @article{nielsen_MolecularSignaturesNatural_2005,
   title = {Molecular {{Signatures}} of {{Natural Selection}}},
   author = {Nielsen, Rasmus},
@@ -1381,6 +1430,23 @@ journal = {Systematic Biology - SYST BIOL}
   abstract = {AbstractThere is an increasing interest in detecting genes, or genomic regions, that have been targeted by natural selection. The interest stems from a basic desire to learn more about evolutionary processes in humans and other organisms, and from the realization that inferences regarding selection may provide important functional information. This review provides a nonmathematical description of the issues involved in detecting selection from DNA sequences and SNP data and is intended for readers who are not familiar with population genetic theory. Particular attention is placed on issues relating to the analysis of large-scale genomic data sets.},
   pmid = {16285858},
   keywords = {nmo journal club}
+}
+@article{nielsen_SNPCallingGenotype_2012,
+  title = {{{SNP Calling}}, {{Genotype Calling}}, and {{Sample Allele Frequency Estimation}} from {{New-Generation Sequencing Data}}},
+  author = {Nielsen, Rasmus and Korneliussen, Thorfinn and Albrechtsen, Anders and Li, Yingrui and Wang, Jun},
+  year = {2012},
+  month = jul,
+  journal = {PLOS ONE},
+  volume = {7},
+  number = {7},
+  pages = {e37558},
+  publisher = {{Public Library of Science}},
+  issn = {1932-6203},
+  doi = {10.1371/journal.pone.0037558},
+  urldate = {2022-11-01},
+  abstract = {We present a statistical framework for estimation and application of sample allele frequency spectra from New-Generation Sequencing (NGS) data. In this method, we first estimate the allele frequency spectrum using maximum likelihood. In contrast to previous methods, the likelihood function is calculated using a dynamic programming algorithm and numerically optimized using analytical derivatives. We then use a Bayesian method for estimating the sample allele frequency in a single site, and show how the method can be used for genotype calling and SNP calling. We also show how the method can be extended to various other cases including cases with deviations from Hardy-Weinberg equilibrium. We evaluate the statistical properties of the methods using simulations and by application to a real data set.},
+  langid = {english},
+  keywords = {Algorithms,Heterozygosity,Next-generation sequencing,Nucleotides,Population genetics,Simulation and modeling,Single nucleotide polymorphisms,Variant genotypes},
 }
 @article{ohta_SlightlyDeleteriousMutant_1973,
   title = {Slightly {{Deleterious Mutant Substitutions}} in {{Evolution}}},
@@ -1397,6 +1463,21 @@ journal = {Systematic Biology - SYST BIOL}
   abstract = {RECENT advances in molecular genetics have had a great deal of influence on evolutionary theory, and in particular, the neutral mutation-random drift hypothesis of molecular evolution1,2 has stimulated much interest. The concept of neutral mutant substitution in the population by random genetic drift can be extended to include random fixation of very slightly deleterious mutations which have more chance of being selected against than of being selected for3,4. If this class of mutant substitution is important, we can predict that the evolution is rapid in small populations or at the time of speciation5. Here I shall organize the observed facts which indicate that this class is in fact important.},
   copyright = {1973 Nature Publishing Group},
   langid = {english},
+}
+@article{okonechnikov_QualimapAdvancedMultisample_2016,
+  title = {Qualimap 2: Advanced Multi-Sample Quality Control for High-Throughput Sequencing Data},
+  shorttitle = {Qualimap 2},
+  author = {Okonechnikov, Konstantin and Conesa, Ana and {Garc{\'i}a-Alcalde}, Fernando},
+  year = {2016},
+  month = jan,
+  journal = {Bioinformatics},
+  volume = {32},
+  number = {2},
+  pages = {292--294},
+  issn = {1367-4803},
+  doi = {10.1093/bioinformatics/btv566},
+  urldate = {2023-10-20},
+  abstract = {Motivation: Detection of random errors and systematic biases is a crucial step of a robust pipeline for processing high-throughput sequencing (HTS) data. Bioinformatics software tools capable of performing this task are available, either for general analysis of HTS data or targeted to a specific sequencing technology. However, most of the existing QC instruments only allow processing of one sample at a time.Results: Qualimap 2 represents a next step in the QC analysis of HTS data. Along with comprehensive single-sample analysis of alignment data, it includes new modes that allow simultaneous processing and comparison of multiple samples. As with the first version, the new features are available via both graphical and command line interface. Additionally, it includes a large number of improvements proposed by the user community.Availability and implementation: The implementation of the software along with documentation is freely available at http://www.qualimap.org.Contact: ~meyer@mpiib-berlin.mpg.deSupplementary information: ~Supplementary data are available at Bioinformatics online.},
 }
 @article{patterson_PopulationStructureEigenanalysis_2006,
   title = {Population {{Structure}} and {{Eigenanalysis}}},
@@ -1430,6 +1511,7 @@ journal = {Systematic Biology - SYST BIOL}
   urldate = {2022-08-26},
   abstract = {Mosdepth is a new command-line tool for rapidly calculating genome-wide sequencing coverage. It measures depth from BAM or CRAM files at either each nucleotide position in a genome or for sets of genomic regions. Genomic regions may be specified as either a BED file to evaluate coverage across capture regions, or as a fixed-size window as required for copy-number calling. Mosdepth uses a simple algorithm that is computationally efficient and enables it to quickly produce coverage summaries. We demonstrate that mosdepth is faster than existing tools and provides flexibility in the types of coverage profiles produced.mosdepth is available from https://github.com/brentp/mosdepth under the MIT license.Supplementary data are available at Bioinformatics online.}
 }
+
 @article{pennisi_AllureMonkeyflowers_2019,
   title = {The Allure of Monkeyflowers},
   author = {Pennisi, Elizabeth},
@@ -1508,7 +1590,6 @@ journal = {Systematic Biology - SYST BIOL}
   copyright = {\textcopyright{} 2023, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution-NonCommercial 4.0 International), CC BY-NC 4.0, as described at http://creativecommons.org/licenses/by-nc/4.0/},
   langid = {english},
 }
-
 @article{romiguier_ComparativePopulationGenomics_2014,
   title = {Comparative Population Genomics in Animals Uncovers the Determinants of Genetic Diversity},
   author = {Romiguier, J. and Gayral, P. and Ballenghien, M. and Bernard, A. and Cahais, V. and Chenuil, A. and Chiari, Y. and Dernat, R. and Duret, L. and Faivre, N. and Loire, E. and Lourenco, J. M. and Nabholz, B. and Roux, C. and Tsagkogeorga, G. and a.-T. Weber, A. and Weinert, L. A. and Belkhir, K. and Bierne, N. and Gl{\'e}min, S. and Galtier, N.},
@@ -1596,6 +1677,20 @@ journal = {Systematic Biology - SYST BIOL}
   abstract = {Speciation genomic studies aim to interpret patterns of genome-wide variation in light of the processes that give rise to new species. However, interpreting the genomic ``landscape'' of speciation is difficult, because many evolutionary processes can impact levels of variation. Facilitated by the first chromosome-level assembly for the group, we use whole-genome sequencing and simulations to shed light on the processes that have shaped the genomic landscape during a radiation of monkeyflowers. After inferring the phylogenetic relationships among the 9 taxa in this radiation, we show that highly similar diversity ({$\pi$}) and differentiation (FST) landscapes have emerged across the group. Variation in these landscapes was strongly predicted by the local density of functional elements and the recombination rate, suggesting that the landscapes have been shaped by widespread natural selection. Using the varying divergence times between pairs of taxa, we show that the correlations between FST and genome features arose almost immediately after a population split and have become stronger over time. Simulations of genomic landscape evolution suggest that background selection (BGS; i.e., selection against deleterious mutations) alone is too subtle to generate the observed patterns, but scenarios that involve positive selection and genetic incompatibilities are plausible alternative explanations. Finally, tests for introgression among these taxa reveal widespread evidence of heterogeneous selection against gene flow during this radiation. Combined with previous evidence for adaptation in this system, we conclude that the correlation in FST among these taxa informs us about the processes contributing to adaptation and speciation during a rapid radiation.},
   langid = {english},
   keywords = {Deletion mutation,Evolutionary genetics,Gene flow,Gene mapping,Genomics,Mammalian genomics,Phylogenetic analysis,Speciation},
+}
+@article{stoler_SequencingErrorProfiles_2021,
+  title = {Sequencing Error Profiles of {{Illumina}} Sequencing Instruments},
+  author = {Stoler, Nicholas and Nekrutenko, Anton},
+  year = {2021},
+  month = mar,
+  journal = {NAR Genomics and Bioinformatics},
+  volume = {3},
+  number = {1},
+  pages = {lqab019},
+  issn = {2631-9268},
+  doi = {10.1093/nargab/lqab019},
+  urldate = {2023-10-21},
+  abstract = {Sequencing technology has achieved great advances in the past decade. Studies have previously shown the quality of specific instruments in controlled conditions. Here, we developed a method able to retroactively determine the error rate of most public sequencing datasets. To do this, we utilized the overlaps between reads that are a feature of many sequencing libraries. With this method, we surveyed 1943 different datasets from seven different sequencing instruments produced by Illumina. We show that among public datasets, the more expensive platforms like HiSeq and NovaSeq have a lower error rate and less variation. But we also discovered that there is great variation within each platform, with the accuracy of a sequencing experiment depending greatly on the experimenter. We show the importance of sequence context, especially the phenomenon where preceding bases bias the following bases toward the same identity. We also show the difference in patterns of sequence bias between instruments. Contrary to expectations based on the underlying chemistry, HiSeq X Ten and NovaSeq 6000 share notable exceptions to the preceding-base bias. Our results demonstrate the importance of the specific circumstances of every sequencing experiment, and the importance of evaluating the quality of each one.},
 }
 @article{talla_DissectingEffectsSelection_2019,
   title = {Dissecting the {{Effects}} of {{Selection}} and {{Mutation}} on {{Genetic Diversity}} in {{Three Wood White}} ({{Leptidea}}) {{Butterfly Species}}},

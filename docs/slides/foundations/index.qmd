@@ -18,7 +18,7 @@ format:
 #| echo: false
 #| eval: true
 #| cache: false
-library(viridislite)
+library(viridisLite)
 library(gganimate)
 library(patchwork)
 library(expm)
@@ -444,6 +444,10 @@ The latter expression is called the *nucleotide diversity*
 
 ## Alleles as algebraic entities
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 Recall: **alleles** refer to *different variants* of a sequence at a
 locus (genomic position).
 
@@ -467,7 +471,11 @@ Will use combination $A$, $a$ for *bi-allelic* loci from now on
 
 :::
 
-::: {.fragment .large}
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment}
 
 ::: {.callout-important appearance="simple" icon=false}
 
@@ -475,24 +483,19 @@ Will use combination $A$, $a$ for *bi-allelic* loci from now on
 
 :::::: {.columns}
 
-::::: {.column width="30%"}
+::::: {.column width="50%"}
 
 [{{< fa solid circle >}}]{style="color: #ff2a2a;"} $A$ red color
 
 {{< fa regular circle >}} $a$ white color
 
-:::::
-
-:::::{.column width="5%"}
-
-:::::
-
-:::::{.column width="20%" .fragment}
+::: {.fragment}
 
 [Punnett square](https://en.wikipedia.org/wiki/Punnett_square)
 
 :::: {style="display: grid; grid-template-columns: auto auto auto;
-grid-row-gap: 0px; grid-column-gap: 0px; text-align: center; align-items: center;"}
+grid-row-gap: 0px; grid-column-gap: 0px; text-align: center;
+align-items: center;"}
 
 :::{}
 
@@ -520,13 +523,13 @@ A
 
 :::{}
 
-![](assets/images/flower-red.svg){width=100}
+![](assets/images/flower-red.svg){width=75}
 
 :::
 
 :::{}
 
-![](assets/images/flower-pink.svg){width=100}
+![](assets/images/flower-pink.svg){width=75}
 
 :::
 
@@ -538,17 +541,19 @@ a
 
 :::{}
 
-![](assets/images/flower-pink.svg){width=100}
+![](assets/images/flower-pink.svg){width=75}
 
 :::
 
 :::{}
 
-![](assets/images/flower-white.svg){width=100}
+![](assets/images/flower-white.svg){width=75}
 
 :::
 
 ::::
+
+:::
 
 :::::
 
@@ -556,7 +561,7 @@ a
 
 :::::
 
-::::: {.column width="40%" .fragment}
+::::: {.column width="45%" .fragment}
 
 :::: {style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
 grid-row-gap: 0px; grid-column-gap: 10px; text-align: center; align-items: center;"}
@@ -620,6 +625,10 @@ Heterozygote has intermediate color phenotype (pink).
 :::
 
 :::
+
+:::
+
+::::
 
 ::: {.notes}
 
@@ -4218,6 +4227,7 @@ xi <- L / 2
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
+#| fig-format: png
 #| fig-cap: The effect of a selective sweep on
 #|     diversity. The arrow points to the site under selection.
 #|     The y-axis shows Tajima's D which is proportional to the

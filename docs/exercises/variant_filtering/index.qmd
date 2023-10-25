@@ -4,7 +4,7 @@ author:
   - Per Unneberg
 format: html
 execute:
-  cache: true
+  cache: false
 ---
 
 <!-- markdownlint-disable MD041 -->
@@ -15,11 +15,21 @@ execute:
 
 <!-- markdownlint-enable MD041 -->
 
+::: {.callout-important collapse=true}
+
+#### Compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+:::
+
 In this exercise we will look at ways of filtering variant data. We
 will begin by applying filters to the variant file containing all
 sites data, followed by a more general approach based on sequencing
 coverage that works also when the variant file lacks information about
-monomorphic sites.
+invariant sites.
 
 ::: {.callout-tip collapse=true}
 
@@ -43,11 +53,11 @@ Create an exercise directory and `cd` to it:
 #| label: create-monkeyflower-directory
 #| echo: true
 #| eval: false
-mkdir -p monkeyflower
-cd monkeyflower
+mkdir -p variant_filtering
+cd variant_filtering
 ```
 
-Then download the zip archives and unzip them.
+FIXME: add data source
 
 :::
 
@@ -55,13 +65,9 @@ Then download the zip archives and unzip them.
 
 ## Tools
 
-In this exercise we will use the tools listed below. See [compute
-environment](/exercises/compute_environment/index.html) for
-instructions on how to install.
-
 :::{.panel-tabset}
 
-### Listing
+#### Listing
 
 - [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
 - [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
@@ -71,7 +77,29 @@ instructions on how to install.
 - [vcflib](https://github.com/vcflib/vcflib) [@garrison_SpectrumFreeSoftware_2022]
 - [vcftools](https://vcftools.github.io/) [@danecek_VariantCallFormat_2011]
 
-### Conda
+#### UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools \
+    mosdepth/0.3.3 BEDTools/2.29.2 \
+    samtools/1.17 bcftools/1.17 \
+    vcftools/0.1.16 vcflib/1.0.1
+```
+
+`csvtk` has been added to the module system and can be loaded as
+follows:
+
+```bash
+module use /proj/{{< var uppmaxproject >}}/modules
+module load csvtk
+```
+
+#### Conda
 
 Copy the contents to a file `environment.yml` and install packages
 with `mamba env update -f environment.yml`.
@@ -91,23 +119,6 @@ dependencies:
   - vcftools=0.1.16
 ```
 
-### UPPMAX modules
-
-Execute the following command to load modules:
-
-```{bash }
-#| label: uppmax-load-modules
-#| echo: true
-#| eval: false
-module load uppmax bioinfo-tools mosdepth/0.3.3 \
-       BEDTools/2.29.2 samtools/1.17 bcftools/1.17 vcftools/0.1.16 \
-    vcflib/1.0.1
-```
-
-Note that `csvtk` may require [manual
-installation](https://bioinf.shenwei.me/csvtk/#installation)^[18-Oct-2023:
-We will aim to make csvtk available via the module system].
-
 :::
 
 :::
@@ -123,13 +134,13 @@ with its own biases and issues, with the most important being the
 difficulty to accurately call
 genotypes[@maruki_GenotypeCallingPopulationGenomic_2017].
 
-To improve the accuracy of downstream inference, a number of
+In order to improve the accuracy of downstream inference, a number of
 analysis-dependent quality control filters should be applied to the
 raw variant call set (for a concise summary, see
 @lou_BeginnerGuideLowcoverage_2021). In this exercise, we will begin
 by applying filters to the variant file containing all sites data,
 followed by a more general approach based on sequencing coverage that
-works also when the variant file lacks information about monomorphic
+works also when the variant file lacks information about invariant
 sites.
 
 It is worthwhile to spend time thinking about filtering. As we will
@@ -336,11 +347,12 @@ csvtk summary -t -f MEAN_DEPTH:mean ${OUT}.idepth
 #| eval: true
 data <- read.table("vcftools/allsites.idepth", header=TRUE)
 LDEPTH_MEAN <- round(mean(data$MEAN_DEPTH), 1)
+ldepth <- sprintf("%.1fX", LDEPTH_MEAN)
 ```
 
 Note that `vcftools` treats uncalled sites as missing data, which is
 why the number of sites differ between samples. The average coverage
-over all samples is 7.9X. This is in the low range for a
+over all samples is `r ldepth`. This is in the low range for a
 protocol based on explicitly calling genotypes. At 5X coverage, there
 may be a high probability that only one of the alleles has been
 sampled [@nielsen_GenotypeSNPCalling_2011], whereby sequencing may be
@@ -361,7 +373,10 @@ total depth across all samples.
 
 We plot the distribution of depths by counting how many times each
 depth is observed. This can be done with `csvtk summary` where we
-count positions and group (`-g`) by the `SUM_DEPTH` value:
+count positions and group (`-g`) by the `SUM_DEPTH` value:^[Viewing
+`csvtk` output: either you can **redirect** (`>`) the results from
+`csvtk` to a png output file, or you can **pipe** (`|`) it to the
+command `display`, which should fire up a window with your plot.]
 
 ```{bash }
 #| label: csvtk-plot-vcftools-depth-per-site

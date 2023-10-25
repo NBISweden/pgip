@@ -115,5 +115,13 @@ exercises/variant_filtering:
     - __variants__
     - __redyellow_variants__
 
+exercises/genetic_diversity:
+  __data__:
+    - __sampleinfo__
+  allsites.vcf.gz: monkeyflower/tiny/allsites.vcf.gz
+  allsites.vcf.gz.tbi: monkeyflower/tiny/allsites.vcf.gz.tbi
+  redyellow.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
+  redyellow.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi
+
 slides/foundations:
   data/Homo_sapiens: Homo_sapiens

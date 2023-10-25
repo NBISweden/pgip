@@ -9,7 +9,7 @@ repos:
         always_run: true
         fail_fast: true
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-merge-conflict
       - id: debug-statements
@@ -19,7 +19,7 @@ repos:
       - id: check-yaml
       - id: trailing-whitespace
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v3.10.0
+    rev: v3.12.0
     hooks:
       - id: reorder-python-imports
         args:
@@ -28,7 +28,7 @@ repos:
             --unclassifiable-application-module=_tskit,
           ]
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.282"
+    rev: "v0.1.2"
     hooks:
       - id: ruff
         args:
@@ -36,19 +36,19 @@ repos:
             "--per-file-ignores=tests/test_utils.py:E501,manticore/tests/wm/snakemake.py:E501",
           ]
   - repo: https://github.com/psf/black
-    rev: 23.7.0
+    rev: 23.10.1
     hooks:
       - id: black
         language_version: python3
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1.15.0
+    rev: 1.16.0
     hooks:
       - id: blacken-docs
         args: [--skip-errors]
         additional_dependencies: [black==22.3.0]
         language_version: python3
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.8.1
+    rev: v0.10.0
     hooks:
       - id: markdownlint-cli2
         files: \.(md|qmd)$
@@ -59,7 +59,7 @@ repos:
         types: [file]
         exclude: LICENSE.md
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: '2.7.2'
+    rev: '2.7.3'
     hooks:
       - id: editorconfig-checker
         alias: ec
@@ -71,7 +71,7 @@ repos:
           docs/slides/population_structure/data/DavidReich/AADR\.geno
           )
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.2.9019
+    rev: v0.3.2.9023
     hooks:
       - id: style-files
         name: style-files
