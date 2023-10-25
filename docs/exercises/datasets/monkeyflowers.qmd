@@ -98,9 +98,9 @@ the similarities between genomic landscapes.
 
 A locus that previously had been associated with differentiation of
 red and yellow ecotypes was investigated in more detail. The locus is
-located on linkage group 4, and we will be using both a 3Mbp region of
-interest (ROI) surronding the locus, and the whole linkage group, for
-different exercises.
+located on linkage group 4 (`LG4`), and we will be using both a 3Mbp
+region of interest (ROI) surronding the locus, and the whole linkage
+group, for different exercises.
 
 ## Data
 
@@ -136,9 +136,7 @@ data[, c(1, 2, 3, 4, 7, 8, 9)] %>%
 The monkeyflower dataset is located in UPPMAX project `{{<
 var uppmaxproject >}}` at `/proj/{{< var uppmaxproject
 >}}/webexport/monkeyflower`. In addition to local access, data can be
-accessed remotely through [https://export.uppmax.uu.se/{{<
-var uppmaxproject >}}/](<https://export.uppmax.uu.se/{{><
-var uppmaxproject >}}/).
+accessed remotely through [{{< var webexport.url >}}]({{< var webexport.url >}}/).
 
 ### Github
 

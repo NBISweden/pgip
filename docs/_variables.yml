@@ -8,8 +8,9 @@ lab:
 uppmaxproject: naiss2023-22-1084
 
 webexport:
-  url: https://export.uppmax.uu.se
+  baseurl: https://export.uppmax.uu.se
   user: pgip
+  url: https://export.uppmax.uu.se/naiss2023-22-1084
 
 demes:
   ooa: pgip_data/data/ooa/ooa.demes.yaml
