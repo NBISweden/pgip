@@ -29,7 +29,7 @@ In this exercise we will look at ways of filtering variant data. We
 will begin by applying filters to the variant file containing all
 sites data, followed by a more general approach based on sequencing
 coverage that works also when the variant file lacks information about
-monomorphic sites.
+invariant sites.
 
 ::: {.callout-tip collapse=true}
 
@@ -348,7 +348,6 @@ csvtk summary -t -f MEAN_DEPTH:mean ${OUT}.idepth
 data <- read.table("vcftools/allsites.idepth", header=TRUE)
 LDEPTH_MEAN <- round(mean(data$MEAN_DEPTH), 1)
 ldepth <- sprintf("%.1fX", LDEPTH_MEAN)
-
 ```
 
 Note that `vcftools` treats uncalled sites as missing data, which is
@@ -374,7 +373,10 @@ total depth across all samples.
 
 We plot the distribution of depths by counting how many times each
 depth is observed. This can be done with `csvtk summary` where we
-count positions and group (`-g`) by the `SUM_DEPTH` value:
+count positions and group (`-g`) by the `SUM_DEPTH` value:^[Viewing
+`csvtk` output: either you can **redirect** (`>`) the results from
+`csvtk` to a png output file, or you can **pipe** (`|`) it to the
+command `display`, which should fire up a window with your plot.]
 
 ```{bash }
 #| label: csvtk-plot-vcftools-depth-per-site

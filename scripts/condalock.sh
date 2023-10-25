@@ -4,7 +4,7 @@ set -xeuo pipefail
 if [[ $# == 1 ]]; then
     if [[ "$1" == "--force" ]]; then
         echo "generating conda-linux-64.lock from environment.yml"
-        conda-lock --kind explicit --platform linux-64
+        conda-lock lock -f environment.yml --kind explicit --platform linux-64
     else
         echo "Usage: $0 [--force]"
         exit 1

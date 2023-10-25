@@ -9,6 +9,7 @@ dependencies:
   - bedtools
   - bcftools
   - bokeh
+  - bwa
   - ca-certificates
   - csvtk
   - cyvcf2=0.30.16
@@ -25,10 +26,11 @@ dependencies:
   - multiqc
   - pandas
   - pip
+  - picard
   - pyslim
   - python>=3.10
   - python-newick
-  # - r-animation
+  - qualimap
   - r-ape
   - r-codetools
   - r-curl
@@ -48,8 +50,6 @@ dependencies:
   - r-gsalib
   - r-highcharter
   - r-igraph
-  # # - r-irkernel
-  # # - r-jsonlite
   - r-kableextra
   - r-latex2exp
   - r-leaflet
@@ -58,20 +58,16 @@ dependencies:
   - r-patchwork
   - r-pdftools
   - r-plotly
-  # # - r-reactable
   - r-readr
   - r-readxl
   - r-reticulate
   - r-rmarkdown>=2.19
   - r-tidyr
-  # # - r-transformr
   - r-viridis
   - samtools=1.15.1
-  # # - scikit-learn
   - scikit-allel
   - slim>=4.0
   - sgkit
   - tskit>=0.5.0
+  - vcflib
   - vcftools
-  # # - tqdm
-  # # - yarl
