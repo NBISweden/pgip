@@ -13,67 +13,79 @@ format: html
 
 <!-- markdownlint-enable MD041 -->
 
-Computer exercise requirements are listed in `Tools` callout blocks in
-each exercise. We will primarily use gitpod and JupyterLite for
-exercises, which ideally means you do not need to install any software
-dependencies yourself. The `Tools` callout block contains listings of
-programs, along with specifications for two fallback solutions,
-whenever relevant:
+## UPPMAX
 
-1. a [conda](https://docs.conda.io/en/latest/) environment file
-2. a list of [UPPMAX](https://www.uppmax.uu.se) modules
+::: {.callout-important collapse=true}
 
-::: {.callout-note collapse=true}
+#### Prerequisite: UPPMAX account
 
-## Tools - example
-
-Example Tools block.
-
-:::{.panel-tabset}
-
-### Listing
-
-- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
-
-### Conda
-
-Copy the contents to a file `environment.yml` and install packages
-with `mamba env update -f environment.yml`.
-
-```{lang="text" }
-channels:
-  - conda-forge
-  - bioconda
-  - defauts
-dependencies:
-  - bwa=0.7.17
-  - fastqc=0.12.1
-```
-
-### UPPMAX modules
-
-Execute the following command to load modules:
-
-```{bash }
-#| label: uppmax-load-modules
-#| echo: true
-#| eval: false
-module load uppmax bioinfo-tools bwa/0.7.17 FastQC/0.11.9
-```
+To run exercises on UPPMAX you need an
+account. You can apply for an account
+[here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
 
 :::
 
+We will primarily be using Uppsala's high-performance computing (HPC)
+center [UPPMAX](https://www.uppmax.uu.se/) to run exercises. Course
+material will be hosted in a dedicated course project directory
+`/proj/{{< var uppmaxproject >}}`.
+
+We recommend you setup a working directory based on your username in
+`/proj/{{< var uppmaxproject >}}/users` in which to run your
+exercises:
+
+```bash
+mkdir -p /proj/{{< var uppmaxproject >}}/users/YOURUSERNAME
+cd /proj/{{< var uppmaxproject >}}/users/YOURUSERNAME
+```
+
+All computations should be run on a compute node. You can request an
+[interactive
+session](https://www.uppmax.uu.se/support/faq/running-jobs-faq/how-can-i-run-interactively-on-a-compute-node/)
+with the `interactive` command. For example, to request an eight hour
+job on 4 cores, run
+
+```bash
+interactive -A {{< var uppmaxproject >}} --cores 4 \
+   --partition core --time 08:00:00
+```
+
+::: {.callout-important}
+
+#### Please do not book more than 4 cores
+
+We have priviliged access to a limited number of nodes. Please do not
+book more than 4 cores or else your fellow students will experience
+long waiting times.
+
 :::
 
-## gitpod
+::: {.callout-important}
+
+#### Make sure to login to a compute node before running any heavy commands
+
+:::
+
+### Tutorials
+
+UPPMAX hosts tutorials and user guides at
+<https://www.uppmax.uu.se/support/user-guides/>. In particular,
+<https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
+has information on how to connect to and work on UPPMAX.
 
 ## JupyterLite
 
-## conda
+Some exercises will be run using
+[JupyterLite](https://github.com/jupyterlite/jupyterlite) which is a
+JupyterLab distribution that runs entirely in the browser. Apart from
+having a browser, no preparations are necessary. Note that some users
+have reported issues with Firefox and that Google Chrome may be a
+better solution.
 
-The first fallback option is to install software packages locally on
-your computer. We will use the
+## Fallback solution: conda
+
+In case there are issues with the HPC, a fallback option is to install
+software packages locally on your computer. We will use the
 [conda](https://docs.conda.io/en/latest/) package manager to install
 necessary requirements from the package repositories
 [bioconda](https://bioconda.github.io/) and
@@ -145,19 +157,64 @@ or if you have packages listed in an environment file
 mamba env update -f environment.yml
 ```
 
-## UPPMAX
+## Tools
 
-As another fallback option, you may need an [uppmax
-account](https://www.uppmax.uu.se/) to run some of the exercises. You
-can apply for an account
-[here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
+Computer exercise requirements are listed in `Tools` callout blocks in
+each exercise. The `Tools` callout block contains listings of
+programs, along with package dependencies and specifications for
+UPPMAX and conda, whenever relevant. An example block is shown below.
 
-### Tutorials
+::: {.callout-note collapse=true}
 
-Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
-<https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
-for information on how to connect to and work on uppmax.
+### Tools - example
 
-## Brief introduction to bash
+Example Tools block.
+
+:::{.panel-tabset}
+
+#### Listing
+
+Provides list of packages linked to repository, and citation when
+available.
+
+- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
+
+#### UPPMAX modules
+
+Provides command and instructions to load relevant UPPMAX modules.
+
+Example:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools bwa/0.7.17 FastQC/0.11.9
+```
+
+:::
+
+:::
+
+#### Conda
+
+Provides a [conda environment
+file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+that lists dependencies and where to retrieve them.
+
+To install, copy the contents in the code block to a file
+`environment.yml` and install packages with `mamba env update -f
+environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - defauts
+dependencies:
+  - bwa=0.7.17
+  - fastqc=0.12.1
+```
 
 ## References

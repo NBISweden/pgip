@@ -27,9 +27,19 @@ fi
 
 <!-- markdownlint-enable MD041 -->
 
+::: {.callout-important collapse=true}
+
+#### Compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+:::
+
 In this exercise we will produce a variant call set, going through the
-basic steps from quality control, read mapping to variant calling. We
-will be working on the [Monkeyflowers
+basic steps from quality control through read mapping to variant
+calling. We will be working on the [Monkeyflowers
 dataset](../datasets/monkeyflowers.qmd). Make sure to read the dataset
 document before running any commands as it will give you the
 biological background and general information about where to find and
@@ -72,50 +82,18 @@ results will differ from those presented here.
 
 ## Data setup
 
-Create an exercise directory and `cd` to it:
+In your course working directory, create an exercise directory and
+`cd` to it:
 
 ```{bash }
 #| label: create-monkeyflower-directory
 #| echo: true
 #| eval: false
-mkdir -p monkeyflower
-cd monkeyflower
+mkdir -p variant_calling
+cd variant_calling
 ```
 
-Then download the zip archives and unzip them.
-
-:::: {style="display: grid; grid-template-columns: 1fr 1fr 1fr;
-grid-row-gap: 0px ; grid-column-gap: 0px;"}
-
-:::{.text-center}
-
-Fastq and bam files.
-
-:::{.btn .btn-primary .btn-sm .nbisbtn}
-
-[{{< fa download >}} Download]({{< var webexport >}}/small/M_aurantiacus_v1_splitline_ordered.fasta)
-
-:::
-
-:::
-
-:::{.text-center}
-
-Reference data
-
-:::{.btn .btn-primary .btn-sm .nbisbtn}
-
-[{{< fa download >}} Download]({{< var webexport >}}/small/M_aurantiacus_v1_splitline_ordered.fasta)
-
-:::
-
-:::
-
-:::{}
-
-:::
-
-::::
+FIXME: add data download instructions.
 
 :::
 
@@ -123,13 +101,9 @@ Reference data
 
 ## Tools
 
-In this exercise we will use the tools listed below. See [software
-installation](/precourse.html#sec-software-installation) for
-instructions on how to install.
-
 :::{.panel-tabset}
 
-### Listing
+#### Listing
 
 - [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
 - [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
@@ -140,7 +114,21 @@ instructions on how to install.
 - [qualimap](http://qualimap.conesalab.org/) [@okonechnikov_QualimapAdvancedMultisample_2016]
 - [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
 
-### Conda
+#### UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools \
+       GATK/4.3.0.0 bwa/0.7.17 FastQC/0.11.9 \
+       MultiQC/1.12 picard/2.27.5 samtools/1.17 \
+       bcftools/1.17 QualiMap/2.2.1
+```
+
+#### Conda
 
 Copy the contents to a file `environment.yml` and install packages
 with `mamba env update -f environment.yml`.
@@ -159,18 +147,6 @@ dependencies:
   - picard=3.1.0
   - qualimap=2.2.2d
   - samtools=1.15.1
-```
-
-### UPPMAX modules
-
-Execute the following command to load modules:
-
-```{bash }
-#| label: uppmax-load-modules
-#| echo: true
-#| eval: false
-module load uppmax bioinfo-tools GATK/4.3.0.0 bwa/0.7.17 FastQC/0.11.9 \
-    MultiQC/1.12 picard/2.27.5 samtools/1.17 bcftools/1.17 QualiMap/2.2.1
 ```
 
 :::
@@ -215,8 +191,9 @@ $$
 Q = -10 \log_{10} P
 $$
 
-Hence, a base quality score $Q=20$ corresponds to a 1% probability
-that the call is incorrect. The base qualities typically drop towards
+which for $P=0.01$ gives $Q=20$. Hence, a base quality score $Q=20$
+corresponds to a 1% probability that the call is incorrect, $Q=30$ a
+0.1% probability, and so on. The base qualities typically drop towards
 the end of the reads (@fig-fastqc-base-quality). Prior to mapping it
 may therefore be prudent to remove reads that display too high drop in
 quality, too low mean quality, or on some other quality metric
@@ -234,15 +211,24 @@ used to cut out columns from a tab-delimited file, or in this case,
 cut the longest strings to 30 characters width.] that are separated by
 a so-called pipe (`|`) character which takes the output from one
 process and sends it as input to the next^[For more information, see
-[unix pipelines {{< fa brands wikipedia-w
->}}](<https://en.wikipedia.org/wiki/Pipeline_(Unix)>)].
+[unix pipelines](<https://en.wikipedia.org/wiki/Pipeline_(Unix)>)].
+
+Note that we use the *long* option names to clarify commands, and we
+aim to do so consistently when a new command is introduced. Once you
+feel confident you know what a command does, you will probably want to
+switch to *short* option names, and we may do so in the instructions
+for some commonly used commands (e.g., `head -n`) without warning.
+Remember to use `--help` to examine command options.
 
 ```{bash }
 #| label: cat-fastq
 #| echo: true
 #| eval: true
 #| fig-cap: |
-zcat PUN-Y-INJ_R1.fastq.gz | head -n 4 | cut -c -30
+# Command using long (-- prefix) option names
+zcat PUN-Y-INJ_R1.fastq.gz | head --lines 4 | cut --characters -30
+# Equivalent command using short (single -, single character) option names
+# zcat PUN-Y-INJ_R1.fastq.gz | head -n 4 | cut -c -30
 ```
 
 A fastq entry consists of four lines:
@@ -262,7 +248,7 @@ A fastq entry consists of four lines:
 #| label: wc-exercise-answer
 #| echo: true
 #| eval: false
-zcat PUN-Y-INJ_R1.fastq.gz | wc -l
+zcat PUN-Y-INJ_R1.fastq.gz | wc --lines
 ```
 
 Since there are four lines per sequence (id, sequence, `+` separator,
@@ -369,9 +355,10 @@ simultaneously, setting the output directory with the `-o` flag:
 #| echo: true
 #| eval: true
 #| results: hide
-# Make fastqc output directory; -p avoids error if it already exists
-mkdir -p fastqc
-fastqc -o fastqc *fastq.gz
+# Make fastqc output directory; --parents makes parent directories as
+# needed
+mkdir --parents fastqc
+fastqc --outdir fastqc *fastq.gz
 ```
 
 ::: {.callout-exercise}
@@ -457,16 +444,18 @@ Let's map the fastq files corresponding to sample `PUN-Y-BCRD`:
 #| results: hide
 bwa mem -R "@RG\tID:SRR9309788\tSM:PUN-Y-BCRD\tPL:ILLUMINA" -t 4 \
  -M M_aurantiacus_v1.fasta PUN-Y-BCRD_R1.fastq.gz PUN-Y-BCRD_R2.fastq.gz | \
- samtools sort - | samtools view -h -o PUN-Y-BCRD.sort.bam
+ samtools sort - | samtools view --with-header --output PUN-Y-BCRD.sort.bam
 ```
 
 There's a lot to unpack here. First, the `-R` flag to `bwa mem` passes
 the read group information to the mapper. `-t` sets the number of
 threads, and `-M` marks shorter split hits as secondary, which is for
-Picard compatibility^[Simply type `man bwa mem` at the command line
-for general help and a complete list of options.]. The first
-positional argument is the reference sequence, followed by the fastq
-files for read 1 and 2, respectively.
+Picard compatibility^[`bwa` consistently uses short option names.
+Also, there is no `--help` option. To get a list of options, at the
+command line simply type `bwa mem`, or `man bwa mem` for general help
+and a complete list of options.]. The first positional argument is the
+reference sequence, followed by the fastq files for read 1 and 2,
+respectively.
 
 The output would be printed on the screen (try running the `bwa mem`
 command alone!), but we pipe the output to `samtools sort` to sort the
@@ -474,8 +463,8 @@ mappings (by default by coordinate). The `-` simply means "read from
 the pipe".
 
 Finally, `samtools view` converts the text output to binary format
-(default), including the header information (option `-h`). You can use
-the same command to view the resulting output on your screen:
+(default), including the header information (short option `-h`). You
+can use the same command to view the resulting output on your screen:
 
 ```{bash }
 #| label: samtools-view-example
@@ -492,8 +481,8 @@ you?
 
 ::: {.callout-hint}
 
-To get a list of options, type `samtools view`. The `-H` option views
-the header only.
+To get a list of options, type `samtools view`. The `-H` or
+`--header-only` option views the header only.
 
 :::
 
@@ -712,11 +701,11 @@ Base quality score recalibration consists of two commands:
 #| echo: true
 #| eval: true
 #| results: hide
-gatk BaseRecalibrator -I ${SAMPLE}.sort.dup.bam \
-  -R ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
-  -O ${SAMPLE}.sort.dup.recal.table
-gatk ApplyBQSR -bqsr ${SAMPLE}.sort.dup.recal.table \
-  -I ${SAMPLE}.sort.dup.bam -O ${SAMPLE}.sort.dup.recal.bam
+gatk BaseRecalibrator --input ${SAMPLE}.sort.dup.bam \
+  --reference ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.recal.table
+gatk ApplyBQSR --bqsr-recal-file ${SAMPLE}.sort.dup.recal.table \
+  --input ${SAMPLE}.sort.dup.bam --output ${SAMPLE}.sort.dup.recal.bam
 ```
 
 [BaseRecalibrator](https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator)
@@ -739,9 +728,9 @@ bam file:
 #| echo: true
 #| eval: true
 #| results: hide
-gatk BaseRecalibrator -I ${SAMPLE}.sort.dup.recal.bam \
-  -R ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
-  -O ${SAMPLE}.sort.dup.recal.after.table
+gatk BaseRecalibrator --input ${SAMPLE}.sort.dup.recal.bam \
+  --reference ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.recal.after.table
 ```
 
 Then we use the two calibration tables as input to
@@ -754,10 +743,10 @@ code block):
 #| echo: true
 #| eval: true
 #| results: hide
-gatk AnalyzeCovariates -before ${SAMPLE}.sort.dup.recal.table \
-  -after ${SAMPLE}.sort.dup.recal.after.table \
-  -plots ${SAMPLE}.sort.dup.recal.after.pdf \
-  -csv ${SAMPLE}.sort.dup.recal.after.csv
+gatk AnalyzeCovariates --before-report-file ${SAMPLE}.sort.dup.recal.table \
+  --after-report-file ${SAMPLE}.sort.dup.recal.after.table \
+  --plots-report-file ${SAMPLE}.sort.dup.recal.after.pdf \
+  --intermediate-csv-file ${SAMPLE}.sort.dup.recal.after.csv
 ```
 
 @fig-bqsr-analyze-covariates-plot shows an example plot of quality
@@ -826,9 +815,10 @@ Change the output file label from `raw` to `recal` (i.e.,
 #| echo: true
 #| eval: true
 #| results: hide
-gatk HaplotypeCaller -OVI true \
+gatk HaplotypeCaller --create-output-variant-index true \
   --emit-ref-confidence GVCF \
-  --annotation FisherStrand -A QualByDepth -A MappingQuality -G StandardAnnotation \
+  --annotation FisherStrand --annotation QualByDepth --annotation MappingQuality \
+  --annotation-group StandardAnnotation \
   --input ${SAMPLE}.sort.dup.recal.bam --output ${SAMPLE}.sort.dup.recal.hc.g.vcf.gz \
   --reference ${REF}
 gatk VariantFiltration -OVI true \
@@ -905,11 +895,13 @@ This done by first combining individual sample gVCF files with GATK
 #| echo: true
 #| eval: true
 #| results: hide
+# -OVI = --create-output-variant-index
+# -R = --reference
 gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} \
-  -V PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
-  -V PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz
+  --variant PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
+  --variant PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz
 gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.subset.g.vcf.gz \
-  -O allsites.subset.vcf.gz --all-sites
+  --output allsites.subset.vcf.gz --all-sites
 ```
 
 ::: {.callout-exercise}
@@ -927,7 +919,7 @@ option. To get the sample names, look at the first column of
 #| label: get-yellow-samples
 #| echo: true
 #| eval: true
-cat sampleinfo.csv | grep yellow | cut -f 1 -d ","
+cat sampleinfo.csv | grep yellow | cut --fields 1 --delimiter ","
 ```
 
 :::
@@ -998,8 +990,8 @@ Rerunning MultiQC will automatically add this report.
 #| echo: true
 #| eval: true
 #| results: hide
-# Use -f to overwrite old report
-multiqc -f .
+# Use --force (-f) to overwrite old report
+multiqc --force .
 ```
 
 We will use bcftools stats in the next exercise to look more closely
@@ -1020,7 +1012,7 @@ and more. You can print the header with the command `bcftools view
 #| label: looking-inside-vcf-meta
 #| echo: true
 #| eval: true
-bcftools view -h allsites.vcf.gz | grep FILTER | head -n 1
+bcftools view --header-only allsites.vcf.gz | grep FILTER | head -n 1
 bcftools view -h allsites.vcf.gz | grep INFO | head -n 1
 bcftools view -h allsites.vcf.gz | grep FORMAT | head -n 1
 ```
@@ -1044,7 +1036,8 @@ position of the SNP):
 #| label: bcftools-view-vcf
 #| echo: true
 #| eval: true
-pos=$(bcftools view -v snps -s PUN-R-JMC allsites.vcf.gz -H | head -n 1 | cut -f 2)
+pos=$(bcftools view --types snps --samples PUN-R-JMC allsites.vcf.gz \
+               --no-header | head -n 1 | cut -f 2)
 bcftools view -v snps -s PUN-R-JMC allsites.vcf.gz LG4:$pos | tail -n 2
 ```
 
@@ -1143,7 +1136,7 @@ list the samples in a file, we can run `bcftools query`:
 #| label: bcftools-query-l
 #| echo: true
 #| eval: true
-bcftools query -l allsites.vcf.gz
+bcftools query --list-samples allsites.vcf.gz
 ```
 
 Selecting indel variants for a given sample, say `PUN-Y-BCRD`, and
