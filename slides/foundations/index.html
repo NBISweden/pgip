@@ -419,7 +419,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">24-Oct-2023</h4>
+  <h4 class="date">25-Oct-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1407,6 +1407,8 @@ Calculate the nucleotide diversity
 </section>
 <section id="alleles-as-algebraic-entities" class="slide level2">
 <h2>Alleles as algebraic entities</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Recall: <strong>alleles</strong> refer to <em>different variants</em> of a sequence at a locus (genomic position).</p>
 <div class="fragment">
 <p>Whatever the underlying molecular nature (gene, chromosome, nucleotide, protein), let’s represent a locus by a letter, e.g., <span class="math inline">\(A\)</span> (<span class="math inline">\(B\)</span> if two loci, and so on)</p>
@@ -1417,7 +1419,8 @@ Calculate the nucleotide diversity
 <div class="fragment">
 <p>Will use combination <span class="math inline">\(A\)</span>, <span class="math inline">\(a\)</span> for <em>bi-allelic</em> loci from now on</p>
 </div>
-<div class="fragment large">
+</div><div class="column" style="width:50%;">
+<div class="fragment">
 <div class="callout callout-important no-icon callout-titled callout-style-simple">
 <div class="callout-body">
 <div class="callout-title">
@@ -1425,12 +1428,10 @@ Calculate the nucleotide diversity
 </div>
 <div class="callout-content">
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column" style="width:50%;">
 <p><span style="color: #ff2a2a;"><i class="fa-solid fa-circle" aria-label="circle"></i></span> <span class="math inline">\(A\)</span> red color</p>
 <p><i class="fa-regular fa-circle" aria-label="circle"></i> <span class="math inline">\(a\)</span> white color</p>
-</div><div class="column" style="width:5%;">
-
-</div><div class="column fragment" style="width:20%;">
+<div class="fragment">
 <p><a href="https://en.wikipedia.org/wiki/Punnett_square">Punnett square</a></p>
 <div style="display: grid; grid-template-columns: auto auto auto; grid-row-gap: 0px; grid-column-gap: 0px; text-align: center; align-items: center;">
 <div>
@@ -1446,24 +1447,25 @@ Calculate the nucleotide diversity
 <p>A</p>
 </div>
 <div>
-<p><img data-src="assets/images/flower-red.svg" width="100"></p>
+<p><img data-src="assets/images/flower-red.svg" width="75"></p>
 </div>
 <div>
-<p><img data-src="assets/images/flower-pink.svg" width="100"></p>
+<p><img data-src="assets/images/flower-pink.svg" width="75"></p>
 </div>
 <div>
 <p>a</p>
 </div>
 <div>
-<p><img data-src="assets/images/flower-pink.svg" width="100"></p>
+<p><img data-src="assets/images/flower-pink.svg" width="75"></p>
 </div>
 <div>
-<p><img data-src="assets/images/flower-white.svg" width="100"></p>
+<p><img data-src="assets/images/flower-white.svg" width="75"></p>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:5%;">
 
-</div><div class="column fragment" style="width:40%;">
+</div><div class="column fragment" style="width:45%;">
 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-row-gap: 0px; grid-column-gap: 10px; text-align: center; align-items: center;">
 <div>
 <p>Genotype</p>
@@ -1491,6 +1493,8 @@ Calculate the nucleotide diversity
 </div>
 </div>
 <p>Heterozygote has intermediate color phenotype (pink).</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2374,28 +2378,28 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <p>To capture dynamics, follow allele frequency trajectory (<span class="math inline">\(p_t\)</span>) as function of time.</p>
 <div class="smallr">
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_fc6a9d0852d57471ad01989470464bdb">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="do">##'</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="do">##' @param n Population size</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="do">##'</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
-<span id="cb2-11"><a href="#cb2-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    }</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    x</span>
-<span id="cb2-14"><a href="#cb2-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="do">##'</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="do">##' @param n Population size</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="do">##' @param generations Number of generations to simulate</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="do">##'</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>wright_fisher <span class="ot">&lt;-</span> <span class="cf">function</span>(p0, n, generations) {</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> generations)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    x[<span class="dv">1</span>] <span class="ot">&lt;-</span> p0</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">length</span>(x))) {</span>
+<span id="cb1-11"><a href="#cb1-11"></a>        x[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> x[i <span class="sc">-</span> <span class="dv">1</span>])<span class="sc">/</span>n</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    }</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    x</span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/wright-fisher-plot_6499baaaee1d16b3debdc278a724c026">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example simulation and plot</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Example simulation and plot</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># NB: haploid population size!</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>generations, <span class="fu">wright_fisher</span>(<span class="fl">0.5</span>, n, generations), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"frequency"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">xlab =</span> <span class="st">"generation"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -3399,8 +3403,8 @@ D_t = (1-r)^tD_0
 <div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_51eacb4a9e001967e6e5faa0749b18cb">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/pgip-load-slim-data_3ac66aeeaa40c52c4eda503c1ba06518">
@@ -3418,7 +3422,7 @@ D_t = (1-r)^tD_0
 </div>
 <!-- markdownlint-enable MD013 -->
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd_45bdce78bc0f2a58623012b8acdfa538">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd_94b10b7d962d6261b14278601c8fbbac">
 <div class="cell-output cell-output-error">
 <pre><code>Error in FUN(X[[i]], ...): object 'windows' not found</code></pre>
 </div>
@@ -3444,8 +3448,8 @@ D_t = (1-r)^tD_0
 <div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_74273fb0acada19733235fc43559f319">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- markdownlint-enable MD013 -->

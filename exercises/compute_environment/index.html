@@ -276,10 +276,15 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#gitpod" id="toc-gitpod" class="nav-link active" data-scroll-target="#gitpod">gitpod</a></li>
+<li>
+<a href="#uppmax" id="toc-uppmax" class="nav-link active" data-scroll-target="#uppmax">UPPMAX</a>
+  <ul class="collapse">
+<li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
+  </ul>
+</li>
   <li><a href="#jupyterlite" id="toc-jupyterlite" class="nav-link" data-scroll-target="#jupyterlite">JupyterLite</a></li>
   <li>
-<a href="#conda-1" id="toc-conda-1" class="nav-link" data-scroll-target="#conda-1">conda</a>
+<a href="#fallback-solution-conda" id="toc-fallback-solution-conda" class="nav-link" data-scroll-target="#fallback-solution-conda">Fallback solution: conda</a>
   <ul class="collapse">
 <li><a href="#install-conda" id="toc-install-conda" class="nav-link" data-scroll-target="#install-conda">1. Install conda</a></li>
   <li><a href="#configure-conda" id="toc-configure-conda" class="nav-link" data-scroll-target="#configure-conda">2. Configure conda</a></li>
@@ -287,13 +292,7 @@ div.csl-indent {
   <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">4. Install packages</a></li>
   </ul>
 </li>
-  <li>
-<a href="#uppmax" id="toc-uppmax" class="nav-link" data-scroll-target="#uppmax">UPPMAX</a>
-  <ul class="collapse">
-<li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
-  </ul>
-</li>
-  <li><a href="#brief-introduction-to-bash" id="toc-brief-introduction-to-bash" class="nav-link" data-scroll-target="#brief-introduction-to-bash">Brief introduction to bash</a></li>
+  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></nav>
     </div>
@@ -316,7 +315,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">24-Oct-2023</p>
+      <p class="date">25-Oct-2023</p>
     </div>
   </div>
   
@@ -324,64 +323,62 @@ div.csl-indent {
   </div>
   
 
-</header><!-- markdownlint-disable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-enable MD041 --><p>Computer exercise requirements are listed in <code>Tools</code> callout blocks in each exercise. We will primarily use gitpod and JupyterLite for exercises, which ideally means you do not need to install any software dependencies yourself. The <code>Tools</code> callout block contains listings of programs, along with specifications for two fallback solutions, whenever relevant:</p>
-<ol type="1">
-<li>a <a href="https://docs.conda.io/en/latest/">conda</a> environment file</li>
-<li>a list of <a href="https://www.uppmax.uu.se">UPPMAX</a> modules</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled">
+</header><!-- markdownlint-disable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-enable MD041 --><section id="uppmax" class="level2"><h2 class="anchored" data-anchor-id="uppmax">UPPMAX</h2>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tools - example
+Prerequisite: UPPMAX account
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Example Tools block.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Conda</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">UPPMAX modules</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<ul>
-<li><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a></li>
-<li>
-<a href="https://github.com/lh3/bwa">bwa</a> <span class="citation" data-cites="li_AligningSequenceReads_2013">(<a href="#ref-li_AligningSequenceReads_2013" role="doc-biblioref">Li, 2013</a>)</span>
-</li>
-</ul>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Copy the contents to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
-<pre lang="text"><code>channels:
-  - conda-forge
-  - bioconda
-  - defauts
-dependencies:
-  - bwa=0.7.17
-  - fastqc=0.12.1</code></pre>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p>Execute the following command to load modules:</p>
-<div class="cell" data-hash="index_cache/html/uppmax-load-modules_02a733ba2a6121b24695ad06c5a84e9e">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To run exercises on UPPMAX you need an account. You can apply for an account <a href="https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/">here</a>.</p>
 </div>
 </div>
 </div>
+<p>We will primarily be using Uppsala’s high-performance computing (HPC) center <a href="https://www.uppmax.uu.se/">UPPMAX</a> to run exercises. Course material will be hosted in a dedicated course project directory <code>/proj/naiss2023-22-1084</code>.</p>
+<p>We recommend you setup a working directory based on your username in <code>/proj/naiss2023-22-1084/users</code> in which to run your exercises:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /proj/naiss2023-22-1084/users/YOURUSERNAME</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /proj/naiss2023-22-1084/users/YOURUSERNAME</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>All computations should be run on a compute node. You can request an <a href="https://www.uppmax.uu.se/support/faq/running-jobs-faq/how-can-i-run-interactively-on-a-compute-node/">interactive session</a> with the <code>interactive</code> command. For example, to request an eight hour job on 4 cores, run</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">interactive</span> <span class="at">-A</span> naiss2023-22-1084 <span class="at">--cores</span> 4 <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--partition</span> core <span class="at">--time</span> 08:00:00</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Please do not book more than 4 cores
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>We have priviliged access to a limited number of nodes. Please do not book more than 4 cores or else your fellow students will experience long waiting times.</p>
 </div>
 </div>
-<section id="gitpod" class="level2"><h2 class="anchored" data-anchor-id="gitpod">gitpod</h2>
-</section><section id="jupyterlite" class="level2"><h2 class="anchored" data-anchor-id="jupyterlite">JupyterLite</h2>
-</section><section id="conda-1" class="level2"><h2 class="anchored" data-anchor-id="conda-1">conda</h2>
-<p>The first fallback option is to install software packages locally on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Make sure to login to a compute node before running any heavy commands
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<section id="tutorials" class="level3"><h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
+<p>UPPMAX hosts tutorials and user guides at <a href="https://www.uppmax.uu.se/support/user-guides/" class="uri">https://www.uppmax.uu.se/support/user-guides/</a>. In particular, <a href="https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/" class="uri">https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/</a> has information on how to connect to and work on UPPMAX.</p>
+</section></section><section id="jupyterlite" class="level2"><h2 class="anchored" data-anchor-id="jupyterlite">JupyterLite</h2>
+<p>Some exercises will be run using <a href="https://github.com/jupyterlite/jupyterlite">JupyterLite</a> which is a JupyterLab distribution that runs entirely in the browser. Apart from having a browser, no preparations are necessary. Note that some users have reported issues with Firefox and that Google Chrome may be a better solution.</p>
+</section><section id="fallback-solution-conda" class="level2"><h2 class="anchored" data-anchor-id="fallback-solution-conda">Fallback solution: conda</h2>
+<p>In case there are issues with the HPC, a fallback option is to install software packages locally on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
 <section id="install-conda" class="level3"><h3 class="anchored" data-anchor-id="install-conda">1. Install conda</h3>
 <p>To start using conda, follow the <a href="https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install">quick command line install instructions</a> to install the minimal conda installer <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>.</p>
 </section><section id="configure-conda" class="level3"><h3 class="anchored" data-anchor-id="configure-conda">2. Configure conda</h3>
@@ -421,12 +418,59 @@ Important
 <div class="cell" data-hash="index_cache/html/conda-install-packages-from-environment-file_b737b19f676d94a36f25480ad7e32a21">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env update <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="uppmax" class="level2"><h2 class="anchored" data-anchor-id="uppmax">UPPMAX</h2>
-<p>As another fallback option, you may need an <a href="https://www.uppmax.uu.se/">uppmax account</a> to run some of the exercises. You can apply for an account <a href="https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/">here</a>.</p>
-<section id="tutorials" class="level3"><h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
-<p>Look at <a href="https://www.uppmax.uu.se/support/user-guides/" class="uri">https://www.uppmax.uu.se/support/user-guides/</a>, in particular <a href="https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/" class="uri">https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/</a> for information on how to connect to and work on uppmax.</p>
-</section></section><section id="brief-introduction-to-bash" class="level2"><h2 class="anchored" data-anchor-id="brief-introduction-to-bash">Brief introduction to bash</h2>
-</section><section id="references" class="level2">
+</section></section><section id="tools" class="level2"><h2 class="anchored" data-anchor-id="tools">Tools</h2>
+<p>Computer exercise requirements are listed in <code>Tools</code> callout blocks in each exercise. The <code>Tools</code> callout block contains listings of programs, along with package dependencies and specifications for UPPMAX and conda, whenever relevant. An example block is shown below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tools - example
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Example Tools block.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">UPPMAX modules</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Provides list of packages linked to repository, and citation when available.</p>
+<ul>
+<li><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a></li>
+<li>
+<a href="https://github.com/lh3/bwa">bwa</a> <span class="citation" data-cites="li_AligningSequenceReads_2013">(<a href="#ref-li_AligningSequenceReads_2013" role="doc-biblioref">Li, 2013</a>)</span>
+</li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Provides command and instructions to load relevant UPPMAX modules.</p>
+<p>Example:</p>
+<div class="cell" data-hash="index_cache/html/uppmax-load-modules_02a733ba2a6121b24695ad06c5a84e9e">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="conda" class="level4"><h4 class="anchored" data-anchor-id="conda">Conda</h4>
+<p>Provides a <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda environment file</a> that lists dependencies and where to retrieve them.</p>
+<p>To install, copy the contents in the code block to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
+<pre lang="text"><code>channels:
+  - conda-forge
+  - bioconda
+  - defauts
+dependencies:
+  - bwa=0.7.17
+  - fastqc=0.12.1</code></pre>
+</section></section><section id="references" class="level2">
 
 
 
