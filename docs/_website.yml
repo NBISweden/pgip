@@ -41,9 +41,11 @@ website:
           - slides/population_structure/index.qmd
       - section: Exercises
         contents:
+          - exercises/compute_environment/index.qmd
+          - exercises/datasets/monkeyflowers.qmd
           - exercises/simulation/index.qmd
           - exercises/variant_calling/index.qmd
-          - exercises/data_filtering/index.qmd
+          - exercises/variant_filtering/index.qmd
       - section: Code recipes
         contents:
           - recipes/index.qmd
