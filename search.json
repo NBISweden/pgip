@@ -32,7 +32,7 @@
     "href": "recipes/index.html",
     "title": "Code recipes",
     "section": "",
-    "text": "25-Oct-2023: This page is under construction!"
+    "text": "26-Oct-2023: This page is under construction!"
   },
   {
     "objectID": "recipes/index.html#slides",
@@ -487,14 +487,14 @@
     "href": "exercises/simulation/index.html",
     "title": "Introduction to simulation",
     "section": "",
-    "text": "Note\n\n\n\n25-Oct-2023: The simulation exercises are currently hosted at https://nbisweden.github.io/pgip-jlite/lab/index.html. The repository will shortly be moved to the NBIS github organization."
+    "text": "Start by going through the HOWTO"
   },
   {
     "objectID": "exercises/simulation/index.html#sec-exercise-simulation-howto",
     "href": "exercises/simulation/index.html#sec-exercise-simulation-howto",
     "title": "Introduction to simulation",
-    "section": "Instructions",
-    "text": "Instructions\nStart by going through the HOWTO"
+    "section": "",
+    "text": "Start by going through the HOWTO"
   },
   {
     "objectID": "exercises/simulation/index.html#sec-exercise-simulation-coalescent",
@@ -571,7 +571,7 @@
     "href": "index.html",
     "title": "DDLS Population genomics in practice",
     "section": "",
-    "text": "NBIS • Workshop\nDDLS Population genomics in practice\nWelcome to the DDLS Population Genomics in Practice homepage!\nImportant dates and information\nSee the canvas home page for the current course NBIS_POPGENIP_H23 for more information on how to apply.\n\n\n\n\n\nNext round\n06-Nov-2023 - 10-Nov-2023\n\n\nApplication opens\n15-Aug-2023\n\n\nApplication deadline\n30-Sep-2023\n\n\n\n\nBrief contents\n\n\nThis workshop includes the following moments:\n\nVariant calling and filtering\nDescribing and summarising variation data\nPopulation structure\nDemographic analysis\nSelection scans\nCoalescent simulation\n\nSee syllabus for a more complete description of course contents and info for practical information on venue and hotels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLast updated on  25-Oct-2023"
+    "text": "NBIS • Workshop\nDDLS Population genomics in practice\nWelcome to the DDLS Population Genomics in Practice homepage!\nImportant dates and information\nSee the canvas home page for the current course NBIS_POPGENIP_H23 for more information on how to apply.\n\n\n\n\n\nNext round\n06-Nov-2023 - 10-Nov-2023\n\n\nApplication opens\n15-Aug-2023\n\n\nApplication deadline\n30-Sep-2023\n\n\n\n\nBrief contents\n\n\nThis workshop includes the following moments:\n\nVariant calling and filtering\nDescribing and summarising variation data\nPopulation structure\nDemographic analysis\nSelection scans\nCoalescent simulation\n\nSee syllabus for a more complete description of course contents and info for practical information on venue and hotels.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLast updated on  26-Oct-2023"
   },
   {
     "objectID": "contents.html",
@@ -634,7 +634,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "25-Oct-2023: Note that the schedule is tentative and subject to change!\n\n\n\n\n\n\nNote\n\n\n\nCoffee breaks are planned for approximately 10:00 and 14:30 every day.\n\n\n\n\n 06-Nov-2023 Mon  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n08:30 - 09:30\nCoffee and registration\n\n\n\n\n09:00 - 09:30\nWelcome and general introduction\nPer Unneberg\nAS, JH, NO\n\n\n09:30 - 10:30\n\nPopulation genomics in practice \n\nPer Unneberg\n\n\n\n10:30 - 12:00\n\nPopulation genetics foundations \n\nPer Unneberg\n\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 14:45\n\nIntroduction to the coalescent  \n\nPer Unneberg\nAS, JH, NO\n\n\n14:45 - 16:30\n\nIntroduction to msprime  \n\nPer Unneberg\nAS, JH, NO\n\n\n16:30 - 17:00\n\nOverview of SLiM, general applications \n\nPer Unneberg\nAS, JH, NO\n\n\n\n\n 07-Nov-2023 Tue  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 09:30\nRecap day 1\nPer Unneberg\n\n\n\n09:30 - 11:00\n\nVariant calling \n\nPer Unneberg\nAS, JH, NO\n\n\n11:00 - 12:00\n\nVariant filtering \n\nPer Unneberg\nAS, JH, NO\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 17:00\nGenetic diversity, summarizing variation data\nPer Unneberg\nAS, JH, NO\n\n\n\n\n 08-Nov-2023 Wed  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 09:30\nRecap day 2\nPer Unneberg\n\n\n\n09:30 - 12:00\n\nPopulation structure \n\nNikolay Oskolkov\nAS, JH, PU\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 15:00\n\nPopulation structure \n\nNikolay Oskolkov\nAS, JH, PU\n\n\n\n\n 09-Nov-2023 Thu  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 09:30\nRecap day 3\nNikolay Oskolkov\n\n\n\n09:30 - 12:00\nDemography\nAndré Soares\nJH, NO, PU\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 17:00\nSelection\nJason Hill\nAS, NO, PU\n\n\n\n\n 10-Nov-2023 Fri  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 10:30\nRecap\nAndré Soares / Jason Hill / Nikolay Oskolkov / Per Unneberg\n\n\n\n10:30 - 11:30\nGuest lecture (TBA)\n\n\n\n\n11:30 - 12:00\nRecap\nAndré Soares / Jason Hill / Nikolay Oskolkov / Per Unneberg\n\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 17:00\nProject discussion / networking / own time\n\n\n\n\n\n\n\n\n   Date    Venue    Slides    Exercises  \n\n\n  AS: André Soares, JH: Jason Hill, NO: Nikolay Oskolkov, PU: Per Unneberg\n\n\n\n\nLast updated on  25-Oct-2023"
+    "text": "26-Oct-2023: Note that the schedule is tentative and subject to change!\n\n\n\n\n\n\nNote\n\n\n\nCoffee breaks are planned for approximately 10:00 and 14:30 every day.\n\n\n\n\n 06-Nov-2023 Mon  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n08:30 - 09:30\nCoffee and registration\n\n\n\n\n09:00 - 09:30\nWelcome and general introduction\nPer Unneberg\nAS, JH, NO\n\n\n09:30 - 10:30\n\nPopulation genomics in practice \n\nPer Unneberg\n\n\n\n10:30 - 12:00\n\nPopulation genetics foundations \n\nPer Unneberg\n\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 14:45\n\nIntroduction to the coalescent  \n\nPer Unneberg\nAS, JH, NO\n\n\n14:45 - 16:30\n\nIntroduction to msprime  \n\nPer Unneberg\nAS, JH, NO\n\n\n16:30 - 17:00\n\nOverview of SLiM, general applications \n\nPer Unneberg\nAS, JH, NO\n\n\n\n\n 07-Nov-2023 Tue  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 09:30\nRecap day 1\nPer Unneberg\n\n\n\n09:30 - 11:00\n\nVariant calling \n\nPer Unneberg\nAS, JH, NO\n\n\n11:00 - 12:00\n\nVariant filtering \n\nPer Unneberg\nAS, JH, NO\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 17:00\nGenetic diversity, summarizing variation data\nPer Unneberg\nAS, JH, NO\n\n\n\n\n 08-Nov-2023 Wed  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 09:30\nRecap day 2\nPer Unneberg\n\n\n\n09:30 - 12:00\n\nPopulation structure \n\nNikolay Oskolkov\nAS, JH, PU\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 15:00\n\nPopulation structure \n\nNikolay Oskolkov\nAS, JH, PU\n\n\n\n\n 09-Nov-2023 Thu  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 09:30\nRecap day 3\nNikolay Oskolkov\n\n\n\n09:30 - 12:00\nDemography\nAndré Soares\nJH, NO, PU\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 17:00\nSelection\nJason Hill\nAS, NO, PU\n\n\n\n\n 10-Nov-2023 Fri  Uppsala\n\n\n\n\n\n\n\n\n\n\nTime\nTopic\nTeacher\nAssistant\n\n\n\n09:00 - 10:30\nRecap\nAndré Soares / Jason Hill / Nikolay Oskolkov / Per Unneberg\n\n\n\n10:30 - 11:30\nGuest lecture (TBA)\n\n\n\n\n11:30 - 12:00\nRecap\nAndré Soares / Jason Hill / Nikolay Oskolkov / Per Unneberg\n\n\n\n12:00 - 13:00\nLunch\n\n\n\n\n13:00 - 17:00\nProject discussion / networking / own time\n\n\n\n\n\n\n\n\n   Date    Venue    Slides    Exercises  \n\n\n  AS: André Soares, JH: Jason Hill, NO: Nikolay Oskolkov, PU: Per Unneberg\n\n\n\n\nLast updated on  26-Oct-2023"
   },
   {
     "objectID": "exercises/compute_environment/index.html",
