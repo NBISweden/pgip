@@ -5,15 +5,6 @@ author:
 format: html
 ---
 
-::: {.callout-note}
-
-{{< meta date >}}: The simulation exercises are currently hosted at
-[{{< var lab.sim.baseurl >}}/index.html]({{< var lab.sim.baseurl
->}}/index.html). The repository will shortly be moved to the NBIS
-github organization.
-
-:::
-
 ## Instructions {#sec-exercise-simulation-howto}
 
 Start by going through the [HOWTO]({{< var lab.sim.baseurl
