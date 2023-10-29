@@ -330,7 +330,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26-Oct-2023</p>
+      <p class="date">29-Oct-2023</p>
     </div>
   </div>
   
@@ -361,7 +361,8 @@ Prerequisite: UPPMAX account
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /proj/naiss2023-22-1084/users/YOURUSERNAME</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>All computations should be run on a compute node. You can request an <a href="https://www.uppmax.uu.se/support/faq/running-jobs-faq/how-can-i-run-interactively-on-a-compute-node/">interactive session</a> with the <code>interactive</code> command. For example, to request an eight hour job on 4 cores, run</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">interactive</span> <span class="at">-A</span> naiss2023-22-1084 <span class="at">--cores</span> 4 <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--partition</span> core <span class="at">--time</span> 08:00:00</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--partition</span> core <span class="at">--time</span> 08:00:00 <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--reservation</span><span class="op">=</span>naiss2023-22-1084</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

@@ -311,7 +311,7 @@ div.csl-indent {
 <a href="#read-mapping-1" id="toc-read-mapping-1" class="nav-link" data-scroll-target="#read-mapping-1">Read mapping</a>
   <ul class="collapse">
 <li><a href="#read-group-information-identifies-sequence-sets" id="toc-read-group-information-identifies-sequence-sets" class="nav-link" data-scroll-target="#read-group-information-identifies-sequence-sets">Read group information identifies sequence sets</a></li>
-  <li><a href="#read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" id="toc-read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="nav-link" data-scroll-target="#read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to bam format with samtools</a></li>
+  <li><a href="#read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" id="toc-read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="nav-link" data-scroll-target="#read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to BAM format with samtools</a></li>
   <li><a href="#mapping-from-ubam-file" id="toc-mapping-from-ubam-file" class="nav-link" data-scroll-target="#mapping-from-ubam-file">Mapping from uBAM file</a></li>
   <li><a href="#mark-duplicate-reads-with-picard-markduplicates" id="toc-mark-duplicate-reads-with-picard-markduplicates" class="nav-link" data-scroll-target="#mark-duplicate-reads-with-picard-markduplicates">Mark duplicate reads with Picard MarkDuplicates</a></li>
   <li><a href="#generate-high-quality-known-sites-for-bqsr" id="toc-generate-high-quality-known-sites-for-bqsr" class="nav-link" data-scroll-target="#generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</a></li>
@@ -357,7 +357,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26-Oct-2023</p>
+      <p class="date">29-Oct-2023</p>
     </div>
   </div>
   
@@ -392,7 +392,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This is a technical exercise, where the focus is not so much on the biology as on getting programs to run and interpreting the outputs.</p>
+<p>This is a technical exercise, where the focus is not so much on the biology as on getting programs to run and interpreting the output.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -450,7 +450,20 @@ Data setup
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> variant_calling</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> variant_calling</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>FIXME: add data download instructions.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">UPPMAX</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Local</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -468,12 +481,12 @@ Tools
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">UPPMAX modules</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Conda</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Listing</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">UPPMAX modules</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Conda</a></li>
 </ul>
 <div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <ul>
 <li>
 <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> <span class="citation" data-cites="danecek_TwelveYearsSAMtools_2021">(<a href="#ref-danecek_TwelveYearsSAMtools_2021" role="doc-biblioref">Danecek et al., 2021</a>)</span>
@@ -499,7 +512,7 @@ Tools
 </li>
 </ul>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Execute the following command to load modules:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools <span class="dt">\</span></span>
@@ -508,7 +521,7 @@ Tools
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       bcftools/1.17 QualiMap/2.2.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
 <p>Copy the contents to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
 <pre lang="text"><code>channels:
   - conda-forge
@@ -572,7 +585,7 @@ AAFFFJJJJJJJFJJJJJJJJJJJJJJJJJ</code></pre>
 <li>phred base quality scores</li>
 </ol>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -581,13 +594,33 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p><i class="fa-brands fa-linux" aria-label="linux"></i> Use the command <code>wc</code> to determine how many sequences are in <code>PUN-Y-INJ_R1.fastq.gz</code>.</p>
-<div class="callout callout-style-default callout-answer no-icon callout-titled">
+<div class="callout callout-style-default callout-hint no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-hint">
+<p>The <code>wc</code> help page (<code>wc --help</code>) shows <code>wc</code> prints newline, word and byte counts for a file, where newline is what we’re after. We can restrict the output to newline characters with the <code>--lines</code> option. Use <code>zcat</code> to print the contents of <code>PUN-Y-INJ_R1.fastq.gz</code> to the screen, piping (<code>|</code>) the output to <code>wc --lines</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-answer no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -596,7 +629,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -617,11 +650,11 @@ Answer
 </section><section id="read-mapping" class="level3"><h3 class="anchored" data-anchor-id="read-mapping">Read mapping</h3>
 <p>Read mapping consists of aligning sequence reads, typically from individuals in a population (a.k.a. resequencing) to a reference sequence. The choice of read mapper depends, partly on preference, but mostly on the sequencing read length and application. For short reads, a common choice is <a href="https://github.com/lh3/bwa">bwa-mem</a>, and for longer reads <a href="https://github.com/lh3/minimap2">minimap2</a>.</p>
 <p>In what follows, we will assume that the sequencing protocol generates paired-end short reads (e.g., from <a href="https://ngisweden.scilifelab.se/technologies/illumina/">Illumina</a>). In practice, this means a DNA fragment has been sequence from both ends, where fragment sizes have been selected such that reads do not overlap (i.e., there is unsequenced DNA between the reads of a given <em>insert size</em>).</p>
-<p>The final output of read mapping is an alignment file in <a href="https://en.wikipedia.org/wiki/Binary_Alignment_Map">binary alignment map (bam)</a> format or variants thereof.</p>
+<p>The final output of read mapping is an alignment file in <a href="https://en.wikipedia.org/wiki/Binary_Alignment_Map">binary alignment map (BAM)</a> format or variants thereof.</p>
 </section><section id="removal-marking-of-duplicate-reads" class="level3"><h3 class="anchored" data-anchor-id="removal-marking-of-duplicate-reads">Removal / marking of duplicate reads</h3>
 <p>During sample preparation or DNA amplification with PCR, it may happen that a single DNA fragment is present in multiple copies and therefore produces redundant sequencing reads. This shows up as alignments with identical start and stop coordinates. These so-called duplicate reads should be marked prior to any downstream analyses. The most commonly used tools for this purpose are <code>samtools markdup</code> and <code>picard MarkDuplicates</code>.</p>
 </section><section id="variant-calling" class="level3"><h3 class="anchored" data-anchor-id="variant-calling">Variant calling</h3>
-<p>Once bam files have been produced, it is time for variant calling. There are many different variant callers, of which we will mention four.</p>
+<p>Once BAM files have been produced, it is time for variant calling. There are many different variant callers, of which we will mention four.</p>
 <p><a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> is a toolkit to process variant call files, but also has a variant caller command. We will use bcftools to look at and summarize the variant files.</p>
 <p><a href="https://github.com/freebayes/freebayes">freebayes</a> uses a Bayesian model to call variants. It may be time-consuming in high-coverage regions, and one therefore may have to mask repetitive and other low-complexity regions.</p>
 <p><a href="http://www.popgen.dk/angsd/index.php/ANGSD">ANGSD</a> is optimized for low-coverage data. Genotypes aren’t called directly; rather, genotype likelihoods form the basis for all downstream analyses, such as calculation of diversity or other statistics.</p>
@@ -630,11 +663,25 @@ Answer
 <p>We will base our work on the GATK <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-">Germline short variant discovery workflow</a>. In addition to the steps outlined above, there is a step where quality scores are recalibrated in an attempt to correct errors produced by the base calling procedure itself.</p>
 <p>GATK comes with a large set of tools. For a complete list and documentation, see the <span class="citation" data-cites="ToolDocumentationIndex_2023"><span>“<span>Tool Documentation Index</span>”</span> (<a href="#ref-ToolDocumentationIndex_2023" role="doc-biblioref">2023</a>)</span>.</p>
 </section></section><section id="preparation-reference-sequence-index-and-read-qc" class="level2"><h2 class="anchored" data-anchor-id="preparation-reference-sequence-index-and-read-qc">Preparation: reference sequence index and read QC</h2>
-<p>Prior to mapping we need to create a database index. We also generate a fasta index and a sequence dictionary for use with the picard toolkit.</p>
+<p>Prior to mapping we need to create a database index. We also generate a fasta index and a sequence dictionary for use with the <code>picard</code> toolkit.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On UPPMAX, the command to run <code>picard</code> is <code>java -jar $PICARD_HOME/picard.jar</code>. The UPPMAX command version is included as a comment whenever there is a command running <code>picard</code>. Make sure to uncomment when copying the code.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx M_aurantiacus_v1.fasta</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">picard</span> CreateSequenceDictionary <span class="at">--REFERENCE</span> M_aurantiacus_v1.fasta</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index M_aurantiacus_v1.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># java -jar $PICARD_HOME/picard.jar CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">picard</span> CreateSequenceDictionary <span class="at">--REFERENCE</span> M_aurantiacus_v1.fasta</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index M_aurantiacus_v1.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can generate fastqc reports for all input fastq files simultaneously, setting the output directory with the <code>-o</code> flag:</p>
 <div class="cell">
@@ -644,7 +691,7 @@ Answer
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--outdir</span> fastqc <span class="pp">*</span>fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -653,13 +700,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p><code>cd</code> to the output directory and look at the <code>html</code> reports. Do you notice any difference between read 1 (R1) and read 2 (R2)?</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -668,7 +715,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -703,7 +750,7 @@ SRS4979267,SRR9309785,Diplacus longiflorus,LON-T8_8,T8,LON-T8,ssp. longiflorus,3
 </div>
 </div>
 <p>The sample information is a combination of the run information obtained from the SRA (BioProject <code>PRJNA549183</code>) and the sample sheet provided with the article. An additional column <code>SampleAlias</code> has been added that names samples using a three-letter abbreviation for population hyphenated with the sample identifier. For the <em>ssp. puniceus</em>, an additional one-letter character denoting the color ecotype is inserted between population and sample id. <code>PUN-Y-BCRD</code> then is a sample from the <em>puniceus</em> subspecies with the yellow ecotype. We will use the <code>Run</code> column as unique <code>ID</code>, <code>SampleAlias</code> as the sample id <code>SM</code>, and <code>ILLUMINA</code> as the platform <code>PL</code>.</p>
-</section><section id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="level3"><h3 class="anchored" data-anchor-id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to bam format with samtools</h3>
+</section><section id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools" class="level3"><h3 class="anchored" data-anchor-id="read-mapping-with-bwa-and-conversion-to-bam-format-with-samtools">Read mapping with bwa and conversion to BAM format with samtools</h3>
 <p>Let’s map the fastq files corresponding to sample <code>PUN-Y-BCRD</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-R</span> <span class="st">"@RG\tID:SRR9309788\tSM:PUN-Y-BCRD\tPL:ILLUMINA"</span> <span class="at">-t</span> 4 <span class="dt">\</span></span>
@@ -721,7 +768,7 @@ SRR9309788.9554822  99  LG4 58  60  74M2I75M    =   256 321 TAATTAATTATATATTTTTT
 </div>
 </div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -730,13 +777,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Look at the header information of the output bam file. What does the <code>@SQ</code> tag stand for, and what does the information on that line tell you?</p>
+<p>Look at the header information of the output BAM file. What does the <code>@SQ</code> tag stand for, and what does the information on that line tell you?</p>
 <div class="callout callout-style-default callout-hint no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -745,7 +792,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-hint">
@@ -756,7 +803,7 @@ Hint
 </div>
 </div>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -765,7 +812,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -807,12 +854,15 @@ Answer
 </section><section id="mark-duplicate-reads-with-picard-markduplicates" class="level3"><h3 class="anchored" data-anchor-id="mark-duplicate-reads-with-picard-markduplicates">Mark duplicate reads with Picard MarkDuplicates</h3>
 <p>Once mapping is completed, we must find and mark duplicate reads as these can distort the results of downstream analyses, such as variant calling. We here use <code>Picard MarkDuplicates</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">picard</span> MarkDuplicates <span class="at">--INPUT</span> <span class="va">${SAMPLE}</span>.sort.bam <span class="dt">\</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--METRICS_FILE</span> <span class="va">${SAMPLE}</span>.sort.dup_metrics.txt <span class="dt">\</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--OUTPUT</span> <span class="va">${SAMPLE}</span>.sort.dup.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#java -jar $PICARD_HOME/picard.jar MarkDuplicates --INPUT ${SAMPLE}.sort.bam \</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    --METRICS_FILE ${SAMPLE}.sort.dup_metrics.txt \</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    --OUTPUT ${SAMPLE}.sort.dup.bam</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">picard</span> MarkDuplicates <span class="at">--INPUT</span> <span class="va">${SAMPLE}</span>.sort.bam <span class="dt">\</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--METRICS_FILE</span> <span class="va">${SAMPLE}</span>.sort.dup_metrics.txt <span class="dt">\</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--OUTPUT</span> <span class="va">${SAMPLE}</span>.sort.dup.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The metrics output file contains information on the rate of duplication. We will include the output in the final <code>MultiQC</code> report.</p>
-<p>An additional mapping quality metric of interest is percentage mapped reads and average read depth. We can use <code>qualimap bamqc</code> to collect mapping statistics from a bam file:</p>
+<p>An additional mapping quality metric of interest is percentage mapped reads and average read depth. We can use <code>qualimap bamqc</code> to collect mapping statistics from a BAM file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qualimap</span> bamqc <span class="at">-bam</span> <span class="va">${SAMPLE}</span>.sort.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -826,7 +876,7 @@ Answer
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -835,7 +885,7 @@ Why does the sample have such low coverage?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If you look at the coverage reported in <code>sampleinfo.csv</code>, column <code>Seq. Depth</code>, you will note that the observed coverage here is much lower. This has to do with how the exercise data set was prepared; only read pairs where <em>both</em> reads mapped within the example region were retained.</p>
 </div>
@@ -843,7 +893,7 @@ Why does the sample have such low coverage?
 </div>
 <p>These statistics will also be picked up by <code>MultiQC</code>.</p>
 </section><section id="generate-high-quality-known-sites-for-bqsr" class="level3"><h3 class="anchored" data-anchor-id="generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</h3>
-<p>Once we have a duplicate marked bam file, we can proceed with Base Quality Score Recalibration (BQSR). The purpose here is to correct any systematic errors made by the sequencing machine. This is done by applying a machine learning model. Before we do so, however, we need to generate a list of <em>known sites</em> that should not be recalibrated<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Therefore, we will first perform a preliminary round of variant calling and filtering to generate a known sites callset.</p>
+<p>Once we have a duplicate marked BAM file, we can proceed with Base Quality Score Recalibration (BQSR). The purpose here is to correct any systematic errors made by the sequencing machine. This is done by applying a machine learning model. Before we do so, however, we need to generate a list of <em>known sites</em> that should not be recalibrated<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Therefore, we will first perform a preliminary round of variant calling and filtering to generate a known sites callset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> HaplotypeCaller <span class="at">-OVI</span> true <span class="dt">\</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--emit-ref-confidence</span> GVCF <span class="dt">\</span></span>
@@ -859,7 +909,7 @@ Why does the sample have such low coverage?
 </div>
 <p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037422451-HaplotypeCaller"><code>HaplotypeCaller</code></a> is GATK’s variant caller that calls both SNPs and indels by realigning sequences in the vicinity of sites that harbor variation. We apply the <code>-ERC</code> option to generate <code>GVCF</code> output format, a condensed VCF format that includes non-variant sites as well as variant sites. The <code>--annotation</code> (<code>-A</code>) option adds annotations to the output that are used in the subsequent filtering step.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -868,13 +918,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p><i class="fa-brands fa-linux" aria-label="linux"></i> What does the <code>-OVI</code> parameter do?</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -883,7 +933,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -904,7 +954,7 @@ Answer
 </div>
 <p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832750065947-VariantFiltration"><code>VariantFiltration</code></a> does what its name suggests. The <code>--filter-name</code> / <code>--filter</code> option pairs apply named filters to the input data. For instance, we here remove variants whose mapping quality is below 50.0.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -913,7 +963,7 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse show">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
@@ -933,9 +983,9 @@ Exercise
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> ApplyBQSR <span class="at">--bqsr-recal-file</span> <span class="va">${SAMPLE}</span>.sort.dup.recal.table <span class="dt">\</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> <span class="va">${SAMPLE}</span>.sort.dup.bam <span class="at">--output</span> <span class="va">${SAMPLE}</span>.sort.dup.recal.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator">BaseRecalibrator</a> compiles empirical data for all non-variant sites for an input bam file for a number of covariates (e.g., nucleotide context). The basic idea is to fit a probability of error (i.e., a quality score of sorts), to observed covariate combinations, which is recorded in a <em>recalibration table</em> file. The probability is then used correct the quality scores reported by the sequencing machine in <a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832692459163-ApplyBQSR">ApplyBQSR</a>.</p>
+<p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator">BaseRecalibrator</a> compiles empirical data for all non-variant sites for an input BAM file for a number of covariates (e.g., nucleotide context). The basic idea is to fit a probability of error (i.e., a quality score of sorts), to observed covariate combinations, which is recorded in a <em>recalibration table</em> file. The probability is then used correct the quality scores reported by the sequencing machine in <a href="https://gatk.broadinstitute.org/hc/en-us/articles/13832692459163-ApplyBQSR">ApplyBQSR</a>.</p>
 </section><section id="optional-examine-the-output-of-bqsr" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="optional-examine-the-output-of-bqsr">OPTIONAL: Examine the output of BQSR</h3>
-<p>We can investigate how well BQSR has performed by applying two more commands. First, we generate a calibration table for the recalibrated bam file:</p>
+<p>We can investigate how well BQSR has performed by applying two more commands. First, we generate a calibration table for the recalibrated BAM file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> BaseRecalibrator <span class="at">--input</span> <span class="va">${SAMPLE}</span>.sort.dup.recal.bam <span class="dt">\</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--reference</span> <span class="va">${REF}</span> <span class="at">--known-sites</span> <span class="va">${SAMPLE}</span>.sort.dup.raw.hc.filtered.g.vcf.gz <span class="dt">\</span></span>
@@ -957,11 +1007,11 @@ Exercise
 <div class="cell-output cell-output-error">
 <pre><code>Error in subset.default(data, EventType == "Base Substitution" &amp; CovariateName == : object 'EventType' not found</code></pre>
 </div>
-</div></div><p>Several rounds of generating known sites followed by BQSR can be applied until convergence. This means that running BQSR can be time-consuming, and one side effect is that the resulting bam output files can become very large, which may or not be a problem. Also, sequencing technologies keep improving, potentially eliminating concerns of biased quality scores. This begs the question: is it worth running BQSR? For the time being, the GATK developers do recommend that BQSR always be run. Keep in mind though, that for non-model organisms, one issue is that there seldom is a catalogue of known sites, which means the user has to bootstrap such a call set, like we did above. For a more complete discussion, see the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-">technical documentation on BQSR</a>.</p>
+</div></div><p>Several rounds of generating known sites followed by BQSR can be applied until convergence. This means that running BQSR can be time-consuming, and one side effect is that the resulting BAM output files can become very large, which may or not be a problem. Also, sequencing technologies keep improving, potentially eliminating concerns of biased quality scores. This begs the question: is it worth running BQSR? For the time being, the GATK developers do recommend that BQSR always be run. Keep in mind though, that for non-model organisms, one issue is that there seldom is a catalogue of known sites, which means the user has to bootstrap such a call set, like we did above. For a more complete discussion, see the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-">technical documentation on BQSR</a>.</p>
 </section></section><section id="variant-calling-and-genotyping" class="level2"><h2 class="anchored" data-anchor-id="variant-calling-and-genotyping">Variant calling and genotyping</h2>
-<p>After we have generated the recalibrated bam files, we can proceed with the “real” variant calling. We once again run GATK <code>HaplotypeCaller</code> and <code>VariantFiltration</code>.</p>
+<p>After we have generated the recalibrated BAM files, we can proceed with the “real” variant calling. We once again run GATK <code>HaplotypeCaller</code> and <code>VariantFiltration</code>.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -970,11 +1020,11 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse show">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Using the code in section <a href="../../exercises/variant_calling/index.html#generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</a> as a template, run GATK <code>HaplotypeCaller</code> on the recalibrated bam file, followed by <code>VariantFiltration</code>. For the latter, modify the filters to</p>
+<p>Using the code in section <a href="../../exercises/variant_calling/index.html#generate-high-quality-known-sites-for-bqsr">Generate high quality known sites for BQSR</a> as a template, run GATK <code>HaplotypeCaller</code> on the recalibrated BAM file, followed by <code>VariantFiltration</code>. For the latter, modify the filters to</p>
 <ul>
 <li>filterName: FisherStrand, filter: FS &gt; 60.0</li>
 <li>filterName: QualByDepth, filter: QD &lt; 2.0</li>
@@ -982,7 +1032,7 @@ Exercise
 </ul>
 <p>Change the output file label from <code>raw</code> to <code>recal</code> (i.e., <code>.sort.dup.raw</code> becomes <code>.sort.dup.recal</code>).</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -991,7 +1041,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1021,7 +1071,7 @@ Answer
 </div>
 <p>That concludes the sample-specific part of the variant calling workflow! Now we need to combine the samples and perform genotyping. To do so, we need to run the same commands, from mapping to variant calling and filtering on recalibrated files, for all samples.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1030,7 +1080,7 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse show">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
@@ -1060,7 +1110,7 @@ Important
 </div>
 <p>Open the report <code>multiqc_report.html</code> to quickly QC your data. There are lots of ways you can interactively modify the report to make more logical groupings (e.g., grouping reports by sample<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>) , but we won’t go into this topic in more detail here.</p>
 </section><section id="combine-genomic-vcf-files-and-genotype" class="level3"><h3 class="anchored" data-anchor-id="combine-genomic-vcf-files-and-genotype">Combine genomic VCF files and genotype</h3>
-<p>We are now at the stage where we can do genotyping of our samples. This done by first combining individual sample gVCF files with GATK <code>CombineGVCFs</code>, followed by genotyping with <code>GenotypeGVCFs</code>.</p>
+<p>We are now at the stage where we can do genotyping of our samples. This done by first combining individual sample gVCF files with GATK <code>CombineGVCFs</code>, followed by genotyping with <code>GenotypeGVCFs</code>. We use the label <code>subset</code> to indicate that we are looking at a sample subset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -OVI = --create-output-variant-index</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -R = --reference</span></span>
@@ -1068,10 +1118,14 @@ Important
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--variant</span> PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--variant</span> PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.subset.g.vcf.gz <span class="dt">\</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> allsites.subset.vcf.gz <span class="at">--all-sites</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> variantsites.subset.vcf.gz</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.subset.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> allsites.subset.vcf.gz <span class="at">--all-sites</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Here, the option <code>--all-sites</code> tells <code>gatk GenotypeGVCFs</code> to include variant as well as invariant sites in the output. Many software packages that are based on genetic diversity statistics implicitly assume that invariant sites are all homozygous reference <span class="citation" data-cites="korunes_PixyUnbiasedEstimation_2021">(<a href="#ref-korunes_PixyUnbiasedEstimation_2021" role="doc-biblioref">Korunes &amp; Samuk, 2021</a>)</span>. However, if invariant sites lack sequencing coverage, they should preferably be treated as <em>missing</em> data, which theoretically could harbour (unobserved) variant sites. Therefore, the inclusion of invariant sites provides a way to generate estimates of missing data, based on, e.g., sequencing depth profiles.</p>
+<p>Inclusion of invariant sites comes at a cost however; the VCF file size may increase dramatically, to the point that it becomes impractical or even impossible to process. We generate both types of files for future analyses.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1080,13 +1134,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse show">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Create a variant call set <code>allsites.vcf.gz</code> but for all the red and yellow samples.</p>
+<p>Create variant call sets <code>allsites.vcf.gz</code> and <code>variantsites.vcf.gz</code> but for <strong>all</strong> the red and yellow samples.</p>
 <div class="callout callout-style-default callout-hint no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1095,19 +1149,19 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-hint">
 <p>You need to specify all gVCF input files via the <code>--variants</code> (<code>-V</code>) option. To get the sample names, look at the first column of <code>sampleinfo.csv</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sampleinfo.csv <span class="kw">|</span> <span class="fu">grep</span> yellow <span class="kw">|</span> <span class="fu">cut</span> <span class="at">--fields</span> 1 <span class="at">--delimiter</span> <span class="st">","</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sampleinfo.csv <span class="kw">|</span> <span class="fu">grep</span> yellow <span class="kw">|</span> <span class="fu">cut</span> <span class="at">--fields</span> 6 <span class="at">--delimiter</span> <span class="st">","</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SRS4979264
-SRS4979263
-SRS4979222
-SRS4979220
-SRS4979218</code></pre>
+<pre><code>PUN-Y-BCRD
+PUN-Y-INJ
+PUN-Y-LO
+PUN-Y-PCT
+PUN-Y-POTR</code></pre>
 </div>
 </div>
 </div>
@@ -1116,7 +1170,7 @@ SRS4979218</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1125,7 +1179,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1142,7 +1196,9 @@ Answer
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-PCT.sort.dup.recal.hc.g.vcf.gz <span class="dt">\</span></span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">-V</span> PUN-Y-POTR.sort.dup.recal.hc.g.vcf.gz</span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.g.vcf.gz <span class="dt">\</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-O</span> allsites.vcf.gz <span class="at">--all-sites</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-O</span> allsites.vcf.gz <span class="at">--all-sites</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="ex">gatk</span> GenotypeGVCFs <span class="at">-OVI</span> true <span class="at">-R</span> <span class="va">${REF}</span> <span class="at">-V</span> combine.g.vcf.gz <span class="dt">\</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">-O</span> variantsites.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1186,12 +1242,12 @@ SN  0   number of multiallelic SNP sites:   69</code></pre>
 </section><section id="looking-inside-the-vcf" class="level3"><h3 class="anchored" data-anchor-id="looking-inside-the-vcf">Looking inside the VCF</h3>
 <p>A Variant Call Format (VCF) file consists of three sections: meta-information lines (prefixed with <code>##</code>), a header line (prefixed with <code>#</code>), followed by the data. The meta-information contains provenance information detailing how the file was generated, <code>FILTER</code> specification, <code>INFO</code> fields that provide additional information to genotypes, <code>FORMAT</code> specification fields that define genotype entries, and more. You can print the header with the command <code>bcftools view -h</code>. An example of each is given below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">--header-only</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> FILTER <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> INFO <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> FORMAT <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">--header-only</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"##FILTER"</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"##INFO"</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-h</span> allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"##FORMAT"</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##FILTER=&lt;ID=PASS,Description="All filters passed"&gt;
-##GATKCommandLine=&lt;ID=CombineGVCFs,CommandLine="CombineGVCFs --output tiny/redyellow.combine.g.vcf.gz --variant tiny/PUN-Y-BCRD/SRR9309788.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-R-ELF/SRR9309791.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-Y-INJ/SRR9309790.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-R-JMC/SRR9309467.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-R-LH/SRR9309468.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-Y-LO/SRR9309469.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-R-MT/SRR9309470.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-Y-PCT/SRR9309471.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-Y-POTR/SRR9309472.sort.dup.recal.hc.g.vcf.gz --variant tiny/PUN-R-UCSD/SRR9309473.sort.dup.recal.hc.g.vcf.gz --reference tiny/M_aurantiacus_v1_splitline_ordered.fasta --create-output-variant-index true --convert-to-base-pair-resolution false --break-bands-at-multiples-of 0 --input-is-somatic false --drop-somatic-filtering-annotations false --call-genotypes false --ignore-variants-starting-outside-interval false --combine-variants-distance 0 --max-distance 2147483647 --ref-padding 1 --interval-set-rule UNION --interval-padding 0 --interval-exclusion-padding 0 --interval-merging-rule ALL --read-validation-stringency SILENT --seconds-between-progress-updates 10.0 --disable-sequence-dictionary-validation false --create-output-bam-index true --create-output-bam-md5 false --create-output-variant-md5 false --max-variants-per-shard 0 --lenient false --add-output-sam-program-record true --add-output-vcf-command-line true --cloud-prefetch-buffer 40 --cloud-index-prefetch-buffer -1 --disable-bam-index-caching false --sites-only-vcf-output false --help false --version false --showHidden false --verbosity INFO --QUIET false --use-jdk-deflater false --use-jdk-inflater false --gcs-max-retries 20 --gcs-project-for-requester-pays  --disable-tool-default-read-filters false --disable-tool-default-annotations false --enable-all-annotations false --allow-old-rms-mapping-quality-annotation-data false",Version="4.4.0.0",Date="17 October 2023 at 21:33:19 CEST"&gt;
+##INFO=&lt;ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed"&gt;
 ##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed"&gt;</code></pre>
 </div>
 </div>
@@ -1241,7 +1297,7 @@ LG4 17  .   C   T   368.55  .   AC=0;AF=0.429;AN=0;DP=22;ExcessHet=0;FS=0;Inbree
 </div>
 <p>bcftools view has many options for subsetting and filtering variants. Remember to consult the help pages!</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1250,13 +1306,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse show">
+<div id="callout-29" class="callout-29-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p><i class="fa-brands fa-linux" aria-label="linux"></i> How many SNPs are there in region LG4:12010000-12000100?</p>
 <div class="callout callout-style-default callout-hint no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1265,7 +1321,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-hint">
@@ -1276,7 +1332,7 @@ Hint
 </div>
 </div>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1285,7 +1341,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1352,6 +1408,9 @@ Hansen, N. F. (2016). Variant <span>Calling From Next Generation Sequence Data</
 </div>
 <div id="ref-HTSFormatSpecifications_2023" class="csl-entry" role="listitem">
 <em><span>HTS</span> format specifications</em>. (2023). <a href="https://samtools.github.io/hts-specs/">https://samtools.github.io/hts-specs/</a>
+</div>
+<div id="ref-korunes_PixyUnbiasedEstimation_2021" class="csl-entry" role="listitem">
+Korunes, K. L., &amp; Samuk, K. (2021). Pixy: <span>Unbiased</span> estimation of nucleotide diversity and divergence in the presence of missing data. <em>Molecular Ecology Resources</em>, <em>21</em>(4), 1359–1368. <a href="https://doi.org/10.1111/1755-0998.13326">https://doi.org/10.1111/1755-0998.13326</a>
 </div>
 <div id="ref-li_AligningSequenceReads_2013" class="csl-entry" role="listitem">
 Li, H. (2013). Aligning sequence reads, clone sequences and assembly contigs with <span>BWA-MEM</span>. <em>arXiv:1303.3997 [q-Bio]</em>. <a href="https://arxiv.org/abs/1303.3997">https://arxiv.org/abs/1303.3997</a>
@@ -1620,7 +1679,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 </body></html>
