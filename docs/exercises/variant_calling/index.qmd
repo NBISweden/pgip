@@ -49,7 +49,7 @@ ecotypes in what follows.
 ::: {.callout-note}
 
 This is a technical exercise, where the focus is not so much on the
-biology as on getting programs to run and interpreting the outputs.
+biology as on getting programs to run and interpreting the output.
 
 :::
 
@@ -93,7 +93,13 @@ mkdir -p variant_calling
 cd variant_calling
 ```
 
-FIXME: add data download instructions.
+:::{.panel-tabset}
+
+#### UPPMAX
+
+#### Local
+
+:::
 
 :::
 
@@ -242,6 +248,16 @@ A fastq entry consists of four lines:
 
 {{< fa brands linux >}} Use the command `wc` to determine how many sequences are in `PUN-Y-INJ_R1.fastq.gz`.
 
+::: {.callout-hint}
+
+The `wc` help page (`wc --help`) shows `wc` prints newline, word and
+byte counts for a file, where newline is what we're after. We can
+restrict the output to newline characters with the `--lines` option.
+Use `zcat` to print the contents of `PUN-Y-INJ_R1.fastq.gz` to the
+screen, piping (`|`) the output to `wc --lines`.
+
+:::
+
 ::: {.callout-answer}
 
 ```{bash }
@@ -277,7 +293,7 @@ overlap (i.e., there is unsequenced DNA between the reads of a given
 
 The final output of read mapping is an alignment file in [binary
 alignment map
-(bam)](https://en.wikipedia.org/wiki/Binary_Alignment_Map) format or variants thereof.
+(BAM)](https://en.wikipedia.org/wiki/Binary_Alignment_Map) format or variants thereof.
 
 ### Removal / marking of duplicate reads
 
@@ -291,7 +307,7 @@ MarkDuplicates`.
 
 ### Variant calling
 
-Once bam files have been produced, it is time for variant calling.
+Once BAM files have been produced, it is time for variant calling.
 There are many different variant callers, of which we will mention
 four.
 
@@ -334,8 +350,17 @@ GATK comes with a large set of tools. For a complete list and documentation, see
 ## Preparation: reference sequence index and read QC
 
 Prior to mapping we need to create a database index. We also generate
-a fasta index and a sequence dictionary for use with the picard
+a fasta index and a sequence dictionary for use with the `picard`
 toolkit.
+
+::: {.callout-important}
+
+On UPPMAX, the command to run `picard` is `java -jar
+$PICARD_HOME/picard.jar`. The UPPMAX command version is included as a
+comment whenever there is a command running `picard`. Make sure to
+uncomment when copying the code.
+
+:::
 
 ```{bash }
 #| label: samtools-faidx
@@ -343,6 +368,7 @@ toolkit.
 #| eval: true
 #| results: hide
 samtools faidx M_aurantiacus_v1.fasta
+# java -jar $PICARD_HOME/picard.jar CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
 picard CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
 bwa index M_aurantiacus_v1.fasta
 ```
@@ -433,7 +459,7 @@ then is a sample from the *puniceus* subspecies with the yellow
 ecotype. We will use the `Run` column as unique `ID`, `SampleAlias` as
 the sample id `SM`, and `ILLUMINA` as the platform `PL`.
 
-### Read mapping with bwa and conversion to bam format with samtools
+### Read mapping with bwa and conversion to BAM format with samtools
 
 Let's map the fastq files corresponding to sample `PUN-Y-BCRD`:
 
@@ -475,7 +501,7 @@ samtools view PUN-Y-BCRD.sort.bam | head -n 2
 
 ::: {.callout-exercise}
 
-Look at the header information of the output bam file. What does the
+Look at the header information of the output BAM file. What does the
 `@SQ` tag stand for, and what does the information on that line tell
 you?
 
@@ -562,6 +588,9 @@ $PICARD_ROOT/picard.jar`)]:
 #| echo: true
 #| eval: true
 #| results: hide
+#java -jar $PICARD_HOME/picard.jar MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
+#    --METRICS_FILE ${SAMPLE}.sort.dup_metrics.txt \
+#    --OUTPUT ${SAMPLE}.sort.dup.bam
 picard MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
     --METRICS_FILE ${SAMPLE}.sort.dup_metrics.txt \
     --OUTPUT ${SAMPLE}.sort.dup.bam
@@ -572,7 +601,7 @@ duplication. We will include the output in the final `MultiQC` report.
 
 An additional mapping quality metric of interest is percentage mapped
 reads and average read depth. We can use `qualimap bamqc` to collect
-mapping statistics from a bam file:
+mapping statistics from a BAM file:
 
 ```{bash }
 #| label: qualimap-bamqc
@@ -610,7 +639,7 @@ These statistics will also be picked up by `MultiQC`.
 
 ### Generate high quality known sites for BQSR
 
-Once we have a duplicate marked bam file, we can proceed with Base
+Once we have a duplicate marked BAM file, we can proceed with Base
 Quality Score Recalibration (BQSR). The purpose here is to correct any
 systematic errors made by the sequencing machine. This is done by
 applying a machine learning model. Before we do so, however, we need
@@ -709,7 +738,7 @@ gatk ApplyBQSR --bqsr-recal-file ${SAMPLE}.sort.dup.recal.table \
 ```
 
 [BaseRecalibrator](https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator)
-compiles empirical data for all non-variant sites for an input bam
+compiles empirical data for all non-variant sites for an input BAM
 file for a number of covariates (e.g., nucleotide context). The basic
 idea is to fit a probability of error (i.e., a quality score of
 sorts), to observed covariate combinations, which is recorded in a
@@ -721,7 +750,7 @@ quality scores reported by the sequencing machine in
 
 We can investigate how well BQSR has performed by applying two more
 commands. First, we generate a calibration table for the recalibrated
-bam file:
+BAM file:
 
 ```{bash }
 #| label: bqsr-make-after-covariate-table
@@ -776,7 +805,7 @@ ggplot(
 
 Several rounds of generating known sites followed by BQSR can be
 applied until convergence. This means that running BQSR can be
-time-consuming, and one side effect is that the resulting bam output
+time-consuming, and one side effect is that the resulting BAM output
 files can become very large, which may or not be a problem. Also,
 sequencing technologies keep improving, potentially eliminating
 concerns of biased quality scores. This begs the question: is it worth
@@ -790,7 +819,7 @@ BQSR](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Qualit
 
 ## Variant calling and genotyping
 
-After we have generated the recalibrated bam files, we can proceed
+After we have generated the recalibrated BAM files, we can proceed
 with the "real" variant calling. We once again run GATK
 `HaplotypeCaller` and `VariantFiltration`.
 
@@ -798,7 +827,7 @@ with the "real" variant calling. We once again run GATK
 
 Using the code in section [Generate high quality known sites for
 BQSR](index.qmd#generate-high-quality-known-sites-for-bqsr) as a
-template, run GATK `HaplotypeCaller` on the recalibrated bam file,
+template, run GATK `HaplotypeCaller` on the recalibrated BAM file,
 followed by `VariantFiltration`. For the latter, modify the filters to
 
 - filterName: FisherStrand, filter: FS > 60.0
@@ -888,7 +917,8 @@ here.
 
 We are now at the stage where we can do genotyping of our samples.
 This done by first combining individual sample gVCF files with GATK
-`CombineGVCFs`, followed by genotyping with `GenotypeGVCFs`.
+`CombineGVCFs`, followed by genotyping with `GenotypeGVCFs`. We use
+the label `subset` to indicate that we are looking at a sample subset.
 
 ```{bash }
 #| label: combine-genotype-gvcfs
@@ -901,13 +931,31 @@ gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} 
   --variant PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
   --variant PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz
 gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.subset.g.vcf.gz \
+  --output variantsites.subset.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.subset.g.vcf.gz \
   --output allsites.subset.vcf.gz --all-sites
 ```
 
+Here, the option `--all-sites` tells `gatk GenotypeGVCFs` to include
+variant as well as invariant sites in the output. Many software
+packages that are based on genetic diversity statistics implicitly
+assume that invariant sites are all homozygous reference
+[@korunes_PixyUnbiasedEstimation_2021]. However, if invariant sites
+lack sequencing coverage, they should preferably be treated as
+*missing* data, which theoretically could harbour (unobserved) variant
+sites. Therefore, the inclusion of invariant sites provides a way to
+generate estimates of missing data, based on, e.g., sequencing depth
+profiles.
+
+Inclusion of invariant sites comes at a cost however; the VCF file
+size may increase dramatically, to the point that it becomes
+impractical or even impossible to process. We generate both types of
+files for future analyses.
+
 ::: {.callout-exercise}
 
-Create a variant call set `allsites.vcf.gz` but for all the red and
-yellow samples.
+Create variant call sets `allsites.vcf.gz` and `variantsites.vcf.gz`
+but for **all** the red and yellow samples.
 
 ::: {.callout-hint}
 
@@ -919,7 +967,7 @@ option. To get the sample names, look at the first column of
 #| label: get-yellow-samples
 #| echo: true
 #| eval: true
-cat sampleinfo.csv | grep yellow | cut --fields 1 --delimiter ","
+cat sampleinfo.csv | grep yellow | cut --fields 6 --delimiter ","
 ```
 
 :::
@@ -943,6 +991,8 @@ gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} 
      -V PUN-Y-POTR.sort.dup.recal.hc.g.vcf.gz
 gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
   -O allsites.vcf.gz --all-sites
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
+  -O variantsites.vcf.gz
 ```
 
 :::
@@ -1012,9 +1062,9 @@ and more. You can print the header with the command `bcftools view
 #| label: looking-inside-vcf-meta
 #| echo: true
 #| eval: true
-bcftools view --header-only allsites.vcf.gz | grep FILTER | head -n 1
-bcftools view -h allsites.vcf.gz | grep INFO | head -n 1
-bcftools view -h allsites.vcf.gz | grep FORMAT | head -n 1
+bcftools view --header-only allsites.vcf.gz | grep "##FILTER" | head -n 1
+bcftools view -h allsites.vcf.gz | grep "##INFO" | head -n 1
+bcftools view -h allsites.vcf.gz | grep "##FORMAT" | head -n 1
 ```
 
 The header field consists of eight mandatory columns

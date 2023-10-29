@@ -47,7 +47,8 @@ job on 4 cores, run
 
 ```bash
 interactive -A {{< var uppmaxproject >}} --cores 4 \
-   --partition core --time 08:00:00
+   --partition core --time 08:00:00 \
+   --reservation={{< var uppmaxproject >}}
 ```
 
 ::: {.callout-important}
