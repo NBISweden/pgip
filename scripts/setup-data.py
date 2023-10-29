@@ -50,12 +50,22 @@ def main():
             continue
         logging.info(f"Setting up links for {session}")
         data = dict()
-        for k, v in dataset.items():
-            if k == "__data__":
-                for ds in v:
-                    data.update(**pgip_data[ds])
+        for x in dataset:
+            if isinstance(x, dict):
+                data.update(**x)
+                continue
+            if x.startswith("__"):
+                objlist = pgip_data[x]
+                for item in objlist:
+                    if isinstance(item, str):
+                        data[os.path.basename(item)] = item
+                    elif isinstance(item, dict):
+                        data.update(**item)
             else:
-                data[k] = v
+                if isinstance(x, str):
+                    data[os.path.basename(x)] = x
+                elif isinstance(x, dict):
+                    data.update(**x)
         for dst, src in data.items():
             session = os.path.join(session, os.path.dirname(dst))
             os.makedirs(session, exist_ok=True)
