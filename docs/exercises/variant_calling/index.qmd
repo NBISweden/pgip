@@ -286,7 +286,7 @@ longer reads [minimap2](https://github.com/lh3/minimap2).
 In what follows, we will assume that the sequencing protocol generates
 paired-end short reads (e.g., from
 [Illumina](https://ngisweden.scilifelab.se/technologies/illumina/)).
-In practice, this means a DNA fragment has been sequence from both
+In practice, this means a DNA fragment has been sequenced from both
 ends, where fragment sizes have been selected such that reads do not
 overlap (i.e., there is unsequenced DNA between the reads of a given
 *insert size*).

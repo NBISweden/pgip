@@ -53,3 +53,15 @@ Code to generate Hardy-Weinberg equilibrium plot.
 #|     *R.norvegicus* from ensembl and plot
 #| file: foundations/hsapiens-rat-dnds.R
 ```
+
+## msprime trees {#sec-recipe-msprime-trees}
+
+```{python }
+#| label: recipe-slides-simulation-msprime-trees
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     Python code to generate four coalescent trees under different
+#|     evolutionary scenarios.
+#| file: simulation/treeviz.py
+```
