@@ -142,10 +142,18 @@ slides/foundations:
 slides/variant_calling:
   - monkeyflower/tiny/PUN-R-ELF/PUN-R-ELF_R1.fastq.gz
   - monkeyflower/tiny/PUN-R-ELF/PUN-R-ELF_R2.fastq.gz
+  - monkeyflower/tiny/PUN-R-ELF/PUN-R-ELF.sort.dup.bam
+  - monkeyflower/tiny/PUN-R-ELF/PUN-R-ELF.sort.dup.bai
   - monkeyflower/tiny/PUN-R-ELF/PUN-R-ELF.sort.dup.recal.bam
   - monkeyflower/tiny/PUN-R-ELF/PUN-R-ELF.sort.dup.recal.bai
   - monkeyflower/tiny/PUN-Y-INJ/PUN-Y-INJ_R1.fastq.gz
   - monkeyflower/tiny/PUN-Y-INJ/PUN-Y-INJ_R2.fastq.gz
   - monkeyflower/tiny/PUN-Y-INJ/PUN-Y-INJ.sort.dup.recal.bam
   - monkeyflower/tiny/PUN-Y-INJ/PUN-Y-INJ.sort.dup.recal.bai
+  - monkeyflower/tiny/PUN-Y-INJ/PUN-Y-INJ.sort.dup.bam
+  - monkeyflower/tiny/PUN-Y-INJ/PUN-Y-INJ.sort.dup.bai
+  - monkeyflower/small/redyellow.variantsites.vcf.gz
+  - monkeyflower/small/redyellow.variantsites.vcf.gz.tbi
+  - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
+  - allsites.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi
   - __reference__

@@ -2384,7 +2384,7 @@ coalesce.
 ![](assets/images/brandt-genetics-2022-fig1b.jpeg){fig-align=center, height=300}
 ![](assets/images/brandt-genetics-2022-fig1c.jpeg){fig-align=center, height=300}
 
-::: {.flushright}
+::: {.flushright .smallr}
 
 @y.c.brandt_EvaluationMethodsEstimating_2022 [Fig. 1a]
 
@@ -2570,7 +2570,7 @@ coalescent-based simulators.
 2. **performance** - optimized code base
 3. **GUI** - interactive execution and graphical debugging
 
-::: {.flushright}
+::: {.flushright .smallr}
 
 @haller_SLiMEvolutionarySimulation_2022
 

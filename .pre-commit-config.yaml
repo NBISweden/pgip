@@ -86,6 +86,7 @@ repos:
           docs/slides/datageneration/index\.qmd|
           docs/slides/foundations/index\.qmd|
           docs/slides/variant_filtering/index\.qmd|
+          docs/slides/variant_calling/index\.qmd|
           docs/exercises/variant_filtering/index\.qmd|
           docs/slides/simulation/index\.qmd
           )$

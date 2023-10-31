@@ -23,13 +23,15 @@ project:
     - "exercises/simulation/index.qmd"
     - "exercises/variant_calling/index.qmd"
     - "exercises/variant_filtering/index.qmd"
+    - "exercises/genetic_diversity/index.qmd"
     # Slides
     - "slides/index.qmd"
     - "slides/pgip/index.qmd"
     - "slides/foundations/index.qmd"
     - "slides/simulation/index.qmd"
-    # - "slides/variant_calling/index.qmd"
-    # - "slides/datageneration/index.qmd"
+    - "slides/variant_calling/index.qmd"
+    - "slides/variant_filtering/index.qmd"
+    - "slides/genetic_diversity/index.qmd"
     - "slides/population_structure/index.qmd"
     # Recipes
     - "recipes/index.qmd"
@@ -75,7 +77,7 @@ format:
     fig-width: 10
     width: 1280
     height: 720
-    margin: 0.1
+    margin: 0.08
     date: last-modified
     date-format: "DD-MMM-YYYY"
     navigation-mode: vertical
@@ -97,13 +99,13 @@ revealjs-plugins:
   - pointer
 
 execute:
-  cache: true
+  cache: false
   echo: true
   warning: false
   include: true
   autodep: true
   eval: true
-  error: true
+  error: false
 
 knitr:
   opts_chunk:

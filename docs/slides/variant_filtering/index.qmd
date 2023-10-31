@@ -1,11 +1,11 @@
 ---
-title: "Data generation and processing"
-subtitle: "Sequencing protocols and variant calling"
+title: "Variant filtering"
+subtitle: "From raw variant calls to high-quality call sets"
 author:
     - "Per Unneberg"
 format:
   revealjs:
-    footer: Variant calling
+    footer: Variant filtering
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -21,116 +21,6 @@ format:
 library(readxl)
 library(curl)
 ```
-
-# Data generation
-
-```{bash }
-#| label: test-bcftools
-#| echo: true
-#| eval: true
-bcftools --help
-```
-
-## Textbook data is clean
-
-<!-- markdownlint-disable MD013 -->
-
-```{bash }
-#| label: tskit-vcf-data
-#| echo: false
-#| eval: true
-chromhead=$(bcftools view -h ../../data/data/ooa-outgroups/ooa.chr21.gatk.vcf.gz | tail -n 1)
-tskit vcf ../../data/data/ooa-outgroups/ooa.chr21.ts | head -4
-echo -e "$chromhead"
-tskit vcf ../../data/data/ooa-outgroups/ooa.chr21.ts | tail -n +7 | head -n 5
-```
-
-<!-- markdownlint-enable MD013 -->
-
-FIXME: Include McDonald-Kreitman ADH alignment
-
-::: {.fragment}
-
-Variant calls need to be generated from sequencing data and need to be
-filtered and preprocessed before any subsequent analyses. There are
-many possible reasons, including:
-
-- uneven mapping
-- incomplete reference
-
-:::
-
-## Real data
-
-![Aligments of three samples to chromosome 21](assets/images/chr21_example.png)
-
-## Population genomics - the data
-
-Since the goal of population genomics is to analyze variation in a set
-of individuals, data generation consists of compiling variation data
-from individuals. Here the focus is on next-generation sequencing
-data.
-
-<!-- markdownlint-disable MD013 -->
-
-```{r }
-#| label: fig-sequencing-cost
-#| echo: false
-#| eval: true
-#| fig-cap: Sequencing cost ($) per megabase [@wetterstrandka_DNASequencingCosts_]
-url <- "https://www.genome.gov/sites/default/files/media/files/2021-11/Sequencing_Cost_Data_Table_Aug2021.xls"
-if (!file.exists(basename(url)))
-    download.file(url, destfile=basename(url))
-data <- read_excel(basename(url))
-colnames(data) <- c("Date", "Mb", "Genome")
-ggplot(data, aes(x=as.Date(Date), y=Mb)) + geom_line() + xlab("") + ylab("") + scale_y_continuous(trans="log10", labels=comma, n.breaks=6) + scale_x_date(breaks="year", labels=date_format("%Y"))
-```
-
-<!-- markdownlint-enable MD013 -->
-
-## {}
-
-![@lou_BeginnerGuideLowcoverage_2021](assets/images/sequencing_approaches_lou_2021.png)
-
-## RADSeq
-
-## High coverage sequencing data
-
-Pros: call genotypes with confidence
-
-cons: cost
-
-::: {.notes }
-
-[@lou_BeginnerGuideLowcoverage_2021 p.5967] points out that "full
-genome coverage is often needed to understand mechanisms of
-adaptation" but that high-coverage sequencing still too expensive
-
-:::
-
-## Low coverage sequencing data
-
-lcWGS - alleviates cost issue
-
-# Read mapping and variant calling
-
-## GATK best practice
-
-Point out: not optimal for non-model organims
-
-## Alternative variant callers
-
-Reference bias: plot no. hets vs coverage for real data, e.g., conifer
-
-### freebayes
-
-### bcftools
-
-### ANGSd
-
-## PoolSeq
-
-### Popoolation
 
 # Variant filtering
 
