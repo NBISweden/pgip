@@ -219,7 +219,11 @@ want to create filters by examining distributions of VCF quality
 metrics and setting reasonable cutoffs. In order to decrease run time,
 we will look at a random sample of sites. We use the `vcflib` program
 `vcfrandomsample` to randomly sample approximately 100,000 sites from
-our VCF file:
+our VCF file^[We select a fix number that should contain enough
+information to generate reliable statistics. This number should not
+change significantly even when files contain vastly different numbers
+of sites, which is why we need adjust the parameter *r* to the number
+of sites in the file.]:
 
 ```{bash }
 #| label: vcflib-random-subsample
@@ -1149,7 +1153,7 @@ You must choose your filters wisely!
 
 ::: {.callout-important}
 
-This exercise is optional. It was created prior to the previos
+This exercise is optional. It was created prior to the previous
 filtering exercises and may contain overlapping explanations and
 information. The procedure closely resembles that from the section on
 genotype depth data above, but depth profiles are now calculated from
