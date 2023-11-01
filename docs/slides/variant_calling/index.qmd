@@ -14,30 +14,1322 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-::: {.notes}
+```{r libs}
+#| echo: false
+#| eval: true
+#| cache: false
+library(readxl)
+library(curl)
 
-Testing title notes
+```
+
+## Yesterday
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.dna .smallr}
+
+| 1 | 2     | 3 | 4 | 5     | 6 | 7 | 8     | 9 | 10 | 11    | 12 | 13    | 14 | 15    |
+|:-:|:-----:|:-:|:-:|:-----:|:-:|:-:|:-----:|:-:|:--:|:-----:|:--:|:-----:|:--:|:-----:|
+| T | T     | A | C | A     | A | T | **C** | C | G  | A     | T  | C     | G  | T     |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+| T | **C** | A | C | A     | A | T | G     | C | G  | A     | T  | **G** | G  | **A** |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+|   | *     |   |   | *     |   |   | *     |   |    | *     |    | *     |    | *     |
+
+: {tbl-colwidths="[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]"}
 
 :::
 
-## On data
+::: {.fragment .smallr}
 
-Some text and more
+$$
+\begin{align}
+\pi & = \sum_{j=1}^S h_j = \sum_{j=1}^{S} \frac{n}{n-1}\left(1 - \sum_i p_i^2 \right) \\
+& \stackrel{S=6,\\ n=4}{=} \sum_{j=1}^{6} \frac{4}{3}\left(1 - \sum_i p_i^2\right) \\
+& = \frac{4}{3}\left(\mathbf{\color{#a7c947}{4}}\left(1-\frac{1}{16}-
+\frac{9}{16}\right) + \mathbf{\color{#a7c947}{2}}\left(1 - \frac{1}{4} -
+\frac{1}{4}\right)\right) = \frac{10}{3}
+\end{align}
+$$
+
+:::
+
+:::
+
+::: {.column width="20%" .fragment}
+
+```{r, engine="tikz", fig.ext="svg" }
+#| label: coalescent-tree-dna-variation
+#| echo: false
+#| eval: true
+#| out-width: 80%
+\begin{tikzpicture}[outer sep=0, inner sep=0, thick,
+                    node distance=5px, every node/.style={font=\ttfamily}]
+\tikzstyle{mut} = [circle, minimum height=0.2cm, fill=gray, draw];
+\draw
+node (1) at (0, 0) {}
+node (2) at (1, 0) {}
+node (3) at (2, 0) {}
+node (4) at (3, 0) {}
+node (5) at ($(1) !.5! (2) + (0, 2)$) {}
+node (6) at ($(1-|5) !.5! (3) + (0, 3)$) {}
+node (7) at ($(1-|6) !.5! (4) + (0, 5)$) {}
+node[above of=7, anchor=south] (rootl) {000000}
+node[rotate=45, below left of=1, anchor=north east] (1l) {010100}
+node[rotate=45, below left of=2, anchor=north east] (2l) {010100}
+node[rotate=45, below left of=3, anchor=north east] (3l) {001000}
+node[rotate=45, below left of=4, anchor=north east] (4l) {100011}
+;
+
+\draw
+(1) -- (5)
+(2) -- (5)
+(5) -- (6)
+(3) -- (6)
+(6) -- (7)
+(4) -- (7)
+node[mut] (m1) at ($(5) !.33! (6)$) {}
+node[mut] (m2) at ($(5) !.67! (6)$) {}
+node[mut] (m3) at ($(3) !.5! (6)$) {}
+node[mut] (m4) at ($(4) !.25! (7)$) {}
+node[mut] (m5) at ($(4) !.5! (7)$) {}
+node[mut] (m6) at ($(4) !.75! (7)$) {}
+;
+\end{tikzpicture}
+```
+
+:::
+
+::: {.column width="30%" .fragment}
+
+```{r, engine="tikz", fig.ext="svg" }
+#| label: site-frequency-spectrum-graph
+#| echo: false
+#| eval: true
+#| out-width: 80%
+%% https://tex.stackexchange.com/questions/123866/histogram-with-tikz
+\begin{tikzpicture}[ybar interval]
+\tikzstyle{tick}=[font=\scriptsize];
+\tikzstyle{label}=[font=\small];
+  \draw[fill=blue!60!black, draw=blue!60!black]
+plot coordinates{(0,.8) (1,.4) (2, 0) (3, 0)};
+\draw[->] (-0.2, 0) -- (3.2, 0) node[right] {$x$};
+\draw[->] (0, -0.2) -- (0, 1.2) node[above] {$y$};
+\node[tick] at (0.5, -0.3) {1};
+\node[tick] at (1.5, -0.3) {2};
+\node[tick] at (2.5, -0.3) {3};
+\node[tick] at (1.5, -0.6) {Allele frequency};
+\node[tick, rotate=90] at (-0.4, .5) {Proportion};
+\end{tikzpicture}
+```
+
+::: {.fragment .smallr}
+
+$$
+\begin{align}
+\pi & = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2} \\
+& \stackrel{n=4}{=} \frac{1*(4-1)*4 + 2*(4-2)*2}{6} = \frac{10}{3}
+\end{align}
+$$
+
+:::
+
+:::
+
+::::
+
+::: {.fragment}
+
+This is not how real data looks like from the beginning...
+
+:::
 
 ::: {.notes}
 
-## About
-
 We have previously looked at how to simulate sequence data and
 performed some simple calculations on data that are "well-behaved" in
-some sense. This lecture will focus on how data is generated through
-the process of *variant calling*, starting from a set of reads and a
-reference sequence (it does *not* cover sequencing technologies or
-assembly).
+some sense; textbook data is usually clean without missing data points
+or at least high quality in some sense. This lecture will focus on how
+data is generated through the process of *variant calling*, starting
+from a set of reads and a reference sequence (it does *not* cover
+sequencing technologies or assembly).
 
-## Aims
+:::
 
-## The monkeyflower system
+## The real data
+
+```{bash }
+#| label: samtools-faidx-reference
+#| echo: false
+#| eval: true
+samtools faidx M_aurantiacus_v1.fasta
+```
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{bash }
+#| label: show-fastq-real-data
+#| echo: false
+#| eval: true
+zcat PUN-Y-INJ_R1.fastq.gz | head --lines 8 | cut --characters -30
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{bash }
+#| label: samtools-tview-PUN-Y-real-data
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:30430 -d H -w 47 \
+   PUN-Y-INJ.sort.dup.bam \
+   M_aurantiacus_v1.fasta
+```
+
+:::
+
+::::
+
+::: {.notes}
+
+Before getting to variants and genotypes a lot of processing has to be
+done, from FASTQ input, to mapped data, to variant and genotype calls.
+
+:::
+
+## The process
+
+:::{}
+
+![](../foundations/assets/images/popgen.svg)
+
+:::
+
+::: {.notes}
+
+In short: going from sample collection through data processing to
+variant data is a long and winding road. Here we will focus on the
+data processing part that generates a raw variant call set.
+
+The end result is a table consisting of variant positions, and for
+each individual, information about genetic variation.
+
+:::
+
+## Variant and genotype calling
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fnrg2986/MediaObjects/41576_2011_Article_BFnrg2986_Fig1_HTML.jpg?as=webp){width=60% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+::: {.flushright .smallest .translatey50}
+
+@nielsen_GenotypeSNPCalling_2011
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+SNP calling
+: Identification of polymorphic sites ($>1$% allele frequency)
+
+Variant calling
+: Identification of variant sites (sufficient that **any** allele
+  differs)
+
+Genotype calling
+: Determine the allele combination for each individual (aa, aA, or AA
+  for bi-allelic variants)
+
+::: {.fragment}
+
+Knowing variant sites informs us of possible genotypes and improves genotyping.
+
+Example: knowing a site has `A` or `C` limits possible genotype calls
+to `AA`, `AC`, or `CC`
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+Figure caption from [@nielsen_GenotypeSNPCalling_2011]:
+
+> Pre-processing steps (shown in yellow) transform the raw data from
+> next-generation sequencing technology into a set of aligned reads
+> that have a measure of confidence, or quality score, associated with
+> the bases of each read. The per-base quality scores produced by
+> base-calling algorithms may need to be recalibrated to accurately
+> reflect the true error rates. Depending on the number of samples and
+> the depth of coverage, either a multi-sample calling procedure
+> (green) or a single-sample calling procedure (orange) may then be
+> applied to obtain SNP or genotype calls and associated quality
+> scores. Note that the multi-sample procedure may include a
+> linkage-based analysis, which can substantially improve the accuracy
+> of SNP or genotype calls. Finally, post-processing (purple) uses
+> both known data and simple heuristics to filter the set of SNPs
+> and/or improve the associated quality scores. Optional, although
+> recommended, steps are shown in dashed lines.
+
+:::
+
+# Sequencing DNA
+
+## Sequencing technologies
+
+:::: {.columns}
+
+::: {.column width="90%"}
+
+![](https://ngisweden.scilifelab.se/wp-content/uploads/2023/06/tech3-1024x171.png){width=80%
+fig-align=center}
+
+:::
+
+::: {.column width="10%" fig-align=left}
+
+![](https://ngisweden.scilifelab.se/wp-content/themes/ngisweden/img/NGI-logo.svg){width=100%}
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+##### Illumina NovaSeq 600
+
+:::{.smallr}
+
+> Scale up and down with a tunable output of up to 6 Tb and 20B single
+> reads in < 2 days.
+
+:::
+
+Up to 2X250 bp read length. Price example: 8,000 SEK total for
+resequencing 3Gbp genome to 30X
+
+::: {.flushright .smallest}
+
+<https://www.illumina.com/systems/sequencing-platforms/novaseq.html>
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+##### PacBio Revio
+
+:::{.smallr}
+
+> Up to 360 Gb of HiFi reads per day, equivalent to 1,300 human whole
+> genomes per year.
+
+:::
+
+Tens of kilobases long HiFi reads. Price example (Sequel II): ~35kSEK
+per library and SMRT cell
+
+::: {.flushright .smallest}
+
+<https://www.pacb.com/revio/>
+
+:::
+
+:::
+
+::::
+
+## DNA sequences in FASTQ format
+
+```{bash }
+#| label: list-fastq-files
+#| echo: true
+#| eval: false
+ls --long --human *.fastq.gz
+```
+
+```{bash }
+#| label: list-fastq-files-dereference
+#| echo: false
+#| eval: true
+ls -lLh PUN-Y*.fastq.gz
+```
+
+::: {.fragment}
+
+Count number of lines:
+
+```{bash }
+#| label: count-entries-fastq-file
+#| echo: true
+#| eval: true
+zcat PUN-Y-INJ_R1.fastq.gz | wc --lines
+```
+
+:::
+
+:::{}
+
+::: {.fragment}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+Format:
+
+1. sequence id (prefixed by `@`)
+2. DNA sequence
+3. separator (`+`)
+4. Phred base quality scores
+
+:::
+
+::: {.column width="70%"}
+
+```{bash }
+#| label: show-fastq
+#| echo: true
+#| eval: true
+zcat PUN-Y-INJ_R1.fastq.gz | head --lines 8 | cut --characters -30
+```
+
+:::
+
+::::
+
+:::
+
+:::
+
+::: {.notes}
+
+First data encounter is usually FASTQ files from sequencing center.
+Files contain **sequence reads** that are generated by the sequencing
+machine. They correspond to short stretches of DNA that have been
+sequentially read by the machine, resulting in a string of **base
+calls** that constitute the reads. Every DNA base has an associated
+so-called **Phred-scaled quality score** from 0 to 93 that are encoded
+using ASCII 33 to 126.
+
+The format consists of 1. @ title with id 2. raw sequence 3. +: a
+separator with optional description 4. the quality scores
+
+:::
+
+## DNA sequence quality control
+
+```{bash }
+#| label: fastqc-plot
+#| echo: false
+#| eval: false
+fastqc --extract --outdir assets PUN-Y-INJ_R1.fastq.gz
+```
+
+Quality values represent the probability $P$ that the call is
+*incorrect*. They are coded as **Phred** quality scores $Q$. Here,
+$Q=20$ implies 1% probability of error, $Q=30$ 0.1% and so on.
+Typically you should not rely on quality values below $20$.
+
+$$
+Q = -10 \log_{10} P
+$$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+A common way to do QC is with `fastqc`:
+
+```{bash }
+#| label: fastqc-example
+#| echo: true
+#| eval: false
+fastqc --outdir . --extract *fastq.gz
+```
+
+:::
+
+::: {.column width="50%"}
+
+![](assets/PUN-Y-INJ_R1_fastqc/Images/per_base_quality.svg){width=80%}
+
+:::
+
+::::
+
+## Sequencing approaches
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
+
+```{r }
+#| label: sequencing-cost
+#| echo: false
+#| eval: true
+#| fig-width: 12
+#| fig-height: 8
+#| out-width: 90%
+url <- "https://www.genome.gov/sites/default/files/media/files/2021-11/Sequencing_Cost_Data_Table_Aug2021.xls"
+if (!file.exists(basename(url)))
+    download.file(url, destfile=basename(url))
+data <- read_excel(basename(url))
+colnames(data) <- c("Date", "Mb", "Genome")
+ggplot(data, aes(x=as.Date(Date), y=Mb)) + geom_line(size=2) +
+  xlab("Year") +
+  ylab("Cost (USD)") +
+  scale_y_continuous(trans="log10", labels=comma, n.breaks=6) +
+  scale_x_date(breaks="year", labels=date_format("%Y")) +
+  theme(axis.text=element_text(size=24), text=element_text(size=24))
+```
+
+<!-- markdownlint-enable MD013 -->
+
+Despite price drop, still need to make choices regarding depth and
+breadth of sequencing coverage and number of samples.
+
+:::
+
+::: {.column width="50%" .fragment}
+
+![](assets/images/sequencing_approaches_lou_2021.png){width=70% fig-align=center}
+
+::: {.flushright .smallest .translatey50}
+
+@lou_BeginnerGuideLowcoverage_2021
+
+:::
+
+Here focus on Whole Genome reSequencing (WGS), mostly high-coverage.
+
+:::
+
+::::
+
+::: {.notes}
+
+Despite the fact that sequencing costs have dropped dramatically
+(left), there still are choices to be made regarding the distribution
+of costs along 1) sequencing coverage depth, i.e., the mean depth of
+sequencing 2) sequencing coverage breadth, i.e., whether or not to do
+targeted or whole-genome resequencing or 3) sample size; how many
+individuals to sample. Whole-genome resequencing of individuals from
+populations to sufficient depth (30X) is still very expensive, but
+often needed to understand mechanisms of adaptation
+[@lou_BeginnerGuideLowcoverage_2021 p.5967]. Various protocols have
+been developed to meet the challenges that cost imposes:
+
+1. RAD-seq, restriction site-associated DNA sequencing, targets
+   regions flanking given restriction sites. Downside: much of genome
+   is missed
+2. pool-seq, pooled sequencing. Cost-effective, but loses information
+   about individuals
+3. lcWGS, low-coverage whole genome sequencing increasing in
+   popularity. Genotyping low coverage is problematic however.
+
+Our focus here is WGS (whole-genome resequencing), primarily
+high-coverage, despite the cost it may incur.
+
+:::
+
+## Genome assembly and population resequencing
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<h5>Genome assembly</h5>
+
+![](assets/images/oso-genome-assembly.png){width=80%}
+
+::: {.flushright .smallest .translatey50}
+
+@allendorf_PopulationGenomics_2022
+
+:::
+
+:::
+
+::: {.column width="50%" .fragment}
+
+<h5>Population resequencing</h5>
+
+![](assets/images/population-resequencing.png){}
+
+:::
+
+::::
+
+::: {.notes}
+
+DNA sequences are generated from DNA fragments, often as paired-end
+reads, or long reads. For population genomics, it is often necessary
+to generate a *reference sequence* through *genome assembly*, the
+quality of which will impact the types of downstream analyses that can
+be done. Reads are assembled into *contigs* (contiguous sequences)
+that with the aid of genetic maps are pieced together into
+*scaffolds*. In the left figure, note that the scaffolds contain areas
+of unknown sequence.
+
+Once a reference sequence has been produced, (short) reads from
+individuals are mapped to the reference (right).
+
+:::
+
+# Read mapping
+
+## Sequence alignment maps reads to a reference
+
+:::{}
+
+![Screenshot of reference sequence (top) and aligned reads (bottom).
+Bases are colored by nucleotide. Letter case indicates forward
+(upper-case) or reverse (lower-case) alignment. * is placeholder for
+deleted base.](assets/images/read-mapping.png){#fig-read-mapping
+width=100%}
+
+:::
+
+Aim of sequence alignment (read mapping) is to determine source in
+reference sequence. Some commonly used read mappers for resequencing
+are
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- BWA, BWA-MEM [@li_AligningSequenceReads_2013]
+- Novoalign (<https://www.novocraft.com/>)
+- Minimap2 [@li_Minimap2PairwiseAlignment_2018]
+
+:::
+
+::: {.column width="50%"}
+
+For a recent comprehensive comparison see @donato_NewEvaluationMethods_2021
+
+:::
+
+::::
+
+## Alignments are stored in BAM format
+
+:::{.smallr}
+
+<h5>Header information</h5>
+
+```{bash }
+#| label: bam-format-header
+#| echo: true
+#| eval: true
+samtools view --header-only PUN-Y-INJ.sort.dup.bam | head --lines 4
+```
+
+Format: metadata record types prefixed with `@`, e.g., `@RG` is the *read group*
+
+:::
+
+:::{.smallr .fragment}
+
+<h5>Alignments</h5>
+
+```{bash }
+#| label: bam-format-alignment
+#| echo: true
+#| eval: true
+samtools view PUN-Y-INJ.sort.dup.bam | head --lines 1
+```
+
+Some important columns: 1:`QUERY`, 3:`REFERENCE`, 4:`POSITION`,
+5:`MAPQ`, 6:`CIGAR`. The `CIGAR` string compiles information on the
+alignment, such as match (`M`), soft clipping (`S`), and insertion to
+reference (`I`)
+
+:::
+
+::: {.flushright .smallest}
+
+cf <https://samtools.github.io/hts-specs/SAMv1.pdf>
+
+:::
+
+::: {.notes}
+
+For a complete description, see the specification. Suffice to say that
+the alignment format consists of a **header** section, with metadata
+and provenance data, and an **alignment** section, which is a
+column-based format with information pertaining to the query sequence
+being mapped and the reference sequence to which the query is mapped.
+
+:::
+
+## Mapped alignments can be viewed with `samtools tview`
+
+:::: {.columns .smallr}
+
+::: {.column width="50%"}
+
+```{bash }
+#| label: samtools-tview-PUN-Y
+#| echo: true
+#| eval: true
+#| results: asis
+samtools tview -p LG4:30430 -d H -w 60 \
+   PUN-Y-INJ.sort.dup.bam \
+   M_aurantiacus_v1.fasta
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{bash }
+#| label: samtools-tview-PUN-R
+#| echo: true
+#| eval: true
+#| results: asis
+samtools tview -p LG4:30430 -d H -w 60 \
+   PUN-R-ELF.sort.dup.bam \
+   M_aurantiacus_v1.fasta
+```
+
+:::
+
+::::
+
+Aka `pileup` format. Forward (`.`) and backward (`,`) mapping reads.
+Mismatches shown as letters.
+
+::: {.notes}
+
+After preprocessing, reads are mapped to a reference. Observations:
+
+1. different coverage
+2. sequencing error randomly distributed
+
+:::
+
+## Potential error corrections and pitfalls
+
+#### Instrument
+
+- PCR duplicates -> MarkDuplicates
+- systematic errors from sequencing machine -> BQSR
+
+#### Reference
+
+- quality of reference sequence!
+- repetitive sequence
+
+# Variant calling and genotyping
+
+## Variants show up in pileup alignments
+
+:::: {.columns .smallr}
+
+::: {.column width="50%"}
+
+<h5>PUN-Y-INJ</h5>
+
+```{bash }
+#| label: samtools-tview-PUN-Y-2
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:30430 -d H -w 60 \
+   PUN-Y-INJ.sort.dup.bam \
+   M_aurantiacus_v1.fasta
+```
+
+:::
+
+::: {.column width="50%"}
+
+<h5>PUN-R-ELF</h5>
+
+```{bash }
+#| label: samtools-tview-PUN-R-2
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:30430 -d H -w 60 \
+   PUN-R-ELF.sort.dup.bam \
+   M_aurantiacus_v1.fasta
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+:::{.smallr}
+
+Potential variants show up as multiple mismatches in a column. Two
+questions arise:
+
+- how do we detect variant sites?
+- how do we distinguish variants from sequencing error?
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+:::{.smallr .fragment}
+
+Simple approach: filter bases on quality (e.g., Q20), call heterozygous if 20-80% bases non-reference.
+
+Issues: undercalls heterozygotes, no measure of uncertainty
+
+:::
+
+::: {.fragment .smallr}
+
+Solution: probabilistic methods!
+
+:::
+
+::: {.flushright .smallest}
+
+[@nielsen_GenotypeSNPCalling_2011]
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+Potential variants show up as multiple mismatches in a column. Left
+sample has three reads that match the reference so is probably
+heterozygote. For the right sample no read matches reference so most
+likely call is homozygote alternate.
+
+:::
+
+## We can calculate likelihoods of observed data
+
+### Example (exluding sequencing error!)
+
+:::: {.columns}
+
+::: {.column width="5%"}
+
+```{bash }
+#| label: samtools-tview-view-variant
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:32011 -d H -w 3 \
+   PUN-Y-INJ.sort.dup.bam \
+   M_aurantiacus_v1.fasta | \
+ sed -e "s/LG4:32011//g"
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="90%"}
+
+Goal: calculate likelihood of observing $X=$`G,g,T,T,G,g,t` from a
+genotype $G$. We assume each observation $X_i$ can be treated
+independently. We restrict possible genotypes to the observed alleles
+(i.e., `G, T`). Some observations:
+
+::: {.fragment}
+
+Prob($X_1=$`G` *assuming* genotype `T,T`) = P($X_1=$`G`|`T,T`) = $0$
+
+:::
+
+::: {.fragment}
+
+Prob($X_1=$`G` assuming genotype `G,G`) = P($X_1=$`G`|`G,G`) = $1$
+
+:::
+
+::: {.fragment}
+
+Prob($X_1=$`G` assuming genotype `G,T`) = P($X_1=$`G`|`G,T`) = $0.5$
+
+:::
+
+::: {.fragment}
+
+To get total likelihood $P(X|G)$ assuming a genotype $G$ (here `G,T`),
+we can multiply over all observations (reads):
+
+$$
+\begin{align}
+P(X|G,T) & = P(X_1=G|G,T)P(X_2=g|G,T)P(X_3=T|G,T)P(X_4=T|G,T) \\
+    & P(X_5=G|G,T)P(X_6=g|G,T)P(X_7=t|G,T) = 0.5^7
+\end{align}
+$$
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+We restrict the possible genotypes to the observed alleles at a site
+(here G and T). If there are more than two observed alleles, a common
+procedure is to pick the two with highest frequencies, under the
+assumption that the rarest observation is a sequencing error.
+
+In reality, we also need to take into account sequencing error. There
+are different ways of doing this (e.g.
+@maruki_GenotypeCallingPopulationGenomic_2017,
+@depristo_FrameworkVariationDiscovery_2011), but we leave the details
+to the interested reader.
+
+:::
+
+## We can use Bayes' theorem to genotype
+
+### Example
+
+:::: {.columns}
+
+::: {.column width="5%"}
+
+```{bash }
+#| label: samtools-tview-view-variant-2
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:32011 -d H -w 3 \
+   PUN-Y-INJ.sort.dup.bam \
+   M_aurantiacus_v1.fasta | \
+ sed -e "s/LG4:32011//g"
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="90%"}
+
+For a given site, we have a number of observations $X$. We have shown
+we can calculate the likelihood of observing $X$ given a genotype $G$,
+$P(X|G)$.
+
+::: {.fragment}
+
+However; what we really want to know is the most likely genotype $G$
+*given the data* $X$, or $P(G|X)$.
+
+:::
+
+::: {.fragment}
+
+Apply Bayes' theorem:
+
+:::{.large}
+
+$$
+P(G|X) \sim P(X|G)\cdot P(G)
+$$
+
+:::
+
+:::
+
+::: {.fragment .large}
+
+$$
+\text{posterior} \sim \text{likelihood} \cdot \text{prior}
+$$
+
+:::
+
+::: {.fragment}
+
+Consequently we need to set a prior on $G$. If allele frequencies are
+known, we can constrain the frequencies; for example, if A is known to
+be low ($\sim1$%) AA genotype is *very* unlikely. Otherwise, could set
+all equal (flat prior).
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+cf <https://gatk.broadinstitute.org/hc/en-us/articles/360035890511>
+
+@li_SNPDetectionMassively_2009, Table 1, shows a nice numerical
+example of one way of setting priors. The authors assume a specific
+allele, G, in the *reference sequence*:
+
+--G--
+
+They start by calculating the frequency of *haploid* genotypes. They
+first determine $p_G$ by assuming a *heterozygous SNP rate* $f=0.001$,
+which means 1 in a 1000 sites has G/G genotype mutated to G/X, where X
+is one of {A,C,T}. They assume a transition to transversion (ts/tv)
+ratio of 4, meaning X=A four times as often as C or T (there is an
+error in the text where C is taken to be the transition; the numbers
+in the table are correct however). This gives the following haploid
+genotype frequencies:
+
+\begin{align}
+p_G & = 1-f = 0.999 \\
+p_A & = 4f/6 = 6.67\times10^{-4} \\
+p_C & = f/6 = 1.67\times10^{-4}\\
+p_T & = f/6 =1.67\times10^{-4}
+\end{align}
+
+To get the *diploid* genotypes, we simply multiply the corresponding
+entries, e.g., $p_{AC} = p_Ap_C$. For homozygote ALT, we need to
+account for the *homozygous SNP rate* $r = 0.0005$, where G/G mutates
+to X/X, for X one of {A,C,T}:
+
+\begin{align}
+p_{AA} & = p_Ap_A + 4r/6 = 3.33\times10^{-4} \\
+p_{AC} & = p_Ap_C = 1.11\times10^{-7}\\
+p_{AT} & = p_Ap_T = 1.11\times10^{-7}\\
+p_{CC} & = p_Cp_C + r/6 = 8.34\times10^{-5} \\
+p_{CG} & = p_Cp_G = 1.67\times10^{-4}\\
+p_{CT} & = p_Cp_T = 2.78\times10^{-8}\\
+p_{GG} & = 1 - f - r = 0.9985 \\
+p_{GT} & = p_Gp_T = 1.67\times10^{-4}\\
+p_{TT} & = p_Tp_T + r = 8.34\times10^{-5}\\
+\end{align}
+
+:::
+
+## Genotype likelihoods
+
+We have outlined a probabilistic approach to variant calling where we
+obtain a posterior probability of observing a genotype $G$ given data
+$X$:
+
+$$
+P(G|X) \sim P(X|G)P(G)
+$$
+
+::: {.fragment}
+
+Assuming a bi-allelic site, and letting $H_1, H_2$ denote the two
+alleles, we have three possible genotype likelihoods $P(H_1H_1|X)$,
+$P(H_1H_2|X)$, and $P(H_2H_2|X)$.
+
+:::
+
+::: {.fragment}
+
+The *highest* posterior probability is typically chosen as the
+genotype call, with a measure confidence represented by the genotype
+probability or ratio between the two most probable calls.
+
+:::
+
+::: {.fragment}
+
+Genotype likelihoods are often represented as Phred-scaled likelihoods (again!):
+
+$$
+\text{QUAL} = -10 \log_{10} P(G|X)
+$$
+
+:::
+
+## Variant Call Format (VCF) - header {.smallr}
+
+:::{}
+
+```{bash }
+#| label: vcf-format-header
+#| echo: true
+#| eval: true
+bcftools view --header-only allsites.vcf.gz | head --lines 1
+bcftools view --header-only allsites.vcf.gz | grep "##FILTER"
+bcftools view -h allsites.vcf.gz | grep "##INFO" | head -n 4
+bcftools view -h allsites.vcf.gz | grep "##FORMAT" | head -n 8
+```
+
+`FILTER` defines applied filters , `INFO` fields provide additional
+information to genotypes, `FORMAT` specification fields define
+genotype entries, and more. NB: `PL` format definition.
+
+:::
+
+::: {.flushright .smallr}
+
+<https://samtools.github.io/hts-specs/VCFv4.4.pdf>
+
+:::
+
+## Variant Call Format (VCF) - data {.smallr}
+
+```{bash }
+#| label: vcf-format-data
+#| echo: true
+#| eval: true
+bcftools view --header-only --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz |\
+ tail --lines 1
+bcftools view --no-header  --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz LG4:6886
+```
+
+:::::: {.columns}
+
+::::: {.column width="35%"}
+
+`QUAL`: Phred-scaled quality score for Prob(ALT is wrong): $722.43$
+($p=10^{-Q/10}=5.7e-73$)
+
+`INFO` field summarizes data for all samples. For instance:
+
+- allele count 2 (`AC=2`)
+- allele frequency minor allele 0.222 (`AF=0.222`)
+
+::: {.flushright .smallr}
+
+<https://samtools.github.io/hts-specs/VCFv4.4.pdf>
+
+:::
+
+:::::
+
+::::: {.column width="65%"}
+
+:::: {.columns }
+
+::: {.column width="80%"}
+
+::: {.fragment fragment-index=1}
+
+<h5>Genotypes (`GT:AD:DP:GQ:PGT:PID:PL:PS`)</h5>
+
+ELF: `0/1:3,8:11:50:.:.:189,0,50:.`
+
+`GT=0/1`, `AD=3,8` => 3 REF, 8 ALT, `DP=11` => sequence depth = 11, `PL=189,0,50`
+
+INJ: `0/1:2,2:4:45:.:.:45,0,45:.`
+
+`GT=0/1`, `AD=2,2` => 2 REF, 2 ALT, `DP=4` => sequence depth = 4, `PL=45,0,45`
+
+:::
+
+::: {.fragment fragment-index=2}
+
+<h5>Relative genotype probabilities</h5>
+
+Can convert Phred-scaled quality scores to probabilities as
+
+$$
+p = 10^{-Q/10}
+$$
+
+For ELF the relative probabilities are $10^{-189/10}\approx1.26e-9$, $10^{0}=1$, $10^{50}=10^{-5}$.
+
+Interpretation: `0/1` 10,000 times more likely than `1/1` ($1/10^{-5}$)
+
+:::
+
+:::
+
+:::{.column width="3%"}
+
+:::
+
+::: {.column width="7%"}
+
+::: {.fragment fragment-index=1}
+
+```{bash }
+#| label: samtools-tview-view-R-6885
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:6885 -d H -w 3 \
+   PUN-R-ELF.sort.dup.bam \
+   M_aurantiacus_v1.fasta | \
+ sed -e "s/LG4:6885/ELF/g"
+```
+
+:::
+
+:::
+
+::: {.column width="7%"}
+
+::: {.fragment fragment-index=1}
+
+```{bash }
+#| label: samtools-tview-view-Y-6885
+#| echo: false
+#| eval: true
+#| results: asis
+samtools tview -p LG4:6885 -d H -w 3 \
+   PUN-Y-INJ.sort.dup.bam \
+   M_aurantiacus_v1.fasta | \
+ sed -e "s/LG4:6885/INJ/g"
+```
+
+:::
+
+:::
+
+::::
+
+:::::
+
+::::::
+
+::: {.notes}
+
+- QUAL: Phred-scaled quality score for the assertion made in ALT. i.e.
+    $-10log_{10}$ prob(call in ALT is wrong)
+
+:::
+
+## GATK best practice
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+![](assets/images/gatk-best-practice.png){width=90% fig-align=center}
+
+::: {.flushright .smallest}
+
+<https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels->
+
+:::
+
+:::
+
+::: {.column width="30%"}
+
+<h5>Pros</h5>
+
+- Best practices
+- Large documentation
+- Variant quality score recalibration
+
+<h5>Cons</h5>
+
+- Human-centric - very slow runtime on genomes with many sequences
+- Complicated setup
+
+:::
+
+::::
+
+## Alternative variant callers
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+##### [freebayes](https://github.com/freebayes/freebayes)
+
+Bayesian genetic variant detector. Simpler setup.
+
+May struggle in high-coverage regions.
+
+::: {.flushright .smallr}
+
+[@garrison_HaplotypebasedVariantDetection_2012]
+
+:::
+
+:::
+
+::: {.column width="33%"}
+
+##### [bcftools](https://github.com/samtools/bcftools)
+
+Utilities for variant calling and manipulating VCFs and BCFs.
+
+::: {.flushright .smallr}
+
+[@danecek_TwelveYearsSAMtools_2021]
+
+:::
+
+:::
+
+::: {.column width="33%"}
+
+##### [ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD)
+
+For low-coverage sequencing. Doesn't do explicit genotyping; most
+methods take genotype uncertainty into account.
+
+::: {.flushright .smallr}
+
+[@korneliussen_ANGSDAnalysisNext_2014]
+
+:::
+
+:::
+
+::::
+
+:::{.hidden}
+
+Reference bias: plot no. hets vs coverage for real data, e.g., conifer
+
+:::
+
+::: {.notes}
+
+:::
+
+# Exercise on variant calling
+
+## The monkeyflower system {.smallr}
+
+:::{}
+
+<!-- markdownlint-disable MD013 -->
+
+![](https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg){fig-alt="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)" width=50% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
 
 From <https://jgi.doe.gov/csp-2021-genomic-resources-for-mimulus/>
 
@@ -47,4 +1339,19 @@ From <https://jgi.doe.gov/csp-2021-genomic-resources-for-mimulus/>
 > experimental tractability, rapidly growing research community, and
 > the JGI-generated reference genome for M. guttatus.
 
-:::
+## Learning outcomes
+
+Follow GATK best practices to
+
+- Perform qc on sequencing reads and interpret results
+- Prepare reference for read mapping
+- Map reads to reference
+- Mark duplicates
+- Perform raw variant calling to generate a set of sites to exclude
+  from recalibration
+- Perform base quality score recalibration
+- Perform variant calling on base recalibrated data
+- Do genotyping on all samples and combine results to a raw variant
+  call set
+
+## Bibliography

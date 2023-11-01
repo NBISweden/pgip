@@ -26,7 +26,7 @@ dependencies:
   - multiqc
   - pandas
   - pip
-  - picard
+  - picard<3
   - pyslim
   - python>=3.10
   - python-newick

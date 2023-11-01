@@ -1,6 +1,12 @@
 ---
+title: Genetic diversity landscapes
+subtitle: Investigating the diversity landscape in Monkeyflower
+author:
+  - Per Unneberg
 format: html
 engine: knitr
+execute:
+  cache: false
 ---
 
 <!-- markdownlint-disable MD041 -->
@@ -13,11 +19,135 @@ engine: knitr
 
 <!-- markdownlint-enable MD041 -->
 
+::: {.callout-important collapse=true}
+
+#### Compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+:::
+
+In this exercise we will look at measures that describe variation and
+compile statistics along a sequence. By scanning variation in windows
+along the sequence (a.k.a. genomic scan) we can identify outlier
+regions whose pattern of variation could potentially be attributed to
+causes other than neutral processes, such as adaptation or migration.
+
+::: {.callout-tip collapse=true}
+
+## Learning objectives
+
+- describe and calculate commonly used measures of variation,
+  including nucleotide diversity $\pi$, divergence $d_{XY}$ and
+  differentiation $F_{ST}$
+- perform genome scans of diversity and plot the results
+- identify outlier regions of interest
+- untangle processes that drive patterns of variation using simulated
+  data
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Data setup
+
+Create an exercise directory and `cd` to it:
+
+```{bash }
+#| label: create-monkeyflower-diversity-directory
+#| echo: true
+#| eval: false
+mkdir -p diversity
+cd diversity
+```
+
+FIXME: add data source
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Tools
+
+::: { .panel-tabset }
+
+#### Listing
+
+- [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
+- [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) [@quinlan_BEDToolsFlexibleSuite_2010]
+- [csvtk](https://bioinf.shenwei.me/csvtk/)
+- [vcftools](https://vcftools.github.io/) [@danecek_VariantCallFormat_2011]
+
+#### UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools \
+    bcftools/1.17 \
+    BEDTools/2.29.2 \
+       vcftools/0.1.16
+```
+
+`csvtk` has been added to the module system and can be loaded as
+follows:
+
+```bash
+module use /proj/{{< var uppmaxproject >}}/modules
+module load csvtk
+```
+
+#### Conda
+
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - bcftools=1.15.1
+  - bedtools=2.31.0
+  - csvtk=0.28.0
+  - vcftools=0.1.16
+```
+
+:::
+
+:::
+
+```{bash }
+#| label: variant-filter-setup
+#| echo: false
+#| eval: true
+mkdir -p vcftools
+OUT=vcftools/all.allsites
+VCF=all.allsites.vcf.gz
+MISS=0.75
+QUAL=30
+MIN_DEPTH=260
+MAX_DEPTH=400
+OUTVCF=${VCF%.vcf.gz}.filtered.vcf.gz
+vcftools --gzvcf $VCF \
+   --remove-indels --max-missing $MISS --minQ $QUAL \
+   --min-meanDP $MIN_DEPTH --max-meanDP $MAX_DEPTH \
+   --minDP $MIN_DEPTH --maxDP $MAX_DEPTH --recode \
+   --stdout 2>/dev/null |
+ gzip -c > $OUTVCF
+```
+
 # Genetic diversity {#sec-ex-genetic-diversity}
 
 ## Nucleotide diversity {#sec-ex-nucleotide-diversity}
 
-::: {.callout-warning}
+::: {.hidden}
 
 FIXME: pen-and-paper exercise to calculate diversity based on "fixed"
 genotype calls and genotype likelihoods to highlight differences; the
@@ -27,7 +157,136 @@ latter requires GLs for **all** sites. Use Table 4.1 in
 
 :::
 
-::: {.callout-note}
+## Allele frequency differences
+
+Could add exercise where, before scans, students simply calculate
+allele frequency differences. Easy counting exercise; could also
+quickly use genotype likelihoods
+
+## Global statistics
+
+### Preparation
+
+In this exercise, we will be analysing both the red/yellow population
+subsets, as well as the full data set for linkage group 4 (LG4).
+
+Some of the programs require we prepare a populations file. For
+`pixy`, this is a headerless, tab-separated file with sample and
+population columns. The `sampleinfo.csv` contains the information we
+need; the sample names have been prefixed with a three-letter code to
+indicate population (apart from *ssp. puniceus* which also comes with
+a single letter `R` or `Y` indicating ecotype) so we convert it with
+`csvtk`. We also add a populations file with all samples belonging to
+the same population:
+
+```{bash }
+#| label: make-populations-file
+#| echo: true
+#| eval: true
+csvtk mutate --name Population --fields SampleAlias sampleinfo.csv |
+ csvtk cut --fields SampleAlias,Population |
+ csvtk replace --fields Population --pattern "(.+)-.+$" --replacement "\$1" |
+ csvtk replace --fields Population --pattern "(CLV)_.+" --replacement "\$1" |
+ csvtk del-header --out-tabs > populations.txt
+csvtk cut --fields SampleAlias sampleinfo.csv |
+ csvtk mutate --name Population --fields SampleAlias |
+ csvtk replace --fields Population --pattern ".+" --replacement "ALL" |
+ csvtk del-header --out-tabs > populations.ALL.txt
+```
+
+`vcftools`, on the other hand, require that populations are specified
+as separate files, containing the individuals of each population. We
+can use the `populations.txt` file to quickly generate
+population-specific files, and we add an `ALL` population, treating
+all samples as coming from the same population:
+
+```{bash }
+#| label: make-population-specific-files
+#| echo: true
+#| eval: true
+for pop in ARI AUR CAL CLV GRA LON PAR PUN-R PUN-Y; do
+ csvtk --no-header-row grep --tabs --fields 2 --pattern "$pop" populations.txt | \
+  csvtk cut --tabs --fields 1 > $pop.txt;
+done
+csvtk cut --tabs --no-header-row --fields 1 populations.txt > ALL.txt
+```
+
+We define environment variables to make the downstream commands
+easier to type:
+
+```{bash }
+#| label: variant-setup
+#| echo: true
+#| eval: true
+VCF=all.allsites.vcf.gz
+REDYLW=redyellow.allsites.vcf.gz
+POPS=populations.txt
+```
+
+```{r }
+#| label: set-vcf-envvars
+#| echo: false
+#| eval: true
+Sys.setenv(
+  VCF = "all.allsites.vcf.gz",
+  REDYLW = "redyellow.allsites.vcf.gz",
+  POPS = "populations.txt"
+)
+```
+
+### e1: Effect of program
+
+General introduction to show the effect of filtering.
+
+We start by comparing the outputs from `vcftools` and `pixy`. Start by
+creating an output directory for the first exercise `e1`:
+
+```{bash }
+#| label: e1-setup-output
+#| echo: true
+#| eval: true
+mkdir -p e1
+OUTDIR=e1
+OUT=e1/all.allsites
+```
+
+```{r }
+#| label: e1-setenv
+#| echo: false
+#| eval: true
+Sys.setenv(
+  OUT = "e1/all.allsites",
+  OUTDIR = "e1"
+)
+```
+
+```{bash }
+#| label: vcftools-pi
+#| echo: true
+#| eval: true
+vcftools --gzvcf ${VCF} --window-pi 100000 --out $OUT 2>/dev/null
+cat ${OUT}.windowed.pi
+```
+
+```{bash }
+#| label: pixy-pi
+#| echo: true
+#| eval: true
+pixy --vcf $VCF --populations populations.ALL.txt --stats pi \
+  --output_folder $OUTDIR \
+  --window_size 100000 --output_prefix ALL.pixy > /dev/null 2>&1
+cat ${OUTDIR}/ALL.pixy_pi.txt
+```
+
+:::{.hidden}
+
+Compare pixy with vcftools to show that filtering is important
+
+FIXME: comparison of pixy and coverage-based filtering approach
+
+:::
+
+::: {.hidden}
 
 - use sequence masks (0/1) encoded gz files to enable quick
   calculations of feature-based stats (e.g. 4d-degenerate sites)
@@ -35,4 +294,58 @@ latter requires GLs for **all** sites. Use Table 4.1 in
 
 :::
 
-FIXME: comparison of pixy and coverage-based filtering approach
+### Effect of mask files
+
+Calculate pi, Fst and dxy for:
+
+- all sites unfiltered
+- all sites filtered
+- all sites variant mask
+
+### Combining masks with genome features
+
+:::{.hidden}
+
+Combine / provide gff features (better to generate from gff), combine
+with coverage mask to get, e.g., gene / exon / intron measures
+
+:::
+
+## Windowed statistics and genome scans
+
+::: {.hidden}
+
+Windows and genome scans. Provide toolkit to work with data. Goal:
+prepare students for the problem of finding the region of interest.
+
+Calculate pi, Fst and dxy for:
+
+- all sites unfiltered
+- all sites filtered
+- all sites variant mask
+
+Compare
+
+Need some custom function to summarize over windows unfortunately;
+show that vcftools gets it wrong
+
+### Visualising data
+
+Make plots over genome
+
+### Finding significant peaks
+
+Show how an outlier analysis could be done
+
+## Data exploration
+
+Given the tools above, let the students play around with the data. See
+if they can find a contrast that highlights adaptation. Also, urge
+them to compile genomic landscape. Provide little instructions.
+
+## Simulation
+
+Final touch: add msprime / slim simulation to compare with observed
+landscape somehow
+
+:::

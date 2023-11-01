@@ -92,16 +92,36 @@ demonstrating the power of using whole-genome data."
 
 ## Example: Population genetics of the coral *Acropora millepora*
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 Motivation: corals are facing hard times and to prevent future losses
 of coral cover a better understanding of genetics is warranted.
 
+::: {.fragment fragment-index=1}
+
+<h5>**Genome assembly** and **sampling**</h5>
+
+Motivation: most analyses require a *reference sequence* with which to
+compare *resequenced samples*
+
+- Assemble high-quality reference genome
+- Choice of populations, sampling locations
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
 <!-- markdownlint-disable MD013 -->
 
-::: {.fragment}
+::: {.fragment fragment-index=1}
 
-![Genome assembly and sample collection. ](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly height=550 fig-align=center}
+![Genome assembly and sample collection. ](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly width=90% fig-align=center}
 
-::: { .flushright .smallest .translatey100}
+::: { .flushright .smallest .translatey50}
 
 @fuller_PopulationGeneticsCoral_2020
 
@@ -110,6 +130,10 @@ of coral cover a better understanding of genetics is warranted.
 :::
 
 <!-- markdownlint-enable MD013 -->
+
+:::
+
+::::
 
 ::: {.notes }
 
@@ -138,20 +162,40 @@ Points to consider:
 
 ## Example: Population genetics of the coral *Acropora millepora*
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 Motivation: corals are facing hard times and to prevent future losses
 of coral cover a better understanding of genetics is warranted.
 
+<h5>Describe **genetic structure** and **demographic history**</h5>
+
+Motivation:
+
+- address basic question of why genetic structure looks the way it
+  does
+- demographic history may generate signals similar to selection
+
+:::
+
+::: {.column width="50%"}
+
 ![Variation and demographic history inferred from 44 resequenced
 individuals.](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-corals-variation
-height=550 fig-align=center}
+width=70% fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
-::: { .flushright .smallest .translatey100}
+::: {.flushright .smallest .translatey50}
 
 @fuller_PopulationGeneticsCoral_2020
 
 :::
+
+:::
+
+::::
 
 ::: {.notes }
 
@@ -181,14 +225,30 @@ signals similar to those of selection
 
 ## Example: Population genetics of the coral *Acropora millepora*
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 Motivation: corals are facing hard times and to prevent future losses
 of coral cover a better understanding of genetics is warranted.
+
+<h5>Characterize **population structure**</h5>
+
+Motivation:
+
+1. identify populations for contrasts in e.g. selection scans
+2. identify admixed individuals that should be removed from analyses
+3. identify barriers to gene flow etc
+
+:::
+
+::: {.column width="50%"}
 
 <!-- markdownlint-disable MD013 -->
 
 ![Characterizing population structure and gene flow across 12
 refs](https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg){#fig-corals-structure
-width=550 fig-align=center}
+width=100% fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
@@ -197,6 +257,10 @@ width=550 fig-align=center}
 @fuller_PopulationGeneticsCoral_2020
 
 :::
+
+:::
+
+::::
 
 ::: {.notes }
 
@@ -219,22 +283,40 @@ Indicative of high connectivity among 12 sampled reefs.
 
 ## Example: Population genetics of the coral *Acropora millepora*
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 Motivation: corals are facing hard times and to prevent future losses
 of coral cover a better understanding of genetics is warranted.
+
+<h5>Genomic scans for **selection**</h5>
+
+Motivation: identify loci associated with adaptation / selection
+
+- little differentiation over reefs, however thermal regimes
+- genomic scan for $\pi$ (diversity) outliers
+
+:::
+
+::: {.column width="50%"}
 
 <!-- markdownlint-disable MD013 -->
 
 ![Genomic scans for local adaptation detect a signal at
-*sacsin*](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection
-height=550 fig-align=center}
+*sacsin*](https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg){#fig-corals-selection width=100% fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
-::: { .flushright .smallest .translatey100}
+::: { .flushright .translatey50}
 
 @fuller_PopulationGeneticsCoral_2020
 
 :::
+
+:::
+
+::::
 
 ::: {.notes }
 
@@ -329,10 +411,16 @@ genetic variation from theoretical predictions and models.
 
 <!-- markdownlint-disable MD013 -->
 
+:::{}
+
 ![The variable sites at the *Drosophila melanogaster* ADH locus
-[@kreitman_NucleotidePolymorphismAlcohol_1983]](assets/images/kreitman-1983-table1.png)
+[@kreitman_NucleotidePolymorphismAlcohol_1983]](assets/images/kreitman-1983-table1.png){width=70% fig-align=center}
+
+:::
 
 <!-- markdownlint-enable MD013 -->
+
+First study of natural population. However, limited to one locus.
 
 ::: {.notes }
 
@@ -364,18 +452,37 @@ implies mathematics / computational skills important
 
 ## From population genetics to population genomics
 
-![Patterns of polymorphism and divergence [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.g001)
+:::{}
+
+![Patterns of polymorphism and divergence [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.g001){width=60%}
+
+:::
+
+Same system but **genome-wide**. Plots represent all chromosomes and the entire genome.
 
 ::: {.notes}
 
 @begun_PopulationGenomicsWholeGenome_2007 study: same system
-(*Drosophila*) but more individuals and whole genome
+(*Drosophila*) but more individuals and whole genome. All of a sudden
+possible to ask questions about the general characteristics of
+diversity, not just limited to single loci.
 
 :::
 
 ## From population genetics to population genomics
 
-![Numbers of polymorphic and fixed variants [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.t002)
+:::{}
+
+<!-- markdownlint-disable MD013 -->
+
+![Numbers of polymorphic and fixed variants [@begun_PopulationGenomicsWholeGenome_2007]](https://journals.plos.org/plosbiology/article/figure/image?size=large&download=&id=10.1371/journal.pbio.0050310.t002){width=70% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+Novelty: now possible to do *genome-wide* characterization of
+variation in different **functional contexts**
 
 ::: {.notes}
 
@@ -395,7 +502,9 @@ variation in different functional contexts
 #| echo: false
 #| eval: true
 #| fig-cap: Sequencing cost ($) per megabase [@wetterstrandka_DNASequencingCosts_]
-#| out-width: 400
+#| fig-width: 12
+#| fig-height: 8
+#| out-width: 90%
 url <- "https://www.genome.gov/sites/default/files/media/files/2021-11/Sequencing_Cost_Data_Table_Aug2021.xls"
 if (!file.exists(basename(url))) {
   download.file(url, destfile = basename(url))
@@ -403,11 +512,12 @@ if (!file.exists(basename(url))) {
 data <- read_excel(basename(url))
 colnames(data) <- c("Date", "Mb", "Genome")
 ggplot(data, aes(x = as.Date(Date), y = Mb)) +
-  geom_line() +
+  geom_line(size=2) +
   xlab("") +
   ylab("") +
   scale_y_continuous(trans = "log10", labels = comma, n.breaks = 6) +
-  scale_x_date(breaks = "year", labels = date_format("%Y"))
+  scale_x_date(breaks = "year", labels = date_format("%Y")) +
+  theme(axis.text=element_text(size=24), text=element_text(size=24))
 ```
 
 :::

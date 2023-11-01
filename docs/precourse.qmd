@@ -1,11 +1,16 @@
 ---
-title: "Precourse"
+title: Precourse
+author: Per Unneberg
 date: ""
 sidebar: false
-format:
-  html:
-    number-sections: false
+format: html
 ---
+
+```{r }
+#| label: dummy-code
+#| echo: false
+#| eval: false
+```
 
 ## Suggested readings
 
@@ -41,17 +46,11 @@ for information on how to connect to and work on uppmax.
 
 ## Software installation{#sec-software-installation}
 
-::: {.callout-important}
-
-Instructions will be updated when a full list of required programs are
-available.
-
-:::
-
-In case there are issues with UPPMAX we ask you to prepare a local
-backup compute environment on your computer. We will use the
-[conda](https://docs.conda.io/en/latest/) package manager to install
-necessary requirements from the package repositories
+Although we will mainly work on UPPMAX, some exercises, notably the
+ones that utilise [Jupyter](https://jupyter.org/) notebooks benefit
+from working in a local compute environment on your computer. We will
+use the [conda](https://docs.conda.io/en/latest/) package manager to
+install necessary requirements from the package repositories
 [bioconda](https://bioconda.github.io/) and
 [conda-forge](https://conda-forge.org/).
 
@@ -87,35 +86,36 @@ Please note that the order of these commands is important!
 ### 3. Create an isolated course environment
 
 It is suggested you create and change to a isolated environment `pgip`
-dedicated to the course:
+dedicated to the course. The command below will create an environment
+named `pgip` and install the packages `python` version 3.10, an R base
+installation (`r-base`), the `jupyter` package that provides support
+for Jupyter Notebooks, and the `mamba` package manager.
 
-```{bash }
-#| label: create-conda-pgip
-#| echo: true
+```{bash}
 #| eval: false
-conda create -n pgip python=3.10 r-base
+conda create -n pgip python=3.10 r-base mamba jupyter
 conda activate pgip
 ```
 
-To deactivate an environment you issue the command `conda deactivate`.
+The `activate` command is required to access the isolated environment
+named `pgip`. Once you have activated the environment, you gain access
+to whatever programs are installed. To deactivate an environment you
+issue the command `conda deactivate`.
 
 ### 4. Install packages
 
-You can install packages as follows (remember to activate `pgip`!):
+Installation of packages is done with the `install` command, but we
+recommend you use the
+[mamba](https://mamba.readthedocs.io/en/latest/index.html) package
+manager as it is faster (`mamba` is a rewrite of `conda` in C++). An
+example of how to install packages `bcftools, angsd, mosdepth` follows
+(remember to activate `pgip`!):
 
-```{bash }
-#| label: conda-install-packages
-#| echo: true
+```{bash}
 #| eval: false
-conda install bcftools angsd mosdepth
+conda activate pgip
+mamba install bcftools angsd mosdepth
 ```
-
-::: {.callout-tip}
-
-If installation is slow, you can try the
-[mamba](https://mamba.readthedocs.io/en/latest/mamba-installation.html) installer.
-
-:::
 
 ## Resources
 

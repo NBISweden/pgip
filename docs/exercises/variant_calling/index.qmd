@@ -29,7 +29,7 @@ fi
 
 ::: {.callout-important collapse=true}
 
-#### Compute environment setup
+#### {{< fa server >}} Compute environment setup
 
 If you haven't already done so, please read [Compute
 environment](../compute_environment/index.qmd) for information on how
@@ -164,15 +164,15 @@ dependencies:
 A generic variant calling workflow consists of the following basic
 steps:
 
-0. read quality control and filtering
-1. read mapping
-2. removal / marking of duplicate reads
-3. joint / sample-based variant calling
+1. read quality control and filtering
+2. read mapping
+3. removal / marking of duplicate reads
+4. joint / sample-based variant calling and genotyping
 
 There are different tweaks and additions to each of these steps,
 depending on application and method.
 
-### Read quality control
+### 1. Read quality control
 
 :::{.column-margin}
 
@@ -181,8 +181,9 @@ depending on application and method.
 ![](PUN-Y-INJ_R1_fastqc/Images/per_base_quality.png)
 ![](PUN-Y-INJ_R2_fastqc/Images/per_base_quality.png)
 
-Fastqc per base quality scores, read 1 (upper) and read 2 (lower
-panel).
+Per base quality scores, read 1 (upper) and read 2 (lower panel),
+obtained from the FastQC program. Quality values are on the $y$-axis,
+base position in sequence read on $x$-axis.
 
 :::
 
@@ -197,16 +198,30 @@ $$
 Q = -10 \log_{10} P
 $$
 
-which for $P=0.01$ gives $Q=20$. Hence, a base quality score $Q=20$
-corresponds to a 1% probability that the call is incorrect, $Q=30$ a
-0.1% probability, and so on. The base qualities typically drop towards
-the end of the reads (@fig-fastqc-base-quality). Prior to mapping it
-may therefore be prudent to remove reads that display too high drop in
-quality, too low mean quality, or on some other quality metric
-reported by the qc software.
+which for $P=0.01$ gives $Q=20$. Converting from quality to
+probability is done by solving for $P$:
+
+$$
+P = 10^{-Q/10}
+$$
+
+Hence, a base quality score $Q=20$ (somtimes written Q20) corresponds
+to a 1% probability that the call is incorrect, Q30 a 0.1%
+probability, and so on, where the higher the quality score, the
+better. Bases with low quality scores are usually discarded from
+downstream analyses, but what is a good threshold? The human genome
+has approximately 1 SNP per 1,000 bp, which means sequencing errors
+will be ten times as probable in a single read for Q20 base calls. A
+reasonable threshold is therefore around Q20-Q30 for many purposes.
+
+The base qualities typically drop towards the end of the reads
+(@fig-fastqc-base-quality). Prior to mapping it may therefore be
+prudent to remove reads that display too high drop in quality, too low
+mean quality, or on some other quality metric reported by the qc
+software.
 
 The quality scores are encoded using ASCII codes. An example of a
-[fastq](https://en.wikipedia.org/wiki/FASTQ_format) sequence is given
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) sequence is given
 below. The code snippet shows an example of shell commands^[For any
 shell command, use the option `--help` to print information about the
 commands and its options. `zcat` is a variant of the `cat` command
@@ -237,7 +252,7 @@ zcat PUN-Y-INJ_R1.fastq.gz | head --lines 4 | cut --characters -30
 # zcat PUN-Y-INJ_R1.fastq.gz | head -n 4 | cut -c -30
 ```
 
-A fastq entry consists of four lines:
+A FASTQ entry consists of four lines:
 
 1. sequence id (prefixed by `@`)
 2. DNA sequence
@@ -274,7 +289,7 @@ qualities) you need to divide the final number by four (622744 / 4).
 
 :::
 
-### Read mapping
+### 2. Read mapping
 
 Read mapping consists of aligning sequence reads, typically from
 individuals in a population (a.k.a. resequencing) to a reference
@@ -286,7 +301,7 @@ longer reads [minimap2](https://github.com/lh3/minimap2).
 In what follows, we will assume that the sequencing protocol generates
 paired-end short reads (e.g., from
 [Illumina](https://ngisweden.scilifelab.se/technologies/illumina/)).
-In practice, this means a DNA fragment has been sequence from both
+In practice, this means a DNA fragment has been sequenced from both
 ends, where fragment sizes have been selected such that reads do not
 overlap (i.e., there is unsequenced DNA between the reads of a given
 *insert size*).
@@ -295,7 +310,7 @@ The final output of read mapping is an alignment file in [binary
 alignment map
 (BAM)](https://en.wikipedia.org/wiki/Binary_Alignment_Map) format or variants thereof.
 
-### Removal / marking of duplicate reads
+### 3. Removal / marking of duplicate reads
 
 During sample preparation or DNA amplification with PCR, it may happen
 that a single DNA fragment is present in multiple copies and therefore
@@ -305,11 +320,12 @@ should be marked prior to any downstream analyses. The most commonly
 used tools for this purpose are `samtools markdup` and `picard
 MarkDuplicates`.
 
-### Variant calling
+### 4. Variant calling and genotyping
 
-Once BAM files have been produced, it is time for variant calling.
-There are many different variant callers, of which we will mention
-four.
+Once BAM files have been produced, it is time for variant calling,
+which is the process of identifying sites where there sequence
+variation. There are many different variant callers, of which we will
+mention four.
 
 [bcftools](https://samtools.github.io/bcftools/bcftools.html) is a
 toolkit to process variant call files, but also has a variant caller
@@ -373,8 +389,9 @@ picard CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
 bwa index M_aurantiacus_v1.fasta
 ```
 
-We can generate fastqc reports for all input fastq files
-simultaneously, setting the output directory with the `-o` flag:
+With the program `fastqc` we can generate quality control reports for
+all input `FASTQ` files simultaneously, setting the output directory
+with the `-o` flag:
 
 ```{bash }
 #| label: fastqc-red
@@ -419,7 +436,7 @@ output reports.
 
 ## Read mapping
 
-We will start by mapping `fastq` read pairs to the reference. We will
+We will start by mapping `FASTQ` read pairs to the reference. We will
 use the `bwa` read mapper together with `samtools` to process the
 resulting output.
 
@@ -461,7 +478,7 @@ the sample id `SM`, and `ILLUMINA` as the platform `PL`.
 
 ### Read mapping with bwa and conversion to BAM format with samtools
 
-Let's map the fastq files corresponding to sample `PUN-Y-BCRD`:
+Let's map the FASTQ files corresponding to sample `PUN-Y-BCRD`:
 
 ```{bash }
 #| label: map-pun-y-bcrd-with-bwa
@@ -480,7 +497,7 @@ Picard compatibility^[`bwa` consistently uses short option names.
 Also, there is no `--help` option. To get a list of options, at the
 command line simply type `bwa mem`, or `man bwa mem` for general help
 and a complete list of options.]. The first positional argument is the
-reference sequence, followed by the fastq files for read 1 and 2,
+reference sequence, followed by the FASTQ files for read 1 and 2,
 respectively.
 
 The output would be printed on the screen (try running the `bwa mem`
@@ -534,10 +551,10 @@ by extracting the region on `LG4` from position 12000000 to 12100000).
 
 ### Mapping from uBAM file
 
-There is an alternative storage format for the fastq files called
+There is an alternative storage format for the FASTQ files called
 [`uBAM`](https://gatk.broadinstitute.org/hc/en-us/articles/360035532132-uBAM-Unmapped-BAM-Format)
 (unmapped BAM format). The GATK developers promote its use in lieu of
-fastq files since BAM files can store more metadata associated with
+FASTQ files since BAM files can store more metadata associated with
 sequencing runs. The workflow is slightly more complex, but the files
 have been prepared for you so you don't need to worry about generating
 the uBAM files.
@@ -670,10 +687,10 @@ gatk VariantFiltration -OVI true \
 [`HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/articles/360037422451-HaplotypeCaller)
 is GATK's variant caller that calls both SNPs and indels by realigning
 sequences in the vicinity of sites that harbor variation. We apply the
-`-ERC` option to generate `GVCF` output format, a condensed VCF format
-that includes non-variant sites as well as variant sites. The
-`--annotation` (`-A`) option adds annotations to the output that are
-used in the subsequent filtering step.
+`--emit-ref-confidence (-ERC)` option to generate `GVCF` output
+format, a condensed VCF format that includes non-variant sites as well
+as variant sites. The `--annotation` (`-A`) option adds annotations to
+the output that are used in the subsequent filtering step.
 
 ::: {.callout-exercise}
 
@@ -1055,8 +1072,9 @@ with `#`), followed by the data. The meta-information contains
 provenance information detailing how the file was generated, `FILTER`
 specification, `INFO` fields that provide additional information to
 genotypes, `FORMAT` specification fields that define genotype entries,
-and more. You can print the header with the command `bcftools view
--h`. An example of each is given below:
+and more. You can print the header^[Which in this context means both
+the metadata information and header *line*] with the command `bcftools
+view -h`. An example of each is given below:
 
 ```{bash }
 #| label: looking-inside-vcf-meta

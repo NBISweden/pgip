@@ -2016,17 +2016,51 @@ Tajima; see @wakeley_CoalescentTheoryIntroduction_2008, p. 92)
 
 :::
 
-## The coalescent and diversity {.smaller}
+## The coalescent and diversity
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
+::: {.dna .smallr}
+
+| 1 | 2     | 3 | 4 | 5     | 6 | 7 | 8     | 9 | 10 | 11    | 12 | 13    | 14 | 15    |
+|:-:|:-----:|:-:|:-:|:-----:|:-:|:-:|:-----:|:-:|:--:|:-----:|:--:|:-----:|:--:|:-----:|
+| T | T     | A | C | A     | A | T | **C** | C | G  | A     | T  | C     | G  | T     |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+| T | **C** | A | C | A     | A | T | G     | C | G  | A     | T  | **G** | G  | **A** |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+|   | *     |   |   | *     |   |   | *     |   |    | *     |    | *     |    | *     |
+
+: {tbl-colwidths="[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]"}
+
+:::
+
+::: {.fragment .smallr}
+
+<!-- markdownlint-disable MD013 -->
+
+$$
+\begin{align}
+\pi & = \sum_{j=1}^S h_j = \sum_{j=1}^{S} \frac{n}{n-1}\left(1 - \sum_i p_i^2 \right) \\
+& \stackrel{S=6,\\ n=4}{=} \sum_{j=1}^{6} \frac{4}{3}\left(1 - \sum_i p_i^2\right) \\
+& = \frac{4}{3}\left(\mathbf{\color{#a7c947}{4}}\left(1-\frac{1}{16}-\frac{9}{16}\right) + \mathbf{\color{#a7c947}{2}}\left(1 - \frac{1}{4} - \frac{1}{4}\right)\right) = \frac{10}{3}
+\end{align}
+$$
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+:::
+
+::: {.column width="20%" .fragment}
+
 ```{r, engine="tikz", fig.ext="svg" }
-#| label: coalescent-tree-dna-variation
+#| label: coalescent-tree-dna-variation-representation
 #| echo: false
 #| eval: true
-#| out-height: 600
+#| out-width: 80%
 \begin{tikzpicture}[outer sep=0, inner sep=0, thick,
                     node distance=5px, every node/.style={font=\ttfamily}]
 \tikzstyle{mut} = [circle, minimum height=0.2cm, fill=gray, draw];
@@ -2064,38 +2098,13 @@ node[mut] (m6) at ($(4) !.75! (7)$) {}
 
 :::
 
-::: {.column width="50%"}
-
-Many statistical quantities can be related to the **site frequency
-spectrum** (**SFS**), which is a summary of the frequencies of the
-segregating sites. Let $\xi_i$ be the number of chromosomes in the
-sample with $i$ minor alleles. In the figure we have 6 mutations on
-$n=4$ chromosomes.
-
-:::: {.columns}
-
-::: {.column width="40%"}
-
-|         | Name      | Count |
-|---------|-----------|------:|
-| $\xi_1$ | singleton | 4     |
-| $\xi_2$ | doubleton | 2     |
-| $\xi_3$ |           | 0     |
-
-:::
-
-::: {.column width="10%"}
-
-:::
-
-::: {.column width="40%"}
-
-:::{.translatey50}
+::: {.column width="30%" .fragment}
 
 ```{r, engine="tikz", fig.ext="svg" }
-#| label: site-frequency-spectrum-graph
+#| label: tree-site-frequency-spectrum-graph
 #| echo: false
 #| eval: true
+#| out-width: 80%
 %% https://tex.stackexchange.com/questions/123866/histogram-with-tikz
 \begin{tikzpicture}[ybar interval]
 \tikzstyle{tick}=[font=\scriptsize];
@@ -2108,41 +2117,20 @@ plot coordinates{(0,.8) (1,.4) (2, 0) (3, 0)};
 \node[tick] at (1.5, -0.3) {2};
 \node[tick] at (2.5, -0.3) {3};
 \node[tick] at (1.5, -0.6) {Allele frequency};
-\node[tick, rotate=90] at (-0.4, .5) {Percent};
+\node[tick, rotate=90] at (-0.4, .5) {Proportion};
 \end{tikzpicture}
 ```
 
-:::
-
-:::
-
-::::
-
-:::{.translatey100}
-
-Note that the number of segregating sites is $S=\sum_{i=1}^{n-1}\xi_i$
+::: {.fragment .smallr}
 
 In this notation one can show that $\pi$, the nucleotide diversity, is
 
 $$
-\pi = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2}
-$$
-
-:::
-
-::: {.fragment .translatey100}
-
-#### Exercise
-
-Calculate the nucleotide diversity and compare the results from the foundation lecture
-
-:::
-
-::: {.fragment .translatey100}
-
-$$
-\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2} =
-\frac{1}{6}\left(12 + 8 + 0\right) = 3\frac{1}{3}
+\begin{align}
+\pi & = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2} \\
+& \stackrel{n=4}{=} \frac{1*(4-1)*4 + 2*(4-2)*2}{6}
+= \frac{10}{3}
+\end{align}
 $$
 
 :::
@@ -2151,14 +2139,13 @@ $$
 
 ::::
 
-::: {.notes }
+::: {.fragment}
 
-Exercise:
-
-$$
-\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2}
-= \frac{3*4 + 4*2 + 3*0}{6} = \frac{20}{6} = \frac{8}{3}
-$$
+Many statistical quantities can be related to the **site frequency
+spectrum** (**SFS**), which is a summary of the frequencies of the
+segregating sites. Let $\xi_i$ be the number of chromosomes in the
+sample with $i$ minor alleles. In the example above we have $S=6$
+mutations on $n=4$ chromosomes.
 
 :::
 
@@ -2170,9 +2157,77 @@ $$
 
 <!-- markdownlint-disable MD013 -->
 
-![Interpretation of neutrality tests [@ferretti_DecomposingSiteFrequency_2017]](assets/images/ferretti-table1.jpg){#fig-neutrality-interpretation width=400 fig-align=center}
+:::: {style="display: grid; grid-template-columns: 200px 200px; grid-row-gap: 0px; grid-column-gap: 40px;"}
+
+:::{}
+
+*Neutral*
+
+```{python }
+#| label: msprime-trees-neutral
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="neutral", svgid="neutral", size=(200, 250)))
+```
+
+:::
+
+:::{}
+
+*Expansion*
+
+```{python }
+#| label: msprime-trees-expansion
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="expansion", svgid="expansion", size=(200, 250)))
+```
+
+:::
+
+:::{}
+
+*Bottleneck*
+
+```{python }
+#| label: msprime-trees-bottleneck
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="bottleneck", svgid="bottleneck", size=(200, 250)))
+```
+
+:::
+
+:::{}
+
+*Selection*
+
+```{python }
+#| label: msprime-trees-selection
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="selection", svgid="selection", size=(200, 250)))
+```
+
+:::
+
+::::
 
 <!-- markdownlint-enable MD013 -->
+
+[{{< fa rectangle-list >}}]({{< var recipes.baseurl >}}#sec-recipe-msprime-trees)
 
 :::
 
@@ -2180,7 +2235,7 @@ $$
 
 <!-- markdownlint-disable MD013 -->
 
-![The SFS under neutrality and selection](assets/images/nielsen-fig2-2005.jpeg){#fig-sfs-neutrality-selection width=480}
+![The SFS under neutrality and selection](assets/images/nielsen-fig2-2005.jpeg){#fig-sfs-neutrality-selection width=450}
 
 <!-- markdownlint-enable MD013 -->
 
@@ -2329,7 +2384,7 @@ coalesce.
 ![](assets/images/brandt-genetics-2022-fig1b.jpeg){fig-align=center, height=300}
 ![](assets/images/brandt-genetics-2022-fig1c.jpeg){fig-align=center, height=300}
 
-::: {.flushright}
+::: {.flushright .smallr}
 
 @y.c.brandt_EvaluationMethodsEstimating_2022 [Fig. 1a]
 
@@ -2515,7 +2570,7 @@ coalescent-based simulators.
 2. **performance** - optimized code base
 3. **GUI** - interactive execution and graphical debugging
 
-::: {.flushright}
+::: {.flushright .smallr}
 
 @haller_SLiMEvolutionarySimulation_2022
 
