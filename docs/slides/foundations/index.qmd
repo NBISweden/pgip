@@ -4204,7 +4204,7 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #| label: pgip-load-slim-data
 #| echo: false
 #| eval: true
-data <- tidyr::tibble(read.csv("../../data/results/slim/selective_sweep.w500.csv.gz", header = TRUE))
+data <- tidyr::tibble(read.csv("../../pgip_data/results/slim/selective_sweep.w500.csv.gz", header = TRUE))
 a <- sum(1 / seq(10 - 1))
 data$thetaW <- data$S / a
 data_mean <- as.data.frame(data) %>%
@@ -4302,7 +4302,7 @@ signal is clear for the *mean*.
 #| label: pgip-load-slim-data2
 #| echo: false
 #| eval: true
-data <- tidyr::tibble(read.csv("../../data/results/slim/selective_sweep.w500.csv.gz",
+data <- tidyr::tibble(read.csv("../../pgip_data/results/slim/selective_sweep.w500.csv.gz",
                                header = TRUE))
 a <- sum(1 / seq(10 - 1))
 data$thetaW <- data$S / a
