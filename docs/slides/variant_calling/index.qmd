@@ -733,11 +733,17 @@ After preprocessing, reads are mapped to a reference. Observations:
 
 :::
 
-## Potential pitfalls
+## Potential error corrections and pitfalls
+
+#### Instrument
+
+- PCR duplicates -> MarkDuplicates
+- systematic errors from sequencing machine -> BQSR
+
+#### Reference
 
 - quality of reference sequence!
 - repetitive sequence
-- PCR duplicates
 
 # Variant calling and genotyping
 
@@ -1219,21 +1225,111 @@ samtools tview -p LG4:6885 -d H -w 3 \
 
 ## GATK best practice
 
-Point out: not optimal for non-model organims
+:::: {.columns}
+
+::: {.column width="70%"}
+
+![](assets/images/gatk-best-practice.png){width=90% fig-align=center}
+
+::: {.flushright .smallest}
+
+<https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels->
+
+:::
+
+:::
+
+::: {.column width="30%"}
+
+<h5>Pros</h5>
+
+- Best practices
+- Large documentation
+- Variant quality score recalibration
+
+<h5>Cons</h5>
+
+- Human-centric - very slow runtime on genomes with many sequences
+- Complicated setup
+
+:::
+
+::::
 
 ## Alternative variant callers
 
+:::: {.columns}
+
+::: {.column width="33%"}
+
+##### [freebayes](https://github.com/freebayes/freebayes)
+
+Bayesian genetic variant detector. Simpler setup.
+
+May struggle in high-coverage regions.
+
+::: {.flushright .smallr}
+
+[@garrison_HaplotypebasedVariantDetection_2012]
+
+:::
+
+:::
+
+::: {.column width="33%"}
+
+##### [bcftools](https://github.com/samtools/bcftools)
+
+Utilities for variant calling and manipulating VCFs and BCFs.
+
+::: {.flushright .smallr}
+
+[@danecek_TwelveYearsSAMtools_2021]
+
+:::
+
+:::
+
+::: {.column width="33%"}
+
+##### [ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD)
+
+For low-coverage sequencing. Doesn't do explicit genotyping; most
+methods take genotype uncertainty into account.
+
+::: {.flushright .smallr}
+
+[@korneliussen_ANGSDAnalysisNext_2014]
+
+:::
+
+:::
+
+::::
+
+:::{.hidden}
+
 Reference bias: plot no. hets vs coverage for real data, e.g., conifer
 
-### freebayes
+:::
 
-### bcftools
+::: {.notes}
 
-### ANGSd
+:::
 
 # Exercise on variant calling
 
-## The monkeyflower system
+## The monkeyflower system {.smallr}
+
+:::{}
+
+<!-- markdownlint-disable MD013 -->
+
+![](https://www.science.org/cms/10.1126/science.365.6456.854/asset/db271bee-8914-4712-9965-dcf1615b6a43/assets/graphic/365_854_f1.jpeg){fig-alt="The allure of monkeyflowers (DOI: 10.1126/science.365.6456.854)" width=50% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
 
 From <https://jgi.doe.gov/csp-2021-genomic-resources-for-mimulus/>
 
@@ -1242,5 +1338,20 @@ From <https://jgi.doe.gov/csp-2021-genomic-resources-for-mimulus/>
 > a powerful system for ecological genomic studies, thanks to its
 > experimental tractability, rapidly growing research community, and
 > the JGI-generated reference genome for M. guttatus.
+
+## Learning outcomes
+
+Follow GATK best practices to
+
+- Perform qc on sequencing reads and interpret results
+- Prepare reference for read mapping
+- Map reads to reference
+- Mark duplicates
+- Perform raw variant calling to generate a set of sites to exclude
+  from recalibration
+- Perform base quality score recalibration
+- Perform variant calling on base recalibrated data
+- Do genotyping on all samples and combine results to a raw variant
+  call set
 
 ## Bibliography

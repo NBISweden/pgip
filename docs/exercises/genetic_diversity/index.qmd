@@ -1,6 +1,6 @@
 ---
-title: Genetic diversity
-subtitle: Diversity calculations and genomic scans
+title: Genetic diversity landscapes
+subtitle: Investigating the diversity landscape in Monkeyflower
 author:
   - Per Unneberg
 format: html
@@ -128,8 +128,8 @@ dependencies:
 #| echo: false
 #| eval: true
 mkdir -p vcftools
-OUT=vcftools/allsites
-VCF=allsites.vcf.gz
+OUT=vcftools/all.allsites
+VCF=all.allsites.vcf.gz
 MISS=0.75
 QUAL=30
 MIN_DEPTH=260
@@ -147,7 +147,7 @@ vcftools --gzvcf $VCF \
 
 ## Nucleotide diversity {#sec-ex-nucleotide-diversity}
 
-::: {.callout-warning}
+::: {.hidden}
 
 FIXME: pen-and-paper exercise to calculate diversity based on "fixed"
 genotype calls and genotype likelihoods to highlight differences; the
@@ -218,8 +218,8 @@ easier to type:
 #| label: variant-setup
 #| echo: true
 #| eval: true
-VCF=allsites.vcf.gz
-REDYLW=redyellow.vcf.gz
+VCF=all.allsites.vcf.gz
+REDYLW=redyellow.allsites.vcf.gz
 POPS=populations.txt
 ```
 
@@ -228,8 +228,8 @@ POPS=populations.txt
 #| echo: false
 #| eval: true
 Sys.setenv(
-  VCF = "allsites.vcf.gz",
-  REDYLW = "redyellow.vcf.gz",
+  VCF = "all.allsites.vcf.gz",
+  REDYLW = "redyellow.allsites.vcf.gz",
   POPS = "populations.txt"
 )
 ```
@@ -247,7 +247,7 @@ creating an output directory for the first exercise `e1`:
 #| eval: true
 mkdir -p e1
 OUTDIR=e1
-OUT=e1/allsites
+OUT=e1/all.allsites
 ```
 
 ```{r }
@@ -255,7 +255,7 @@ OUT=e1/allsites
 #| echo: false
 #| eval: true
 Sys.setenv(
-  OUT = "e1/allsites",
+  OUT = "e1/all.allsites",
   OUTDIR = "e1"
 )
 ```
@@ -278,11 +278,15 @@ pixy --vcf $VCF --populations populations.ALL.txt --stats pi \
 cat ${OUTDIR}/ALL.pixy_pi.txt
 ```
 
+:::{.hidden}
+
 Compare pixy with vcftools to show that filtering is important
 
 FIXME: comparison of pixy and coverage-based filtering approach
 
-::: {.callout-note}
+:::
+
+::: {.hidden}
 
 - use sequence masks (0/1) encoded gz files to enable quick
   calculations of feature-based stats (e.g. 4d-degenerate sites)
@@ -298,14 +302,18 @@ Calculate pi, Fst and dxy for:
 - all sites filtered
 - all sites variant mask
 
-Compare
-
 ### Combining masks with genome features
+
+:::{.hidden}
 
 Combine / provide gff features (better to generate from gff), combine
 with coverage mask to get, e.g., gene / exon / intron measures
 
+:::
+
 ## Windowed statistics and genome scans
+
+::: {.hidden}
 
 Windows and genome scans. Provide toolkit to work with data. Goal:
 prepare students for the problem of finding the region of interest.
@@ -339,3 +347,5 @@ them to compile genomic landscape. Provide little instructions.
 
 Final touch: add msprime / slim simulation to compare with observed
 landscape somehow
+
+:::
