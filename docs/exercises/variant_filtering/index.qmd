@@ -189,7 +189,7 @@ have been reviewed [@lou_BeginnerGuideLowcoverage_2021, Table 3]:
 ::: {.callout-important}
 
 For applications where invariant sites should be included, such as
-genetic diversity calculations, neither quality or MAF filtering
+genetic diversity calculations, neither quality nor MAF filtering
 should be applied.
 
 :::

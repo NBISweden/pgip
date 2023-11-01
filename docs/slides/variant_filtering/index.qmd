@@ -6,6 +6,7 @@ author:
 format:
   revealjs:
     footer: Variant filtering
+    toc: false
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -22,11 +23,521 @@ library(readxl)
 library(curl)
 ```
 
+```{bash }
+#| label: setup-variants
+#| echo: false
+#| eval: true
+if [ ! -e variantsites.vcf.gz ]; then
+ bcftools view redyellow.variantsites.vcf.gz | vcfrandomsample -r 0.1 |\
+  bgzip -c > variantsites.vcf.gz
+fi
+if [ ! -e allsites.vcf.gz ]; then
+ bcftools view redyellow.allsites.vcf.gz | vcfrandomsample -r 0.1 |\
+  bgzip -c > allsites.vcf.gz
+fi
+```
+
 # Variant filtering
 
-Show coverage tracks from e.g., krill
+## Why we need to filter variants
 
-## Coverage tracks
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![Overlap in **raw** variant calls for different combinations of read
+mappers and variant
+callers.](assets/images/Li-2014-F2.png){#fig-Li-2014-2
+fig-align=center width=70%}
+
+Error rate of variant calls (SNPs and INDELs) largely unknown. Two
+major sources of error are
+
+1. erroneous realignment in low-complexity regions
+2. incomplete reference sequence
+
+:::
+
+::: {.column width="50%"}
+
+![Overlap in **filtered** variant calls for different combinations of
+read mappers and variant
+callers](assets/images/Li-2014-F3.png){#fig-Li-2014-3 fig-align=center
+width=70%}
+
+:::
+
+::: {.flushright .smallr .translatey50}
+
+@li_BetterUnderstandingArtifacts_2014
+
+:::
+
+::::
+
+::: {.notes}
+
+Error rate of variant calls (SNPs and INDELs) and leading causal
+artifacts remain unclear and largely unknown
+[@li_BetterUnderstandingArtifacts_2014]. This study compared several
+read mappers and variant callers on a haploid data set. For
+comparison, the following variant filters were applied:
+
+1. low-complexity (LC) filter
+2. maximum depth (MD)
+3. allele balance (AD) - filter sites where non-reference (ALT) too low
+4. double strand (DS) - filter if ALT too low on one strand
+5. Fisher strand (FS) - filter if strong REF/ALT correlation with +/-
+   strand
+6. quality filter (QU) - variant quality threshold
+
+Here, AB, DS and FS filters are *caller dependent*!
+
+:::
+
+## Manual filtering sets thresholds on context statistics {.smallr}
+
+<!-- markdownlint-disable MD013 -->
+
+| Category                                       | Filter                                      | Recommendation (examples)                                              |
+|------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
+| General filters                                | Base quality                                | Recalibrate / <Q20                                                     |
+|                                                | Mapping quality                             | MAQ < 20 / improper pairs                                              |
+|                                                | Minimum depth and/ or number of individuals | Varies; e.g. <50% individuals, <0.8X average depth                     |
+|                                                | Maximum depth                               | 1-2 sd above median depth                                              |
+|                                                | Duplicate reads                             | Remove                                                                 |
+|                                                | Indels                                      | Realign reads / haplotype-based caller / exclude bases flanking indels |
+|                                                | Overlapping sections of paired-­end reads   | Soft-clip to avoid double-counting                                     |
+| Filters on polymorphic sites                   | $p$-value                                   | $10^{-6}$                                                              |
+|                                                | SNPs with more than two alleles             | Filter; methods often assume bi-allelic sites                          |
+|                                                | Minimum minor allele frequency (MAF)        | 1%-10% for some analyses (PCA/admixture/LD/$\mathsf{F_{ST}}$)          |
+| Restricting analysis to a predefined site list | List of global SNPs                         | Use global call set for analyses requiring shared sites                |
+
+: Key data filters [Table 3 @lou_BeginnerGuideLowcoverage_2021, p.
+  5974] {#tbl-key-data-filters tbl-colwidths="[30,30,40]"}
+
+<!-- markdownlint-enable MD013 -->
+
+#### Procedure
+
+Look at annotations (*context statistics*) and set thresholds.
+
+Example: filter all sites with MAF<1%
+
+::: {.notes }
+
+NB: bypassing recommendations often means doing custom analyses. For
+instance, @talla_DissectingEffectsSelection_2019 include GATK
+tri-allelic sites due to different bi-allelic pairs segregating in
+different subpopulations (e.g. A/G in pop 1, A/T in pop 2)
+
+#### Verbose explanations of filters
+
+Source: [@lou_BeginnerGuideLowcoverage_2021]
+
+> Base quality scores are factored into the calculation of genotype
+> likelihoods, so if they accurately reflect the probability of
+> sequencing error, bases with low scores also carry useful information.
+> However, base quality scores are sometimes miscalibrated, so noise may
+> be reduced if bases with scores below a threshold (e.g., 20) are
+> either trimmed off prior to analysis or ignored. Alternatively, all
+> base quality scores can be recalibrated based on estimated error
+> profiles in the data (see Section 3.1).
+>
+> Mapping quality is not considered in genotype likelihood estimation in
+> currently available tools, so it is often advisable to remove
+> low-­confidence and/or nonuniquely mapped reads prior to analysis
+> (e.g., reads with mapping quality <20). Filtering out reads that do
+> not map in proper pairs should also further increase confidence in
+> reads being mapped to the correct location, but could cause biases in
+> regions with structural variation.
+>
+> To avoid sites with low or confounding data support in downstream
+> analysis, minimum depth and/or minimum number of individual filters
+> can be used to exclude sites with much reduced sequencing coverage
+> compared to the rest of the genome (e.g., regions with low unique
+> mapping rates, such as repetitive sequences). Appropriate thresholds
+> will vary between data sets, but could, for example, exclude sites
+> with read data for <50% of individuals (globally or within each
+> population), or with <0.8× average depth across individuals (after
+> filtering on mapping quality)
+>
+> Maximum depth filters are used to exclude sites with exceptionally
+> high coverage (e.g., regions that are susceptible to dubious mapping,
+> such as copy number variants). Common maximum depth thresholds could
+> be one or two standard deviations above the median genome-­wide depth.
+>
+> PCR and optical duplicates can give inflated impressions of how many
+> unique molecules have been sequenced, which—­particularly in the
+> presence of preferential amplification of one allele—­ could bias
+> genotype likelihood estimation. We therefore recommend removing
+> duplicate reads prior to any analysis.
+>
+> Reads mapped across indels are frequently misaligned, especially if
+> the ends of reads span an indel. To avoid false SNP calls, we
+> recommend either using dedicated tools to realign reads covering
+> indels, using a haplotype-­based variant caller (e.g., freebayes or
+> gatk) to estimate genotype likelihoods, or excluding bases flanking
+> indels.
+>
+> If the DNA insert in a library fragment is shorter than the combined
+> length of paired reads, there will be a section of overlap between the
+> forward and reverse reads. While some variant callers (e.g., gatk)
+> account for the pseudoreplication in overlapping ends of read pairs,
+> the current implementation of angsd treats each end of a read pair as
+> independent (this may change in a future release (T. Korneliussen,
+> personal communication)). When treated as independent, read support
+> for overlapping sections will be “double counted,” which may bias
+> genotype likelihoods. A conservative approach is to soft-­clip one of
+> the overlapping read ends.
+>
+> The significance threshold (often in the form of maximum p-­value) can
+> be adjusted to fine-­tune the sensitivity of polymorphism detection,
+> with lower p-­values leading to fewer, but higher confidence, SNP
+> calls. A commonly used cut-­off is 10 −6.
+>
+> Most software programs for downstream analyses assume that all SNPs
+> are biallelic, so SNPs with more than two alleles can be filtered out
+> in the SNP identification step to avoid violation of such assumptions.
+>
+> For many types of analysis, such as PCA, admixture analysis, detection
+> of FST outliers and estimation of LD, low-­frequency SNPs are
+> uninformative and can even bias results (e.g. Linck & Battey, 2019;
+> Roesti et al., 2012). For those types of analysis, imposing a minimum
+> MAF filter of 1%–­10% can substantially speed up computation time.
+> Appropriate thresholds depend on coverage, sample size (how many
+> copies does an MAF threshold correspond to) and the type of downstream
+> analysis.
+>
+> For comparison of parameter estimates for multiple populations, it is
+> important to ensure that data are obtained for a shared set of sites
+> and that SNP polarization (which allele we track the frequency of) is
+> consistent. For programs such as angsd where population-­specific
+> estimates are obtained by analysing the data from each population
+> separately, a good strategy is to first conduct a global SNP calling
+> with all samples and then restrict population-­specific analysis to
+> those SNPs with consistent major and minor allele designations
+> (-­doMajorMinor 3 in angsd) no MAF or SNP p-­value filter (because
+> that would incorrectly generate “missing data” if a site is fixed in a
+> particular population).
+
+:::
+
+## What about machine learning?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fng.806/MediaObjects/41588_2011_Article_BFng806_Fig4_HTML.jpg?as=webp){width=100%}
+
+::: {.flushright .smallr}
+
+@depristo_FrameworkVariationDiscovery_2011
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+<h5>Variant Quality Score Recalibration</h5>
+
+Motivation: look at context statistics and integrate over *multiple*
+dimensions
+
+- training data: subset of known variants (from validated resources,
+  e.g. 1000 Genomes)
+- compile multiple statistics (allele depth, read count, quality, ...)
+- fit Gaussian mixture model
+- reassign quality scores to variant call set
+
+::: {.fragment}
+
+Database of known variants often *not* known for non-model organisms.
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+Key take home: thresholds that previously were binary yes/no filters
+now depend on context; for instance, an AD (allele depth) cutoff of 4
+will in VQSR sometimes pass, sometimes not, depending on other
+information
+
+Figure legend:
+
+> (a) Relationship in the HiSeq call set between strand bias and
+> quality by depth for genomic locations in HapMap3 (red) and dbSNP
+> (orange) used for training the variant quality score recalibrator
+> (left), (b) and the same annotations applied to differentiate likely
+> true positive (green) from false positive (purple) new SNPs. (c–e)
+> Quality tranches in the recalibrated HiSeq (c), exome (d) and
+> low-pass CEU (e) calls beginning with (top) the highest quality but
+> smallest call set with an estimated false positive rate among new
+> SNP calls of <1/1000 to a more comprehensive call set (bottom) that
+> includes effectively all true positives in the raw call set along
+> with more false positive calls for a cumulative false positive rate
+> of 10%. Each successive call set contains within it the previous
+> tranche's true- and false-positive calls (shaded bars) as well as
+> tranche-specific calls of both classes (solid bars). The tranche
+> selected for further analyses here is indicated.
+
+:::
+
+# Filtering VCF with variant sites
+
+## Monkeyflower variants
+
+```{bash }
+#| label: bcftools-stats-redyellow-variantsites
+#| echo: true
+#| eval: true
+bcftools stats variantsites.vcf.gz | grep "^SN"
+```
+
+Use `vcftools` to compile data to generate summary statistics
+
+Plot and select thresholds
+
+## Mean depth and variant quality distribution
+
+:::: {.columns .smallr}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: mean-depth
+#| echo: true
+#| eval: true
+#| out-width: 80%
+#| fig-align: center
+#| fig-width: 14
+#| code-fold: true
+vcf <- "variantsites.vcf.gz"
+system(paste("vcftools --gzvcf", vcf, "--site-depth 2>/dev/null"))
+data <- read.table("out.ldepth", header=TRUE)
+x <- as.data.frame(table(data$SUM_DEPTH))
+lower <- 0.8 * median(data$SUM_DEPTH)
+upper <- median(data$SUM_DEPTH) + 2*sd(data$SUM_DEPTH)
+ggplot(x, aes(x=as.numeric(as.character(Var1)), y=Freq)) + geom_line() +
+  xlab("Depth") + ylab("bp") + xlim(0, signif(upper, digits=0)) +
+  geom_vline(xintercept=lower, color="red", size=1.3) +
+  geom_vline(xintercept=upper, color="red", size=1.3) +
+  ggtitle("Example threshold: 0.8X median depth, median depth + 2sd")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: variant-quality-score-distribution
+#| echo: true
+#| eval: true
+#| out-width: 80%
+#| fig-width: 14
+#| fig-align: center
+#| code-fold: true
+system(paste("vcftools --gzvcf", vcf, "--site-quality 2>/dev/null"))
+data <- read.table("out.lqual", header=TRUE)
+ggplot(subset(data, QUAL<1000), aes(x=QUAL)) +
+  geom_histogram(fill="white", color="black", bins=50) +
+  xlab("Quality value") + ylab("Count") +
+  geom_vline(xintercept=30, color="red", size=1.3) +
+  ggtitle("Example threshold: Q30")
+```
+
+:::
+
+::::
+
+## Missing data per individual and site
+
+:::: {.columns .smallr}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: missing-indv
+#| echo: true
+#| eval: true
+#| out-width: 80%
+#| fig-align: center
+#| fig-width: 14
+#| code-fold: true
+system(paste("vcftools --gzvcf", vcf, "--missing-indv 2>/dev/null"))
+data <- read.table("out.imiss", header=TRUE)
+ggplot(data, aes(x=F_MISS, y=INDV)) + geom_point(size=3) +
+  ggtitle("Missing data per individual")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: missing-site
+#| echo: true
+#| eval: true
+#| out-width: 80%
+#| fig-align: center
+#| fig-width: 14
+#| code-fold: true
+system(paste("vcftools --gzvcf", vcf, "--missing-site 2>/dev/null"))
+data <- read.table("out.lmiss", header=TRUE)
+ggplot(data, aes(x=F_MISS)) +
+  geom_histogram(fill="white", color="black", bins=10) +
+  xlab("F_MISS") + ylab("Count") +
+  geom_vline(xintercept=0.25, color="red", size=1.3) +
+  ggtitle("Missing data per site: example threshold F_MISS=0.25")
+```
+
+:::
+
+::::
+
+## Minor allele frequency and heterozygosity
+
+:::: {.columns .smallr}
+
+::: {.column width="50%"}
+
+```{r }
+#| label: minor-allele-frequency
+#| echo: true
+#| eval: true
+#| out-width: 60%
+#| fig-width: 14
+#| fig-align: center
+#| code-fold: true
+system(paste("vcftools --gzvcf", vcf, "--freq2 --max-alleles 2 2>/dev/null"))
+data <- read.table("out.frq", skip=1)
+colnames(data) <- c("CHROM", "POS", "N_ALLELES", "N_CHR", "FREQ1", "FREQ2")
+data$MAF <- apply(data, 1, function(x) as.numeric(min(x[5], x[6])))
+ggplot(data, aes(x=MAF)) +
+  geom_histogram(fill="white", color="black", bins=10) +
+  xlab("MAF") + ylab("Count") +
+  geom_vline(xintercept=0.1, color="red", size=1.3) +
+  ggtitle("Minor allele frequency: example threshold MAF=0.1")
+```
+
+But! Statistics based on diversity or the SFS should **not** be
+filtered on MAF
+
+:::
+
+::: {.column width="50%"}
+
+```{r }
+#| label: heterozygosity
+#| echo: true
+#| eval: true
+#| out-width: 60%
+#| fig-width: 14
+#| fig-align: center
+#| code-fold: true
+system(paste("vcftools --gzvcf", vcf, "--het 2>/dev/null"))
+data <- read.table("out.het", header=TRUE)
+ggplot(data, aes(x=F, y=INDV)) + geom_point(size=3) +
+  ggtitle("Inbreeding coefficient")
+```
+
+- F=0: Hardy-Weinberg Equilibrium
+- F>0: deficit of heterozygotes; inbreedeng, allele dropout
+- F<0: surplus of heterozygotes; could be sample contamination, poor
+  sequence quality (mismapping)
+
+:::
+
+::::
+
+# Filtering VCF with invariant sites
+
+## Monkeyflower call set with invariant sites
+
+```{bash }
+#| label: bcftools-stats-redyellow-allsites
+#| echo: true
+#| eval: true
+bcftools stats allsites.vcf.gz | grep "^SN"
+```
+
+Filtering as before but excluding MAF, variant quality filters
+
+# Filtering on bam files
+
+## Motivation
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Some organisms generate a **lot** of data...
+
+::: {.fragment fragment-index=2 .large}
+
+Total variant file size: `7.4T`!!!
+
+Without invariant sites!
+
+:::
+
+::: {.fragment fragment-index=3}
+
+Solution: sequence masks
+
+> ...it may be possible for more advanced users to achieve similar
+> results with existing tools. For example, with the inclusion of a
+> user-created "accessibility mask", it should be possible to avoid
+> the "missing sites" effect...
+
+::: {.flushright .smallr}
+
+[@korunes_PixyUnbiasedEstimation_2021]
+
+:::
+
+:::
+
+:::
+
+::: {.column width="50%" .fragment fragment-index=1}
+
+<h5>Spruce variant files, chromosome 1</h5>
+
+```{bash }
+#| label: spruce-file-size
+#| echo: true
+#| eval: false
+48G     PA_chr01_10.vcf.gz
+45G     PA_chr01_11.vcf.gz
+51G     PA_chr01_12.vcf.gz
+50G     PA_chr01_13.vcf.gz
+45G     PA_chr01_14.vcf.gz
+51G     PA_chr01_15.vcf.gz
+51G     PA_chr01_16.vcf.gz
+35G     PA_chr01_17.vcf.gz
+49G     PA_chr01_1.vcf.gz
+50G     PA_chr01_2.vcf.gz
+52G     PA_chr01_3.vcf.gz
+51G     PA_chr01_4.vcf.gz
+54G     PA_chr01_5.vcf.gz
+51G     PA_chr01_6.vcf.gz
+37G     PA_chr01_7.vcf.gz
+51G     PA_chr01_8.vcf.gz
+47G     PA_chr01_9.vcf.gz
+```
+
+:::
+
+::::
+
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -103,7 +614,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -181,7 +692,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -257,7 +768,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -338,7 +849,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -417,7 +928,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -497,7 +1008,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -573,7 +1084,7 @@ Show coverage tracks from e.g., krill
 
 <!-- markdownlint-enable MD013 -->
 
-## Coverage tracks
+## Coverage tracks and sequence masks
 
 <!-- markdownlint-disable MD013 -->
 
@@ -649,145 +1160,98 @@ Show coverage tracks from e.g., krill
 
 ## Filters and masks
 
-Implement:
+:::: {.columns}
 
-## General filters {.smallest}
+::: {.column width="20%"}
 
-<!-- markdownlint-disable MD013 -->
-
-| Category                                       | Filter                                      | Recommendation (examples)                                              |
-|------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
-| General filters                                | Base quality                                | Recalibrate / <Q20                                                     |
-|                                                | Mapping quality                             | MAQ < 20 / improper pairs                                              |
-|                                                | Minimum depth and/ or number of individuals | Varies; e.g. <50% individuals, <0.8X average depth                     |
-|                                                | Maximum depth                               | 1-2 sd above median depth                                              |
-|                                                | Duplicate reads                             | Remove                                                                 |
-|                                                | Indels                                      | Realign reads / haplotype-based caller / exclude bases flanking indels |
-|                                                | Overlapping sections of paired-­end reads   | Soft-clip to avoid double-counting                                     |
-| Filters on polymorphic sites                   | $p$-value                                   | $10^{-6}$                                                              |
-|                                                | SNPs with more than two alleles             | Filter; methods often assume bi-allelic sites                          |
-|                                                | Minimum minor allele frequency (MAF)        | 1%-10% for some analyses (PCA/admixture/LD/$\mathsf{F_{ST}}$           |
-| Restricting analysis to a predefined site list | List of global SNPs                         | Use global call set for analyses requiring shared sites                |
-
-: Key data filters [Table 3 @lou_BeginnerGuideLowcoverage_2021, p.
-  5974] {#tbl-key-data-filters}
-
-<!-- markdownlint-enable MD013 -->
-
-::: {.notes }
-
-NB: bypassing recommendations often means doing custom analyses. For
-instance, @talla_DissectingEffectsSelection_2019 include GATK
-tri-allelic sites due to different bi-allelic pairs segregating in
-different subpopulations (e.g. A/G in pop 1, A/T in pop 2)
-
-#### Verbose explanations of filters
-
-Source: [@lou_BeginnerGuideLowcoverage_2021]
-
-Base quality scores are factored into the calculation of genotype
-likelihoods, so if they accurately reflect the probability of
-sequencing error, bases with low scores also carry useful information.
-However, base quality scores are sometimes miscalibrated, so noise may
-be reduced if bases with scores below a threshold (e.g., 20) are
-either trimmed off prior to analysis or ignored. Alternatively, all
-base quality scores can be recalibrated based on estimated error
-profiles in the data (see Section 3.1).
-
-Mapping quality is not considered in genotype likelihood estimation in
-currently available tools, so it is often advisable to remove
-low-­confidence and/or nonuniquely mapped reads prior to analysis
-(e.g., reads with mapping quality <20). Filtering out reads that do
-not map in proper pairs should also further increase confidence in
-reads being mapped to the correct location, but could cause biases in
-regions with structural variation.
-
-To avoid sites with low or confounding data support in downstream
-analysis, minimum depth and/or minimum number of individual filters
-can be used to exclude sites with much reduced sequencing coverage
-compared to the rest of the genome (e.g., regions with low unique
-mapping rates, such as repetitive sequences). Appropriate thresholds
-will vary between data sets, but could, for example, exclude sites
-with read data for <50% of individuals (globally or within each
-population), or with <0.8× average depth across individuals (after
-filtering on mapping quality)
-
-Maximum depth filters are used to exclude sites with exceptionally
-high coverage (e.g., regions that are susceptible to dubious mapping,
-such as copy number variants). Common maximum depth thresholds could
-be one or two standard deviations above the median genome-­wide depth.
-
-PCR and optical duplicates can give inflated impressions of how many
-unique molecules have been sequenced, which—­particularly in the
-presence of preferential amplification of one allele—­ could bias
-genotype likelihood estimation. We therefore recommend removing
-duplicate reads prior to any analysis.
-
-Reads mapped across indels are frequently misaligned, especially if
-the ends of reads span an indel. To avoid false SNP calls, we
-recommend either using dedicated tools to realign reads covering
-indels, using a haplotype-­based variant caller (e.g., freebayes or
-gatk) to estimate genotype likelihoods, or excluding bases flanking
-indels.
-
-If the DNA insert in a library fragment is shorter than the combined
-length of paired reads, there will be a section of overlap between the
-forward and reverse reads. While some variant callers (e.g., gatk)
-account for the pseudoreplication in overlapping ends of read pairs,
-the current implementation of angsd treats each end of a read pair as
-independent (this may change in a future release (T. Korneliussen,
-personal communication)). When treated as independent, read support
-for overlapping sections will be “double counted,” which may bias
-genotype likelihoods. A conservative approach is to soft-­clip one of
-the overlapping read ends.
-
-The significance threshold (often in the form of maximum p-­value) can
-be adjusted to fine-­tune the sensitivity of polymorphism detection,
-with lower p-­values leading to fewer, but higher confidence, SNP
-calls. A commonly used cut-­off is 10 −6.
-
-Most software programs for downstream analyses assume that all SNPs
-are biallelic, so SNPs with more than two alleles can be filtered out
-in the SNP identification step to avoid violation of such assumptions.
-
-For many types of analysis, such as PCA, admixture analysis, detection
-of FST outliers and estimation of LD, low-­frequency SNPs are
-uninformative and can even bias results (e.g. Linck & Battey, 2019;
-Roesti et al., 2012). For those types of analysis, imposing a minimum
-MAF filter of 1%–­10% can substantially speed up computation time.
-Appropriate thresholds depend on coverage, sample size (how many
-copies does an MAF threshold correspond to) and the type of downstream
-analysis.
-
-For comparison of parameter estimates for multiple populations, it is
-important to ensure that data are obtained for a shared set of sites
-and that SNP polarization (which allele we track the frequency of) is
-consistent. For programs such as angsd where population-­specific
-estimates are obtained by analysing the data from each population
-separately, a good strategy is to first conduct a global SNP calling
-with all samples and then restrict population-­specific analysis to
-those SNPs with consistent major and minor allele designations
-(-­doMajorMinor 3 in angsd) no MAF or SNP p-­value filter (because
-that would incorrectly generate “missing data” if a site is fixed in a
-particular population).
+```{bash }
+#| label: bedtools-maskfasta-make-genome-mask-label
+#| echo: false
+#| eval: true
+echo
+echo "Reference"
+echo "Coverage mask"
+```
 
 :::
 
-## Gentotype likelihoods
+::: {.column width="80%"}
 
-::: {.notes }
+```{bash }
+#| label: bedtools-maskfasta-make-genome-mask
+#| echo: false
+#| eval: true
+REF=M_aurantiacus_v1.fasta
+head -n 2 ${REF}
+echo -e "LG4\t10\t20\nLG4\t34\t45\nLG4\t57\t59\n" | \
+ bedtools maskfasta -fi <(echo -e "LG4\t0\t60" | \
+   bedtools maskfasta -fi ${REF} -bed - -fo /dev/stdout -mc 0 | \
+   head -n 2) -bed - -fo /dev/stdout -mc 1 | tail -n 1
+```
 
-NB: samtools and GATK may actually produce different genotypes despite
-having identical GLs. Samtools applies prior $10^{-3}$ to het call,
-GATK has no prior [@li_BetterUnderstandingArtifacts_2014]
+:::
+
+::::
+
+::: {.fragment}
+
+Mask could also represent annotation features, such as exons,
+four-fold degenerate sites etc to be combined with coverage mask:
+
+:::: {.columns}
+
+::: {.column width="20%"}
+
+```{bash }
+#| label: bedtools-maskfasta-make-genome-mask-exons-label
+#| echo: false
+#| eval: true
+echo
+echo "Reference"
+echo "Coverage mask"
+echo "Exons"
+echo
+echo "Combined"
+```
+
+:::
+
+::: {.column width="80%"}
+
+```{bash }
+#| label: bedtools-maskfasta-make-genome-mask-exons
+#| echo: false
+#| eval: true
+REF=M_aurantiacus_v1.fasta
+head -n 2 ${REF}
+echo -e "LG4\t10\t20\nLG4\t34\t45\nLG4\t57\t59\n" | \
+ bedtools maskfasta -fi <(echo -e "LG4\t0\t60" | \
+   bedtools maskfasta -fi ${REF} -bed - -fo /dev/stdout -mc 1 | \
+   head -n 2) -bed - -fo /dev/stdout -mc 0 | tail -n 1
+echo -e "LG4\t5\t30\nLG4\t40\t50\n" | \
+ bedtools maskfasta -fi <(echo -e "LG4\t0\t60" | \
+   bedtools maskfasta -fi ${REF} -bed - -fo /dev/stdout -mc 1 | \
+   head -n 2) -bed - -fo /dev/stdout -mc 0 | tail -n 1
+echo
+echo -e "LG4\t10\t20\nLG4\t40\t45\n" | \
+ bedtools maskfasta -fi <(echo -e "LG4\t0\t60" | \
+   bedtools maskfasta -fi ${REF} -bed - -fo /dev/stdout -mc 1 | \
+   head -n 2) -bed - -fo /dev/stdout -mc 0 | tail -n 1
+```
+
+:::
+
+::::
+
+:::
+
+::: {.fragment}
+
+Use with `vcftools --mask` to restrict analyses to certain positions.
 
 :::
 
 ## Bibliography {.unnumbered .unlisted}
 
 ::: { #refs }
-:::
-
-::: {.notes }
-ART: <https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm>
 :::
