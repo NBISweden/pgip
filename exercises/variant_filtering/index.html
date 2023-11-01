@@ -351,7 +351,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">29-Oct-2023</p>
+      <p class="date">01-Nov-2023</p>
     </div>
   </div>
   
@@ -365,7 +365,7 @@ div.csl-indent {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Compute environment setup
+<i class="fa-solid fa-server" aria-label="server"></i> Compute environment setup
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -540,7 +540,7 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 </div>
 <p>Keep track of these numbers as we will use them to evaluate the effects of filtering.</p>
 <section id="generate-random-subset-of-variants" class="level3"><h3 class="anchored" data-anchor-id="generate-random-subset-of-variants">Generate random subset of variants</h3>
-<p>Depending on the size of a study, both in terms of reference sequence and number of samples, the VCF output can become large; a VCF file may in fact contain millions of variants and be several hundred GB! We want to create filters by examining distributions of VCF quality metrics and setting reasonable cutoffs. In order to decrease run time, we will look at a random sample of sites. We use the <code>vcflib</code> program <code>vcfrandomsample</code> to randomly sample approximately 100,000 sites from our VCF file:</p>
+<p>Depending on the size of a study, both in terms of reference sequence and number of samples, the VCF output can become large; a VCF file may in fact contain millions of variants and be several hundred GB! We want to create filters by examining distributions of VCF quality metrics and setting reasonable cutoffs. In order to decrease run time, we will look at a random sample of sites. We use the <code>vcflib</code> program <code>vcfrandomsample</code> to randomly sample approximately 100,000 sites from our VCF file<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter r = 100000 / total number of variants</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view variantsites.vcf.gz <span class="kw">|</span> <span class="ex">vcfrandomsample</span> <span class="at">-r</span> 0.8 <span class="kw">|</span><span class="dt">\</span></span>
@@ -549,11 +549,11 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats variantsites.subset.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"number of records:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SN  0   number of records:  102827</code></pre>
+<pre><code>SN  0   number of records:  102775</code></pre>
 </div>
 </div>
 <p>The <code>-r</code> parameter sets the <em>rate</em> of sampling which is why we get <em>approximately</em> 100,000 sites. You will need to adjust this parameter accordingly.</p>
-<p>We will now use <code>vcftools</code> to compile statistics. By default, <code>vcftools</code> outputs results to files with a prefix <code>out.</code> in the current directory. You can read up on settings and options by consulting the man pages with <code>man vcftools</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Therefore, we define a variable <code>OUT</code> where we will output our quality metrics, along with a variable referencing our variant subset:</p>
+<p>We will now use <code>vcftools</code> to compile statistics. By default, <code>vcftools</code> outputs results to files with a prefix <code>out.</code> in the current directory. You can read up on settings and options by consulting the man pages with <code>man vcftools</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Therefore, we define a variable <code>OUT</code> where we will output our quality metrics, along with a variable referencing our variant subset:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> vcftools</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">OUT</span><span class="op">=</span>vcftools/variantsites.subset</span>
@@ -562,28 +562,28 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 </section><section id="generate-statistics-for-filters" class="level3"><h3 class="anchored" data-anchor-id="generate-statistics-for-filters">Generate statistics for filters</h3>
 <p><code>vcftools</code> can compile many different kinds of statistics. Below we will focus on the ones relevant to our data filters. We will generate metrics and plot results as we go along, with the goal of generating a set of filtering thresholds to apply to the data.</p>
 <section id="total-depth-per-site" class="level4"><h4 class="anchored" data-anchor-id="total-depth-per-site">Total depth per site</h4>
-<p>To get a general overview of depth of coverage, we first generate the average depth per <em>sample</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>:</p>
+<p>To get a general overview of depth of coverage, we first generate the average depth per <em>sample</em><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">$VCF</span> <span class="at">--depth</span> <span class="at">--out</span> <span class="va">$OUT</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.idepth</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> MEAN_DEPTH:mean <span class="va">${OUT}</span>.idepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_SITES MEAN_DEPTH
-PUN-R-ELF   102639  8.6074
-PUN-R-JMC   102623  9.54616
-PUN-R-LH    102672  9.27622
-PUN-R-MT    102620  9.49699
-PUN-R-UCSD  102711  8.94217
-PUN-Y-BCRD  102620  9.9117
-PUN-Y-INJ   102595  8.28261
-PUN-Y-LO    102581  7.86116
-PUN-Y-PCT   102578  9.19924
-PUN-Y-POTR  102552  8.54969
+PUN-R-ELF   102579  8.55438
+PUN-R-JMC   102574  9.50464
+PUN-R-LH    102613  9.18976
+PUN-R-MT    102573  9.42235
+PUN-R-UCSD  102657  8.90387
+PUN-Y-BCRD  102572  9.88846
+PUN-Y-INJ   102533  8.17657
+PUN-Y-LO    102538  7.81869
+PUN-Y-PCT   102525  9.11053
+PUN-Y-POTR  102493  8.42413
 MEAN_DEPTH:mean
-8.97</code></pre>
+8.90</code></pre>
 </div>
 </div>
-<p>The average coverage over all samples is 9.0X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
+<p>The average coverage over all samples is 8.9X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
 <p>Then we calculate depth per site to see if we can identify reasonable depth cutoffs:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">$VCF</span> <span class="at">--site-depth</span> <span class="at">--out</span> <span class="va">$OUT</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
@@ -595,7 +595,7 @@ LG4 2130    11  21</code></pre>
 </div>
 </div>
 <p>So, for each position, we have a value (column <code>SUM_DEPTH</code>) for the total depth across all samples.</p>
-<p>We plot the distribution of total depths by counting how many times each depth is observed. This can be done with <code>csvtk summary</code> where we count positions and group (<code>-g</code>) by the <code>SUM_DEPTH</code> value:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>We plot the distribution of total depths by counting how many times each depth is observed. This can be done with <code>csvtk summary</code> where we count positions and group (<code>-g</code>) by the <code>SUM_DEPTH</code> value:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-g</span> SUM_DEPTH <span class="at">-f</span> POS:count <span class="at">-w</span> 0 <span class="va">${OUT}</span>.ldepth <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> sort <span class="at">-t</span> <span class="at">-k</span> 1:n <span class="kw">|</span><span class="dt">\</span></span>
@@ -616,7 +616,7 @@ LG4 2130    11  21</code></pre>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> 3:min,3:q1,3:median,3:mean,3:q3,3:max,3:stdev vcftools/variantsites.subset.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SUM_DEPTH:min   SUM_DEPTH:q1    SUM_DEPTH:median    SUM_DEPTH:mean  SUM_DEPTH:q3    SUM_DEPTH:max   SUM_DEPTH:stdev
-1.00    55.00   72.00   89.49   88.00   33988.00    247.80</code></pre>
+1.00    55.00   72.00   88.81   88.00   33988.00    240.57</code></pre>
 </div>
 </div>
 <p>The range from the first quartile (<code>q1</code>) to the third (<code>q3</code>) is 55-88, showing most sites have a depth between 50-100X. We redraw the plot to zoom in on the peak:</p>
@@ -689,7 +689,7 @@ LG4 2130    2   14  0.857143    0.142857</code></pre>
 </div>
 <figcaption class="figure-caption">Figure&nbsp;4: Distribution of minor allele frequencies.</figcaption></figure>
 </div>
-<p>Since our variant file consists of 10 individuals, that is, 20 chromosomes, there are only so many frequencies that we can observe, which is why the histogram looks a bit disconnected<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. In fact, given 20 chromosomes, MAF=0.05 corresponds to one alternative allele among all individuals (<em>singleton</em>), MAF=0.1 to two, and so on. The maximum value is 0.5, which is to be expected, as it is a <em>minor</em> allele frequency. We note that there are more sites with a low minor allele frequency, which in practice means there are many singleton variants.</p>
+<p>Since our variant file consists of 10 individuals, that is, 20 chromosomes, there are only so many frequencies that we can observe, which is why the histogram looks a bit disconnected<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. In fact, given 20 chromosomes, MAF=0.05 corresponds to one alternative allele among all individuals (<em>singleton</em>), MAF=0.1 to two, and so on. The maximum value is 0.5, which is to be expected, as it is a <em>minor</em> allele frequency. We note that there are more sites with a low minor allele frequency, which in practice means there are many singleton variants.</p>
 <p>This is where filtering on MAF can get tricky. Singletons may correspond to sequencing error, but if too hard a filter is applied, the resulting site frequency spectrum (SFS) will be skewed. For statistics that are based on the SFS, this may lead biased estimates. Since we will be applying such a statistic, we do not filter on the MAF here. Note, however, that for other applications, such as population structure, it may be warranted to more stringently (say, MAF&gt;0.1) filter out low-frequency variants.</p>
 </section><section id="missing-data-for-individuals-and-sites" class="level4"><h4 class="anchored" data-anchor-id="missing-data-for-individuals-and-sites">Missing data for individuals and sites</h4>
 <p>The proportion missing data per individual can indicate whether the input DNA was of poor quality, and that the individual should be excluded from analysis. Note that in this case, missing data refers to a missing genotype call and not sequencing depth!</p>
@@ -699,8 +699,8 @@ LG4 2130    2   14  0.857143    0.142857</code></pre>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.imiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
-PUN-R-ELF   102827  0   6942    0.0675115
-PUN-R-JMC   102827  0   6596    0.0641466</code></pre>
+PUN-R-ELF   102775  0   6878    0.0669229
+PUN-R-JMC   102775  0   6595    0.0641693</code></pre>
 </div>
 </div>
 <p>and look at the results, focusing on the <code>F_MISS</code> column (proportion missing sites):</p>
@@ -752,19 +752,19 @@ LG4 2130    20  0   6   0.3</code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.het</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   72317   65381.2 87106   0.31926
-PUN-R-JMC   68004   65583.2 87315   0.11140
-PUN-R-LH    70708   65822.9 87642   0.22389
-PUN-R-MT    69743   65570.4 87259   0.19239
-PUN-R-UCSD  74427   65335.4 87289   0.41413
-PUN-Y-BCRD  69250   64731.6 86103   0.21142
-PUN-Y-INJ   71085   63941.4 84859   0.34151
-PUN-Y-LO    72660   63183.8 84256   0.44970
-PUN-Y-PCT   74334   64281.6 85770   0.46781
-PUN-Y-POTR  71445   64288.5 85542   0.33672</code></pre>
+PUN-R-ELF   72391   65494.8 87199   0.31774
+PUN-R-JMC   68041   65692.5 87409   0.10814
+PUN-R-LH    70774   65892.9 87673   0.22411
+PUN-R-MT    69750   65639.6 87301   0.18976
+PUN-R-UCSD  74559   65452.7 87399   0.41494
+PUN-Y-BCRD  69213   64766.8 86088   0.20854
+PUN-Y-INJ   71137   63991.8 84868   0.34227
+PUN-Y-LO    72661   63238.0 84279   0.44784
+PUN-Y-PCT   74386   64372.1 85840   0.46646
+PUN-Y-POTR  71596   64422.1 85659   0.33780</code></pre>
 </div>
 </div>
-<p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, which you can verify by substituting the variables in the output.</p>
+<p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, which you can verify by substituting the variables in the output.</p>
 <p>If F is positive (<span class="math inline">\(O(HOM) &gt; E(HOM)\)</span>), i.e., there are more observed homozygotes than expected, then there is a deficit of heterozygotes, which could be a sign of inbreeding or signs of allelic dropout in case of low sequencing coverage.</p>
 <p>If F is negative, there are fewer observed homozygotes than expected, or conversely, an excess of heterozygotes. This could be indicative of poor sequence quality (bad mappings) or contamination <span class="citation" data-cites="purcell_PLINKToolSet_2007">(<a href="#ref-purcell_PLINKToolSet_2007" role="doc-biblioref">Purcell et al., 2007</a>)</span>.</p>
 <p>The underlying assumption is HWE, which holds for F=0.</p>
@@ -803,11 +803,11 @@ Answer
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--het</span> <span class="at">--stdout</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   41777   37662.9 56566   0.21764
-PUN-R-JMC   37367   37744.1 56678   -0.01992
-PUN-R-LH    39858   37838.5 56792   0.10655
-PUN-R-MT    38847   37591.6 56363   0.06688
-PUN-R-UCSD  43503   37436.8 56365   0.32048</code></pre>
+PUN-R-ELF   41744   37682.1 56552   0.21526
+PUN-R-JMC   37306   37756.0 56674   -0.02379
+PUN-R-LH    39879   37856.4 56778   0.10689
+PUN-R-MT    38802   37605.8 56353   0.06381
+PUN-R-UCSD  43540   37467.4 56380   0.32109</code></pre>
 </div>
 </div>
 </div>
@@ -843,14 +843,14 @@ PUN-R-UCSD  43503   37436.8 56365   0.32048</code></pre>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="va">$OUTVCF</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  37609
+SN  0   number of records:  37680
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 37416
+SN  0   number of SNPs: 37474
 SN  0   number of MNPs: 0
 SN  0   number of indels:   0
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1663
-SN  0   number of multiallelic SNP sites:   690</code></pre>
+SN  0   number of multiallelic sites:   1649
+SN  0   number of multiallelic SNP sites:   680</code></pre>
 </div>
 </div>
 <p>Quite a substantial portion variants have in fact been removed, which here can most likely be attributed to the low average sequencing coverage.</p>
@@ -1090,7 +1090,7 @@ LG4 346 409</code></pre>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">REF</span><span class="op">=</span>M_aurantiacus_v1.fasta</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx <span class="va">${REF}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, we use the command <code>bedtools makefasta</code> to make a sequence mask file in FASTA format consisting solely of <code>1</code>’s:<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>Now, we use the command <code>bedtools makefasta</code> to make a sequence mask file in FASTA format consisting solely of <code>1</code>’s:<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"} {print $1, 0, $2}'</span> <span class="va">${REF}</span>.fai <span class="op">&gt;</span> <span class="va">${REF}</span>.bed</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span> <span class="at">-mc</span> 1 <span class="at">-fo</span> <span class="va">${REF}</span>.mask.fa <span class="at">-bed</span> <span class="va">${REF}</span>.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1122,7 +1122,7 @@ genome  1   79065   100000  0.79065
 <p>Note that 0 and 1 in the <code>bedtools genomecov</code> output refers to coverage (i.e., absence/presence) and not unmask/mask as in the mask FASTA file.</p>
 </section><section id="example-using-a-sequence-mask-with-vcftools" class="level4"><h4 class="anchored" data-anchor-id="example-using-a-sequence-mask-with-vcftools">Example: Using a sequence mask with <code>vcftools</code>
 </h4>
-<p>The sequence mask file can be used with <code>vcftools</code> with the option <code>--mask</code>. Before we use, however, we need to convert the mask file to one sequence per line<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. <code>seqkit</code> is a neat tool that allows us to do this without hassle. As an example, we then perform a genetic diversity calculation with and without mask file to highlight the difference:</p>
+<p>The sequence mask file can be used with <code>vcftools</code> with the option <code>--mask</code>. Before we use, however, we need to convert the mask file to one sequence per line<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. <code>seqkit</code> is a neat tool that allows us to do this without hassle. As an example, we then perform a genetic diversity calculation with and without mask file to highlight the difference:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="va">WIDEMASK</span><span class="op">=</span><span class="va">${REF}</span>.unmask.wide.fa</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> seq <span class="at">-w</span> 0 <span class="va">${REF}</span>.unmask.fa <span class="op">&gt;</span> <span class="va">${WIDEMASK}</span></span>
@@ -1152,7 +1152,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This exercise is optional. It was created prior to the previos filtering exercises and may contain overlapping explanations and information. The procedure closely resembles that from the section on genotype depth data above, but depth profiles are now calculated from BAM files, which requires different tools.</p>
+<p>This exercise is optional. It was created prior to the previous filtering exercises and may contain overlapping explanations and information. The procedure closely resembles that from the section on genotype depth data above, but depth profiles are now calculated from BAM files, which requires different tools.</p>
 </div>
 </div>
 <p>In this section, we will restrict our attention to coverage-based filters, with the aim of generating <em>sequence masks</em> to denote regions of a reference sequence that contain sufficient information across individuals and populations. Furthermore, the masks will be applied in the context of genetic diversity calculations, in which case specific filters on polymorphic sites (e.g., <em>p</em>-value or minimum minor allele frequency (MAF)) should <strong>not</strong> be applied (all sites contain information).</p>
@@ -1184,7 +1184,7 @@ LG4 56  62  7</code></pre>
 <p>To get an idea of what the coverage looks like over the chromsome, we will make use of two versatile programs for dealing with genomic interval data and delimited text files. Both programs operate on streams, enabling the construction of powerful piped commands at the command line (see below).</p>
 <p>The first is <code>bedtools</code>, which consists of a set of tools to perform <em>genome arithmetic</em> on <code>bed</code>-like file formats. The <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><code>bed</code></a> format is a tab-delimited format that at its simplest consists of the three columns <code>chrom</code> (the chromosome name), <code>chromStart</code>, and <code>chromEnd</code>, the start and end coordinates of a region.</p>
 <p>The second is <code>csvtk</code>, a program that provides tools for dealing with tab- or comma-separated text files. Avid <code>R</code> users will see that many of the subcommands are similar to those in the <a href="https://dplyr.tidyverse.org/"><code>tidyverse dplyr</code></a> package.</p>
-<p>We can use these programs in a one-liner to generate a simple coverage plot (<a href="#fig-plot-coverage">Figure&nbsp;10</a>)<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>We can use these programs in a one-liner to generate a simple coverage plot (<a href="#fig-plot-coverage">Figure&nbsp;10</a>)<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="op">&lt;(</span><span class="ex">bedtools</span> makewindows <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-w</span> 1000<span class="op">)</span> <span class="dt">\</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">-b</span> PUN-Y-INJ.per-base.bed.gz <span class="at">-wa</span> <span class="at">-wb</span> <span class="kw">|</span> <span class="dt">\</span></span>
@@ -1199,7 +1199,7 @@ LG4 56  62  7</code></pre>
 </div>
 <figcaption class="figure-caption">Figure&nbsp;10: Coverage for sample PUN-Y-INJ in 1kb windows. Experiment changing the window size (<code>-w</code>) parameter to change smoothing.</figcaption></figure>
 </div>
-<p>Apparently there are some high-coverage regions that could be associated with, e.g., collapsed repeat regions in the assembly. Let’s compile coverage results for all samples, using bash string manipulation to generate file prefix<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>Apparently there are some high-coverage regions that could be associated with, e.g., collapsed repeat regions in the assembly. Let’s compile coverage results for all samples, using bash string manipulation to generate file prefix<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [A-Z] matches characters A-Z, * is a wildcard character that matches</span></span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co"># anything</span></span>
@@ -1234,7 +1234,7 @@ PUN-Y-POTR  total   100000  795201  7.95    0   205</code></pre>
 <p>to get the total coverage 84.78, which gives a hint at where the diploid coverage peak should be.</p>
 </section><section id="sample-set-coverages" class="level3"><h3 class="anchored" data-anchor-id="sample-set-coverages">Sample set coverages</h3>
 <p>In this section, we will summarize coverage information for different sample sets, the motivation being that different filters may be warranted depending on what samples are being analysed. For instance, the coverage cutoffs for all samples will most likely be different from those applied to the subpopulations. In practice this means summing coverage tracks like those in <a href="#fig-plot-coverage">Figure&nbsp;10</a> for all samples.</p>
-<p>We can combine the coverage output from different samples with <code>bedtools unionbedg</code>. We begin by generating a coverage file for all samples, where the output columns will correspond to individual samples. To save typing, we collect the sample names and generate matching BED file names to pass as arguments to options <code>-names</code> and <code>-i</code>, respectively. Also, we include positions with no coverage (<code>-empty</code>) which requires the use of a genome file (option <code>-g</code>). The BED output is piped to <code>bgzip</code> which compresses the output, before finally indexing with <code>tabix</code><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>.</p>
+<p>We can combine the coverage output from different samples with <code>bedtools unionbedg</code>. We begin by generating a coverage file for all samples, where the output columns will correspond to individual samples. To save typing, we collect the sample names and generate matching BED file names to pass as arguments to options <code>-names</code> and <code>-i</code>, respectively. Also, we include positions with no coverage (<code>-empty</code>) which requires the use of a genome file (option <code>-g</code>). The BED output is piped to <code>bgzip</code> which compresses the output, before finally indexing with <code>tabix</code><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLES</span><span class="op">=</span><span class="va">$(</span><span class="ex">csvtk</span> grep <span class="at">-f</span> Taxon <span class="at">-r</span> <span class="at">-p</span> <span class="st">"yellow"</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"red"</span> sampleinfo.csv <span class="kw">|</span> <span class="ex">csvtk</span> cut <span class="at">-f</span> SampleAlias <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> SampleAlias <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\n"</span> <span class="st">" "</span><span class="va">)</span></span>
@@ -1760,16 +1760,17 @@ Shen, W., Le, S., Li, Y., &amp; Hu, F. (2016). <span>SeqKit</span>: <span>A Cros
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
 <li id="fn1"><p>This exercise is inspired by and based on <a href="https://speciationgenomics.github.io/filtering_vcfs/" class="uri">https://speciationgenomics.github.io/filtering_vcfs/</a>]<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><code>vcftools</code> does <strong>not</strong> have a <code>-h</code> or <code>--help</code> option.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The <code>2&gt;/dev/null</code> outputs messages from <code>vcftools</code> to a special file <code>/dev/null</code> which is a kind of electronic dustbin.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>On viewing <code>csvtk</code> plots: either you can <strong>redirect</strong> (<code>&gt;</code>) the results from <code>csvtk</code> to a png output file, or you can <strong>pipe</strong> (<code>|</code>) it to the command <code>display</code> (replace <code>&gt; $OUT.ldepth.png</code> by <code>| display</code>, which should fire up a window with your plot.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>You can try different values of the <code>--bins</code> option<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><span class="citation" data-cites="purcell_PLINKToolSet_2007">Purcell et al. (<a href="#ref-purcell_PLINKToolSet_2007" role="doc-biblioref">2007</a>)</span>, p.&nbsp;565 gives a coherent derivation of this estimator<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>We need to generate a BED file representation of the FASTA index unfortuanely as <code>bedtools makefasta</code> doesn’t handle FASTA indices natively.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>For <code>vcftools</code>; unfortunate, but that’s the way it is<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>The one-liner combines the results of several commands in a pipe stream. Also, <a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">Bash redirections</a> are used to gather the results from the output of <code>bedtools makewindows</code> to <code>bedtools intersect</code>. The intersection commands collects coverage data in 1kb windows that are then summarized by <code>bedtools groupby</code>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>The <code>%</code> operator deletes the shortest match of <code>$substring</code> from back of <code>$string</code>: <code>${string%substring}</code>. See <a href="https://tldp.org/LDP/abs/html/string-manipulation.html">Bash string manipulation</a> for more information.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>Instead of using the command substitution, you could look into the sample info file and set the sample names manually: <code>SAMPLES="PUN-Y-BCRD PUN-R-ELF PUN-Y-INJ PUN-R-JMC PUN-R-LH PUN-Y-LO PUN-R-MT PUN-Y-PCT PUN-Y-POTR PUN-R-UCSD"</code><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>We select a fix number that should contain enough information to generate reliable statistics. This number should not change significantly even when files contain vastly different numbers of sites, which is why we need adjust the parameter <em>r</em> to the number of sites in the file.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><code>vcftools</code> does <strong>not</strong> have a <code>-h</code> or <code>--help</code> option.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The <code>2&gt;/dev/null</code> outputs messages from <code>vcftools</code> to a special file <code>/dev/null</code> which is a kind of electronic dustbin.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>On viewing <code>csvtk</code> plots: either you can <strong>redirect</strong> (<code>&gt;</code>) the results from <code>csvtk</code> to a png output file, or you can <strong>pipe</strong> (<code>|</code>) it to the command <code>display</code> (replace <code>&gt; $OUT.ldepth.png</code> by <code>| display</code>, which should fire up a window with your plot.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>You can try different values of the <code>--bins</code> option<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><span class="citation" data-cites="purcell_PLINKToolSet_2007">Purcell et al. (<a href="#ref-purcell_PLINKToolSet_2007" role="doc-biblioref">2007</a>)</span>, p.&nbsp;565 gives a coherent derivation of this estimator<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>We need to generate a BED file representation of the FASTA index unfortuanely as <code>bedtools makefasta</code> doesn’t handle FASTA indices natively.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>For <code>vcftools</code>; unfortunate, but that’s the way it is<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>The one-liner combines the results of several commands in a pipe stream. Also, <a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">Bash redirections</a> are used to gather the results from the output of <code>bedtools makewindows</code> to <code>bedtools intersect</code>. The intersection commands collects coverage data in 1kb windows that are then summarized by <code>bedtools groupby</code>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>The <code>%</code> operator deletes the shortest match of <code>$substring</code> from back of <code>$string</code>: <code>${string%substring}</code>. See <a href="https://tldp.org/LDP/abs/html/string-manipulation.html">Bash string manipulation</a> for more information.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Instead of using the command substitution, you could look into the sample info file and set the sample names manually: <code>SAMPLES="PUN-Y-BCRD PUN-R-ELF PUN-Y-INJ PUN-R-JMC PUN-R-LH PUN-Y-LO PUN-R-MT PUN-Y-PCT PUN-Y-POTR PUN-R-UCSD"</code><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -2011,7 +2012,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
 
 
 </body></html>

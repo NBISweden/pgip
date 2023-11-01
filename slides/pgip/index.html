@@ -344,6 +344,7 @@
   </style>
 </head>
 <body class="quarto-light">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {enableAssistiveMml: false}});</script>
   <div class="reveal">
     <div class="slides">
 
@@ -352,7 +353,7 @@
   <h3 class="subtitle">What is population genomics?</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">29-Oct-2023</h4>
+  <h4 class="date">01-Nov-2023</h4>
 </section>
 
 <section id="intended-learning-outcomes" class="slide level2">
@@ -423,20 +424,35 @@
 </section>
 <section id="example-population-genetics-of-the-coral-acropora-millepora" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
+<div class="fragment" data-fragment-index="1">
+<h5>
+<strong>Genome assembly</strong> and <strong>sampling</strong>
+</h5>
+<p>Motivation: most analyses require a <em>reference sequence</em> with which to compare <em>resequenced samples</em></p>
+<ul>
+<li>Assemble high-quality reference genome</li>
+<li>Choice of populations, sampling locations</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="fragment">
+<div class="fragment" data-fragment-index="1">
 <div id="fig-corals-assembly" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;1: Genome assembly and sample collection.</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" height="550"></p>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" style="width:90.0%"></p>
 </figure>
 </div>
-<div class="flushright smallest translatey100">
+<div class="flushright smallest translatey50">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 </div>
 <!-- markdownlint-enable MD013 -->
+</div>
+</div>
 <aside class="notes">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Fuller et al., 2020</a>)</span> is an example of a population genomics study that applies methods that could be seen as a basic foundation of population genomics. We believe these present a minimum toolkit of methods that should be known to anyone starting out in population genomics, and that is sufficiently small to be presented in a one-week workshop. At the end of this lecture, we will discuss some more advanced applications in population genomics.</p>
 <p><strong>Genome assembly and sampling</strong></p>
@@ -463,16 +479,29 @@
 </section>
 <section id="example-population-genetics-of-the-coral-acropora-millepora-1" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
+<h5>
+Describe <strong>genetic structure</strong> and <strong>demographic history</strong>
+</h5>
+<p>Motivation:</p>
+<ul>
+<li>address basic question of why genetic structure looks the way it does</li>
+<li>demographic history may generate signals similar to selection</li>
+</ul>
+</div><div class="column" style="width:50%;">
 <div id="fig-corals-variation" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;2: Variation and demographic history inferred from 44 resequenced individuals.</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" height="550"></p>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" style="width:70.0%"></p>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
-<div class="flushright smallest translatey100">
+<div class="flushright smallest translatey50">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div>
+</div>
 </div>
 <aside class="notes">
 <p><strong>Variation and demographic history</strong></p>
@@ -498,12 +527,31 @@
 </section>
 <section id="example-population-genetics-of-the-coral-acropora-millepora-2" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
+<h5>
+Characterize <strong>population structure</strong>
+</h5>
+<p>Motivation:</p>
+<ol type="1">
+<li>identify populations for contrasts in e.g.&nbsp;selection scans</li>
+<li>identify admixed individuals that should be removed from analyses</li>
+<li>identify barriers to gene flow etc</li>
+</ol>
+</div><div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-
+<div id="fig-corals-structure" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;3: Characterizing population structure and gene flow across 12 refs</figcaption>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg" style="width:100.0%"></p>
+</figure>
+</div>
 <!-- markdownlint-enable MD013 -->
-<img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/4625c5a6-1e71-4b9f-9589-0fed7ab72d3d/assets/graphic/369_aba4674_f3.jpeg" width="550" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;3: Characterizing population structure and gene flow across 12 refs</p><div class="flushright smallest">
+<div class="flushright smallest">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div>
+</div>
 </div>
 <aside class="notes">
 <p><strong>Population structure:</strong></p>
@@ -530,17 +578,30 @@
 </section>
 <section id="example-population-genetics-of-the-coral-acropora-millepora-3" class="slide level2">
 <h2>Example: Population genetics of the coral <em>Acropora millepora</em></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Motivation: corals are facing hard times and to prevent future losses of coral cover a better understanding of genetics is warranted.</p>
+<h5>
+Genomic scans for <strong>selection</strong>
+</h5>
+<p>Motivation: identify loci associated with adaptation / selection</p>
+<ul>
+<li>little differentiation over reefs, however thermal regimes</li>
+<li>genomic scan for <span class="math inline">\(\pi\)</span> (diversity) outliers</li>
+</ul>
+</div><div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
 <div id="fig-corals-selection" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;4: Genomic scans for local adaptation detect a signal at <em>sacsin</em></figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg" height="550"></p>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/83167ee1-c1f3-4ef8-88b3-d69a0cb93062/assets/graphic/369_aba4674_f4.jpeg" style="width:100.0%"></p>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
-<div class="flushright smallest translatey100">
+<div class="flushright translatey50">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div>
+</div>
 </div>
 <aside class="notes">
 <p><strong>Selection scan</strong></p>
@@ -624,9 +685,17 @@
 <section id="from-population-genetics-to-population-genomics" class="slide level2">
 <h2>From population genetics to population genomics</h2>
 <!-- markdownlint-disable MD013 -->
-
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>The variable sites at the <em>Drosophila melanogaster</em> ADH locus <span class="citation" data-cites="kreitman_NucleotidePolymorphismAlcohol_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kreitman, 1983</a>)</span></figcaption>
+<p><img data-src="assets/images/kreitman-1983-table1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
 <!-- markdownlint-enable MD013 -->
-<img data-src="assets/images/kreitman-1983-table1.png" class="r-stretch quarto-figure-left"><p class="caption">The variable sites at the <em>Drosophila melanogaster</em> ADH locus <span class="citation" data-cites="kreitman_NucleotidePolymorphismAlcohol_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kreitman, 1983</a>)</span></p><aside class="notes">
+<p>First study of natural population. However, limited to one locus.</p>
+<aside class="notes">
 <ul>
 <li>from locus-based studies (e.g., alcohol dehydrogenase in Drosophila <span class="citation" data-cites="kreitman_NucleotidePolymorphismAlcohol_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kreitman, 1983</a>)</span>) to genome-wide (e.g., Drosophila population genomics <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></li>
 <li>note: studied loci have often not been randomly chosen, which is another argument for whole-genome studies</li>
@@ -659,9 +728,17 @@
 </section>
 <section id="from-population-genetics-to-population-genomics-1" class="slide level2">
 <h2>From population genetics to population genomics</h2>
-
-<img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.g001" class="r-stretch quarto-figure-left"><p class="caption">Patterns of polymorphism and divergence <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></p><aside class="notes">
-<p><span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">Begun et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span> study: same system (<em>Drosophila</em>) but more individuals and whole genome</p>
+<div>
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption>Patterns of polymorphism and divergence <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></figcaption>
+<p><img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.g001" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+<p>Same system but <strong>genome-wide</strong>. Plots represent all chromosomes and the entire genome.</p>
+<aside class="notes">
+<p><span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">Begun et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2007</a>)</span> study: same system (<em>Drosophila</em>) but more individuals and whole genome. All of a sudden possible to ask questions about the general characteristics of diversity, not just limited to single loci.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -676,8 +753,18 @@
 </section>
 <section id="from-population-genetics-to-population-genomics-2" class="slide level2">
 <h2>From population genetics to population genomics</h2>
-
-<img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.t002" class="r-stretch quarto-figure-left"><p class="caption">Numbers of polymorphic and fixed variants <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></p><aside class="notes">
+<div>
+<!-- markdownlint-disable MD013 -->
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Numbers of polymorphic and fixed variants <span class="citation" data-cites="begun_PopulationGenomicsWholeGenome_2007">(<a href="#/bibliography" role="doc-biblioref" onclick="">Begun et al., 2007</a>)</span></figcaption>
+<p><img data-src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;download=&amp;id=10.1371/journal.pbio.0050310.t002" style="width:70.0%"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div>
+<p>Novelty: now possible to do <em>genome-wide</em> characterization of variation in different <strong>functional contexts</strong></p>
+<aside class="notes">
 <p>Novelty: now possible to do <em>genome-wide</em> characterization of variation in different functional contexts</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -695,12 +782,12 @@
 <h2>The technological revolution in <strong>sequencing</strong> and <strong>computing</strong></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-sequencing-cost_2d091b67a95916cbdc4fdf1400238231">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-sequencing-cost" class="quarto-figure quarto-figure-left">
 <figure>
 <figcaption>Figure&nbsp;5: Sequencing cost ($) per megabase <span class="citation" data-cites="wetterstrandka_DNASequencingCosts_">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wetterstrand, KA</a>)</span></figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-sequencing-cost-1.svg" width="400"></p>
+<p><img data-src="index_files/figure-revealjs/fig-sequencing-cost-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -1020,7 +1107,7 @@ Wetterstrand, KA. <em><span>DNA Sequencing Costs</span>: <span>Data</span> from 
         height: 720,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 8.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

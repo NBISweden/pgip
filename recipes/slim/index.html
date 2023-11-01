@@ -284,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content"><section id="sec-slim-recipes" class="level1" data-number="1"><h1 data-number="1">
 <span class="header-section-number">1</span> SLiM recipes</h1>
 <p>SLiM recipes can be run with wrapper <code>pgip-slim</code> to generate multiple simulations.</p>
-<div class="cell" data-hash="index_cache/html/pgip-slim-help_150ee19b092a27d00113b406bb663784">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgip-slim</span> <span class="at">--help</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Usage: pgip-slim [OPTIONS] SLIM</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## </span></span>
@@ -309,14 +309,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>As an example, the following command can be used to generate 10 simulations using the <a href="@sec-slim-recipe-selective-sweep">selective sweep</a> recipe.</p>
-<div class="cell" data-hash="index_cache/html/pgip-slim-example_c88d918f4c792e99bf2caac57df0d8e1">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 10 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="sec-slim-recipe-selective-sweep" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="sec-slim-recipe-selective-sweep">
 <span class="header-section-number">1.1</span> Selective sweep</h2>
-<div class="cell" data-file="selective_sweep.slim" data-hash="index_cache/html/slim-recipe-selective-sweep_652abf0902e7c204a942e505edbcee09">
+<div class="cell" data-file="selective_sweep.slim">
 <details><summary>slim code to simulate a selective sweep at a locus on a 1Mbp chromosome, with mutation rate <span class="math inline">\(\mu=10^{-8}\)</span>, recombination rate <span class="math inline">\(\rho=10^{-8}\)</span>, and <span class="math inline">\(N_e=5,000\)</span>.</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initialize</span>() {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">defineConstant</span>(<span class="st">"Nref"</span>, <span class="fl">5e3</span>);</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"seed"</span>))</span>
@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Recipe to simulate a selective sweep.</p>
 </section><section id="sec-slim-recipe-neutral" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="sec-slim-recipe-neutral">
 <span class="header-section-number">1.2</span> Neutral simulation</h2>
-<div class="cell" data-file="neutral.slim" data-hash="index_cache/html/slim-recipe-neutral_11d4a74fa3caa2108fd8961706d1df21">
+<div class="cell" data-file="neutral.slim">
 <details><summary>slim code to simulate a neutrally evolving locus on a 100kbp chromosome, with mutation rate <span class="math inline">\(\mu=10^{-8}\)</span>, recombination rate <span class="math inline">\(\rho=10^{-8}\)</span>, and <span class="math inline">\(N_e=5,000\)</span>.</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initialize</span>() {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">defineConstant</span>(<span class="st">"Nref"</span>, <span class="fl">5e3</span>);</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"seed"</span>))</span>

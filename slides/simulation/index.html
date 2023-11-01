@@ -411,6 +411,7 @@
   </style>
 </head>
 <body class="quarto-light">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {enableAssistiveMml: false}});</script>
   <div class="reveal">
     <div class="slides">
 
@@ -419,7 +420,7 @@
   <h3 class="subtitle">Primer on the coalescent and forward simulation</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">29-Oct-2023</h4>
+  <h4 class="date">01-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -448,7 +449,7 @@
 <h2>The Wright-Fisher model and simulations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-reproductive-success-1_719d7328077e001baa1bad0c014956d1">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-reproductive-success-1" class="quarto-figure quarto-figure-left">
 <figure>
@@ -506,7 +507,7 @@
 <h2>The Wright-Fisher model and simulations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-reproductive-success-2_88567cc1eed8bac5f03ade9a892b3b70">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-reproductive-success-2" class="quarto-figure quarto-figure-left">
 <figure>
@@ -549,7 +550,7 @@
 <h2>Forward and backward simulation</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy-forward_ee0044e7a42c77d84996e8674d5ed0cf">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy-forward" class="quarto-figure quarto-figure-left">
 <figure>
@@ -560,7 +561,7 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy-backward_56ab3fb486ce7355cb3dcd323593c874">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy-backward" class="quarto-figure quarto-figure-left">
 <figure>
@@ -629,7 +630,7 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 <li>Simulate ancestry (genealogy)</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-1_13233446bd1a27534caa2308794d874b">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/wf-model-genealogy-backward-1-1.svg" style="width:75.0%"></p>
 </div>
@@ -660,7 +661,7 @@ Generate training data for machine learning, e.g., Approximate Bayesian Computat
 <li>Simulate mutations</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-mutations_9487c515969963460fe5317264fab204">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/wf-model-genealogy-backward-mutations-1.svg" style="width:75.0%"></p>
 </div>
@@ -683,7 +684,7 @@ Exercise
 <p>How many mutations are common to all samples? How many mutations does sample 1 have? Sample 2?</p>
 <p>Assuming the ancestral state is denoted <code>0</code> (prior to the <em>first</em> generation) and the derived state <code>1</code>, what are the sequences of the samples?</p>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/wf-model-genealogy-backward-mutations-1_4c9c887c231fb58d84af52aa07102b87">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/wf-model-genealogy-backward-mutations-1-1.svg" style="width:75.0%"></p>
 </div>
@@ -714,7 +715,7 @@ Exercise
 <li>Start with <span class="math inline">\(i=n\)</span> chromosomes</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-1_e0e6f0c579a3fbe75afecd96acb712cf">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-1-1.svg" width="500" height="600"></p>
 </div>
@@ -731,7 +732,7 @@ Exercise
 <li><p>Choose time to next coalescent event from an exponential distribution with parameter <span class="math inline">\(\lambda=i(i-1)/2\)</span></p></li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-2_b848affc08941a5b18548ec1fa72e791">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-2-1.svg" width="500" height="600"></p>
 </div>
@@ -749,7 +750,7 @@ Exercise
 <li><p>Choose two chromosomes at random to coalesce</p></li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-3_d5af43b937f636a454eeb2e278836f27">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-3-1.svg" width="500" height="600"></p>
 </div>
@@ -768,7 +769,7 @@ Exercise
 <li><p>Merge the two lineages and set <span class="math inline">\(i \rightarrow i - 1\)</span></p></li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-4_ac9667844f2107107349a0410f2ed4f5">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-4-1.svg" width="500" height="600"></p>
 </div>
@@ -788,7 +789,7 @@ Exercise
 <li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-5_ed8e008d523f85ff7c4ef6e5a31cd9ab">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-5-1.svg" width="500" height="600"></p>
 </div>
@@ -808,7 +809,7 @@ Exercise
 <li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-6_fcb3f5a0e7335c8b83fbee79c62d6610">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-6-1.svg" width="500" height="600"></p>
 </div>
@@ -828,7 +829,7 @@ Exercise
 <li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-7_c9a9e21999993bca1cf4e9261e4211fc">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-7-1.svg" width="500" height="600"></p>
 </div>
@@ -848,7 +849,7 @@ Exercise
 <li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-8_eb0b374189eecf0e4ad39fad9fd0215f">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-8-1.svg" width="500" height="600"></p>
 </div>
@@ -868,7 +869,7 @@ Exercise
 <li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-9_8af6d61e6a1c1942137f4e011b02efc0">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-9-1.svg" width="500" height="600"></p>
 </div>
@@ -888,7 +889,7 @@ Exercise
 <li>If <span class="math inline">\(i&gt;1\)</span>, go to step 2; if not, stop.</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-10_bf948f1adf3eab3f0a476ada87048c88">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-10-1.svg" width="500" height="600"></p>
 </div>
@@ -911,7 +912,7 @@ Exercise
 <p><span class="math inline">\(^1\)</span>: The exponential can be parametrized in two different ways, so that the parameter to the function is either <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\beta=1/\lambda\)</span>.</p>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/simulate-genealogy-11_5451f464821a7d1a2adf2457dbc0d016">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/simulate-genealogy-11-1.svg" width="500" height="600"></p>
 </div>
@@ -934,7 +935,7 @@ Exercise
 <p><span class="math inline">\(^1\)</span>: The exponential can be parametrized in two different ways, so that the parameter to the function is either <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\beta=1/\lambda\)</span>.</p>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-simulate-genealogy-end_114e947d1d00724e0bfdcea2ddcf1757">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-simulate-genealogy-end" class="quarto-figure quarto-figure-left">
 <figure>
@@ -951,7 +952,7 @@ Exercise
 <h2>Some properties of the tree</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-genealogy-properties_29c3784e68df71942a87c73bb66f7fc5">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-genealogy-properties" class="quarto-figure quarto-figure-left">
 <figure>
@@ -995,7 +996,6 @@ Exercise
 <span id="cb1-3"><a href="#cb1-3"></a>trees <span class="op">=</span> [msprime.sim_ancestry(<span class="dv">3</span>, random_seed<span class="op">=</span>x) <span class="cf">for</span> x <span class="kw">in</span> seeds]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="index_cache/revealjs/fig-coalescent-trees-with-msprime_b270e914bd4645972f218bb1bbee940c">
 <svg baseprofile="full" height="262.5576521441852" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
@@ -1026,7 +1026,6 @@ Exercise
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
 </defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(70 26.8)"><g class="a10 c2 node n6 p0" transform="translate(-30 425.824)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-10 5.57571)"><path class="edge" d="M 0 0 V -5.57571 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n4 p0 sample" transform="translate(10 5.57571)"><path class="edge" d="M 0 0 V -5.57571 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -425.824 H 30"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a10 c2 node n9 p0" transform="translate(30 388.351)"><g class="a9 c2 node n7 p0" transform="translate(20 35.4797)"><g class="a7 i1 leaf node n2 p0 sample" transform="translate(-10 7.56884)"><path class="edge" d="M 0 0 V -7.56884 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 i2 leaf node n5 p0 sample" transform="translate(10 7.56884)"><path class="edge" d="M 0 0 V -7.56884 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -35.4797 H -20"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a9 c2 node n8 p0" transform="translate(-20 33.0688)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-10 9.9798)"><path class="edge" d="M 0 0 V -9.9798 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 i1 leaf node n3 p0 sample" transform="translate(10 9.9798)"><path class="edge" d="M 0 0 V -9.9798 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -33.0688 H 20"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -388.351 H -30"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
 </svg>
-</div>
 <p>Examples of coalescent simulations. Note the variation in tree topology and height.</p>
 </section>
 <section id="diminishing-returns-of-adding-more-samples" class="slide level2">
@@ -1050,7 +1049,7 @@ Exercise
 <h2>Adding mutations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-add-mutations_ba13666372e59133e7b9bcd4a43b0d0e">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-add-mutations" class="quarto-figure quarto-figure-left">
 <figure>
@@ -1088,113 +1087,223 @@ S = Po(\theta/2T_{total})
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-coalescent-and-diversity" class="slide level2 smaller">
+<section id="the-coalescent-and-diversity" class="slide level2">
 <h2>The coalescent and diversity</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/coalescent-tree-dna-variation_ef2cbc1f993cda652f4cefd42f969b0c">
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/coalescent-tree-dna-variation-1.svg" width="960" height="600"></p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p>Many statistical quantities can be related to the <strong>site frequency spectrum</strong> (<strong>SFS</strong>), which is a summary of the frequencies of the segregating sites. Let <span class="math inline">\(\xi_i\)</span> be the number of chromosomes in the sample with <span class="math inline">\(i\)</span> minor alleles. In the figure we have 6 mutations on <span class="math inline">\(n=4\)</span> chromosomes.</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<table>
+<div class="dna smallr">
+<table style="width:90%;">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>Name</th>
-<th style="text-align: right;">Count</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\xi_1\)</span></td>
-<td>singleton</td>
-<td style="text-align: right;">4</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\xi_2\)</span></td>
-<td>doubleton</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\xi_3\)</span></td>
-<td></td>
-<td style="text-align: right;">0</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>A</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>G</strong></td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">*</td>
 </tr>
 </tbody>
 </table>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:40%;">
-<div class="translatey50">
-<div class="cell" data-hash="index_cache/revealjs/site-frequency-spectrum-graph_22b59fece5523371f4e7486f6dcf2102">
+</div>
+<div class="fragment smallr">
+<!-- markdownlint-disable MD013 -->
+<p><span class="math display">\[
+\begin{align}
+\pi &amp; = \sum_{j=1}^S h_j = \sum_{j=1}^{S} \frac{n}{n-1}\left(1 - \sum_i p_i^2 \right) \\
+&amp; \stackrel{S=6,\\ n=4}{=} \sum_{j=1}^{6} \frac{4}{3}\left(1 - \sum_i p_i^2\right) \\
+&amp; = \frac{4}{3}\left(\mathbf{\color{#a7c947}{4}}\left(1-\frac{1}{16}-\frac{9}{16}\right) + \mathbf{\color{#a7c947}{2}}\left(1 - \frac{1}{4} - \frac{1}{4}\right)\right) = \frac{10}{3}
+\end{align}
+\]</span></p>
+<!-- markdownlint-enable MD013 -->
+</div>
+</div><div class="column fragment" style="width:20%;">
+<div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/site-frequency-spectrum-graph-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/coalescent-tree-dna-variation-representation-1.svg" style="width:80.0%"></p>
 </div>
 </div>
+</div><div class="column fragment" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tree-site-frequency-spectrum-graph-1.svg" style="width:80.0%"></p>
 </div>
 </div>
-</div>
-<div class="translatey100">
-<p>Note that the number of segregating sites is <span class="math inline">\(S=\sum_{i=1}^{n-1}\xi_i\)</span></p>
+<div class="fragment smallr">
 <p>In this notation one can show that <span class="math inline">\(\pi\)</span>, the nucleotide diversity, is</p>
 <p><span class="math display">\[
-\pi = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2}
-\]</span></p>
-</div>
-<div class="fragment translatey100">
-<!-- -->
-<h4 id="exercise">Exercise</h4>
-<p>Calculate the nucleotide diversity and compare the results from the foundation lecture</p>
-</div>
-<div class="fragment translatey100">
-<p><span class="math display">\[
-\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2} =
-\frac{1}{6}\left(12 + 8 + 0\right) = 3\frac{1}{3}
+\begin{align}
+\pi &amp; = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2} \\
+&amp; \stackrel{n=4}{=} \frac{1*(4-1)*4 + 2*(4-2)*2}{6}
+= \frac{10}{3}
+\end{align}
 \]</span></p>
 </div>
 </div>
 </div>
-<aside class="notes">
-<p>Exercise:</p>
-<p><span class="math display">\[
-\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2}
-= \frac{3*4 + 4*2 + 3*0}{6} = \frac{20}{6} = \frac{8}{3}
-\]</span></p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<div class="fragment">
+<p>Many statistical quantities can be related to the <strong>site frequency spectrum</strong> (<strong>SFS</strong>), which is a summary of the frequencies of the segregating sites. Let <span class="math inline">\(\xi_i\)</span> be the number of chromosomes in the sample with <span class="math inline">\(i\)</span> minor alleles. In the example above we have <span class="math inline">\(S=6\)</span> mutations on <span class="math inline">\(n=4\)</span> chromosomes.</p>
+</div>
 </section>
 <section id="the-impact-of-topology-on-the-sfs" class="slide level2">
 <h2>The impact of topology on the SFS</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div id="fig-neutrality-interpretation" class="quarto-figure quarto-figure-center">
-<figure>
-<figcaption>Figure&nbsp;10: Interpretation of neutrality tests <span class="citation" data-cites="ferretti_DecomposingSiteFrequency_2017">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ferretti et al., 2017</a>)</span></figcaption>
-<p><img data-src="assets/images/ferretti-table1.jpg" width="400"></p>
-</figure>
+<div style="display: grid; grid-template-columns: 200px 200px; grid-row-gap: 0px; grid-column-gap: 40px;">
+<div>
+<p><em>Neutral</em></p>
+<svg baseprofile="full" height="250" id="neutral" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#neutral { .edge {stroke-width: 2px} }</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n38 p0 root" transform="translate(114.547 26.8)"><g class="a38 i5 leaf node n10 p0 sample" transform="translate(22.4531 181.4)"><path class="edge" d="M 0 0 V -181.4 H -22.4531"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a38 c2 node n37 p0" transform="translate(-22.4531 118.917)"><g class="a37 c2 node n35 p0" transform="translate(-29.3438 20.5598)"><g class="a35 i8 leaf node n16 p0 sample" transform="translate(14.25 41.9228)"><path class="edge" d="M 0 0 V -41.9228 H -14.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a35 c2 node n33 p0" transform="translate(-14.25 20.2335)"><g class="a33 c2 node n31 p0" transform="translate(-12.75 5.70072)"><g class="a31 i4 leaf node n9 p0 sample" transform="translate(5.25 15.9886)"><path class="edge" d="M 0 0 V -15.9886 H -5.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a31 c2 node n29 p0" transform="translate(-5.25 5.78699)"><g class="a29 i9 leaf node n18 p0 sample" transform="translate(4.5 10.2016)"><path class="edge" d="M 0 0 V -10.2016 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a29 c2 node n25 p0" transform="translate(-4.5 7.30927)"><g class="a25 i0 leaf node n0 p0 sample" transform="translate(-3 2.8923)"><path class="edge" d="M 0 0 V -2.8923 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a25 i3 leaf node n6 p0 sample" transform="translate(3 2.8923)"><path class="edge" d="M 0 0 V -2.8923 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -7.30927 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -5.78699 H 5.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -5.70072 H 12.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a33 c2 node n32 p0" transform="translate(12.75 2.03576)"><g class="a32 c2 node n28 p0" transform="translate(6.75 12.5623)"><g class="a28 i2 leaf node n5 p0 sample" transform="translate(-3 7.09118)"><path class="edge" d="M 0 0 V -7.09118 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a28 i6 leaf node n12 p0 sample" transform="translate(3 7.09118)"><path class="edge" d="M 0 0 V -7.09118 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -12.5623 H -6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a32 c2 node n30 p0" transform="translate(-6.75 8.30281)"><g class="a30 i3 leaf node n7 p0 sample" transform="translate(4.5 11.3507)"><path class="edge" d="M 0 0 V -11.3507 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a30 c2 node n27 p0" transform="translate(-4.5 7.3301)"><g class="a27 i1 leaf node n2 p0 sample" transform="translate(-3 4.02062)"><path class="edge" d="M 0 0 V -4.02062 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a27 i4 leaf node n8 p0 sample" transform="translate(3 4.02062)"><path class="edge" d="M 0 0 V -4.02062 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -7.3301 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -8.30281 H 6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -2.03576 H -12.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -20.2335 H 14.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -20.5598 H 29.3438"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a37 c2 node n36 p0" transform="translate(29.3438 16.2194)"><g class="a36 i1 leaf node n3 p0 sample" transform="translate(9.5625 46.2631)"><path class="edge" d="M 0 0 V -46.2631 H -9.5625"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a36 c2 node n34 p0" transform="translate(-9.5625 24.4754)"><g class="a34 c2 node n24 p0" transform="translate(-10.125 18.953)"><g class="a24 i7 leaf node n14 p0 sample" transform="translate(11.25 2.83471)"><path class="edge" d="M 0 0 V -2.83471 H -11.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a24 c2 node n23 p0" transform="translate(-11.25 1.35141)"><g class="a23 i0 leaf node n1 p0 sample" transform="translate(-7.5 1.48331)"><path class="edge" d="M 0 0 V -1.48331 H 7.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a23 c2 node n22 p0" transform="translate(7.5 0.222772)"><g class="a22 c2 node n20 p0" transform="translate(-6 1.19866)"><g class="a20 i2 leaf node n4 p0 sample" transform="translate(-3 0.0618694)"><path class="edge" d="M 0 0 V -0.0618694 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a20 i5 leaf node n11 p0 sample" transform="translate(3 0.0618694)"><path class="edge" d="M 0 0 V -0.0618694 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -1.19866 H 6"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a22 c2 node n21 p0" transform="translate(6 0.350138)"><g class="a21 i7 leaf node n15 p0 sample" transform="translate(-3 0.910395)"><path class="edge" d="M 0 0 V -0.910395 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a21 i9 leaf node n19 p0 sample" transform="translate(3 0.910395)"><path class="edge" d="M 0 0 V -0.910395 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.350138 H -6"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.222772 H -7.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -1.35141 H 11.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -18.953 H 10.125"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a34 c2 node n26 p0" transform="translate(10.125 18.7815)"><g class="a26 i6 leaf node n13 p0 sample" transform="translate(-3 3.00617)"><path class="edge" d="M 0 0 V -3.00617 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a26 i8 leaf node n17 p0 sample" transform="translate(3 3.00617)"><path class="edge" d="M 0 0 V -3.00617 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -18.7815 H -10.125"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -24.4754 H 9.5625"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -16.2194 H -29.3438"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -118.917 H 22.4531"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+</div>
+<div>
+<p><em>Expansion</em></p>
+<svg baseprofile="full" height="250" id="expansion" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#expansion { .edge {stroke-width: 2px} }</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n38 p0 root" transform="translate(114.547 26.8)"><g class="a38 i5 leaf node n10 p0 sample" transform="translate(22.4531 181.4)"><path class="edge" d="M 0 0 V -181.4 H -22.4531"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a38 c2 node n37 p0" transform="translate(-22.4531 22.6042)"><g class="a37 c2 node n35 p0" transform="translate(-29.3438 8.46042)"><g class="a35 i8 leaf node n16 p0 sample" transform="translate(14.25 150.335)"><path class="edge" d="M 0 0 V -150.335 H -14.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a35 c2 node n33 p0" transform="translate(-14.25 13.9648)"><g class="a33 c2 node n31 p0" transform="translate(-12.75 6.45737)"><g class="a31 i4 leaf node n9 p0 sample" transform="translate(5.25 129.913)"><path class="edge" d="M 0 0 V -129.913 H -5.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a31 c2 node n29 p0" transform="translate(-5.25 9.5065)"><g class="a29 i9 leaf node n18 p0 sample" transform="translate(4.5 120.407)"><path class="edge" d="M 0 0 V -120.407 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a29 c2 node n25 p0" transform="translate(-4.5 26.559)"><g class="a25 i0 leaf node n0 p0 sample" transform="translate(-3 93.8478)"><path class="edge" d="M 0 0 V -93.8478 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a25 i3 leaf node n6 p0 sample" transform="translate(3 93.8478)"><path class="edge" d="M 0 0 V -93.8478 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -26.559 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -9.5065 H 5.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -6.45737 H 12.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a33 c2 node n32 p0" transform="translate(12.75 2.0875)"><g class="a32 c2 node n28 p0" transform="translate(6.75 21.5604)"><g class="a28 i2 leaf node n5 p0 sample" transform="translate(-3 112.723)"><path class="edge" d="M 0 0 V -112.723 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a28 i6 leaf node n12 p0 sample" transform="translate(3 112.723)"><path class="edge" d="M 0 0 V -112.723 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -21.5604 H -6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a32 c2 node n30 p0" transform="translate(-6.75 11.6192)"><g class="a30 i3 leaf node n7 p0 sample" transform="translate(4.5 122.664)"><path class="edge" d="M 0 0 V -122.664 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a30 c2 node n27 p0" transform="translate(-4.5 21.8996)"><g class="a27 i1 leaf node n2 p0 sample" transform="translate(-3 100.764)"><path class="edge" d="M 0 0 V -100.764 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a27 i4 leaf node n8 p0 sample" transform="translate(3 100.764)"><path class="edge" d="M 0 0 V -100.764 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -21.8996 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -11.6192 H 6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -2.0875 H -12.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -13.9648 H 14.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -8.46042 H 29.3438"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a37 c2 node n36 p0" transform="translate(29.3438 6.37201)"><g class="a36 i1 leaf node n3 p0 sample" transform="translate(9.5625 152.424)"><path class="edge" d="M 0 0 V -152.424 H -9.5625"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a36 c2 node n34 p0" transform="translate(-9.5625 15.9573)"><g class="a34 c2 node n24 p0" transform="translate(-10.125 43.0403)"><g class="a24 i7 leaf node n14 p0 sample" transform="translate(11.25 93.4263)"><path class="edge" d="M 0 0 V -93.4263 H -11.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a24 c2 node n23 p0" transform="translate(-11.25 13.5055)"><g class="a23 i0 leaf node n1 p0 sample" transform="translate(-7.5 79.9208)"><path class="edge" d="M 0 0 V -79.9208 H 7.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a23 c2 node n22 p0" transform="translate(7.5 3.36608)"><g class="a22 c2 node n20 p0" transform="translate(-6 54.9975)"><g class="a20 i2 leaf node n4 p0 sample" transform="translate(-3 21.5572)"><path class="edge" d="M 0 0 V -21.5572 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a20 i5 leaf node n11 p0 sample" transform="translate(3 21.5572)"><path class="edge" d="M 0 0 V -21.5572 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -54.9975 H 6"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a22 c2 node n21 p0" transform="translate(6 6.68386)"><g class="a21 i7 leaf node n15 p0 sample" transform="translate(-3 69.8708)"><path class="edge" d="M 0 0 V -69.8708 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a21 i9 leaf node n19 p0 sample" transform="translate(3 69.8708)"><path class="edge" d="M 0 0 V -69.8708 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -6.68386 H -6"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -3.36608 H -7.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -13.5055 H 11.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -43.0403 H 10.125"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a34 c2 node n26 p0" transform="translate(10.125 41.8092)"><g class="a26 i6 leaf node n13 p0 sample" transform="translate(-3 94.6574)"><path class="edge" d="M 0 0 V -94.6574 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a26 i8 leaf node n17 p0 sample" transform="translate(3 94.6574)"><path class="edge" d="M 0 0 V -94.6574 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -41.8092 H -10.125"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -15.9573 H 9.5625"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -6.37201 H -29.3438"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -22.6042 H 22.4531"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+</div>
+<div>
+<p><em>Bottleneck</em></p>
+<svg baseprofile="full" height="250" id="bottleneck" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#bottleneck { .edge {stroke-width: 2px} }</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n33 p0 root" transform="translate(96.4062 26.8)"><g class="a33 c4 node n27 p0" transform="translate(27.0938 167.508)"><g class="a27 i1 leaf node n2 p0 sample" transform="translate(-10.5 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H 10.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a27 i3 leaf node n7 p0 sample" transform="translate(-4.5 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H 4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a27 i5 leaf node n10 p0 sample" transform="translate(1.5 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H -1.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a27 c2 node n26 p0" transform="translate(10.5 1.99575)"><g class="a26 i6 leaf node n13 p0 sample" transform="translate(-3 11.8959)"><path class="edge" d="M 0 0 V -11.8959 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a26 i8 leaf node n17 p0 sample" transform="translate(3 11.8959)"><path class="edge" d="M 0 0 V -11.8959 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -1.99575 H -10.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -167.508 H -27.0938"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a33 c2 node n32 p0" transform="translate(-27.0938 94.9931)"><g class="a32 c3 node n28 p0" transform="translate(26.0625 72.5153)"><g class="a28 i4 leaf node n8 p0 sample" transform="translate(5.625 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H -5.625"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a28 i6 leaf node n12 p0 sample" transform="translate(11.625 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H -11.625"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a28 c2 node n24 p0" transform="translate(-11.625 2.67424)"><g class="a24 i7 leaf node n14 p0 sample" transform="translate(11.25 11.2174)"><path class="edge" d="M 0 0 V -11.2174 H -11.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a24 c2 node n23 p0" transform="translate(-11.25 5.34771)"><g class="a23 i0 leaf node n1 p0 sample" transform="translate(-7.5 5.86966)"><path class="edge" d="M 0 0 V -5.86966 H 7.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a23 c2 node n22 p0" transform="translate(7.5 0.881543)"><g class="a22 c2 node n20 p0" transform="translate(-6 4.74329)"><g class="a20 i2 leaf node n4 p0 sample" transform="translate(-3 0.244826)"><path class="edge" d="M 0 0 V -0.244826 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a20 i5 leaf node n11 p0 sample" transform="translate(3 0.244826)"><path class="edge" d="M 0 0 V -0.244826 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -4.74329 H 6"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a22 c2 node n21 p0" transform="translate(6 1.38555)"><g class="a21 i7 leaf node n15 p0 sample" transform="translate(-3 3.60257)"><path class="edge" d="M 0 0 V -3.60257 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a21 i9 leaf node n19 p0 sample" transform="translate(3 3.60257)"><path class="edge" d="M 0 0 V -3.60257 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -1.38555 H -6"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.881543 H -7.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -5.34771 H 11.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -2.67424 H 11.625"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -72.5153 H -26.0625"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a32 c2 node n31 p0" transform="translate(-26.0625 20.974)"><g class="a31 c3 node n29 p0" transform="translate(9.75 51.5413)"><g class="a29 i1 leaf node n3 p0 sample" transform="translate(-6 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H 6"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a29 i2 leaf node n5 p0 sample" transform="translate(0.0 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H 0.0"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a29 i9 leaf node n18 p0 sample" transform="translate(6 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H -6"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -51.5413 H -9.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a31 c3 node n30 p0" transform="translate(-9.75 51.5413)"><g class="a30 i4 leaf node n9 p0 sample" transform="translate(1.5 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H -1.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a30 i8 leaf node n16 p0 sample" transform="translate(7.5 13.8916)"><path class="edge" d="M 0 0 V -13.8916 H -7.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a30 c2 node n25 p0" transform="translate(-7.5 2.44634)"><g class="a25 i0 leaf node n0 p0 sample" transform="translate(-3 11.4453)"><path class="edge" d="M 0 0 V -11.4453 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a25 i3 leaf node n6 p0 sample" transform="translate(3 11.4453)"><path class="edge" d="M 0 0 V -11.4453 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -2.44634 H 7.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -51.5413 H 9.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -20.974 H 26.0625"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -94.9931 H 27.0938"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+</div>
+<div>
+<p><em>Selection</em></p>
+<svg baseprofile="full" height="250" id="selection" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#selection { .edge {stroke-width: 2px} }</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n38 p0 root" transform="translate(115.93 26.8)"><g class="a38 i3 leaf node n6 p0 sample" transform="translate(21.0703 181.4)"><path class="edge" d="M 0 0 V -181.4 H -21.0703"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a38 c2 node n37 p0" transform="translate(-21.0703 177.216)"><g class="a37 c2 node n35 p0" transform="translate(29.3906 0.347722)"><g class="a35 i5 leaf node n10 p0 sample" transform="translate(6.75 3.83662)"><path class="edge" d="M 0 0 V -3.83662 H -6.75"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a35 c2 node n32 p0" transform="translate(-6.75 0.227613)"><g class="a32 i4 leaf node n8 p0 sample" transform="translate(-4.5 3.60901)"><path class="edge" d="M 0 0 V -3.60901 H 4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a32 c2 node n20 p0" transform="translate(4.5 3.50084)"><g class="a20 i6 leaf node n13 p0 sample" transform="translate(-3 0.108173)"><path class="edge" d="M 0 0 V -0.108173 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a20 i8 leaf node n17 p0 sample" transform="translate(3 0.108173)"><path class="edge" d="M 0 0 V -0.108173 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -3.50084 H -4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.227613 H 6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.347722 H -29.3906"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a37 c2 node n36 p0" transform="translate(-29.3906 0.0515823)"><g class="a36 c2 node n33 p0" transform="translate(24.0938 0.503637)"><g class="a33 c2 node n30 p0" transform="translate(12.9375 0.116185)"><g class="a30 i3 leaf node n7 p0 sample" transform="translate(4.5 3.51294)"><path class="edge" d="M 0 0 V -3.51294 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a30 c2 node n24 p0" transform="translate(-4.5 0.539862)"><g class="a24 i1 leaf node n2 p0 sample" transform="translate(-3 2.97308)"><path class="edge" d="M 0 0 V -2.97308 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a24 i9 leaf node n19 p0 sample" transform="translate(3 2.97308)"><path class="edge" d="M 0 0 V -2.97308 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.539862 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.116185 H -12.9375"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a33 c2 node n31 p0" transform="translate(-12.9375 0.0757877)"><g class="a31 c2 node n22 p0" transform="translate(9.375 1.28071)"><g class="a22 i1 leaf node n3 p0 sample" transform="translate(-3 2.27263)"><path class="edge" d="M 0 0 V -2.27263 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a22 i7 leaf node n15 p0 sample" transform="translate(3 2.27263)"><path class="edge" d="M 0 0 V -2.27263 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -1.28071 H -9.375"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a31 c2 node n29 p0" transform="translate(-9.375 0.096237)"><g class="a29 c2 node n23 p0" transform="translate(6.75 0.592195)"><g class="a23 i2 leaf node n5 p0 sample" transform="translate(-3 2.86491)"><path class="edge" d="M 0 0 V -2.86491 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a23 i4 leaf node n9 p0 sample" transform="translate(3 2.86491)"><path class="edge" d="M 0 0 V -2.86491 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.592195 H -6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a29 c2 node n25 p0" transform="translate(-6.75 0.477512)"><g class="a25 i9 leaf node n18 p0 sample" transform="translate(4.5 2.97959)"><path class="edge" d="M 0 0 V -2.97959 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a25 c2 node n21 p0" transform="translate(-4.5 1.96405)"><g class="a21 i0 leaf node n1 p0 sample" transform="translate(-3 1.01554)"><path class="edge" d="M 0 0 V -1.01554 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a21 i6 leaf node n12 p0 sample" transform="translate(3 1.01554)"><path class="edge" d="M 0 0 V -1.01554 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -1.96405 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.477512 H 6.75"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.096237 H 9.375"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.0757877 H 12.9375"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.503637 H -24.0938"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a36 c2 node n34 p0" transform="translate(-24.0938 0.29664)"><g class="a34 i2 leaf node n4 p0 sample" transform="translate(5.625 3.83612)"><path class="edge" d="M 0 0 V -3.83612 H -5.625"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a34 c2 node n28 p0" transform="translate(-5.625 0.423342)"><g class="a28 i8 leaf node n16 p0 sample" transform="translate(5.25 3.41278)"><path class="edge" d="M 0 0 V -3.41278 H -5.25"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a28 c2 node n27 p0" transform="translate(-5.25 0.0765389)"><g class="a27 i7 leaf node n14 p0 sample" transform="translate(4.5 3.33624)"><path class="edge" d="M 0 0 V -3.33624 H -4.5"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a27 c2 node n26 p0" transform="translate(-4.5 0.00550879)"><g class="a26 i0 leaf node n0 p0 sample" transform="translate(-3 3.33073)"><path class="edge" d="M 0 0 V -3.33073 H 3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a26 i5 leaf node n11 p0 sample" transform="translate(3 3.33073)"><path class="edge" d="M 0 0 V -3.33073 H -3"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -0.00550879 H 4.5"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.0765389 H 5.25"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.423342 H 5.625"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.29664 H 24.0938"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -0.0515823 H 29.3906"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -177.216 H 21.0703"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+</div>
 </div>
 <!-- markdownlint-enable MD013 -->
+<p><a href="../../recipes/slides/index.html#sec-recipe-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
 </div><div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
 <div id="fig-sfs-neutrality-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;11: The SFS under neutrality and selection</figcaption>
-<p><img data-src="assets/images/nielsen-fig2-2005.jpeg" width="480"></p>
+<figcaption>Figure&nbsp;10: The SFS under neutrality and selection</figcaption>
+<p><img data-src="assets/images/nielsen-fig2-2005.jpeg" width="450"></p>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -1253,7 +1362,7 @@ population contraction <em>or</em> balancing selection
 <h2>On non-recombining chromosomes and assortment</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/non-recombining-chromosomes-assortment-1_42ec96a90faa86175562f0212d7868a5">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-1-1.svg" width="300"></p>
 </div>
@@ -1262,7 +1371,7 @@ population contraction <em>or</em> balancing selection
 <p>Chromosomes coalesce at father</p>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/non-recombining-chromosomes-assortment-2_f6a91d912bb2cd7d1091c503050a60a9">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-2-1.svg" width="300"></p>
 </div>
@@ -1289,7 +1398,7 @@ population contraction <em>or</em> balancing selection
 <section id="the-ancestral-recombination-graph" class="slide level2">
 <h2>The ancestral recombination graph</h2>
 <p><img data-src="assets/images/brandt-genetics-2022-fig1a.jpeg" data-fig-align="center," height="300"> <img data-src="assets/images/brandt-genetics-2022-fig1b.jpeg" data-fig-align="center," height="300"> <img data-src="assets/images/brandt-genetics-2022-fig1c.jpeg" data-fig-align="center," height="300"></p>
-<div class="flushright">
+<div class="flushright smallr">
 <p><span class="citation" data-cites="y.c.brandt_EvaluationMethodsEstimating_2022">Y. C. Brandt et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2022, fig. 1a</a>)</span></p>
 </div>
 <div>
@@ -1374,7 +1483,6 @@ population contraction <em>or</em> balancing selection
 <!-- markdownlint-disable MD013 -->
 <p>From <a href="https://tskit.dev/msprime/docs/stable/quickstart.html">msprime quickstart</a></p>
 <!-- markdownlint-enable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/sim_ancestry_1935924b18bb915673606e603e734fb6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> msprime</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Simulate an ancestral history for 3 diploid samples under the coalescent</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># with recombination on a 5kb region with human-like parameters.</span></span>
@@ -1390,11 +1498,9 @@ population contraction <em>or</em> balancing selection
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}</style>
 </defs><g class="tree-sequence"><g class="background"><path d="M20,0 l190,0 l0,138.2 l-168.568,25 l0,5 l-21.432,0 l0,-5 l0,-25 l0,-138.2z"></path><path d="M210,0 l190,0 l0,138.2 l-261.136,25 l0,5 l-97.432,0 l0,-5 l168.568,-25 l0,-138.2z"></path><path d="M400,0 l190,0 l0,138.2 l38.152,25 l0,5 l-489.288,0 l0,-5 l261.136,-25 l0,-138.2z"></path><path d="M590,0 l190,0 l0,138.2 l0,25 l0,5 l-151.848,0 l0,-5 l-38.152,-25 l0,-138.2z"></path></g><g class="axes"><g class="x-axis"><g class="title" transform="translate(400 200)"><text class="lab" text-anchor="middle" transform="translate(0 -11)">Genome position</text></g><line class="ax-line" x1="20" x2="780" y1="163.2" y2="163.2"></line><g class="ticks"><g class="tick" transform="translate(20 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">0</text></g></g><g class="tick" transform="translate(41.432 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">141</text></g></g><g class="tick" transform="translate(138.864 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">782</text></g></g><g class="tick" transform="translate(628.152 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">4001</text></g></g><g class="tick" transform="translate(780 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">5000</text></g></g></g></g></g><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n13 p0 root" transform="translate(124.688 26.8)"><g class="a13 i1 leaf node n3 p0 sample" transform="translate(32.8125 94.6)"><path class="edge" d="M 0 0 V -94.6 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a13 c2 node n10 p0" transform="translate(-32.8125 79.037)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">6</text></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -79.037 H 32.8125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">13</text></g></g></g><g class="tree t1" transform="translate(210 0)"><g class="plotbox"><g class="c2 node n12 p0 root" transform="translate(124.688 50.9994)"><g class="a12 i1 leaf node n3 p0 sample" transform="translate(32.8125 70.4006)"><path class="edge" d="M 0 0 V -70.4006 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a12 c2 node n10 p0" transform="translate(-32.8125 54.8376)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">6</text></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -54.8376 H 32.8125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">12</text></g></g></g><g class="tree t2" transform="translate(400 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf node n3 p0 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">6</text></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">11</text></g></g></g><g class="tree t3" transform="translate(590 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf node n3 p0 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(-28.125 12.0777)"><g class="a8 i2 leaf node n5 p0 sample" transform="translate(18.75 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><g class="a8 c2 node n7 p0" transform="translate(-18.75 1.62753)"><g class="a7 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a7 i0 leaf node n1 p0 sample" transform="translate(12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><path class="edge" d="M 0 0 V -1.62753 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">7</text></g><path class="edge" d="M 0 0 V -12.0777 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 i1 leaf node n2 p0 sample" transform="translate(-12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -11.4842 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">11</text></g></g></g></g></g>
 </svg>
-</div>
 </section>
 <section id="simulating-mutations-with-msprime" class="slide level2">
 <h2>Simulating mutations with msprime</h2>
-<div class="cell" data-hash="index_cache/revealjs/sim_mutations_1cb5a04b871d95bbb0fb051e2ed3a1fd">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> msprime</span>
 <span id="cb3-2"><a href="#cb3-2"></a>ts <span class="op">=</span> msprime.sim_ancestry(</span>
 <span id="cb3-3"><a href="#cb3-3"></a>    samples<span class="op">=</span><span class="dv">3</span>,</span>
@@ -1409,7 +1515,6 @@ population contraction <em>or</em> balancing selection
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}</style>
 </defs><g class="tree-sequence"><g class="background"><path d="M20,0 l190,0 l0,138.2 l-168.568,25 l0,5 l-21.432,0 l0,-5 l0,-25 l0,-138.2z"></path><path d="M210,0 l190,0 l0,138.2 l-261.136,25 l0,5 l-97.432,0 l0,-5 l168.568,-25 l0,-138.2z"></path><path d="M400,0 l190,0 l0,138.2 l38.152,25 l0,5 l-489.288,0 l0,-5 l261.136,-25 l0,-138.2z"></path><path d="M590,0 l190,0 l0,138.2 l0,25 l0,5 l-151.848,0 l0,-5 l-38.152,-25 l0,-138.2z"></path></g><g class="axes"><g class="x-axis"><g class="title" transform="translate(400 200)"><text class="lab" text-anchor="middle" transform="translate(0 -11)">Genome position</text></g><line class="ax-line" x1="20" x2="780" y1="163.2" y2="163.2"></line><g class="ticks"><g class="tick" transform="translate(20 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">0</text></g></g><g class="tick" transform="translate(41.432 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">141</text></g></g><g class="tick" transform="translate(138.864 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">782</text></g></g><g class="tick" transform="translate(628.152 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">4001</text></g></g><g class="tick" transform="translate(780 163.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">5000</text></g></g></g><g class="site s0" transform="translate(33.68 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m0"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s1" transform="translate(70.616 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m1"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s2" transform="translate(144.488 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m2"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s3" transform="translate(507.008 163.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m3"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g></g></g><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n13 p0 root" transform="translate(124.688 26.8)"><g class="a13 i1 leaf node n3 p0 sample" transform="translate(32.8125 94.6)"><path class="edge" d="M 0 0 V -94.6 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a13 c2 m0 node n10 p0 s0" transform="translate(-32.8125 79.037)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">6</text></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -79.037 H 32.8125"></path><g class="mut m0 s0" transform="translate(0 -0.962491)"><line x1="0" x2="0" y1="0" y2="0.962491"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">0</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">13</text></g></g></g><g class="tree t1" transform="translate(210 0)"><g class="plotbox"><g class="c2 node n12 p0 root" transform="translate(124.688 50.9994)"><g class="a12 i1 leaf node n3 p0 sample" transform="translate(32.8125 70.4006)"><path class="edge" d="M 0 0 V -70.4006 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a12 c2 m1 node n10 p0 s1" transform="translate(-32.8125 54.8376)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">6</text></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -54.8376 H 32.8125"></path><g class="mut m1 s1" transform="translate(0 -44.3139)"><line x1="0" x2="0" y1="0" y2="44.3139"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">12</text></g></g></g><g class="tree t2" transform="translate(400 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf m3 node n3 p0 s3 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"></path><g class="mut m3 s3" transform="translate(0 -1.57025)"><line x1="0" x2="0" y1="0" y2="1.57025"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(28.125 12.0777)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><g class="a8 i2 leaf node n5 p0 sample" transform="translate(12.5 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><path class="edge" d="M 0 0 V -12.0777 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">8</text></g><g class="a10 c2 m2 node n9 p0 s2" transform="translate(-28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(18.75 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 c2 node n6 p0" transform="translate(-18.75 3.0756)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a6 i1 leaf node n2 p0 sample" transform="translate(12.5 1.00319)"><path class="edge" d="M 0 0 V -1.00319 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -3.0756 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">6</text></g><path class="edge" d="M 0 0 V -11.4842 H 28.125"></path><g class="mut m2 s2" transform="translate(0 -8.93025)"><line x1="0" x2="0" y1="0" y2="8.93025"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">11</text></g></g></g><g class="tree t3" transform="translate(590 0)"><g class="plotbox"><g class="c2 node n11 p0 root" transform="translate(124.688 90.3248)"><g class="a11 i1 leaf node n3 p0 sample" transform="translate(32.8125 31.0752)"><path class="edge" d="M 0 0 V -31.0752 H -32.8125"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3</text></g><g class="a11 c2 node n10 p0" transform="translate(-32.8125 15.5122)"><g class="a10 c2 node n8 p0" transform="translate(-28.125 12.0777)"><g class="a8 i2 leaf node n5 p0 sample" transform="translate(18.75 3.48524)"><path class="edge" d="M 0 0 V -3.48524 H -18.75"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">5</text></g><g class="a8 c2 node n7 p0" transform="translate(-18.75 1.62753)"><g class="a7 i0 leaf node n0 p0 sample" transform="translate(-12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0</text></g><g class="a7 i0 leaf node n1 p0 sample" transform="translate(12.5 1.85771)"><path class="edge" d="M 0 0 V -1.85771 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1</text></g><path class="edge" d="M 0 0 V -1.62753 H 18.75"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">7</text></g><path class="edge" d="M 0 0 V -12.0777 H 28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">8</text></g><g class="a10 c2 node n9 p0" transform="translate(28.125 11.4842)"><g class="a9 i2 leaf node n4 p0 sample" transform="translate(12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H -12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">4</text></g><g class="a9 i1 leaf node n2 p0 sample" transform="translate(-12.5 4.07879)"><path class="edge" d="M 0 0 V -4.07879 H 12.5"></path><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2</text></g><path class="edge" d="M 0 0 V -11.4842 H -28.125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)">9</text></g><path class="edge" d="M 0 0 V -15.5122 H 32.8125"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)">10</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)">11</text></g></g></g></g></g>
 </svg>
-</div>
 </section></section>
 <section id="msprime-exercise" class="title-slide slide level1 unnumbered unlisted center">
 <h1>msprime exercise</h1>
@@ -1444,7 +1549,7 @@ population contraction <em>or</em> balancing selection
 <li><strong>performance</strong> - optimized code base</li>
 <li><strong>GUI</strong> - interactive execution and graphical debugging</li>
 </ol>
-<div class="flushright">
+<div class="flushright smallr">
 <p><span class="citation" data-cites="haller_SLiMEvolutionarySimulation_2022">Haller &amp; Messer (<a href="#/bibliography" role="doc-biblioref" onclick="">2022</a>)</span></p>
 </div>
 </div><div class="column" style="width:50%;">
@@ -1478,11 +1583,11 @@ population contraction <em>or</em> balancing selection
 <li>Tick/cycle count increment</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy-forward-slim_7dc3af4645f698d877c937120426c981">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy-forward-slim" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;12: Forward simulation.</figcaption>
+<figcaption>Figure&nbsp;11: Forward simulation.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-forward-slim-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -1524,7 +1629,7 @@ population contraction <em>or</em> balancing selection
 </section>
 <section id="simple-neutral-simulation-in-slim" class="slide level2 smaller">
 <h2>Simple neutral simulation in SLiM</h2>
-<div class="cell" data-hash="index_cache/revealjs/slim-example_6a9fb82c8410a2fdba87b806d53c7017">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// set up a simple neutral simulation</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>initialize<span class="op">()</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="op">{</span></span>
@@ -1566,7 +1671,7 @@ population contraction <em>or</em> balancing selection
 <div>
 <div class="fragment" data-fragment-index="2">
 <div style="transform: translate(0, 60px);">
-<div class="cell" data-hash="index_cache/revealjs/backward-simulation-recapitation_4fdd9db660f3ad5fcf784ea9d80f07c1">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/backward-simulation-recapitation-1.svg" style="width:70.0%"></p>
 </div>
@@ -1585,7 +1690,7 @@ population contraction <em>or</em> balancing selection
 <div>
 <div class="fragment" data-fragment-index="1">
 <div class="translatey50">
-<div class="cell" data-hash="index_cache/revealjs/forward-simulation-recapitation_673a9a6d74280bd68122d94903fa0ccc">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/forward-simulation-recapitation-1.svg" style="width:70.0%"></p>
 </div>
@@ -1605,7 +1710,7 @@ population contraction <em>or</em> balancing selection
 <div class="compact">
 <div id="fig-pope-2023-clr" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;13: Empirical distribution function of SweepFinder2 composite likelihood ratio (CLR) scores from observed data versus null simulations for three populations of squash bee (<em>E. pruinosa</em>). msprime was used to simulate data (without selection) using the inferred demographic model and recombination map. The eastern population in particular shows signs of selective sweeps. <span class="citation" data-cites="pope_ExpansionAgricultureHas_2023">Pope et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2023</a>)</span>, Fig S8.</figcaption>
+<figcaption>Figure&nbsp;12: Empirical distribution function of SweepFinder2 composite likelihood ratio (CLR) scores from observed data versus null simulations for three populations of squash bee (<em>E. pruinosa</em>). msprime was used to simulate data (without selection) using the inferred demographic model and recombination map. The eastern population in particular shows signs of selective sweeps. <span class="citation" data-cites="pope_ExpansionAgricultureHas_2023">Pope et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2023</a>)</span>, Fig S8.</figcaption>
 <p><img data-src="assets/images/pope_2023_figs8.png" style="width:90.0%"></p>
 </figure>
 </div>
@@ -1638,7 +1743,7 @@ population contraction <em>or</em> balancing selection
 <!-- markdownlint-disable MD013 -->
 <div id="fig-stankowski-figs2" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;14: Sampling locations</figcaption>
+<figcaption>Figure&nbsp;13: Sampling locations</figcaption>
 <p><img data-src="assets/images/stankowski-2019-figs2.jpg" style="width:80.0%"></p>
 </figure>
 </div>
@@ -1647,7 +1752,7 @@ population contraction <em>or</em> balancing selection
 <!-- markdownlint-disable MD013 -->
 <div id="fig-stankowski-fig7" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;15: Genomic landscapes simulated under different divergence histories.</figcaption>
+<figcaption>Figure&nbsp;14: Genomic landscapes simulated under different divergence histories.</figcaption>
 <p><img data-src="assets/images/stankowski-2019-fig7.png" style="width:70.0%"></p>
 </figure>
 </div>
@@ -1690,7 +1795,7 @@ population contraction <em>or</em> balancing selection
 <div>
 <div id="fig-adrion-2020-fig1" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;16: Cartoon of Recombination Landscape Estimation using Recurrent Neural Networks (ReLERNN) workflow <span class="citation" data-cites="adrion_PredictingLandscapeRecombination_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Adrion et al., 2020</a>)</span></figcaption>
+<figcaption>Figure&nbsp;15: Cartoon of Recombination Landscape Estimation using Recurrent Neural Networks (ReLERNN) workflow <span class="citation" data-cites="adrion_PredictingLandscapeRecombination_2020">(<a href="#/bibliography" role="doc-biblioref" onclick="">Adrion et al., 2020</a>)</span></figcaption>
 <p><img data-src="assets/images/adrion-2020-fig1.jpg" style="width:60.0%"></p>
 </figure>
 </div>
@@ -1726,9 +1831,6 @@ Baumdicker, F., Bisschop, G., Goldstein, D., Gower, G., Ragsdale, A. P., Tsambos
 </div>
 <div id="ref-degiorgio_SweepFinder2IncreasedSensitivity_2016" class="csl-entry" role="listitem">
 DeGiorgio, M., Huber, C. D., Hubisz, M. J., Hellmann, I., &amp; Nielsen, R. (2016). <span>SweepFinder2</span>: Increased sensitivity, robustness and flexibility. <em>Bioinformatics</em>, <em>32</em>(12), 1895–1897. <a href="https://doi.org/10.1093/bioinformatics/btw051">https://doi.org/10.1093/bioinformatics/btw051</a>
-</div>
-<div id="ref-ferretti_DecomposingSiteFrequency_2017" class="csl-entry" role="listitem">
-Ferretti, L., Ledda, A., Wiehe, T., Achaz, G., &amp; Ramos-Onsins, S. E. (2017). Decomposing the <span>Site Frequency Spectrum</span>: <span>The Impact</span> of <span>Tree Topology</span> on <span>Neutrality Tests</span>. <em>Genetics</em>, <em>207</em>(1), 229–240. <a href="https://doi.org/10.1534/genetics.116.188763">https://doi.org/10.1534/genetics.116.188763</a>
 </div>
 <div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="listitem">
 Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
@@ -1949,7 +2051,7 @@ Y. C. Brandt, D., Wei, X., Deng, Y., Vaughn, A. H., &amp; Nielsen, R. (2022). Ev
         height: 720,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 8.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

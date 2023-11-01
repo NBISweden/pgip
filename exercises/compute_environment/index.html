@@ -89,7 +89,9 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -292,14 +294,19 @@ div.csl-indent {
    
   <ul>
 <li>
-<a href="#uppmax" id="toc-uppmax" class="nav-link active" data-scroll-target="#uppmax">UPPMAX</a>
+<a href="#fa-server-uppmax" id="toc-fa-server-uppmax" class="nav-link active" data-scroll-target="#fa-server-uppmax"><i class="fa-solid fa-server" aria-label="server"></i> UPPMAX</a>
   <ul class="collapse">
 <li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
   </ul>
 </li>
-  <li><a href="#jupyterlite" id="toc-jupyterlite" class="nav-link" data-scroll-target="#jupyterlite">JupyterLite</a></li>
   <li>
-<a href="#fallback-solution-conda" id="toc-fallback-solution-conda" class="nav-link" data-scroll-target="#fallback-solution-conda">Fallback solution: conda</a>
+<a href="#fa-laptop-jupyter-notebooks" id="toc-fa-laptop-jupyter-notebooks" class="nav-link" data-scroll-target="#fa-laptop-jupyter-notebooks"><i class="fa-solid fa-laptop" aria-label="laptop"></i> Jupyter Notebooks</a>
+  <ul class="collapse">
+<li><a href="#fa-brands-firefox-jupyterlite" id="toc-fa-brands-firefox-jupyterlite" class="nav-link" data-scroll-target="#fa-brands-firefox-jupyterlite"><i class="fa-brands fa-firefox" aria-label="firefox"></i> JupyterLite</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-compute-environment-conda" id="toc-sec-compute-environment-conda" class="nav-link" data-scroll-target="#sec-compute-environment-conda"><i class="fa-solid fa-laptop" aria-label="laptop"></i> Conda</a>
   <ul class="collapse">
 <li><a href="#install-conda" id="toc-install-conda" class="nav-link" data-scroll-target="#install-conda">1. Install conda</a></li>
   <li><a href="#configure-conda" id="toc-configure-conda" class="nav-link" data-scroll-target="#configure-conda">2. Configure conda</a></li>
@@ -330,7 +337,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">29-Oct-2023</p>
+      <p class="date">01-Nov-2023</p>
     </div>
   </div>
   
@@ -338,7 +345,8 @@ div.csl-indent {
   </div>
   
 
-</header><!-- markdownlint-disable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-enable MD041 --><section id="uppmax" class="level2"><h2 class="anchored" data-anchor-id="uppmax">UPPMAX</h2>
+</header><!-- markdownlint-disable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-disable MD041 --><!-- markdownlint-enable MD041 --><!-- markdownlint-enable MD041 --><section id="fa-server-uppmax" class="level2"><h2 class="anchored" data-anchor-id="fa-server-uppmax">
+<i class="fa-solid fa-server" aria-label="server"></i> UPPMAX</h2>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -391,15 +399,20 @@ Make sure to login to a compute node before running any heavy commands
 </div>
 <section id="tutorials" class="level3"><h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
 <p>UPPMAX hosts tutorials and user guides at <a href="https://www.uppmax.uu.se/support/user-guides/" class="uri">https://www.uppmax.uu.se/support/user-guides/</a>. In particular, <a href="https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/" class="uri">https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/</a> has information on how to connect to and work on UPPMAX.</p>
-</section></section><section id="jupyterlite" class="level2"><h2 class="anchored" data-anchor-id="jupyterlite">JupyterLite</h2>
-<p>Some exercises will be run using <a href="https://github.com/jupyterlite/jupyterlite">JupyterLite</a> which is a JupyterLab distribution that runs entirely in the browser. Apart from having a browser, no preparations are necessary. Note that some users have reported issues with Firefox and that Google Chrome may be a better solution.</p>
-</section><section id="fallback-solution-conda" class="level2"><h2 class="anchored" data-anchor-id="fallback-solution-conda">Fallback solution: conda</h2>
-<p>In case there are issues with the HPC, a fallback option is to install software packages locally on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
+</section></section><section id="fa-laptop-jupyter-notebooks" class="level2"><h2 class="anchored" data-anchor-id="fa-laptop-jupyter-notebooks">
+<i class="fa-solid fa-laptop" aria-label="laptop"></i> Jupyter Notebooks</h2>
+<p><a href="https://jupyter.org/">Jupyter Notebook</a> exercises will be run in local compute environments on your laptop. See the section below on setting up a <code>pgip</code> conda environment, which by default installs <code>jupyter</code> and its dependencies.</p>
+<section id="fa-brands-firefox-jupyterlite" class="level3"><h3 class="anchored" data-anchor-id="fa-brands-firefox-jupyterlite">
+<i class="fa-brands fa-firefox" aria-label="firefox"></i> JupyterLite</h3>
+<p>There are some Jupyter Notebook exercises that are hosted online and run using <a href="https://github.com/jupyterlite/jupyterlite">JupyterLite</a> which is a JupyterLab distribution that runs entirely in the browser. Apart from having a browser, no preparations are necessary. Note that some users have reported issues with Firefox and that Google Chrome may be a better solution.</p>
+</section></section><section id="sec-compute-environment-conda" class="level2"><h2 class="anchored" data-anchor-id="sec-compute-environment-conda">
+<i class="fa-solid fa-laptop" aria-label="laptop"></i> Conda</h2>
+<p>Exercises that require local software installation will make use of the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>. This is also the fallback solution in case there are issues with the HPC.</p>
 <section id="install-conda" class="level3"><h3 class="anchored" data-anchor-id="install-conda">1. Install conda</h3>
 <p>To start using conda, follow the <a href="https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install">quick command line install instructions</a> to install the minimal conda installer <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>.</p>
 </section><section id="configure-conda" class="level3"><h3 class="anchored" data-anchor-id="configure-conda">2. Configure conda</h3>
 <p>Configure conda to access the package repositories (see also <a href="https://bioconda.github.io/#usage">bioconda usage</a>). This will modify your <code>~/.condarc</code> file:</p>
-<div class="cell" data-hash="index_cache/html/conda-configuration_da7b194a03e43165443025d4e2a641dd">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
@@ -419,19 +432,20 @@ Important
 </div>
 </div>
 </section><section id="create-an-isolated-course-environment" class="level3"><h3 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h3>
-<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. We also suggest you use <a href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a> package manager to install programs as this is much quicker.</p>
-<div class="cell" data-hash="index_cache/html/create-conda-pgip_7fd67199afb77e409aee4393e7ac07a7">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> pgip python=3.10 r-base</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. The command below will create an environment named <code>pgip</code> and install the packages <code>python</code> version 3.10, an R base installation (<code>r-base</code>), the <code>jupyter</code> package that provides support for Jupyter Notebooks, and the <code>mamba</code> package manager.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> pgip python=3.10 r-base jupyter mamba</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To deactivate an environment you issue the command <code>mamba deactivate</code>.</p>
+<p>The <code>activate</code> command is required to access the isolated environment named <code>pgip</code>. Once you have activated the environment, you gain access to whatever programs are installed. To deactivate an environment you issue the command <code>conda deactivate</code>.</p>
 </section><section id="install-packages" class="level3"><h3 class="anchored" data-anchor-id="install-packages">4. Install packages</h3>
-<p>You can install packages as follows (remember to activate <code>pgip</code>!):</p>
-<div class="cell" data-hash="index_cache/html/conda-install-packages_a791e4cdf7b6363d8a201ca5a5ca1877">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Installation of packages in an environment is done with the <code>install</code> command, but we recommend you use the <a href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a> package manager as it is faster (<code>mamba</code> is a rewrite of <code>conda</code> in C++). An example of how to install packages <code>bcftools, angsd, mosdepth</code> follows (remember to activate <code>pgip</code>!):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>or if you have packages listed in an environment file</p>
-<div class="cell" data-hash="index_cache/html/conda-install-packages-from-environment-file_b737b19f676d94a36f25480ad7e32a21">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env update <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="tools" class="level2"><h2 class="anchored" data-anchor-id="tools">Tools</h2>
@@ -453,6 +467,7 @@ Tools - example
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">UPPMAX modules</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Conda</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
@@ -467,16 +482,12 @@ Tools - example
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Provides command and instructions to load relevant UPPMAX modules.</p>
 <p>Example:</p>
-<div class="cell" data-hash="index_cache/html/uppmax-load-modules_02a733ba2a6121b24695ad06c5a84e9e">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="conda" class="level4"><h4 class="anchored" data-anchor-id="conda">Conda</h4>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>Provides a <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda environment file</a> that lists dependencies and where to retrieve them.</p>
 <p>To install, copy the contents in the code block to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
 <pre lang="text"><code>channels:
@@ -486,7 +497,13 @@ Tools - example
 dependencies:
   - bwa=0.7.17
   - fastqc=0.12.1</code></pre>
-</section></section><section id="references" class="level2">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="references" class="level2">
 
 
 

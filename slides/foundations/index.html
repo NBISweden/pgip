@@ -411,6 +411,7 @@
   </style>
 </head>
 <body class="quarto-light">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {enableAssistiveMml: false}});</script>
   <div class="reveal">
     <div class="slides">
 
@@ -419,7 +420,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">29-Oct-2023</h4>
+  <h4 class="date">01-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -2078,7 +2079,7 @@ q = q^2 + pq
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-wright-fisher-model-gganimation-last_78fe16f7075885cb9b994f809091dd66">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2090,7 +2091,7 @@ q = q^2 + pq
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell" data-hash="index_cache/revealjs/fig-wf-model-genealogy_559de7c785316a6ebd0c6023db219f87">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2139,7 +2140,7 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 <div class="fragment">
 <!-- -->
 <h5 id="the-expected-number-of-offspring-is-one">The expected number of offspring is one</h5>
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-expected-number-of-offspring_487f4cf9a5a4c2bcff0b5d6170f97d7e">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -2152,7 +2153,7 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
 <div class="fragment">
 <!-- -->
 <h5 id="poisson-approximation-for-large-n">Poisson approximation for large <span class="math inline">\(N\)</span></h5>
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-poisson-approximation-large-n_ef661f1a23e8edfc1e8cd9974fa0fc43">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -2169,7 +2170,7 @@ P(v=k) \approx \frac{1}{k!}e^{-k}
 <div class="fragment">
 <!-- -->
 <h5 id="sec-prob-sequence-pick-same-parent">Prob(pick same parent) = 1/2N</h5>
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-prob-parents-identical-fig_48adb348ad9b576e57ee763cecd6a719">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -2186,7 +2187,7 @@ P(v=k) \approx \frac{1}{k!}e^{-k}
 <div class="column" style="width:15%;">
 
 </div><div class="column" style="width:70%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/wf-two-chrom-find-common-ancestor_9b9a33c5b90970aa9d8b98996a3a4268">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -2377,7 +2378,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="column" style="width:50%;">
 <p>To capture dynamics, follow allele frequency trajectory (<span class="math inline">\(p_t\)</span>) as function of time.</p>
 <div class="smallr">
-<div class="cell" data-hash="index_cache/revealjs/wright-fisher-source_fc6a9d0852d57471ad01989470464bdb">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">##' Wright Fisher model - follow allele frequency distribution</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="do">##'</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="do">##' @param p0 Starting frequency</span></span>
@@ -2393,7 +2394,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <span id="cb1-13"><a href="#cb1-13"></a>    x</span>
 <span id="cb1-14"><a href="#cb1-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="index_cache/revealjs/wright-fisher-plot_6499baaaee1d16b3debdc278a724c026">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Example simulation and plot</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">set.seed</span>(<span class="dv">1223</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>generations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
@@ -2404,7 +2405,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<div class="cell" data-animation.hook="gifski" data-hash="index_cache/revealjs/fig-genetic-drift-N-10_92895623153bceedc7a63fb5f59e9b2f">
+<div class="cell" data-animation.hook="gifski">
 <div class="cell-output-display">
 <div id="fig-genetic-drift-N-10" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2436,7 +2437,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="columns">
 <div class="column" style="width:50%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/fig-genetic-drift-many-repetitions_e77d7c2b8179e5e687200e1a47a30dfd">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-genetic-drift-many-repetitions" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2457,7 +2458,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 <div class="fragment">
 <div class="center">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/gas-particle-drift_674263fbb995b2e89763594279313bd6">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -2494,19 +2495,19 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="column" style="width:10%;">
 <p>t=0</p>
 </div><div class="column" style="width:30%;">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aa_6a12285644573aa3a39be2a55c43e18e">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-aa-1.svg" width="200"></p>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aA_e415ec65ff88cdddab805a09b208df25">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-aA-1.svg" width="200"></p>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-AA_24a7821b3adcac8d4b68a3b6ab2b1cd6">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-AA-1.svg" width="200"></p>
 </div>
@@ -2521,7 +2522,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div><div class="column" style="width:30%;">
 <div class="fragment" data-fragment-index="2">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aa-1_6365ef18aea8e8fc3843740c360ffef9">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-aa-1-1.svg" width="200"></p>
 </div>
@@ -2529,7 +2530,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div><div class="column" style="width:30%;">
 <div class="fragment" data-fragment-index="4">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aA-1_d2cc0ad6cfadfe7a70eeba7b0e7387df">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-aA-1-1.svg" width="200"></p>
 </div>
@@ -2537,7 +2538,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div><div class="column" style="width:30%;">
 <div class="fragment" data-fragment-index="3">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-AA-1_311739540a3d170ba20761792bd026c9">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-AA-1-1.svg" width="200"></p>
 </div>
@@ -2556,7 +2557,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 
 </div><div class="column" style="width:30%;">
 <div class="fragment" data-fragment-index="5">
-<div class="cell" data-hash="index_cache/revealjs/tikz-afd-aA-2_00037b39bced6518d08ea1300115f226">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/tikz-afd-aA-2-1.svg" width="200"></p>
 </div>
@@ -2588,7 +2589,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Probability distributions of allele frequencies</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-allele-frequency-histogram-plot_732246968e52965be8353d138c704f74">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-allele-frequency-histogram-plot" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2599,7 +2600,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 </div>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-buri-table-14_728487970443eb7aebc2c9321a3df2cb">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-buri-table-14" class="quarto-figure quarto-figure-center">
 <figure>
@@ -2638,7 +2639,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-identity-by-state-and-descent_68793df2e3436679ae674958c36e2819">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-identity-by-state-and-descent" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2676,7 +2677,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-gillespie-2.4_6c1dc4ae053a5395b90d141b2393a73f">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-gillespie-2.4" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2690,7 +2691,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="fragment">
 <div class="columns">
 <div class="column" style="width:60%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-black-footed-ferret_4d33173619ef0c3b86a392b2b7b0f661">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-black-footed-ferret" class="quarto-figure quarto-figure-left">
 <figure>
@@ -2797,7 +2798,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
 <div class="columns">
 <div class="column" style="width:70%;">
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/mutation-models_ae9c567c3453d82184cb7050ec753bce">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/mutation-models-1.svg" width="960"></p>
 </div>
@@ -2836,7 +2837,7 @@ DNA sequences
 </ul>
 <p>Additional model not presented here is the stepwise mutation model (mainly used to model repeats):</p>
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/stepwise-mutation-model_89d608c5a4dcd526167ec279c52e1b92">
+<div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/stepwise-mutation-model-1.svg" width="1000"></p>
 </div>
@@ -2867,7 +2868,7 @@ DNA sequences
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-wf-mutation_fd89915487e293c2815fe75ec9e3cfaf">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-wf-mutation" class="quarto-figure quarto-figure-center">
 <figure>
@@ -2899,7 +2900,7 @@ DNA sequences
 <h2>Tracing the evolution of mutations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-tracing-evolution-of-mutations_65fe57a21cd6c2bebc032a2dfb986d98">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-center">
 <figure>
@@ -2980,7 +2981,7 @@ DNA sequences
 <p><strong>Nearly neutral theory</strong> <span class="citation" data-cites="ohta_SlightlyDeleteriousMutant_1973">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ohta, 1973</a>)</span> was later developed to explain failure to predict scaling of polymorphism with population size: most mutations are not neutral but <em>slightly deleterious</em> and <em>purged</em> from population by natural selection.</p>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-heterozygosity-function-ne_73b423689179227dd9b180fe2a0cb8ee">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
 <figure>
@@ -3148,7 +3149,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 \]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-selection-fig-p_ffc6058520bca56f38360a2c5d16f5d0">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-selection-fig-p" class="quarto-figure quarto-figure-center">
 <figure>
@@ -3159,7 +3160,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-selection-fig-dp_7b2c079c909312c4bb1a686638dc3f16">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-selection-fig-dp" class="quarto-figure quarto-figure-center">
 <figure>
@@ -3191,7 +3192,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <h2>Selection and drift - population size matters</h2>
 <div class="columns">
 <div class="column" style="width:80%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-selection-and-drift_41d281d469119a489a2c966e92ca2d4d">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-selection-and-drift" class="quarto-figure quarto-figure-left">
 <figure>
@@ -3247,7 +3248,7 @@ positive selection
 </dd>
 </dl>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-file="../../recipes/slides/foundations/hsapiens-rat-dnds.R" data-hash="index_cache/revealjs/fig-ensembl-hsapiens-rat-dnds_12ca98d665704594b3f298179bcb51b6">
+<div class="cell" data-file="../../recipes/slides/foundations/hsapiens-rat-dnds.R">
 <div class="cell-output-display">
 <div id="fig-ensembl-hsapiens-rat-dnds" class="quarto-figure quarto-figure-left">
 <figure>
@@ -3282,7 +3283,7 @@ positive selection
 </section>
 <section id="linked-selection-reduces-diversity-at-neighbour-loci" class="slide level2">
 <h2>Linked selection reduces diversity at neighbour loci</h2>
-<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep_453b993406cec290ffb65804d95cd362">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-selective-sweep" class="quarto-figure quarto-figure-left">
 <figure>
@@ -3326,7 +3327,7 @@ positive selection
 </div><div class="column" style="width:40%;">
 <div class="fragment">
 <p>Main effect: association between loci breaks up.</p>
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/recombinant-chromosomes_d23f66fa110dab0f2e4522aeb3ff13eb">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3400,35 +3401,18 @@ D_t = (1-r)^tD_0
 <section id="the-effect-of-a-selective-sweep-on-diversity" class="slide level2">
 <h2>The effect of a selective sweep on diversity</h2>
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command_51eacb4a9e001967e6e5faa0749b18cb">
+<div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="index_cache/revealjs/pgip-load-slim-data_3ac66aeeaa40c52c4eda503c1ba06518">
-<div class="cell-output cell-output-error">
-<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `$&lt;-.data.frame`(`*tmp*`, thetaW, value = numeric(0)): replacement has 0 rows, data has 401</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `select()`:
-! Can't subset columns that don't exist.
-✖ Column `windows` doesn't exist.</code></pre>
-</div>
-</div>
 <!-- markdownlint-enable MD013 -->
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd_94b10b7d962d6261b14278601c8fbbac">
-<div class="cell-output cell-output-error">
-<pre><code>Error in FUN(X[[i]], ...): object 'windows' not found</code></pre>
-</div>
-</div>
+
 <!-- markdownlint-enable MD013 -->
-<aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-1.gif" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;21: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <p>Simulation: N=1e4, mu=5e-8, pi=4<em>N</em>mu=0.004, seek S=a*pi=0.01, so a=S/pi which gives n.&nbsp;One needs to ramp up recombination rate to see the dip in TajD clearly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3445,20 +3429,16 @@ D_t = (1-r)^tD_0
 <section id="the-effect-of-a-selective-sweep-on-diversity-1" class="slide level2">
 <h2>The effect of a selective sweep on diversity</h2>
 <!-- markdownlint-disable MD013 -->
-<div class="cell" data-hash="index_cache/revealjs/pgip-slim-sweep-command-2_74273fb0acada19733235fc43559f319">
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- markdownlint-enable MD013 -->
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-tajd-2_27c4821634a05a67f6a8904a2345b981">
-<div class="cell-output cell-output-error">
-<pre><code>Error in fortify(data): object 'data_mean' not found</code></pre>
-</div>
-</div>
-<aside class="notes">
+
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-2-1.svg" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;22: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <p>Important: individual runs show a lot of stochasticity, but the signal is clear for the <em>mean</em>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3474,32 +3454,8 @@ D_t = (1-r)^tD_0
 </section>
 <section id="the-effect-of-a-selective-sweep-on-diversity-2" class="slide level2">
 <h2>The effect of a selective sweep on diversity</h2>
-<div class="cell" data-hash="index_cache/revealjs/pgip-load-slim-data2_d3d5b29b7f3d29b2a54ab05fe2bc46b9">
-<div class="cell-output cell-output-error">
-<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `$&lt;-.data.frame`(`*tmp*`, thetaW, value = numeric(0)): replacement has 0 rows, data has 401</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `dplyr::select()`:
-! Can't subset columns that don't exist.
-✖ Column `windows` doesn't exist.</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/fig-pgip-slim-sweep-plot-pi-S_ffe777f64e408c17cbe5c6cfc5c74287">
-<div class="cell-output cell-output-error">
-<pre><code>Error in pivot_longer(., cols = c("pi", "thetaW", "pi_minus_thetaW"), : object 'data_mean' not found</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `geom_line()`:
-! Problem while computing aesthetics.
-ℹ Error occurred in the 2nd layer.
-Caused by error in `FUN()`:
-! object 'windows' not found</code></pre>
-</div>
-</div>
-<aside class="notes">
+
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-pi-S-1.svg" width="600" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;23: The effect of a selective sweep on diversity. The figure shows the mean of 1000 simulations with the selected locus indicated with an arrow.</p><aside class="notes">
 <p>cf <span class="citation" data-cites="nielsen_MolecularSignaturesNatural_2005">Nielsen (<a href="#/bibliography" role="doc-biblioref" onclick="">2005</a>)</span>. Not clear how scaling of statistics to have mean=1 is done.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3518,11 +3474,11 @@ Caused by error in `FUN()`:
 <h2>The phases of a selective sweep</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
-<div class="cell" data-hash="index_cache/revealjs/fig-selective-sweep-phases_1c334fc387646d680bcda7651aa0d29c">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;21: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
+<figcaption>Figure&nbsp;24: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
 </figure>
 </div>
@@ -3551,11 +3507,11 @@ Caused by error in `FUN()`:
 <section id="linked-selection-may-constrain-levels-of-diversity" class="slide level2">
 <h2>Linked selection may constrain levels of diversity</h2>
 <div>
-<div class="cell" data-hash="index_cache/revealjs/fig-hitchhiking-vs-background-selection_4263c63ea2c9c0c7a63ed47196e7fc71">
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-hitchhiking-vs-background-selection" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;22: Hitchhiking (left) versus background selection (right).</figcaption>
+<figcaption>Figure&nbsp;25: Hitchhiking (left) versus background selection (right).</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-hitchhiking-vs-background-selection-1.svg" width="1000"></p>
 </figure>
 </div>
@@ -3881,7 +3837,7 @@ Wisely, S. M., Buskirk, S. W., Fleming, M. A., McDonald, D. B., &amp; Ostrander,
         height: 720,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 8.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

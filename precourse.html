@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
+<meta name="author" content="Per Unneberg">
 <title>DDLS Population genomics in practice - Precourse</title>
 <style>
 code{white-space: pre-wrap;}
@@ -19,6 +17,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -41,7 +73,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -58,8 +89,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -79,20 +109,14 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/logos/nbislogo-green.svg" alt="" class="navbar-logo">
-    </a>
+    <img src="./assets/logos/nbislogo-green.svg" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">DDLS Population genomics in practice</span>
     </a>
@@ -103,7 +127,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
@@ -150,45 +174,43 @@ div.csl-indent {
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#suggested-readings" id="toc-suggested-readings" class="nav-link active" data-scroll-target="#suggested-readings">Suggested readings</a></li>
-  <li><a href="#uppmax-account" id="toc-uppmax-account" class="nav-link" data-scroll-target="#uppmax-account">UPPMAX account</a>
+<li><a href="#suggested-readings" id="toc-suggested-readings" class="nav-link active" data-scroll-target="#suggested-readings">Suggested readings</a></li>
+  <li>
+<a href="#uppmax-account" id="toc-uppmax-account" class="nav-link" data-scroll-target="#uppmax-account">UPPMAX account</a>
   <ul class="collapse">
-  <li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
-  </ul></li>
-  <li><a href="#sec-software-installation" id="toc-sec-software-installation" class="nav-link" data-scroll-target="#sec-software-installation">Software installation</a>
+<li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-software-installation" id="toc-sec-software-installation" class="nav-link" data-scroll-target="#sec-software-installation">Software installation</a>
   <ul class="collapse">
-  <li><a href="#install-conda" id="toc-install-conda" class="nav-link" data-scroll-target="#install-conda">1. Install conda</a></li>
+<li><a href="#install-conda" id="toc-install-conda" class="nav-link" data-scroll-target="#install-conda">1. Install conda</a></li>
   <li><a href="#configure-conda" id="toc-configure-conda" class="nav-link" data-scroll-target="#configure-conda">2. Configure conda</a></li>
   <li><a href="#create-an-isolated-course-environment" id="toc-create-an-isolated-course-environment" class="nav-link" data-scroll-target="#create-an-isolated-course-environment">3. Create an isolated course environment</a></li>
   <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">4. Install packages</a></li>
-  </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
-  <ul class="collapse">
-  <li><a href="#literature" id="toc-literature" class="nav-link" data-scroll-target="#literature">Literature</a></li>
-  </ul></li>
   </ul>
-</nav>
+</li>
+  <li>
+<a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
+  <ul class="collapse">
+<li><a href="#literature" id="toc-literature" class="nav-link" data-scroll-target="#literature">Literature</a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Precourse</h1>
 </div>
 
@@ -196,62 +218,43 @@ div.csl-indent {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Per Unneberg </p>
+          </div>
+  </div>
     
   
     
   </div>
   
 
-</header>
-
-<section id="suggested-readings" class="level2">
-<h2 class="anchored" data-anchor-id="suggested-readings">Suggested readings</h2>
+</header><section id="suggested-readings" class="level2"><h2 class="anchored" data-anchor-id="suggested-readings">Suggested readings</h2>
 <p>The first sessions consist of lectures that aim to introduce concepts and theory from population genetics</p>
 <p><a href="./slides/pgip/index.html">Population genomics in practice</a> provides a quick overview of population genomics. Although not required, it is recommended to briefly go through the following papers that will be discussed in the lecture:</p>
 <ul>
-<li><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span> (most important)</li>
+<li>
+<span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span> (most important)</li>
 <li><span class="citation" data-cites="johri_RecommendationsImprovingStatistical_2022">Johri et al. (<a href="#ref-johri_RecommendationsImprovingStatistical_2022" role="doc-biblioref">2022</a>)</span></li>
 </ul>
 <p><a href="./slides/foundations/index.html">Population genetics</a> introduces the foundations of population genetics. This lecture contains a lot of material and we strongly recommend you review the slides to be fully prepared for the lecture. See <a href="./slides/index.html#a-note-on-usage">notes on usage</a> for instructions how to view slides.</p>
-</section>
-<section id="uppmax-account" class="level2">
-<h2 class="anchored" data-anchor-id="uppmax-account">UPPMAX account</h2>
+</section><section id="uppmax-account" class="level2"><h2 class="anchored" data-anchor-id="uppmax-account">UPPMAX account</h2>
 <p>You will need an <a href="https://www.uppmax.uu.se/">uppmax account</a> to run some of the exercises. You can apply for an account <a href="https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/">here</a>.</p>
-<section id="tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
+<section id="tutorials" class="level3"><h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
 <p>Look at <a href="https://www.uppmax.uu.se/support/user-guides/" class="uri">https://www.uppmax.uu.se/support/user-guides/</a>, in particular <a href="https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/" class="uri">https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/</a> for information on how to connect to and work on uppmax.</p>
-</section>
-</section>
-<section id="sec-software-installation" class="level2">
-<h2 class="anchored" data-anchor-id="sec-software-installation">Software installation</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Instructions will be updated when a full list of required programs are available.</p>
-</div>
-</div>
-<p>In case there are issues with UPPMAX we ask you to prepare a local backup compute environment on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
-<section id="install-conda" class="level3">
-<h3 class="anchored" data-anchor-id="install-conda">1. Install conda</h3>
+</section></section><section id="sec-software-installation" class="level2"><h2 class="anchored" data-anchor-id="sec-software-installation">Software installation</h2>
+<p>Although we will mainly work on UPPMAX, some exercises, notably the ones that utilise <a href="https://jupyter.org/">Jupyter</a> notebooks benefit from working in a local compute environment on your computer. We will use the <a href="https://docs.conda.io/en/latest/">conda</a> package manager to install necessary requirements from the package repositories <a href="https://bioconda.github.io/">bioconda</a> and <a href="https://conda-forge.org/">conda-forge</a>.</p>
+<section id="install-conda" class="level3"><h3 class="anchored" data-anchor-id="install-conda">1. Install conda</h3>
 <p>To start using conda, follow the <a href="https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install">quick command line install instructions</a> to install the minimal conda installer <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a>.</p>
-</section>
-<section id="configure-conda" class="level3">
-<h3 class="anchored" data-anchor-id="configure-conda">2. Configure conda</h3>
+</section><section id="configure-conda" class="level3"><h3 class="anchored" data-anchor-id="configure-conda">2. Configure conda</h3>
 <p>Configure conda to access the package repositories (see also <a href="https://bioconda.github.io/#usage">bioconda usage</a>). This will modify your <code>~/.condarc</code> file:</p>
-<pre class="{bash}"><code>#| label: conda-configuration
-#| echo: true
-#| eval: false
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-conda config --set channel_priority strict</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels defaults</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -265,46 +268,23 @@ Important
 <p>Please note that the order of these commands is important!</p>
 </div>
 </div>
-</section>
-<section id="create-an-isolated-course-environment" class="level3">
-<h3 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h3>
-<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course:</p>
-<pre class="{bash }"><code>#| label: create-conda-pgip
-#| echo: true
-#| eval: false
-conda create -n pgip python=3.10 r-base
-conda activate pgip</code></pre>
-<p>To deactivate an environment you issue the command <code>conda deactivate</code>.</p>
-</section>
-<section id="install-packages" class="level3">
-<h3 class="anchored" data-anchor-id="install-packages">4. Install packages</h3>
-<p>You can install packages as follows (remember to activate <code>pgip</code>!):</p>
-<pre class="{bash }"><code>#| label: conda-install-packages
-#| echo: true
-#| eval: false
-conda install bcftools angsd mosdepth</code></pre>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+</section><section id="create-an-isolated-course-environment" class="level3"><h3 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h3>
+<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. The command below will create an environment named <code>pgip</code> and install the packages <code>python</code> version 3.10, an R base installation (<code>r-base</code>), the <code>jupyter</code> package that provides support for Jupyter Notebooks, and the <code>mamba</code> package manager.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pgip python=3.10 r-base mamba jupyter</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Tip
+<p>The <code>activate</code> command is required to access the isolated environment named <code>pgip</code>. Once you have activated the environment, you gain access to whatever programs are installed. To deactivate an environment you issue the command <code>conda deactivate</code>.</p>
+</section><section id="install-packages" class="level3"><h3 class="anchored" data-anchor-id="install-packages">4. Install packages</h3>
+<p>Installation of packages is done with the <code>install</code> command, but we recommend you use the <a href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a> package manager as it is faster (<code>mamba</code> is a rewrite of <code>conda</code> in C++). An example of how to install packages <code>bcftools, angsd, mosdepth</code> follows (remember to activate <code>pgip</code>!):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If installation is slow, you can try the <a href="https://mamba.readthedocs.io/en/latest/mamba-installation.html">mamba</a> installer.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<section id="literature" class="level3">
-<h3 class="anchored" data-anchor-id="literature">Literature</h3>
+</section></section><section id="resources" class="level2"><h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="literature" class="level3"><h3 class="anchored" data-anchor-id="literature">Literature</h3>
 <p>Lecture notes have been prepared based on the literature listed below.</p>
-<section id="online" class="level4">
-<h4 class="anchored" data-anchor-id="online">Online</h4>
+<section id="online" class="level4"><h4 class="anchored" data-anchor-id="online">Online</h4>
 <dl>
 <dt>Graham Coop’s notes on population genetics</dt>
 <dd>
@@ -314,10 +294,7 @@ Comprehensive introduction to population genetics. Contains many biological exam
 <dd>
 Introduction to mathematical population genetics <span class="citation" data-cites="hermisson_MathematicalPopulationGenetics_2017 hermisson_MathematicalPopulationGenetics_2018">(<a href="#ref-hermisson_MathematicalPopulationGenetics_2017" role="doc-biblioref">Hermisson, 2017</a>, <a href="#ref-hermisson_MathematicalPopulationGenetics_2018" role="doc-biblioref">2018</a>)</span>.
 </dd>
-</dl>
-</section>
-<section id="books" class="level4">
-<h4 class="anchored" data-anchor-id="books">Books</h4>
+</dl></section><section id="books" class="level4"><h4 class="anchored" data-anchor-id="books">Books</h4>
 <dl>
 <dt>Population Genetics: A Concise Guide</dt>
 <dd>
@@ -360,11 +337,7 @@ Alternative introduction to coalescent with more focus on the Wright-Fisher mode
 
 
 
-</section>
-</section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+</section></section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-barton2007evolution" class="csl-entry" role="listitem">
 Barton, N. H., Briggs, D. E. G., Eisen, J. A., Goldstein, D. B., &amp; Patel, N. H. (2007). <em>Evolution</em>. <span>Cold Spring Harbor Laboratory Press</span>.
 </div>
@@ -407,8 +380,7 @@ Nei, M., &amp; Kumar, S. (2000). <em>Molecular <span>Evolution</span> and <span>
 <div id="ref-wakeley_CoalescentTheoryIntroduction_2008" class="csl-entry" role="listitem">
 Wakeley, J. (2008). <em>Coalescent <span>Theory</span>: <span>An Introduction</span></em> (1st Edition edition). <span>Roberts and Company Publishers</span>.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -642,16 +614,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">2023 <a href="about.html">NBIS</a> | <a href="https://choosealicense.com/licenses/gpl-3.0/">GPL-3 License</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
+    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
 </footer>
-
 
 
 </body></html>
