@@ -1,0 +1,75 @@
+---
+title: "Population structure"
+author:
+  - "Nikolay Oskolkov"
+  - "Per Unneberg"
+format: html
+---
+
+::: {.callout-important collapse=true}
+
+#### {{< fa laptop >}} Jupyter compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+This is a Jupyter Notebook exercise. See the
+[Conda](../compute_environment/index.qmd#sec-compute-environment-conda)
+section on how to install conda.
+
+:::
+
+::: {.callout-tip collapse=true}
+
+## Learning objectives
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Data setup
+
+:::{.panel-tabset}
+
+#### Local
+
+:::
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Tools
+
+:::{.panel-tabset}
+
+#### Listing
+
+- [Jupyter](https://jupyter.org/)
+
+#### Conda
+
+::: {.callout-note}
+
+If you have successfully setup the [`pgip`
+environment](../compute_environment/index.qmd#sec-compute-environment-conda),
+this step is not required.
+
+:::
+
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - jupyter
+```
+
+:::
+
+:::

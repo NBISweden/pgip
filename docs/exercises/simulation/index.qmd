@@ -5,6 +5,14 @@ author:
 format: html
 ---
 
+::: {.callout-important collapse=true}
+
+#### {{< fa brands firefox >}} Compute environment setup
+
+No setup required.
+
+:::
+
 ## Instructions {#sec-exercise-simulation-howto}
 
 Start by going through the [HOWTO]({{< var lab.sim.baseurl

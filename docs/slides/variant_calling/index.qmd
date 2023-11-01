@@ -958,7 +958,7 @@ Apply Bayes' theorem:
 :::{.large}
 
 $$
-P(G|X) \sim P(X|G) \cdot P(G)
+P(G|X) \sim P(X|G)\cdot P(G)
 $$
 
 :::
@@ -976,9 +976,9 @@ $$
 ::: {.fragment}
 
 Consequently we need to set a prior on $G$. If allele frequencies are
-knows, we can constrain the frequencies; if A is known to be low
-($\sim1$%) AA genotype is *very* unlikely. Otherwise, could set all
-equal (flat prior).
+known, we can constrain the frequencies; for example, if A is known to
+be low ($\sim1$%) AA genotype is *very* unlikely. Otherwise, could set
+all equal (flat prior).
 
 :::
 
@@ -991,22 +991,43 @@ equal (flat prior).
 cf <https://gatk.broadinstitute.org/hc/en-us/articles/360035890511>
 
 @li_SNPDetectionMassively_2009, Table 1, shows a nice numerical
-example of how to set priors assuming a SNP rate $f$, namely: assume
-in *reference sequence* at a site we observe a G. Then, since we know
-there is at least one G, the probability of observing GG is $1*(1-f)$.
-Assuming a flat prior would mean $P(GA)=P(GC)=P(GT)=f/3$.
-@li_SNPDetectionMassively_2009 also take errors into account, which
-further shifts these probabilities down to add non-zero probabilities
-for the other 6 possible genotypes.
+example of one way of setting priors. The authors assume a specific
+allele, G, in the *reference sequence*:
 
-In more detail: they first set the *haploid* genotypes. Let $p_G=1-f$,
-where $f$ is the heterozygous SNP rate. The reference G could be
-wrong, having mutated from A (transition) or C, T (transversion). They
-assume ts/tv ratio r=4, so $p_A=4f/6$ and $p_C=p_T=f/6$ (there is an
-error in the text). Then diploid genotypes are calculated as
-$p_{AA}=p_A*p_A$, $p_{AC}=p_A*p_C$ and so on, except for $p_{GG}$
-which is 1 minus the 9 other probabilities *minus the homozygous SNP
-rate* (thus the probabilities don't add up to one!).
+--G--
+
+They start by calculating the frequency of *haploid* genotypes. They
+first determine $p_G$ by assuming a *heterozygous SNP rate* $f=0.001$,
+which means 1 in a 1000 sites has G/G genotype mutated to G/X, where X
+is one of {A,C,T}. They assume a transition to transversion (ts/tv)
+ratio of 4, meaning X=A four times as often as C or T (there is an
+error in the text where C is taken to be the transition; the numbers
+in the table are correct however). This gives the following haploid
+genotype frequencies:
+
+\begin{align}
+p_G & = 1-f = 0.999 \\
+p_A & = 4f/6 = 6.67\times10^{-4} \\
+p_C & = f/6 = 1.67\times10^{-4}\\
+p_T & = f/6 =1.67\times10^{-4}
+\end{align}
+
+To get the *diploid* genotypes, we simply multiply the corresponding
+entries, e.g., $p_{AC} = p_Ap_C$. For homozygote ALT, we need to
+account for the *homozygous SNP rate* $r = 0.0005$, where G/G mutates
+to X/X, for X one of {A,C,T}:
+
+\begin{align}
+p_{AA} & = p_Ap_A + 4r/6 = 3.33\times10^{-4} \\
+p_{AC} & = p_Ap_C = 1.11\times10^{-7}\\
+p_{AT} & = p_Ap_T = 1.11\times10^{-7}\\
+p_{CC} & = p_Cp_C + r/6 = 8.34\times10^{-5} \\
+p_{CG} & = p_Cp_G = 1.67\times10^{-4}\\
+p_{CT} & = p_Cp_T = 2.78\times10^{-8}\\
+p_{GG} & = 1 - f - r = 0.9985 \\
+p_{GT} & = p_Gp_T = 1.67\times10^{-4}\\
+p_{TT} & = p_Tp_T + r = 8.34\times10^{-5}\\
+\end{align}
 
 :::
 

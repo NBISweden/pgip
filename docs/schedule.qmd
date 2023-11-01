@@ -12,8 +12,6 @@ execute:
   cache: false
 ---
 
-[**{{< meta date >}}: Note that the schedule is tentative and subject to change!**]{.large}
-
 ```{r }
 #| label: schedule
 #| echo: false

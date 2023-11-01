@@ -15,6 +15,9 @@ listing:
     - variant_calling/index.qmd
     - variant_filtering/index.qmd
     - genetic_diversity/index.qmd
+    - population_structure/index.qmd
+    - demography/index.qmd
+    - selection/index.qmd
 date: ""
 toc: false
 sidebar: false
@@ -25,6 +28,18 @@ format:
 execute:
   freeze: false
 ---
+
+## Information
+
+All exercise pages start with a callout block that provides
+information on how to setup the relevant [Compute
+environment](compute_environment/index.qmd). The callout blocks are
+labelled with icons that indicate the type of environment ({{< fa
+server >}} UPPMAX resource; {{< fa laptop >}} local compute
+environment; {{< fa brands firefox >}} online browser-based resource).
+Make sure to read these instructions before proceeding with the
+exercise itself. Some of the documents include a link to an external
+URL that hosts the actual exercise instructions.
 
 ## On self-assessment exercise blocks
 

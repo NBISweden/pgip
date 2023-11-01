@@ -17,13 +17,16 @@ project:
     - "syllabus.qmd"
     # Exercises
     # - "exercises/data.qmd"
+    - "exercises/index.qmd"
     - "exercises/compute_environment/index.qmd"
     - "exercises/datasets/monkeyflowers.qmd"
-    - "exercises/index.qmd"
     - "exercises/simulation/index.qmd"
     - "exercises/variant_calling/index.qmd"
     - "exercises/variant_filtering/index.qmd"
     - "exercises/genetic_diversity/index.qmd"
+    - "exercises/population_structure/index.qmd"
+    - "exercises/demography/index.qmd"
+    - "exercises/selection/index.qmd"
     # Slides
     - "slides/index.qmd"
     - "slides/pgip/index.qmd"
@@ -33,6 +36,8 @@ project:
     - "slides/variant_filtering/index.qmd"
     - "slides/genetic_diversity/index.qmd"
     - "slides/population_structure/index.qmd"
+    - "slides/demography/index.qmd"
+    - "slides/selection/index.qmd"
     # Recipes
     - "recipes/index.qmd"
     - "recipes/slim/index.qmd"
@@ -64,6 +69,7 @@ format:
     quarto-required: ">=1.2.475"
     toc: true
     include-after-body: assets/www/logo-hyperlink.html
+    include-before: [ '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {enableAssistiveMml: false}});</script>']
     toc-depth: 1
     slide-level: 2
     slide-number: true
