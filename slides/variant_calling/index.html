@@ -418,7 +418,7 @@
   <h3 class="subtitle">Variant calling</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">01-Nov-2023</h4>
+  <h4 class="date">02-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -808,8 +808,8 @@ Determine the allele combination for each individual (aa, aA, or AA for bi-allel
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r-- 1 runner docker 302K Nov  1 16:04 PUN-Y-INJ_R1.fastq.gz
--rw-r--r-- 1 runner docker 393K Nov  1 16:04 PUN-Y-INJ_R2.fastq.gz</code></pre>
+<pre><code>-rw-r--r-- 1 runner docker 302K Nov  2 09:48 PUN-Y-INJ_R1.fastq.gz
+-rw-r--r-- 1 runner docker 393K Nov  2 09:48 PUN-Y-INJ_R2.fastq.gz</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1742,7 +1742,7 @@ Cons
 <p>Reference bias: plot no. hets vs coverage for real data, e.g., conifer</p>
 </div>
 <aside class="notes">
-
+<p>NB: samtools and GATK may actually produce different genotypes despite having identical GLs. Samtools applies prior <span class="math inline">\(10^{-3}\)</span> to het call, GATK has no prior <span class="citation" data-cites="li_BetterUnderstandingArtifacts_2014">(<a href="#/bibliography" role="doc-biblioref" onclick="">H. Li, 2014</a>)</span></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1817,6 +1817,9 @@ Korneliussen, T. S., Albrechtsen, A., &amp; Nielsen, R. (2014). <span>ANGSD</spa
 </div>
 <div id="ref-li_AligningSequenceReads_2013" class="csl-entry" role="listitem">
 Li, H. (2013). Aligning sequence reads, clone sequences and assembly contigs with <span>BWA-MEM</span>. <em>arXiv:1303.3997 [q-Bio]</em>. <a href="https://arxiv.org/abs/1303.3997">https://arxiv.org/abs/1303.3997</a>
+</div>
+<div id="ref-li_BetterUnderstandingArtifacts_2014" class="csl-entry" role="listitem">
+Li, H. (2014). Toward better understanding of artifacts in variant calling from high-coverage samples. <em>Bioinformatics</em>, <em>30</em>(20), 2843–2851. <a href="https://doi.org/10.1093/bioinformatics/btu356">https://doi.org/10.1093/bioinformatics/btu356</a>
 </div>
 <div id="ref-li_Minimap2PairwiseAlignment_2018" class="csl-entry" role="listitem">
 Li, H. (2018). Minimap2: Pairwise alignment for nucleotide sequences. <em>Bioinformatics</em>, <em>34</em>(18), 3094–3100. <a href="https://doi.org/10.1093/bioinformatics/bty191">https://doi.org/10.1093/bioinformatics/bty191</a>

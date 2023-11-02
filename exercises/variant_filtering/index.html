@@ -224,8 +224,38 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../slides/variant_calling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/variant_filtering/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/genetic_diversity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic diversity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../slides/population_structure/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/demography/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographic inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/selection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selection</span></a>
   </div>
 </li>
       </ul>
@@ -267,6 +297,30 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../../exercises/variant_filtering/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Variant filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/genetic_diversity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic diversity landscapes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/population_structure/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/demography/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographic inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/selection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selection</span></a>
   </div>
 </li>
       </ul>
@@ -351,7 +405,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">01-Nov-2023</p>
+      <p class="date">02-Nov-2023</p>
     </div>
   </div>
   
@@ -376,8 +430,21 @@ div.csl-indent {
 </div>
 </div>
 <p>In this exercise we will look at ways of filtering variant data. We will begin by applying filters to the variant file containing variant sites only, followed by an approach that filters on sequencing depth in a variant file containing both variant and invariant sites. The latter methodology can then be generalized to generate depth-based filters from BAM files.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The commands of this document have been run on a subset (a subregion) of the data. Therefore, although you will use the same commands, your results will differ from those presented here.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -386,7 +453,7 @@ Learning objectives
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>filter variants by quality, read depth, and other metrics</li>
@@ -398,7 +465,7 @@ Learning objectives
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -407,7 +474,7 @@ Data setup
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Create an exercise directory and <code>cd</code> to it:</p>
 <div class="cell">
@@ -419,7 +486,7 @@ Data setup
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -428,7 +495,7 @@ Tools
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -518,7 +585,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For applications where invariant sites should be included, such as genetic diversity calculations, neither quality or MAF filtering should be applied.</p>
+<p>For applications where invariant sites should be included, such as genetic diversity calculations, neither quality nor MAF filtering should be applied.</p>
 </div>
 </div>
 </section></section><section id="sec-basic-filtering" class="level2"><h2 class="anchored" data-anchor-id="sec-basic-filtering">Basic filtering of a VCF file<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
@@ -549,7 +616,7 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats variantsites.subset.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"number of records:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SN  0   number of records:  102775</code></pre>
+<pre><code>SN  0   number of records:  103012</code></pre>
 </div>
 </div>
 <p>The <code>-r</code> parameter sets the <em>rate</em> of sampling which is why we get <em>approximately</em> 100,000 sites. You will need to adjust this parameter accordingly.</p>
@@ -569,21 +636,21 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> MEAN_DEPTH:mean <span class="va">${OUT}</span>.idepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_SITES MEAN_DEPTH
-PUN-R-ELF   102579  8.55438
-PUN-R-JMC   102574  9.50464
-PUN-R-LH    102613  9.18976
-PUN-R-MT    102573  9.42235
-PUN-R-UCSD  102657  8.90387
-PUN-Y-BCRD  102572  9.88846
-PUN-Y-INJ   102533  8.17657
-PUN-Y-LO    102538  7.81869
-PUN-Y-PCT   102525  9.11053
-PUN-Y-POTR  102493  8.42413
+PUN-R-ELF   102820  8.62904
+PUN-R-JMC   102819  9.57592
+PUN-R-LH    102846  9.26765
+PUN-R-MT    102804  9.48756
+PUN-R-UCSD  102899  9.01136
+PUN-Y-BCRD  102811  9.92815
+PUN-Y-INJ   102777  8.31736
+PUN-Y-LO    102773  7.86488
+PUN-Y-PCT   102749  9.23268
+PUN-Y-POTR  102739  8.55732
 MEAN_DEPTH:mean
-8.90</code></pre>
+8.99</code></pre>
 </div>
 </div>
-<p>The average coverage over all samples is 8.9X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
+<p>The average coverage over all samples is 9.0X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
 <p>Then we calculate depth per site to see if we can identify reasonable depth cutoffs:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">$VCF</span> <span class="at">--site-depth</span> <span class="at">--out</span> <span class="va">$OUT</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
@@ -616,7 +683,7 @@ LG4 2130    11  21</code></pre>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> 3:min,3:q1,3:median,3:mean,3:q3,3:max,3:stdev vcftools/variantsites.subset.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SUM_DEPTH:min   SUM_DEPTH:q1    SUM_DEPTH:median    SUM_DEPTH:mean  SUM_DEPTH:q3    SUM_DEPTH:max   SUM_DEPTH:stdev
-1.00    55.00   72.00   88.81   88.00   33988.00    240.57</code></pre>
+1.00    55.00   72.00   89.69   88.00   33988.00    249.70</code></pre>
 </div>
 </div>
 <p>The range from the first quartile (<code>q1</code>) to the third (<code>q3</code>) is 55-88, showing most sites have a depth between 50-100X. We redraw the plot to zoom in on the peak:</p>
@@ -699,8 +766,8 @@ LG4 2130    2   14  0.857143    0.142857</code></pre>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.imiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
-PUN-R-ELF   102775  0   6878    0.0669229
-PUN-R-JMC   102775  0   6595    0.0641693</code></pre>
+PUN-R-ELF   103012  0   6961    0.0675747
+PUN-R-JMC   103012  0   6659    0.064643</code></pre>
 </div>
 </div>
 <p>and look at the results, focusing on the <code>F_MISS</code> column (proportion missing sites):</p>
@@ -752,16 +819,16 @@ LG4 2130    20  0   6   0.3</code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.het</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   72391   65494.8 87199   0.31774
-PUN-R-JMC   68041   65692.5 87409   0.10814
-PUN-R-LH    70774   65892.9 87673   0.22411
-PUN-R-MT    69750   65639.6 87301   0.18976
-PUN-R-UCSD  74559   65452.7 87399   0.41494
-PUN-Y-BCRD  69213   64766.8 86088   0.20854
-PUN-Y-INJ   71137   63991.8 84868   0.34227
-PUN-Y-LO    72661   63238.0 84279   0.44784
-PUN-Y-PCT   74386   64372.1 85840   0.46646
-PUN-Y-POTR  71596   64422.1 85659   0.33780</code></pre>
+PUN-R-ELF   72451   65518.2 87264   0.31881
+PUN-R-JMC   68096   65710.7 87463   0.10966
+PUN-R-LH    70758   65976.0 87816   0.21896
+PUN-R-MT    69890   65721.9 87444   0.19188
+PUN-R-UCSD  74606   65496.2 87483   0.41433
+PUN-Y-BCRD  69413   64835.3 86217   0.21409
+PUN-Y-INJ   71155   64060.6 84981   0.33912
+PUN-Y-LO    72753   63273.6 84340   0.44998
+PUN-Y-PCT   74397   64424.5 85930   0.46372
+PUN-Y-POTR  71692   64464.4 85742   0.33968</code></pre>
 </div>
 </div>
 <p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, which you can verify by substituting the variables in the output.</p>
@@ -769,8 +836,21 @@ PUN-Y-POTR  71596   64422.1 85659   0.33780</code></pre>
 <p>If F is negative, there are fewer observed homozygotes than expected, or conversely, an excess of heterozygotes. This could be indicative of poor sequence quality (bad mappings) or contamination <span class="citation" data-cites="purcell_PLINKToolSet_2007">(<a href="#ref-purcell_PLINKToolSet_2007" role="doc-biblioref">Purcell et al., 2007</a>)</span>.</p>
 <p>The underlying assumption is HWE, which holds for F=0.</p>
 <p>In this case, we know that the samples are from two different populations, red and yellow. In such cases, we actually expect a deficit of heterozygotes (and consequently, positive F) simply due to something called the <a href="https://en.wikipedia.org/wiki/Wahlund_effect">Wahlund effect</a>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The inbreeding coefficient is a population-level statistic and is not reliable for small sample sizes (<span class="math inline">\(n&lt;10\)</span>, say). Therefore, our sample size is in the lower range and the results should be taken with a grain of salt.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -779,13 +859,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p>Use <code>bcftools view -s SAMPLENAMES | vcftools --vcf - --het --stdout</code> to calculate the heterozygosity for red and yellow samples. Substitute <code>SAMPLENAMES</code> for a comma-separated list of samples.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -794,7 +874,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -803,11 +883,11 @@ Answer
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--het</span> <span class="at">--stdout</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   41744   37682.1 56552   0.21526
-PUN-R-JMC   37306   37756.0 56674   -0.02379
-PUN-R-LH    39879   37856.4 56778   0.10689
-PUN-R-MT    38802   37605.8 56353   0.06381
-PUN-R-UCSD  43540   37467.4 56380   0.32109</code></pre>
+PUN-R-ELF   41778   37664.2 56591   0.21735
+PUN-R-JMC   37286   37707.4 56653   -0.02224
+PUN-R-LH    39800   37858.1 56858   0.10221
+PUN-R-MT    38838   37590.3 56392   0.06636
+PUN-R-UCSD  43540   37444.7 56417   0.32127</code></pre>
 </div>
 </div>
 </div>
@@ -843,14 +923,14 @@ PUN-R-UCSD  43540   37467.4 56380   0.32109</code></pre>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="va">$OUTVCF</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  37680
+SN  0   number of records:  37757
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 37474
+SN  0   number of SNPs: 37570
 SN  0   number of MNPs: 0
 SN  0   number of indels:   0
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1649
-SN  0   number of multiallelic SNP sites:   680</code></pre>
+SN  0   number of multiallelic sites:   1662
+SN  0   number of multiallelic SNP sites:   686</code></pre>
 </div>
 </div>
 <p>Quite a substantial portion variants have in fact been removed, which here can most likely be attributed to the low average sequencing coverage.</p>
@@ -897,7 +977,7 @@ SN  0   number of multiallelic SNP sites:   69</code></pre>
 </section><section id="data-for-depth-filters" class="level3"><h3 class="anchored" data-anchor-id="data-for-depth-filters">Data for depth filters</h3>
 <p>By now you should be familiar with the <code>vcftools</code> commands to generate relevant data for filters. In particular, we used <code>--site-depth</code> to generate depth profiles over all sites, and <code>--missing-site</code> to generate missingness data, based on genotype presence/abscence, for every site. Use these same commands again to generate a set of depth filters.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -906,7 +986,7 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
@@ -921,7 +1001,7 @@ Exercise
 </ol>
 <p>Call the final output file <code>allsites.filtered.vcf.gz</code> and compare your output to the input file.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -930,7 +1010,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1243,7 +1323,7 @@ PUN-Y-POTR  total   100000  795201  7.95    0   205</code></pre>
 <span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="at">-S</span> 1 ALL.bg.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1252,7 +1332,7 @@ PUN-Y-POTR  total   100000  795201  7.95    0   205</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The code above works as follows. We first use <code>csvtk</code> to <code>grep</code> (search) for the population names red and yellow in the <code>Taxon</code> column in <code>sampleinfo.csv</code>, thereby filtering the output to lines where <code>Taxon</code> matches the population names. Then, we cut out the interesting column <code>SampleAlias</code> and remove the header (<code>grep -v SampleAlias</code> matches anything but <code>SampleAlias</code>). Finally, <code>tr</code> translates newline character <code>\n</code> to space. The output is stored in the <code>SAMPLES</code> variable through the command substitution (<code>$()</code>) syntax.</p>
 <p>We then iterate through the <code>$SAMPLES</code> to generate the input file names with the <code>echo</code> command, storing the output in <code>$BEDGZ</code>. These variables are passed on to <code>bedtools unionbedg</code> to generate a <a href="https://genome.ucsc.edu/goldenPath/help/bedgraph.html">bedgraph file</a> combining all samples.</p>
@@ -1262,7 +1342,7 @@ PUN-Y-POTR  total   100000  795201  7.95    0   205</code></pre>
 <!-- markdownlint-enable MD013 -->
 <p>As mentioned previously, we also need to combine coverages per populations yellow and red.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1271,13 +1351,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p>Using the previous command as a template, try to generate per population coverage files.</p>
 <div class="callout callout-style-default callout-hint no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1286,7 +1366,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-hint">
@@ -1297,7 +1377,7 @@ Hint
 </div>
 </div>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1306,7 +1386,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1425,7 +1505,7 @@ Answer
 <!-- markdownlint-enable MD013 -->
 <p>Consequently, 75.2% of the genome is accessible by depth.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1434,13 +1514,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p>Generate coverage sums for the red and yellow sample sets, and from these determine coverage thresholds and apply the thresholds to generate BED files with accessible regions.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1449,7 +1529,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1534,7 +1614,7 @@ genome  1   76769   100000  0.76769</code></pre>
 <span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.ind.bed.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1543,13 +1623,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse show">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p>Use <code>bedtools genomecov</code> to determine the proportion of bases that are filtered out. Use <code>${REF}.fai</code> as the argument to the required option <code>-g</code>.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1558,7 +1638,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1583,7 +1663,7 @@ genome  1   92306   100000  0.92306</code></pre>
 </div>
 <!-- markdownlint-enable MD013 -->
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1592,13 +1672,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse show">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p>Generate coverage sums for red and yellow sample sets.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1607,7 +1687,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -1667,7 +1747,7 @@ genome  1   75236   100000  0.75236</code></pre>
 </div>
 <p>Note that 0 and 1 in the <code>bedtools genomecov</code> output refers to coverage (i.e., absence/presence) and not unmask/mask as in the mask FASTA file.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1676,13 +1756,13 @@ Exercise
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse show">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
 <p>Create unmask files for red and yellow populations.</p>
 <div class="callout callout-style-default callout-answer no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1691,7 +1771,7 @@ Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-answer">
@@ -2012,7 +2092,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":true,"selector":".lightbox","openEffect":"zoom"});</script>
 
 
 </body></html>

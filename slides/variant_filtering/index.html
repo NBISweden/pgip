@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #3c3836;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #3c3836; } /* Normal */
+    code span.al { color: #282828; background-color: #cc241d; font-weight: bold; } /* Alert */
+    code span.an { color: #98971a; } /* Annotation */
+    code span.at { color: #d79921; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #d65d0e; } /* BuiltIn */
+    code span.cf { color: #cc241d; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #b16286; } /* Char */
+    code span.cn { color: #b16286; font-weight: bold; } /* Constant */
+    code span.co { color: #928374; } /* Comment */
+    code span.cv { color: #928374; } /* CommentVar */
+    code span.do { color: #98971a; } /* Documentation */
+    code span.dt { color: #d79921; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #cc241d; text-decoration: underline; } /* Error */
+    code span.ex { color: #689d6a; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #689d6a; } /* Function */
+    code span.im { color: #689d6a; } /* Import */
+    code span.in { color: #282828; background-color: #83a598; } /* Information */
+    code span.kw { color: #3c3836; font-weight: bold; } /* Keyword */
+    code span.op { color: #3c3836; } /* Operator */
+    code span.ot { color: #689d6a; } /* Other */
+    code span.pp { color: #d65d0e; } /* Preprocessor */
+    code span.re { color: #928374; background-color: #f9f5d7; } /* RegionMarker */
+    code span.sc { color: #b16286; } /* SpecialChar */
+    code span.ss { color: #98971a; } /* SpecialString */
+    code span.st { color: #98971a; } /* String */
+    code span.va { color: #458588; } /* Variable */
+    code span.vs { color: #98971a; } /* VerbatimString */
+    code span.wa { color: #282828; background-color: #fabd2f; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -353,83 +418,73 @@
   <h3 class="subtitle">From raw variant calls to high-quality call sets</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">01-Nov-2023</h4>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#/variant-filtering" id="/toc-variant-filtering">Variant filtering</a></li>
-</ul>
-</nav>
+  <h4 class="date">02-Nov-2023</h4>
 </section>
 
 <section>
 <section id="variant-filtering" class="title-slide slide level1 center">
 <h1>Variant filtering</h1>
-<p>Show coverage tracks from e.g., krill</p>
+
 </section>
-<section id="coverage-tracks" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-1-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-1" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-2-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-2" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-3-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-3" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-4-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-4" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-5-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-5" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-6-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-6" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-7-1.svg" width="960" class="r-stretch"></section>
-<section id="coverage-tracks-7" class="slide level2">
-<h2>Coverage tracks</h2>
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/coverage-filters-final-1.svg" width="960" class="r-stretch"></section>
-<section id="filters-and-masks" class="slide level2">
-<h2>Filters and masks</h2>
-<p>Implement:</p>
+<section id="why-we-need-to-filter-variants" class="slide level2">
+<h2>Why we need to filter variants</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="fig-Li-2014-2" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;1: Overlap in <strong>raw</strong> variant calls for different combinations of read mappers and variant callers.</figcaption>
+<p><img data-src="assets/images/Li-2014-F2.png" style="width:70.0%"></p>
+</figure>
+</div>
+<p>Error rate of variant calls (SNPs and INDELs) largely unknown. Two major sources of error are</p>
+<ol type="1">
+<li>erroneous realignment in low-complexity regions</li>
+<li>incomplete reference sequence</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div id="fig-Li-2014-3" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;2: Overlap in <strong>filtered</strong> variant calls for different combinations of read mappers and variant callers</figcaption>
+<p><img data-src="assets/images/Li-2014-F3.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div><div class="flushright smallr translatey50">
+<p><span class="citation" data-cites="li_BetterUnderstandingArtifacts_2014">Li (<a href="#/bibliography" role="doc-biblioref" onclick="">2014</a>)</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>Error rate of variant calls (SNPs and INDELs) and leading causal artifacts remain unclear and largely unknown <span class="citation" data-cites="li_BetterUnderstandingArtifacts_2014">(<a href="#/bibliography" role="doc-biblioref" onclick="">Li, 2014</a>)</span>. This study compared several read mappers and variant callers on a haploid data set. For comparison, the following variant filters were applied:</p>
+<ol type="1">
+<li>low-complexity (LC) filter</li>
+<li>maximum depth (MD)</li>
+<li>allele balance (AD) - filter sites where non-reference (ALT) too low</li>
+<li>double strand (DS) - filter if ALT too low on one strand</li>
+<li>Fisher strand (FS) - filter if strong REF/ALT correlation with +/- strand</li>
+<li>quality filter (QU) - variant quality threshold</li>
+</ol>
+<p>Here, AB, DS and FS filters are <em>caller dependent</em>!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="general-filters" class="slide level2 smallest">
-<h2>General filters</h2>
+<section id="manual-filtering-sets-thresholds-on-context-statistics" class="slide level2 smallr">
+<h2>Manual filtering sets thresholds on context statistics</h2>
 <!-- markdownlint-disable MD013 -->
 <div id="tbl-key-data-filters">
 <table>
 <caption>Table&nbsp;1: Key data filters <span class="citation" data-cites="lou_BeginnerGuideLowcoverage_2021">(Table 3 <a href="#/bibliography" role="doc-biblioref" onclick="">Lou et al., 2021, p. 5974</a>)</span></caption>
 <colgroup>
-<col style="width: 29%">
-<col style="width: 27%">
-<col style="width: 43%">
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 40%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -487,7 +542,7 @@
 <tr class="even">
 <td></td>
 <td>Minimum minor allele frequency (MAF)</td>
-<td>1%-10% for some analyses (PCA/admixture/LD/<span class="math inline">\(\mathsf{F_{ST}}\)</span></td>
+<td>1%-10% for some analyses (PCA/admixture/LD/<span class="math inline">\(\mathsf{F_{ST}}\)</span>)</td>
 </tr>
 <tr class="odd">
 <td>Restricting analysis to a predefined site list</td>
@@ -498,10 +553,14 @@
 </table>
 </div>
 <!-- markdownlint-enable MD013 -->
+<h4 id="procedure">Procedure</h4>
+<p>Look at annotations (<em>context statistics</em>) and set thresholds.</p>
+<p>Example: filter all sites with MAF&lt;1%</p>
 <aside class="notes">
 <p>NB: bypassing recommendations often means doing custom analyses. For instance, <span class="citation" data-cites="talla_DissectingEffectsSelection_2019">Talla et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span> include GATK tri-allelic sites due to different bi-allelic pairs segregating in different subpopulations (e.g.&nbsp;A/G in pop 1, A/T in pop 2)</p>
 <h4 id="verbose-explanations-of-filters">Verbose explanations of filters</h4>
 <p>Source: <span class="citation" data-cites="lou_BeginnerGuideLowcoverage_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">Lou et al., 2021</a>)</span></p>
+<blockquote>
 <p>Base quality scores are factored into the calculation of genotype likelihoods, so if they accurately reflect the probability of sequencing error, bases with low scores also carry useful information. However, base quality scores are sometimes miscalibrated, so noise may be reduced if bases with scores below a threshold (e.g., 20) are either trimmed off prior to analysis or ignored. Alternatively, all base quality scores can be recalibrated based on estimated error profiles in the data (see Section 3.1).</p>
 <p>Mapping quality is not considered in genotype likelihood estimation in currently available tools, so it is often advisable to remove low-­confidence and/or nonuniquely mapped reads prior to analysis (e.g., reads with mapping quality &lt;20). Filtering out reads that do not map in proper pairs should also further increase confidence in reads being mapped to the correct location, but could cause biases in regions with structural variation.</p>
 <p>To avoid sites with low or confounding data support in downstream analysis, minimum depth and/or minimum number of individual filters can be used to exclude sites with much reduced sequencing coverage compared to the rest of the genome (e.g., regions with low unique mapping rates, such as repetitive sequences). Appropriate thresholds will vary between data sets, but could, for example, exclude sites with read data for &lt;50% of individuals (globally or within each population), or with &lt;0.8× average depth across individuals (after filtering on mapping quality)</p>
@@ -513,6 +572,7 @@
 <p>Most software programs for downstream analyses assume that all SNPs are biallelic, so SNPs with more than two alleles can be filtered out in the SNP identification step to avoid violation of such assumptions.</p>
 <p>For many types of analysis, such as PCA, admixture analysis, detection of FST outliers and estimation of LD, low-­frequency SNPs are uninformative and can even bias results (e.g.&nbsp;Linck &amp; Battey, 2019; Roesti et al., 2012). For those types of analysis, imposing a minimum MAF filter of 1%–­10% can substantially speed up computation time. Appropriate thresholds depend on coverage, sample size (how many copies does an MAF threshold correspond to) and the type of downstream analysis.</p>
 <p>For comparison of parameter estimates for multiple populations, it is important to ensure that data are obtained for a shared set of sites and that SNP polarization (which allele we track the frequency of) is consistent. For programs such as angsd where population-­specific estimates are obtained by analysing the data from each population separately, a good strategy is to first conduct a global SNP calling with all samples and then restrict population-­specific analysis to those SNPs with consistent major and minor allele designations (-­doMajorMinor 3 in angsd) no MAF or SNP p-­value filter (because that would incorrectly generate “missing data” if a site is fixed in a particular population).</p>
+</blockquote>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -525,10 +585,62 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="gentotype-likelihoods" class="slide level2">
-<h2>Gentotype likelihoods</h2>
+<section id="guidelines-what-guidelines" class="slide level2 smallr">
+<h2>Guidelines? What guidelines?</h2>
+<h4 id="gatk-hard-filters">GATK hard filters</h4>
+<blockquote>
+<p>However, because we want to help, we have formulated some generic recommendations that should at least provide a starting point for people to experiment with their data.</p>
+</blockquote>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<h5 id="snps">SNPs</h5>
+<pre><code>QualByDepth (QD) &lt; 2.0
+RMSMappingQuality (MQ) &lt; 40.0
+FisherStrand (FS) &gt; 60.0
+StrandOddsRatio (SOR) &gt; 3.0
+MappingQualityRankSumTest (MQRankSum) &lt; -12.5
+ReadPosRankSumTest (ReadPosRankSum) &lt; -8.0</code></pre>
+</div><div class="column" style="width:50%;">
+<h5 id="indels">Indels</h5>
+<pre><code>QualByDepth (QD) &lt; 2.0
+ReadPosRankSum (ReadPosRankSumTest) &lt; -20.0
+InbreedingCoeff &lt; -0.8
+FisherStrand (FS) &gt; 200.0
+StrandOddsRatio (SOR) &gt; 10.0</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<blockquote>
+<p>That said, you ABSOLUTELY SHOULD NOT expect to run these commands and be done with your analyses.</p>
+</blockquote>
+</div>
+<div class="flushright smallest translatey50">
+<p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037499012" class="uri">https://gatk.broadinstitute.org/hc/en-us/articles/360037499012</a></p>
+</div>
+<div class="fragment">
+<!-- -->
+<h4 id="on-rad-seq-filtering">On RAD-seq filtering</h4>
+<blockquote>
+<p>… the effects of SNP filtering practices on population genetic inference have received much less attention</p>
+</blockquote>
+<div class="flushright smallest translatey50">
+<p>There Is No ‘Rule of Thumb’: Genomic Filter Settings for a Small Plant Population to Obtain Unbiased Gene Flow Estimates <span class="citation" data-cites="nazareno_ThereNoRule_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">Nazareno &amp; Knowles, 2021</a>)</span></p>
+</div>
+</div>
 <aside class="notes">
-<p>NB: samtools and GATK may actually produce different genotypes despite having identical GLs. Samtools applies prior <span class="math inline">\(10^{-3}\)</span> to het call, GATK has no prior <span class="citation" data-cites="li_BetterUnderstandingArtifacts_2014">(<a href="#/bibliography" role="doc-biblioref" onclick="">Li, 2014</a>)</span></p>
+<p>General guidelines on manual filters are not discussed much in the literature, simply due to the fact that there is no set of rule of thumbs. Every problem requires its own settings, as the GATK developers maintain.</p>
+<p>GATK guidelines explained (see <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890471" class="uri">https://gatk.broadinstitute.org/hc/en-us/articles/360035890471</a>):</p>
+<ul>
+<li>QualByDepth (QFD): variant confidence (QUAL) divided by unfiltered depth</li>
+<li>FisherStrand (FS): checks for strand bias (i.e., if minor allele occurs more often on one strand)</li>
+<li>StrandOddsRatio (SOR): alternative strand bias test</li>
+<li>RMSMappingQuality (MQ): root mean square mapping quality over all reads</li>
+<li>MappingQualytRankSumTest (MQRankSum): compares mapping qualities of ref and alt alleles</li>
+<li>ReadPosRankSumTest (ReadPosRankSum): looks at site position within reads</li>
+<li>InbreedingCoeff: population-level statistics that requires at least 10 individuals</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -540,33 +652,403 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="what-about-machine-learning" class="slide level2">
+<h2>What about machine learning?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fng.806/MediaObjects/41588_2011_Article_BFng806_Fig4_HTML.jpg?as=webp" style="width:100.0%"></p>
+<div class="flushright smallr">
+<p><span class="citation" data-cites="depristo_FrameworkVariationDiscovery_2011">DePristo et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+<h5>
+Variant Quality Score Recalibration
+</h5>
+<p>Motivation: look at context statistics and integrate over <em>multiple</em> dimensions</p>
+<ul>
+<li>training data: subset of known variants (from validated resources, e.g.&nbsp;1000 Genomes)</li>
+<li>compile multiple statistics (allele depth, read count, quality, …)</li>
+<li>fit Gaussian mixture model</li>
+<li>reassign quality scores to variant call set</li>
+</ul>
+<div class="fragment">
+<p>Caveat: database of known variants often <em>not</em> known for non-model organisms.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Key take home: thresholds that previously were binary yes/no filters now depend on context; for instance, an AD (allele depth) cutoff of 4 will in VQSR sometimes pass, sometimes not, depending on other information</p>
+<p>Figure legend:</p>
+<ol type="a">
+<li class="fragment">Relationship in the HiSeq call set between strand bias and quality by depth for genomic locations in HapMap3 (red) and dbSNP (orange) used for training the variant quality score recalibrator (left), (b) and the same annotations applied to differentiate likely true positive (green) from false positive (purple) new SNPs. (c–e) Quality tranches in the recalibrated HiSeq (c), exome (d) and low-pass CEU (e) calls beginning with (top) the highest quality but smallest call set with an estimated false positive rate among new SNP calls of &lt;1/1000 to a more comprehensive call set (bottom) that includes effectively all true positives in the raw call set along with more false positive calls for a cumulative false positive rate of 10%. Each successive call set contains within it the previous tranche’s true- and false-positive calls (shaded bars) as well as tranche-specific calls of both classes (solid bars). The tranche selected for further analyses here is indicated.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="filtering-vcf-with-variant-sites" class="title-slide slide level1 center">
+<h1>Filtering VCF with variant sites</h1>
+
+</section>
+<section id="monkeyflower-variants" class="slide level2">
+<h2>Monkeyflower variants</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">bcftools</span> stats variantsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SN  0   number of samples:  10
+SN  0   number of records:  12845
+SN  0   number of no-ALTs:  0
+SN  0   number of SNPs: 10559
+SN  0   number of MNPs: 0
+SN  0   number of indels:   2299
+SN  0   number of others:   0
+SN  0   number of multiallelic sites:   1002
+SN  0   number of multiallelic SNP sites:   192</code></pre>
+</div>
+</div>
+<p>Use <code>vcftools</code> to compile data to generate summary statistics</p>
+<p>Plot and select thresholds</p>
+</section>
+<section id="mean-depth-and-variant-quality-distribution" class="slide level2">
+<h2>Mean depth and variant quality distribution</h2>
+<div class="columns smallr">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>vcf <span class="ot">&lt;-</span> <span class="st">"variantsites.vcf.gz"</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">system</span>(<span class="fu">paste</span>(<span class="st">"vcftools --gzvcf"</span>, vcf, <span class="st">"--site-depth 2&gt;/dev/null"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.ldepth"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(data<span class="sc">$</span>SUM_DEPTH))</span>
+<span id="cb5-5"><a href="#cb5-5"></a>lower <span class="ot">&lt;-</span> <span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">median</span>(data<span class="sc">$</span>SUM_DEPTH)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>upper <span class="ot">&lt;-</span> <span class="fu">median</span>(data<span class="sc">$</span>SUM_DEPTH) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sd</span>(data<span class="sc">$</span>SUM_DEPTH)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(Var1)), <span class="at">y =</span> Freq)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Depth"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="fu">ylab</span>(<span class="st">"bp"</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="fu">signif</span>(upper, <span class="at">digits =</span> <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> lower,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> upper, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="fu">ggtitle</span>(<span class="st">"Example threshold: 0.8X median depth, median depth + 2sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/mean-depth-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">system</span>(<span class="fu">paste</span>(<span class="st">"vcftools --gzvcf"</span>, vcf, <span class="st">"--site-quality 2&gt;/dev/null"</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.lqual"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(data, QUAL <span class="sc">&lt;</span> <span class="dv">1000</span>), <span class="fu">aes</span>(<span class="at">x =</span> QUAL)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">bins =</span> <span class="dv">50</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Quality value"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Count"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">30</span>,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Example threshold: Q30"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/variant-quality-score-distribution-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="missing-data-per-individual-and-site" class="slide level2">
+<h2>Missing data per individual and site</h2>
+<div class="columns smallr">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">system</span>(<span class="fu">paste</span>(<span class="st">"vcftools --gzvcf"</span>, vcf, <span class="st">"--missing-indv 2&gt;/dev/null"</span>))</span>
+<span id="cb7-2"><a href="#cb7-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.imiss"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> F_MISS, <span class="at">y =</span> INDV)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Missing data per individual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/missing-indv-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">system</span>(<span class="fu">paste</span>(<span class="st">"vcftools --gzvcf"</span>, vcf, <span class="st">"--missing-site 2&gt;/dev/null"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.lmiss"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> F_MISS)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="fu">xlab</span>(<span class="st">"F_MISS"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Count"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.25</span>, <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Missing data per site: example threshold F_MISS=0.25"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/missing-site-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="minor-allele-frequency-and-heterozygosity" class="slide level2">
+<h2>Minor allele frequency and heterozygosity</h2>
+<div class="columns smallr">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">system</span>(<span class="fu">paste</span>(<span class="st">"vcftools --gzvcf"</span>, vcf, <span class="st">"--freq2 --max-alleles 2 2&gt;/dev/null"</span>))</span>
+<span id="cb9-2"><a href="#cb9-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.frq"</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CHROM"</span>, <span class="st">"POS"</span>, <span class="st">"N_ALLELES"</span>, <span class="st">"N_CHR"</span>, <span class="st">"FREQ1"</span>, <span class="st">"FREQ2"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>data<span class="sc">$</span>MAF <span class="ot">&lt;-</span> <span class="fu">apply</span>(data, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">min</span>(x[<span class="dv">5</span>], x[<span class="dv">6</span>])))</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> MAF)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="fu">xlab</span>(<span class="st">"MAF"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Count"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="fu">ggtitle</span>(<span class="st">"Minor allele frequency: example threshold MAF=0.1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/minor-allele-frequency-1.svg" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>But! Statistics based on diversity or the SFS should <strong>not</strong> be filtered on MAF</p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">system</span>(<span class="fu">paste</span>(<span class="st">"vcftools --gzvcf"</span>, vcf, <span class="st">"--het 2&gt;/dev/null"</span>))</span>
+<span id="cb10-2"><a href="#cb10-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.het"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> F, <span class="at">y =</span> INDV)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Inbreeding coefficient"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/heterozygosity-1.svg" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>F=0: Hardy-Weinberg Equilibrium</li>
+<li>F&gt;0: deficit of heterozygotes; inbreeding, Wahlund effect (population substructure), allele dropout</li>
+<li>F&lt;0: surplus of heterozygotes; could be sample contamination, poor sequence quality (mismapping)</li>
+</ul>
+</div>
+</div>
+</section></section>
+<section>
+<section id="filtering-vcf-with-invariant-sites" class="title-slide slide level1 center">
+<h1>Filtering VCF with invariant sites</h1>
+
+</section>
+<section id="monkeyflower-call-set-with-invariant-sites" class="slide level2">
+<h2>Monkeyflower call set with invariant sites</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">bcftools</span> stats allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SN  0   number of samples:  10
+SN  0   number of records:  10081
+SN  0   number of no-ALTs:  9238
+SN  0   number of SNPs: 388
+SN  0   number of MNPs: 0
+SN  0   number of indels:   156
+SN  0   number of others:   0
+SN  0   number of multiallelic sites:   60
+SN  0   number of multiallelic SNP sites:   5</code></pre>
+</div>
+</div>
+<p>Filtering as before but excluding MAF, variant quality filters</p>
+</section></section>
+<section>
+<section id="filtering-on-bam-files" class="title-slide slide level1 center">
+<h1>Filtering on bam files</h1>
+
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Some organisms generate a <strong>lot</strong> of data…</p>
+<div class="fragment large" data-fragment-index="2">
+<p>Total variant file size: <code>7.4T</code>!!!</p>
+<p>Without invariant sites!</p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p>Solution: sequence masks</p>
+<blockquote>
+<p>…it may be possible for more advanced users to achieve similar results with existing tools. For example, with the inclusion of a user-created “accessibility mask”, it should be possible to avoid the “missing sites” effect…</p>
+</blockquote>
+<div class="flushright smallr">
+<p><span class="citation" data-cites="korunes_PixyUnbiasedEstimation_2021">(<a href="#/bibliography" role="doc-biblioref" onclick="">Korunes &amp; Samuk, 2021</a>)</span></p>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="1" style="width:50%;">
+<h5>
+Spruce variant files, chromosome 1
+</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">48G</span>     PA_chr01_10.vcf.gz</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">45G</span>     PA_chr01_11.vcf.gz</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="ex">51G</span>     PA_chr01_12.vcf.gz</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="ex">50G</span>     PA_chr01_13.vcf.gz</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="ex">45G</span>     PA_chr01_14.vcf.gz</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="ex">51G</span>     PA_chr01_15.vcf.gz</span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="ex">51G</span>     PA_chr01_16.vcf.gz</span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="ex">35G</span>     PA_chr01_17.vcf.gz</span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="ex">49G</span>     PA_chr01_1.vcf.gz</span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="ex">50G</span>     PA_chr01_2.vcf.gz</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="ex">52G</span>     PA_chr01_3.vcf.gz</span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="ex">51G</span>     PA_chr01_4.vcf.gz</span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="ex">54G</span>     PA_chr01_5.vcf.gz</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="ex">51G</span>     PA_chr01_6.vcf.gz</span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="ex">37G</span>     PA_chr01_7.vcf.gz</span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="ex">51G</span>     PA_chr01_8.vcf.gz</span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="ex">47G</span>     PA_chr01_9.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="coverage-tracks-and-sequence-masks" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-1-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-1" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-2-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-2" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-3-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-3" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-4-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-4" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-5-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-5" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-6-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-6" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-7-1.svg" width="960" class="r-stretch"></section>
+<section id="coverage-tracks-and-sequence-masks-7" class="slide level2">
+<h2>Coverage tracks and sequence masks</h2>
+<!-- markdownlint-disable MD013 -->
+
+<!-- markdownlint-enable MD013 -->
+<img data-src="index_files/figure-revealjs/coverage-filters-final-1.svg" width="960" class="r-stretch"></section>
+<section id="filters-and-masks" class="slide level2">
+<h2>Filters and masks</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reference
+Coverage mask</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:80%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;LG4 LG4:12000001-12100000
+GGACAATTACCCCCTCCGTTATGTTTCAGTCAATTTCATGTTTGACTTTTAGATTTTTAA
+000000000011111111110000000000000011111111111000000000000110</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Mask could also represent annotation features, such as exons, four-fold degenerate sites etc to be combined with coverage mask:</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reference
+Coverage mask
+Exons
+
+Combined</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:80%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;LG4 LG4:12000001-12100000
+GGACAATTACCCCCTCCGTTATGTTTCAGTCAATTTCATGTTTGACTTTTAGATTTTTAA
+111111111100000000001111111111111100000000000111111111111001
+111110000000000000000000000000111111111100000000001111111111
+
+111111111100000000001111111111111111111100000111111111111111</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Use with <code>vcftools --mask</code> to restrict analyses to certain positions.</p>
+</div>
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-depristo_FrameworkVariationDiscovery_2011" class="csl-entry" role="listitem">
+DePristo, M. A., Banks, E., Poplin, R., Garimella, K. V., Maguire, J. R., Hartl, C., Philippakis, A. A., del Angel, G., Rivas, M. A., Hanna, M., McKenna, A., Fennell, T. J., Kernytsky, A. M., Sivachenko, A. Y., Cibulskis, K., Gabriel, S. B., Altshuler, D., &amp; Daly, M. J. (2011). A framework for variation discovery and genotyping using next-generation <span>DNA</span> sequencing data. <em>Nature Genetics</em>, <em>43</em>(5), 491–498. <a href="https://doi.org/10.1038/ng.806">https://doi.org/10.1038/ng.806</a>
+</div>
+<div id="ref-korunes_PixyUnbiasedEstimation_2021" class="csl-entry" role="listitem">
+Korunes, K. L., &amp; Samuk, K. (2021). Pixy: <span>Unbiased</span> estimation of nucleotide diversity and divergence in the presence of missing data. <em>Molecular Ecology Resources</em>, <em>21</em>(4), 1359–1368. <a href="https://doi.org/10.1111/1755-0998.13326">https://doi.org/10.1111/1755-0998.13326</a>
+</div>
 <div id="ref-li_BetterUnderstandingArtifacts_2014" class="csl-entry" role="listitem">
 Li, H. (2014). Toward better understanding of artifacts in variant calling from high-coverage samples. <em>Bioinformatics</em>, <em>30</em>(20), 2843–2851. <a href="https://doi.org/10.1093/bioinformatics/btu356">https://doi.org/10.1093/bioinformatics/btu356</a>
 </div>
 <div id="ref-lou_BeginnerGuideLowcoverage_2021" class="csl-entry" role="listitem">
 Lou, R. N., Jacobs, A., Wilder, A. P., &amp; Therkildsen, N. O. (2021). A beginner’s guide to low-coverage whole genome sequencing for population genomics. <em>Molecular Ecology</em>, <em>30</em>(23), 5966–5993. <a href="https://doi.org/10.1111/mec.16077">https://doi.org/10.1111/mec.16077</a>
 </div>
+<div id="ref-nazareno_ThereNoRule_2021" class="csl-entry" role="listitem">
+Nazareno, A. G., &amp; Knowles, L. L. (2021). There <span>Is No</span> <span>“<span>Rule</span> of <span>Thumb</span>”</span>: <span>Genomic Filter Settings</span> for a <span>Small Plant Population</span> to <span>Obtain Unbiased Gene Flow Estimates</span>. <em>Frontiers in Plant Science</em>, <em>12</em>. <a href="https://www.frontiersin.org/articles/10.3389/fpls.2021.677009">https://www.frontiersin.org/articles/10.3389/fpls.2021.677009</a>
+</div>
 <div id="ref-talla_DissectingEffectsSelection_2019" class="csl-entry" role="listitem">
 Talla, V., Soler, L., Kawakami, T., Dincă, V., Vila, R., Friberg, M., Wiklund, C., &amp; Backström, N. (2019). Dissecting the <span>Effects</span> of <span>Selection</span> and <span>Mutation</span> on <span>Genetic Diversity</span> in <span>Three Wood White</span> (<span>Leptidea</span>) <span>Butterfly Species</span>. <em>Genome Biology and Evolution</em>, <em>11</em>(10), 2875–2886. <a href="https://doi.org/10.1093/gbe/evz212">https://doi.org/10.1093/gbe/evz212</a>
 </div>
 </div>
-<aside class="notes">
-<p>ART: <a href="https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm" class="uri">https://www-niehs-nih-gov.ezproxy.its.uu.se/research/resources/software/biostatistics/art/index.cfm</a></p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 
 <div class="footer footer-default">
 <p>Variant filtering</p>

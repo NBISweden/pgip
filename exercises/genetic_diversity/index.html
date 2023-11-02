@@ -182,7 +182,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Genetic diversity landscapes</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/compute_environment/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../../exercises/genetic_diversity/index.html">Genetic diversity landscapes</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -219,8 +219,38 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../slides/variant_calling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/variant_filtering/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/genetic_diversity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic diversity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../slides/population_structure/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/demography/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographic inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/selection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selection</span></a>
   </div>
 </li>
       </ul>
@@ -262,6 +292,30 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../../exercises/variant_filtering/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variant filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/genetic_diversity/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Genetic diversity landscapes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/population_structure/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/demography/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographic inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/selection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selection</span></a>
   </div>
 </li>
       </ul>
@@ -330,7 +384,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">01-Nov-2023</p>
+      <p class="date">02-Nov-2023</p>
     </div>
   </div>
   
@@ -354,9 +408,22 @@ Compute environment setup
 </div>
 </div>
 </div>
-<p>In this exercise we will look at measures that describe variation and compile statistics along a sequence. By scanning variation in windows along the sequence (a.k.a. genomic scan) we can identify outlier regions whose pattern of variation could potentially be attributed to causes other than neutral processes, such as adaptation or migration.</p>
+<p>In this exercise we will look at measures that describe variation and compile statistics along a sequence. By scanning variation in windows along the sequence (a.k.a. genomic scan) we can identify outlier regions whose pattern of variation could potentially be attributed to causes other than neutral processes, such as adaptation or migration. We will use the Monkeyflower system to generate a diversity landscape.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The commands of this document have been run on a subset (a subregion) of the data. Therefore, although you will use the same commands, your results will differ from those presented here.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -365,7 +432,7 @@ Learning objectives
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>describe and calculate commonly used measures of variation, including nucleotide diversity <span class="math inline">\(\pi\)</span>, divergence <span class="math inline">\(d_{XY}\)</span> and differentiation <span class="math inline">\(F_{ST}\)</span>
@@ -378,7 +445,7 @@ Learning objectives
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -387,7 +454,7 @@ Data setup
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Create an exercise directory and <code>cd</code> to it:</p>
 <div class="cell">
@@ -399,7 +466,7 @@ Data setup
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -408,7 +475,7 @@ Tools
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -437,7 +504,7 @@ Tools
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    bcftools/1.17 <span class="dt">\</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    BEDTools/2.29.2 <span class="dt">\</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       vcftools/0.1.16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    vcftools/0.1.16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>csvtk</code> has been added to the module system and can be loaded as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> use /proj/naiss2023-22-1084/modules</span>
