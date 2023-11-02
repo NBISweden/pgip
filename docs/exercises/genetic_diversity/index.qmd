@@ -62,17 +62,56 @@ results will differ from those presented here.
 
 ## Data setup
 
-Create an exercise directory and `cd` to it:
+:::{.panel-tabset}
 
-```{bash }
-#| label: create-monkeyflower-diversity-directory
-#| echo: true
-#| eval: false
-mkdir -p diversity
-cd diversity
+#### {{< fa server >}} UPPMAX
+
+Move to your course working directory `/proj/{{< var uppmaxproject
+>}}/users/USERNAME`, create an exercise directory called
+`monkeyflower` and `cd` to it:
+
+```bash
+cd /proj/{{< var uppmaxproject >}}/users/USERNAME
+mkdir -p monkeyflower
+cd monkeyflower
 ```
 
-FIXME: add data source
+Retrieve the data with `rsync`. You can use the `--dry-run` option to
+see what is going to happen; just remove it when you are content:
+
+```bash
+# Remove the dry run option to retrieve data
+rsync --dry-run -av \
+      /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/LG4/* .
+```
+
+#### {{< fa laptop >}} Local
+
+Create an exercise directory called `monkeyflower` and `cd` to it:
+
+```{bash }
+#| label: create-monkeyflower-directory-local
+#| echo: true
+#| eval: false
+mkdir -p monkeyflower
+cd monkeyflower
+```
+
+Retrieve the variant files from `{{< var webexport.url
+>}}/monkeyflower/LG4` with `wget`^[The password is provided
+by the course instructor]:
+
+```bash
+wget --user pgip --password PASSWORD \
+     --recursive --accept='*.*' \
+     --reject='*.gif','index*' \
+  --no-parent --no-directories \
+     --no-clobber \
+     --directory-prefix=. \
+     {{< var webexport.url >}}/monkeyflower/LG4/
+```
+
+:::
 
 :::
 
@@ -89,7 +128,7 @@ FIXME: add data source
 - [csvtk](https://bioinf.shenwei.me/csvtk/)
 - [vcftools](https://vcftools.github.io/) [@danecek_VariantCallFormat_2011]
 
-#### UPPMAX modules
+#### {{< fa server >}} UPPMAX modules
 
 Execute the following command to load modules:
 
@@ -111,7 +150,7 @@ module use /proj/{{< var uppmaxproject >}}/modules
 module load csvtk
 ```
 
-#### Conda
+#### {{< fa laptop >}} Conda
 
 Copy the contents to a file `environment.yml` and install packages
 with `mamba env update -f environment.yml`.
