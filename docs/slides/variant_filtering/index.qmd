@@ -223,6 +223,104 @@ Source: [@lou_BeginnerGuideLowcoverage_2021]
 
 :::
 
+## Guidelines? What guidelines? {.smallr}
+
+#### GATK hard filters
+
+> However, because we want to help, we have formulated some generic
+> recommendations that should at least provide a starting point for
+> people to experiment with their data.
+
+::: {.fragment}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+##### SNPs
+
+```
+QualByDepth (QD) < 2.0
+RMSMappingQuality (MQ) < 40.0
+FisherStrand (FS) > 60.0
+StrandOddsRatio (SOR) > 3.0
+MappingQualityRankSumTest (MQRankSum) < -12.5
+ReadPosRankSumTest (ReadPosRankSum) < -8.0
+```
+
+:::
+
+::: {.column width="50%"}
+
+##### Indels
+
+```
+QualByDepth (QD) < 2.0
+ReadPosRankSum (ReadPosRankSumTest) < -20.0
+InbreedingCoeff < -0.8
+FisherStrand (FS) > 200.0
+StrandOddsRatio (SOR) > 10.0
+```
+
+:::
+
+::::
+
+:::
+
+::: {.fragment}
+
+> That said, you ABSOLUTELY SHOULD NOT expect to run these commands
+> and be done with your analyses.
+
+:::
+
+::: {.flushright .smallest .translatey50}
+
+<https://gatk.broadinstitute.org/hc/en-us/articles/360037499012>
+
+:::
+
+::: {.fragment}
+
+#### On RAD-seq filtering
+
+> ... the effects of SNP filtering practices on population genetic
+> inference have received much less attention
+
+::: {.flushright .smallest .translatey50 }
+
+There Is No ‘Rule of Thumb’: Genomic Filter Settings for a Small Plant
+Population to Obtain Unbiased Gene Flow Estimates
+[@nazareno_ThereNoRule_2021]
+
+:::
+
+:::
+
+::: {.notes}
+
+General guidelines on manual filters are not discussed much in the
+literature, simply due to the fact that there is no set of rule of
+thumbs. Every problem requires its own settings, as the GATK
+developers maintain.
+
+GATK guidelines explained (see <https://gatk.broadinstitute.org/hc/en-us/articles/360035890471>):
+
+- QualByDepth (QFD): variant confidence (QUAL) divided by unfiltered depth
+- FisherStrand (FS): checks for strand bias (i.e., if minor allele
+  occurs more often on one strand)
+- StrandOddsRatio (SOR): alternative strand bias test
+- RMSMappingQuality (MQ): root mean square mapping quality over all
+  reads
+- MappingQualytRankSumTest (MQRankSum): compares mapping qualities of
+  ref and alt alleles
+- ReadPosRankSumTest (ReadPosRankSum): looks at site position within reads
+- InbreedingCoeff: population-level statistics that requires at least
+  10 individuals
+
+:::
+
 ## What about machine learning?
 
 :::: {.columns}
@@ -254,7 +352,7 @@ dimensions
 
 ::: {.fragment}
 
-Database of known variants often *not* known for non-model organisms.
+Caveat: database of known variants often *not* known for non-model organisms.
 
 :::
 
@@ -448,7 +546,8 @@ ggplot(data, aes(x=F, y=INDV)) + geom_point(size=3) +
 ```
 
 - F=0: Hardy-Weinberg Equilibrium
-- F>0: deficit of heterozygotes; inbreedeng, allele dropout
+- F>0: deficit of heterozygotes; inbreeding, Wahlund
+  effect (population substructure), allele dropout
 - F<0: surplus of heterozygotes; could be sample contamination, poor
   sequence quality (mismapping)
 

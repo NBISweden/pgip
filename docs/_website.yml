@@ -38,7 +38,12 @@ website:
           - slides/pgip/index.qmd
           - slides/foundations/index.qmd
           - slides/simulation/index.qmd
+          - slides/variant_calling/index.qmd
+          - slides/variant_filtering/index.qmd
+          - slides/genetic_diversity/index.qmd
           - slides/population_structure/index.qmd
+          - slides/demography/index.qmd
+          - slides/selection/index.qmd
       - section: Exercises
         contents:
           - exercises/compute_environment/index.qmd
@@ -46,6 +51,10 @@ website:
           - exercises/simulation/index.qmd
           - exercises/variant_calling/index.qmd
           - exercises/variant_filtering/index.qmd
+          - exercises/genetic_diversity/index.qmd
+          - exercises/population_structure/index.qmd
+          - exercises/demography/index.qmd
+          - exercises/selection/index.qmd
       - section: Code recipes
         contents:
           - recipes/index.qmd

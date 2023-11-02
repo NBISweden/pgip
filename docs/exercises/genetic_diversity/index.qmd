@@ -34,6 +34,15 @@ compile statistics along a sequence. By scanning variation in windows
 along the sequence (a.k.a. genomic scan) we can identify outlier
 regions whose pattern of variation could potentially be attributed to
 causes other than neutral processes, such as adaptation or migration.
+We will use the Monkeyflower system to generate a diversity landscape.
+
+::: {.callout-important}
+
+The commands of this document have been run on a subset (a subregion)
+of the data. Therefore, although you will use the same commands, your
+results will differ from those presented here.
+
+:::
 
 ::: {.callout-tip collapse=true}
 
@@ -91,7 +100,7 @@ Execute the following command to load modules:
 module load uppmax bioinfo-tools \
     bcftools/1.17 \
     BEDTools/2.29.2 \
-       vcftools/0.1.16
+    vcftools/0.1.16
 ```
 
 `csvtk` has been added to the module system and can be loaded as

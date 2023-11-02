@@ -31,6 +31,14 @@ sites only, followed by an approach that filters on sequencing depth
 in a variant file containing both variant and invariant sites. The
 latter methodology can then be generalized to generate depth-based filters from BAM files.
 
+::: {.callout-important}
+
+The commands of this document have been run on a subset (a subregion)
+of the data. Therefore, although you will use the same commands, your
+results will differ from those presented here.
+
+:::
+
 ::: {.callout-tip collapse=true}
 
 ## Learning objectives
@@ -636,6 +644,15 @@ populations, red and yellow. In such cases, we actually expect a
 deficit of heterozygotes (and consequently, positive F) simply due to
 something called the [Wahlund
 effect](https://en.wikipedia.org/wiki/Wahlund_effect).
+
+::: {.callout-warning}
+
+The inbreeding coefficient is a population-level statistic and is not
+reliable for small sample sizes ($n<10$, say). Therefore, our sample
+size is in the lower range and the results should be taken with a
+grain of salt.
+
+:::
 
 ::: {.callout-exercise}
 
