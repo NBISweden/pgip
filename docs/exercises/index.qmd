@@ -44,15 +44,14 @@ URL that hosts the actual exercise instructions.
 ## On self-assessment exercise blocks
 
 Scattered throughout the documents are exercise blocks, with hidden
-answers, and in some cases, hints. The exercises are for
+answers, and, in some cases, hints. The exercises are for
 self-assessment of your understanding, but they are not mandatory.
 
-Some of the exercises (labelled with the linux penguin {{< fa
-brands linux >}}) are related to the usage of the command line
-interfaces (CLI), and how to obtain information about what a program
-does. This is an essential skill when working in Linux/UNIX
-environments! These exercises can be skipped if you are an experienced
-Linux/UNIX user.
+Some of the exercises (labelled with the Linux penguin {{< fa brands
+linux >}}) are related to the usage of the command line interfaces
+(CLI), and how to obtain information about what a program does. This
+is an essential skill when working in Linux/UNIX environments! These
+exercises can be skipped if you are an experienced Linux/UNIX user.
 
 An example exercise is provided here:
 

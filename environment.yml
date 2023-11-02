@@ -70,5 +70,5 @@ dependencies:
   - slim>=4.0
   - sgkit
   - tskit>=0.5.0
-  - vcflib
+  - vcflib=1.0.1
   - vcftools

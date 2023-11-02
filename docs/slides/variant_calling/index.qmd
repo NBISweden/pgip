@@ -1315,6 +1315,10 @@ Reference bias: plot no. hets vs coverage for real data, e.g., conifer
 
 ::: {.notes}
 
+NB: samtools and GATK may actually produce different genotypes despite
+having identical GLs. Samtools applies prior $10^{-3}$ to het call,
+GATK has no prior [@li_BetterUnderstandingArtifacts_2014]
+
 :::
 
 # Exercise on variant calling
