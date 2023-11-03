@@ -415,10 +415,10 @@
 
 <section id="title-slide" data-background-image="../../assets/logos/nbis-scilifelab.svg" data-background-position="top left" data-background-size="500px" class="center">
   <h1 class="title">Variant calling</h1>
-  <h3 class="subtitle">Variant calling</h3>
+  <h3 class="subtitle">From sequence data to variant call set</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">02-Nov-2023</h4>
+  <h4 class="date">03-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -801,15 +801,15 @@ Determine the allele combination for each individual (aa, aA, or AA for bi-allel
 </div>
 </div>
 </section>
-<section id="dna-sequences-in-fastq-format" class="slide level2">
+<section id="dna-sequences-in-fastq-format" class="slide level2 smaller">
 <h2>DNA sequences in FASTQ format</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ls</span> <span class="at">--long</span> <span class="at">--human</span> <span class="pp">*</span>.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r-- 1 runner docker 302K Nov  2 09:48 PUN-Y-INJ_R1.fastq.gz
--rw-r--r-- 1 runner docker 393K Nov  2 09:48 PUN-Y-INJ_R2.fastq.gz</code></pre>
+<pre><code>-rw-r--r-- 1 runner docker 302K Nov  3 23:32 PUN-Y-INJ_R1.fastq.gz
+-rw-r--r-- 1 runner docker 393K Nov  3 23:32 PUN-Y-INJ_R2.fastq.gz</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -969,7 +969,7 @@ Population resequencing
 <div>
 <div id="fig-read-mapping" class="quarto-figure quarto-figure-left">
 <figure>
-<figcaption>Figure&nbsp;1: Screenshot of reference sequence (top) and aligned reads (bottom). Bases are colored by nucleotide. Letter case indicates forward (upper-case) or reverse (lower-case) alignment. * is placeholder for deleted base.</figcaption>
+<figcaption>Figure&nbsp;1: Screenshot of reference sequence (top) and aligned reads (bottom). Second line with <code>.</code> characters is the consensus sequence. Bases are colored by nucleotide. Letter case indicates forward (upper-case) or reverse (lower-case) alignment. <code>*</code> is placeholder for deleted base.</figcaption>
 <p><img data-src="assets/images/read-mapping.png" style="width:100.0%"></p>
 </figure>
 </div>
@@ -987,9 +987,9 @@ Population resequencing
 </div>
 </div>
 </section>
-<section id="alignments-are-stored-in-bam-format" class="slide level2">
+<section id="alignments-are-stored-in-bam-format" class="slide level2 smaller">
 <h2>Alignments are stored in BAM format</h2>
-<div class="smallr">
+<div>
 <h5>
 Header information
 </h5>
@@ -1004,7 +1004,7 @@ Header information
 </div>
 <p>Format: metadata record types prefixed with <code>@</code>, e.g., <code>@RG</code> is the <em>read group</em></p>
 </div>
-<div class="smallr fragment">
+<div class="fragment">
 <h5>
 Alignments
 </h5>
@@ -1150,7 +1150,7 @@ LG4:30430
 <h4 id="instrument">Instrument</h4>
 <ul>
 <li>PCR duplicates -&gt; MarkDuplicates</li>
-<li>systematic errors from sequencing machine -&gt; BQSR</li>
+<li>systematic errors from sequencing machine -&gt; Base Quality Score Recalibration (BQSR)</li>
 </ul>
 <h4 id="reference">Reference</h4>
 <ul>
@@ -1163,12 +1163,12 @@ LG4:30430
 <h1>Variant calling and genotyping</h1>
 
 </section>
-<section id="variants-show-up-in-pileup-alignments" class="slide level2">
+<section id="variants-show-up-in-pileup-alignments" class="slide level2 smaller">
 <h2>Variants show up in pileup alignments</h2>
-<div class="columns smallr">
-<div class="column" style="width:50%;">
+<div class="columns">
+<div class="column smallr" style="width:50%;">
 <h5>
-PUN-Y-INJ
+Sample PUN-Y-INJ
 </h5>
 
 
@@ -1210,9 +1210,9 @@ LG4:30430
 </div>
 
 
-</div><div class="column" style="width:50%;">
+</div><div class="column smallr" style="width:50%;">
 <h5>
-PUN-R-ELF
+Sample PUN-R-ELF
 </h5>
 
 
@@ -1258,7 +1258,7 @@ LG4:30430
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="smallr">
+<div>
 <p>Potential variants show up as multiple mismatches in a column. Two questions arise:</p>
 <ul>
 <li>how do we detect variant sites?</li>
@@ -1266,11 +1266,11 @@ LG4:30430
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="smallr fragment">
+<div class="fragment">
 <p>Simple approach: filter bases on quality (e.g., Q20), call heterozygous if 20-80% bases non-reference.</p>
 <p>Issues: undercalls heterozygotes, no measure of uncertainty</p>
 </div>
-<div class="fragment smallr">
+<div class="fragment">
 <p>Solution: probabilistic methods!</p>
 </div>
 <div class="flushright smallest">
@@ -1375,7 +1375,7 @@ P(X|G,T) &amp; = P(X_1=G|G,T)P(X_2=g|G,T)P(X_3=T|G,T)P(X_4=T|G,T) \\
           display:block!important;
       }</style></aside>
 </section>
-<section id="we-can-use-bayes-theorem-to-genotype" class="slide level2">
+<section id="we-can-use-bayes-theorem-to-genotype" class="slide level2 smaller">
 <h2>We can use Bayes’ theorem to genotype</h2>
 <h3 id="example">Example</h3>
 <div class="columns">
@@ -1498,7 +1498,7 @@ P(G|X) \sim P(X|G)P(G)
 \]</span></p>
 </div>
 </section>
-<section id="variant-call-format-vcf---header" class="slide level2 smallr">
+<section id="variant-call-format-vcf---header" class="slide level2 smaller">
 <h2>Variant Call Format (VCF) - header</h2>
 <div>
 <div class="cell">
@@ -1530,7 +1530,7 @@ P(G|X) \sim P(X|G)P(G)
 <p><a href="https://samtools.github.io/hts-specs/VCFv4.4.pdf" class="uri">https://samtools.github.io/hts-specs/VCFv4.4.pdf</a></p>
 </div>
 </section>
-<section id="variant-call-format-vcf---data" class="slide level2 smallr">
+<section id="variant-call-format-vcf---data" class="slide level2">
 <h2>Variant Call Format (VCF) - data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">bcftools</span> view <span class="at">--header-only</span> <span class="at">--samples</span> PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
@@ -1541,29 +1541,35 @@ P(G|X) \sim P(X|G)P(G)
 LG4 6886    .   C   T   722.43  .   AC=2;AF=0.222;AN=4;BaseQRankSum=0;DP=82;ExcessHet=1.8123;FS=1.309;InbreedingCoeff=-0.155;MLEAC=4;MLEAF=0.222;MQ=60;MQRankSum=0;QD=18.52;ReadPosRankSum=0.577;SOR=0.44   GT:AD:DP:GQ:PGT:PID:PL:PS   0/1:3,8:11:50:.:.:189,0,50:.    0/1:2,2:4:45:.:.:45,0,45:.</code></pre>
 </div>
 </div>
-<div class="columns">
-<div class="column" style="width:35%;">
+<div>
 <p><code>QUAL</code>: Phred-scaled quality score for Prob(ALT is wrong): <span class="math inline">\(722.43\)</span> (<span class="math inline">\(p=10^{-Q/10}=5.7e-73\)</span>)</p>
 <p><code>INFO</code> field summarizes data for all samples. For instance:</p>
 <ul>
 <li>allele count 2 (<code>AC=2</code>)</li>
 <li>allele frequency minor allele 0.222 (<code>AF=0.222</code>)</li>
 </ul>
-<div class="flushright smallr">
+</div>
+<div class="flushright smallest">
 <p><a href="https://samtools.github.io/hts-specs/VCFv4.4.pdf" class="uri">https://samtools.github.io/hts-specs/VCFv4.4.pdf</a></p>
 </div>
-</div><div class="column" style="width:65%;">
+</section>
+<section id="variant-call-format-vcf---data-1" class="slide level2 smaller">
+<h2>Variant Call Format (VCF) - data</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>#CHROM  POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  PUN-R-ELF   PUN-Y-INJ
+LG4 6886    .   C   T   722.43  .   AC=2;AF=0.222;AN=4;BaseQRankSum=0;DP=82;ExcessHet=1.8123;FS=1.309;InbreedingCoeff=-0.155;MLEAC=4;MLEAF=0.222;MQ=60;MQRankSum=0;QD=18.52;ReadPosRankSum=0.577;SOR=0.44   GT:AD:DP:GQ:PGT:PID:PL:PS   0/1:3,8:11:50:.:.:189,0,50:.    0/1:2,2:4:45:.:.:45,0,45:.</code></pre>
+</div>
+</div>
 <div class="columns">
 <div class="column" style="width:80%;">
-<div class="fragment" data-fragment-index="1">
 <h5>
 Genotypes (<code>GT:AD:DP:GQ:PGT:PID:PL:PS</code>)
 </h5>
-<p>ELF: <code>0/1:3,8:11:50:.:.:189,0,50:.</code></p>
+<p>PUN-R-ELF: <code>0/1:3,8:11:50:.:.:189,0,50:.</code></p>
 <p><code>GT=0/1</code>, <code>AD=3,8</code> =&gt; 3 REF, 8 ALT, <code>DP=11</code> =&gt; sequence depth = 11, <code>PL=189,0,50</code></p>
-<p>INJ: <code>0/1:2,2:4:45:.:.:45,0,45:.</code></p>
+<p>PUN-Y-INJ: <code>0/1:2,2:4:45:.:.:45,0,45:.</code></p>
 <p><code>GT=0/1</code>, <code>AD=2,2</code> =&gt; 2 REF, 2 ALT, <code>DP=4</code> =&gt; sequence depth = 4, <code>PL=45,0,45</code></p>
-</div>
 <div class="fragment" data-fragment-index="2">
 <h5>
 Relative genotype probabilities
@@ -1572,13 +1578,12 @@ Relative genotype probabilities
 <p><span class="math display">\[
 p = 10^{-Q/10}
 \]</span></p>
-<p>For ELF the relative probabilities are <span class="math inline">\(10^{-189/10}\approx1.26e-9\)</span>, <span class="math inline">\(10^{0}=1\)</span>, <span class="math inline">\(10^{50}=10^{-5}\)</span>.</p>
+<p>For PUN-R-ELF the relative probabilities are <span class="math inline">\(10^{-189/10}\approx1.26e-9\)</span>, <span class="math inline">\(10^{0}=1\)</span>, <span class="math inline">\(10^{50}=10^{-5}\)</span>.</p>
 <p>Interpretation: <code>0/1</code> 10,000 times more likely than <code>1/1</code> (<span class="math inline">\(1/10^{-5}\)</span>)</p>
 </div>
 </div><div class="column" style="width:3%;">
 
-</div><div class="column" style="width:7%;">
-<div class="fragment" data-fragment-index="1">
+</div><div class="column" style="width:4%;">
 
 
 <title>
@@ -1619,9 +1624,7 @@ ELF
 </div>
 
 
-</div>
-</div><div class="column" style="width:7%;">
-<div class="fragment" data-fragment-index="1">
+</div><div class="column" style="width:4%;">
 
 
 <title>
@@ -1664,13 +1667,10 @@ INJ
 
 </div>
 </div>
-</div>
-</div>
-</div>
+<p>:::::</p>
+<p>::::::</p>
 <aside class="notes">
-<ul>
-<li>QUAL: Phred-scaled quality score for the assertion made in ALT. i.e. <span class="math inline">\(-10log_{10}\)</span> prob(call in ALT is wrong)</li>
-</ul>
+<p>QUAL: Phred-scaled quality score for the assertion made in ALT. i.e. <span class="math inline">\(-10log_{10}\)</span> prob(call in ALT is wrong)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1760,7 +1760,7 @@ Cons
 <h1>Exercise on variant calling</h1>
 
 </section>
-<section id="the-monkeyflower-system" class="slide level2 smallr">
+<section id="the-monkeyflower-system" class="slide level2 smaller">
 <h2>The monkeyflower system</h2>
 <div>
 <!-- markdownlint-disable MD013 -->

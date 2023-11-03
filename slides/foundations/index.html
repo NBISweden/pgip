@@ -420,7 +420,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">02-Nov-2023</h4>
+  <h4 class="date">03-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -767,7 +767,7 @@
 </div>
 <p>The alignment has 4 DNA sequences where each sequence has length <span class="math inline">\(L=15\)</span>. A site where all nucleotides (alleles) are identical is called a <em>monomorphic</em> site (indicated with asterisks above). There are 9 monomorphic sites.</p>
 </section>
-<section id="dna-variation---segregating-sites" class="slide level2">
+<section id="dna-variation---segregating-sites" class="slide level2 smaller">
 <h2>DNA variation - segregating sites</h2>
 <div class="dna">
 <table style="width:75%;">
@@ -1222,7 +1222,7 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
           display:block!important;
       }</style></aside>
 </section>
-<section id="describing-dna-variation---nucleotide-diversity" class="slide level2">
+<section id="describing-dna-variation---nucleotide-diversity" class="slide level2 smaller">
 <h2>Describing DNA variation - nucleotide diversity</h2>
 <div class="dna">
 <table style="width:75%;">
@@ -1354,9 +1354,9 @@ h_5 = \frac{4}{3} \left(1 - \left(p_A^2 + p_G^2\right) \right) = \frac{4}{3} \le
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
-<h3>
+<h4>
 Nucleotide diversity <span class="math inline">\(\pi\)</span>
-</h3>
+</h4>
 <p>The <em>nucleotide diversity</em> is the sum of site heterozygosities:</p>
 <p><span class="math display">\[
 \pi = \sum_{j=1}^S h_j
@@ -1365,9 +1365,9 @@ Nucleotide diversity <span class="math inline">\(\pi\)</span>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<h3>
+<h4>
 Calculate the nucleotide diversity
-</h3>
+</h4>
 </div>
 <div class="fragment">
 <p>Observation: <span class="math inline">\(h_i\)</span> either 1/2 or 2/3 (for sites with <span class="math inline">\(p_{major}=p_{minor}\)</span>).</p>
@@ -1580,7 +1580,7 @@ Calculate the nucleotide diversity
 </div>
 </div>
 </div>
-<div class="fragment" data-fragment-index="5">
+<div class="fragment small" data-fragment-index="5">
 <p><strong>Expected</strong> allele frequencies after mating: <span class="math inline">\(p=p^2 + pq=0.7\)</span>, <span class="math inline">\(q=1-p=0.3\)</span></p>
 </div>
 </div>
@@ -1620,6 +1620,12 @@ Calculate the nucleotide diversity
 <td><span class="math inline">\(2pq\)</span></td>
 <td><span class="math inline">\(q^2\)</span></td>
 </tr>
+<tr class="odd">
+<td></td>
+<td>$f_{AA}</td>
+<td><span class="math inline">\(f_{Aa}\)</span></td>
+<td><span class="math inline">\(f_{aa}\)</span></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1650,8 +1656,8 @@ Calculate the nucleotide diversity
 <p>Under HWE assumption, neither allele nor genotype frequencies change over time.</p>
 <p>Importantly, we can calculate allele frequencies from genotype frequencies and vice versa:</p>
 <p><span class="math display">\[
-p = p^2 + pq\\
-q = q^2 + pq
+p = f_{AA} + \frac{f_{Aa}}{2} = p^2 + pq\\
+q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 \]</span></p>
 <aside class="notes">
 <p>Segue: apart from describing the variation via e.g., diversity measures, we want to model how allele frequencies <em>change</em> in time. As <span class="citation" data-cites="gillespie_PopulationGeneticsConcise_2004">(<a href="#/bibliography" role="doc-biblioref" onclick="">Gillespie, 2004</a>, preface p.&nbsp;xi)</span> points out, “While genotype frequencies are easily measured, their change is not”</p>
@@ -1673,7 +1679,7 @@ q = q^2 + pq
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
 
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" width="1152" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. For each SNP, genotypes are given as counts (minor/heterozygote/major), converted to frequencies and plotted on the y-axis. Allele frequencies are obtained from genotype frequencies and plotted on the x-axis. Most observations follow HWE proportions. Deviations from HWE can indicate sample QC issues, or that there is population structure. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. For each SNP, genotypes are given as counts (minor/heterozygote/major), converted to frequencies and plotted on the y-axis. Allele frequencies are obtained from genotype frequencies and plotted on the x-axis. Most observations follow HWE proportions. Deviations from HWE can indicate sample QC issues, or that there is population structure. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <p>So how do the HWE assumptions hold up in real data? The figure shows three human populations from the 1000 genomes data, for which 10,000 SNPs have been selected. For each SNP, we know the genotype frequencies <span class="math inline">\(AA\)</span>, <span class="math inline">\(Aa\)</span>, <span class="math inline">\(aa\)</span> and can therefore calculate the allele frequencies for <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> using the equations on the preceding slide (e.g., <span class="math inline">\(p=p_{AA}+p_{Aa}/2\)</span>).</p>
 <p>Note that 1000 genomes data have sorted genotype frequencies, so to produce nice symmetrical plots, half the genotype frequencies have been reversed (minor/het/major -&gt; major/het/minor).</p>
 <!-- markdownlint-disable MD013 -->
@@ -1711,21 +1717,21 @@ q = q^2 + pq
 </div><div class="column fragment" style="width:50%;">
 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; grid-row-gap: 0px; grid-column-gap: 0px; align-items: center;">
 <div>
-<p><img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"></p>
+<p><img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"></p>
 <p><span class="math inline">\(p=0.1\)</span></p>
 </div>
 <div>
 <p><span class="math inline">\(\large\rightarrow\)</span></p>
 </div>
 <div>
-<p><img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"></p>
+<p><img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"></p>
 <p><span class="math inline">\(p=0.5\)</span></p>
 </div>
 <div>
 <p><span class="math inline">\(\large\rightarrow\)</span></p>
 </div>
 <div>
-<p><img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-red.svg" width="30"> <img data-src="assets/images/flower-white.svg" width="30"></p>
+<p><img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-red.svg" width="27"> <img data-src="assets/images/flower-white.svg" width="27"></p>
 <p><span class="math inline">\(p=0.9\)</span></p>
 </div>
 </div>
@@ -2084,7 +2090,7 @@ q = q^2 + pq
 <div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left">
 <figure>
 <figcaption>Figure&nbsp;3: WF model indicating time direction from past (top) to present (bottom).</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -2096,7 +2102,7 @@ q = q^2 + pq
 <div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
 <figure>
 <figcaption>Figure&nbsp;4: WF model tracing the genealogies of three extant chromosomes</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" style="width:90.0%"></p>
 </figure>
 </div>
 </div>
@@ -2273,7 +2279,7 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
 </div>
 </div>
 </section>
-<section id="wright-fisher-model-with-alleles" class="slide level2">
+<section id="wright-fisher-model-with-alleles" class="slide level2 smaller">
 <h2>Wright-Fisher model with alleles</h2>
 <div class="columns compact">
 <div class="column" style="width:35%;">
@@ -2308,7 +2314,7 @@ P(p_u \neq p_v) = 1 - \frac{1}{2N}
           display:block!important;
       }</style></aside>
 </section>
-<section id="binomial-process-models-allele-sampling" class="slide level2">
+<section id="binomial-process-models-allele-sampling" class="slide level2 smaller">
 <h2>Binomial process models allele sampling</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -2487,7 +2493,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           display:block!important;
       }</style></aside>
 </section>
-<section id="allele-frequency-distribution-for-n1" class="slide level2">
+<section id="allele-frequency-distribution-for-n1" class="slide level2 smaller">
 <h2>Allele frequency distribution for N=1</h2>
 <p>Instead of looking at frequencies let’s switch to distributions of alleles for <strong>one</strong> individual, one locus. Then there are three possible genotypes (<strong>states</strong>) <span class="math inline">\(aa\)</span>, <span class="math inline">\(aA\)</span>, and <span class="math inline">\(AA\)</span>. Let <span class="math inline">\(n=0,1,2\)</span> be an integer corresponding to each genotype (i.e., it counts the number of <span class="math inline">\(A\)</span> alleles).</p>
 <p>Assume individual mates with itself at random(!) starting in either of the three states. How does distribution evolve?</p>
@@ -2585,7 +2591,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           display:block!important;
       }</style></aside>
 </section>
-<section id="probability-distributions-of-allele-frequencies" class="slide level2">
+<section id="probability-distributions-of-allele-frequencies" class="slide level2 smaller">
 <h2>Probability distributions of allele frequencies</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -2635,7 +2641,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           display:block!important;
       }</style></aside>
 </section>
-<section id="heterozygosity-dynamics" class="slide level2">
+<section id="heterozygosity-dynamics" class="slide level2 smaller">
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -2981,12 +2987,12 @@ DNA sequences
 <p><strong>Nearly neutral theory</strong> <span class="citation" data-cites="ohta_SlightlyDeleteriousMutant_1973">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ohta, 1973</a>)</span> was later developed to explain failure to predict scaling of polymorphism with population size: most mutations are not neutral but <em>slightly deleterious</em> and <em>purged</em> from population by natural selection.</p>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-left">
+<div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals (y-axis). The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:50.0%"></p>
 </figure>
 </div>
 </div>
@@ -3057,7 +3063,7 @@ DNA sequences
 <div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/images/gould_finches.jpg" width="700"></p>
+<p><img data-src="assets/images/gould_finches.jpg" width="500"></p>
 </figure>
 </div>
 </div>
@@ -3224,7 +3230,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
           display:block!important;
       }</style></aside>
 </section>
-<section id="direct-selection-can-be-inferred-from-protein-substitutions" class="slide level2">
+<section id="direct-selection-can-be-inferred-from-protein-substitutions" class="slide level2 smaller">
 <h2>Direct selection can be inferred from protein substitutions</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -3309,7 +3315,7 @@ positive selection
           display:block!important;
       }</style></aside>
 </section>
-<section id="recombination-breaks-association-between-loci" class="slide level2">
+<section id="recombination-breaks-association-between-loci" class="slide level2 smaller">
 <h2>Recombination breaks association between loci</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -3412,7 +3418,7 @@ D_t = (1-r)^tD_0
 <!-- markdownlint-disable MD013 -->
 
 <!-- markdownlint-enable MD013 -->
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-1.gif" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;21: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-1.gif" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;21: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <p>Simulation: N=1e4, mu=5e-8, pi=4<em>N</em>mu=0.004, seek S=a*pi=0.01, so a=S/pi which gives n.&nbsp;One needs to ramp up recombination rate to see the dip in TajD clearly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3438,7 +3444,7 @@ D_t = (1-r)^tD_0
 </div>
 <!-- markdownlint-enable MD013 -->
 
-<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-2-1.svg" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;22: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-pgip-slim-sweep-plot-tajd-2-1.svg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;22: The effect of a selective sweep on diversity. The arrow points to the site under selection. The y-axis shows Tajima’s D which is proportional to the difference between two measures of diversity, nucleotide diversity <span class="math inline">\(\pi\)</span> and Watterson’s <span class="math inline">\(\theta_W\)</span>. <a href="../../recipes/slim/index.html#sec-recipe-slim-selective-sweep"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
 <p>Important: individual runs show a lot of stochasticity, but the signal is clear for the <em>mean</em>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3479,7 +3485,7 @@ D_t = (1-r)^tD_0
 <div id="fig-selective-sweep-phases" class="quarto-figure quarto-figure-left">
 <figure>
 <figcaption>Figure&nbsp;24: Time goes from left to right. As sweep progresses, tree topology changes. Adapted from <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">Hahn (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span>, Figure 8.1</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="500"></p>
+<p><img data-src="index_files/figure-revealjs/fig-selective-sweep-phases-1.svg" width="960" height="400"></p>
 </figure>
 </div>
 </div>
@@ -3520,13 +3526,13 @@ D_t = (1-r)^tD_0
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<h3 id="hitchhiking">Hitchhiking</h3>
+<h4 id="hitchhiking">Hitchhiking</h4>
 <ul>
 <li>alleles linked to locus under selection “hitchhike” to high frequencies <span class="citation" data-cites="smith_HitchhikingEffectFavourable_1974">(<a href="#/bibliography" role="doc-biblioref" onclick="">Smith &amp; Haigh, 1974</a>)</span></li>
 <li>evidence: positive correlation between putative neutral diversity and recombination <span class="citation" data-cites="corbett-detig_NaturalSelectionConstrains_2015">(<a href="#/bibliography" role="doc-biblioref" onclick="">Corbett-Detig et al., 2015</a>)</span></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<h3 id="background-selection">Background selection</h3>
+<h4 id="background-selection">Background selection</h4>
 <ul>
 <li>loci linked to a deleterious locus will be purged from population and thus reduce diversity <span class="citation" data-cites="charlesworth_EffectDeleteriousMutations_1993">(<a href="#/bibliography" role="doc-biblioref" onclick="">Charlesworth et al., 1993</a>)</span></li>
 <li>similar patterns to hitchhiking</li>

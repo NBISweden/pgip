@@ -353,7 +353,7 @@
   <h3 class="subtitle">What is population genomics?</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">02-Nov-2023</h4>
+  <h4 class="date">03-Nov-2023</h4>
 </section>
 
 <section id="intended-learning-outcomes" class="slide level2">
@@ -438,19 +438,19 @@
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
-<!-- markdownlint-disable MD013 -->
 <div class="fragment" data-fragment-index="1">
+<!-- markdownlint-disable MD013 -->
 <div id="fig-corals-assembly" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;1: Genome assembly and sample collection.</figcaption>
 <p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg" style="width:90.0%"></p>
 </figure>
 </div>
+<!-- markdownlint-enable MD013 -->
 <div class="flushright smallest translatey50">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 </div>
-<!-- markdownlint-enable MD013 -->
 </div>
 </div>
 <aside class="notes">
@@ -491,10 +491,11 @@ Describe <strong>genetic structure</strong> and <strong>demographic history</str
 <li>demographic history may generate signals similar to selection</li>
 </ul>
 </div><div class="column" style="width:50%;">
+<!-- markdownlint-disable MD013 -->
 <div id="fig-corals-variation" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;2: Variation and demographic history inferred from 44 resequenced individuals.</figcaption>
-<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" style="width:70.0%"></p>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" style="width:60.0%"></p>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -507,7 +508,7 @@ Describe <strong>genetic structure</strong> and <strong>demographic history</str
 <p><strong>Variation and demographic history</strong></p>
 <p>Why: summarizing <em>diversity</em> provides (indirect) information on population size and more, as does the <em>linkage structure</em>. Estimate <em>demographic history</em> since fluctuating population size may produce signals similar to those of selection</p>
 <ul>
-<li>LD decay: important for imputation (e.g., stephens_AccountingDecayLinkage_2005)</li>
+<li>LD decay: important for imputation (e.g., stephens_AccountingDecayLinkage_2005) and setting window size for genome scans, where a common rule of thumb is to set the size larger than the genome background: this ensures windows are, in some sense, independent</li>
 <li>The extent of LD and its decay with genetic distance are useful parameters for determining the number of markers needed to successfully map a QTL, and the resolution with which the trait can be successfully mapped otyama_EvaluationLinkageDisequilibrium_2019</li>
 <li>0.363% average pi, but large variation.</li>
 <li>many psmc plots show decline in population size, which could be an effect of bottleneck during pleistocene. Also population divergence (ghost ancestral populations, splits, extinction) can affect population size</li>
@@ -598,14 +599,14 @@ Genomic scans for <strong>selection</strong>
 </figure>
 </div>
 <!-- markdownlint-enable MD013 -->
-<div class="flushright translatey50">
+<div class="flushright smallest translatey50">
 <p><span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 </div>
 </div>
 <aside class="notes">
 <p><strong>Selection scan</strong></p>
-<p>Why: identify loci associated with adaptation / selection</p>
+<p>Why: identify loci associated with adaptation / selection, which provides potential mechanisms for adaptation, as well as information that could be important for conservation strategies</p>
 <p>Little differentiation across reefs -&gt; little population structure over hundreds of kilometers. However, there are environmental differences (thermal regimes). Scan for pi outliers:</p>
 <ul>
 <li>points to <em>sacsin</em> gene</li>

@@ -420,7 +420,7 @@
   <h3 class="subtitle">Primer on the coalescent and forward simulation</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">02-Nov-2023</h4>
+  <h4 class="date">03-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -449,12 +449,12 @@
 <h2>The Wright-Fisher model and simulations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-wf-model-reproductive-success-1" class="quarto-figure quarto-figure-left">
+<div id="fig-wf-model-reproductive-success-1" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;1: Wright-Fisher model for 50 generations, 30 individuals</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-1-1.svg" style="width:80.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-1-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -507,20 +507,20 @@
 <h2>The Wright-Fisher model and simulations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-wf-model-reproductive-success-2" class="quarto-figure quarto-figure-left">
+<div id="fig-wf-model-reproductive-success-2" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;2: Wright-Fisher model for 50 generations, 30 individuals</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-2-1.svg" style="width:80.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-2-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-wf-model-reproductive-success-graph" class="quarto-figure quarto-figure-left">
+<div id="fig-wf-model-reproductive-success-graph" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;3: Reproductive success in percent per generation.</figcaption>
 <p><img data-src="index_files/figure-revealjs/fig-wf-model-reproductive-success-graph-1.svg" style="width:55.0%"></p>
@@ -528,7 +528,9 @@
 </div>
 </div>
 </div>
+<div class="small translatey50">
 <p>Mean reproductive success = 63.4%. Can show for large populations P(no descendants)=<span class="math inline">\(1 - e^{-1} \approx 0.632\)</span></p>
+</div>
 </div>
 </div>
 <aside class="notes">
@@ -546,7 +548,7 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="forward-and-backward-simulation" class="slide level2">
+<section id="forward-and-backward-simulation" class="slide level2 smaller">
 <h2>Forward and backward simulation</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -935,12 +937,12 @@ Exercise
 <p><span class="math inline">\(^1\)</span>: The exponential can be parametrized in two different ways, so that the parameter to the function is either <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\beta=1/\lambda\)</span>.</p>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-simulate-genealogy-end" class="quarto-figure quarto-figure-left">
+<div id="fig-simulate-genealogy-end" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;6: A simulated genealogy. The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-simulate-genealogy-end-1.svg" width="500" height="600"></p>
+<p><img data-src="index_files/figure-revealjs/fig-simulate-genealogy-end-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -948,16 +950,16 @@ Exercise
 </div>
 </div>
 </section>
-<section id="some-properties-of-the-tree" class="slide level2">
+<section id="some-properties-of-the-tree" class="slide level2 smaller">
 <h2>Some properties of the tree</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-genealogy-properties" class="quarto-figure quarto-figure-left">
+<div id="fig-genealogy-properties" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;7: A coalescent tree with numbered nodes. Nodes 1-5 correspond to the samples and are leaves. The internal nodes 6-8 (and the unlabelled root) are ancestral chromosomes (unsampled). The <span class="math inline">\(T_i\)</span> represent the waiting time when the state has <span class="math inline">\(i\)</span> chromosomes, whereas <span class="math inline">\(\tau_i\)</span> correspond to the branch length from node <span class="math inline">\(i\)</span> to its parent.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-genealogy-properties-1.svg" width="400" height="500"></p>
+<p><img data-src="index_files/figure-revealjs/fig-genealogy-properties-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -965,7 +967,7 @@ Exercise
 </div><div class="column" style="width:50%;">
 <p>Expected waiting time to coalesce when <span class="math inline">\(i\)</span> lineages: <span class="math inline">\(E(T_i) = \frac{2}{i(i-1)}\)</span></p>
 <p>Branch lengths can be derived from waiting times. For instance, <span class="math inline">\(\tau_1=\tau_2=T_5+T_4\)</span> and <span class="math inline">\(\tau_4=\tau_5=T_5\)</span></p>
-<p>Time to the <strong>most recent common ancestor (MRCA)</strong>: <span class="math inline">\(T_{MRCA} = \sum_{i=2}^n T_i\)</span></p>
+<p>Time to the <strong>most recent common ancestor (MRCA)</strong> is sum of wating times: <span class="math inline">\(T_{MRCA} = \sum_{i=2}^n T_i\)</span></p>
 <p>with expected value <span class="math inline">\(E(T_{MRCA}) = \sum_{i=2}^nE(T_i) = 2\left(1 - \frac{1}{n}\right)\)</span></p>
 <p>The expected <strong>total tree height</strong> is <span class="math inline">\(E(T_{total}) = \sum_{i=2}^n iE(T_i) = 2\sum_{i=2}^n\frac{1}{i-1}\)</span></p>
 </div>
@@ -996,6 +998,7 @@ Exercise
 <span id="cb1-3"><a href="#cb1-3"></a>trees <span class="op">=</span> [msprime.sim_ancestry(<span class="dv">3</span>, random_seed<span class="op">=</span>x) <span class="cf">for</span> x <span class="kw">in</span> seeds]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<div>
 <svg baseprofile="full" height="262.5576521441852" id="msprime-simulation" version="1.1" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
@@ -1026,12 +1029,24 @@ Exercise
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke-width: 2px}</style>
 </defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n10 p0 root" transform="translate(70 26.8)"><g class="a10 c2 node n6 p0" transform="translate(-30 425.824)"><g class="a6 i0 leaf node n0 p0 sample" transform="translate(-10 5.57571)"><path class="edge" d="M 0 0 V -5.57571 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a6 i2 leaf node n4 p0 sample" transform="translate(10 5.57571)"><path class="edge" d="M 0 0 V -5.57571 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -425.824 H 30"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a10 c2 node n9 p0" transform="translate(30 388.351)"><g class="a9 c2 node n7 p0" transform="translate(20 35.4797)"><g class="a7 i1 leaf node n2 p0 sample" transform="translate(-10 7.56884)"><path class="edge" d="M 0 0 V -7.56884 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a7 i2 leaf node n5 p0 sample" transform="translate(10 7.56884)"><path class="edge" d="M 0 0 V -7.56884 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -35.4797 H -20"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><g class="a9 c2 node n8 p0" transform="translate(-20 33.0688)"><g class="a8 i0 leaf node n1 p0 sample" transform="translate(-10 9.9798)"><path class="edge" d="M 0 0 V -9.9798 H 10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a8 i1 leaf node n3 p0 sample" transform="translate(10 9.9798)"><path class="edge" d="M 0 0 V -9.9798 H -10"></path><rect class="sym" height="0" width="0" x="-0" y="-0"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -33.0688 H 20"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -388.351 H -30"></path><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="0"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
 </svg>
+</div>
 <p>Examples of coalescent simulations. Note the variation in tree topology and height.</p>
 </section>
 <section id="diminishing-returns-of-adding-more-samples" class="slide level2">
 <h2>Diminishing returns of adding more samples</h2>
-
-<img data-src="index_files/figure-revealjs/fig-coalescent-diminishing-returns-1.svg" width="600" class="r-stretch quarto-figure-left"><p class="caption">Figure&nbsp;8: Dependence of <span class="math inline">\(E[T_{MRCA}]\)</span> and <span class="math inline">\(E[T_{total}]\)</span> on the sample size n.&nbsp;Already at low values of n the value of <span class="math inline">\(E[T_{MRCA}]\)</span> is close to its asymptotic value, which has practical consequences for the measurement of DNA variation. Adapted from <span class="citation" data-cites="wakeley_CoalescentTheoryIntroduction_2008">Wakeley (<a href="#/bibliography" role="doc-biblioref" onclick="">2008</a>)</span>, Fig. 3.3.</p><aside class="notes">
+<div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-coalescent-diminishing-returns" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;8: Dependence of <span class="math inline">\(E[T_{MRCA}]\)</span> and <span class="math inline">\(E[T_{total}]\)</span> on the sample size n.&nbsp;Already at low values of n the value of <span class="math inline">\(E[T_{MRCA}]\)</span> is close to its asymptotic value, which has practical consequences for the measurement of DNA variation. Adapted from <span class="citation" data-cites="wakeley_CoalescentTheoryIntroduction_2008">Wakeley (<a href="#/bibliography" role="doc-biblioref" onclick="">2008</a>)</span>, Fig. 3.3.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-coalescent-diminishing-returns-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
 <p>Adding a sample only adds <span class="math inline">\(2/n\)</span> to the total tree length. Also, adding a sample will add little to <span class="math inline">\(T_{MRCA}\)</span>, or equivalently, will most likely add a very recent coalescent event to the tree for large enough <span class="math inline">\(n\)</span>. Note that <span class="math inline">\(n=20\)</span> here is equivalent to 10 diploid individuals.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1087,11 +1102,11 @@ S = Po(\theta/2T_{total})
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-coalescent-and-diversity" class="slide level2">
+<section id="the-coalescent-and-diversity" class="slide level2 smaller">
 <h2>The coalescent and diversity</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="dna smallr">
+<div class="dna">
 <table style="width:90%;">
 <colgroup>
 <col style="width: 6%">
@@ -1218,7 +1233,7 @@ S = Po(\theta/2T_{total})
 </tbody>
 </table>
 </div>
-<div class="fragment smallr">
+<div class="fragment">
 <!-- markdownlint-disable MD013 -->
 <p><span class="math display">\[
 \begin{align}
@@ -1241,7 +1256,7 @@ S = Po(\theta/2T_{total})
 <p><img data-src="index_files/figure-revealjs/tree-site-frequency-spectrum-graph-1.svg" style="width:80.0%"></p>
 </div>
 </div>
-<div class="fragment smallr">
+<div class="fragment">
 <p>In this notation one can show that <span class="math inline">\(\pi\)</span>, the nucleotide diversity, is</p>
 <p><span class="math display">\[
 \begin{align}
@@ -1257,7 +1272,7 @@ S = Po(\theta/2T_{total})
 <p>Many statistical quantities can be related to the <strong>site frequency spectrum</strong> (<strong>SFS</strong>), which is a summary of the frequencies of the segregating sites. Let <span class="math inline">\(\xi_i\)</span> be the number of chromosomes in the sample with <span class="math inline">\(i\)</span> minor alleles. In the example above we have <span class="math inline">\(S=6\)</span> mutations on <span class="math inline">\(n=4\)</span> chromosomes.</p>
 </div>
 </section>
-<section id="the-impact-of-topology-on-the-sfs" class="slide level2">
+<section id="the-impact-of-topology-on-the-sfs" class="slide level2 smaller">
 <h2>The impact of topology on the SFS</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1358,22 +1373,30 @@ population contraction <em>or</em> balancing selection
           display:block!important;
       }</style></aside>
 </section>
-<section id="on-non-recombining-chromosomes-and-assortment" class="slide level2">
+<section id="on-non-recombining-chromosomes-and-assortment" class="slide level2 smaller">
 <h2>On non-recombining chromosomes and assortment</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-1-1.svg" width="300"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-1-1.svg" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Both siblings inherit chromosome from paternal grandfather</p>
 <p>Chromosomes coalesce at father</p>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-2-1.svg" width="300"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/non-recombining-chromosomes-assortment-2-1.svg" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Siblings inherit different grandparental chromosomes <span class="math inline">\(\Rightarrow\)</span> chromosomes coalesce God knows when in the past</p>
@@ -1395,13 +1418,14 @@ population contraction <em>or</em> balancing selection
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-ancestral-recombination-graph" class="slide level2">
+<section id="the-ancestral-recombination-graph" class="slide level2 smaller">
 <h2>The ancestral recombination graph</h2>
+<div>
 <p><img data-src="assets/images/brandt-genetics-2022-fig1a.jpeg" data-fig-align="center," height="300"> <img data-src="assets/images/brandt-genetics-2022-fig1b.jpeg" data-fig-align="center," height="300"> <img data-src="assets/images/brandt-genetics-2022-fig1c.jpeg" data-fig-align="center," height="300"></p>
-<div class="flushright smallr">
+<div class="flushright smallest">
 <p><span class="citation" data-cites="y.c.brandt_EvaluationMethodsEstimating_2022">Y. C. Brandt et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2022, fig. 1a</a>)</span></p>
 </div>
-<div>
+</div>
 <p>Properties:</p>
 <ul>
 <li>marginal trees constitute a sequence of trees (<strong>tree sequence</strong>) along a chromosome</li>
@@ -1409,7 +1433,6 @@ population contraction <em>or</em> balancing selection
 <li>neighbouring trees are <strong>correlated</strong></li>
 </ul>
 <p>Interpretation: chromosomes are mosaics of non-recombining units</p>
-</div>
 <aside class="notes">
 <p>Going backwards in time, we now have two events to track. We have already encountered coalescence, that is, the merging of lineages. We now also need to monitor recombination events, at which point a genealogy <em>splits</em> into two separate paths. A recombination event takes place on a sequence, such that the genealogical history of the recombined sequence differs on either side of the recombination breakpoint. In the ARG, by convention the sequence to the left of the breakpoint takes the left path, the sequence to the right the right path.</p>
 <p>The end consequence of recombination is that the chromosome/sequence will consist of non-recombining units with different genealogical histories. However, neighbouring genealogies will be similar - they are <em>correlated</em> - a fact that is of importance for the tree sequence data structure used in msprime.</p>
@@ -1657,7 +1680,7 @@ population contraction <em>or</em> balancing selection
 </div>
 <p>Comes with a huge manual <span class="citation" data-cites="haller_SLiMEvolutionarySimulation_2022">(<a href="#/bibliography" role="doc-biblioref" onclick="">Haller &amp; Messer, 2022</a>)</span> (700+ pages!)</p>
 </section>
-<section id="recapitation---combining-the-best-of-two-worlds" class="slide level2">
+<section id="recapitation---combining-the-best-of-two-worlds" class="slide level2 smaller">
 <h2>Recapitation - combining the best of two worlds</h2>
 <div style="display: grid; grid-template-columns: 4fr 3fr 3fr; grid-row-gap: 0px; grid-column-gap: 20px;">
 <div>
@@ -1670,7 +1693,7 @@ population contraction <em>or</em> balancing selection
 </div>
 <div>
 <div class="fragment" data-fragment-index="2">
-<div style="transform: translate(0, 60px);">
+<div style="transform: translate(0, -50px);">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/backward-simulation-recapitation-1.svg" style="width:70.0%"></p>
@@ -1689,7 +1712,7 @@ population contraction <em>or</em> balancing selection
 </div>
 <div>
 <div class="fragment" data-fragment-index="1">
-<div class="translatey50">
+<div style="transform: translate(0, -150px);">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/forward-simulation-recapitation-1.svg" style="width:70.0%"></p>
@@ -1705,7 +1728,7 @@ population contraction <em>or</em> balancing selection
 <h1>Applications</h1>
 
 </section>
-<section id="simulation-of-null-distributions" class="slide level2">
+<section id="simulation-of-null-distributions" class="slide level2 smaller">
 <h2>Simulation of null distributions</h2>
 <div class="compact">
 <div id="fig-pope-2023-clr" class="quarto-figure quarto-figure-center">
@@ -1736,7 +1759,7 @@ population contraction <em>or</em> balancing selection
           display:block!important;
       }</style></aside>
 </section>
-<section id="simulations-of-genomic-landscapes-in-monkeyflower" class="slide level2">
+<section id="simulations-of-genomic-landscapes-in-monkeyflower" class="slide level2 smaller">
 <h2>Simulations of genomic landscapes in monkeyflower</h2>
 <div class="columns">
 <div class="column" style="width:30%;">

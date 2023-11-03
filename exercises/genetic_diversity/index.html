@@ -89,7 +89,12 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -110,7 +115,7 @@ div.csl-indent {
   }
 }</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
@@ -152,7 +157,7 @@ div.csl-indent {
  <span class="menu-text">Info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../slides/index.html" rel="" target="">
+    <a class="nav-link active" href="../../slides/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
@@ -160,7 +165,7 @@ div.csl-indent {
  <span class="menu-text">Exercises</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../recipes/index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../recipes/index.html" rel="" target="">
  <span class="menu-text">Code recipes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -182,7 +187,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/compute_environment/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../../exercises/genetic_diversity/index.html">Genetic diversity landscapes</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../../exercises/genetic_diversity/index.html">Genetic diversity landscapes</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -200,6 +205,12 @@ div.csl-indent {
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../slides/pgip/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population genomics in practice</span></a>
@@ -266,6 +277,21 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../exercises/compute_environment/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Compute environment</span></a>
   </div>
@@ -275,6 +301,8 @@ div.csl-indent {
   <a href="../../exercises/datasets/monkeyflowers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monkeyflowers dataset</span></a>
   </div>
+</li>
+      </ul>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -322,13 +350,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Code recipes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../recipes/index.html" class="sidebar-item-text sidebar-link">
@@ -345,27 +373,25 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-<li>
-<a href="#sec-ex-genetic-diversity" id="toc-sec-ex-genetic-diversity" class="nav-link active" data-scroll-target="#sec-ex-genetic-diversity">Genetic diversity</a>
-  <ul class="collapse">
-<li><a href="#sec-ex-nucleotide-diversity" id="toc-sec-ex-nucleotide-diversity" class="nav-link" data-scroll-target="#sec-ex-nucleotide-diversity">Nucleotide diversity</a></li>
-  <li><a href="#allele-frequency-differences" id="toc-allele-frequency-differences" class="nav-link" data-scroll-target="#allele-frequency-differences">Allele frequency differences</a></li>
+<li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation">Preparation</a></li>
   <li>
-<a href="#global-statistics" id="toc-global-statistics" class="nav-link" data-scroll-target="#global-statistics">Global statistics</a>
+<a href="#generating-and-visualising-diversity-statistics" id="toc-generating-and-visualising-diversity-statistics" class="nav-link" data-scroll-target="#generating-and-visualising-diversity-statistics">Generating and visualising diversity statistics</a>
   <ul class="collapse">
-<li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation">Preparation</a></li>
-  <li><a href="#e1-effect-of-program" id="toc-e1-effect-of-program" class="nav-link" data-scroll-target="#e1-effect-of-program">e1: Effect of program</a></li>
-  <li><a href="#effect-of-mask-files" id="toc-effect-of-mask-files" class="nav-link" data-scroll-target="#effect-of-mask-files">Effect of mask files</a></li>
-  <li><a href="#combining-masks-with-genome-features" id="toc-combining-masks-with-genome-features" class="nav-link" data-scroll-target="#combining-masks-with-genome-features">Combining masks with genome features</a></li>
+<li><a href="#compiling-statistics-with-vcftools" id="toc-compiling-statistics-with-vcftools" class="nav-link" data-scroll-target="#compiling-statistics-with-vcftools">Compiling statistics with vcftools</a></li>
+  <li><a href="#compiling-statistics-with-pixy" id="toc-compiling-statistics-with-pixy" class="nav-link" data-scroll-target="#compiling-statistics-with-pixy">Compiling statistics with pixy</a></li>
   </ul>
 </li>
-  <li><a href="#windowed-statistics-and-genome-scans" id="toc-windowed-statistics-and-genome-scans" class="nav-link" data-scroll-target="#windowed-statistics-and-genome-scans">Windowed statistics and genome scans</a></li>
+  <li>
+<a href="#genome-scans" id="toc-genome-scans" class="nav-link" data-scroll-target="#genome-scans">Genome scans</a>
+  <ul class="collapse">
+<li><a href="#working-with-z-transformed-data" id="toc-working-with-z-transformed-data" class="nav-link" data-scroll-target="#working-with-z-transformed-data">Working with Z-transformed data</a></li>
   </ul>
 </li>
+  <li><a href="#monkeyflower-diversity-landscape" id="toc-monkeyflower-diversity-landscape" class="nav-link" data-scroll-target="#monkeyflower-diversity-landscape">Monkeyflower diversity landscape</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Genetic diversity landscapes</h1>
 <p class="subtitle lead">Investigating the diversity landscape in Monkeyflower</p>
 </div>
@@ -384,7 +410,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">02-Nov-2023</p>
+      <p class="date">03-Nov-2023</p>
     </div>
   </div>
   
@@ -456,12 +482,41 @@ Data setup
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Create an exercise directory and <code>cd</code> to it:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> diversity</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> diversity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true"><i class="fa-solid fa-server" aria-label="server"></i> UPPMAX</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><i class="fa-solid fa-laptop" aria-label="laptop"></i> Local</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<!-- markdownlint-disable MD038 -->
+<p>Move to your course working directory <code>/proj/naiss2023-22-1084/users/USERNAME</code>, create an exercise directory called <code>monkeyflower</code> and <code>cd</code> to it:</p>
+<!-- markdownlint-enable MD038 -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /proj/naiss2023-22-1084/users/USERNAME</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> monkeyflower</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> monkeyflower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Retrieve the data with <code>rsync</code>. You can use the <code>--dry-run</code> option to see what is going to happen; just remove it when you are content:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the dry run option to retrieve data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-av</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>FIXME: add data source</p>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Create an exercise directory called <code>monkeyflower</code> and <code>cd</code> to it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> monkeyflower</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> monkeyflower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Retrieve the variant files from <code>https://export.uppmax.uu.se/naiss2023-22-1084/monkeyflower/LG4</code> with <code>wget</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--user</span> pgip <span class="at">--password</span> PASSWORD <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--recursive</span> <span class="at">--accept</span><span class="op">=</span><span class="st">'*.*'</span> <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">--reject</span><span class="op">=</span><span class="st">'*.gif'</span>,<span class="st">'index*'</span> <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--no-parent</span> <span class="at">--no-directories</span> <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--no-clobber</span> <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">--directory-prefix</span><span class="op">=</span>. <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>     https://export.uppmax.uu.se/naiss2023-22-1084/monkeyflower/LG4/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -479,12 +534,12 @@ Tools
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Listing</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">UPPMAX modules</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Conda</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Listing</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false"><i class="fa-solid fa-server" aria-label="server"></i> UPPMAX modules</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false"><i class="fa-solid fa-laptop" aria-label="laptop"></i> Conda</a></li>
 </ul>
 <div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <ul>
 <li>
 <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> <span class="citation" data-cites="danecek_TwelveYearsSAMtools_2021">(<a href="#ref-danecek_TwelveYearsSAMtools_2021" role="doc-biblioref">Danecek et al., 2021</a>)</span>
@@ -498,19 +553,20 @@ Tools
 </li>
 </ul>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Execute the following command to load modules:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    bcftools/1.17 <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    BEDTools/2.29.2 <span class="dt">\</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    vcftools/0.1.16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    bcftools/1.17 <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    BEDTools/2.29.2 <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    vcftools/0.1.16 <span class="dt">\</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    pixy/1.2.5.beta1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>csvtk</code> has been added to the module system and can be loaded as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> use /proj/naiss2023-22-1084/modules</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load csvtk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> use /proj/naiss2023-22-1084/modules</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load csvtk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
 <p>Copy the contents to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
 <pre lang="text"><code>channels:
   - conda-forge
@@ -521,135 +577,441 @@ dependencies:
   - bedtools=2.31.0
   - csvtk=0.28.0
   - vcftools=0.1.16</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="sec-ex-genetic-diversity" class="level1"><h1>Genetic diversity</h1>
-<section id="sec-ex-nucleotide-diversity" class="level2"><h2 class="anchored" data-anchor-id="sec-ex-nucleotide-diversity">Nucleotide diversity</h2>
-<div class="hidden">
-<p>FIXME: pen-and-paper exercise to calculate diversity based on “fixed” genotype calls and genotype likelihoods to highlight differences; the latter requires GLs for <strong>all</strong> sites. Use Table 4.1 in <span class="citation" data-cites="hartl1997principles">(<a href="#ref-hartl1997principles" role="doc-biblioref">Hartl &amp; Clark, 1997, p. 173</a>)</span> and/or Figure 3.1 in <span class="citation" data-cites="hahn_MolecularPopulationGenetics_2019">(<a href="#ref-hahn_MolecularPopulationGenetics_2019" role="doc-biblioref">Hahn, 2019, p. 45</a>)</span></p>
-</div>
-</section><section id="allele-frequency-differences" class="level2"><h2 class="anchored" data-anchor-id="allele-frequency-differences">Allele frequency differences</h2>
-<p>Could add exercise where, before scans, students simply calculate allele frequency differences. Easy counting exercise; could also quickly use genotype likelihoods</p>
-</section><section id="global-statistics" class="level2"><h2 class="anchored" data-anchor-id="global-statistics">Global statistics</h2>
-<section id="preparation" class="level3"><h3 class="anchored" data-anchor-id="preparation">Preparation</h3>
-<p>In this exercise, we will be analysing both the red/yellow population subsets, as well as the full data set for linkage group 4 (LG4).</p>
-<p>Some of the programs require we prepare a populations file. For <code>pixy</code>, this is a headerless, tab-separated file with sample and population columns. The <code>sampleinfo.csv</code> contains the information we need; the sample names have been prefixed with a three-letter code to indicate population (apart from <em>ssp. puniceus</em> which also comes with a single letter <code>R</code> or <code>Y</code> indicating ecotype) so we convert it with <code>csvtk</code>. We also add a populations file with all samples belonging to the same population:</p>
+<p>There is no <code>pixy</code> Conda package for Python &gt;= 3.9, so it must be manually installed with <code>pip</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate <span class="at">--name</span> Population <span class="at">--fields</span> SampleAlias sampleinfo.csv <span class="kw">|</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> cut <span class="at">--fields</span> SampleAlias,Population <span class="kw">|</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> replace <span class="at">--fields</span> Population <span class="at">--pattern</span> <span class="st">"(.+)-.+$"</span> <span class="at">--replacement</span> <span class="st">"</span><span class="dt">\$</span><span class="st">1"</span> <span class="kw">|</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> replace <span class="at">--fields</span> Population <span class="at">--pattern</span> <span class="st">"(CLV)_.+"</span> <span class="at">--replacement</span> <span class="st">"</span><span class="dt">\$</span><span class="st">1"</span> <span class="kw">|</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> del-header <span class="at">--out-tabs</span> <span class="op">&gt;</span> populations.txt</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> cut <span class="at">--fields</span> SampleAlias sampleinfo.csv <span class="kw">|</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> mutate <span class="at">--name</span> Population <span class="at">--fields</span> SampleAlias <span class="kw">|</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> replace <span class="at">--fields</span> Population <span class="at">--pattern</span> <span class="st">".+"</span> <span class="at">--replacement</span> <span class="st">"ALL"</span> <span class="kw">|</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> del-header <span class="at">--out-tabs</span> <span class="op">&gt;</span> populations.ALL.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install git+https://github.com/ksamuk/pixy.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>vcftools</code>, on the other hand, require that populations are specified as separate files, containing the individuals of each population. We can use the <code>populations.txt</code> file to quickly generate population-specific files, and we add an <code>ALL</code> population, treating all samples as coming from the same population:</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="preparation" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="preparation">Preparation</h2>
+<p>In this exercise, we will be analysing the full data set for linkage group 4 (LG4), consisting of all 37 samples.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> ARI AUR CAL CLV GRA LON PAR PUN-R PUN-Y<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> <span class="at">--no-header-row</span> grep <span class="at">--tabs</span> <span class="at">--fields</span> 2 <span class="at">--pattern</span> <span class="st">"</span><span class="va">$pop</span><span class="st">"</span> populations.txt <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> cut <span class="at">--tabs</span> <span class="at">--fields</span> 1 <span class="op">&gt;</span> <span class="va">$pop</span>.txt<span class="kw">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> cut <span class="at">--tabs</span> <span class="at">--no-header-row</span> <span class="at">--fields</span> 1 populations.txt <span class="op">&gt;</span> ALL.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="tbl-r-bcftools-summarise-vcfs" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Summary of VCF files</caption>
+<thead><tr class="header">
+<th style="text-align: left;">Filename</th>
+<th style="text-align: right;">records</th>
+<th style="text-align: right;">samples</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: left;">allsites.vcf.gz</td>
+<td style="text-align: right;">1e+05</td>
+<td style="text-align: right;">37</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Some of the programs require we prepare population files. For <code>pixy</code>, this is a headerless, tab-separated file with sample and population columns. The <code>sampleinfo.csv</code> file contains the information we need; the sample names have been prefixed with a three-letter code to indicate population (apart from <em>ssp. puniceus</em> which also comes with a single letter <code>R</code> or <code>Y</code> indicating ecotype). <a href="#tbl-sample-populations">Table&nbsp;2</a> summarizes the populations and samples.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># R code to generate sample population summary</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"sampleinfo.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>Population <span class="op">=</span> <span class="va">SampleAlias</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="st">"Population"</span>, <span class="va">str_replace</span>, <span class="st">"(.+)-.+$"</span>, <span class="st">"\\1"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="st">"Population"</span>, <span class="va">str_replace</span>, <span class="st">"(CLV)_.+"</span>, <span class="st">"\\1"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">group_by</span><span class="op">(</span><span class="va">Population</span>, <span class="va">ScientificName</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">summarise</span><span class="op">(</span>n <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>, samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">SampleAlias</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-sample-populations" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;2: Summary of populations and samples.</caption>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 25%">
+<col style="width: 3%">
+<col style="width: 59%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Population</th>
+<th style="text-align: left;">ScientificName</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: left;">samples</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ARI</td>
+<td style="text-align: left;">Diplacus aridus</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">ARI-159_83, ARI-159_84, ARI-195_1, ARI-T84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AUR</td>
+<td style="text-align: left;">Diplacus aurantiacus</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">AUR-T102, AUR-T104, AUR-T50, AUR-T92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CAL</td>
+<td style="text-align: left;">Diplacus calycinus</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">CAL-T90, CAL-T91, CAL-T144, CAL-T150</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CLV</td>
+<td style="text-align: left;">Diplacus clevelandii</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">CLV_GH, CLV_11, CLV_4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GRA</td>
+<td style="text-align: left;">Diplacus grandiflorus</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">GRA-T96, GRA-T101, GRA-T61, GRA-T99</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LON</td>
+<td style="text-align: left;">Diplacus longiflorus</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">LON-T33, LON-T8, LON-DPR, LON-SS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PAR</td>
+<td style="text-align: left;">Erythranthe parviflora</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">PAR-KK161, PAR-KK168, PAR-KK180, PAR-KK182</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUN-R</td>
+<td style="text-align: left;">Diplacus puniceus</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">PUN-R-ELF, PUN-R-JMC, PUN-R-LH, PUN-R-MT, PUN-R-UCSD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUN-Y</td>
+<td style="text-align: left;">Diplacus puniceus</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">PUN-Y-BCRD, PUN-Y-INJ, PUN-Y-LO, PUN-Y-PCT, PUN-Y-POTR</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div id="fig-evolutionary-relationship" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="../datasets/assets/images/stankowski-2019-fig1A.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Evolutionary relationships across the radiation"><img src="../datasets/assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Evolutionary relationships across the radiation</figcaption></figure>
+</div>
+<div id="fig-monkeyflower-sampling-location" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Monkeyflower sampling locations"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Monkeyflower sampling locations</figcaption></figure>
+</div>
+</div></div><p>We convert the sample information with <code>csvtk</code>. We also add a populations file with all samples belonging to the same population:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate <span class="at">--name</span> Population <span class="at">--fields</span> SampleAlias sampleinfo.csv <span class="kw">|</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> cut <span class="at">--fields</span> SampleAlias,Population <span class="kw">|</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> replace <span class="at">--fields</span> Population <span class="at">--pattern</span> <span class="st">"(.+)-.+$"</span> <span class="at">--replacement</span> <span class="st">"</span><span class="dt">\$</span><span class="st">1"</span> <span class="kw">|</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> replace <span class="at">--fields</span> Population <span class="at">--pattern</span> <span class="st">"(CLV)_.+"</span> <span class="at">--replacement</span> <span class="st">"</span><span class="dt">\$</span><span class="st">1"</span> <span class="kw">|</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> del-header <span class="at">--out-tabs</span> <span class="op">&gt;</span> populations.txt</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> cut <span class="at">--fields</span> SampleAlias sampleinfo.csv <span class="kw">|</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> mutate <span class="at">--name</span> Population <span class="at">--fields</span> SampleAlias <span class="kw">|</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> replace <span class="at">--fields</span> Population <span class="at">--pattern</span> <span class="st">".+"</span> <span class="at">--replacement</span> <span class="st">"ALL"</span> <span class="kw">|</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> del-header <span class="at">--out-tabs</span> <span class="op">&gt;</span> populations.ALL.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>vcftools</code>, on the other hand, requires that populations are specified as separate files, containing the individuals of each population. We can use the <code>populations.txt</code> file to quickly generate population-specific files, and we add an <code>ALL</code> population, treating all samples as coming from the same population:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> ARI AUR CAL CLV GRA LON PAR PUN-R PUN-Y<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> <span class="at">--no-header-row</span> grep <span class="at">--tabs</span> <span class="at">--fields</span> 2 <span class="at">--pattern</span> <span class="st">"</span><span class="va">$pop</span><span class="st">"</span> populations.txt <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> cut <span class="at">--tabs</span> <span class="at">--fields</span> 1 <span class="op">&gt;</span> <span class="va">$pop</span>.txt<span class="kw">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> cut <span class="at">--tabs</span> <span class="at">--no-header-row</span> <span class="at">--fields</span> 1 populations.txt <span class="op">&gt;</span> ALL.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We define environment variables to make the downstream commands easier to type:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">VCF</span><span class="op">=</span>all.allsites.vcf.gz</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">REDYLW</span><span class="op">=</span>redyellow.allsites.vcf.gz</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="va">POPS</span><span class="op">=</span>populations.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="va">VCF</span><span class="op">=</span>allsites.vcf.gz</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">POPS</span><span class="op">=</span>populations.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="e1-effect-of-program" class="level3"><h3 class="anchored" data-anchor-id="e1-effect-of-program">e1: Effect of program</h3>
-<p>General introduction to show the effect of filtering.</p>
-<p>We start by comparing the outputs from <code>vcftools</code> and <code>pixy</code>. Start by creating an output directory for the first exercise <code>e1</code>:</p>
+</section><section id="generating-and-visualising-diversity-statistics" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="generating-and-visualising-diversity-statistics">Generating and visualising diversity statistics</h2>
+<section id="compiling-statistics-with-vcftools" class="level3 page-columns page-full"><h3 class="anchored" data-anchor-id="compiling-statistics-with-vcftools">Compiling statistics with vcftools</h3>
+<p>Create an output directory for the results and define some environment variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> e1</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">OUTDIR</span><span class="op">=</span>e1</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">OUT</span><span class="op">=</span>e1/all.allsites</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 01-vcftools</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="va">OUT</span><span class="op">=</span>01-vcftools/allsites</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="nucleotide-diversity-pi" class="level4 page-columns page-full"><h4 class="anchored" data-anchor-id="nucleotide-diversity-pi">Nucleotide diversity (<span class="math inline">\(\pi\)</span>)</h4>
+<p>Nucleotide diversity can be calculated by site (<code>--site-pi</code>) or in windows (<code>--window-pi</code>)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">${VCF}</span> <span class="at">--window-pi</span> 100000 <span class="at">--out</span> <span class="va">$OUT</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.windowed.pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">$VCF</span> <span class="at">--site-pi</span> <span class="at">--out</span> <span class="va">$OUT</span> <span class="dv">2</span><span class="op">&gt;</span> /dev/null</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="va">$OUT</span>.sites.pi <span class="at">--ignore-non-numbers</span> <span class="at">--tabs</span> <span class="dt">\</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--fields</span> PI:mean,PI:stdev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CHROM   BIN_START   BIN_END N_VARIANTS  PI
-LG4 1   100000  22481   0.0299076</code></pre>
+<pre><code>PI:mean PI:stdev
+0.04    0.10</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixy</span> <span class="at">--vcf</span> <span class="va">$VCF</span> <span class="at">--populations</span> populations.ALL.txt <span class="at">--stats</span> pi <span class="dt">\</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output_folder</span> <span class="va">$OUTDIR</span> <span class="dt">\</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--window_size</span> 100000 <span class="at">--output_prefix</span> ALL.pixy <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUTDIR}</span>/ALL.pixy_pi.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your window size higher, e.g., 10kb</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">$VCF</span> <span class="at">--window-pi</span> 1000 <span class="at">--out</span> <span class="va">$OUT</span> <span class="dv">2</span><span class="op">&gt;</span> /dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+On genome scans and window sizes
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Genetic diversity estimates can be noisy, so we often want to compute values in sliding windows across a sequence. Choosing window size can be as simple as trying out different values, often ranging from single to several hundred kilobases. As always, the appropriate size depends on the analyses.</p>
+<p>One rule of thumb that can be applied is that the window size should be larger than the genomic background of linkage disequilibrium (LD). Recall, LD is the non-random co-segregation of alleles at two or more loci. Linked loci will induce correlations in window-based statistics, so by choosing a window size larger than the LD background, we ensure that our windows are, in some sense, independent.</p>
+<p>For this reason, a common approach is to calculate some measure of LD between marker pairs, and generate a plot of LD decay. This is outside the scope of this exercise, but the interested reader can consult the <a href="https://www.cog-genomics.org/plink2/">plink</a> documentation for ways to do this. See also <a href="#fig-ld-decay-fuller">Figure&nbsp;3</a> for an example plot.</p>
+
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div class="callout-6-contents callout-collapse collapse callout-margin-content">
+<!-- markdownlint-disable MD013 -->
+<div id="fig-ld-decay-fuller" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Properties of genetic variation and inferred demographic history in sampled A. millepora. @fuller_PopulationGeneticsCoral_2020, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent."><img src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Properties of genetic variation and inferred demographic history in sampled <em>A. millepora</em>. <span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span>, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent.</figcaption></figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div></div><p>Even though single point summary statistics can be informative, we can get an overview of the distribution over the chromosome by plotting:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">--tabs</span> <span class="va">$OUT</span>.windowed.pi <span class="at">-x</span> BIN_START <span class="at">-y</span> PI <span class="dt">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--ylab</span> <span class="st">"Diversity"</span> <span class="at">--title</span> LG4 <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>   <span class="op">&gt;</span> <span class="va">$OUT</span>.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-01-vcftools-window-pi" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="01-vcftools/allsites.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="01-vcftools/allsites.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;4: Nucleotide diversity across LG4 for all populations.</figcaption></figure>
+</div>
+<p><a href="#fig-01-vcftools-window-pi">Figure&nbsp;4</a> shows the diversity for all populations. We would also be interested in <em>comparing</em> the diversity for <em>different</em> populations. This can be achieved by passing a population file to <code>bcftools view</code> and piping (<code>|</code>) the output to <code>vcftools</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-S</span> PAR.txt <span class="va">$VCF</span> <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--window-pi</span> 1000 <span class="at">--out</span> <span class="va">$OUT</span>.PAR <span class="dv">2</span><span class="op">&gt;</span> /dev/null</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-S</span> ARI.txt <span class="va">$VCF</span> <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--window-pi</span> 1000 <span class="at">--out</span> <span class="va">$OUT</span>.ARI <span class="dv">2</span><span class="op">&gt;</span> /dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With some <code>csvtk</code> magic we can combine the measures and plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># When assigning a constant</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate2 <span class="at">--tabs</span> <span class="at">--name</span> Population <span class="at">--expression</span> <span class="st">" 'ARI' "</span> <span class="dt">\</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="va">$OUT</span>.ARI.windowed.pi <span class="op">&gt;</span> <span class="va">$OUT</span>.ARI.wpi</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate2 <span class="at">--tabs</span> <span class="at">--name</span> Population <span class="at">--expression</span> <span class="st">" 'PAR' "</span> <span class="dt">\</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>   <span class="va">$OUT</span>.PAR.windowed.pi <span class="op">&gt;</span> <span class="va">$OUT</span>.PAR.wpi</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> concat <span class="at">--tabs</span> <span class="va">$OUT</span>.ARI.wpi <span class="va">$OUT</span>.PAR.wpi <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> plot <span class="at">--tabs</span> line <span class="at">-</span> <span class="at">-x</span> BIN_START <span class="at">-y</span> PI <span class="dt">\</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--group-field</span> Population <span class="dt">\</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ylab</span> <span class="st">"Diversity"</span> <span class="at">--title</span> <span class="st">"LG4:PAR and ARI"</span> <span class="dt">\</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;</span> <span class="va">$OUT</span>.ARI.PAR.png <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-01-vcftools-window-pi-ARI-PAR" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="01-vcftools/allsites.ARI.PAR.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="01-vcftools/allsites.ARI.PAR.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;5: Nucleotide diversity across LG4 comparing populations ARI and PAR.</figcaption></figure>
+</div>
+</section><section id="f_st" class="level4"><h4 class="anchored" data-anchor-id="f_st"><span class="math inline">\(F_{ST}\)</span></h4>
+<p>Since <span class="math inline">\(F_{ST}\)</span> is a statistic that compares populations, we must supply two or more of the population files we defined above. A population file name is passed to the <code>--weir-fst-pop</code> option. Calculations are done by site per default, but let’s calculate <span class="math inline">\(F_{ST}\)</span> for a comparison of two populations in 100kb windows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your window size higher, e.g., 100000</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="va">$VCF</span> <span class="at">--weir-fst-pop</span> ARI.txt <span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--weir-fst-pop</span> PAR.txt <span class="dt">\</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">--fst-window-size</span> 1000 <span class="dt">\</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">--out</span> <span class="va">$OUT</span>.ARI-PAR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">--tabs</span> <span class="va">$OUT</span>.ARI-PAR.windowed.weir.fst <span class="dt">\</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">-x</span> BIN_START <span class="at">-y</span> MEAN_FST <span class="dt">\</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">--ylab</span> <span class="st">"Fst"</span> <span class="at">--title</span> <span class="st">"LG4:ARI vs PAR"</span> <span class="dt">\</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>   <span class="op">&gt;</span> <span class="va">$OUT</span>.ARI-PAR.windowed.weir.fst.mean.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-01-vcftools-fst" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="01-vcftools/allsites.ARI-PAR.windowed.weir.fst.mean.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="01-vcftools/allsites.ARI-PAR.windowed.weir.fst.mean.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;6: Mean <span class="math inline">\(F_{ST}\)</span> across LG4, comparing ARI and PAR populations.</figcaption></figure>
+</div>
+</section></section><section id="compiling-statistics-with-pixy" class="level3"><h3 class="anchored" data-anchor-id="compiling-statistics-with-pixy">Compiling statistics with pixy</h3>
+<p>The vcftools statistics that we just calculated have a couple of issues:</p>
+<ol type="1">
+<li>they have been calculated on unfiltered data; this can be somewhat remediated by applying a depth-based filter</li>
+<li>a more concerning problem is that even if we did apply a filter, all missing sites would be treated as invariant sites, when in reality the windows would need to be adjusted to the number of accessible sites within a window. This number could be calculated from a mask file, but adds some complexity to the calculations.</li>
+</ol>
+<p>Instead of applying filters, let’s first try out an alternative solution. <a href="https://pixy.readthedocs.io/en/latest/about.html">pixy</a> is a program that facilitates the calculation of nucleotide diversity within <span class="math inline">\(\pi\)</span> and between <span class="math inline">\(d_{XY}\)</span> populations from a VCF, as well as differentiation (<span class="math inline">\(F_{ST}\)</span>). It also takes invariant sites and missing data into consideration. Another nice feature is that by providing a population file with all samples, every population comparison is done on the fly, so only one run is needed!</p>
+<p>Calculating per-site statistics takes too long time, so we will only generate windowed output here. This may still take a couple of minutes though.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 02-pixy</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your window size higher, e.g., 100kb</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixy</span> <span class="at">--stats</span> pi fst dxy <span class="dt">\</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--vcf</span> <span class="va">$VCF</span> <span class="dt">\</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--populations</span> populations.txt <span class="dt">\</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--window_size</span> 1000 <span class="dt">\</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output_folder</span> 02-pixy <span class="dt">\</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--n_cores</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 02-pixy/pixy_pi.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>pop chromosome  window_pos_1    window_pos_2    avg_pi  no_sites    count_diffs count_comparisons   count_missing
-ALL LG4 1   100000  0.017389449743205   83124   3045851 175155111   59750859</code></pre>
+LON LG4 1   1000    0.0019674355495251  616 29  14740   3544
+PAR LG4 1   1000    0.0008201763379126  625 12  14631   3653</code></pre>
+</div>
+</div>
+<p>For windowed output, the pixy output files contain information on the windows, the number of missing sites, number of snps, and more. The first column corresponds to the population, which means we can easily select lines matching population(s) of interest. For a full description, consult the <a href="https://pixy.readthedocs.io/en/latest/output.html">documentation</a>. Note that because we provided a population file defining two populations, diversity is calculated per population.</p>
+<p>We conclude by plotting diversity for ARI and PAR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Possibly remove NA values that otherwise would throw error</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter2 <span class="at">--tabs</span> <span class="dt">\</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--filter</span> <span class="st">'$avg_pi != "NA" &amp;&amp; ($pop == "ARI" || $pop == "PAR") '</span> <span class="dt">\</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>   02-pixy/pixy_pi.txt <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> plot line <span class="at">--tabs</span> <span class="at">-</span> <span class="at">-x</span> window_pos_1 <span class="at">-y</span> avg_pi <span class="dt">\</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--group-field</span> pop <span class="dt">\</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ylab</span> <span class="st">"Diversity"</span> <span class="at">--title</span> <span class="st">"LG4:ARI and PAR"</span> <span class="dt">\</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a> <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;</span> 02-pixy/pixy_pi.ARI-PAR.txt.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-02-pixy-fst" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="02-pixy/pixy_pi.ARI-PAR.txt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="02-pixy/pixy_pi.ARI-PAR.txt.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;7: Mean diversity across LG4 for ARI and PAR.</figcaption></figure>
+</div>
+<p>and <span class="math inline">\(F_{ST}\)</span> comparing ARI and PAR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter2 <span class="at">--tabs</span> <span class="dt">\</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--filter</span> <span class="st">'$avg_wc_fst != "NA" &amp;&amp; $pop1 == "PAR" &amp;&amp; $pop2 == "ARI" '</span> <span class="dt">\</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>   02-pixy/pixy_fst.txt <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> plot line <span class="at">-t</span> <span class="at">-</span> <span class="at">-x</span> window_pos_1 <span class="at">-y</span> avg_wc_fst <span class="dt">\</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ylab</span> <span class="st">"Fst"</span> <span class="at">--title</span> <span class="st">"LG4:ARI vs PAR"</span> <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;</span> 02-pixy/pixy_fst.ARI-PAR.txt.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-02-pixy-fst-ARI-PAR" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="02-pixy/pixy_fst.ARI-PAR.txt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="02-pixy/pixy_fst.ARI-PAR.txt.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;8: Mean <span class="math inline">\(F_{ST}\)</span> across LG4 for ARI vs PAR.</figcaption></figure>
+</div>
+<p>Comparing <a href="#fig-02-pixy-fst-ARI-PAR">Figure&nbsp;8</a> to <a href="#fig-01-vcftools-fst">Figure&nbsp;6</a> shows a stark contrast, so clearly, how you filter and handle invariant/missing data will strongly affect the outcome.</p>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+OPTIONAL: Apply filters to pixy and vcftools output and compare
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<p>Generate depth filters, utilizing the knowledge from the variant filtering lab, and apply them to the VCF file. Rerun a couple of pixy and vcftools stats to see how it affects the outcome.</p>
+<div class="callout callout-style-default callout-hint no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-hint">
+<p>FIXME: add filter values and command here</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="genome-scans" class="level2"><h2 class="anchored" data-anchor-id="genome-scans">Genome scans</h2>
+<section id="working-with-z-transformed-data" class="level3"><h3 class="anchored" data-anchor-id="working-with-z-transformed-data">Working with Z-transformed data</h3>
+</section></section><section id="monkeyflower-diversity-landscape" class="level2"><h2 class="anchored" data-anchor-id="monkeyflower-diversity-landscape">Monkeyflower diversity landscape</h2>
+<p>Drawing on what you learned earlier today about filtering, and with the help of the command examples above, you can now start exploring the Monkeyflower diversity landscape. Try different population comparisons, perform outlier analyses, and see if you can find candidate regions of interest. If you want inspiration, take a look at the methods section of <span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<a href="#ref-stankowski_WidespreadSelectionGene_2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>To get you started, here are some exercise templates:</p>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Apply depth filter to VCF
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<p>Start by applying a depth filter to the VCF.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="hidden">
-<p>Compare pixy with vcftools to show that filtering is important</p>
-<p>FIXME: comparison of pixy and coverage-based filtering approach</p>
-</div>
-<div class="hidden">
-<ul>
-<li>use sequence masks (0/1) encoded gz files to enable quick calculations of feature-based stats (e.g.&nbsp;4d-degenerate sites)</li>
-<li>use pixy to compare to vcf with all sites present</li>
-</ul>
-</div>
-</section><section id="effect-of-mask-files" class="level3"><h3 class="anchored" data-anchor-id="effect-of-mask-files">Effect of mask files</h3>
-<p>Calculate pi, Fst and dxy for:</p>
-<ul>
-<li>all sites unfiltered</li>
-<li>all sites filtered</li>
-<li>all sites variant mask</li>
-</ul></section><section id="combining-masks-with-genome-features" class="level3"><h3 class="anchored" data-anchor-id="combining-masks-with-genome-features">Combining masks with genome features</h3>
-<div class="hidden">
-<p>Combine / provide gff features (better to generate from gff), combine with coverage mask to get, e.g., gene / exon / intron measures</p>
-</div>
-</section></section><section id="windowed-statistics-and-genome-scans" class="level2"><h2 class="anchored" data-anchor-id="windowed-statistics-and-genome-scans">Windowed statistics and genome scans</h2>
-<div class="hidden">
-<p>Windows and genome scans. Provide toolkit to work with data. Goal: prepare students for the problem of finding the region of interest.</p>
-<p>Calculate pi, Fst and dxy for:</p>
-<ul>
-<li>all sites unfiltered</li>
-<li>all sites filtered</li>
-<li>all sites variant mask</li>
-</ul>
-<p>Compare</p>
-<p>Need some custom function to summarize over windows unfortunately; show that vcftools gets it wrong</p>
-<section id="visualising-data" class="level3"><h3 class="anchored" data-anchor-id="visualising-data">Visualising data</h3>
-<p>Make plots over genome</p>
-</section><section id="finding-significant-peaks" class="level3"><h3 class="anchored" data-anchor-id="finding-significant-peaks">Finding significant peaks</h3>
-<p>Show how an outlier analysis could be done</p>
-</section><section id="data-exploration" class="level2"><h2 class="anchored" data-anchor-id="data-exploration">Data exploration</h2>
-<p>Given the tools above, let the students play around with the data. See if they can find a contrast that highlights adaptation. Also, urge them to compile genomic landscape. Provide little instructions.</p>
-</section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
-<p>Final touch: add msprime / slim simulation to compare with observed landscape somehow</p>
+<section id="reconciling-results-with-filters" class="level3"><h3 class="anchored" data-anchor-id="reconciling-results-with-filters">Reconciling results with filters</h3>
+<p>Show how we can reconcile results? After all, pixy cannot be used for species that lack variant sites</p>
+</section><section id="genome-scan-with-vcftools" class="level3"><h3 class="anchored" data-anchor-id="genome-scan-with-vcftools">Genome scan with vcftools</h3>
+<p>Since pixy takes care of everything, run Tajima’s with vcftools?</p>
+</section><section id="outlier-analyses" class="level3"><h3 class="anchored" data-anchor-id="outlier-analyses">Outlier analyses</h3>
+<p>Must introduce Z-transformed stats and explain; hopefully region in paper shows up</p>
+</section><section id="genic-structure" class="level3"><h3 class="anchored" data-anchor-id="genic-structure">Genic structure</h3>
+<p>Show an example of bed file</p>
+</section><section id="investigations" class="level2"><h2 class="anchored" data-anchor-id="investigations">Investigations</h2>
 </section>
 </div>
 
 
 
-</section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-danecek_VariantCallFormat_2011" class="csl-entry" role="listitem">
 Danecek, P., Auton, A., Abecasis, G., Albers, C. A., Banks, E., DePristo, M. A., Handsaker, R. E., Lunter, G., Marth, G. T., Sherry, S. T., McVean, G., &amp; Durbin, R. (2011). The variant call format and <span>VCFtools</span>. <em>Bioinformatics (Oxford, England)</em>, <em>27</em>(15), 2156–2158. <a href="https://doi.org/10.1093/bioinformatics/btr330">https://doi.org/10.1093/bioinformatics/btr330</a>
 </div>
 <div id="ref-danecek_TwelveYearsSAMtools_2021" class="csl-entry" role="listitem">
 Danecek, P., Bonfield, J. K., Liddle, J., Marshall, J., Ohan, V., Pollard, M. O., Whitwham, A., Keane, T., McCarthy, S. A., Davies, R. M., &amp; Li, H. (2021). Twelve years of <span>SAMtools</span> and <span>BCFtools</span>. <em>GigaScience</em>, <em>10</em>(2), giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>
 </div>
-<div id="ref-hahn_MolecularPopulationGenetics_2019" class="csl-entry" role="listitem">
-Hahn, M. (2019). <em>Molecular <span>Population Genetics</span></em> (First). <span>Oxford University Press</span>.
-</div>
-<div id="ref-hartl1997principles" class="csl-entry" role="listitem">
-Hartl, D. L., &amp; Clark, A. G. (1997). <em>Principles of population genetics</em>. <span>Sinauer Associates</span>.
+<div id="ref-fuller_PopulationGeneticsCoral_2020" class="csl-entry" role="listitem">
+Fuller, Z. L., Mocellin, V. J. L., Morris, L. A., Cantin, N., Shepherd, J., Sarre, L., Peng, J., Liao, Y., Pickrell, J., Andolfatto, P., Matz, M., Bay, L. K., &amp; Przeworski, M. (2020). Population genetics of the coral <span>Acropora</span> millepora: <span>Toward</span> genomic prediction of bleaching. <em>Science</em>, <em>369</em>(6501), eaba4674. <a href="https://doi.org/10.1126/science.aba4674">https://doi.org/10.1126/science.aba4674</a>
 </div>
 <div id="ref-quinlan_BEDToolsFlexibleSuite_2010" class="csl-entry" role="listitem">
 Quinlan, A. R., &amp; Hall, I. M. (2010). <span>BEDTools</span>: A flexible suite of utilities for comparing genomic features. <em>Bioinformatics</em>, <em>26</em>(6), 841–842. <a href="https://doi.org/10.1093/bioinformatics/btq033">https://doi.org/10.1093/bioinformatics/btq033</a>
 </div>
-</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div id="ref-stankowski_WidespreadSelectionGene_2019" class="csl-entry" role="listitem">
+Stankowski, S., Chase, M. A., Fuiten, A. M., Rodrigues, M. F., Ralph, P. L., &amp; Streisfeld, M. A. (2019). Widespread selection and gene flow shape the genomic landscape during a radiation of monkeyflowers. <em>PLOS Biology</em>, <em>17</em>(7), e3000391. <a href="https://doi.org/10.1371/journal.pbio.3000391">https://doi.org/10.1371/journal.pbio.3000391</a>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<ol>
+<li id="fn1"><p>The password is provided by the course instructor<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Recall; the dataset used to render these pages is much smaller, which is why we use a smaller window size below. Consequently, your plot will look different.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -890,7 +1252,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 </body></html>

@@ -265,22 +265,45 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please note that the order of these commands is important!</p>
+<p>Please note that the order of these commands is important! When <code>conda config --add</code> is run it adds the channel to the <strong>top</strong> of the list in your configuration, so your <code>~/.condarc</code> will end up looking like this:</p>
+<pre><code>cat ~/.condarc</code></pre>
+<pre><code>channels:
+  - conda-forge
+  - bioconda
+  - defaults
+channel_priority: strict</code></pre>
 </div>
 </div>
 </section><section id="create-an-isolated-course-environment" class="level3"><h3 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h3>
 <p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. The command below will create an environment named <code>pgip</code> and install the packages <code>python</code> version 3.10, an R base installation (<code>r-base</code>), the <code>jupyter</code> package that provides support for Jupyter Notebooks, and the <code>mamba</code> package manager.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pgip python=3.10 r-base mamba jupyter</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pgip python=3.10 r-base mamba jupyter</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>activate</code> command is required to access the isolated environment named <code>pgip</code>. Once you have activated the environment, you gain access to whatever programs are installed. To deactivate an environment you issue the command <code>conda deactivate</code>.</p>
 </section><section id="install-packages" class="level3"><h3 class="anchored" data-anchor-id="install-packages">4. Install packages</h3>
 <p>Installation of packages is done with the <code>install</code> command, but we recommend you use the <a href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a> package manager as it is faster (<code>mamba</code> is a rewrite of <code>conda</code> in C++). An example of how to install packages <code>bcftools, angsd, mosdepth</code> follows (remember to activate <code>pgip</code>!):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+03-Nov-2023: Package errors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some users have reported errors in that <code>bcftools</code> and <code>angsd</code> cannot be found, despite setting the proper channels. We are looking into the issue, but unless there are issues with UPPMAX, we will not need to install any additional packages apart from those that went into the creation of the <code>pgip</code> environment above. You can therefore treat the code below as examples only.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or if you have packages listed in an environment file</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conda-install-packages-from-environment-file</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env update <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section><section id="resources" class="level2"><h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <section id="literature" class="level3"><h3 class="anchored" data-anchor-id="literature">Literature</h3>
 <p>Lecture notes have been prepared based on the literature listed below.</p>

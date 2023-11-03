@@ -154,7 +154,7 @@ div.csl-indent {
  <span class="menu-text">Info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../slides/index.html" rel="" target="">
+    <a class="nav-link active" href="../../slides/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
@@ -162,7 +162,7 @@ div.csl-indent {
  <span class="menu-text">Exercises</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../recipes/index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../recipes/index.html" rel="" target="">
  <span class="menu-text">Code recipes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -184,7 +184,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/compute_environment/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../../exercises/compute_environment/index.html">Compute environment</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../../exercises/compute_environment/index.html">Data</a></li><li class="breadcrumb-item"><a href="../../exercises/compute_environment/index.html">Compute environment</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -202,6 +202,12 @@ div.csl-indent {
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../slides/pgip/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population genomics in practice</span></a>
@@ -268,6 +274,21 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../exercises/compute_environment/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Compute environment</span></a>
   </div>
@@ -277,6 +298,8 @@ div.csl-indent {
   <a href="../../exercises/datasets/monkeyflowers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monkeyflowers dataset</span></a>
   </div>
+</li>
+      </ul>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -324,13 +347,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Code recipes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../recipes/index.html" class="sidebar-item-text sidebar-link">
@@ -391,7 +414,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">02-Nov-2023</p>
+      <p class="date">03-Nov-2023</p>
     </div>
   </div>
   
@@ -482,30 +505,50 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please note that the order of these commands is important!</p>
+<p>Please note that the order of these commands is important! When <code>conda config --add</code> is run it adds the channel to the <strong>top</strong> of the list in your configuration, so your <code>~/.condarc</code> will end up looking like this:</p>
+<pre><code>cat ~/.condarc</code></pre>
+<pre><code>channels:
+  - conda-forge
+  - bioconda
+  - defaults
+channel_priority: strict</code></pre>
 </div>
 </div>
 </section><section id="create-an-isolated-course-environment" class="level3"><h3 class="anchored" data-anchor-id="create-an-isolated-course-environment">3. Create an isolated course environment</h3>
-<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. The command below will create an environment named <code>pgip</code> and install the packages <code>python</code> version 3.10, an R base installation (<code>r-base</code>), the <code>jupyter</code> package that provides support for Jupyter Notebooks, and the <code>mamba</code> package manager.</p>
+<p>It is suggested you create and change to a isolated environment <code>pgip</code> dedicated to the course. The command below will create an environment named <code>pgip</code> and install the packages <code>python</code> version 3.10, an R base installation (<code>r-base</code>), the <code>jupyter</code> package that provides support for Jupyter Notebooks, an <code>R</code> kernel for Jupyter, and the <code>mamba</code> package manager.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> pgip python=3.10 r-base jupyter mamba</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> pgip python=3.10 r-base jupyter r-irkernel mamba</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>activate</code> command is required to access the isolated environment named <code>pgip</code>. Once you have activated the environment, you gain access to whatever programs are installed. To deactivate an environment you issue the command <code>conda deactivate</code>.</p>
 </section><section id="install-packages" class="level3"><h3 class="anchored" data-anchor-id="install-packages">4. Install packages</h3>
 <p>Installation of packages in an environment is done with the <code>install</code> command, but we recommend you use the <a href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a> package manager as it is faster (<code>mamba</code> is a rewrite of <code>conda</code> in C++). An example of how to install packages <code>bcftools, angsd, mosdepth</code> follows (remember to activate <code>pgip</code>!):</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+03-Nov-2023: Package errors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some users have reported errors in that <code>bcftools</code> and <code>angsd</code> cannot be found, despite setting the proper channels. We are looking into the issue, but unless there are issues with UPPMAX, we will not need to install any additional packages apart from those that went into the creation of the <code>pgip</code> environment above. You can therefore treat the code below as examples only.</p>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pgip</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bcftools angsd mosdepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>or if you have packages listed in an environment file</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env update <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conda-install-packages-from-environment-file</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env update <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section><section id="tools" class="level2"><h2 class="anchored" data-anchor-id="tools">Tools</h2>
 <p>Computer exercise requirements are listed in <code>Tools</code> callout blocks in each exercise. The <code>Tools</code> callout block contains listings of programs, along with package dependencies and specifications for UPPMAX and conda, whenever relevant. An example block is shown below.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -514,7 +557,7 @@ Tools - example
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Example Tools block.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -537,8 +580,8 @@ Tools - example
 <p>Provides command and instructions to load relevant UPPMAX modules.</p>
 <p>Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load uppmax bioinfo-tools bwa/0.7.17 <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    FastQC/0.11.9</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">

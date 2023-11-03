@@ -418,7 +418,7 @@
   <h3 class="subtitle">From raw variant calls to high-quality call sets</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">02-Nov-2023</h4>
+  <h4 class="date">03-Nov-2023</h4>
 </section>
 
 <section>
@@ -475,9 +475,10 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="manual-filtering-sets-thresholds-on-context-statistics" class="slide level2 smallr">
+<section id="manual-filtering-sets-thresholds-on-context-statistics" class="slide level2 smaller">
 <h2>Manual filtering sets thresholds on context statistics</h2>
 <!-- markdownlint-disable MD013 -->
+<div class="small">
 <div id="tbl-key-data-filters">
 <table>
 <caption>Table&nbsp;1: Key data filters <span class="citation" data-cites="lou_BeginnerGuideLowcoverage_2021">(Table 3 <a href="#/bibliography" role="doc-biblioref" onclick="">Lou et al., 2021, p. 5974</a>)</span></caption>
@@ -552,6 +553,7 @@
 </tbody>
 </table>
 </div>
+</div>
 <!-- markdownlint-enable MD013 -->
 <h4 id="procedure">Procedure</h4>
 <p>Look at annotations (<em>context statistics</em>) and set thresholds.</p>
@@ -585,16 +587,16 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="guidelines-what-guidelines" class="slide level2 smallr">
+<section id="guidelines-what-guidelines" class="slide level2 smaller">
 <h2>Guidelines? What guidelines?</h2>
-<h4 id="gatk-hard-filters">GATK hard filters</h4>
+<h5 id="gatk-hard-filters">GATK hard filters</h5>
 <blockquote>
 <p>However, because we want to help, we have formulated some generic recommendations that should at least provide a starting point for people to experiment with their data.</p>
 </blockquote>
 <div class="fragment">
-<div class="columns">
+<div class="columns small">
 <div class="column" style="width:50%;">
-<h5 id="snps">SNPs</h5>
+<h6 id="snps">SNPs</h6>
 <pre><code>QualByDepth (QD) &lt; 2.0
 RMSMappingQuality (MQ) &lt; 40.0
 FisherStrand (FS) &gt; 60.0
@@ -602,7 +604,7 @@ StrandOddsRatio (SOR) &gt; 3.0
 MappingQualityRankSumTest (MQRankSum) &lt; -12.5
 ReadPosRankSumTest (ReadPosRankSum) &lt; -8.0</code></pre>
 </div><div class="column" style="width:50%;">
-<h5 id="indels">Indels</h5>
+<h6 id="indels">Indels</h6>
 <pre><code>QualByDepth (QD) &lt; 2.0
 ReadPosRankSum (ReadPosRankSumTest) &lt; -20.0
 InbreedingCoeff &lt; -0.8
@@ -621,7 +623,7 @@ StrandOddsRatio (SOR) &gt; 10.0</code></pre>
 </div>
 <div class="fragment">
 <!-- -->
-<h4 id="on-rad-seq-filtering">On RAD-seq filtering</h4>
+<h5 id="on-rad-seq-filtering">On RAD-seq filtering</h5>
 <blockquote>
 <p>… the effects of SNP filtering practices on population genetic inference have received much less attention</p>
 </blockquote>
@@ -658,7 +660,7 @@ StrandOddsRatio (SOR) &gt; 10.0</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fng.806/MediaObjects/41588_2011_Article_BFng806_Fig4_HTML.jpg?as=webp" style="width:100.0%"></p>
-<div class="flushright smallr">
+<div class="flushright smallest">
 <p><span class="citation" data-cites="depristo_FrameworkVariationDiscovery_2011">DePristo et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span></p>
 </div>
 </div><div class="column" style="width:50%;">
@@ -706,14 +708,14 @@ Variant Quality Score Recalibration
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">bcftools</span> stats variantsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  12845
+SN  0   number of records:  12808
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 10559
+SN  0   number of SNPs: 10546
 SN  0   number of MNPs: 0
-SN  0   number of indels:   2299
+SN  0   number of indels:   2259
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1002
-SN  0   number of multiallelic SNP sites:   192</code></pre>
+SN  0   number of multiallelic sites:   1040
+SN  0   number of multiallelic SNP sites:   209</code></pre>
 </div>
 </div>
 <p>Use <code>vcftools</code> to compile data to generate summary statistics</p>
@@ -731,11 +733,11 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 <span id="cb5-3"><a href="#cb5-3"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.ldepth"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-4"><a href="#cb5-4"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(data<span class="sc">$</span>SUM_DEPTH))</span>
 <span id="cb5-5"><a href="#cb5-5"></a>lower <span class="ot">&lt;-</span> <span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">median</span>(data<span class="sc">$</span>SUM_DEPTH)</span>
-<span id="cb5-6"><a href="#cb5-6"></a>upper <span class="ot">&lt;-</span> <span class="fu">median</span>(data<span class="sc">$</span>SUM_DEPTH) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sd</span>(data<span class="sc">$</span>SUM_DEPTH)</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(Var1)), <span class="at">y =</span> Freq)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Depth"</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="fu">ylab</span>(<span class="st">"bp"</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="fu">signif</span>(upper, <span class="at">digits =</span> <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> lower,</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> upper, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="fu">ggtitle</span>(<span class="st">"Example threshold: 0.8X median depth, median depth + 2sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6"></a>upper <span class="ot">&lt;-</span> <span class="fu">median</span>(data<span class="sc">$</span>SUM_DEPTH) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> <span class="fu">sd</span>(data<span class="sc">$</span>SUM_DEPTH)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>xupper <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(upper<span class="sc">/</span><span class="dv">100</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(Var1)), <span class="at">y =</span> Freq)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Depth"</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="fu">ylab</span>(<span class="st">"bp"</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, xupper) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> lower, <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> upper, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Example threshold: 0.8X median depth, median depth + 2sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -745,6 +747,7 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 </div>
 </div>
 </div>
+<p>Depth uneven. High coverage often repetitive sequence. Too low coverage will bias SNP calling due to undersampling of alleles.</p>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <details>
@@ -763,6 +766,7 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 </div>
 </div>
 </div>
+<p>Filter variants with too low quality (Q30=0.001% chance of being wrong)</p>
 </div>
 </div>
 </section>
@@ -780,11 +784,12 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/missing-indv-1.svg" style="width:80.0%"></p>
+<p><img data-src="index_files/figure-revealjs/missing-indv-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Missing number of sites per individual. Too many would indicate poor sample quality.</p>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <details>
@@ -798,11 +803,12 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/missing-site-1.svg" style="width:80.0%"></p>
+<p><img data-src="index_files/figure-revealjs/missing-site-1.svg" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Fraction missing calls per site. Could warrant separate filters when comparing populations (e.g., total missing 0.2, but population A has 0.1 missing, population B 0.4).</p>
 </div>
 </div>
 </section>
@@ -810,6 +816,8 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 <h2>Minor allele frequency and heterozygosity</h2>
 <div class="columns smallr">
 <div class="column" style="width:50%;">
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Code</summary>
@@ -824,11 +832,21 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/minor-allele-frequency-1.svg" style="width:60.0%"></p>
+<p><img data-src="index_files/figure-revealjs/minor-allele-frequency-1.svg" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:40%;">
+<svg baseprofile="full" height="350" id="msprime-tree" version="1.1" width="250" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}.edge {stroke: black; stroke-width: 3px}.mut .sym{stroke:black} .mut .lab{fill:black}.mut.m0 .sym{stroke:red} .mut.m0 .lab{fill:red}.mut.m4 .sym{stroke:red} .mut.m4 .lab{fill:red}.mut.m5 .sym{stroke:red} .mut.m5 .lab{fill:red}.node > .sym, .node:not(.leaf) > .lab {display: none}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n22 p0 root" transform="translate(113.411 26.8)"><g class="a22 c2 m2 m3 m6 node n20 p0 s2 s3 s6" transform="translate(-47.3698 207.029)"><g class="a20 c2 node n16 p0" transform="translate(-21.25 42.7476)"><g class="a16 i3 leaf node n6 p0 sample" transform="translate(10.625 31.6239)"><path class="edge" d="M 0 0 V -31.6239 H -10.625"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a16 c2 node n14 p0" transform="translate(-10.625 11.1848)"><g class="a14 i0 leaf node n0 p0 sample" transform="translate(-7.08333 20.4391)"><path class="edge" d="M 0 0 V -20.4391 H 7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a14 i5 leaf m5 node n11 p0 s5 sample" transform="translate(7.08333 20.4391)"><path class="edge" d="M 0 0 V -20.4391 H -7.08333"></path><g class="mut m5 s5" transform="translate(0 -19.9892)"><line x1="0" x2="0" y1="0" y2="19.9892"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab rgt" transform="translate(7 0)">5</text></g><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -11.1848 H 10.625"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -42.7476 H 21.25"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a20 c2 node n17 p0" transform="translate(21.25 31.2231)"><g class="a17 i2 leaf node n5 p0 sample" transform="translate(10.625 43.1483)"><path class="edge" d="M 0 0 V -43.1483 H -10.625"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a17 c2 node n13 p0" transform="translate(-10.625 34.194)"><g class="a13 i0 leaf node n1 p0 sample" transform="translate(-7.08333 8.95427)"><path class="edge" d="M 0 0 V -8.95427 H 7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a13 i1 leaf node n2 p0 sample" transform="translate(7.08333 8.95427)"><path class="edge" d="M 0 0 V -8.95427 H -7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -34.194 H 10.625"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -31.2231 H -21.25"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -207.029 H 47.3698"></path><g class="mut m6 s6" transform="translate(0 -192.786)"><line x1="0" x2="0" y1="0" y2="192.786"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab lft" transform="translate(-7 0)">6</text></g><g class="mut m3 s3" transform="translate(0 -93.6026)"><line x1="0" x2="0" y1="0" y2="93.6026"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab lft" transform="translate(-7 0)">3</text></g><g class="mut m2 s2" transform="translate(0 -5.15485)"><line x1="0" x2="0" y1="0" y2="5.15485"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab lft" transform="translate(-7 0)">2</text></g><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a22 c2 m1 m7 node n21 p0 s1 s7" transform="translate(47.3698 174.459)"><g class="a21 i5 leaf m0 m4 node n10 p0 s0 s4 sample" transform="translate(22.1354 106.941)"><path class="edge" d="M 0 0 V -106.941 H -22.1354"></path><g class="mut m0 s0" transform="translate(0 -72.1134)"><line x1="0" x2="0" y1="0" y2="72.1134"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab rgt" transform="translate(7 0)">0</text></g><g class="mut m4 s4" transform="translate(0 -42.0215)"><line x1="0" x2="0" y1="0" y2="42.0215"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab rgt" transform="translate(7 0)">4</text></g><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a21 c2 node n19 p0" transform="translate(-22.1354 34.1086)"><g class="a19 c2 node n15 p0" transform="translate(-19.4792 46.346)"><g class="a15 i1 leaf node n3 p0 sample" transform="translate(-7.08333 26.4862)"><path class="edge" d="M 0 0 V -26.4862 H 7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a15 i3 leaf node n7 p0 sample" transform="translate(7.08333 26.4862)"><path class="edge" d="M 0 0 V -26.4862 H -7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -46.346 H 19.4792"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a19 c2 node n18 p0" transform="translate(19.4792 16.611)"><g class="a18 i4 leaf node n8 p0 sample" transform="translate(10.625 56.2212)"><path class="edge" d="M 0 0 V -56.2212 H -10.625"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a18 c2 node n12 p0" transform="translate(-10.625 52.7313)"><g class="a12 i2 leaf node n4 p0 sample" transform="translate(-7.08333 3.48991)"><path class="edge" d="M 0 0 V -3.48991 H 7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><g class="a12 i4 leaf node n9 p0 sample" transform="translate(7.08333 3.48991)"><path class="edge" d="M 0 0 V -3.48991 H -7.08333"></path><rect class="sym" height="10" width="10" x="-5" y="-5"></rect><text class="lab" transform="translate(0 11)"></text></g><path class="edge" d="M 0 0 V -52.7313 H 10.625"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -16.611 H -19.4792"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><path class="edge" d="M 0 0 V -34.1086 H 22.1354"></path><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><path class="edge" d="M 0 0 V -174.459 H -47.3698"></path><g class="mut m7 s7" transform="translate(0 -148.516)"><line x1="0" x2="0" y1="0" y2="148.516"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab rgt" transform="translate(7 0)">7</text></g><g class="mut m1 s1" transform="translate(0 -30.3651)"><line x1="0" x2="0" y1="0" y2="30.3651"></line><path class="sym" d="M -5,-5 l 10,10 M -5,5 l 10,-10"></path><text class="lab rgt" transform="translate(7 0)">1</text></g><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="5"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<p>n=12; mutations 0, 4, 5 (red) are singletons and would fail MAF&lt;=0.1</p>
+</div>
+</div>
+<p>Reasonable cutoff 0.05-0.1 for PCA, population structure.</p>
 <p>But! Statistics based on diversity or the SFS should <strong>not</strong> be filtered on MAF</p>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
@@ -866,13 +884,13 @@ SN  0   number of multiallelic SNP sites:   192</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
 SN  0   number of records:  10081
-SN  0   number of no-ALTs:  9238
-SN  0   number of SNPs: 388
+SN  0   number of no-ALTs:  9300
+SN  0   number of SNPs: 365
 SN  0   number of MNPs: 0
-SN  0   number of indels:   156
+SN  0   number of indels:   120
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   60
-SN  0   number of multiallelic SNP sites:   5</code></pre>
+SN  0   number of multiallelic sites:   59
+SN  0   number of multiallelic SNP sites:   3</code></pre>
 </div>
 </div>
 <p>Filtering as before but excluding MAF, variant quality filters</p>
@@ -1025,6 +1043,7 @@ GGACAATTACCCCCTCCGTTATGTTTCAGTCAATTTCATGTTTGACTTTTAGATTTTTAA
 </div>
 <div class="fragment">
 <p>Use with <code>vcftools --mask</code> to restrict analyses to certain positions.</p>
+<p><strong>NB</strong>! Here <code>0</code> is a position that is <strong>unmasked</strong>, <code>&gt;0</code> <strong>masked</strong></p>
 </div>
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
