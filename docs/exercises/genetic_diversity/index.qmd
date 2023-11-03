@@ -307,11 +307,12 @@ different.]:
 #| label: 01-vcftools-fst
 #| echo: true
 #| eval: true
+#| results: hide
 # Set your window size higher, e.g., 100000
 vcftools --gzvcf $VCF --weir-fst-pop PUN-R.txt \
    --weir-fst-pop PUN-Y.txt \
    --fst-window-size 1000 \
-   --out $OUT 2> /dev/null
+   --out $OUT
 ```
 
 ```{bash }
