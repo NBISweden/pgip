@@ -112,8 +112,6 @@ exercises/variant_calling:
   - __yellow_gvcf__
   - __reference__
   - __sampleinfo__
-  - __variants__
-  - __redyellow_variants__
   - variantsites.vcf.gz: monkeyflower/small/redyellow.variantsites.vcf.gz
   - variantsites.vcf.gz.tbi: monkeyflower/small/redyellow.variantsites.vcf.gz.tbi
   - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
@@ -124,17 +122,18 @@ exercises/variant_filtering:
   - __yellow_recal_bam__
   - __reference__
   - __sampleinfo__
-  - __variants__
   - variantsites.vcf.gz: monkeyflower/small/redyellow.variantsites.vcf.gz
   - variantsites.vcf.gz.tbi: monkeyflower/small/redyellow.variantsites.vcf.gz.tbi
   - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
   - allsites.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi
 
-
 exercises/genetic_diversity:
   - __sampleinfo__
-  - __variants__
-  - __redyellow_variants__
+  - __reference__
+  - variantsites.vcf.gz: monkeyflower/small/redyellow.variantsites.vcf.gz
+  - variantsites.vcf.gz.tbi: monkeyflower/small/redyellow.variantsites.vcf.gz.tbi
+  - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
+  - allsites.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi
 
 slides/foundations:
   - data/Homo_sapiens: Homo_sapiens

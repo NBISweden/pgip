@@ -187,7 +187,7 @@ $L=15$. A site where all nucleotides (alleles) are identical is called
 a *monomorphic* site (indicated with asterisks above). There are 9
 monomorphic sites.
 
-## DNA variation - segregating sites
+## DNA variation - segregating sites {.smaller}
 
 ::: {.dna }
 
@@ -344,7 +344,7 @@ It can also be applied to haploid organisms, like bacteria.
 
 :::
 
-## Describing DNA variation - nucleotide diversity
+## Describing DNA variation - nucleotide diversity {.smaller}
 
 ::: {.dna }
 
@@ -366,7 +366,7 @@ It can also be applied to haploid organisms, like bacteria.
 
 ::: {.fragment}
 
-<h3>Nucleotide diversity $\pi$</h3>
+<h4>Nucleotide diversity $\pi$</h4>
 
 The *nucleotide diversity* is the sum of site heterozygosities:
 
@@ -384,7 +384,7 @@ where $S$ is the number of segregating sites
 
 ::: {.fragment}
 
-<h3>Calculate the nucleotide diversity</h3>
+<h4>Calculate the nucleotide diversity</h4>
 
 :::
 
@@ -782,7 +782,7 @@ $q\cdot q = 0.09$
 
 ::::
 
-::: {.fragment fragment-index=5}
+::: {.fragment fragment-index=5 .small}
 
 **Expected** allele frequencies after mating: $p=p^2 + pq=0.7$, $q=1-p=0.3$
 
@@ -818,10 +818,11 @@ the **Hardy-Weinberg equilibrium** (**HWE**).
 
 ::: {.column width="45%"}
 
-|            |       |       |       |
-|------------|-------|-------|-------|
-| Genotype:  | $AA$  | $Aa$  | $aa$  |
-| Frequency: | $p^2$ | $2pq$ | $q^2$ |
+|            |         |          |          |
+|------------|---------|----------|----------|
+| Genotype:  | $AA$    | $Aa$     | $aa$     |
+| Frequency: | $p^2$   | $2pq$    | $q^2$    |
+|            | $f_{AA} | $f_{Aa}$ | $f_{aa}$ |
 
 :::
 
@@ -843,8 +844,8 @@ Importantly, we can calculate allele frequencies from genotype
 frequencies and vice versa:
 
 $$
-p = p^2 + pq\\
-q = q^2 + pq
+p = f_{AA} + \frac{f_{Aa}}{2} = p^2 + pq\\
+q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 $$
 
 ::: {.notes }
@@ -874,8 +875,9 @@ See next slide.
 #| echo: false
 #| eval: true
 #| file: ../../recipes/slides/foundations/hwe.R
+#| out-width: 80%
 #| fig-height: 6
-#| fig-width: 12
+#| fig-width: 14
 #| fig-align: center
 #| fig-cap:
 #|     Hardy-Weinberg proportions in 10,000 SNPs on chromosome
@@ -943,16 +945,16 @@ grid-row-gap: 0px; grid-column-gap: 0px; align-items: center;"}
 
 :::{}
 
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
 
 $p=0.1$
 
@@ -966,16 +968,16 @@ $\large\rightarrow$
 
 :::{}
 
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
 
 $p=0.5$
 
@@ -989,16 +991,16 @@ $\large\rightarrow$
 
 :::{}
 
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-red.svg){width=30}
-![](assets/images/flower-white.svg){width=30}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-red.svg){width=27}
+![](assets/images/flower-white.svg){width=27}
 
 $p=0.9$
 
@@ -1569,7 +1571,7 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 #|   WF model indicating time
 #|   direction from past (top) to present
 #|   (bottom).
-#| out-width: 100%
+#| out-width: 90%
 x_range <- range(vertex_attr(wf, "x"))
 y_range <- range(vertex_attr(wf, "y"))
 x1 <- x_range[1] - 0.5
@@ -1613,6 +1615,7 @@ wf %>% ggplot_wf(.) +
 #| label: fig-wf-model-genealogy
 #| echo: false
 #| eval: true
+#| out-width: 90%
 #| fig-cap: "WF model tracing the genealogies of three extant chromosomes"
 obj <- wf
 i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
@@ -1969,7 +1972,7 @@ Drift
 
 ::::
 
-## Wright-Fisher model with alleles
+## Wright-Fisher model with alleles {.smaller}
 
 :::: {.columns .compact}
 
@@ -2029,7 +2032,7 @@ drift
 
 :::
 
-## Binomial process models allele sampling
+## Binomial process models allele sampling {.smaller}
 
 ```{r }
 #| label: allele-sampling-model
@@ -2343,7 +2346,7 @@ floating up and down at random.
 
 :::
 
-## Allele frequency distribution for N=1
+## Allele frequency distribution for N=1 {.smaller}
 
 Instead of looking at frequencies let's switch to distributions of
 alleles for **one** individual, one locus. Then there are three
@@ -2623,7 +2626,7 @@ Kimura's example for the case where we have N=10 chromosomes.
 
 :::
 
-## Probability distributions of allele frequencies
+## Probability distributions of allele frequencies {.smaller}
 
 ```{r }
 #| label: allele-frequency-histogram
@@ -2796,7 +2799,7 @@ On the sampling model, [@charlesworth_ElementsEvolutionaryGenetics_2010, p. 231]
 
 :::
 
-## Heterozygosity dynamics
+## Heterozygosity dynamics{.smaller}
 
 :::: {.columns}
 
@@ -3403,7 +3406,8 @@ deleterious* and *purged* from population by natural selection.
 #| label: fig-heterozygosity-function-ne
 #| echo: false
 #| eval: true
-#| out-width: 60%
+#| out-width: 50%
+#| fig-align: center
 #| fig-cap:
 #|     Heterozygosity predicted by the neutral theory.
 #|     Shaded region shows typical heterozygosities in animals (y-axis).
@@ -3540,7 +3544,7 @@ For practical note on estimation of mutation rate see e.g.,
 
 :::{}
 
-![](assets/images/gould_finches.jpg){width=700px fig-align=center}
+![](assets/images/gould_finches.jpg){width=500px fig-align=center}
 
 :::
 
@@ -3834,7 +3838,7 @@ In figure, we assume $s<0.1$, which is almost always the case
 
 :::
 
-## Direct selection can be inferred from protein substitutions
+## Direct selection can be inferred from protein substitutions {.smaller}
 
 :::: {.columns}
 
@@ -4023,7 +4027,7 @@ we in essence are looking multi- and not a bi-allelic locus.
 
 :::
 
-## Recombination breaks association between loci
+## Recombination breaks association between loci {.smaller}
 
 :::: {.columns}
 
@@ -4227,6 +4231,7 @@ xi <- L / 2
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
+#| out-width: 80%
 #| fig-format: png
 #| fig-cap: The effect of a selective sweep on
 #|     diversity. The arrow points to the site under selection.
@@ -4279,6 +4284,7 @@ pgip-tsstat results/slim/slim*.trees -n 10 --seed 31 -s pi -s S -s TajD -w 500 -
 #| fig-align: center
 #| fig-height: 5
 #| fig-width: 10
+#| out-width: 80%
 #| fig-cap: The effect of a selective sweep on
 #|     diversity. The arrow points to the site under selection.
 #|     The y-axis shows Tajima's D which is proportional to the
@@ -4451,7 +4457,7 @@ more compressed (=faster coalescence) than in the neutral case.
 #| label: fig-selective-sweep-phases
 #| echo: false
 #| eval: true
-#| out-height: 500
+#| out-height: 400
 #| fig-cap:
 #|     Time goes from left to right. As sweep progresses,
 #|     tree topology changes. Adapted from
@@ -4798,7 +4804,7 @@ generations for a neutral locus)
 
 ::: {.column width="50%"}
 
-### Hitchhiking
+#### Hitchhiking
 
 - alleles linked to locus under selection "hitchhike" to high
   frequencies [@smith_HitchhikingEffectFavourable_1974]
@@ -4809,7 +4815,7 @@ generations for a neutral locus)
 
 ::: {.column width="50%"}
 
-### Background selection
+#### Background selection
 
 - loci linked to a deleterious locus will be purged from population
   and thus reduce diversity [@charlesworth_EffectDeleteriousMutations_1993]
@@ -4841,7 +4847,7 @@ equilibrium.
 Methods to detect **selection** are based on **direct selection** or
 studying patterns of variation caused by **linked selection**.
 
-## Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted .smaller}
 
 ::: { #refs }
 :::

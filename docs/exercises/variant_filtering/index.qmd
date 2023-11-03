@@ -59,9 +59,13 @@ results will differ from those presented here.
 
 #### {{< fa server >}} UPPMAX
 
+<!-- markdownlint-disable MD038 -->
+
 Move to your course working directory `/proj/{{< var uppmaxproject
 >}}/users/USERNAME`, create an exercise directory called
 `monkeyflower` and `cd` to it:
+
+<!-- markdownlint-enable MD038 -->
 
 ```bash
 cd /proj/{{< var uppmaxproject >}}/users/USERNAME
@@ -391,6 +395,18 @@ csvtk summary -t -g SUM_DEPTH -f POS:count -w 0 ${OUT}.ldepth |\
 ![](vcftools/variantsites.subset.ldepth.png)
 
 Distribution of the total depth per site for all samples.
+
+:::
+
+::: {.callout-note collapse=true}
+
+#### On csvtk as plotting software
+
+You are of course perfectly welcome to use `R` or some other software
+to make these plots. We choose to generate the plots using `csvtk` to
+avoid too much context switching, and also because it emulates much of
+the functionality in `R`, albeit much less powerful when it comes to
+plotting.
 
 :::
 

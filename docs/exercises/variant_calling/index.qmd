@@ -86,9 +86,13 @@ results will differ from those presented here.
 
 #### {{< fa server >}} UPPMAX
 
+<!-- markdownlint-disable MD038 -->
+
 Move to your course working directory `/proj/{{< var uppmaxproject
 >}}/users/USERNAME`, create an exercise directory called
 `monkeyflower` and `cd` to it:
+
+<!-- markdownlint-enable MD038 -->
 
 ```bash
 cd /proj/{{< var uppmaxproject >}}/users/USERNAME
