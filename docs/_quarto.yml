@@ -16,7 +16,6 @@ project:
     - "schedule.qmd"
     - "syllabus.qmd"
     # Exercises
-    # - "exercises/data.qmd"
     - "exercises/index.qmd"
     - "exercises/compute_environment/index.qmd"
     - "exercises/datasets/monkeyflowers.qmd"

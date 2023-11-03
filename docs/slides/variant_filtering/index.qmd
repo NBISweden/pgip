@@ -95,9 +95,11 @@ Here, AB, DS and FS filters are *caller dependent*!
 
 :::
 
-## Manual filtering sets thresholds on context statistics {.smallr}
+## Manual filtering sets thresholds on context statistics {.smaller}
 
 <!-- markdownlint-disable MD013 -->
+
+:::{.small}
 
 | Category                                       | Filter                                      | Recommendation (examples)                                              |
 |------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
@@ -115,6 +117,8 @@ Here, AB, DS and FS filters are *caller dependent*!
 
 : Key data filters [Table 3 @lou_BeginnerGuideLowcoverage_2021, p.
   5974] {#tbl-key-data-filters tbl-colwidths="[30,30,40]"}
+
+:::
 
 <!-- markdownlint-enable MD013 -->
 
@@ -223,9 +227,9 @@ Source: [@lou_BeginnerGuideLowcoverage_2021]
 
 :::
 
-## Guidelines? What guidelines? {.smallr}
+## Guidelines? What guidelines? {.smaller}
 
-#### GATK hard filters
+##### GATK hard filters
 
 > However, because we want to help, we have formulated some generic
 > recommendations that should at least provide a starting point for
@@ -233,11 +237,11 @@ Source: [@lou_BeginnerGuideLowcoverage_2021]
 
 ::: {.fragment}
 
-:::: {.columns}
+:::: {.columns .small}
 
 ::: {.column width="50%"}
 
-##### SNPs
+###### SNPs
 
 ```
 QualByDepth (QD) < 2.0
@@ -252,7 +256,7 @@ ReadPosRankSumTest (ReadPosRankSum) < -8.0
 
 ::: {.column width="50%"}
 
-##### Indels
+###### Indels
 
 ```
 QualByDepth (QD) < 2.0
@@ -283,7 +287,7 @@ StrandOddsRatio (SOR) > 10.0
 
 ::: {.fragment}
 
-#### On RAD-seq filtering
+##### On RAD-seq filtering
 
 > ... the effects of SNP filtering practices on population genetic
 > inference have received much less attention
@@ -329,7 +333,7 @@ GATK guidelines explained (see <https://gatk.broadinstitute.org/hc/en-us/article
 
 ![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fng.806/MediaObjects/41588_2011_Article_BFng806_Fig4_HTML.jpg?as=webp){width=100%}
 
-::: {.flushright .smallr}
+::: {.flushright .smallest}
 
 @depristo_FrameworkVariationDiscovery_2011
 
@@ -421,13 +425,17 @@ system(paste("vcftools --gzvcf", vcf, "--site-depth 2>/dev/null"))
 data <- read.table("out.ldepth", header=TRUE)
 x <- as.data.frame(table(data$SUM_DEPTH))
 lower <- 0.8 * median(data$SUM_DEPTH)
-upper <- median(data$SUM_DEPTH) + 2*sd(data$SUM_DEPTH)
+upper <- median(data$SUM_DEPTH) + 1*sd(data$SUM_DEPTH)
+xupper <- ceiling(upper/100) * 100
 ggplot(x, aes(x=as.numeric(as.character(Var1)), y=Freq)) + geom_line() +
-  xlab("Depth") + ylab("bp") + xlim(0, signif(upper, digits=0)) +
+  xlab("Depth") + ylab("bp") + xlim(0, xupper) +
   geom_vline(xintercept=lower, color="red", size=1.3) +
   geom_vline(xintercept=upper, color="red", size=1.3) +
   ggtitle("Example threshold: 0.8X median depth, median depth + 2sd")
 ```
+
+Depth uneven. High coverage often repetitive sequence. Too low
+coverage will bias SNP calling due to undersampling of alleles.
 
 :::
 
@@ -450,6 +458,9 @@ ggplot(subset(data, QUAL<1000), aes(x=QUAL)) +
   ggtitle("Example threshold: Q30")
 ```
 
+Filter variants with too low quality (Q30=0.001% chance of being
+wrong)
+
 :::
 
 ::::
@@ -464,7 +475,7 @@ ggplot(subset(data, QUAL<1000), aes(x=QUAL)) +
 #| label: missing-indv
 #| echo: true
 #| eval: true
-#| out-width: 80%
+#| out-width: 70%
 #| fig-align: center
 #| fig-width: 14
 #| code-fold: true
@@ -474,6 +485,9 @@ ggplot(data, aes(x=F_MISS, y=INDV)) + geom_point(size=3) +
   ggtitle("Missing data per individual")
 ```
 
+Missing number of sites per individual. Too many would indicate poor
+sample quality.
+
 :::
 
 ::: {.column width="50%"}
@@ -482,7 +496,7 @@ ggplot(data, aes(x=F_MISS, y=INDV)) + geom_point(size=3) +
 #| label: missing-site
 #| echo: true
 #| eval: true
-#| out-width: 80%
+#| out-width: 70%
 #| fig-align: center
 #| fig-width: 14
 #| code-fold: true
@@ -495,6 +509,10 @@ ggplot(data, aes(x=F_MISS)) +
   ggtitle("Missing data per site: example threshold F_MISS=0.25")
 ```
 
+Fraction missing calls per site. Could warrant separate filters when
+comparing populations (e.g., total missing 0.2, but population A has
+0.1 missing, population B 0.4).
+
 :::
 
 ::::
@@ -505,11 +523,15 @@ ggplot(data, aes(x=F_MISS)) +
 
 ::: {.column width="50%"}
 
+:::: {.columns}
+
+::: {.column width="60%"}
+
 ```{r }
 #| label: minor-allele-frequency
 #| echo: true
 #| eval: true
-#| out-width: 60%
+#| out-width: 100%
 #| fig-width: 14
 #| fig-align: center
 #| code-fold: true
@@ -523,6 +545,41 @@ ggplot(data, aes(x=MAF)) +
   geom_vline(xintercept=0.1, color="red", size=1.3) +
   ggtitle("Minor allele frequency: example threshold MAF=0.1")
 ```
+
+:::
+
+::: {.column width="40%"}
+
+```{python }
+#| label: msprime-tree
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+#| out-width: 10%
+import msprime
+ts = msprime.sim_ancestry(6, sequence_length=1e4, random_seed=13)
+ts = msprime.sim_mutations(ts, rate=5e-5, random_seed=7)
+css_string = (
+    ".edge {stroke: black; stroke-width: 3px}"
+    ".mut .sym{stroke:black} .mut .lab{fill:black}"
+    ".mut.m0 .sym{stroke:red} .mut.m0 .lab{fill:red}"
+    ".mut.m4 .sym{stroke:red} .mut.m4 .lab{fill:red}"
+    ".mut.m5 .sym{stroke:red} .mut.m5 .lab{fill:red}"
+    ".node > .sym, .node:not(.leaf) > .lab {display: none}"
+)
+print(ts.draw_svg(size=(250, 350), x_axis=False, node_labels={},
+                  symbol_size=10, style=css_string,
+                  root_svg_attributes={"id": "msprime-tree"}))
+```
+
+n=12; mutations 0, 4, 5 (red) are singletons and would fail MAF<=0.1
+
+:::
+
+::::
+
+Reasonable cutoff 0.05-0.1 for PCA, population structure.
 
 But! Statistics based on diversity or the SFS should **not** be
 filtered on MAF
@@ -1348,9 +1405,11 @@ echo -e "LG4\t10\t20\nLG4\t40\t45\n" | \
 
 Use with `vcftools --mask` to restrict analyses to certain positions.
 
+**NB**! Here `0` is a position that is **unmasked**, `>0` **masked**
+
 :::
 
-## Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted .smaller}
 
 ::: { #refs }
 :::

@@ -79,7 +79,22 @@ conda config --set channel_priority strict
 
 ::: {.callout-important}
 
-Please note that the order of these commands is important!
+Please note that the order of these commands is important! When `conda
+config --add` is run it adds the channel to the **top** of the list in
+your configuration, so your `~/.condarc` will end up looking like
+this:
+
+```
+cat ~/.condarc
+```
+
+```
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+channel_priority: strict
+```
 
 :::
 
@@ -111,10 +126,32 @@ manager as it is faster (`mamba` is a rewrite of `conda` in C++). An
 example of how to install packages `bcftools, angsd, mosdepth` follows
 (remember to activate `pgip`!):
 
-```{bash}
+::: {.callout-note}
+
+#### 03-Nov-2023: Package errors
+
+Some users have reported errors in that `bcftools` and `angsd` cannot
+be found, despite setting the proper channels. We are looking into the
+issue, but unless there are issues with UPPMAX, we will not need to
+install any additional packages apart from those that went into the
+creation of the `pgip` environment above. You can therefore treat the
+code below as examples only.
+
+:::
+
+```bash
 #| eval: false
 conda activate pgip
 mamba install bcftools angsd mosdepth
+```
+
+or if you have packages listed in an environment file
+
+```bash
+#| label: conda-install-packages-from-environment-file
+#| echo: true
+#| eval: false
+mamba env update -f environment.yml
 ```
 
 ## Resources

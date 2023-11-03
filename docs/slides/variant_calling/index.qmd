@@ -1,6 +1,6 @@
 ---
 title: "Variant calling"
-subtitle: "Variant calling"
+subtitle: "From sequence data to variant call set"
 author:
   - "Per Unneberg"
 format:
@@ -360,7 +360,7 @@ per library and SMRT cell
 
 ::::
 
-## DNA sequences in FASTQ format
+## DNA sequences in FASTQ format {.smaller}
 
 ```{bash }
 #| label: list-fastq-files
@@ -607,10 +607,10 @@ individuals are mapped to the reference (right).
 :::{}
 
 ![Screenshot of reference sequence (top) and aligned reads (bottom).
-Bases are colored by nucleotide. Letter case indicates forward
-(upper-case) or reverse (lower-case) alignment. * is placeholder for
-deleted base.](assets/images/read-mapping.png){#fig-read-mapping
-width=100%}
+Second line with `.` characters is the consensus sequence. Bases are
+colored by nucleotide. Letter case indicates forward (upper-case) or
+reverse (lower-case) alignment. `*` is placeholder for deleted
+base.](assets/images/read-mapping.png){#fig-read-mapping width=100%}
 
 :::
 
@@ -636,9 +636,9 @@ For a recent comprehensive comparison see @donato_NewEvaluationMethods_2021
 
 ::::
 
-## Alignments are stored in BAM format
+## Alignments are stored in BAM format {.smaller}
 
-:::{.smallr}
+:::{}
 
 <h5>Header information</h5>
 
@@ -653,7 +653,7 @@ Format: metadata record types prefixed with `@`, e.g., `@RG` is the *read group*
 
 :::
 
-:::{.smallr .fragment}
+:::{.fragment}
 
 <h5>Alignments</h5>
 
@@ -738,7 +738,8 @@ After preprocessing, reads are mapped to a reference. Observations:
 #### Instrument
 
 - PCR duplicates -> MarkDuplicates
-- systematic errors from sequencing machine -> BQSR
+- systematic errors from sequencing machine -> Base Quality Score
+  Recalibration (BQSR)
 
 #### Reference
 
@@ -747,13 +748,13 @@ After preprocessing, reads are mapped to a reference. Observations:
 
 # Variant calling and genotyping
 
-## Variants show up in pileup alignments
+## Variants show up in pileup alignments {.smaller}
 
-:::: {.columns .smallr}
+:::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="50%" .smallr}
 
-<h5>PUN-Y-INJ</h5>
+<h5>Sample PUN-Y-INJ</h5>
 
 ```{bash }
 #| label: samtools-tview-PUN-Y-2
@@ -767,9 +768,9 @@ samtools tview -p LG4:30430 -d H -w 60 \
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="50%" .smallr}
 
-<h5>PUN-R-ELF</h5>
+<h5>Sample PUN-R-ELF</h5>
 
 ```{bash }
 #| label: samtools-tview-PUN-R-2
@@ -789,7 +790,7 @@ samtools tview -p LG4:30430 -d H -w 60 \
 
 ::: {.column width="50%"}
 
-:::{.smallr}
+:::{}
 
 Potential variants show up as multiple mismatches in a column. Two
 questions arise:
@@ -803,7 +804,7 @@ questions arise:
 
 ::: {.column width="50%"}
 
-:::{.smallr .fragment}
+:::{.fragment}
 
 Simple approach: filter bases on quality (e.g., Q20), call heterozygous if 20-80% bases non-reference.
 
@@ -811,7 +812,7 @@ Issues: undercalls heterozygotes, no measure of uncertainty
 
 :::
 
-::: {.fragment .smallr}
+::: {.fragment}
 
 Solution: probabilistic methods!
 
@@ -919,7 +920,7 @@ to the interested reader.
 
 :::
 
-## We can use Bayes' theorem to genotype
+## We can use Bayes' theorem to genotype {.smaller}
 
 ### Example
 
@@ -1073,7 +1074,7 @@ $$
 
 :::
 
-## Variant Call Format (VCF) - header {.smallr}
+## Variant Call Format (VCF) - header {.smaller}
 
 :::{}
 
@@ -1099,7 +1100,7 @@ genotype entries, and more. NB: `PL` format definition.
 
 :::
 
-## Variant Call Format (VCF) - data {.smallr}
+## Variant Call Format (VCF) - data
 
 ```{bash }
 #| label: vcf-format-data
@@ -1110,9 +1111,7 @@ bcftools view --header-only --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz |\
 bcftools view --no-header  --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz LG4:6886
 ```
 
-:::::: {.columns}
-
-::::: {.column width="35%"}
+:::{}
 
 `QUAL`: Phred-scaled quality score for Prob(ALT is wrong): $722.43$
 ($p=10^{-Q/10}=5.7e-73$)
@@ -1122,33 +1121,38 @@ bcftools view --no-header  --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz LG4:688
 - allele count 2 (`AC=2`)
 - allele frequency minor allele 0.222 (`AF=0.222`)
 
-::: {.flushright .smallr}
+:::
+
+::: {.flushright .smallest}
 
 <https://samtools.github.io/hts-specs/VCFv4.4.pdf>
 
 :::
 
-:::::
+## Variant Call Format (VCF) - data {.smaller}
 
-::::: {.column width="65%"}
+```{bash }
+#| label: vcf-format-data-2
+#| echo: false
+#| eval: true
+bcftools view --header-only --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz |\
+ tail --lines 1
+bcftools view --no-header  --samples PUN-R-ELF,PUN-Y-INJ allsites.vcf.gz LG4:6886
+```
 
 :::: {.columns }
 
 ::: {.column width="80%"}
 
-::: {.fragment fragment-index=1}
-
 <h5>Genotypes (`GT:AD:DP:GQ:PGT:PID:PL:PS`)</h5>
 
-ELF: `0/1:3,8:11:50:.:.:189,0,50:.`
+PUN-R-ELF: `0/1:3,8:11:50:.:.:189,0,50:.`
 
 `GT=0/1`, `AD=3,8` => 3 REF, 8 ALT, `DP=11` => sequence depth = 11, `PL=189,0,50`
 
-INJ: `0/1:2,2:4:45:.:.:45,0,45:.`
+PUN-Y-INJ: `0/1:2,2:4:45:.:.:45,0,45:.`
 
 `GT=0/1`, `AD=2,2` => 2 REF, 2 ALT, `DP=4` => sequence depth = 4, `PL=45,0,45`
-
-:::
 
 ::: {.fragment fragment-index=2}
 
@@ -1160,9 +1164,10 @@ $$
 p = 10^{-Q/10}
 $$
 
-For ELF the relative probabilities are $10^{-189/10}\approx1.26e-9$, $10^{0}=1$, $10^{50}=10^{-5}$.
+For PUN-R-ELF the relative probabilities are $10^{-189/10}\approx1.26e-9$, $10^{0}=1$, $10^{50}=10^{-5}$.
 
-Interpretation: `0/1` 10,000 times more likely than `1/1` ($1/10^{-5}$)
+Interpretation: `0/1` 10,000 times more likely than `1/1`
+($1/10^{-5}$)
 
 :::
 
@@ -1172,9 +1177,7 @@ Interpretation: `0/1` 10,000 times more likely than `1/1` ($1/10^{-5}$)
 
 :::
 
-::: {.column width="7%"}
-
-::: {.fragment fragment-index=1}
+::: {.column width="4%"}
 
 ```{bash }
 #| label: samtools-tview-view-R-6885
@@ -1189,11 +1192,7 @@ samtools tview -p LG4:6885 -d H -w 3 \
 
 :::
 
-:::
-
-::: {.column width="7%"}
-
-::: {.fragment fragment-index=1}
+::: {.column width="4%"}
 
 ```{bash }
 #| label: samtools-tview-view-Y-6885
@@ -1208,8 +1207,6 @@ samtools tview -p LG4:6885 -d H -w 3 \
 
 :::
 
-:::
-
 ::::
 
 :::::
@@ -1218,8 +1215,8 @@ samtools tview -p LG4:6885 -d H -w 3 \
 
 ::: {.notes}
 
-- QUAL: Phred-scaled quality score for the assertion made in ALT. i.e.
-    $-10log_{10}$ prob(call in ALT is wrong)
+QUAL: Phred-scaled quality score for the assertion made in ALT. i.e.
+$-10log_{10}$ prob(call in ALT is wrong)
 
 :::
 
@@ -1323,7 +1320,7 @@ GATK has no prior [@li_BetterUnderstandingArtifacts_2014]
 
 # Exercise on variant calling
 
-## The monkeyflower system {.smallr}
+## The monkeyflower system {.smaller}
 
 :::{}
 
@@ -1358,4 +1355,4 @@ Follow GATK best practices to
 - Do genotyping on all samples and combine results to a raw variant
   call set
 
-## Bibliography
+## Bibliography {.smaller}

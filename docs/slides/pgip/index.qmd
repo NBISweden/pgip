@@ -115,11 +115,13 @@ compare *resequenced samples*
 
 ::: {.column width="50%"}
 
-<!-- markdownlint-disable MD013 -->
-
 ::: {.fragment fragment-index=1}
 
+<!-- markdownlint-disable MD013 -->
+
 ![Genome assembly and sample collection. ](https://www.science.org/cms/10.1126/science.aba4674/asset/31658ca3-933a-4047-81e1-e900fd9a0bae/assets/graphic/369_aba4674_f1.jpeg){#fig-corals-assembly width=90% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
 
 ::: { .flushright .smallest .translatey50}
 
@@ -128,8 +130,6 @@ compare *resequenced samples*
 :::
 
 :::
-
-<!-- markdownlint-enable MD013 -->
 
 :::
 
@@ -181,9 +181,11 @@ Motivation:
 
 ::: {.column width="50%"}
 
+<!-- markdownlint-disable MD013 -->
+
 ![Variation and demographic history inferred from 44 resequenced
 individuals.](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-corals-variation
-width=70% fig-align=center}
+width=60% fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
@@ -207,7 +209,10 @@ population size and more, as does the *linkage structure*. Estimate
 signals similar to those of selection
 
 - LD decay: important for imputation (e.g.,
-  stephens_AccountingDecayLinkage_2005)
+  stephens_AccountingDecayLinkage_2005) and setting window size for
+  genome scans, where a common rule of thumb is to set the size larger
+  than the genome background: this ensures windows are, in some sense,
+  independent
 - The extent of LD and its decay with genetic distance are useful
   parameters for determining the number of markers needed to
   successfully map a QTL, and the resolution with which the trait can
@@ -308,7 +313,7 @@ Motivation: identify loci associated with adaptation / selection
 
 <!-- markdownlint-enable MD013 -->
 
-::: { .flushright .translatey50}
+::: { .flushright .smallest .translatey50}
 
 @fuller_PopulationGeneticsCoral_2020
 
@@ -322,7 +327,9 @@ Motivation: identify loci associated with adaptation / selection
 
 **Selection scan**
 
-Why: identify loci associated with adaptation / selection
+Why: identify loci associated with adaptation / selection, which
+provides potential mechanisms for adaptation, as well as information
+that could be important for conservation strategies
 
 Little differentiation across reefs -> little population structure
 over hundreds of kilometers. However, there are environmental
@@ -615,7 +622,7 @@ ecology [@hohenlohe_PopulationGenomicsProvides_2019]
 
 ::::
 
-## Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted .smaller}
 
 ::: { #refs }
 :::

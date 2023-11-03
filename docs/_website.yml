@@ -35,6 +35,7 @@ website:
     contents:
       - section: Slides
         contents:
+          - slides/index.qmd
           - slides/pgip/index.qmd
           - slides/foundations/index.qmd
           - slides/simulation/index.qmd
@@ -46,8 +47,11 @@ website:
           - slides/selection/index.qmd
       - section: Exercises
         contents:
-          - exercises/compute_environment/index.qmd
-          - exercises/datasets/monkeyflowers.qmd
+          - exercises/index.qmd
+          - section: Data
+            contents:
+              - exercises/compute_environment/index.qmd
+              - exercises/datasets/monkeyflowers.qmd
           - exercises/simulation/index.qmd
           - exercises/variant_calling/index.qmd
           - exercises/variant_filtering/index.qmd

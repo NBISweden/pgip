@@ -50,7 +50,8 @@ to:
 #| echo: false
 #| eval: true
 #| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
-#| out-width: 80%
+#| out-width: 70%
+#| fig-align: center
 set.seed(132)
 g <- wright_fisher_pop(n = 30, generations = 50)
 x_range <- range(vertex_attr(g, "x"))
@@ -144,7 +145,8 @@ Low reproductive success: forward simulations costly!
 #| echo: false
 #| eval: true
 #| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
-#| out-width: 80%
+#| out-width: 70%
+#| fig-align: center
 set.seed(132)
 g <- wright_fisher_pop(n = 30, generations = 50)
 x_range <- range(vertex_attr(g, "x"))
@@ -199,6 +201,7 @@ g %>%
 #| fig-cap:
 #|    Reproductive success in percent per generation.
 #| out-width: 55%
+#| fig-align: center
 gdf <- g %>%
   mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
   as.data.frame()
@@ -214,9 +217,13 @@ ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
   theme(text=element_text(size=36))
 ```
 
+:::{.small .translatey50}
+
 Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can
 show for large populations P(no descendants)=$1 - e^{-1} \approx
 0.632$
+
+:::
 
 :::
 
@@ -233,7 +240,7 @@ Low reproductive success: forward simulations costly!
 
 :::
 
-## Forward and backward simulation
+## Forward and backward simulation {.smaller}
 
 ```{r }
 #| label: wright-fisher-model-graph
@@ -1655,11 +1662,11 @@ $\beta=1/\lambda$.
 #| label: fig-simulate-genealogy-end
 #| echo: false
 #| eval: true
+#| fig-align: center
 #| fig-cap:
 #|   A simulated genealogy. The $T_i$ represent the
 #|   waiting time when the state has $i$ chromosomes.
-#| out-height: 600px
-#| out-width: 500px
+#| out-width: 60%
 \begin{tikzpicture}[
           ultra thick, inner sep=0, outer sep=0,
           leaf/.style={circle,fill=black,minimum size=5pt},
@@ -1718,7 +1725,7 @@ node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
 
 ::::
 
-## Some properties of the tree
+## Some properties of the tree {.smaller}
 
 :::: {.columns}
 
@@ -1735,8 +1742,8 @@ node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
 #|   $T_i$ represent the waiting time when the state has $i$ chromosomes,
 #|   whereas $\tau_i$ correspond to the branch length from node $i$
 #|   to its parent.
-#| out-height: 500px
-#| out-width: 400px
+#| fig-align: center
+#| out-width: 60%
 \begin{tikzpicture}[
           ultra thick, inner sep=0, outer sep=0,
           leaf/.style={circle,fill=black,minimum size=5pt},
@@ -1815,8 +1822,8 @@ Expected waiting time to coalesce when $i$ lineages: $E(T_i) =
 Branch lengths can be derived from waiting times. For instance,
 $\tau_1=\tau_2=T_5+T_4$ and $\tau_4=\tau_5=T_5$
 
-Time to the **most recent common ancestor (MRCA)**: $T_{MRCA} =
-\sum_{i=2}^n T_i$
+Time to the **most recent common ancestor (MRCA)** is sum of wating
+times: $T_{MRCA} = \sum_{i=2}^n T_i$
 
 with expected value $E(T_{MRCA}) = \sum_{i=2}^nE(T_i) = 2\left(1 -
 \frac{1}{n}\right)$
@@ -1856,12 +1863,14 @@ seeds = [12, 15, 16, 34, 63, 30]
 trees = [msprime.sim_ancestry(3, random_seed=x) for x in seeds]
 ```
 
+:::{}
+
 ```{python }
 #| label: fig-coalescent-trees-with-msprime
 #| echo: false
 #| eval: true
 #| fig-format: svg
-#| out-width: 100%
+#| out-width: 80%
 #| output: asis
 #| fig-cap:
 #|     Examples of coalescent simulations. Note the variation in tree
@@ -1876,10 +1885,14 @@ for i, ts in enumerate(trees):
     print(ts.draw_svg(size=(200, y), **kwargs))
 ```
 
+:::
+
 Examples of coalescent simulations. Note the variation in tree
 topology and height.
 
 ## Diminishing returns of adding more samples
+
+:::{}
 
 ```{r }
 #| label: fig-coalescent-diminishing-returns
@@ -1887,7 +1900,8 @@ topology and height.
 #| eval: true
 #| fig-width: 12
 #| fig-height: 6
-#| out-width: 600px
+#| fig-align: center
+#| out-width: 80%
 #| fig-cap:
 #|     Dependence of $E[T_{MRCA}]$ and $E[T_{total}]$ on the
 #|     sample size n. Already at low values of n the value of
@@ -1908,6 +1922,8 @@ ggplot(data, aes(x=x, y=y, linetype=factor(stat))) +
   geom_line(linewidth=1.2) + xlab("n") + ylab("") +
   guides(linetype=guide_legend(title="Statistic"))
 ```
+
+:::
 
 ::: {.notes}
 
@@ -2016,13 +2032,13 @@ Tajima; see @wakeley_CoalescentTheoryIntroduction_2008, p. 92)
 
 :::
 
-## The coalescent and diversity
+## The coalescent and diversity {.smaller}
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-::: {.dna .smallr}
+::: {.dna}
 
 | 1 | 2     | 3 | 4 | 5     | 6 | 7 | 8     | 9 | 10 | 11    | 12 | 13    | 14 | 15    |
 |:-:|:-----:|:-:|:-:|:-----:|:-:|:-:|:-----:|:-:|:--:|:-----:|:--:|:-----:|:--:|:-----:|
@@ -2036,7 +2052,7 @@ Tajima; see @wakeley_CoalescentTheoryIntroduction_2008, p. 92)
 
 :::
 
-::: {.fragment .smallr}
+::: {.fragment}
 
 <!-- markdownlint-disable MD013 -->
 
@@ -2121,7 +2137,7 @@ plot coordinates{(0,.8) (1,.4) (2, 0) (3, 0)};
 \end{tikzpicture}
 ```
 
-::: {.fragment .smallr}
+::: {.fragment}
 
 In this notation one can show that $\pi$, the nucleotide diversity, is
 
@@ -2149,7 +2165,7 @@ mutations on $n=4$ chromosomes.
 
 :::
 
-## The impact of topology on the SFS
+## The impact of topology on the SFS {.smaller}
 
 :::: {.columns}
 
@@ -2274,7 +2290,7 @@ very brief inroduction to the concept of tree sequences.
 
 :::
 
-## On non-recombining chromosomes and assortment
+## On non-recombining chromosomes and assortment {.smaller}
 
 :::: {.columns}
 
@@ -2284,7 +2300,8 @@ very brief inroduction to the concept of tree sequences.
 #| label: non-recombining-chromosomes-assortment-1
 #| echo: false
 #| eval: true
-#| out-width: 300
+#| fig-align: center
+#| out-width: 50%
 \tikzstyle{female}=[circle,thick,minimum size=1cm,draw=black]
 \tikzstyle{male}=[rectangle,thick,minimum width=1cm, minimum height=1cm, draw=black]
   \begin{tikzpicture}[>=latex,font=\small, thick,
@@ -2326,7 +2343,8 @@ Chromosomes coalesce at father
 #| label: non-recombining-chromosomes-assortment-2
 #| echo: false
 #| eval: true
-#| out-width: 300
+#| fig-align: center
+#| out-width: 50%
 \usetikzlibrary{shapes}
 \tikzstyle{female}=[circle,thick,minimum size=1cm,draw=black]
 \tikzstyle{male}=[rectangle,thick,minimum width=1cm, minimum height=1cm, draw=black]
@@ -2378,19 +2396,21 @@ coalesce.
 
 :::
 
-## The ancestral recombination graph
+## The ancestral recombination graph {.smaller}
+
+:::{}
 
 ![](assets/images/brandt-genetics-2022-fig1a.jpeg){fig-align=center, height=300}
 ![](assets/images/brandt-genetics-2022-fig1b.jpeg){fig-align=center, height=300}
 ![](assets/images/brandt-genetics-2022-fig1c.jpeg){fig-align=center, height=300}
 
-::: {.flushright .smallr}
+::: {.flushright .smallest}
 
 @y.c.brandt_EvaluationMethodsEstimating_2022 [Fig. 1a]
 
 :::
 
-:::{}
+:::
 
 Properties:
 
@@ -2401,8 +2421,6 @@ Properties:
 - neighbouring trees are **correlated**
 
 Interpretation: chromosomes are mosaics of non-recombining units
-
-:::
 
 ::: {.notes}
 
@@ -2744,7 +2762,7 @@ sim.simulationFinished();
 Comes with a huge manual [@haller_SLiMEvolutionarySimulation_2022] (700+
 pages!)
 
-## Recapitation - combining the best of two worlds
+## Recapitation - combining the best of two worlds {.smaller}
 
 :::: {style="display: grid; grid-template-columns: 4fr 3fr 3fr;
 grid-row-gap: 0px; grid-column-gap: 20px;"}
@@ -2771,7 +2789,7 @@ Backward simulation that adds coalescent (neutral) history
 
 ::: {.fragment fragment-index=2}
 
-:::{style="transform: translate(0, 60px);"}
+:::{style="transform: translate(0, -50px);"}
 
 ```{r }
 #| label: backward-simulation-recapitation
@@ -2824,7 +2842,7 @@ supported by the coalescent
 
 ::: {.fragment fragment-index=1}
 
-::: {.translatey50}
+:::{style="transform: translate(0, -150px);"}
 
 ```{r }
 #| label: forward-simulation-recapitation
@@ -2860,7 +2878,7 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 # Applications
 
-## Simulation of null distributions
+## Simulation of null distributions {.smaller}
 
 :::{.compact}
 
@@ -2909,7 +2927,7 @@ Original figure legend:
 
 :::
 
-## Simulations of genomic landscapes in monkeyflower
+## Simulations of genomic landscapes in monkeyflower{.smaller}
 
 :::: {.columns}
 
@@ -3029,7 +3047,7 @@ Figure caption:
 
 :::
 
-## Bibliography {.unnumbered .unlisted}
+## Bibliography {.unnumbered .unlisted .smaller}
 
 ::: { #refs }
 :::

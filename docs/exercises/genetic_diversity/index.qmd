@@ -62,17 +62,60 @@ results will differ from those presented here.
 
 ## Data setup
 
-Create an exercise directory and `cd` to it:
+:::{.panel-tabset}
 
-```{bash }
-#| label: create-monkeyflower-diversity-directory
-#| echo: true
-#| eval: false
-mkdir -p diversity
-cd diversity
+#### {{< fa server >}} UPPMAX
+
+<!-- markdownlint-disable MD038 -->
+
+Move to your course working directory `/proj/{{< var uppmaxproject
+>}}/users/USERNAME`, create an exercise directory called
+`monkeyflower` and `cd` to it:
+
+<!-- markdownlint-enable MD038 -->
+
+```bash
+cd /proj/{{< var uppmaxproject >}}/users/USERNAME
+mkdir -p monkeyflower
+cd monkeyflower
 ```
 
-FIXME: add data source
+Retrieve the data with `rsync`. You can use the `--dry-run` option to
+see what is going to happen; just remove it when you are content:
+
+```bash
+# Remove the dry run option to retrieve data
+rsync --dry-run -av \
+      /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/LG4/* .
+```
+
+#### {{< fa laptop >}} Local
+
+Create an exercise directory called `monkeyflower` and `cd` to it:
+
+```{bash }
+#| label: create-monkeyflower-directory-local
+#| echo: true
+#| eval: false
+mkdir -p monkeyflower
+cd monkeyflower
+```
+
+Retrieve the variant files from `{{< var webexport.url
+>}}/monkeyflower/LG4` with `wget`^[The password is provided
+by the course instructor]:
+
+```bash
+wget --user pgip --password PASSWORD \
+     --recursive --accept='*.*' \
+     --reject='*.gif','index*' \
+  --no-parent --no-directories \
+     --no-clobber \
+     --directory-prefix=. \
+     {{< var webexport.url >}}/monkeyflower/LG4/
+```
+
+:::
 
 :::
 
@@ -89,7 +132,7 @@ FIXME: add data source
 - [csvtk](https://bioinf.shenwei.me/csvtk/)
 - [vcftools](https://vcftools.github.io/) [@danecek_VariantCallFormat_2011]
 
-#### UPPMAX modules
+#### {{< fa server >}} UPPMAX modules
 
 Execute the following command to load modules:
 
@@ -100,7 +143,8 @@ Execute the following command to load modules:
 module load uppmax bioinfo-tools \
     bcftools/1.17 \
     BEDTools/2.29.2 \
-    vcftools/0.1.16
+    vcftools/0.1.16 \
+    pixy/1.2.5.beta1
 ```
 
 `csvtk` has been added to the module system and can be loaded as
@@ -111,7 +155,7 @@ module use /proj/{{< var uppmaxproject >}}/modules
 module load csvtk
 ```
 
-#### Conda
+#### {{< fa laptop >}} Conda
 
 Copy the contents to a file `environment.yml` and install packages
 with `mamba env update -f environment.yml`.
@@ -128,6 +172,16 @@ dependencies:
   - vcftools=0.1.16
 ```
 
+There is no `pixy` Conda package for Python >= 3.9, so it must be
+manually installed with `pip`:
+
+```{bash }
+#| label: pip-install-pixy
+#| echo: true
+#| eval: false
+python -m pip install git+https://github.com/ksamuk/pixy.git
+```
+
 :::
 
 :::
@@ -137,8 +191,8 @@ dependencies:
 #| echo: false
 #| eval: true
 mkdir -p vcftools
-OUT=vcftools/all.allsites
-VCF=all.allsites.vcf.gz
+OUT=vcftools/allsites
+VCF=allsites.vcf.gz
 MISS=0.75
 QUAL=30
 MIN_DEPTH=260
@@ -152,41 +206,78 @@ vcftools --gzvcf $VCF \
  gzip -c > $OUTVCF
 ```
 
-# Genetic diversity {#sec-ex-genetic-diversity}
+## Preparation
 
-## Nucleotide diversity {#sec-ex-nucleotide-diversity}
+In this exercise, we will be analysing the full data set for linkage
+group 4 (LG4), consisting of all 37 samples.
 
-::: {.hidden}
+```{bash }
+#| label: bcftools-generate-stats
+#| echo: false
+#| eval: true
+#| results: hide
+bcftools stats allsites.vcf.gz > allsites.vcf.gz.bcftools.stats
+```
 
-FIXME: pen-and-paper exercise to calculate diversity based on "fixed"
-genotype calls and genotype likelihoods to highlight differences; the
-latter requires GLs for **all** sites. Use Table 4.1 in
-[@hartl1997principles, p.173] and/or Figure 3.1 in
-[@hahn_MolecularPopulationGenetics_2019, p. 45]
+```{r }
+#| label: tbl-r-bcftools-summarise-vcfs
+#| echo: false
+#| eval: true
+#| tbl-cap: Summary of VCF files
+read_bcftools <- function(fn, stat = "SN") {
+  x <- readLines(fn)
+  cbind(fn, read.table(textConnection(x[grep(stat, x)]), sep = "\t"))
+}
+vcfs <- list.files(pattern = "vcf.gz.bcftools.stats$")
+x <- tibble(do.call("rbind", lapply(vcfs, read_bcftools)))
+colnames(x) <- c("Filename", "SN", "id", "key", "value")
+x %>%
+  mutate(across("Filename", str_replace, ".bcftools.stats", "")) %>%
+  mutate(across("key", str_replace, "number of ", "")) %>%
+  mutate(across("key", str_replace, ":", "")) %>%
+  filter(key == "records" | key == "samples") %>%
+  pivot_wider(names_from = key, values_from = value) %>%
+  select(Filename, records, samples) %>%
+  kable()
+```
+
+Some of the programs require we prepare population files. For `pixy`,
+this is a headerless, tab-separated file with sample and population
+columns. The `sampleinfo.csv` file contains the information we need;
+the sample names have been prefixed with a three-letter code to
+indicate population (apart from *ssp. puniceus* which also comes with
+a single letter `R` or `Y` indicating ecotype).
+@tbl-sample-populations summarizes the populations and samples.
+
+```{r }
+#| label: tbl-sample-populations
+#| echo: true
+#| eval: true
+#| code-fold: true
+#| tbl-cap: Summary of populations and samples.
+# R code to generate sample population summary
+data <- tibble(read.csv("sampleinfo.csv"))
+data <- data %>%
+  mutate(Population = SampleAlias) %>%
+  mutate(across("Population", str_replace, "(.+)-.+$", "\\1")) %>%
+  mutate(across("Population", str_replace, "(CLV)_.+", "\\1"))
+data %>%
+  group_by(Population, ScientificName) %>%
+  summarise(n = n(), samples = paste(SampleAlias, collapse = ", ")) %>%
+  kable()
+```
+
+:::{.column-margin}
+
+![Evolutionary relationships across the radiation](../datasets/assets/images/stankowski-2019-fig1A.png){#fig-evolutionary-relationship}
+
+![Monkeyflower sampling
+locations](../../slides/simulation/assets/images/stankowski-2019-figs2.jpg){#fig-monkeyflower-sampling-location}
 
 :::
 
-## Allele frequency differences
-
-Could add exercise where, before scans, students simply calculate
-allele frequency differences. Easy counting exercise; could also
-quickly use genotype likelihoods
-
-## Global statistics
-
-### Preparation
-
-In this exercise, we will be analysing both the red/yellow population
-subsets, as well as the full data set for linkage group 4 (LG4).
-
-Some of the programs require we prepare a populations file. For
-`pixy`, this is a headerless, tab-separated file with sample and
-population columns. The `sampleinfo.csv` contains the information we
-need; the sample names have been prefixed with a three-letter code to
-indicate population (apart from *ssp. puniceus* which also comes with
-a single letter `R` or `Y` indicating ecotype) so we convert it with
-`csvtk`. We also add a populations file with all samples belonging to
-the same population:
+We convert the sample information with `csvtk`. We also add a
+populations file with all samples belonging to the same population:
 
 ```{bash }
 #| label: make-populations-file
@@ -203,7 +294,7 @@ csvtk cut --fields SampleAlias sampleinfo.csv |
  csvtk del-header --out-tabs > populations.ALL.txt
 ```
 
-`vcftools`, on the other hand, require that populations are specified
+`vcftools`, on the other hand, requires that populations are specified
 as separate files, containing the individuals of each population. We
 can use the `populations.txt` file to quickly generate
 population-specific files, and we add an `ALL` population, treating
@@ -227,8 +318,7 @@ easier to type:
 #| label: variant-setup
 #| echo: true
 #| eval: true
-VCF=all.allsites.vcf.gz
-REDYLW=redyellow.allsites.vcf.gz
+VCF=allsites.vcf.gz
 POPS=populations.txt
 ```
 
@@ -236,125 +326,375 @@ POPS=populations.txt
 #| label: set-vcf-envvars
 #| echo: false
 #| eval: true
+#| cache: false
 Sys.setenv(
-  VCF = "all.allsites.vcf.gz",
-  REDYLW = "redyellow.allsites.vcf.gz",
+  VCF = "allsites.vcf.gz",
   POPS = "populations.txt"
 )
 ```
 
-### e1: Effect of program
+## Generating and visualising diversity statistics
 
-General introduction to show the effect of filtering.
+### Compiling statistics with vcftools
 
-We start by comparing the outputs from `vcftools` and `pixy`. Start by
-creating an output directory for the first exercise `e1`:
+Create an output directory for the results and define some environment variables:
 
 ```{bash }
-#| label: e1-setup-output
+#| label: 01-vcftools
 #| echo: true
 #| eval: true
-mkdir -p e1
-OUTDIR=e1
-OUT=e1/all.allsites
+mkdir -p 01-vcftools
+OUT=01-vcftools/allsites
 ```
 
 ```{r }
-#| label: e1-setenv
+#| label: 01-vcftools-setenv
 #| echo: false
 #| eval: true
+#| cache: false
 Sys.setenv(
-  OUT = "e1/all.allsites",
-  OUTDIR = "e1"
+  OUT = "01-vcftools/allsites",
+  VCF = "allsites.vcf.gz"
 )
 ```
 
+#### Nucleotide diversity ($\pi$)
+
+Nucleotide diversity can be calculated by site (`--site-pi`) or in
+windows (`--window-pi`)^[Recall; the dataset used to render these
+pages is much smaller, which is why we use a smaller window size
+below. Consequently, your plot will look different.].
+
 ```{bash }
-#| label: vcftools-pi
+#| label: 01-vcftools-site-pi
 #| echo: true
 #| eval: true
-vcftools --gzvcf ${VCF} --window-pi 100000 --out $OUT 2>/dev/null
-cat ${OUT}.windowed.pi
+vcftools --gzvcf $VCF --site-pi --out $OUT 2> /dev/null
+csvtk summary $OUT.sites.pi --ignore-non-numbers --tabs \
+   --fields PI:mean,PI:stdev
 ```
 
 ```{bash }
-#| label: pixy-pi
+#| label: 01-vcftools-window-pi
 #| echo: true
 #| eval: true
-pixy --vcf $VCF --populations populations.ALL.txt --stats pi \
-  --output_folder $OUTDIR \
-  --window_size 100000 --output_prefix ALL.pixy > /dev/null 2>&1
-cat ${OUTDIR}/ALL.pixy_pi.txt
+# Set your window size higher, e.g., 10kb
+vcftools --gzvcf $VCF --window-pi 1000 --out $OUT 2> /dev/null
 ```
 
+::: {.callout-note collapse=true}
+
+#### On genome scans and window sizes
+
+Genetic diversity estimates can be noisy, so we often want to compute
+values in sliding windows across a sequence. Choosing window size can
+be as simple as trying out different values, often ranging from single
+to several hundred kilobases. As always, the appropriate size depends
+on the analyses.
+
+One rule of thumb that can be applied is that the window size should
+be larger than the genomic background of linkage disequilibrium (LD).
+Recall, LD is the non-random co-segregation of alleles at two or more
+loci. Linked loci will induce correlations in window-based statistics,
+so by choosing a window size larger than the LD background, we ensure
+that our windows are, in some sense, independent.
+
+For this reason, a common approach is to calculate some measure of LD
+between marker pairs, and generate a plot of LD decay. This is outside
+the scope of this exercise, but the interested reader can consult the
+[plink](https://www.cog-genomics.org/plink2/) documentation for ways
+to do this. See also @fig-ld-decay-fuller for an example plot.
+
+:::{.column-margin}
+
+<!-- markdownlint-disable MD013 -->
+
+![Properties of genetic variation and inferred demographic history in
+sampled *A. millepora*. @fuller_PopulationGeneticsCoral_2020,
+Figure 2. Upper left plot illustrates LD as a function of physical
+distance. Here, choosing a window size 20-30kb would ensure that most
+windows are independent.](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){#fig-ld-decay-fuller}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+:::
+
+Even though single point summary statistics can be informative, we can
+get an overview of the distribution over the chromosome by plotting:
+
+```{bash }
+#| label: 01-vcftools-window-pi-plot
+#| echo: true
+#| eval: true
+csvtk plot line --tabs $OUT.windowed.pi -x BIN_START -y PI \
+   --point-size 0.01 --xlab "Position (bp)" \
+   --ylab "Diversity" --title LG4 --width 9.0 --height 3.5 \
+   > $OUT.png
+```
+
+::: {#fig-01-vcftools-window-pi attr-output='.details summary="Output"'}
+
+![](01-vcftools/allsites.png)
+
+Nucleotide diversity across LG4 for all populations.
+
+:::
+
+@fig-01-vcftools-window-pi shows the diversity for all populations. We
+would also be interested in *comparing* the diversity for *different*
+populations. This can be achieved by passing a population file to
+`bcftools view` and piping (`|`) the output to `vcftools`:
+
+```{bash }
+#| label: bcftools-to-vcftools
+#| echo: true
+#| eval: true
+bcftools view -S PAR.txt $VCF |\
+ vcftools --vcf - --window-pi 1000 --out $OUT.PAR 2> /dev/null
+bcftools view -S ARI.txt $VCF |\
+ vcftools --vcf - --window-pi 1000 --out $OUT.ARI 2> /dev/null
+```
+
+With some `csvtk` magic we can combine the measures and plot:
+
+```{bash }
+#| label: csvtk-plot-ari-par
+#| echo: true
+#| eval: true
+# When assigning a constant
+csvtk mutate2 --tabs --name Population --expression " 'ARI' " \
+   $OUT.ARI.windowed.pi > $OUT.ARI.wpi
+csvtk mutate2 --tabs --name Population --expression " 'PAR' " \
+   $OUT.PAR.windowed.pi > $OUT.PAR.wpi
+csvtk concat --tabs $OUT.ARI.wpi $OUT.PAR.wpi |\
+ csvtk plot --tabs line - -x BIN_START -y PI \
+    --group-field Population \
+    --point-size 0.01 --xlab "Position (bp)" \
+    --ylab "Diversity" --title "LG4:PAR and ARI" \
+    --width 9.0 --height 3.5 \
+    > $OUT.ARI.PAR.png 2>/dev/null
+```
+
+::: {#fig-01-vcftools-window-pi-ARI-PAR attr-output='.details summary="Output"'}
+
+![](01-vcftools/allsites.ARI.PAR.png)
+
+Nucleotide diversity across LG4 comparing populations ARI and PAR.
+
+:::
+
+#### $F_{ST}$
+
+Since $F_{ST}$ is a statistic that compares populations, we must
+supply two or more of the population files we defined above. A
+population file name is passed to the `--weir-fst-pop` option.
+Calculations are done by site per default, but let's calculate
+$F_{ST}$ for a comparison of two populations in 100kb windows:
+
+```{bash }
+#| label: 01-vcftools-fst
+#| echo: true
+#| eval: true
+#| results: hide
+# Set your window size higher, e.g., 100000
+vcftools --gzvcf $VCF --weir-fst-pop ARI.txt \
+   --weir-fst-pop PAR.txt \
+   --fst-window-size 1000 \
+   --out $OUT.ARI-PAR
+```
+
+```{bash }
+#| label: 01-vcftools-fst-plot
+#| echo: true
+#| eval: true
+csvtk plot line --tabs $OUT.ARI-PAR.windowed.weir.fst \
+   -x BIN_START -y MEAN_FST \
+   --point-size 0.01 --xlab "Position (bp)" \
+   --ylab "Fst" --title "LG4:ARI vs PAR" \
+   --width 9.0 --height 3.5 \
+   > $OUT.ARI-PAR.windowed.weir.fst.mean.png
+```
+
+::: {#fig-01-vcftools-fst attr-output='.details summary="Output"'}
+
+![](01-vcftools/allsites.ARI-PAR.windowed.weir.fst.mean.png)
+
+Mean $F_{ST}$ across LG4, comparing ARI and PAR populations.
+
+:::
+
+### Compiling statistics with pixy
+
+The vcftools statistics that we just calculated have a couple of
+issues:
+
+1. they have been calculated on unfiltered data; this can be somewhat
+   remediated by applying a depth-based filter
+2. a more concerning problem is that even if we did apply a filter,
+   all missing sites would be treated as invariant sites, when in
+   reality the windows would need to be adjusted to the number of
+   accessible sites within a window. This number could be calculated
+   from a mask file, but adds some complexity to the calculations.
+
+Instead of applying filters, let's first try out an alternative
+solution. [pixy](https://pixy.readthedocs.io/en/latest/about.html) is
+a program that facilitates the calculation of nucleotide diversity
+within $\pi$ and between $d_{XY}$ populations from a VCF, as well as
+differentiation ($F_{ST}$). It also takes invariant sites and missing
+data into consideration. Another nice feature is that by providing a
+population file with all samples, every population comparison is done
+on the fly, so only one run is needed!
+
+Calculating per-site statistics takes too long time, so we will only
+generate windowed output here. This may still take a couple of minutes
+though.
+
+```{bash }
+#| label: 02-pixy
+#| echo: true
+#| eval: true
+#| results: hide
+mkdir -p 02-pixy
+# Set your window size higher, e.g., 100kb
+pixy --stats pi fst dxy \
+  --vcf $VCF \
+  --populations populations.txt \
+  --window_size 1000 \
+  --output_folder 02-pixy \
+  --n_cores 4
+```
+
+```{bash }
+#| label: 02-pixy-pi-head
+#| echo: true
+#| eval: true
+head -n 3 02-pixy/pixy_pi.txt
+```
+
+For windowed output, the pixy output files contain information on the
+windows, the number of missing sites, number of snps, and more. The
+first column corresponds to the population, which means we can easily
+select lines matching population(s) of interest. For a full
+description, consult the
+[documentation](https://pixy.readthedocs.io/en/latest/output.html).
+Note that because we provided a population file defining two
+populations, diversity is calculated per population.
+
+We conclude by plotting diversity for ARI and PAR
+
+```{bash }
+#| label: 02-pixy-pi-plot-ari-par
+#| echo: true
+#| eval: true
+#| results: hide
+# Possibly remove NA values that otherwise would throw error
+csvtk filter2 --tabs \
+   --filter '$avg_pi != "NA" && ($pop == "ARI" || $pop == "PAR") ' \
+   02-pixy/pixy_pi.txt | \
+ csvtk plot line --tabs - -x window_pos_1 -y avg_pi \
+    --group-field pop \
+    --point-size 0.01 --xlab "Position (bp)" \
+    --ylab "Diversity" --title "LG4:ARI and PAR" \
+ --width 9.0 --height 3.5 \
+    > 02-pixy/pixy_pi.ARI-PAR.txt.png
+```
+
+::: {#fig-02-pixy-fst attr-output='.details summary="Output"'}
+
+![](02-pixy/pixy_pi.ARI-PAR.txt.png)
+
+Mean diversity across LG4 for ARI and PAR.
+
+:::
+
+and $F_{ST}$ comparing ARI and PAR
+
+```{bash }
+#| label: 02-pixy-fst-plot-ari-par
+#| echo: true
+#| eval: true
+csvtk filter2 --tabs \
+   --filter '$avg_wc_fst != "NA" && $pop1 == "PAR" && $pop2 == "ARI" ' \
+   02-pixy/pixy_fst.txt | \
+ csvtk plot line -t - -x window_pos_1 -y avg_wc_fst \
+    --point-size 0.01 --xlab "Position (bp)" \
+    --ylab "Fst" --title "LG4:ARI vs PAR" --width 9.0 --height 3.5 \
+    > 02-pixy/pixy_fst.ARI-PAR.txt.png
+```
+
+::: {#fig-02-pixy-fst-ARI-PAR attr-output='.details summary="Output"'}
+
+![](02-pixy/pixy_fst.ARI-PAR.txt.png)
+
+Mean $F_{ST}$ across LG4 for ARI vs PAR.
+
+:::
+
+Comparing @fig-02-pixy-fst-ARI-PAR to @fig-01-vcftools-fst shows a
+stark contrast, so clearly, how you filter and handle
+invariant/missing data will strongly affect the outcome.
+
+::: {.callout-exercise}
+
+#### OPTIONAL: Apply filters to pixy and vcftools output and compare
+
+Generate depth filters, utilizing the knowledge from the variant
+filtering lab, and apply them to the VCF file. Rerun a couple of pixy
+and vcftools stats to see how it affects the outcome.
+
+::: {.callout-hint}
+
+FIXME: add filter values and command here
+
+:::
+
+:::
+
+## Genome scans
+
+### Working with Z-transformed data
+
+## Monkeyflower diversity landscape
+
+Drawing on what you learned earlier today about filtering, and with
+the help of the command examples above, you can now start exploring
+the Monkeyflower diversity landscape. Try different population
+comparisons, perform outlier analyses, and see if you can find
+candidate regions of interest. If you want inspiration, take a look at
+the methods section of @stankowski_WidespreadSelectionGene_2019.
+
+To get you started, here are some exercise templates:
+
+::: {.callout-exercise}
+
+#### Apply depth filter to VCF
+
+Start by applying a depth filter to the VCF.
+
+:::
+
 :::{.hidden}
 
-Compare pixy with vcftools to show that filtering is important
+### Reconciling results with filters
 
-FIXME: comparison of pixy and coverage-based filtering approach
+Show how we can reconcile results? After all, pixy cannot be used for
+species that lack variant sites
 
-:::
+### Genome scan with vcftools
 
-::: {.hidden}
+Since pixy takes care of everything, run Tajima's with vcftools?
 
-- use sequence masks (0/1) encoded gz files to enable quick
-  calculations of feature-based stats (e.g. 4d-degenerate sites)
-- use pixy to compare to vcf with all sites present
+### Outlier analyses
 
-:::
+Must introduce Z-transformed stats and explain; hopefully region in
+paper shows up
 
-### Effect of mask files
+### Genic structure
 
-Calculate pi, Fst and dxy for:
+Show an example of bed file
 
-- all sites unfiltered
-- all sites filtered
-- all sites variant mask
-
-### Combining masks with genome features
-
-:::{.hidden}
-
-Combine / provide gff features (better to generate from gff), combine
-with coverage mask to get, e.g., gene / exon / intron measures
-
-:::
-
-## Windowed statistics and genome scans
-
-::: {.hidden}
-
-Windows and genome scans. Provide toolkit to work with data. Goal:
-prepare students for the problem of finding the region of interest.
-
-Calculate pi, Fst and dxy for:
-
-- all sites unfiltered
-- all sites filtered
-- all sites variant mask
-
-Compare
-
-Need some custom function to summarize over windows unfortunately;
-show that vcftools gets it wrong
-
-### Visualising data
-
-Make plots over genome
-
-### Finding significant peaks
-
-Show how an outlier analysis could be done
-
-## Data exploration
-
-Given the tools above, let the students play around with the data. See
-if they can find a contrast that highlights adaptation. Also, urge
-them to compile genomic landscape. Provide little instructions.
-
-## Simulation
-
-Final touch: add msprime / slim simulation to compare with observed
-landscape somehow
+## Investigations
 
 :::
