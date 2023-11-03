@@ -130,10 +130,10 @@ exercises/variant_filtering:
 exercises/genetic_diversity:
   - __sampleinfo__
   - __reference__
-  - variantsites.vcf.gz: monkeyflower/small/redyellow.variantsites.vcf.gz
-  - variantsites.vcf.gz.tbi: monkeyflower/small/redyellow.variantsites.vcf.gz.tbi
-  - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
-  - allsites.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi
+  - variantsites.vcf.gz: monkeyflower/small/all.variantsites.vcf.gz
+  - variantsites.vcf.gz.tbi: monkeyflower/small/all.variantsites.vcf.gz.tbi
+  - allsites.vcf.gz: monkeyflower/tiny/all.allsites.vcf.gz
+  - allsites.vcf.gz.tbi: monkeyflower/tiny/all.allsites.vcf.gz.tbi
 
 slides/foundations:
   - data/Homo_sapiens: Homo_sapiens
