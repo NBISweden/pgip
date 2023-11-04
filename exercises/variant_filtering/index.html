@@ -329,11 +329,8 @@ div.csl-indent {
   </div>
 </li>
           <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../exercises/population_structure/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Population structure</span></a>
-  </div>
-</li>
+ <span class="menu-text">exercises/population_structure/index.qmd</span>
+  </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/demography/index.html" class="sidebar-item-text sidebar-link">
@@ -428,7 +425,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">03-Nov-2023</p>
+      <p class="date">04-Nov-2023</p>
     </div>
   </div>
   
@@ -668,7 +665,7 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats variantsites.subset.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"number of records:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SN  0   number of records:  102594</code></pre>
+<pre><code>SN  0   number of records:  102671</code></pre>
 </div>
 </div>
 <p>The <code>-r</code> parameter sets the <em>rate</em> of sampling which is why we get <em>approximately</em> 100,000 sites. You will need to adjust this parameter accordingly.</p>
@@ -688,18 +685,18 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> MEAN_DEPTH:mean <span class="va">${OUT}</span>.idepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_SITES MEAN_DEPTH
-PUN-R-ELF   102398  8.5663
-PUN-R-JMC   102400  9.52105
-PUN-R-LH    102433  9.25254
-PUN-R-MT    102389  9.40371
-PUN-R-UCSD  102476  8.89583
-PUN-Y-BCRD  102393  9.88377
-PUN-Y-INJ   102346  8.23261
-PUN-Y-LO    102351  7.803
-PUN-Y-PCT   102339  9.14782
-PUN-Y-POTR  102311  8.50095
+PUN-R-ELF   102491  8.56185
+PUN-R-JMC   102466  9.53679
+PUN-R-LH    102501  9.28071
+PUN-R-MT    102469  9.47234
+PUN-R-UCSD  102546  8.93438
+PUN-Y-BCRD  102467  9.95467
+PUN-Y-INJ   102443  8.19653
+PUN-Y-LO    102429  7.8115
+PUN-Y-PCT   102423  9.21892
+PUN-Y-POTR  102389  8.4786
 MEAN_DEPTH:mean
-8.92</code></pre>
+8.94</code></pre>
 </div>
 </div>
 <p>The average coverage over all samples is 8.9X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
@@ -710,7 +707,7 @@ MEAN_DEPTH:mean
 <div class="cell-output cell-output-stdout">
 <pre><code>CHROM   POS SUM_DEPTH   SUMSQ_DEPTH
 LG4 2105    9   23
-LG4 2139    12  26</code></pre>
+LG4 2130    11  21</code></pre>
 </div>
 </div>
 <p>So, for each position, we have a value (column <code>SUM_DEPTH</code>) for the total depth across all samples.</p>
@@ -751,7 +748,7 @@ On csvtk as plotting software
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> 3:min,3:q1,3:median,3:mean,3:q3,3:max,3:stdev vcftools/variantsites.subset.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SUM_DEPTH:min   SUM_DEPTH:q1    SUM_DEPTH:median    SUM_DEPTH:mean  SUM_DEPTH:q3    SUM_DEPTH:max   SUM_DEPTH:stdev
-1.00    55.00   72.00   89.03   88.00   33988.00    241.25</code></pre>
+1.00    55.00   72.00   89.27   88.00   33988.00    249.26</code></pre>
 </div>
 </div>
 <p>The range from the first quartile (<code>q1</code>) to the third (<code>q3</code>) is 55-88, showing most sites have a depth between 50-100X. We redraw the plot to zoom in on the peak:</p>
@@ -770,7 +767,7 @@ On csvtk as plotting software
 <div class="cell-output cell-output-stdout">
 <pre><code>CHROM   POS MEAN_DEPTH  VAR_DEPTH
 LG4 2105    0.9 1.65556
-LG4 2139    1.2 1.28889</code></pre>
+LG4 2130    1.1 0.988889</code></pre>
 </div>
 </div>
 </section><section id="variant-quality-distribution" class="level4"><h4 class="anchored" data-anchor-id="variant-quality-distribution">Variant quality distribution</h4>
@@ -805,7 +802,7 @@ LG4 2139    1.2 1.28889</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>CHROM   POS N_ALLELES   N_CHR   {FREQ}
 LG4 2105    2   4   0   1
-LG4 2139    2   8   0.25    0.75</code></pre>
+LG4 2130    2   14  0.857143    0.142857</code></pre>
 </div>
 </div>
 <p>The last two columns are frequencies ordered according to the reference allele. Therefore, we need to pick the minimum value to get the MAF. We can use <code>csvtk mutate</code> to create a new column</p>
@@ -834,8 +831,8 @@ LG4 2139    2   8   0.25    0.75</code></pre>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.imiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
-PUN-R-ELF   102594  0   6896    0.0672164
-PUN-R-JMC   102594  0   6506    0.063415</code></pre>
+PUN-R-ELF   102671  0   6962    0.0678088
+PUN-R-JMC   102671  0   6603    0.0643122</code></pre>
 </div>
 </div>
 <p>and look at the results, focusing on the <code>F_MISS</code> column (proportion missing sites):</p>
@@ -857,7 +854,7 @@ PUN-R-JMC   102594  0   6506    0.063415</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>CHR POS N_DATA  N_GENOTYPE_FILTERED N_MISS  F_MISS
 LG4 2105    20  0   16  0.8
-LG4 2139    20  0   12  0.6</code></pre>
+LG4 2130    20  0   6   0.3</code></pre>
 </div>
 </div>
 <p>and plot to get an idea of if there are sites that lack data.</p>
@@ -887,16 +884,16 @@ LG4 2139    20  0   12  0.6</code></pre>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.het</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   72221   65365.5 87051   0.31613
-PUN-R-JMC   67942   65584.5 87302   0.10855
-PUN-R-LH    70633   65801.0 87578   0.22189
-PUN-R-MT    69596   65478.2 87101   0.19044
-PUN-R-UCSD  74410   65316.6 87238   0.41482
-PUN-Y-BCRD  69084   64665.1 85980   0.20731
-PUN-Y-INJ   70991   63915.6 84789   0.33897
-PUN-Y-LO    72509   63108.1 84122   0.44736
-PUN-Y-PCT   74269   64259.0 85714   0.46656
-PUN-Y-POTR  71478   64308.4 85536   0.33775</code></pre>
+PUN-R-ELF   72254   65392.2 87059   0.31670
+PUN-R-JMC   68120   65611.6 87296   0.11568
+PUN-R-LH    70643   65844.7 87606   0.22050
+PUN-R-MT    69677   65566.6 87194   0.19006
+PUN-R-UCSD  74406   65343.0 87244   0.41382
+PUN-Y-BCRD  69203   64725.9 86040   0.21005
+PUN-Y-INJ   70990   63902.1 84735   0.34023
+PUN-Y-LO    72585   63151.3 84157   0.44910
+PUN-Y-PCT   74288   64265.6 85679   0.46804
+PUN-Y-POTR  71452   64335.1 85541   0.33561</code></pre>
 </div>
 </div>
 <p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, which you can verify by substituting the variables in the output.</p>
@@ -951,11 +948,11 @@ Answer
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--het</span> <span class="at">--stdout</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   41685   37641.9 56515   0.21422
-PUN-R-JMC   37292   37734.4 56652   -0.02339
-PUN-R-LH    39835   37842.1 56780   0.10524
-PUN-R-MT    38773   37551.5 56278   0.06523
-PUN-R-UCSD  43528   37440.4 56356   0.32183</code></pre>
+PUN-R-ELF   41631   37597.3 56436   0.21412
+PUN-R-JMC   37402   37690.3 56578   -0.01527
+PUN-R-LH    39725   37787.3 56688   0.10252
+PUN-R-MT    38755   37544.5 56272   0.06464
+PUN-R-UCSD  43430   37384.7 56268   0.32014</code></pre>
 </div>
 </div>
 </div>
@@ -991,14 +988,14 @@ PUN-R-UCSD  43528   37440.4 56356   0.32183</code></pre>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="va">$OUTVCF</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  37700
+SN  0   number of records:  37645
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 37509
+SN  0   number of SNPs: 37448
 SN  0   number of MNPs: 0
 SN  0   number of indels:   0
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1629
-SN  0   number of multiallelic SNP sites:   674</code></pre>
+SN  0   number of multiallelic sites:   1636
+SN  0   number of multiallelic SNP sites:   688</code></pre>
 </div>
 </div>
 <p>Quite a substantial portion variants have in fact been removed, which here can most likely be attributed to the low average sequencing coverage.</p>
@@ -2161,7 +2158,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 </body></html>

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nikolay Oskolkov">
 
-<title>DDLS Population genomics in practice - Population structure</title>
+<title>DDLS Population genomics in practice - PCA and MDS for population genetics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,8 +41,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,6 +64,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -144,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../../exercises/population_structure/index.html">Population structure</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">PCA and MDS for population genetics</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -290,11 +294,8 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
           <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../exercises/population_structure/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Population structure</span></a>
-  </div>
-</li>
+ <span class="menu-text">exercises/population_structure/index.qmd</span>
+  </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/demography/index.html" class="sidebar-item-text sidebar-link">
@@ -332,14 +333,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#principal-component-analysis-pca-and-multidimensional-scaling-mds" id="toc-principal-component-analysis-pca-and-multidimensional-scaling-mds" class="nav-link active" data-scroll-target="#principal-component-analysis-pca-and-multidimensional-scaling-mds">Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</a>
+  <ul class="collapse">
+  <li><a href="#pca-for-population-genetics" id="toc-pca-for-population-genetics" class="nav-link" data-scroll-target="#pca-for-population-genetics">PCA for population genetics</a></li>
+  <li><a href="#mds-for-population-genetics" id="toc-mds-for-population-genetics" class="nav-link" data-scroll-target="#mds-for-population-genetics">MDS for population genetics</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Population structure</h1>
+<h1 class="title">PCA and MDS for population genetics</h1>
 </div>
 
 
@@ -356,7 +367,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">03-Nov-2023</p>
+      <p class="date">04-Nov-2023</p>
     </div>
   </div>
   
@@ -366,111 +377,162 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="principal-component-analysis-pca-and-multidimensional-scaling-mds" class="level1">
+<h1>Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</h1>
+<p>In this notebook, we will learn similarities and differences between PCA and MDS and compute both of them from scratch.</p>
+<section id="pca-for-population-genetics" class="level2">
+<h2 class="anchored" data-anchor-id="pca-for-population-genetics">PCA for population genetics</h2>
+<p>PCA is a matrix factorization (eigen value decomposition) problem that attempts to project the data into a low dimensional space that explains the largest amount of variance in the data. The motivation is that, if the data is high-dimensional, many features (axes) can be redundant, therefore one can reduce the number of dimensions and make the statistical analysis more robust in this way. Graphically, PCA can be viewed as rotation and shift of coordinate system where the original 2D data with XY-coordinates are replaced by e.g.&nbsp;1D data as PC1 which keeps most of the variation in the data. Note, that some information can be lost in this way, however, it can be statistically very benificial to work with lower-dimensional data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/pca_rotation.png" class="lightbox" title="idea of PCA" data-gallery="quarto-lightbox-gallery-1"><img src="assets/pca_rotation.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">idea of PCA</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-<i class="fa-solid fa-laptop" aria-label="laptop"></i> Jupyter compute environment setup
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>If you haven’t already done so, please read <a href="../../exercises/compute_environment/index.html">Compute environment</a> for information on how to prepare your working directory.</p>
-<p>This is a Jupyter Notebook exercise. See the <a href="../../exercises/compute_environment/index.html#sec-compute-environment-conda">Conda</a> section on how to install conda.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning objectives
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-
+<p>In population genetics, we typically work with genetic variation (genotype) data encoded as 0, 1 and 2 by the number of minor allele carrier in the sample. Let us generate a toy genotype matrix for 5 individuals and 7 genetic variants.</p>
+<div class="cell" data-kernel="R" data-execution_count="1">
+<pre class="sos cell-code"><code>gen &lt;- t(matrix(c(1, 0, 2, 0, 2, 0, 2, 1, 1, 1, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1, 0, 1, 0, 2, 0, 1, 1, 0, 2, 1, 2, 0, 1, 0), 5, by = TRUE))
+colnames(gen) &lt;- paste0("Ind", 1:5)
+rownames(gen) &lt;- paste0("SNP", 1:7)
+print(gen)</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
+SNP1    1    1    1    0    0
+SNP2    0    1    2    1    2
+SNP3    2    1    1    0    1
+SNP4    0    0    1    2    2
+SNP5    2    1    1    0    0
+SNP6    0    0    1    1    1
+SNP7    2    2    1    1    0</code></pre>
 </div>
 </div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Data setup
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Local</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tools
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Listing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Conda</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Now we are going to compute PCA from scratch in R. The PCA algorithm includes three steps:</p>
 <ul>
-<li><a href="https://jupyter.org/">Jupyter</a></li>
+<li>mean centering the data</li>
+<li>computing variance-covariance matrix</li>
+<li>performing eigen value decomposition on the variance-covariance matrix</li>
 </ul>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you have successfully setup the <a href="../../exercises/compute_environment/index.html#sec-compute-environment-conda"><code>pgip</code> environment</a>, this step is not required.</p>
-</div>
-</div>
-<p>Copy the contents to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
-<pre lang="text"><code>channels:
-  - conda-forge
-  - bioconda
-  - default
-dependencies:
-  - jupyter</code></pre>
+<p>Below, we will implement the three steps with repsect to the genotype matrix, and display the fraction of variance explained by each principal component.</p>
+<div class="cell" data-kernel="R" data-execution_count="2">
+<pre class="sos cell-code"><code>gen_centered &lt;- scale(gen, center = TRUE, scale = FALSE) # mean centering
+covariance &lt;- t(gen_centered) %*% gen_centered # computing variance-covariance matrix
+eig &lt;- eigen(covariance) # performing eigen value decomposition of the variance-covariance matrix
+
+barplot(eig$values / sum(eig$values), names = paste0("PC", 1:5))</code></pre>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="pca_mds_toy_example_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="pca_mds_toy_example_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
 </div>
 </div>
 </div>
+<p>From the barplot above we can conclude that PC1 explains most of the variation (approximately 70%) in the genotype data, while the other PCs explain limited amount of variation, therefore one can say that our original 7-dimensional data is essentially 1-dimensional, or can be approximated with only <strong>one dimension</strong> with good accuracy. In this way we <strong>dramatically reduced dimensionality of the data</strong> from seven to one. Finally, let us visualize the 5 generated samples in two-dimensional space, i.e.&nbsp;using the leading PC1 and PC2 variables.</p>
+<div class="cell" data-kernel="R" data-execution_count="3">
+<pre class="sos cell-code"><code>plot(eig$vectors[, 1:2], xlab = "PC1", ylab = "PC2", pch = 16, cex = 5, col = 2:6)
+points(eig$vectors[, 1:2], pch = as.character(1:5))</code></pre>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="pca_mds_toy_example_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="pca_mds_toy_example_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
 </div>
 </div>
 </div>
+</section>
+<section id="mds-for-population-genetics" class="level2">
+<h2 class="anchored" data-anchor-id="mds-for-population-genetics">MDS for population genetics</h2>
+<p>Multidimensional Scaling (MDS) is very closely related to PCA and sometimes used as a synonim. The idea of MDS is to project the data into a low dimensional space and preserve pairwise distances between data points as much as possible. Under the hood this is done by solving eigen value decomposition problem for a matrix of paiwise distances. Compare with PCA, where we did eigen value decomposition of a variance-covariance matrix, the latter can be sometimes viewed as a pairwise distance matrix. This is how MDS is related to PCA. Both do eigen value decomposition of some sort of matrix of pairwise distances. Note, some implementation of MDS do not perform eigen value decomposition but instead do a gradient descent minimization of <strong>euclidean distance between the original data and an approximation as a product of two matrices (loadings and scores)</strong>. This represents an alternative, machine learning style of matrix factorization.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/mds.png" class="lightbox" title="machine learning idea of MDS" data-gallery="quarto-lightbox-gallery-4"><img src="assets/mds.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">machine learning idea of MDS</figcaption>
+</figure>
+</div>
+<p>Below, we will use the same genotype matrix as for PCA, and compute Manhattan distances between all pairs of data points, which is the sum of absolute values of pairwise genotype differences.</p>
+<div class="cell" data-kernel="R" data-execution_count="4">
+<pre class="sos cell-code"><code>gen &lt;- t(matrix(c(1, 0, 2, 0, 2, 0, 2, 1, 1, 1, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1,
+    0, 1, 0, 2, 0, 1, 1, 0, 2, 1, 2, 0, 1, 0), 5, by = TRUE))
+colnames(gen) &lt;- paste0("Ind", 1:5)
+rownames(gen) &lt;- paste0("SNP", 1:7)
+print(gen)</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
+SNP1    1    1    1    0    0
+SNP2    0    1    2    1    2
+SNP3    2    1    1    0    1
+SNP4    0    0    1    2    2
+SNP5    2    1    1    0    0
+SNP6    0    0    1    1    1
+SNP7    2    2    1    1    0</code></pre>
+</div>
+</div>
+<div class="cell" data-kernel="R" data-execution_count="5">
+<pre class="sos cell-code"><code>my_dist &lt;- dist(t(gen), method = "manhattan", upper = TRUE, diag = TRUE)
+my_dist</code></pre>
+<div class="cell-output cell-output-display">
+<pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
+Ind1    0    3    7   10   11
+Ind2    3    0    4    7    8
+Ind3    7    4    0    5    4
+Ind4   10    7    5    0    3
+Ind5   11    8    4    3    0</code></pre>
+</div>
+</div>
+<p>Here, we can see that the Manhattan distance between for example individuals one and two is equal to 3 because there are three genotype differences at SNP2, SNP3 and SNP5. Now, we will use the <strong>cmdscale</strong> function in R that performs the classic / metric MDS. Under the hood this function does an eigen value decomposition of the matrix of pairwise Manhattan distances.</p>
+<div class="cell" data-kernel="R" data-execution_count="6">
+<pre class="sos cell-code"><code>my_mds &lt;- cmdscale(my_dist)
+my_mds</code></pre>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 5 × 2 of type dbl</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">Ind1</td>
+<td>-6.114866</td>
+<td>0.2977272</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">Ind2</td>
+<td>-3.077094</td>
+<td>0.2402932</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">Ind3</td>
+<td>0.621230</td>
+<td>-1.7944048</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">Ind4</td>
+<td>3.723118</td>
+<td>2.1483083</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">Ind5</td>
+<td>4.847612</td>
+<td>-0.8919238</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Please take a look at the first latent variable in <strong>my_mds</strong>. Interestengly, if you look at the absolute value of the difference between e.g.&nbsp;individuals 1 and 2, it will be close to 3, between individuals 1 and 3 will be nearly 7 etc. This corresponds to the values in the pairwise Manhattan distances in the <strong>my_dist</strong> matrix above. Therefore, as it was emphasized previously, the point of MDS is to preserve pairwise distances while doing dimension reduction. Finally, let us visualize the 5 individuals in the MDS space and compare it with PCA.</p>
+<div class="cell" data-kernel="R" data-execution_count="7">
+<pre class="sos cell-code"><code>plot(my_mds, xlab = "MDS1", ylab = "MDS2", pch = 16, cex = 5, col = 6:2)
+points(my_mds, pch = as.character(5:1))</code></pre>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="pca_mds_toy_example_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="pca_mds_toy_example_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Overall, this picture looks quite similar to the PCA plot above. This is not suprising since both PCA and MDS are based on very similar principles, and typically agree with each other for real-world datasets.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -716,6 +778,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 
