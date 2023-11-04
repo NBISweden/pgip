@@ -19,6 +19,10 @@ to prepare your working directory.
 
 ## Learning objectives
 
+- Perform basic ANGSD commands and analyses
+- Look and interpret SFS plots
+
+
 :::
 
 ::: {.callout-note collapse=true}
@@ -27,9 +31,44 @@ to prepare your working directory.
 
 :::{.panel-tabset}
 
-#### UPPMAX
+#### {{< fa server >}} UPPMAX
 
-#### Local
+<!-- markdownlint-disable MD038 -->
+
+Move to your course working directory `/proj/{{< var uppmaxproject
+>}}/users/USERNAME`, create an exercise directory called
+`demography` and `cd` to it:
+
+<!-- markdownlint-enable MD038 -->
+
+```bash
+cd /proj/{{< var uppmaxproject >}}/users/USERNAME
+mkdir -p demography
+cd demography
+```
+
+You will run most analyses on Rackham, so just go to your directory to start.
+
+
+#### {{< fa laptop >}} Local
+
+You will run R, either via `R Studio` or on the command line, you can choose.
+
+I recommend downloading the `Rmd` file that has all the instructions for this exercise and all the R code necessary to generate the plots we want to see today.
+
+Just download it from `{{< var webexport.url
+>}}/demography/demography.Rmd` with `wget`^[The password is provided
+by the course instructor]:
+
+```bash
+wget --user pgip --password PASSWORD {{< var webexport.url >}}/demography/demography.Rmd
+```
+
+:::
+
+:::
+
+::: {.callout-note collapse=true}
 
 :::
 
@@ -41,36 +80,265 @@ to prepare your working directory.
 
 :::{.panel-tabset}
 
-#### Listing
-
-- [psmc](https://github.com/lh3/psmc) [@li_InferenceHumanPopulation_2011]
-
 #### UPPMAX modules
 
-Execute the following command to load modules:
+Everything you need is on Uppmax. Execute the following command to load modules:
 
 ```{bash }
 #| label: uppmax-load-modules
 #| echo: true
 #| eval: false
-module load uppmax bioinfo-tools \
-    psmc/0.6.5-r67-e5f7df5
+module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib
 ```
 
-#### Conda
-
-Copy the contents to a file `environment.yml` and install packages
-with `mamba env update -f environment.yml`.
-
-```{lang="text" }
-channels:
-  - conda-forge
-  - bioconda
-  - default
-dependencies:
-  - psmc
-```
 
 :::
 
 :::
+
+
+
+## Practical information
+
+This exercise is divided into two parts. The first part will happen on Rackham. All the files you need are located here: ```/proj/naiss2023-22-1084/private/demography```. The second part will happen inside R Studio locally.
+
+We will be using ANGSD (https://github.com/ANGSD/angsd).
+
+What has been prepared for you: 
+- Dataset. Data from 3 human populations (TSI, PEL and LWK).
+- You are also being provided with files with the extension `*.filelist`. These files contain a list with all the BAM files needed for this exercise.
+
+You have two options now:
+1) Create a bash script and submit to SLURM;
+2) Start an Interactive session on Rackham and run manually each step.
+I recommend this option for *today*.
+
+How to start interactive mode on Rackham:
+
+```         
+interactive -A naiss2023-22-1084 -t 4:00:00 -n 10
+```
+
+You need to load all modules on Rackham so you don't have to worry about
+installing each program that we will need in this exercise.
+
+```         
+module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib
+```
+
+## First steps
+
+### Calculate allele frequencies
+
+You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist`).
+
+Just run:
+
+```         
+angsd -b ALL.bamlist -GL 2 -doMajorMinor 1 -doMaf 2 -minMapQ 30 -minQ 20 -nThreads 10
+```
+
+```         
+-b = your file with your BAM files list
+-GL 2 = This will calculate the genotype likelihood for you. "2" means it will use the same method as GATK. If you use -GL 1 it will use the same method as Samtools.
+-doMajorMinor 1 = Many methods assume that each site is diallelic, so this option will use the genotype likelihood to infer the major and minor alleles.
+-doMaf 2 = It will use the inferred major alleles, but it does not assume known minor alleles.
+-minMapQ 30 = mapping quality filter
+-minQ 20 = base quality filter
+-nThreads 10 = will use 10 threads (cores) to perform all calculations.
+```
+
+The output will be `angsdput.mafs.gz`.
+
+Take a look inside the results file. This file is formatted such as:
+```
+chromo  position        major   minor   unknownEM       nInd
+11      61005493        C       A       0.000006        1
+11      61005494        A       C       0.000006        1
+11      61005495        C       A       0.000006        1
+11      61005496        G       A       0.000006        1
+11      61005497        G       A       0.000006        1
+11      61005498        T       A       0.000006        1
+11      61005499        A       C       0.000006        1
+11      61005500        C       A       0.000006        1
+11      61005501        A       C       0.000006        1
+```
+
+```
+chromo = chromosome name
+position = position…
+major = major allele
+minor = minor allele
+knownEM = frequency using -doMaf1
+unknownEM = frequency using -doMaf2
+pK-EM = p-value for the frequency of the minor allele
+nInd = Number of individuals with data
+```
+
+### Generate the genotype likelihood files
+
+You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist`).
+
+Just run:
+
+```         
+angsd -GL 2 -doGlf 2 -b ALL.bamlist -doMajorMinor 1 -SNP_pval 1e-6 -doMaf 1 -nThreads 10
+```
+
+```         
+-doGlf 2 = will create the beagle likelihood file
+-SNP_pval = it will use 10^-6 as a p-value for the LRT to calculate which sites are polymorphic.
+```
+
+The output will be `angsdput.mafs.gz` and `angsdput.beagle.gz`
+
+You already know what's inside the mafs.gz file, but let's take a look inside the Beagle format:
+```
+marker  allele1 allele2 Ind0    Ind0    Ind0    Ind1    Ind1    Ind1    Ind2    Ind2    Ind2    Ind3    Ind3    Ind3    Ind4    Ind4    Ind4    Ind5    Ind5    Ind5    Ind6    Ind6    Ind6    Ind7    Ind7    Ind7    Ind8    Ind8    Ind8    Ind9    Ind9    Ind9
+1_14000202      2       0       0.000532        0.999468        0.000000        0.333333        0.333333        0.333333        0.333333        0.333333        0.333333        0.666490        0.333333        0.000177        0.333333        0.333333        0.333333        0.002660        0.997340        0.000001        0.799744        0.200255        0.000000        0.000842        0.999157        0.000001        0.888820        0.111180        0.000000        0.799988        0.200012        0.000000
+1_14000873      2       0       0.000000        0.030324        0.969676        0.663107        0.333333        0.003560        0.888698        0.111302        0.000000        0.992114        0.007886        0.000000        0.999013        0.000987        0.000000        0.000009        0.991658        0.008334        0.888726        0.111274        0.000000        0.799696        0.200303        0.000001        0.000000        0.030330        0.969670        0.666490        0.333333        0.000177
+1_14001018      3       1       0.000000        0.015429        0.984571        0.799823        0.200177        0.000000        0.050636        0.949364        0.000000        0.941120        0.058880        0.000000        0.888842        0.111158        0.000000        0.799970        0.200030        0.000000        0.333333        0.333333        0.333333        0.992231        0.007769        0.000000        0.000140        0.333333        0.666526        0.666622        0.333333        0.000044
+```
+
+You will see that each individual has three columns in the file.
+
+```
+marker = chromosome and position (chr_position)
+allele1 = major allele as: 0=A, 1=C, 2=G, 3=T
+allele2 = minor allele as: 0=A, 1=C, 2=G, 3=T
+Ind0 = 1st column is the genotype likelihood for major/major genotype
+Ind0 = 2nd column is the genotype likelihood for major/minor genotype
+Ind0 = 3rd column is the genotype likelihood for minor/minor genotype
+```
+
+
+### SFS estimation
+
+Let's look into the Site Frequency Spectrum (SFS) for these populations. As you saw in the theoretical part earlier today, the SFS will show you the proportions of sites at different allele frequencies. And to calculate the unfolded SFS we will need an outgroup species to be used as the ancestral state. One important caveat to remember is that during out exercises we are using only a portion of one chromosome, but for real world data usage it is important to use the whole genome so you have enough information.
+
+We usually run SFS per population, but let's try running it for all individuals in our dataset first, just out of curiosity.
+
+You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist`). You will also need `/proj/naiss2023-22-1084/private/demography/dataset/anc.fa.gz`, which has the ancestral state for your individuals. Let's calculate the unfolded SFS.
+
+First we need the allele frequencies.
+
+Just run:
+
+```         
+angsd -bam ALL.bamlist -anc anc.fa.gz -doSaf 1 -GL 2 -nThreads 10
+```
+
+```         
+-doSaf 1 = it will calculate allele frequency likelihood based on individual genotypoe likelihoods assuming Hardy-Weinberg.
+```
+
+The output will be `angsdput.saf.idx`, `angsdput.saf.pos.gz`,
+`angsdput.saf.gz`. If you want to know more about these files, read
+`https://github.com/ANGSD/angsd/blob/newsaf/doc/formats.pdf`.
+
+But now that we have calculated allele frequencies, let's calculate the genotype likelihood:
+
+Just run:
+
+```         
+angsd -bam ALL.bamlist -doSaf 1 -out output_gl -anc anc.fa.gz -GL 2 -P 10 -minMapQ 1 -minQ 20
+```
+
+```         
+-doSaf 1 = it will calculate allele frequency likelihood based on individual genotypoe likelihoods assuming Hardy-Weinberg.
+-out = choose a name for your output files
+-anc chimpHg19.fa.gz = we have to supply a file with the ancestral state if we want to find unfolded SFS
+-P = just another way to use "nThreads"
+```
+
+Now that all calculations have been done, let's output the SFS based on them. Just run:
+
+```         
+realSFS angsdput.saf.idx -maxIter 100 -P 10 >results.sfs
+```
+
+**One you have done it, repeat it with our populations: PEL, TSI and LWK. Do not forget to add the option `-out name` to name your output files so you can identify each population results.**
+
+
+## Switching to your local computer
+
+Alright, now you need to have this .Rmd file and all outputs in the same directory. You can copy to your machine. Or you can remote access it somewhere. It's up to you.
+
+## Plotting SFS
+
+You can run the code below in R to see how the SFS plots look like. Does it look like the plot we've seen during the theoretical session?
+
+Let's look population by population.
+
+First, PEL:
+
+```{r sfs_pel, fig.show='hide'}
+#function to normalize
+norm <- function(x) x/sum(x)
+#read data
+sfs <- (scan("pel_results.sfs"))
+#the variability as percentile
+pvar<- (1-sfs[1]-sfs[length(sfs)])*100
+#the variable categories of the sfs
+sfs<-norm(sfs[-c(1,length(sfs))]) 
+barplot(sfs,xlab="Derived allele frequency", names=1:length(sfs),ylab="Proportions",main="SFS plot",col='blue')
+```
+
+then LWK:
+
+```{r sfs_lwk, fig.show='hide'}
+#function to normalize
+norm <- function(x) x/sum(x)
+#read data
+sfs <- (scan("lwk_results.sfs"))
+#the variability as percentile
+pvar<- (1-sfs[1]-sfs[length(sfs)])*100
+#the variable categories of the sfs
+sfs<-norm(sfs[-c(1,length(sfs))]) 
+barplot(sfs,xlab="Derived allele frequency", names=1:length(sfs),ylab="Proportions",main="SFS plot",col='blue')
+```
+
+And TSI:
+
+```{r sfs_tsi, fig.show='hide'}
+#function to normalize
+norm <- function(x) x/sum(x)
+#read data
+sfs <- (scan("tsi_results.sfs"))
+#the variability as percentile
+pvar<- (1-sfs[1]-sfs[length(sfs)])*100
+#the variable categories of the sfs
+sfs<-norm(sfs[-c(1,length(sfs))]) 
+barplot(sfs,xlab="Derived allele frequency", names=1:length(sfs),ylab="Proportions",main="SFS plot",col='blue')
+```
+
+They are all a bit different, why do you think is that?
+
+Let's see them all together:
+
+
+```{r sfs_all, fig.show='hide'}
+# function to normalize
+nnorm <- function(x) x/sum(x)
+#expected number of sites with 1:20 derived alleles
+res <- rbind(
+  PEL=scan("pel_results.sfs")[-1],
+  LWK=scan("LWK_results.sfs")[-1],
+  TSI=scan("TSI_results.sfs")[-1]
+)
+colnames(res) <- 1:20
+
+# density instead of expected counts
+res <- t(apply(res,1,nnorm))
+
+#plot the polymorphic sites.
+resPoly <- t(apply(res[,-20],1,nnorm))
+barplot(resPoly,beside=T,legend=c("PEL","LWK","TSI"),names=1:19,main="Derived allele frequencies")
+
+```
+
+## References
+
+- All data comes from the 1000 Genomes Project https://www.nature.com/articles/nature15393
+- You can check Matteo Fumagalli's ngsTools Tutorial page for more exercises using the same dataset. It will show you how to do other things we didn't have time to do today, like FST, PCAs, etc, using ANGSD/ngsTools: https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md
+
