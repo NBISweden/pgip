@@ -44,3 +44,7 @@ tikz*.tex
 /src/quarto-ext/
 
 FIXME.org
+.DS_Store
+docs/.DS_Store
+docs/exercises/.DS_Store
+docs/slides/.DS_Store
