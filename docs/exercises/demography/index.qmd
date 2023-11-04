@@ -47,7 +47,7 @@ mkdir -p demography
 cd demography
 ```
 
-You will run most analyses on Rackham, so just go to your directory to start.
+You will run most analyses on Rackham, so just go to your directory to start. You will need to download the results files to you computer afterwards, you can use `wget` like you'd done multiple times by now.
 
 
 #### {{< fa laptop >}} Local
@@ -262,7 +262,7 @@ realSFS angsdput.saf.idx -maxIter 100 -P 10 >results.sfs
 
 ## Switching to your local computer
 
-Alright, now you need to have this .Rmd file and all outputs in the same directory. You can copy to your machine. Or you can remote access it somewhere. It's up to you.
+Alright, now you need to have this .Rmd file and all outputs in the same directory. You can copy to your machine. Or you can remote access it somewhere. It's up to you. But if you followed the instructions at the top of the page you'll have all you need already in your local machine.
 
 ## Plotting SFS
 
@@ -339,6 +339,9 @@ barplot(resPoly,beside=T,legend=c("PEL","LWK","TSI"),names=1:19,main="Derived al
 
 ## References
 
+- You can learn a lot by browsing the ANGSD website: http://www.popgen.dk/angsd/index.php/ANGSD
 - All data comes from the 1000 Genomes Project https://www.nature.com/articles/nature15393
 - You can check Matteo Fumagalli's ngsTools Tutorial page for more exercises using the same dataset. It will show you how to do other things we didn't have time to do today, like FST, PCAs, etc, using ANGSD/ngsTools: https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md
+- This exercise just scratched the surface of what you can do with this type of data. If you are interested in running more interesting analyses, I recommend that you take a look at dadi: https://dadi.readthedocs.io/en/latest/ They have a nice Jupyterlab notebook (like you have been using in the previous days) which will help you a lot.
+- I also recommend Fastsimcoal2: http://cmpg.unibe.ch/software/fastsimcoal2/
 
