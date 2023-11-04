@@ -9,7 +9,6 @@ _site
 /docs/_freeze/
 /docs/output/
 /docs/data/
-/docs/recipes/
 /docs/slides/template.qmd
 /docs/results/
 /src/pgip.egg-info/
@@ -43,3 +42,5 @@ tikz*.tex
 /obsolete/
 /docs/scratch/
 /src/quarto-ext/
+
+FIXME.org

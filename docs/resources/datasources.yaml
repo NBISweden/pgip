@@ -1,0 +1,12 @@
+- data: slides/datageneration/assets/images/sequencing_approaches_lou_2021.png
+  source: https://onlinelibrary.wiley.com/cms/asset/626296ba-e938-43c5-a9b6-13a854558778/mec16077-fig-0001-m.webp
+  description: |
+    Comparison of sequencing methods.
+- data: slides/foundations/assets/images/ferret.svg
+  source: https://images.phylopic.org/images/f9fafdbd-beda-46e5-9c11-eb5bda3e65bd/vector.svg
+- data: slides/foundations/assets/images/gould_finches.jpg
+  source: https://upload.wikimedia.org/wikipedia/commons/a/ae/Darwin%27s_finches_by_Gould.jpg
+- data: slides/foundations/assets/images/meiosis.png
+  source: https://humanbiology.pressbooks.tru.ca/wp-content/uploads/sites/6/2019/06/MajorEventsInMeiosis_variant_int-1536x921.png
+- data: slides/foundations/assets/images/ld_mice.png
+  source: https://journals.plos.org/plosgenetics/article/figure/image?download&size=large&id=10.1371/journal.pgen.0030144.g002

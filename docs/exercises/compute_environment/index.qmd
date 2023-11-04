@@ -1,0 +1,267 @@
+---
+title: Compute environment
+author:
+  - Per Unneberg
+format: html
+---
+
+<!-- markdownlint-disable MD041 -->
+
+{{< include ../_knitr.qmd >}}
+
+{{< include ../_rlibs.qmd >}}
+
+<!-- markdownlint-enable MD041 -->
+
+## {{< fa server >}} UPPMAX
+
+::: {.callout-important collapse=true}
+
+#### Prerequisite: UPPMAX account
+
+To run exercises on UPPMAX you need an
+account. You can apply for an account
+[here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
+
+:::
+
+We will primarily be using Uppsala's high-performance computing (HPC)
+center [UPPMAX](https://www.uppmax.uu.se/) to run exercises. Course
+material will be hosted in a dedicated course project directory
+`/proj/{{< var uppmaxproject >}}`.
+
+We recommend you setup a working directory based on your username in
+`/proj/{{< var uppmaxproject >}}/users` in which to run your
+exercises:
+
+```bash
+mkdir -p /proj/{{< var uppmaxproject >}}/users/YOURUSERNAME
+cd /proj/{{< var uppmaxproject >}}/users/YOURUSERNAME
+```
+
+All computations should be run on a compute node. You can request an
+[interactive
+session](https://www.uppmax.uu.se/support/faq/running-jobs-faq/how-can-i-run-interactively-on-a-compute-node/)
+with the `interactive` command. For example, to request an eight hour
+job on 4 cores, run
+
+```bash
+interactive -A {{< var uppmaxproject >}} --cores 4 \
+   --partition core --time 08:00:00 \
+   --reservation={{< var uppmaxproject >}}
+```
+
+::: {.callout-important}
+
+#### Please do not book more than 4 cores
+
+We have priviliged access to a limited number of nodes. Please do not
+book more than 4 cores or else your fellow students will experience
+long waiting times.
+
+:::
+
+::: {.callout-important}
+
+#### Make sure to login to a compute node before running any heavy commands
+
+:::
+
+### Tutorials
+
+UPPMAX hosts tutorials and user guides at
+<https://www.uppmax.uu.se/support/user-guides/>. In particular,
+<https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
+has information on how to connect to and work on UPPMAX.
+
+## {{< fa laptop >}} Jupyter Notebooks
+
+[Jupyter Notebook](https://jupyter.org/) exercises will be run in
+local compute environments on your laptop. See the section below on
+setting up a `pgip` conda environment, which by default installs `jupyter` and its dependencies.
+
+### {{< fa brands firefox >}} JupyterLite
+
+There are some Jupyter Notebook exercises that are hosted online and
+run using [JupyterLite](https://github.com/jupyterlite/jupyterlite)
+which is a JupyterLab distribution that runs entirely in the browser.
+Apart from having a browser, no preparations are necessary. Note that
+some users have reported issues with Firefox and that Google Chrome
+may be a better solution.
+
+## {{< fa laptop >}} Conda {#sec-compute-environment-conda}
+
+Exercises that require local software installation will make use of
+the [conda](https://docs.conda.io/en/latest/) package manager to
+install necessary requirements from the package repositories
+[bioconda](https://bioconda.github.io/) and
+[conda-forge](https://conda-forge.org/). This is also the fallback
+solution in case there are issues with the HPC.
+
+### 1. Install conda
+
+To start using conda, follow the [quick command line install
+instructions](https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install)
+to install the minimal conda installer
+[miniconda](https://docs.conda.io/en/latest/miniconda.html).
+
+### 2. Configure conda
+
+Configure conda to access the package repositories (see also [bioconda
+usage](https://bioconda.github.io/#usage)). This will modify your
+`~/.condarc` file:
+
+```{bash}
+#| label: conda-configuration
+#| echo: true
+#| eval: false
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+::: {.callout-important}
+
+Please note that the order of these commands is important! When `conda
+config --add` is run it adds the channel to the **top** of the list in
+your configuration, so your `~/.condarc` will end up looking like
+this:
+
+```
+cat ~/.condarc
+```
+
+```
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+channel_priority: strict
+```
+
+:::
+
+### 3. Create an isolated course environment
+
+It is suggested you create and change to a isolated environment `pgip`
+dedicated to the course. The command below will create an environment
+named `pgip` and install the packages `python` version 3.10, an R base
+installation (`r-base`), the `jupyter` package that provides support
+for Jupyter Notebooks, an `R` kernel for Jupyter, and the `mamba`
+package manager.
+
+```{bash }
+#| label: create-conda-pgip
+#| echo: true
+#| eval: false
+conda create --name pgip python=3.10 r-base jupyter r-irkernel mamba
+conda activate pgip
+```
+
+The `activate` command is required to access the isolated environment
+named `pgip`. Once you have activated the environment, you gain access
+to whatever programs are installed. To deactivate an environment you
+issue the command `conda deactivate`.
+
+### 4. Install packages
+
+Installation of packages in an environment is done with the `install`
+command, but we recommend you use the
+[mamba](https://mamba.readthedocs.io/en/latest/index.html) package
+manager as it is faster (`mamba` is a rewrite of `conda` in C++). An
+example of how to install packages `bcftools, angsd, mosdepth` follows
+(remember to activate `pgip`!):
+
+::: {.callout-note}
+
+#### 03-Nov-2023: Package errors
+
+Some users have reported errors in that `bcftools` and `angsd` cannot
+be found, despite setting the proper channels. We are looking into the
+issue, but unless there are issues with UPPMAX, we will not need to
+install any additional packages apart from those that went into the
+creation of the `pgip` environment above. You can therefore treat the
+code below as examples only.
+
+:::
+
+```{bash }
+#| label: conda-install-packages
+#| echo: true
+#| eval: false
+conda activate pgip
+mamba install bcftools angsd mosdepth
+```
+
+or if you have packages listed in an environment file
+
+```bash
+#| label: conda-install-packages-from-environment-file
+#| echo: true
+#| eval: false
+mamba env update -f environment.yml
+```
+
+## Tools
+
+Computer exercise requirements are listed in `Tools` callout blocks in
+each exercise. The `Tools` callout block contains listings of
+programs, along with package dependencies and specifications for
+UPPMAX and conda, whenever relevant. An example block is shown below.
+
+::: {.callout-note collapse=true}
+
+### Tools - example
+
+Example Tools block.
+
+:::{.panel-tabset}
+
+#### Listing
+
+Provides list of packages linked to repository, and citation when
+available.
+
+- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
+
+#### UPPMAX modules
+
+Provides command and instructions to load relevant UPPMAX modules.
+
+Example:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools bwa/0.7.17 \
+    FastQC/0.11.9
+```
+
+#### Conda
+
+Provides a [conda environment
+file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+that lists dependencies and where to retrieve them.
+
+To install, copy the contents in the code block to a file
+`environment.yml` and install packages with `mamba env update -f
+environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - defauts
+dependencies:
+  - bwa=0.7.17
+  - fastqc=0.12.1
+```
+
+:::
+
+:::
+
+## References

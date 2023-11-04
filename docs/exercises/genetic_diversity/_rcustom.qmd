@@ -9,6 +9,7 @@
 #| cache: false
 library(readxl)
 library(curl)
+library(stringr)
 ```
 
 <!-- markdownlint-enable MD041 -->

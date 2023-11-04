@@ -1,0 +1,76 @@
+---
+title: "Demographic inference"
+author:
+  - "André Soares"
+format: html
+---
+
+::: {.callout-important collapse=true}
+
+#### {{< fa server >}} Compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+:::
+
+::: {.callout-tip collapse=true}
+
+## Learning objectives
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Data setup
+
+:::{.panel-tabset}
+
+#### UPPMAX
+
+#### Local
+
+:::
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Tools
+
+:::{.panel-tabset}
+
+#### Listing
+
+- [psmc](https://github.com/lh3/psmc) [@li_InferenceHumanPopulation_2011]
+
+#### UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools \
+    psmc/0.6.5-r67-e5f7df5
+```
+
+#### Conda
+
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - psmc
+```
+
+:::
+
+:::

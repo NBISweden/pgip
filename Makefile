@@ -40,7 +40,7 @@ install-pgip: ## Create pgip environment and install packages to render site
 	if conda env list | cut -f1 -d ' ' | grep -q "${PGIP}$$"; then \
 		echo "Environment exists; skipping install"; \
 	else \
-		mamba env create -n ${PGIP} --file environment.yml; \
+		mamba env create -n ${PGIP} conda-linux-64.lock; \
 	fi;
 
 install-dev: install-pgip ## Install additional development tools
@@ -48,8 +48,8 @@ install-dev: install-pgip ## Install additional development tools
 
 install-R: install-pgip ## Install additional R packages that require manual installation
 	R -e "install.packages('dotenv', repos=c(CRAN = 'https://cran.rstudio.com/'))"
-	R -e "tinytex::tlmgr_update()"
-	R -e "tinytex::reinstall_tinytex(force=TRUE)"
+	#R -e "tinytex::tlmgr_update()"
+	#R -e "tinytex::reinstall_tinytex(force=TRUE)"
 	R -e "library(devtools); devtools::install_local('src/R/pgip')"
 
 install-kernels: install-pgip ## Install python and bash kernel
@@ -60,4 +60,7 @@ install-kernels: install-pgip ## Install python and bash kernel
 install-bcftools: ## Install bcftools manually due to issues with conda version 1.8
 	scripts/install-bcftools.sh
 
-.phony: help Makefile project production clean-site clean install-pgip install-dev install-R install-kernels bcftools
+install-pixy: ## Install pixy manually due to missing conda package
+	python -m pip install git+https://github.com/ksamuk/pixy.git
+
+.phony: help Makefile project production clean-site clean install-pgip install-dev install-R install-kernels install-bcftools install-pixy

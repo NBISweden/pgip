@@ -1,6 +1,20 @@
-exercises:
-  simulation:
-    baseurl: https://percyfal.github.io/pgip-jlite/lab
+lab:
+  sim:
+    baseurl: https://nbisweden.github.io/pgip-jlite/lab
     howto: exercises/simulation/index.html#sec-exercise-simulation-howto
     coalescent: exercises/simulation/index.html#sec-exercise-simulation-coalescent
     msprime: exercises/simulation/index.html#sec-exercise-simulation-msprime
+
+uppmaxproject: naiss2023-22-1084
+
+webexport:
+  baseurl: https://export.uppmax.uu.se
+  user: pgip
+  url: https://export.uppmax.uu.se/naiss2023-22-1084
+
+demes:
+  ooa: pgip_data/data/ooa/ooa.demes.yaml
+
+recipes:
+  baseurl: /recipes/slides/index.html
+  slimurl: /recipes/slim/index.html

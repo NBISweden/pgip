@@ -6,15 +6,49 @@ Course materials for course [Population Genomics in
 Practice](https://uppsala.instructure.com/courses/86976). Please make
 sure to read the entire README before adding material.
 
-## Installation
+## Terms of use
 
-Clone the repo
+You are free to use the course material for online learning, journal
+clubs, or whatever way you see fit. If you find errors or would like
+to suggest improvements, please consider filing a [github
+issue](https://github.com/NBISweden/workshop-pgip/issues).
 
-    git clone https://github.com/NBISweden/workshop-pgip.git
+## Installation and setup, TL;DR
 
-and follow the instructions below.
+**Note:** this is only for developers! To view the website, navigate
+to <https://nbisweden.github.io/workshop-pgip/>.
 
-### TL;DR
+Clone the repo and cd to directory
+
+    git clone git@github.com:NBISweden/workshop-pgip.git
+    cd workshop-pgip
+
+Since pushing to the main branch is disallowed, make sure you create a
+development branch named `dev-yourgithubusername`:
+
+    git checkout -b dev-yourgithubusername
+
+Make edits on and push this branch to the repo. For this to work you
+need to properly setup [github
+authentication](https://docs.github.com/en/authentication).
+Alternatively, you can [fork the
+repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+to your own github user account.
+
+Whenever a pull request is accepted, you need to sync your development
+branch with the new main. If you have cloned from NBISweden do
+
+    git fetch -a
+    git checkout main
+    git merge origin/main
+    git checkout dev-yourgithubusername
+    git merge main
+
+If you are working on a forked copy it is easiest to sync the main
+branch via the github interface, after which you can follow the
+previous commands.
+
+### Installation
 
 You can change the environment name by modifying the `PGIP`
 environment variable:
@@ -24,7 +58,7 @@ environment variable:
     conda activate pgip
     make install-R
     make install-kernels
-    make install-bcftools
+    make install-pixy
     make install-dev
 
 If the above commands have worked without issues you are done and you
@@ -34,11 +68,13 @@ following sections that describe each installation step in more
 detail. There is also a section on [known installation
 issues](#installation-issues).
 
+## Installation and setup
+
 ### Create pgip conda environment
 
-Create a conda environment called `pgip` using the environment file
+Create a conda environment called `pgip` using the conda lock file
 
-    mamba env create --file environment.yml
+    mamba env create -n pgip conda-linux-64.lock
 
 and activate the environment
 
@@ -86,7 +122,10 @@ information.
 
 [Install Quarto](https://quarto.org/docs/get-started) version [Quarto\>=1.2.475](https://quarto.org/docs/download/).
 
-### bcftools manual install
+### bcftools manual install (OBSOLETE)
+
+**OBSOLETE**: installing pgip using `conda-linux-64.lock` obviates the
+need to install bcftools manually.
 
 Due to dependency issues, bcftools has to be manually installed:
 
@@ -97,6 +136,17 @@ or
     ./scripts/install-bcftools.sh
 
 in the root directory.
+
+### Install pixy
+
+There currently is no pixy conda package for Python>3.9 which requires
+manuall installation with pip:
+
+    make install-pixy
+
+or
+
+    python -m pip install git+https://github.com/ksamuk/pixy.git
 
 ### Development tools
 

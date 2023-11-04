@@ -1,17 +1,12 @@
 ---
-title: "Demography"
-subtitle: "Demographic inference"
+title: "Demographic inference"
 author:
-    - "Per Unneberg"
-format:
-  revealjs:
-    footer: Demographic inference
+  - "Andre Soares"
+format: html
 ---
 
-## Setup  {visibility="hidden" .unnumbered .unlisted}
+::: {.callout-important}
 
-{{< include ../_knitr.qmd >}}
+Lecture notes TBA
 
-{{< include ../_rlibs.qmd >}}
-
-# Demography
+:::

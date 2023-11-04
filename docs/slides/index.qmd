@@ -3,6 +3,7 @@ title: "Slides"
 subtitle: "PGIP 2023 • Population Genomics in Practice"
 description: "List of all presentations"
 listing:
+  id: slide-listings
   type: grid
   grid-columns: 4
   fields: [title, subtitle, author]
@@ -10,7 +11,13 @@ listing:
   contents:
     - pgip/index.qmd
     - foundations/index.qmd
-    - simultation/index.qmd
+    - simulation/index.qmd
+    - variant_calling/index.qmd
+    - variant_filtering/index.qmd
+    - genetic_diversity/index.qmd
+    - population_structure/index.qmd
+    - demography/index.qmd
+    - selection/index.qmd
 date: ""
 toc: false
 sidebar: false
@@ -21,3 +28,18 @@ format:
 execute:
   freeze: false
 ---
+
+### A note on usage
+
+Html slides have been authored using [revealjs](https://revealjs.com/)
+and can be viewed directly in the browser. In some cases, there are
+accompanying speaker notes that can be viewed by pressing `s`.
+Whenever there is a [{{< fa rectangle-list >}}]({{< var
+recipes.baseurl >}}) symbol, it links to a recipe that is related to
+the figure or content on the active slide.
+
+### Slides
+
+:::{#slide-listings}
+
+:::

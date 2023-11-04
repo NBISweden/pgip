@@ -26,6 +26,19 @@ library(ggraph)
 library(tidygraph)
 ```
 
+## Intended learning outcomes {.unnumbered .unlisted}
+
+Introduction to the coalescent and simulation in msprime, with two
+exercises on the coalescent and msprime. The students should be able
+to:
+
+- Describe need for simulations
+- Demonstrate the coalescent step by step
+- Detail some properties of coalescent trees
+- Define the site-frequency spectrum
+- Describe the coalescent with recombination
+- Perform simple simulations in msprime
+
 ## The Wright-Fisher model and simulations
 
 :::: {.columns}
@@ -37,7 +50,8 @@ library(tidygraph)
 #| echo: false
 #| eval: true
 #| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
-#| out-width: 80%
+#| out-width: 70%
+#| fig-align: center
 set.seed(132)
 g <- wright_fisher_pop(n = 30, generations = 50)
 x_range <- range(vertex_attr(g, "x"))
@@ -84,6 +98,10 @@ g %>%
 
 ::: {.column width="50%"}
 
+::: {.notes}
+
+:::
+
 ### Recap
 
 Model of a population describing **genealogies** under the following assumptions
@@ -98,8 +116,6 @@ Model of a population describing **genealogies** under the following assumptions
 ::: {.fragment}
 
 **Forward** simulation
-
-:::
 
 :::
 
@@ -129,7 +145,8 @@ Low reproductive success: forward simulations costly!
 #| echo: false
 #| eval: true
 #| fig-cap: Wright-Fisher model for 50 generations, 30 individuals
-#| out-width: 80%
+#| out-width: 70%
+#| fig-align: center
 set.seed(132)
 g <- wright_fisher_pop(n = 30, generations = 50)
 x_range <- range(vertex_attr(g, "x"))
@@ -184,6 +201,7 @@ g %>%
 #| fig-cap:
 #|    Reproductive success in percent per generation.
 #| out-width: 55%
+#| fig-align: center
 gdf <- g %>%
   mutate(allele = ifelse(degree(., mode = "out") > 0, "b", "a")) %>%
   as.data.frame()
@@ -198,6 +216,8 @@ ggplot(subset(df, x < 50), aes(x = x, y = y * 100)) +
   ylab("Reproductive success (%)") +
   theme(text=element_text(size=36))
 ```
+
+:::{.small .translatey50}
 
 Mean reproductive success = `r sprintf("%.1f%%", mean(x) * 100)`. Can
 show for large populations P(no descendants)=$1 - e^{-1} \approx
@@ -220,7 +240,7 @@ Low reproductive success: forward simulations costly!
 
 :::
 
-## Forward and backward simulation
+## Forward and backward simulation {.smaller}
 
 ```{r }
 #| label: wright-fisher-model-graph
@@ -356,6 +376,16 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 Simulated nodes are filled with black. Genealogy of interest is
 highlighted in thick black lines.
 
+::: {.notes}
+
+Forward simulations: require that we keep track of the entire
+population -> computationally challenging.
+
+Backward simulations: require only tracking the sample -> quicker.
+However, cannot model selection.
+
+:::
+
 ## Why do we want simulations anyway?
 
 ::: {.incremental}
@@ -434,6 +464,13 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 ::::
 
+::: {.notes}
+
+NB: only the samples on the genealogy are needed, but the entire
+population is shown as a means to compare with forward simulations.
+
+:::
+
 ## Coalescent simulations
 
 :::: {.columns}
@@ -502,8 +539,10 @@ on which mutations are "sprinkled" according to a Poisson process.
 1. Simulate ancestry (genealogy)
 2. Simulate mutations
 
-Question: how many mutations are common to all samples? How many
-mutations does sample 1 have? Sample 2?
+<h4>Exercise</h4>
+
+How many mutations are common to all samples? How many mutations does
+sample 1 have? Sample 2?
 
 Assuming the ancestral state is denoted `0` (prior to the *first*
 generation) and the derived state `1`, what are the sequences of the
@@ -552,6 +591,20 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 :::
 
 ::::
+
+::: {.notes}
+
+Answers to exercise: 2 mutations are common to all samples. Sample 1
+has 3 mutations, sample 2 has 4.
+
+(arbitrarily) ordering the sites from top to bottom (oldest mutation
+comes first), the sequences are:
+
+1: 11100
+2: 11101
+3: 11010
+
+:::
 
 ## Simulating genealogies [@hahn_MolecularPopulationGenetics_2019, p. 115]
 
@@ -1609,11 +1662,11 @@ $\beta=1/\lambda$.
 #| label: fig-simulate-genealogy-end
 #| echo: false
 #| eval: true
+#| fig-align: center
 #| fig-cap:
 #|   A simulated genealogy. The $T_i$ represent the
 #|   waiting time when the state has $i$ chromosomes.
-#| out-height: 600px
-#| out-width: 500px
+#| out-width: 60%
 \begin{tikzpicture}[
           ultra thick, inner sep=0, outer sep=0,
           leaf/.style={circle,fill=black,minimum size=5pt},
@@ -1672,7 +1725,7 @@ node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
 
 ::::
 
-## Some properties of the tree
+## Some properties of the tree {.smaller}
 
 :::: {.columns}
 
@@ -1689,8 +1742,8 @@ node at ($(t2r) !.5! (t1r)$) (T2) {$T_2$}
 #|   $T_i$ represent the waiting time when the state has $i$ chromosomes,
 #|   whereas $\tau_i$ correspond to the branch length from node $i$
 #|   to its parent.
-#| out-height: 500px
-#| out-width: 400px
+#| fig-align: center
+#| out-width: 60%
 \begin{tikzpicture}[
           ultra thick, inner sep=0, outer sep=0,
           leaf/.style={circle,fill=black,minimum size=5pt},
@@ -1769,8 +1822,8 @@ Expected waiting time to coalesce when $i$ lineages: $E(T_i) =
 Branch lengths can be derived from waiting times. For instance,
 $\tau_1=\tau_2=T_5+T_4$ and $\tau_4=\tau_5=T_5$
 
-Time to the **most recent common ancestor (MRCA)**: $T_{MRCA} =
-\sum_{i=2}^n T_i$
+Time to the **most recent common ancestor (MRCA)** is sum of wating
+times: $T_{MRCA} = \sum_{i=2}^n T_i$
 
 with expected value $E(T_{MRCA}) = \sum_{i=2}^nE(T_i) = 2\left(1 -
 \frac{1}{n}\right)$
@@ -1782,52 +1835,80 @@ iE(T_i) = 2\sum_{i=2}^n\frac{1}{i-1}$
 
 ::::
 
-## Variation in topology and height
+::: {.notes}
 
-::: {style="transform:  translate(-300px, 0);"}
+Note that the parametrization is in 2N generations (continuous time
+approximation); some use N, others 4N, and so on.
 
-::: {style="transform: rotate(180deg);"}
+Expected waiting time: the first expression follows from the fact that
+the waiting time, given $i$ chromosomes, is exponentially distributed
+with parameter $\lambda=i(i-1)/2$. For an exponentially distributed
+variable $X$, the expected value is simply $E(X)=1/\lambda$.
 
-```{r }
-#| label: genealogy-variation
+Other relations are most easily derived by studying the tree and
+summing up relevant branches or time intervals.
+
+:::
+
+## Coalescent simulations vary in topology and height
+
+```{python }
+#| label: msprime-simulations
+#| cache: false
+#| echo: true
+#| eval: true
+#| code-fold: true
+import msprime
+seeds = [12, 15, 16, 34, 63, 30]
+trees = [msprime.sim_ancestry(3, random_seed=x) for x in seeds]
+```
+
+:::{}
+
+```{python }
+#| label: fig-coalescent-trees-with-msprime
 #| echo: false
 #| eval: true
-#| out-height: 500px
-set.seed(20)
-mykronoviz <- function(x, layout = length(x), ...) {
-  par(mar = rep(0.5, 4), oma = rep(0, 4))
-  rts <- sapply(x, function(x) branching.times(x)[1])
-  maxrts <- max(rts)
-  lim <- cbind(rts - maxrts, rts)
-  Ntree <- length(x)
-  Ntips <- sapply(x, Ntip)
-  nrow <- 1
-  w <- Ntips
-  h <- 1
-  layout(matrix(1:layout, nrow), widths = w, heights = h)
-  for (i in 1:Ntree) {
-    plot(x[[i]],
-      y.lim = lim[i, ], direction = "u",
-      ...
-    )
-  }
-}
-trees <- lapply(rep(5, 6), rcoal, simplify = FALSE)
-mykronoviz(trees, type = "c", show.tip.label = FALSE, edge.width = 3)
+#| fig-format: svg
+#| out-width: 80%
+#| output: asis
+#| fig-cap:
+#|     Examples of coalescent simulations. Note the variation in tree
+#|     topology and height.
+kwargs = dict(x_axis=False, node_labels={},
+              symbol_size=0, style=".edge {stroke-width: 2px}",
+              root_svg_attributes={"id": "msprime-simulation"})
+ymax = 500
+tmrca = [ts.node(ts.first().root).time for ts in trees]
+for i, ts in enumerate(trees):
+    y = tmrca[i] / max(tmrca) * ymax
+    print(ts.draw_svg(size=(200, y), **kwargs))
 ```
 
 :::
 
-:::
+Examples of coalescent simulations. Note the variation in tree
+topology and height.
 
 ## Diminishing returns of adding more samples
 
+:::{}
+
 ```{r }
-#| label: coalescent-diminishing-returns
+#| label: fig-coalescent-diminishing-returns
 #| echo: false
 #| eval: true
-#| fig-width: 16
-#| fig-height: 8
+#| fig-width: 12
+#| fig-height: 6
+#| fig-align: center
+#| out-width: 80%
+#| fig-cap:
+#|     Dependence of $E[T_{MRCA}]$ and $E[T_{total}]$ on the
+#|     sample size n. Already at low values of n the value of
+#|     $E[T_{MRCA}]$ is close to its asymptotic value, which has
+#|     practical consequences for the measurement of DNA variation.
+#|     Adapted from @wakeley_CoalescentTheoryIntroduction_2008,
+#|     Fig. 3.3.
 n <- 20
 t_total <- function(n) {2*sum(1/(seq(2,n)-1))}
 t_mrca <- function(n) {2*(1 - 1/n)}
@@ -1842,7 +1923,22 @@ ggplot(data, aes(x=x, y=y, linetype=factor(stat))) +
   guides(linetype=guide_legend(title="Statistic"))
 ```
 
+:::
+
+::: {.notes}
+
+Adding a sample only adds $2/n$ to the total tree length. Also, adding
+a sample will add little to $T_{MRCA}$, or equivalently, will most
+likely add a very recent coalescent event to the tree for large enough
+$n$. Note that $n=20$ here is equivalent to 10 diploid individuals.
+
+:::
+
 ## Adding mutations
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 ```{tikz, fig.ext="svg" }
 #| label: fig-add-mutations
@@ -1897,17 +1993,90 @@ node at ($(4) !.5! (6) + (.5, 0)$) (m5r) {1}
 \end{tikzpicture}
 ```
 
+:::
+
+::: {.column width="50%"}
+
+Mutations are added by placing them on branches, where the probability
+of ending up on a branch $\tau_i$ is equal to its normalized
+length, where normalization is by the total tree branch length:
+
+$$
+P(\text{mutation on branch }i) = \frac{\tau_i}{\sum_j\tau_j} =
+\frac{\tau_i}{T_{total}}
+$$
+
+The total number of segregating sites $S$ to be thrown on the tree is
+modelled as a [Poisson random
+variable](https://en.wikipedia.org/wiki/Poisson_distribution) which
+expresses the probability of a given number of events in time $t$:
+
+$$
+S = Po(\theta/2T_{total})
+$$
+
+:::
+
+::::
+
+::: {.notes}
+
+Sofar we have looked at genealogies; now add mutations.
+
+In words: sample a number of segregating sites from the Poisson
+distribution, and "sprinkle" them on the tree.
+
+The parametrization $\lambda = \theta / 2$ is defined with reference
+to the average heterozygosity between two sequences being $\theta$ (by
+Tajima; see @wakeley_CoalescentTheoryIntroduction_2008, p. 92)
+
+:::
+
 ## The coalescent and diversity {.smaller}
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
+::: {.dna}
+
+| 1 | 2     | 3 | 4 | 5     | 6 | 7 | 8     | 9 | 10 | 11    | 12 | 13    | 14 | 15    |
+|:-:|:-----:|:-:|:-:|:-----:|:-:|:-:|:-----:|:-:|:--:|:-----:|:--:|:-----:|:--:|:-----:|
+| T | T     | A | C | A     | A | T | **C** | C | G  | A     | T  | C     | G  | T     |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+| T | **C** | A | C | A     | A | T | G     | C | G  | A     | T  | **G** | G  | **A** |
+| T | T     | A | C | **G** | A | T | G     | C | G  | **C** | T  | C     | G  | T     |
+|   | *     |   |   | *     |   |   | *     |   |    | *     |    | *     |    | *     |
+
+: {tbl-colwidths="[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]"}
+
+:::
+
+::: {.fragment}
+
+<!-- markdownlint-disable MD013 -->
+
+$$
+\begin{align}
+\pi & = \sum_{j=1}^S h_j = \sum_{j=1}^{S} \frac{n}{n-1}\left(1 - \sum_i p_i^2 \right) \\
+& \stackrel{S=6,\\ n=4}{=} \sum_{j=1}^{6} \frac{4}{3}\left(1 - \sum_i p_i^2\right) \\
+& = \frac{4}{3}\left(\mathbf{\color{#a7c947}{4}}\left(1-\frac{1}{16}-\frac{9}{16}\right) + \mathbf{\color{#a7c947}{2}}\left(1 - \frac{1}{4} - \frac{1}{4}\right)\right) = \frac{10}{3}
+\end{align}
+$$
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+:::
+
+::: {.column width="20%" .fragment}
+
 ```{r, engine="tikz", fig.ext="svg" }
-#| label: coalescent-tree-dna-variation
+#| label: coalescent-tree-dna-variation-representation
 #| echo: false
 #| eval: true
-#| out-height: 600
+#| out-width: 80%
 \begin{tikzpicture}[outer sep=0, inner sep=0, thick,
                     node distance=5px, every node/.style={font=\ttfamily}]
 \tikzstyle{mut} = [circle, minimum height=0.2cm, fill=gray, draw];
@@ -1945,41 +2114,39 @@ node[mut] (m6) at ($(4) !.75! (7)$) {}
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="30%" .fragment}
 
-Many statistical quantities can be related to the **site frequency
-spectrum** (**SFS**), which is a summary of the frequencies of the
-segregating sites. Let $\xi_i$ be the number of chromosomes in the
-sample with $i$ minor alleles. In the figure we have 6 mutations on
-$n=4$ chromosomes.
+```{r, engine="tikz", fig.ext="svg" }
+#| label: tree-site-frequency-spectrum-graph
+#| echo: false
+#| eval: true
+#| out-width: 80%
+%% https://tex.stackexchange.com/questions/123866/histogram-with-tikz
+\begin{tikzpicture}[ybar interval]
+\tikzstyle{tick}=[font=\scriptsize];
+\tikzstyle{label}=[font=\small];
+  \draw[fill=blue!60!black, draw=blue!60!black]
+plot coordinates{(0,.8) (1,.4) (2, 0) (3, 0)};
+\draw[->] (-0.2, 0) -- (3.2, 0) node[right] {$x$};
+\draw[->] (0, -0.2) -- (0, 1.2) node[above] {$y$};
+\node[tick] at (0.5, -0.3) {1};
+\node[tick] at (1.5, -0.3) {2};
+\node[tick] at (2.5, -0.3) {3};
+\node[tick] at (1.5, -0.6) {Allele frequency};
+\node[tick, rotate=90] at (-0.4, .5) {Proportion};
+\end{tikzpicture}
+```
 
-|         | Name      | Count |
-|---------|-----------|-------|
-| $\xi_1$ | singleton | 4     |
-| $\xi_2$ | doubleton | 2     |
-| $\xi_3$ |           | 0     |
-
-Note that the number of segregating sites is $S=\sum_{i=1}^{n-1}\xi_i$
+::: {.fragment}
 
 In this notation one can show that $\pi$, the nucleotide diversity, is
 
 $$
-\pi = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2}
-$$
-
-::: {.fragment}
-
-#### Exercise
-
-Calculate the nucleotide diversity and compare the results from the foundation lecture
-
-:::
-
-::: {.fragment}
-
-$$
-\pi = \frac{1(4-1)\xi_1 + 2(4-2)\xi_2 + 3(4-3)\xi_3}{4(4-1)/2} =
-\frac{1}{6}\left(12 + 8 + 0\right) = 3\frac{1}{3}
+\begin{align}
+\pi & = \frac{\sum_{i=1}^{n-1}i(n-i)\xi_i}{n(n-1)/2} \\
+& \stackrel{n=4}{=} \frac{1*(4-1)*4 + 2*(4-2)*2}{6}
+= \frac{10}{3}
+\end{align}
 $$
 
 :::
@@ -1988,13 +2155,17 @@ $$
 
 ::::
 
-::: {.notes }
+::: {.fragment}
 
-Point out that we record the number of mutations per branch which together with
+Many statistical quantities can be related to the **site frequency
+spectrum** (**SFS**), which is a summary of the frequencies of the
+segregating sites. Let $\xi_i$ be the number of chromosomes in the
+sample with $i$ minor alleles. In the example above we have $S=6$
+mutations on $n=4$ chromosomes.
 
 :::
 
-## The impact of topology on the SFS
+## The impact of topology on the SFS {.smaller}
 
 :::: {.columns}
 
@@ -2002,9 +2173,77 @@ Point out that we record the number of mutations per branch which together with
 
 <!-- markdownlint-disable MD013 -->
 
-![Interpretation of neutrality tests [@ferretti_DecomposingSiteFrequency_2017]](assets/images/ferretti-table1.jpg){width=480}
+:::: {style="display: grid; grid-template-columns: 200px 200px; grid-row-gap: 0px; grid-column-gap: 40px;"}
+
+:::{}
+
+*Neutral*
+
+```{python }
+#| label: msprime-trees-neutral
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="neutral", svgid="neutral", size=(200, 250)))
+```
+
+:::
+
+:::{}
+
+*Expansion*
+
+```{python }
+#| label: msprime-trees-expansion
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="expansion", svgid="expansion", size=(200, 250)))
+```
+
+:::
+
+:::{}
+
+*Bottleneck*
+
+```{python }
+#| label: msprime-trees-bottleneck
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="bottleneck", svgid="bottleneck", size=(200, 250)))
+```
+
+:::
+
+:::{}
+
+*Selection*
+
+```{python }
+#| label: msprime-trees-selection
+#| echo: false
+#| eval: true
+#| fig-format: svg
+#| output: asis
+import treeviz
+print(treeviz.tree_topology(model="selection", svgid="selection", size=(200, 250)))
+```
+
+:::
+
+::::
 
 <!-- markdownlint-enable MD013 -->
+
+[{{< fa rectangle-list >}}]({{< var recipes.baseurl >}}#sec-recipe-msprime-trees)
 
 :::
 
@@ -2012,7 +2251,7 @@ Point out that we record the number of mutations per branch which together with
 
 <!-- markdownlint-disable MD013 -->
 
-![The SFS under neutrality and selection](assets/images/nielsen-fig2-2005.jpeg){width=480}
+![The SFS under neutrality and selection](assets/images/nielsen-fig2-2005.jpeg){#fig-sfs-neutrality-selection width=450}
 
 <!-- markdownlint-enable MD013 -->
 
@@ -2044,7 +2283,14 @@ D > 0
 
 # The coalescent with recombination
 
-## On non-recombining chromosomes and assortment
+::: {.notes}
+
+Introduce the coalescent with recombination which in practice is a
+very brief inroduction to the concept of tree sequences.
+
+:::
+
+## On non-recombining chromosomes and assortment {.smaller}
 
 :::: {.columns}
 
@@ -2054,7 +2300,8 @@ D > 0
 #| label: non-recombining-chromosomes-assortment-1
 #| echo: false
 #| eval: true
-#| out-width: 300
+#| fig-align: center
+#| out-width: 50%
 \tikzstyle{female}=[circle,thick,minimum size=1cm,draw=black]
 \tikzstyle{male}=[rectangle,thick,minimum width=1cm, minimum height=1cm, draw=black]
   \begin{tikzpicture}[>=latex,font=\small, thick,
@@ -2096,7 +2343,8 @@ Chromosomes coalesce at father
 #| label: non-recombining-chromosomes-assortment-2
 #| echo: false
 #| eval: true
-#| out-width: 300
+#| fig-align: center
+#| out-width: 50%
 \usetikzlibrary{shapes}
 \tikzstyle{female}=[circle,thick,minimum size=1cm,draw=black]
 \tikzstyle{male}=[rectangle,thick,minimum width=1cm, minimum height=1cm, draw=black]
@@ -2140,19 +2388,29 @@ Genealogies **differ**
 
 ::::
 
-## The ancestral recombination graph
+::: {.notes}
 
-:::: {.columns}
-
-::: {.column width="50%"}
-
-![The ancestral recombination graph,
-[@hubisz_InferenceAncestralRecombination_2020, Fig.
-1]](assets/images/hejase-2020-fig1.jpg){width=400}
+NB: the right genealogy is so small the sequences don't coalesce. The
+following slide will show a larger genealogy where all sequence
+coalesce.
 
 :::
 
-::: {.column width="50%"}
+## The ancestral recombination graph {.smaller}
+
+:::{}
+
+![](assets/images/brandt-genetics-2022-fig1a.jpeg){fig-align=center, height=300}
+![](assets/images/brandt-genetics-2022-fig1b.jpeg){fig-align=center, height=300}
+![](assets/images/brandt-genetics-2022-fig1c.jpeg){fig-align=center, height=300}
+
+::: {.flushright .smallest}
+
+@y.c.brandt_EvaluationMethodsEstimating_2022 [Fig. 1a]
+
+:::
+
+:::
 
 Properties:
 
@@ -2164,11 +2422,26 @@ Properties:
 
 Interpretation: chromosomes are mosaics of non-recombining units
 
+::: {.notes}
+
+Going backwards in time, we now have two events to track. We have
+already encountered coalescence, that is, the merging of lineages. We
+now also need to monitor recombination events, at which point a
+genealogy *splits* into two separate paths. A recombination event
+takes place on a sequence, such that the genealogical history of the
+recombined sequence differs on either side of the recombination
+breakpoint. In the ARG, by convention the sequence to the left of the
+breakpoint takes the left path, the sequence to the right the right path.
+
+The end consequence of recombination is that the chromosome/sequence
+will consist of non-recombining units with different genealogical
+histories. However, neighbouring genealogies will be similar - they
+are *correlated* - a fact that is of importance for the tree sequence
+data structure used in msprime.
+
 :::
 
-::::
-
-## The ancestral recombination graph
+## The ancestral recombination graph as sequence of trees
 
 :::: {.columns}
 
@@ -2290,6 +2563,13 @@ print(mutated_ts.draw_svg())
 
 # Forward simulation in SLiM
 
+::: {.notes}
+
+This is currently a *very* brief introduction to SLiM. Future versions
+of the lecture will add some more detail.
+
+:::
+
 ## SLiM
 
 SLiM (**S**election on **Li**nked **M**utations)
@@ -2308,7 +2588,7 @@ coalescent-based simulators.
 2. **performance** - optimized code base
 3. **GUI** - interactive execution and graphical debugging
 
-::: {.flushright}
+::: {.flushright .smallr}
 
 @haller_SLiMEvolutionarySimulation_2022
 
@@ -2412,6 +2692,41 @@ ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
 
 ::::
 
+::: {.notes}
+
+SLiM works forward in time according to a *tick cycle*, which
+basically is a counter of time steps.
+
+@haller_SLiMForwardGenetic_2019, pp. 603--610 describes the steps in
+more details; some clarifying comments are added belowe wrt to the
+slide flowchart. There is **a lot** to unpack here, and the summary
+flowchart captures most of the essentials.
+
+0. first events: prior to generation of offspring; don't affect
+   fitness. Rare use.
+1. early: catch-all event to do things before generation of offspring
+2. generation of offspring
+   1. Choose source subpop for parental individuals, based on
+      migration rates
+   2. Choose parent 1, based on cached fitness values
+   3. Choose parent 2, based on fitness and any defined `mateChoice()`
+      callbacks
+   4. Generate the candidate offspring, with mutation and
+      recombination (including `mutation()` and `recombination()`
+      callbacks)
+   5. Suppress/modify the candidate, using defined `modifyChild()`
+      callbacks
+3. Removal of fixed mutations unless `convertToSubstitution==F` - for
+   simulation efficiency reasons
+4. Offspring become parents
+5. Execution of `late()` events - e.g., changing of selection or
+   dominance coefficients
+6. Fitness recalculation using `mutationEffect()` and `fitnessEffect()`
+   callbacks
+7. Tick/cycle count increment
+
+:::
+
 ## Simple neutral simulation in SLiM {.smaller}
 
 ```{r engine="c"}
@@ -2447,7 +2762,292 @@ sim.simulationFinished();
 Comes with a huge manual [@haller_SLiMEvolutionarySimulation_2022] (700+
 pages!)
 
-## Bibliography {.unnumbered .unlisted}
+## Recapitation - combining the best of two worlds {.smaller}
+
+:::: {style="display: grid; grid-template-columns: 4fr 3fr 3fr;
+grid-row-gap: 0px; grid-column-gap: 20px;"}
+
+:::{}
+
+A recent addition to SLiM is that it records data in *tree sequence
+format* (as in msprime) {{< fa arrow-right >}} we can combine backward
+and forward simulations!
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=2}
+
+Backward simulation that adds coalescent (neutral) history
+
+:::
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=2}
+
+:::{style="transform: translate(0, -50px);"}
+
+```{r }
+#| label: backward-simulation-recapitation
+#| echo: false
+#| eval: true
+#| out-width: 70%
+set.seed(5)
+wf <- wright_fisher_pop(n = 10, generations = 11)
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+indices <- (max(V(obj)) - 10 + 1):max(V(obj))
+i <- V(obj)[unlist(ego(obj, order = 16, nodes = indices, mode = "in"))]
+E(obj)[.to(i)]$width <- .2
+E(obj)[.to(i)]$color <- "black"
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "black"
+  )) +
+  geom_node_point(fill = "black", color = "black", shape = 21, size = 3) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+:::
+
+:::
+
+:::{}
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=1}
+
+Forward simulation with selection or some other process that isn't
+supported by the coalescent
+
+:::
+
+:::
+
+:::{}
+
+::: {.fragment fragment-index=1}
+
+:::{style="transform: translate(0, -150px);"}
+
+```{r }
+#| label: forward-simulation-recapitation
+#| echo: false
+#| eval: true
+#| out-width: 70%
+set.seed(252)
+wf <- wright_fisher_pop(n = 10, generations = 6)
+obj <- wf
+x_range <- range(vertex_attr(obj, "x"))
+y_range <- range(vertex_attr(obj, "y"))
+E(obj)$color <- "lightgray"
+E(obj)$width <- .1
+ggraph(obj, layout = cbind(V(obj)$x, V(obj)$y)) +
+  geom_edge_link(aes(color = color, width = width)) +
+  scale_y_reverse() + scale_edge_width(range = c(.8, 3)) +
+  scale_edge_color_manual(values = c(
+    "black" = "black",
+    "lightgray" = "black"
+  )) +
+  geom_node_point(fill = "black", color = "black", shape = 21, size = 3) +
+  theme(legend.position = "none", axis.text.x = element_blank()) +
+  expand_limits(x = x_range, y = y_range)
+```
+
+:::
+
+:::
+
+:::
+
+::::
+
+# Applications
+
+## Simulation of null distributions {.smaller}
+
+:::{.compact}
+
+![Empirical distribution function of SweepFinder2 composite likelihood
+ratio (CLR) scores from observed data versus null simulations for
+three populations of squash bee (*E. pruinosa*). msprime was used to
+simulate data (without selection) using the inferred demographic model
+and recombination map. The eastern population in particular shows
+signs of selective sweeps. @pope_ExpansionAgricultureHas_2023, Fig
+S8.](assets/images/pope_2023_figs8.png){#fig-pope-2023-clr width=90%
+fig-align=center}
+
+:::
+
+:::{}
+
+Authors inferred demographic history and recombination map. The
+inferred values were used to simulate data with msprime. SweepFinder2
+[@degiorgio_SweepFinder2IncreasedSensitivity_2016] was used to
+calculate composite likelihood ratio (CLR) scores on both observed and
+simulated data to assess significance quantiles.
+
+:::
+
+::: {.notes}
+
+The details of the sweep finding / paper are not the main point here;
+rather, we want to highlight the use of simulations to generate null
+distribution scores (here, for CLR values) such that significance
+quantiles can be derived and applied to the observed data.
+
+Original figure legend:
+
+> Empiricial distribution functions of SWEEPFINDER 2 composite
+> likelihood ratio (CLR) scores from the observed data and null
+> simulations for each major E. pruinosa lineage (log-transformed for
+> visualization). The null simulations were generated using the
+> inferred demographic model and recombination maps (see Methods in
+> main text). The observed and null distributions match each other
+> quite closely in the Mexican lineage (MX). In the Western lineage
+> (CO), the tail of the CLR score distribution deviates slightly from
+> the null simulations. In the Eastern lineage (PA), the tail of the
+> observed CLR score distribution is extremely heavy relative to the
+> null. This suggests the existence of selective sweeps in both CO and
+> PA, but especially in PA
+
+:::
+
+## Simulations of genomic landscapes in monkeyflower{.smaller}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![Sampling locations](assets/images/stankowski-2019-figs2.jpg){#fig-stankowski-figs2 width=80% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.column width="70%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![Genomic landscapes simulated under different divergence histories.](assets/images/stankowski-2019-fig7.png){#fig-stankowski-fig7 width=70% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::::
+
+Monkeyflower (*Mimulus aurantiacus*) radiation in California shows
+wide adaptive range and phenotypic diversity.
+@stankowski_WidespreadSelectionGene_2019 *et al* use simulations (SLiM
+and msprime) to shed light on processes that shape genomic landscapes,
+which are correlated between species.
+
+::: {.fragment}
+
+We will look more closely at this system tomorrow.
+
+:::
+
+::: {.notes}
+
+Simulations are based on variations of a neutral base model that
+starts out with an ancestral population (N=10,000) that after 10N
+generation splits to two daughter populations (N=10,000 each) and are
+simulated another 10N generations. The chromosome is 21Mbp (similar in
+size to a monkeyflower chromosome) consisting of a central neutrally
+evolving region flanked by two regions where non-neutral processes are
+"allowed". Models are:
+
+1. neutral
+2. BGS (non-neutral mutations are deleterious)
+3. Bateson-Dobzhansky-Muller incompatibility (BDMI); after split,
+   fraction variants deleterious in one population, neutral in other
+4. positive selection
+5. BGS and positive selection
+6. local adaptation; 4 but also after split some variants beneficial
+   in one population, neutral in other
+
+Figure caption:
+
+> Fig 7. Genomic landscapes simulated under different divergence
+> histories. Each row of plots shows patterns of within- and
+> between-population variation (π, dxy, and FST) across the chromosome
+> (500-kb windows) at 5 time points (N generations, where N = 10,000)
+> during one of the scenarios The selection parameter (Ns, where s =
+> Ns/N), proportion of deleterious (−) and positive mutations (+), and
+> number of migrants per generation (Nm; 0 unless stated) for these
+> simulations are as follows: (i) neutral divergence (no selection),
+> (ii) BGS (−Ns = 100; −prop = 0.1), (iii) BDMI (−Ns = 100, −prop =
+> 0.05, Nm = 0.1), (iv) positive selection (+Ns = 100, +prop = 0.001),
+> (v) BGS and positive selection (−Ns = 100, −prop = 0.1; +Ns = 100,
+> +prop = 0.005), and (vi) local adaptation (+Ns = 100, +prop = 0.001,
+> Nm = 0.1). The gray boxes in the first column show the areas of the
+> chromosome that are experiencing selection, while the white central
+> area evolves neutrally. Note that π (in populations a and b) and dxy
+> have been mean centered so they can be viewed on the same scale.
+> Uncentered values and additional simulations with different
+> parameter combinations and more time points can be found in S13 Fig.
+> BDMI, Bateson-Dobzhansky-Muller incompatibility; BGS, background
+> selection.
+
+:::
+
+## Neural network recombination landscape prediction
+
+<!-- markdownlint-disable MD013 -->
+
+:::{}
+
+![Cartoon of Recombination Landscape Estimation using Recurrent Neural
+Networks (ReLERNN) workflow
+[@adrion_PredictingLandscapeRecombination_2020]](assets/images/adrion-2020-fig1.jpg){#fig-adrion-2020-fig1
+fig-align=center width=60%}
+
+:::
+
+<!-- markdownlint-enable MD013 -->
+
+Use msprime simulations to generate training data for neural network.
+
+::: {.notes}
+
+Methods paper; one of the first examples of using msprime simulations
+to generate training data for a neural network.
+
+Figure caption:
+
+> A cartoon depicting a typical workflow using ReLERNN’s four modules
+> (shaded boxes) for (A) individually sequenced genomes or (B) pooled
+> sequences. ReLERNN can optionally (dotted lines) utilize output from
+> stairwayplot, SMC++, and MSMC to simulate under a demographic
+> history with msprime. Training inlays show the network architectures
+> used, with the GRU inlay in (B) depicting the gated connections
+> within each hidden unit. Here, r, z, ht, and ht˜ are the reset gate,
+> update gate, activation, and candidate activation, respectively (Cho
+> et al. 2014). The genotype matrix encodes alleles as reference (−1),
+> alternative (1), or padded/missing data (0; not shown). Variant
+> positions are encoded along the real number line (0–1).
+
+:::
+
+## Bibliography {.unnumbered .unlisted .smaller}
 
 ::: { #refs }
 :::

@@ -1,0 +1,24 @@
+<script type="text/javascript">
+  function hyperlink_logo() {
+    var button = document.createElement( 'div' );
+    button.className = "logo-button";
+    button.id = "logo-button";
+    button.style.visibility = "visible";
+    button.style.position = "absolute";
+    button.style.zIndex = 30;
+    button.style.fontSize = "24px";
+    button.style.left = "130px";
+    button.style.bottom = "14px";
+    button.style.top = "auto";
+    button.style.right = "auto";
+    if (window.location.host.startsWith("localhost")) {
+      button.innerHTML = `<a href="http://${window.location.host}/slides" title="Slides listing"><i class="fa fa-home"></i></a>`
+    } else {
+      button.innerHTML = '<a href="https://nbisweden.github.io/workshop-pgip/slides" title="Slides listing"><i class="fa fa-home"></i></a>';
+    }
+    document.querySelector( ".reveal" ).appendChild( button );
+  }
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  hyperlink_logo();
+});
+</script>

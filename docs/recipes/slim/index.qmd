@@ -1,0 +1,61 @@
+---
+format: html
+number-sections: true
+knitr:
+  opts_chunk:
+    collapse: true
+    code-fold: true
+---
+
+# SLiM recipes {#sec-slim-recipes}
+
+SLiM recipes can be run with wrapper `pgip-slim` to generate multiple
+simulations.
+
+```{bash }
+#| label: pgip-slim-help
+#| echo: true
+#| eval: true
+pgip-slim --help
+```
+
+As an example, the following command can be used to generate 10
+simulations using the [selective sweep](@sec-slim-recipe-selective-sweep) recipe.
+
+```{bash }
+#| label: pgip-slim-example
+#| echo: true
+#| eval: false
+pgip-slim --seed 42 -n 10 -r 1e-6 -m 1e-7 --threads 12 \
+    selective_sweep.slim -l 1000000 --outdir results/slim
+```
+
+## Selective sweep {#sec-slim-recipe-selective-sweep}
+
+```{r }
+#| label: slim-recipe-selective-sweep
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     slim code to simulate a selective sweep at a locus
+#|     on a 1Mbp chromosome, with mutation rate $\mu=10^{-8}$,
+#|     recombination rate $\rho=10^{-8}$, and $N_e=5,000$.
+#| file: selective_sweep.slim
+```
+
+Recipe to simulate a selective sweep.
+
+## Neutral simulation {#sec-slim-recipe-neutral}
+
+```{r }
+#| label: slim-recipe-neutral
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     slim code to simulate a neutrally evolving locus
+#|     on a 100kbp chromosome, with mutation rate $\mu=10^{-8}$,
+#|     recombination rate $\rho=10^{-8}$, and $N_e=5,000$.
+#| file: neutral.slim
+```
+
+Recipe to simulate a neutrally evolving locus.

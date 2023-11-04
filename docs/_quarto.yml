@@ -1,75 +1,74 @@
 project:
   type: website
-  title: "Population genomics in practice"
+  title: "DDLS Population genomics in practice"
   output-dir: _site
   pre-render:
-    - ../scripts/setup-data.sh
-    - ../scripts/setup-slides-data.sh
-    - ../scripts/setup-exercise-data.sh
-    - ../scripts/prepare.py
+    - ../scripts/init-site.sh
+    - ../scripts/setup-pgip-data.sh
+    - ../scripts/setup-data.py
   render:
-    - "*.qmd"
+    # Root
+    - "index.qmd"
+    - "contents.qmd"
+    - "info.qmd"
+    - "precourse.qmd"
+    - "references.qmd"
+    - "schedule.qmd"
+    - "syllabus.qmd"
+    # Exercises
+    - "exercises/index.qmd"
+    - "exercises/compute_environment/index.qmd"
+    - "exercises/datasets/monkeyflowers.qmd"
+    - "exercises/simulation/index.qmd"
+    - "exercises/variant_calling/index.qmd"
+    - "exercises/variant_filtering/index.qmd"
+    - "exercises/genetic_diversity/index.qmd"
+    - "exercises/population_structure/index.qmd"
+    - "exercises/demography/index.qmd"
+    - "exercises/selection/index.qmd"
+    # Slides
+    - "slides/index.qmd"
+    - "slides/pgip/index.qmd"
+    - "slides/foundations/index.qmd"
+    - "slides/simulation/index.qmd"
+    - "slides/variant_calling/index.qmd"
+    - "slides/variant_filtering/index.qmd"
+    - "slides/genetic_diversity/index.qmd"
+    - "slides/population_structure/index.qmd"
+    - "slides/demography/index.qmd"
+    - "slides/selection/index.qmd"
+    # Recipes
+    - "recipes/index.qmd"
+    - "recipes/slim/index.qmd"
+    - "recipes/slides/index.qmd"
+    # Exclude
     - "!lectures/*.qmd"
     - "*.ipynb"
 
-website:
-  title: "Population genomics in practice"
-  navbar:
-    logo: assets/logos/nbislogo-green.svg
-    right:
-      - text: "HOME"
-        href: "index.qmd"
-      - text: "CONTENTS"
-        href: "contents.qmd"
-      - text: PROGRAM
-        href: "program.qmd"
-      - text: SCHEDULE
-        href: "schedule.qmd"
-      - text: ABOUT
-        href: "about.qmd"
-      - text: SLIDES
-        href: "slides/index.qmd"
-      - text: EXERCISES
-        href: "exercises/index.qmd"
-      - icon: "twitter"
-        href: "https://twitter.com/NBISwe"
-      - icon: "github"
-        href: "https://github.com/NBISweden/workshop-pgip"
-  page-footer:
-    border: false
-    left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
-    right: "Published with [Quarto](https://quarto.org/) v<?quarto.version?>"
-  favicon: assets/logos/nbislogo-green.svg
-
-  sidebar:
-    contents:
-      - section: Slides
-        contents:
-          - slides/pgip/index.qmd
-          - slides/foundations/index.qmd
-          - slides/simulation/index.qmd
-      - section: Exercises
-        contents:
-          - exercises/simulation/index.qmd
-      - section: Code recipes
-        contents: recipes
+metadata-files:
+  - _website.yml
 
 bibliography: assets/bibliography.bib
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+from: markdown+emoji
 
 format:
   html:
     theme:
       - assets/css/custom.scss
     toc: true
-    embed-resources: true
+    embed-resources: false
     date: last-modified
     date-format: "DD-MMM-YYYY"
+    code-link: true
+    code-block-border-left: "#a7c947"
     lightbox:
       match: auto
   revealjs:
     quarto-required: ">=1.2.475"
     toc: true
+    include-after-body: assets/www/logo-hyperlink.html
+    include-before: [ '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {enableAssistiveMml: false}});</script>']
     toc-depth: 1
     slide-level: 2
     slide-number: true
@@ -81,9 +80,14 @@ format:
     fig-align: left
     fig-height: 12
     fig-width: 10
+    # All three combinations have same aspect ratio
     width: 1280
     height: 720
-    margin: 0.1
+    # width: 1920
+    # height: 1080
+    # width: 1600
+    # height: 900
+    margin: 0.08
     date: last-modified
     date-format: "DD-MMM-YYYY"
     navigation-mode: vertical
@@ -97,18 +101,21 @@ format:
       data-background-position: top left
     theme:
       - assets/css/custom.scss
-
-from: markdown+emoji
+    pointer:
+      pointerSize: 8
+      alwaysVisible: false
+      color: red
+revealjs-plugins:
+  - pointer
 
 execute:
-  freeze: auto
-  cache: true
+  cache: false
   echo: true
   warning: false
   include: true
   autodep: true
   eval: true
-  error: true
+  error: false
 
 knitr:
   opts_chunk:
@@ -129,3 +136,4 @@ jupyter:
 filters:
   - lightbox
   - fontawesome
+  - nbiscourse

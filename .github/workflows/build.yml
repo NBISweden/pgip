@@ -33,41 +33,22 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: cache-conda
-        uses: actions/cache@v3
-        env:
-          CACHE_NUMBER: 0
+      - name: Install micromamba
+        uses: mamba-org/setup-micromamba@v1
         with:
-          path: ~/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
-
-      - name: install miniconda
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          miniconda-version: "latest"
-          activate-environment: pgip
+          micromamba-version: "1.3.1-0"
           environment-file: conda-linux-64.lock
-          use-only-tar-bz2: true
-          auto-activate-base: false
-
-      # - name: Install test dependencies
-      #   run: |
-      #     conda install -c conda-forge mamba
-      #     mamba install -c conda-forge pip
-
-      - name: Install pip dependencies
-        run: |
-          pip install cyvcf2
+          environment-name: pgip
+          init-shell: bash
+          cache-environment: true
 
       - name: Install pgip dependencies
         run: |
-          pip install ipykernel
-          pip install bash_kernel
-          python -m bash_kernel.install
           python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
           python -m pip install git+https://github.com/NBISweden/pgip-tools
+          python -m pip install git+https://github.com/ksamuk/pixy.git
 
       - name: Install dotenv
         run: |
@@ -75,30 +56,25 @@ jobs:
 
       - name: Install TeXLive
         run: |
-          sudo apt update
+          sudo apt-get update
           sudo apt-get install texlive texlive-latex-extra
 
       - name: Install local pgip R package
         run: |
-          R -e "library(devtools); devtools::install_local('src/R/pgip')"
+          R -e "library(devtools); devtools::install_local('src/R/pgip', upgrade=F)"
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.3.450
 
-      - name: Install bcftools
-        run: ./scripts/install-bcftools.sh
+      - run: |
+          quarto --version
 
       - name: Add miniconda path
         run: |
           echo "$(dirname $(which R))" >> $GITHUB_PATH
           quarto check
-
-      # - name: Render project without publishing
-      #   uses: quarto-dev/quarto-actions/publish@v2
-      #   if: ${{ github.event_name == 'push' }}
-      #   with:
-      #     to: html
-      #     path: docs
 
       - name: "Set environment variables"
         run: |
@@ -107,6 +83,12 @@ jobs:
       - name: Install dvisvgm
         run: |
           sudo apt-get install dvisvgm
+
+      - name: Render project without publishing
+        uses: quarto-dev/quarto-actions/render@v2
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          path: docs
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2

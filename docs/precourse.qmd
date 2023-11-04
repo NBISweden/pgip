@@ -1,0 +1,209 @@
+---
+title: Precourse
+author: Per Unneberg
+date: ""
+sidebar: false
+format: html
+---
+
+```{r }
+#| label: dummy-code
+#| echo: false
+#| eval: false
+```
+
+## Suggested readings
+
+The first sessions consist of lectures that aim to introduce concepts
+and theory from population genetics
+
+[Population genomics in practice](slides/pgip/index.qmd) provides a
+quick overview of population genomics. Although not required, it is
+recommended to briefly go through the following papers that will be
+discussed in the lecture:
+
+- @fuller_PopulationGeneticsCoral_2020 (most important)
+- @johri_RecommendationsImprovingStatistical_2022
+
+[Population genetics](slides/foundations/index.qmd) introduces the
+foundations of population genetics. This lecture contains a lot of
+material and we strongly recommend you review the slides to be fully
+prepared for the lecture. See [notes on
+usage](slides/index.qmd#a-note-on-usage) for instructions how to view
+slides.
+
+## UPPMAX account
+
+You will need an [uppmax account](https://www.uppmax.uu.se/) to run
+some of the exercises. You can apply for an account
+[here](https://www.uppmax.uu.se/support/getting-started/applying-for-a-user-account/).
+
+### Tutorials
+
+Look at <https://www.uppmax.uu.se/support/user-guides/>, in particular
+<https://www.uppmax.uu.se/support/user-guides/guide--first-login-to-uppmax/>
+for information on how to connect to and work on uppmax.
+
+## Software installation{#sec-software-installation}
+
+Although we will mainly work on UPPMAX, some exercises, notably the
+ones that utilise [Jupyter](https://jupyter.org/) notebooks benefit
+from working in a local compute environment on your computer. We will
+use the [conda](https://docs.conda.io/en/latest/) package manager to
+install necessary requirements from the package repositories
+[bioconda](https://bioconda.github.io/) and
+[conda-forge](https://conda-forge.org/).
+
+### 1. Install conda
+
+To start using conda, follow the [quick command line install
+instructions](https://docs.conda.io/en/latest/miniconda.html#quick-command-line-install)
+to install the minimal conda installer
+[miniconda](https://docs.conda.io/en/latest/miniconda.html).
+
+### 2. Configure conda
+
+Configure conda to access the package repositories (see also [bioconda
+usage](https://bioconda.github.io/#usage)). This will modify your
+`~/.condarc` file:
+
+```{bash}
+#| label: conda-configuration
+#| echo: true
+#| eval: false
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+::: {.callout-important}
+
+Please note that the order of these commands is important! When `conda
+config --add` is run it adds the channel to the **top** of the list in
+your configuration, so your `~/.condarc` will end up looking like
+this:
+
+```
+cat ~/.condarc
+```
+
+```
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+channel_priority: strict
+```
+
+:::
+
+### 3. Create an isolated course environment
+
+It is suggested you create and change to a isolated environment `pgip`
+dedicated to the course. The command below will create an environment
+named `pgip` and install the packages `python` version 3.10, an R base
+installation (`r-base`), the `jupyter` package that provides support
+for Jupyter Notebooks, and the `mamba` package manager.
+
+```{bash}
+#| eval: false
+conda create -n pgip python=3.10 r-base mamba jupyter
+conda activate pgip
+```
+
+The `activate` command is required to access the isolated environment
+named `pgip`. Once you have activated the environment, you gain access
+to whatever programs are installed. To deactivate an environment you
+issue the command `conda deactivate`.
+
+### 4. Install packages
+
+Installation of packages is done with the `install` command, but we
+recommend you use the
+[mamba](https://mamba.readthedocs.io/en/latest/index.html) package
+manager as it is faster (`mamba` is a rewrite of `conda` in C++). An
+example of how to install packages `bcftools, angsd, mosdepth` follows
+(remember to activate `pgip`!):
+
+::: {.callout-note}
+
+#### 03-Nov-2023: Package errors
+
+Some users have reported errors in that `bcftools` and `angsd` cannot
+be found, despite setting the proper channels. We are looking into the
+issue, but unless there are issues with UPPMAX, we will not need to
+install any additional packages apart from those that went into the
+creation of the `pgip` environment above. You can therefore treat the
+code below as examples only.
+
+:::
+
+```bash
+#| eval: false
+conda activate pgip
+mamba install bcftools angsd mosdepth
+```
+
+or if you have packages listed in an environment file
+
+```bash
+#| label: conda-install-packages-from-environment-file
+#| echo: true
+#| eval: false
+mamba env update -f environment.yml
+```
+
+## Resources
+
+### Literature
+
+Lecture notes have been prepared based on the literature listed below.
+
+#### Online
+
+Graham Coop's notes on population genetics
+: Comprehensive introduction to population genetics. Contains many
+biological examples and code snippets.
+[@grahamcoop_NotesPopulationGenetics_2020].
+
+Joachim Hermisson's notes on mathematical population genetics
+: Introduction to mathematical population genetics [@hermisson_MathematicalPopulationGenetics_2017;
+@hermisson_MathematicalPopulationGenetics_2018].
+
+#### Books
+
+Population Genetics: A Concise Guide
+: John Gillespie's short but excellent introduction to population
+  genetics [@gillespie_PopulationGeneticsConcise_2004].
+
+Molecular Population Genetics
+: A more recent introduction to population genetics with more focus on
+  the analyses of sequencing data  [@hahn_MolecularPopulationGenetics_2019].
+
+Molecular Evolution and Phylogenetics
+: Over view of molecular evolution and population genetics, and also
+  phylogenetics [@nei_MolecularEvolutionPhylogenetics_2000].
+
+Mathematical Population Genetics I
+: A great reference when it comes to the mathematical treatment of
+  population genetics [@ewens_MathematicalPopulationGenetics_2004].
+
+Principles of Population Genetics
+: A comprehensive textbook covering most topics of population
+  genetics [@hartl1997principles].
+
+Elements of Evolutionary Genetics
+: Introduction to evolutionary genetics [@charlesworth_ElementsEvolutionaryGenetics_2010].
+
+Evolution
+: Great comprehensive textbook covering evolution [@barton2007evolution].
+
+Coalescent Theory: An Introduction
+: A great introduction to coalescent theory [@wakeley_CoalescentTheoryIntroduction_2008].
+
+Gene Genealogies, Variation and Evolution: A Primer in Coalescent Theory
+: Alternative introduction to coalescent with more focus on the
+  Wright-Fisher model [@hein2005gene].
+
+<br>

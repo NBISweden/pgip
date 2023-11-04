@@ -1,0 +1,64 @@
+website:
+  title: "DDLS Population genomics in practice"
+  navbar:
+    logo: assets/logos/nbislogo-green.svg
+    right:
+      - text: "Home"
+        href: "index.qmd"
+      - text: Syllabus
+        href: "syllabus.qmd"
+      - text: Precourse
+        href: "precourse.qmd"
+      - text: Contents
+        href: "contents.qmd"
+      - text: Schedule
+        href: "schedule.qmd"
+      - text: Info
+        href: "info.qmd"
+      - text: Slides
+        href: "slides/index.qmd"
+      - text: Exercises
+        href: "exercises/index.qmd"
+      - text: Code recipes
+        href: "recipes/index.qmd"
+      - icon: "twitter"
+        href: "https://twitter.com/NBISwe"
+      - icon: "github"
+        href: "https://github.com/NBISweden/workshop-pgip"
+  page-footer:
+    border: false
+    left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
+    right: "Published with [Quarto](https://quarto.org/) v<?quarto.version?>"
+  favicon: assets/logos/nbislogo-green.svg
+
+  sidebar:
+    contents:
+      - section: Slides
+        contents:
+          - slides/index.qmd
+          - slides/pgip/index.qmd
+          - slides/foundations/index.qmd
+          - slides/simulation/index.qmd
+          - slides/variant_calling/index.qmd
+          - slides/variant_filtering/index.qmd
+          - slides/genetic_diversity/index.qmd
+          - slides/population_structure/index.qmd
+          - slides/demography/index.qmd
+          - slides/selection/index.qmd
+      - section: Exercises
+        contents:
+          - exercises/index.qmd
+          - section: Data
+            contents:
+              - exercises/compute_environment/index.qmd
+              - exercises/datasets/monkeyflowers.qmd
+          - exercises/simulation/index.qmd
+          - exercises/variant_calling/index.qmd
+          - exercises/variant_filtering/index.qmd
+          - exercises/genetic_diversity/index.qmd
+          - exercises/population_structure/index.qmd
+          - exercises/demography/index.qmd
+          - exercises/selection/index.qmd
+      - section: Code recipes
+        contents:
+          - recipes/index.qmd

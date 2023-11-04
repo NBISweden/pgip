@@ -1,42 +1,1273 @@
 ---
+title: Variant calling
+author: Per Unneberg
 format: html
+execute:
+  cache: false
 ---
 
-# Variant calling {#sec-variantcalling}
+<!-- markdownlint-disable MD041 -->
 
-## Best practice pipeline
+{{< include ../_knitr.qmd >}}
 
-Briefly describe best practice pipeline (e.g. GATK, bcftools,
-freebayes), highlighting some of the problems with natural
-populations:
+{{< include ../_rlibs.qmd >}}
 
-- many workflows are human-centric and don't scale to non-model
-  organisms (e.g. chromosome numbers in GATK)
+```{bash }
+#| label: variant-calling-init-data
+#| echo: false
+#| eval: true
+fastqc -o . PUN-Y-INJ*.fastq.gz > /dev/null 2>&1
+if [ ! -e PUN-Y-INJ_R1_fastqc ]; then
+    unzip PUN-Y-INJ_R1_fastqc.zip > /dev/null 2>&1
+fi
+if [ ! -e PUN-Y-INJ_R2_fastqc ]; then
+    unzip PUN-Y-INJ_R2_fastqc.zip > /dev/null 2>&1
+fi
+```
 
-Workflows begin with mapping; do this as common step. Then, move on to
-variant calling and present three alternatives to highlight differences:
+<!-- markdownlint-enable MD041 -->
 
-1. GATK (human-centric; highlight problems)
-2. freebayes
-3. ANGSD - especially for low-coverage, however need to work with
-   genotype likelihoods
+::: {.callout-important collapse=true}
 
-Make 2 and 3 optional.
+#### {{< fa server >}} Compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+:::
+
+In this exercise we will produce a variant call set, going through the
+basic steps from quality control through read mapping to variant
+calling. We will be working on the [Monkeyflowers
+dataset](../datasets/monkeyflowers.qmd). Make sure to read the dataset
+document before running any commands as it will give you the
+biological background and general information about where to find and
+how to setup the data. We will focus on the *red* and *yellow*
+ecotypes in what follows.
+
+::: {.callout-note}
+
+This is a technical exercise, where the focus is not so much on the
+biology as on getting programs to run and interpreting the output.
+
+:::
+
+::: {.callout-important}
+
+The commands of this document have been run on a subset (a subregion)
+of the data. Therefore, although you will use the same commands, your
+results will differ from those presented here.
+
+:::
+
+::: {.callout-tip collapse=true}
+
+## Learning objectives
+
+- Perform qc on sequencing reads and interpret results
+- Prepare reference for read mapping
+- Map reads to reference
+- Mark duplicates
+- Perform raw variant calling to generate a set of sites to exclude
+  from recalibration
+- Perform base quality score recalibration
+- Perform variant calling on base recalibrated data
+- Do genotyping on all samples and combine results to a raw variant
+  call set
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Data setup
+
+:::{.panel-tabset}
+
+#### {{< fa server >}} UPPMAX
+
+<!-- markdownlint-disable MD038 -->
+
+Move to your course working directory `/proj/{{< var uppmaxproject
+>}}/users/USERNAME`, create an exercise directory called
+`monkeyflower` and `cd` to it:
+
+<!-- markdownlint-enable MD038 -->
+
+```bash
+cd /proj/{{< var uppmaxproject >}}/users/USERNAME
+mkdir -p monkeyflower
+cd monkeyflower
+```
+
+The variant calling exercise will be run on small datasets, so to
+avoid name clashes, create a directory `variant_calling` and cd to it:
+
+```{bash }
+#| label: create-variant-calling-dir
+#| echo: true
+#| eval: false
+mkdir -p variant_calling
+cd variant_calling
+```
+
+Retrieve the data with `rsync`. You can use the `--dry-run` option to
+see what is going to happen; just remove it when you are content:
+
+```bash
+# Remove the dry run option to retrieve data
+rsync --dry-run -av \
+      /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/small .
+```
+
+#### {{< fa laptop >}} Local
+
+Create an exercise directory called `monkeyflower` and `cd` to it:
+
+```{bash }
+#| label: create-monkeyflower-directory-local
+#| echo: true
+#| eval: false
+mkdir -p monkeyflower
+cd monkeyflower
+```
+
+The variant calling exercise will be run on small datasets, so to
+avoid name clashes, create a directory `variant_calling` and cd to it:
+
+```{bash }
+#| label: create-variant-calling-dir-local
+#| echo: true
+#| eval: false
+mkdir -p variant_calling
+cd variant_calling
+```
+
+Retrieve the data `{{< var webexport.url
+>}}/monkeyflower/small.tar.gz` with `wget`^[The password is provided
+by the course instructor]:
+
+```bash
+wget --user pgip --password PASSWORD {{< var webexport.url >}}/monkeyflower/small.tar.gz
+tar -zxvf small.tar.gz
+```
+
+:::
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Tools
+
+:::{.panel-tabset}
+
+#### Listing
+
+- [bcftools](https://samtools.github.io/bcftools/bcftools.html) [@danecek_TwelveYearsSAMtools_2021]
+- [bwa](https://github.com/lh3/bwa) [@li_AligningSequenceReads_2013]
+- [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [Genome Analysis ToolKit  (GATK)](https://gatk.broadinstitute.org/hc/en-us)   [@depristo_FrameworkVariationDiscovery_2011]
+- [multiqc](https://multiqc.info/) [@ewels_MultiQCSummarizeAnalysis_2016]
+- [picard](https://github.com/broadinstitute/picard) [@Picard2019toolkit]
+- [qualimap](http://qualimap.conesalab.org/) [@okonechnikov_QualimapAdvancedMultisample_2016]
+- [samtools](https://github.com/samtools/samtools) [@danecek_TwelveYearsSAMtools_2021]
+
+#### {{< fa server >}} UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools \
+       GATK/4.3.0.0 bwa/0.7.17 FastQC/0.11.9 \
+       MultiQC/1.12 picard/2.27.5 samtools/1.17 \
+       bcftools/1.17 QualiMap/2.2.1
+```
+
+#### {{< fa laptop >}} Conda
+
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - bcftools=1.15.1
+  - gatk4=4.4.0.0
+  - bwa=0.7.17
+  - fastqc=0.12.1
+  - multiqc=1.16
+  - picard=3.1.0
+  - qualimap=2.2.2d
+  - samtools=1.15.1
+```
+
+:::
+
+:::
+
+## Variant calling overview
+
+A generic variant calling workflow consists of the following basic
+steps:
+
+1. read quality control and filtering
+2. read mapping
+3. removal / marking of duplicate reads
+4. joint / sample-based variant calling and genotyping
+
+There are different tweaks and additions to each of these steps,
+depending on application and method.
+
+### 1. Read quality control
+
+:::{.column-margin}
+
+:::{#fig-fastqc-base-quality}
+
+![](PUN-Y-INJ_R1_fastqc/Images/per_base_quality.png)
+![](PUN-Y-INJ_R2_fastqc/Images/per_base_quality.png)
+
+Per base quality scores, read 1 (upper) and read 2 (lower panel),
+obtained from the FastQC program. Quality values are on the $y$-axis,
+base position in sequence read on $x$-axis.
+
+:::
+
+:::
+
+DNA sequencers score the quality of each sequenced base as [phred
+quality scores](https://en.wikipedia.org/wiki/Phred_quality_score),
+which is equivalent to the probability $P$ that the call is incorrect.
+The base quality scores, denoted $Q$, are defined as
+
+$$
+Q = -10 \log_{10} P
+$$
+
+which for $P=0.01$ gives $Q=20$. Converting from quality to
+probability is done by solving for $P$:
+
+$$
+P = 10^{-Q/10}
+$$
+
+Hence, a base quality score $Q=20$ (somtimes written Q20) corresponds
+to a 1% probability that the call is incorrect, Q30 a 0.1%
+probability, and so on, where the higher the quality score, the
+better. Bases with low quality scores are usually discarded from
+downstream analyses, but what is a good threshold? The human genome
+has approximately 1 SNP per 1,000 bp, which means sequencing errors
+will be ten times as probable in a single read for Q20 base calls. A
+reasonable threshold is therefore around Q20-Q30 for many purposes.
+
+The base qualities typically drop towards the end of the reads
+(@fig-fastqc-base-quality). Prior to mapping it may therefore be
+prudent to remove reads that display too high drop in quality, too low
+mean quality, or on some other quality metric reported by the qc
+software.
+
+The quality scores are encoded using ASCII codes. An example of a
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) sequence is given
+below. The code snippet shows an example of shell commands^[For any
+shell command, use the option `--help` to print information about the
+commands and its options. `zcat` is a variant of the `cat` command
+that prints the contents of a file on the terminal; the `z` prefix
+shows the command works on compressed files, a common naming
+convention. `head` views the first lines of a file, and `cut` can be
+used to cut out columns from a tab-delimited file, or in this case,
+cut the longest strings to 30 characters width.] that are separated by
+a so-called pipe (`|`) character which takes the output from one
+process and sends it as input to the next^[For more information, see
+[unix pipelines](<https://en.wikipedia.org/wiki/Pipeline_(Unix)>)].
+
+Note that we use the *long* option names to clarify commands, and we
+aim to do so consistently when a new command is introduced. Once you
+feel confident you know what a command does, you will probably want to
+switch to *short* option names, and we may do so in the instructions
+for some commonly used commands (e.g., `head -n`) without warning.
+Remember to use `--help` to examine command options.
+
+```{bash }
+#| label: cat-fastq
+#| echo: true
+#| eval: true
+#| fig-cap: |
+# Command using long (-- prefix) option names
+zcat PUN-Y-INJ_R1.fastq.gz | head --lines 4 | cut --characters -30
+# Equivalent command using short (single -, single character) option names
+# zcat PUN-Y-INJ_R1.fastq.gz | head -n 4 | cut -c -30
+```
+
+A FASTQ entry consists of four lines:
+
+1. sequence id (prefixed by `@`)
+2. DNA sequence
+3. separator (`+`)
+4. phred base quality scores
+
+::: {.callout-exercise}
+
+{{< fa brands linux >}} Use the command `wc` to determine how many sequences are in `PUN-Y-INJ_R1.fastq.gz`.
+
+::: {.callout-hint}
+
+The `wc` help page (`wc --help`) shows `wc` prints newline, word and
+byte counts for a file, where newline is what we're after. We can
+restrict the output to newline characters with the `--lines` option.
+Use `zcat` to print the contents of `PUN-Y-INJ_R1.fastq.gz` to the
+screen, piping (`|`) the output to `wc --lines`.
+
+:::
+
+::: {.callout-answer}
+
+```{bash }
+#| label: wc-exercise-answer
+#| echo: true
+#| eval: false
+zcat PUN-Y-INJ_R1.fastq.gz | wc --lines
+```
+
+Since there are four lines per sequence (id, sequence, `+` separator,
+qualities) you need to divide the final number by four (622744 / 4).
+
+:::
+
+:::
+
+### 2. Read mapping
+
+Read mapping consists of aligning sequence reads, typically from
+individuals in a population (a.k.a. resequencing) to a reference
+sequence. The choice of read mapper depends, partly on preference, but
+mostly on the sequencing read length and application. For short reads,
+a common choice is [bwa-mem](https://github.com/lh3/bwa), and for
+longer reads [minimap2](https://github.com/lh3/minimap2).
+
+In what follows, we will assume that the sequencing protocol generates
+paired-end short reads (e.g., from
+[Illumina](https://ngisweden.scilifelab.se/technologies/illumina/)).
+In practice, this means a DNA fragment has been sequenced from both
+ends, where fragment sizes have been selected such that reads do not
+overlap (i.e., there is unsequenced DNA between the reads of a given
+*insert size*).
+
+The final output of read mapping is an alignment file in [binary
+alignment map
+(BAM)](https://en.wikipedia.org/wiki/Binary_Alignment_Map) format or variants thereof.
+
+### 3. Removal / marking of duplicate reads
+
+During sample preparation or DNA amplification with PCR, it may happen
+that a single DNA fragment is present in multiple copies and therefore
+produces redundant sequencing reads. This shows up as alignments with
+identical start and stop coordinates. These so-called duplicate reads
+should be marked prior to any downstream analyses. The most commonly
+used tools for this purpose are `samtools markdup` and `picard
+MarkDuplicates`.
+
+### 4. Variant calling and genotyping
+
+Once BAM files have been produced, it is time for variant calling,
+which is the process of identifying sites where there sequence
+variation. There are many different variant callers, of which we will
+mention four.
+
+[bcftools](https://samtools.github.io/bcftools/bcftools.html) is a
+toolkit to process variant call files, but also has a variant caller
+command. We will use bcftools to look at and summarize the variant
+files.
+
+[freebayes](https://github.com/freebayes/freebayes) uses a Bayesian
+model to call variants. It may be time-consuming in high-coverage
+regions, and one therefore may have to mask repetitive and other
+low-complexity regions.
+
+[ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD) is optimized for
+low-coverage data. Genotypes aren't called directly; rather, genotype
+likelihoods form the basis for all downstream analyses, such as
+calculation of diversity or other statistics.
+
+Finally, [GATK
+HaplotypeCaller](https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller)
+performs local realignment around variant candidates, which avoids the
+need to run the legacy GATK IndelRealigner. Realignment improves
+results but requires more time to run. GATK is optimized for human
+data. For instance, performance drops dramatically if the reference
+sequence consists of many short scaffolds/contigs, and there is a size
+limit to how large the chromosomes can be. It also requires some
+parameter optimization and has a fairly complicated workflow
+[@hansen_VariantCallingNext_2016].
+
+### GATK best practice variant calling
+
+We will base our work on the GATK [Germline short variant discovery
+workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-).
+In addition to the steps outlined above, there is a step where quality
+scores are recalibrated in an attempt to correct errors produced by
+the base calling procedure itself.
+
+GATK comes with a large set of tools. For a complete list and documentation, see the @ToolDocumentationIndex_2023.
+
+## Preparation: reference sequence index and read QC
+
+Prior to mapping we need to create a database index. We also generate
+a fasta index and a sequence dictionary for use with the `picard`
+toolkit.
+
+::: {.callout-important}
+
+On UPPMAX, the command to run `picard` is `java -jar
+$PICARD_HOME/picard.jar`. The UPPMAX command version is included as a
+comment whenever there is a command running `picard`. Make sure to
+uncomment when copying the code.
+
+:::
+
+```{bash }
+#| label: samtools-faidx
+#| echo: true
+#| eval: true
+#| results: hide
+samtools faidx M_aurantiacus_v1.fasta
+# java -jar $PICARD_HOME/picard.jar CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
+picard CreateSequenceDictionary --REFERENCE M_aurantiacus_v1.fasta
+bwa index M_aurantiacus_v1.fasta
+```
+
+With the program `fastqc` we can generate quality control reports for
+all input `FASTQ` files simultaneously, setting the output directory
+with the `-o` flag:
+
+```{bash }
+#| label: fastqc-red
+#| echo: true
+#| eval: true
+#| results: hide
+# Make fastqc output directory; --parents makes parent directories as
+# needed
+mkdir --parents fastqc
+fastqc --outdir fastqc *fastq.gz
+```
+
+::: {.callout-exercise}
+
+`cd` to the output directory and look at the `html` reports. Do you
+notice any difference between read 1 (R1) and read 2 (R2)?
+
+::: {.callout-answer}
+
+```{bash }
+#| label: fastqc-exercise-answer
+#| echo: true
+#| eval: false
+cd fastqc
+open PUN-Y-INJ_R1_fastqc.html
+open PUN-Y-INJ_R2_fastqc.html
+```
+
+The traffic light summary indicates whether a given quality metric has
+passed or not. Typically, read 2 has slightly lower quality and more
+quality metrics with warnings. Since these reads have been deposited
+in the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
+(SRA), it is likely they were filtered prior to upload, and we will
+not take any further action here.
+
+:::
+
+:::
+
+We will use `MultiQC` later on to combine the results from several
+output reports.
 
 ## Read mapping
 
-### Duplicate removal
+We will start by mapping `FASTQ` read pairs to the reference. We will
+use the `bwa` read mapper together with `samtools` to process the
+resulting output.
 
-Picard MarkDuplicates or bamUtil dedup (samtools rmdup deprecated)
+### Read group information identifies sequence sets
 
-## Variant calling
+Some of the downstream processes require that reads have been assigned
+`read groups` [@ReadGroups_2023], which is a compact string
+representation of a set of reads that originate from a sequencing unit
+and sample. Assigning read groups becomes particularly important for
+multiplexing protocols, or when a sample has been sequenced on
+different lanes or platform units, as it allows for the identification
+of sequence batch issues (e.g., poor sequence quality). Here, we want
+to assign a unique `ID`, the sample id (`SM`), and the sequencing
+platform (`PL`), where the latter informs the algorithms on what error
+model to apply. The read group is formatted as
+`@RG\tID:uniqueid\tSM:sampleid\tPU:platform`, where `\t` is the tab
+character. More fields can be added; see the SAM specification,
+section 1.3 [@HTSFormatSpecifications_2023] for a complete list.
 
-### GATK workflow
+Sample information is available in the `sampleinfo.csv` file:
 
-[@hansen_VariantCallingNext_2016]
+```{bash }
+#| label: head-sampleinfo
+#| echo: true
+#| eval: true
+head -n 3 sampleinfo.csv
+```
 
-### Freebayes (optional)
+The sample information is a combination of the run information
+obtained from the SRA (BioProject `PRJNA549183`) and the sample sheet
+provided with the article. An additional column `SampleAlias` has been
+added that names samples using a three-letter abbreviation for
+population hyphenated with the sample identifier. For the *ssp.
+puniceus*, an additional one-letter character denoting the color
+ecotype is inserted between population and sample id. `PUN-Y-BCRD`
+then is a sample from the *puniceus* subspecies with the yellow
+ecotype. We will use the `Run` column as unique `ID`, `SampleAlias` as
+the sample id `SM`, and `ILLUMINA` as the platform `PL`.
 
-### ANGSD (optional)
+### Read mapping with bwa and conversion to BAM format with samtools
 
-# References
+Let's map the FASTQ files corresponding to sample `PUN-Y-BCRD`:
+
+```{bash }
+#| label: map-pun-y-bcrd-with-bwa
+#| echo: true
+#| eval: true
+#| results: hide
+bwa mem -R "@RG\tID:SRR9309788\tSM:PUN-Y-BCRD\tPL:ILLUMINA" -t 4 \
+ -M M_aurantiacus_v1.fasta PUN-Y-BCRD_R1.fastq.gz PUN-Y-BCRD_R2.fastq.gz | \
+ samtools sort - | samtools view --with-header --output PUN-Y-BCRD.sort.bam
+```
+
+There's a lot to unpack here. First, the `-R` flag to `bwa mem` passes
+the read group information to the mapper. `-t` sets the number of
+threads, and `-M` marks shorter split hits as secondary, which is for
+Picard compatibility^[`bwa` consistently uses short option names.
+Also, there is no `--help` option. To get a list of options, at the
+command line simply type `bwa mem`, or `man bwa mem` for general help
+and a complete list of options.]. The first positional argument is the
+reference sequence, followed by the FASTQ files for read 1 and 2,
+respectively.
+
+The output would be printed on the screen (try running the `bwa mem`
+command alone!), but we pipe the output to `samtools sort` to sort the
+mappings (by default by coordinate). The `-` simply means "read from
+the pipe".
+
+Finally, `samtools view` converts the text output to binary format
+(default), including the header information (short option `-h`). You
+can use the same command to view the resulting output on your screen:
+
+```{bash }
+#| label: samtools-view-example
+#| echo: true
+#| eval: true
+samtools view PUN-Y-BCRD.sort.bam | head -n 2
+```
+
+::: {.callout-exercise}
+
+Look at the header information of the output BAM file. What does the
+`@SQ` tag stand for, and what does the information on that line tell
+you?
+
+::: {.callout-hint}
+
+To get a list of options, type `samtools view`. The `-H` or
+`--header-only` option views the header only.
+
+:::
+
+::: {.callout-answer}
+
+```{bash }
+#| label: samtools-view-answer
+#| echo: true
+#| eval: true
+samtools view -H PUN-Y-BCRD.sort.bam
+```
+
+Although you can probably figure it out by looking at the data, do
+have a glance at the SAM format specification mentioned above. The
+`@SQ` tag corresponds to the reference sequence dictionary and tells
+you what region you are looking at (chromosome `LG4`, which has a
+length `LN` 100000 bases; the example reference sequence was created
+by extracting the region on `LG4` from position 12000000 to 12100000).
+
+:::
+
+:::
+
+### Mapping from uBAM file
+
+There is an alternative storage format for the FASTQ files called
+[`uBAM`](https://gatk.broadinstitute.org/hc/en-us/articles/360035532132-uBAM-Unmapped-BAM-Format)
+(unmapped BAM format). The GATK developers promote its use in lieu of
+FASTQ files since BAM files can store more metadata associated with
+sequencing runs. The workflow is slightly more complex, but the files
+have been prepared for you so you don't need to worry about generating
+the uBAM files.
+
+To facilitate downstream processing, we will from now on make use of
+[environment
+variables](https://en.wikipedia.org/wiki/Environment_variable)^[Briefly,
+environment variables are a great way to generalise commands. To reuse
+the command, one only needs to modify the value of the variable.] to
+refer to a sample and the reference sequence. Retrieve the SRR id from
+the sampleinfo file.
+
+```{bash }
+#| label: map-ubam-with-envvars
+#| echo: true
+#| eval: true
+#| results: hide
+export SRR=SRR9309790
+export SAMPLE=PUN-Y-INJ
+export REF=M_aurantiacus_v1.fasta
+samtools fastq ${SAMPLE}.unmapped.bam | \
+ bwa mem -R "@RG\tID:${SRR}\tSM:${SAMPLE}\tPL:ILLUMINA" -t 4 -p -M ${REF} - | \
+ samtools sort - | samtools view -h -o ${SAMPLE}.sort.bam
+```
+
+```{r }
+#| label: set-sample-envvars
+#| echo: false
+#| eval: true
+Sys.setenv(SRR = "SRR9309790", SAMPLE = "PUN-Y-INJ", REF = "M_aurantiacus_v1.fasta")
+```
+
+Note that we here need to use the command `samtools fastq` to read the
+contents of `${SAMPLE}.unmapped.bam` and pipe the output to `bwa mem`.
+
+### Mark duplicate reads with Picard MarkDuplicates
+
+Once mapping is completed, we must find and mark duplicate reads as
+these can distort the results of downstream analyses, such as variant
+calling. We here use `Picard MarkDuplicates`^[The actual command call
+will depend on how Picard was installed. The conda installation
+provides access via the `picard` wrapper, whereas on UPPMAX you must
+point `java` to the actual jar file (`java -jar
+$PICARD_ROOT/picard.jar`)]:
+
+```{bash }
+#| label: picard-mark-duplicates
+#| echo: true
+#| eval: true
+#| results: hide
+#java -jar $PICARD_HOME/picard.jar MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
+#    --METRICS_FILE ${SAMPLE}.sort.dup_metrics.txt \
+#    --OUTPUT ${SAMPLE}.sort.dup.bam
+picard MarkDuplicates --INPUT ${SAMPLE}.sort.bam \
+    --METRICS_FILE ${SAMPLE}.sort.dup_metrics.txt \
+    --OUTPUT ${SAMPLE}.sort.dup.bam
+```
+
+The metrics output file contains information on the rate of
+duplication. We will include the output in the final `MultiQC` report.
+
+An additional mapping quality metric of interest is percentage mapped
+reads and average read depth. We can use `qualimap bamqc` to collect
+mapping statistics from a BAM file:
+
+```{bash }
+#| label: qualimap-bamqc
+#| echo: true
+#| eval: true
+#| results: hide
+qualimap bamqc -bam ${SAMPLE}.sort.bam
+```
+
+A summary of the results is exported to
+`${SAMPLE}.sort_stats/genome_results.txt`; we show percent mapping and
+average coverage below as examples:
+
+```{bash }
+#| label: qualimap-genome-results-example
+#| echo: true
+#| eval: true
+grep "number of mapped reads" ${SAMPLE}.sort_stats/genome_results.txt
+grep "mean coverageData" ${SAMPLE}.sort_stats/genome_results.txt
+```
+
+::: {.callout-note collapse=true}
+
+## Why does the sample have such low coverage?
+
+If you look at the coverage reported in `sampleinfo.csv`, column `Seq.
+Depth`, you will note that the observed coverage here is much lower.
+This has to do with how the exercise data set was prepared; only read
+pairs where *both* reads mapped within the example region were
+retained.
+
+:::
+
+These statistics will also be picked up by `MultiQC`.
+
+### Generate high quality known sites for BQSR
+
+Once we have a duplicate marked BAM file, we can proceed with Base
+Quality Score Recalibration (BQSR). The purpose here is to correct any
+systematic errors made by the sequencing machine. This is done by
+applying a machine learning model. Before we do so, however, we need
+to generate a list of *known sites* that should not be
+recalibrated^[If we don't supply a list of known sites, the variants
+will be treated as errors and therefore recalibrated to the reference
+state.] Therefore, we will first perform a preliminary round of
+variant calling and filtering to generate a known sites callset.
+
+```{bash }
+#| label: gatk-known-sites-callset
+#| echo: true
+#| eval: true
+#| results: hide
+gatk HaplotypeCaller -OVI true \
+  --emit-ref-confidence GVCF \
+  --annotation FisherStrand -A QualByDepth -A MappingQuality -G StandardAnnotation \
+  --input ${SAMPLE}.sort.dup.bam --output ${SAMPLE}.sort.dup.raw.hc.g.vcf.gz \
+  --reference ${REF}
+gatk VariantFiltration -OVI true \
+  --variant ${SAMPLE}.sort.dup.raw.hc.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+     --filter-name FisherStrand --filter 'FS > 50.0' \
+  --filter-name QualByDepth --filter 'QD < 4.0' \
+  --filter-name MappingQuality --filter 'MQ < 50.0'
+```
+
+[`HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/articles/360037422451-HaplotypeCaller)
+is GATK's variant caller that calls both SNPs and indels by realigning
+sequences in the vicinity of sites that harbor variation. We apply the
+`--emit-ref-confidence (-ERC)` option to generate `GVCF` output
+format, a condensed VCF format that includes non-variant sites as well
+as variant sites. The `--annotation` (`-A`) option adds annotations to
+the output that are used in the subsequent filtering step.
+
+::: {.callout-exercise}
+
+{{< fa brands linux >}} What does the `-OVI` parameter do?
+
+::: {.callout-answer}
+
+Either go to the `HaplotypeCaller` documentation page or type^[Some
+programs, such as GATK, print their help output to `stderr`, one of
+two so-called [standard output
+streams](https://en.wikipedia.org/wiki/Standard_streams) (the other
+being `stdout`). The `2>&1` is a construct that *redirects* (`>`) the
+output from stderr (`2`) to stdout (`1`) and does so in the background
+(`&`). By piping to `less` we can scroll through the documentation.]
+
+```{bash }
+#| echo: true
+#| eval: false
+gatk HaplotypeCaller --help 2>&1 | less
+```
+
+and look for `-OVI`. This option is shorthand for
+`--create-output-variant-index` and makes `HaplotypeCaller` create a
+VCF index.
+
+:::
+
+:::
+
+[`VariantFiltration`](https://gatk.broadinstitute.org/hc/en-us/articles/13832750065947-VariantFiltration)
+does what its name suggests. The `--filter-name` / `--filter` option
+pairs apply named filters to the input data. For instance, we here
+remove variants whose mapping quality is below 50.0.
+
+::: {.callout-exercise}
+
+Go to the [Tool Documentation
+Index](https://gatk.broadinstitute.org/hc/en-us/articles/13832655155099--Tool-Documentation-Index)
+and look up the documentation for the `FisherStrand` and `QualByDepth`
+variant annotations. What do they do and why do you think the filters
+are applied as they are?
+
+:::
+
+Now we have *per-sample* known sites callsets that can be used as
+input to BQSR.
+
+### Base quality score recalibration
+
+Base quality score recalibration consists of two commands:
+
+```{bash }
+#| label: bqsr
+#| echo: true
+#| eval: true
+#| results: hide
+gatk BaseRecalibrator --input ${SAMPLE}.sort.dup.bam \
+  --reference ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.recal.table
+gatk ApplyBQSR --bqsr-recal-file ${SAMPLE}.sort.dup.recal.table \
+  --input ${SAMPLE}.sort.dup.bam --output ${SAMPLE}.sort.dup.recal.bam
+```
+
+[BaseRecalibrator](https://gatk.broadinstitute.org/hc/en-us/articles/13832708374939-BaseRecalibrator)
+compiles empirical data for all non-variant sites for an input BAM
+file for a number of covariates (e.g., nucleotide context). The basic
+idea is to fit a probability of error (i.e., a quality score of
+sorts), to observed covariate combinations, which is recorded in a
+*recalibration table* file. The probability is then used correct the
+quality scores reported by the sequencing machine in
+[ApplyBQSR](https://gatk.broadinstitute.org/hc/en-us/articles/13832692459163-ApplyBQSR).
+
+### OPTIONAL: Examine the output of BQSR
+
+We can investigate how well BQSR has performed by applying two more
+commands. First, we generate a calibration table for the recalibrated
+BAM file:
+
+```{bash }
+#| label: bqsr-make-after-covariate-table
+#| echo: true
+#| eval: true
+#| results: hide
+gatk BaseRecalibrator --input ${SAMPLE}.sort.dup.recal.bam \
+  --reference ${REF} --known-sites ${SAMPLE}.sort.dup.raw.hc.filtered.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.recal.after.table
+```
+
+Then we use the two calibration tables as input to
+[AnalyzeCovariates](https://gatk.broadinstitute.org/hc/en-us/articles/13832627271963-AnalyzeCovariates)
+to generate a pdf output (and a csv file that we will use in the next
+code block):
+
+```{bash }
+#| label: bqsr-analyze-covariates
+#| echo: true
+#| eval: true
+#| results: hide
+gatk AnalyzeCovariates --before-report-file ${SAMPLE}.sort.dup.recal.table \
+  --after-report-file ${SAMPLE}.sort.dup.recal.after.table \
+  --plots-report-file ${SAMPLE}.sort.dup.recal.after.pdf \
+  --intermediate-csv-file ${SAMPLE}.sort.dup.recal.after.csv
+```
+
+@fig-bqsr-analyze-covariates-plot shows an example plot of quality
+values for base substitutions. There are more plots and summaries in
+the pdf output file.
+
+```{r }
+#| label: fig-bqsr-analyze-covariates-plot
+#| echo: false
+#| eval: true
+#| fig-width: 10
+#| fig-height: 5
+#| column: margin
+#| fig-cap: |
+#|    Plot of base substitution empirical and recalibrated
+#|    quality scores. Note how the empirical quality scores after recalibration
+#|    follow the reported qualities.
+sample <- Sys.getenv("SAMPLE")
+data <- read.csv(paste0(sample, ".sort.dup.recal.after.csv"))
+ggplot(
+  subset(data, EventType == "Base Substitution" & CovariateName == "QualityScore"),
+  aes(AverageReportedQuality, EmpiricalQuality, color = Recalibration)
+) +
+  geom_point(size = 3) +
+  geom_abline()
+```
+
+Several rounds of generating known sites followed by BQSR can be
+applied until convergence. This means that running BQSR can be
+time-consuming, and one side effect is that the resulting BAM output
+files can become very large, which may or not be a problem. Also,
+sequencing technologies keep improving, potentially eliminating
+concerns of biased quality scores. This begs the question: is it worth
+running BQSR? For the time being, the GATK developers do recommend
+that BQSR always be run. Keep in mind though, that for non-model
+organisms, one issue is that there seldom is a catalogue of known
+sites, which means the user has to bootstrap such a call set, like we
+did above. For a more complete discussion, see the [technical
+documentation on
+BQSR](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-).
+
+## Variant calling and genotyping
+
+After we have generated the recalibrated BAM files, we can proceed
+with the "real" variant calling. We once again run GATK
+`HaplotypeCaller` and `VariantFiltration`.
+
+::: {.callout-exercise}
+
+Using the code in section [Generate high quality known sites for
+BQSR](index.qmd#generate-high-quality-known-sites-for-bqsr) as a
+template, run GATK `HaplotypeCaller` on the recalibrated BAM file,
+followed by `VariantFiltration`. For the latter, modify the filters to
+
+- filterName: FisherStrand, filter: FS > 60.0
+- filterName: QualByDepth, filter: QD < 2.0
+- filterName: MappingQuality, filter: MQ < 40.0
+
+Change the output file label from `raw` to `recal` (i.e.,
+`.sort.dup.raw` becomes `.sort.dup.recal`).
+
+::: {.callout-answer}
+
+```{bash }
+#| label: variant-calling-on-recal
+#| echo: true
+#| eval: true
+#| results: hide
+gatk HaplotypeCaller --create-output-variant-index true \
+  --emit-ref-confidence GVCF \
+  --annotation FisherStrand --annotation QualByDepth --annotation MappingQuality \
+  --annotation-group StandardAnnotation \
+  --input ${SAMPLE}.sort.dup.recal.bam --output ${SAMPLE}.sort.dup.recal.hc.g.vcf.gz \
+  --reference ${REF}
+gatk VariantFiltration -OVI true \
+  --variant ${SAMPLE}.sort.dup.recal.hc.g.vcf.gz \
+  --output ${SAMPLE}.sort.dup.recal.hc.filtered.g.vcf.gz \
+     --filter-name FisherStrand --filter 'FS > 60.0' \
+  --filter-name QualByDepth --filter 'QD < 2.0' \
+  --filter-name MappingQuality --filter 'MQ < 40.0'
+```
+
+:::
+
+:::
+
+That concludes the sample-specific part of the variant calling
+workflow! Now we need to combine the samples and perform genotyping.
+To do so, we need to run the same commands, from mapping to variant
+calling and filtering on recalibrated files, for all samples.
+
+::: {.callout-exercise}
+
+If time permits, run the workflow on some more samples (e.g., `PUN-R-ELF`).
+
+::: {.callout-important}
+
+There are prepared gVCF files for download so there's no need to run
+the workflow on all samples.
+
+:::
+
+:::
+
+### Compile QC metrics
+
+Identifying sample quality issues is crucial for downstream
+processing. Quality metrics that indicate problems with a sample could
+potentially lead to its removal entirely from subsequent analyses.
+Many programs generate QC metrics, but as it is difficult to get an
+overview by sifting through all separate QC reports, it is recommended
+that you compile them with `MultiQC`. Running `MultiQC` is as simple
+as
+
+```{bash }
+#| label: multiqc-run
+#| echo: false
+#| eval: true
+#| results: hide
+multiqc -f .
+```
+
+```{bash }
+#| label: multiqc
+#| echo: true
+#| eval: false
+multiqc .
+```
+
+Open the report `multiqc_report.html` to quickly QC your data. There
+are lots of ways you can interactively modify the report to make more
+logical groupings (e.g., grouping reports by sample^[MultiQC does a
+fairly good job at this as it is, but it does so by guessing sample
+names from file names. You may need to help it along the way by using
+the rename tab.]) , but we won't go into this topic in more detail
+here.
+
+### Combine genomic VCF files and genotype
+
+We are now at the stage where we can do genotyping of our samples.
+This done by first combining individual sample gVCF files with GATK
+`CombineGVCFs`, followed by genotyping with `GenotypeGVCFs`. We use
+the label `subset` to indicate that we are looking at a sample subset.
+
+```{bash }
+#| label: combine-genotype-gvcfs
+#| echo: true
+#| eval: true
+#| results: hide
+# -OVI = --create-output-variant-index
+# -R = --reference
+gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} \
+  --variant PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
+  --variant PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.subset.g.vcf.gz \
+  --output variantsites.subset.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.subset.g.vcf.gz \
+  --output allsites.subset.vcf.gz --all-sites
+```
+
+Here, the option `--all-sites` tells `gatk GenotypeGVCFs` to include
+variant as well as invariant sites in the output. Many software
+packages that are based on genetic diversity statistics implicitly
+assume that invariant sites are all homozygous reference
+[@korunes_PixyUnbiasedEstimation_2021]. However, if invariant sites
+lack sequencing coverage, they should preferably be treated as
+*missing* data, which theoretically could harbour (unobserved) variant
+sites. Therefore, the inclusion of invariant sites provides a way to
+generate estimates of missing data, based on, e.g., sequencing depth
+profiles.
+
+Inclusion of invariant sites comes at a cost however; the VCF file
+size may increase dramatically, to the point that it becomes
+impractical or even impossible to process. We generate both types of
+files for future analyses.
+
+::: {.callout-exercise}
+
+Create variant call sets `allsites.vcf.gz` and `variantsites.vcf.gz`
+but for **all** the red and yellow samples.
+
+::: {.callout-hint}
+
+You need to specify all gVCF input files via the `--variants` (`-V`)
+option. To get the sample names, look at the first column of
+`sampleinfo.csv`:
+
+```{bash }
+#| label: get-yellow-samples
+#| echo: true
+#| eval: true
+cat sampleinfo.csv | grep yellow | cut --fields 6 --delimiter ","
+```
+
+:::
+
+::: {.callout-answer}
+
+```{bash }
+#| label: combine-red-yellow-samples
+#| echo: true
+#| eval: false
+gatk CombineGVCFs -OVI true --output combine.subset.g.vcf.gz --reference ${REF} \
+     -V PUN-R-ELF.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-JMC.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-LH.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-MT.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-R-UCSD.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-BCRD.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-INJ.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-LO.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-PCT.sort.dup.recal.hc.g.vcf.gz \
+     -V PUN-Y-POTR.sort.dup.recal.hc.g.vcf.gz
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
+  -O allsites.vcf.gz --all-sites
+gatk GenotypeGVCFs -OVI true -R ${REF} -V combine.g.vcf.gz \
+  -O variantsites.vcf.gz
+```
+
+:::
+
+:::
+
+## Looking closer at variants with bcftools
+
+As a final step, let's run a couple of commands to view variants and
+summarize variant statistics.
+
+### Compiling statistics
+
+First out is `bcftools stats`, which compiles a summary of statistics,
+such as number of variants, quality distribution over variants, indel
+distributions and more.
+
+```{bash }
+#| label: bcftools-stats-allsites
+#| echo: true
+#| eval: true
+bcftools stats allsites.vcf.gz > allsites.vcf.gz.stats
+```
+
+The output text file consists of report sections that can be easily
+extracted with the `grep` command by virtue of the fact that the first
+column corresponds to a shortcode of the statistic. For instance, `SN`
+corresponds to Summary numbers:
+
+```{bash }
+#| label: bcftools-stats-greps-SN
+#| echo: true
+#| eval: true
+grep "^SN" allsites.vcf.gz.stats
+```
+
+Here, we can see that we have included non-variant sites (`no-ALTs`),
+that there are indels, and that a number of sites are multiallelic
+(more than two alleles).
+
+Rerunning MultiQC will automatically add this report.
+
+```{bash }
+#| label: rerun-multiqc-bcftools-stats
+#| echo: true
+#| eval: true
+#| results: hide
+# Use --force (-f) to overwrite old report
+multiqc --force .
+```
+
+We will use bcftools stats in the next exercise to look more closely
+at variant quality metrics.
+
+### Looking inside the VCF
+
+A Variant Call Format (VCF) file consists of three sections:
+meta-information lines (prefixed with `##`), a header line (prefixed
+with `#`), followed by the data. The meta-information contains
+provenance information detailing how the file was generated, `FILTER`
+specification, `INFO` fields that provide additional information to
+genotypes, `FORMAT` specification fields that define genotype entries,
+and more. You can print the header^[Which in this context means both
+the metadata information and header *line*] with the command `bcftools
+view -h`. An example of each is given below:
+
+```{bash }
+#| label: looking-inside-vcf-meta
+#| echo: true
+#| eval: true
+bcftools view --header-only allsites.vcf.gz | grep "##FILTER" | head -n 1
+bcftools view -h allsites.vcf.gz | grep "##INFO" | head -n 1
+bcftools view -h allsites.vcf.gz | grep "##FORMAT" | head -n 1
+```
+
+The header field consists of eight mandatory columns
+`CHROM`, `POS`, `ID`, `REF`, `ALT`, `QUAL`, `FILTER` and `INFO`,
+followed by `FORMAT` and sample columns that contain the called
+genotypes:
+
+```{bash }
+#| label: looking-inside-vcf-header
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep CHROM
+```
+
+Let's look at the first SNP entry (here, the first line extracts the
+position of the SNP):
+
+```{bash }
+#| label: bcftools-view-vcf
+#| echo: true
+#| eval: true
+pos=$(bcftools view --types snps --samples PUN-R-JMC allsites.vcf.gz \
+               --no-header | head -n 1 | cut -f 2)
+bcftools view -v snps -s PUN-R-JMC allsites.vcf.gz LG4:$pos | tail -n 2
+```
+
+The most important columns are `CHROM`, which indicates the sequence
+(`LG4`), the genome position `POS`, the reference allele `REF` (i.e.,
+the nucleotide in the reference sequence), and the alternate allele
+`ALT`, which is the called variant. `QUAL` is a Phred-scaled quality
+of the call and can be used to filter low-quality calls. The `FILTER`
+column can be used to set filter flags. The `INFO` column contains
+metadata concerning the site; for instance, `DP` is the approximate
+read depth, the definition of which is included in the
+meta-information:
+
+```{bash }
+#| label: vcf-meta-information-info-dp
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep INFO | grep "ID=DP"
+```
+
+Finally, the columns following `FORMAT` pertain to the samples and
+contain the genotype calls, formatted according to the - you guessed
+it - `FORMAT` column. The example above contains a number of fields, where `GT` is the genotype:
+
+```{bash }
+#| label: vcf-meta-information-gt-format
+#| echo: true
+#| eval: true
+bcftools view -h allsites.vcf.gz | grep FORMAT | grep "ID=GT"
+```
+
+For diploid samples, the genotype format is `#/#`, or `#|#` for phased
+data, where the hash marks are numbers that refer to the reference (0)
+and alternate (1 or higher) alleles. A `.` indicates a missing call.
+
+### Viewing variants and regions
+
+The `bcftools view` command allows for quick access and viewing of
+file contents. A prerequisite is that we first index the file:
+
+```{bash }
+#| label: bcftools-index-allsites
+#| echo: true
+#| eval: false
+bcftools index allsites.vcf.gz
+```
+
+after which we can view, say, the first three indel variants in
+the region 12,010,000-12,010,100, corresponding to VCF coordinates
+10,000-10,100^[Although the reference sequence corresponds to region
+LG4:12000000-12100000, the coordinates in `allsites.vcf.gz` start from
+1]:
+
+```{bash }
+#| label: bcftools-view-region
+#| echo: true
+#| eval: true
+bcftools view -v indels -H allsites.vcf.gz LG4:10000-10100
+```
+
+bcftools view has many options for subsetting and filtering variants.
+Remember to consult the help pages!
+
+::: {.callout-exercise}
+
+{{< fa brands linux >}} How many SNPs are there in region LG4:12010000-12000100?
+
+::: {.callout-hint}
+
+Look in the help page for option `-v`.
+
+:::
+
+::: {.callout-answer}
+
+```{bash }
+#| label: ex-bcftools-view-count-snps
+#| echo: true
+#| eval: false
+# Option -H omits the header information
+bcftools view -H -v snps allsites.vcf.gz LG4:10000-10100
+# Could also use wc -l to count the number of lines
+bcftools view -H -v snps allsites.vcf.gz LG4:10000-10100 | wc -l
+```
+
+:::
+
+:::
+
+### Selecting samples
+
+Finally, we look at how we can select samples from a variant file. To
+list the samples in a file, we can run `bcftools query`:
+
+```{bash }
+#| label: bcftools-query-l
+#| echo: true
+#| eval: true
+bcftools query --list-samples allsites.vcf.gz
+```
+
+Selecting indel variants for a given sample, say `PUN-Y-BCRD`, and
+region `LG4:12001000-12001100` can then be done as follows:
+
+```{bash }
+#| label: bcftools-view-region-sample
+#| echo: true
+#| eval: true
+bcftools view -H -s PUN-Y-BCRD -v indels allsites.vcf.gz LG4:1000-1100
+```
+
+## References

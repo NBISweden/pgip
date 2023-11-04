@@ -33,6 +33,9 @@ MD045: false
 MD046:
   style: "consistent"
 
+# MD049/emphasis-style
+MD049: false
+
 # MD051/link-fragments - Link fragments should be valid. Fails on
 # quartos #sec style links
 MD051: false

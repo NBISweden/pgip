@@ -1,0 +1,34 @@
+initialize() {
+  defineConstant("Nref", 5e3);
+  if (!exists("seed"))
+    defineConstant("seed", getSeed());
+  defineConstant("SimID", seed);
+  if (!exists("N"))
+    defineConstant("N", Nref);
+  if (!exists("outdir"))
+    defineConstant("outdir", tempdir());
+  if (!exists("mu"))
+    defineConstant("mu", 1e-7);
+  if (!exists("rho"))
+    defineConstant("rho", 1e-8);
+  if (!exists("seqlength"))
+    defineConstant("seqlength", 1e5);
+  if (!exists("outfile"))
+    defineConstant("outfile", outdir + "slim_" + SimID + ".rho_" + rho + ".mu_" + mu + ".N_" + N + ".trees");
+  setSeed(seed);
+
+  initializeTreeSeq(simplificationRatio=INF);
+  initializeMutationRate(0);
+  initializeMutationType("m1", 0.5, "f", 0.0);
+  initializeGenomicElementType("g1", m1, 1.0);
+  initializeGenomicElement(g1, 0, seqlength - 1);
+  initializeRecombinationRate(rho);
+}
+1 early() {
+  sim.addSubpop("p1", N);
+}
+10000 early() {
+      cat("Writing output file : " + outfile + "\n");
+      sim.treeSeqOutput(outfile);
+      sim.simulationFinished();
+}
