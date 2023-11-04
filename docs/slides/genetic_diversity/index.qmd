@@ -1,13 +1,12 @@
 ---
 title: "Genetic diversity"
-subtitle: "Genetic diversity"
+subtitle: "Theory and practice"
 author:
     - "Per Unneberg"
 format:
   revealjs:
     footer: Genetic diversity
 ---
-
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
 
@@ -82,24 +81,57 @@ and that diversity is shaped by a number of factors, including:
 
 # Genetic diversity
 
-## Genetic diversity
+## What determines diversity levels?
 
-```{r }
-#| label: genet-diversity-leffler
-#| echo: false
-#| eval: true
-data <- read.table(gzfile("assets/www/Leffler_2012_Dataset_S1.txt.gz"),
-  sep = "\t", fill = TRUE, quote = "", header = TRUE
-)
-colnames(data) <- c(
-  "Latin name", "Common name", "Phylum", "Class",
-  "Total loci", "Mean diversity per bp", "ThetaW or pi",
-  "Chromosome type", "Site feature", "Sampling strategy",
-  "Reference (PMID)", "Mating system", "Habitat",
-  "Range category", "Main analysis", "Sex autosome comparison"
-)
-head(data)
-```
+:::: {.columns}
+
+::: {.column width="30%"}
+
+![](assets/images/leffler-2012-fig1.png){width=55% fig-align=center}
+
+:::
+
+::: {.column width="70%"}
+
+The usual questions:
+
+> What evolutionary forces maintain genetic diversity in natural
+> populations? How do diversity levels relate to census population
+> sizes...? Do low levels of diversity limit adaptation to
+> selective pressures
+
+::: {.flushright .smallest .translatey50}
+
+@leffler_RevisitingOldRiddle_2012
+
+:::
+
+<br>
+
+::: {.fragment}
+
+After *allozyme* era, the study of genetic diversity was largely
+neglected due to lack of genome-wide data, but with advent of
+population genomics becoming a hot topic again.
+
+::: {.flushright .smallest .translatey50}
+
+@ellegren_DeterminantsGeneticDiversity_2016
+
+:::
+
+:::
+
+::: {.fragment}
+
+Lewontin's paradox: genetic diversity range smaller than variation
+among species in population size
+
+:::
+
+:::
+
+::::
 
 ::: {.notes }
 
@@ -129,13 +161,13 @@ part be explained by linked selection
 
 :::: {.columns}
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 ```{r }
 #| label: fig-genetic-diversity-determinants-Ellegren-fig2
 #| echo: false
 #| eval: true
-#| out-height: 500px
+#| out-width: 90%
 #| fig-cap:
 #|    Overview of determinants of genetic diversity
 #|    [@ellegren_DeterminantsGeneticDiversity_2016, Fig 2]
@@ -144,7 +176,7 @@ knitr::include_graphics("https://media.springernature.com/full/springer-static/i
 
 :::
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 
 #### Genetic drift
 
@@ -152,14 +184,14 @@ Reduces diversity at loss $\propto \frac{1}{N}$
 
 #### Selection
 
-Adaptive selection decreases selection, more so if acting on new
+Adaptive selection decreases variation, more so if acting on new
 mutations compared to standing variation.
 
 Balancing selection may increase variation.
 
 #### Recombination
 
-Low recombination rates leads to less "reshuffling" of variation and
+Low recombination rates lead to less "reshuffling" of variation and
 hence lower diversity.
 
 :::
@@ -172,31 +204,534 @@ Note: lower recombination lowers diversity presumably because more
 neutral variants linked to selected sites. There are intriguing
 differences between taxa [@leffler_RevisitingOldRiddle_2012]
 
+@ellegren_DeterminantsGeneticDiversity_2016 point out that with advent
+of population genomic data, we are at the brink of understanding
+Lewontin's paradox, namely [@charlesworth_HowCanWe_2022]
+
+> the observation that the range of levels of genetic diversity in
+> natural populations appears to be far smaller than the extent of
+> variation among species in population size
+
 :::
 
-## On missing data in population genetics
+## Why we measure patterns of genetic variation
 
-[@korunes_PixyUnbiasedEstimation_2021] Fig 4 on real data: strong
-tendency of commonly adopted tools to **underestimate** pi, dxy (even
-for 30X data sets)
+Genetic variation patterns are informative of evolutionary and
+demographic processes. We often use **summary statistics** to describe
+the patterns, and to estimate parameters such as **effective
+population size** and **mutation rate** from genetic variation data.
 
-## Nucleotide diversity revisited
+::: {.fragment}
 
-Most textbooks assume full sequence data
-[@korunes_PixyUnbiasedEstimation_2021]. Vast majority of tools make
-"assumption that missing sites are present but invariant".
+:::{}
 
-Consequence: $\pi$, $d_{XY}$ tend to be downwards biased
+Often critical first step of analysis, such as
+
+- exploratory study
+- test of an evolutionary hypothesis
+- training of machine-learning models
+
+:::
+
+::: {.flushright .smallest}
+
+[@korunes_PixyUnbiasedEstimation_2021]
+
+:::
+
+:::
+
+## Genetic basis of adaptation and genome scans
+
+Fundamental questions:
+
+- How many genes are involved in the evolution of adaptive traits?
+- What is the distribution of phenotypic effects among successive
+  allelic substitutions?
+- Is adaptation typically based on standing variation or new
+  mutations?
+- What is the relative importance of additive vs. nonadditive effects
+  on adaptive trait variation?
+- And what is the relative importance of structural vs. regulatory
+  changes in phenotypic evolution?
+
+::: {.flushright .smallest}
+
+[@storz_INVITEDREVIEWUsing_2005]
+
+:::
+
+# Measuring genetic diversity
+
+## Nucleotide diversity
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-ts-small-pi
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+::: {.fragment fragment-index=2}
+
+Diversity: for each site, count and sum differences between all
+(unique) pairs of samples, and divide by unique pairs. For $n$
+samples, there are $n \choose 2$ such pairs.
+
+:::
+
+::: {.fragment fragment-index=3}
+
+Example: for site 0, start comparing samples 0-1 (0 diffs), samples
+0-2 (0), samples 0-3 (1), samples 1-2 (0) and so on. Call these
+differences $k_{ij}$. Then
+
+:::
+
+::: {.fragment fragment-index=4}
+
+$$
+\pi = \frac{\sum_{i<j}k_{ij}}{n \choose 2}
+$$
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment fragment-index=1}
+
+```{python }
+#| label: fig-msprime-tree-diversity
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    id_string="msprimetreediversity",
+    show_sequences=True,
+    x_axis=False))
+```
+
+:::
+
+:::
+
+::::
+
+## Watterson's $\theta$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-ts-small-theta
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+::: {.fragment fragment-index=1}
+
+Alternative measure of diversity: simply count the number of
+segregating sites ($S$). However, must correct for the number of
+samples $n$ as we expect that more samples $\Rightarrow$ more sites
+
+:::
+
+::: {.fragment fragment-index=2}
+
+$$
+\theta_W = \frac{S}{a} = \frac{S}{\sum_{i=1}^{n-1}\frac{1}{i}}
+$$
+
+:::
+
+::: {.fragment fragment-index=3}
+
+Important: under neutrality, $E(\pi) = E(\theta_W)$. Difference
+between two the basis for **Tajima's D** that is a test for selection
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {}
+
+```{python }
+#| label: fig-msprime-tree-thetaw
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    id_string="msprimetreethetaw",
+    show_sequences=True,
+    x_axis=False))
+```
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+Intuitive example to understand of Tajimas: balancing selection has
+long internal branches -> long haplotype. This will elevate pi since
+many samples will be different for many sites.
+
+:::
+
+## Calculating diversity measures - $\pi$ and $\theta_W$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-tree-small-genotypematrix-and-results
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+::: {.small}
+
+```{python }
+#| label: msprime-tree-1-diversity
+#| echo: true
+#| eval: true
+from trees import ts_small_mut as ts
+
+# Calculate correction factor a for Watterson's
+# theta: the larger the sample size, the more
+# segregating sites we expect to see
+a = sum([1/i for i in range(1, ts.num_samples)])
+
+pi = ts.diversity()
+thetaW = ts.num_sites / a / ts.sequence_length
+
+print(f"Diversity:           {pi:.6f}",
+      f"Watterson's theta:   {thetaW:.6f}",
+      sep="\n")
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {}
+
+```{python }
+#| label: fig-msprime-calculate-diversity-theta
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    id_string="msprimetreediversity",
+    show_sequences=True,
+    x_axis=False))
+```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
+
+:::
+
+:::
+
+::::
+
+## Divergence - dXY
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-tree-small-genotypematrix-and-results-2
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+```{python }
+#| label: msprime-tree-1-divergence
+#| echo: true
+#| eval: true
+from trees import ts_small_mut as ts
+
+sample_sets = [[0, 1], [2, 3]]
+
+dxy = ts.divergence(sample_sets=sample_sets)
+fst = ts.Fst(sample_sets=sample_sets)
+
+print(f"Divergence:   {dxy:.6f}",
+      f"Fst:          {fst:.6f}", sep="\n")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{python }
+#| label: fig-msprime-tree-divergence
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+css_extra = ".n4 .edge {stroke: blue }"
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    css_extra=css_extra,
+    id_string="msprimetreedivergence",
+    show_sequences=True,
+    x_axis=False))
+```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
+
+:::
+
+::::
+
+## Diversity measures
+
+summarize in final tree? thinking relation between
+
+Simple binary tree from Hahn or similar
+
+Want to describe/define pi, dxy, fst, AD, theta_W
+
+::: {.notes}
+
+tskit calculates fst as follows:
+
+fst = 1 - 2(dX + dY)/(dX + dXY + dY)
+
+dXY is the average number of differences between two sample sets. If
+X=Y, it is simply the diversity (dX), i.e. the divergence of a sample
+set with itself is equal to the diversity. dXY reference is Nei and Li
+(1979)
+
+:::
+
+## Many programs treat missing data as invariant
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 <!-- markdownlint-disable MD013 -->
 
-$$
-\pi = \frac{\sum_{i<j}k_{ij}}{n\choose 2} = \frac{c_0c_1}{\frac{n(n-1)}{2}} = \left( \frac{n}{n-1} \right)2\left( \frac{c_0}{n} \right)\left( \frac{c_1}{n} \right)
-$$
+![@korunes_PixyUnbiasedEstimation_2021, Fig 1](https://onlinelibrary.wiley.com/cms/asset/2d12ae05-e2cd-496e-a1d6-f3842bb59e22/men13326-fig-0001-m.jpg){width=80% fig-align=center}
 
 <!-- markdownlint-enable MD013 -->
 
-FIXME: include Fig 1A from [@korunes_PixyUnbiasedEstimation_2021]
+:::
+
+::: {.column width="50%"}
+
+Diversity:
+
+$$
+\pi = \frac{\sum_{i<j}k_{ij}}{n \choose 2}
+$$
+
+Divergence:
+
+$$
+d_{XY} = \frac{1}{n_Xn_Y}\sum_{i=1}^{n_X}\sum_{j=1}^{n_Y}k_{ij}
+$$
+
+Here, $n$ is the number of samples, $k_{ij}$ tally of allelic
+differences between two haplotypes within ($\pi$) a population or
+between ($d_{XY}$) populations
+
+:::
+
+::::
+
+::: {.notes}
+
+Paper caption:
+
+> The logic and input/ouput of pixy demonstrated with a simple haploid
+> example. (a) Comparison of two methods for computing π (or dXY) in
+> the face of missing data. These methods follow the first expression
+> of Equation 1 but differ in how they calculate the numerator and
+> denominator. In Case 1, all missing data is assumed to be present but
+> invariant. This results in a deflated estimate of π. In Case 2,
+> missing data are simply omitted from the calculation, both in terms
+> of the number of sites (the final denominator) and the component
+> denominators for each site (the n choose two terms). This results in
+> an unbiased estimate of π. (b) The adjusted π method (Case 2) as
+> implemented for VCFs in pixy. The example VCF (input) contains the
+> same four haplotypes as (a). Invariant sites are represented as sites
+> with no ALT allele, and greyed-out sites are those that failed to
+> pass a genotype filter requiring a minimum number of reads covering
+> the genotype (Depth ≥ 10 in this case)
+
+:::
+
+## Missing data may bias diversity measures downwards
+
+:::{}
+
+<!-- markdownlint-disable MD013 -->
+
+![@korunes_PixyUnbiasedEstimation_2021, Fig 4](https://onlinelibrary.wiley.com/cms/asset/dc499ed3-0c1f-4260-95a1-cb85a0894d10/men13326-fig-0004-m.jpg){width=45% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.notes}
+
+Real data: strong tendency of commonly adopted tools to
+**underestimate** pi, dxy (even for 30X data sets)
+
+Caption:
+
+> Comparisons of estimates of π from whole genome data derived from 18
+> Anopheles gambiae individuals from the Ag1000G Burkina Faso (BFS)
+> population. Each panel (a–d) depicts the estimates of π for the X
+> chromosome performed using pixy (y-axis) and four other methods
+> (x-axis, a–d). Points are coloured according to the proportion of
+> missing data (of any type) calculated by pixy. The 1:1 line is shown
+> in red
+
+:::
+
+## Nucleotide diversity landscapes
+
+```{bash }
+#| label: monkeyflower-diversity-landscape
+#| echo: true
+#| eval: true
+#| results: hide
+vcftools --gzvcf allsites.vcf.gz --window-pi 1000
+csvtk plot line --tabs out.windowed.pi -x BIN_START -y PI \
+   --point-size 0.01 --xlab "Position (bp)" \
+   --ylab "Diversity" --title LG4 --width 9.0 --height 3.5 \
+   > out.windowed.pi.png
+```
+
+:::{}
+
+![](out.windowed.pi.png){width=80%}
+
+:::
+
+::: {.notes}
+
+Window-based plot is seque into genome scans
+
+:::
+
+# On genome scans
+
+## Motivation
+
+Classical approach (2005): GWAS -> identify locus -> QTL
+
+Alternative: screen genome-wide patterns of DNA polymorphism
+[@storz_INVITEDREVIEWUsing_2005, 672]
+
+## Example
+
+Show genome scan of Monkeyflower
+
+## Window size
+
+Plot LD decay -> independence among windows
+
+## Outlier analyses
+
+Show Manhattan plot -> want the chimneys
+
+## Z-scores
+
+Show raw vs Z-score
+
+## Annotations
+
+Show how to compile data by feature using gff
+
+# Genome diversity and differentiation landscapes
+
+## Dissecting differentiation landscapes
+
+Briefly discuss Burris idea
+
+## Monkeyflower genomic landscape
+
+Comment Stankowich
+
+## Exercise
+
+Comment exercise session
 
 ## Bibliography {.unnumbered .unlisted}
 
