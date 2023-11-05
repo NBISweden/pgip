@@ -18,3 +18,8 @@ demes:
 recipes:
   baseurl: /recipes/slides/index.html
   slimurl: /recipes/slim/index.html
+
+fst: $F_{\mathrm{ST}}$
+dxy: $d_{\mathrm{XY}}$
+dx: $d_{\mathrm{X}}$
+dy: $d_{\mathrm{Y}}$

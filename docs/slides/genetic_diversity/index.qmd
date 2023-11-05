@@ -14,71 +14,6 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-::: {.notes }
-
-Outline:
-
-Describe genetic diversity in more detail. Neglected component of
-biodiversity. Key feature: code for phenotypic variation -> adaptive
-potential. Dawkins: natural selection must have variation to act on.
-Low diversity -> low Ne -> 1) more inbreeding 2) nat sel less
-efficient 3) loss of functional variants. Plot overview of diversity
-in species [@leffler_RevisitingOldRiddle_2012]. Look at historical
-descriptions and predictions of diversity? (I'm thinking the
-development of the neutral model; see
-[@hurst_GeneticsUnderstandingSelection_2009]). Provide plot of
-expected heterozygosity under neutral model and compare with observed
-data [@romiguier_ComparativePopulationGenomics_2014;
-@bergeron_EvolutionGermlineMutation_2023]. Link historical to
-contemporary heterozygosity and highlight importance for conservation
-[@webstermatthew_GeneticVariationMountain_2022;
-@desroches_ConservingIntraspecificVariation_2021;
-@willi_ConservationGeneticsManagement_2022]
-
-How to measure? Ne, population structure, inbreeding. Plot Ne for
-examples. NGS -> uprecedented detail; better N_e, F_ST, as well as
-identification of adaptive loci, introgression, demographic history,
-etc. Requires reference genome! N_e can be estimated from Watterson's
-theta, but as it represents harmonic mean, it says nothing of recent
-declines, which is important for conservations studies. Note in
-passing here, and refer to section on demography later on.
-
-[@kimura_1983, p201-202] has a good example of how it is unlikely that
-a rapid decrease of population size during last few generations will
-lead to significant reduction in heterozygosity.
-
-Genetic diversity is not the only issue for conservation however
-[@lewis_BiggestEverStudy_2023]:
-
->The analysis of all 233 species’ genomes also has implications for
->conservation. For example, it shows that genetic diversity within a
->species does not align with its extinction risk1. That’s surprising,
->says Behie, because lower genetic diversity, which can result from
->inbreeding when population size diminishes, is widely considered a
->sign that a species is at risk of extinction. The finding suggests
->that for some threatened species, populations have declined so fast
->that there hasn’t been time for inbreeding to occur. This points to
->factors other than inbreeding — such as habitat destruction — being
->the greater threat to a species’ resilience.
-
-[@begun_PopulationGenomicsWholeGenome_2007] makes interesting
-statements on the study of variation in the population genetics
-context:
-
-1. small values of *s* may be detected as deviaton from neutral expectation and
-2. enables study of recent (less polymorphism, higher LD) and ancient
-   selection (increased divergence between species)
-
-They also summarize very well the motivation for genome-wide studies
-and that diversity is shaped by a number of factors, including:
-
-1. variation in mutation rates
-2. variation in recombination rates
-3. gene density
-4. natural selection
-
-:::
-
 # Genetic diversity
 
 ## What determines diversity levels?
@@ -98,7 +33,7 @@ The usual questions:
 > What evolutionary forces maintain genetic diversity in natural
 > populations? How do diversity levels relate to census population
 > sizes...? Do low levels of diversity limit adaptation to
-> selective pressures
+> selective pressures?
 
 ::: {.flushright .smallest .translatey50}
 
@@ -219,7 +154,8 @@ Lewontin's paradox, namely [@charlesworth_HowCanWe_2022]
 Genetic variation patterns are informative of evolutionary and
 demographic processes. We often use **summary statistics** to describe
 the patterns, and to estimate parameters such as **effective
-population size** and **mutation rate** from genetic variation data.
+population size** and **mutation rate** from genetic variation data
+($\theta = 4N_e\mu$)
 
 ::: {.fragment}
 
@@ -241,23 +177,85 @@ Often critical first step of analysis, such as
 
 :::
 
-## Genetic basis of adaptation and genome scans
+## Genetic diversity in conservation biology {.smaller}
 
-Fundamental questions:
+:::: {.columns}
 
-- How many genes are involved in the evolution of adaptive traits?
-- What is the distribution of phenotypic effects among successive
-  allelic substitutions?
-- Is adaptation typically based on standing variation or new
-  mutations?
-- What is the relative importance of additive vs. nonadditive effects
-  on adaptive trait variation?
-- And what is the relative importance of structural vs. regulatory
-  changes in phenotypic evolution?
+::: {.column width="50%"}
+
+![@kuderna_GlobalCatalogWholegenome_2023, Fig
+2](assets/images/kuderna-2023-fig2.jpg){width=100% fig-align=center}
+
+> ...no global relationship between numerically coded IUCN extinction
+> risk categories and estimated heterozygosity...
+
+:::
+
+::: {.column width="50%"}
+
+:::{}
+
+Low genetic diversity symptom of past genetic drift inbreeding (higher
+levels of homozygosity), caused by low $N_e$
 
 ::: {.flushright .smallest}
 
-[@storz_INVITEDREVIEWUsing_2005]
+@garcia-dorado_NeutralGeneticDiversity_2021
+
+:::
+
+:::
+
+<br><br>
+
+:::{}
+
+However: if population decline is rapid, may be too little time for
+inbreeding to occur $\Rightarrow$ genetic diversity within species not
+necessarily aligned to extinction risk
+
+::: {.flushright .smallest}
+
+@lewis_BiggestEverStudy_2023
+
+:::
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+Take home [@lewis_BiggestEverStudy_2023]: genetic diversity within a
+species does not necessarily align with its extinction risk. Possible
+explanation: population decline has been so rapid that there hasn't
+been time for inbreeding to occur. Other factors (e.g., habitat
+destruction) greater threat.
+
+Caption:
+
+> Runs of homozygosity and impact of extinction risk on diversity (A)
+> Relationship between IUCN extinction risk categories and
+> heterozygosity. Solid black circles and bars denote median and IQR.
+> (B) Partition into threatened (T: VU, EN, CR) and nonthreatened (N:
+> LC, NT) categories for all families with more than one species in
+> either partition. Significant differences (p < 0.05, one-sided
+> rank-sum test) are marked with an asterisk. (C) Median number of
+> tracts of homozygosity versus median proportion of the genome in
+> runs of homozygosity per species. Species with a fraction over 1/3
+> are highlighted. Solid black dots within highlights denote
+> threatened species (VU, EN, CR).
+
+On Figure 2A:
+
+> We investigated whether genetic diversity estimates are correlated
+> with extinction risk in primates, a subject of previous debate (17,
+> 33, 34). Despite our broad sampling, we find no global relationship
+> between numerically coded IUCN extinction risk categories and
+> estimated heterozygosity [p > 0.05, phylogenetic generalized least
+> squares (PGLS)] (Fig. 2A) (16).
 
 :::
 
@@ -334,7 +332,7 @@ print(plot_tree(
 
 ::::
 
-## Watterson's $\theta$
+## Watterson's $\theta_W$
 
 :::: {.columns}
 
@@ -367,7 +365,7 @@ $$
 
 ::: {.fragment fragment-index=3}
 
-Important: under neutrality, $E(\pi) = E(\theta_W)$. Difference
+Important: under neutrality, $\theta = E(\pi) = E(\theta_W)$. Difference
 between two the basis for **Tajima's D** that is a test for selection
 
 :::
@@ -397,6 +395,13 @@ print(plot_tree(
     show_sequences=True,
     x_axis=False))
 ```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
 
 :::
 
@@ -445,6 +450,7 @@ thetaW = ts.num_sites / a / ts.sequence_length
 
 print(f"Diversity:           {pi:.6f}",
       f"Watterson's theta:   {thetaW:.6f}",
+      f"Sequence length:     {ts.sequence_length:.0f}",
       sep="\n")
 ```
 
@@ -471,9 +477,9 @@ print(plot_tree(
     ts,
     size=(500,400),
     canvas_size=(1200, 500),
-    id_string="msprimetreediversity",
+    id_string="msprimecalctreediversity",
     show_sequences=True,
-    x_axis=False))
+    x_axis=True))
 ```
 
 ::: {.flushright .smallest}
@@ -496,7 +502,7 @@ var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
 ::: {.column width="50%"}
 
 ```{python }
-#| label: msprime-tree-small-genotypematrix-and-results-2
+#| label: msprime-tree-small-divergence-1
 #| echo: false
 #| eval: true
 from trees import ts_small_mut, genotypes
@@ -504,27 +510,32 @@ x = genotypes(ts_small_mut)
 print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
 ```
 
-```{python }
-#| label: msprime-tree-1-divergence
-#| echo: true
-#| eval: true
-from trees import ts_small_mut as ts
+Divergence: for each site, count and sum differences between all pairs
+of samples *between* two populations
 
-sample_sets = [[0, 1], [2, 3]]
+::: {.fragment}
 
-dxy = ts.divergence(sample_sets=sample_sets)
-fst = ts.Fst(sample_sets=sample_sets)
+Example: for site 0, compare samples 0-2 (0 diffs), samples 0-3 (1
+diff), samples 1-2 (0 diffs), samples 1-3 (1 diff), and so on. Call
+differences $k_ij$, let $n_X$, $n_Y$ be sample size in populations
+$X$, $Y$. Then
 
-print(f"Divergence:   {dxy:.6f}",
-      f"Fst:          {fst:.6f}", sep="\n")
-```
+:::
+
+::: {.fragment}
+
+$$
+d_{XY} = \frac{1}{n_Xn_Y}\sum_{i=1}^{n_X}\sum_{i=1}^{n_Y}k_{ij}
+$$
+
+:::
 
 :::
 
 ::: {.column width="50%"}
 
 ```{python }
-#| label: fig-msprime-tree-divergence
+#| label: fig-msprime-tree-small-divergence-2
 #| echo: false
 #| eval: true
 #| fig-cap: |
@@ -556,24 +567,341 @@ var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
 
 ::::
 
-## Diversity measures
+## Divergence - dXY
 
-summarize in final tree? thinking relation between
+:::: {.columns}
 
-Simple binary tree from Hahn or similar
+::: {.column width="50%"}
 
-Want to describe/define pi, dxy, fst, AD, theta_W
+```{python }
+#| label: msprime-tree-small-divergence-2
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+```{python }
+#| label: msprime-tree-divergence-2
+#| echo: true
+#| eval: true
+from trees import ts_small_mut as ts
+
+sample_sets = [[0, 1], [2, 3]]
+
+dxy = ts.divergence(sample_sets=sample_sets)
+
+print(f"Divergence:   {dxy:.6f}")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{python }
+#| label: fig-msprime-tree-calc-divergence
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+css_extra = ".n4 .edge {stroke: blue }"
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    css_extra=css_extra,
+    id_string="msprimetreedivergence",
+    show_sequences=True,
+    x_axis=False))
+```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
+
+:::
+
+::::
 
 ::: {.notes}
 
-tskit calculates fst as follows:
+$F_ST$ (later) and related statistics are strongly affected by
+within-subpopulation genetic variance. @nei_AnalysisGeneDiversity_1973
+proposed dXY as an alternative that does not depend on the levels of
+diversity *within* subpopulations.
 
-fst = 1 - 2(dX + dY)/(dX + dXY + dY)
+:::
 
-dXY is the average number of differences between two sample sets. If
-X=Y, it is simply the diversity (dX), i.e. the divergence of a sample
-set with itself is equal to the diversity. dXY reference is Nei and Li
-(1979)
+## Differentiation - AFD (allele frequency difference) {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-tree-small-afd
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+Allele Frequency Difference (AFD) proposed as intuitive alternative to
+{{< var fst >}}. For each site, count the difference in allele
+frequency between two populations.
+
+::: {.fragment}
+
+Example: site 0, frequency in blue is 0, in black 1/2, so
+difference=1/2, site 1, frequency in blue 0, in black 1/2, and so on
+
+:::
+
+::: {.fragment}
+
+$$
+AFD = \frac{1}{2}\sum_{i=1}^n| (f_{i1} - f_{i2})|
+$$
+
+where $n$ is the number of different alleles ($n=2$ for biallelic
+SNPs), $f_{ij}$ is the frequency of allele $i$ in population $j$
+
+::: {.flushright .smallest}
+
+@berner_AlleleFrequencyDifference_2019
+
+:::
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+```{python }
+#| label: fig-msprime-tree-calc-afd
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+css_extra = ".n4 .edge {stroke: blue }"
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    css_extra=css_extra,
+    id_string="msprimetreeafd",
+    show_sequences=True,
+    x_axis=False))
+```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+AFD proposed as a more intuitive and easier to understand statistic than Fst
+
+:::
+
+## Differentiation - {{< var fst >}} {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-tree-small-fst-1
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+{{< var fst >}} is another measure of differention among
+subpopulations [@wright_EvolutionMendelianPopulations_1931]. It ranges
+between 0 and 1 and has the interpretation 0: no differentiation, 1:
+complete fixation of alternate alleles in subpopulations
+
+::: {.fragment}
+
+Example: site 3 has {{< var fst >}}=1 as it is fixed in black, not
+present in blue
+
+:::
+
+::: {.fragment}
+
+There are *many* ways to express and calculate {{< var fst >}}.
+Example:
+
+$$
+F_{\mathrm{ST}} = \frac{h_{\mathrm{T}} - h_{\mathrm{S}}}{h_{\mathrm{T}}}
+$$
+
+where $h_{\mathrm{T}}$ is the expected heterozygosity in the total
+population, $h_{\mathrm{S}}$ the *average* of expected
+heterozygosities across subpopulations. For site 3,
+$h_{\mathrm{S}}=0$, $h_{\mathrm{T}}=2/3$.
+
+:::
+
+::: {.fragment}
+
+Caveats: strongly influenced by *within* subpopulation levels of
+variation. Therefore considered *relative* measure (cf {{< var dxy
+>}}, which is an *absolute* measure).
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+```{python }
+#| label: fig-msprime-tree-calc-fst-1
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+css_extra = ".n4 .edge {stroke: blue }"
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    css_extra=css_extra,
+    id_string="msprimetreefst",
+    show_sequences=True,
+    x_axis=False))
+```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
+
+Wright's fst measures differentiation among subpopulations.
+Interpretation: 0 no differentiation, 1 complete fixation of alternate
+alleles. Has therefore become a popular statistic for quantifying
+differentiation from molecular data.
+
+:::
+
+## Differentiation - {{< var fst >}} {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{python }
+#| label: msprime-tree-small-fst-2
+#| echo: false
+#| eval: true
+from trees import ts_small_mut, genotypes
+x = genotypes(ts_small_mut)
+print("\n".join([f"{k}:   {v}" for k, v in zip(x.index, x.values)]))
+```
+
+:::{}
+
+```{python }
+#| label: msprime-tree-calculate-fst
+#| echo: true
+#| eval: true
+from trees import ts_small_mut as ts
+
+sample_sets = [[0, 1], [2, 3]]
+win = [0] + [int(x.position)+1 for x in ts.sites()]
+_ = win.pop()
+win = win + [ts.sequence_length]
+
+fst = ts.Fst(sample_sets=sample_sets)
+fst_sites = ts.Fst(sample_sets=sample_sets,
+                   windows=win)
+
+print(f"Site id:       {list(range(5))}",
+      f"Fst per site:  {fst_sites}",
+      f"Overall Fst:   {fst:.6f}",
+      sep="\n")
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+```{python }
+#| label: fig-msprime-tree-calc-fst-2
+#| echo: false
+#| eval: true
+#| fig-cap: |
+#|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl
+#|     >}}#sec-recipe-diversity-msprime-trees)
+#| fig-format: svg
+#| output: asis
+from trees import ts_small_mut as ts
+from trees import plot_tree
+css_extra = ".n4 .edge {stroke: blue }"
+print(plot_tree(
+    ts,
+    size=(500,400),
+    canvas_size=(1200, 500),
+    css_extra=css_extra,
+    id_string="msprimetreefst",
+    show_sequences=True,
+    x_axis=True))
+```
+
+::: {.flushright .smallest}
+
+Tree plot with mutations and sequences [{{< fa rectangle-list >}}]({{<
+var recipes.baseurl >}}#sec-recipe-diversity-msprime-trees)
+
+:::
+
+:::
+
+::::
+
+::: {.notes}
 
 :::
 
@@ -692,46 +1020,244 @@ Window-based plot is seque into genome scans
 
 # On genome scans
 
-## Motivation
+## Genetic basis of adaptation and genome scans
 
-Classical approach (2005): GWAS -> identify locus -> QTL
+:::: {.columns}
 
-Alternative: screen genome-wide patterns of DNA polymorphism
-[@storz_INVITEDREVIEWUsing_2005, 672]
+::: {.column width="50%"}
 
-## Example
+![](assets/images/storz-2005-fig1.png){width=60% fig-align=center}
 
-Show genome scan of Monkeyflower
+:::
 
-## Window size
+::: {.column width="50%"}
 
-Plot LD decay -> independence among windows
+Fundamental questions:
 
-## Outlier analyses
+- How many genes are involved in the evolution of adaptive traits?
+- What is the distribution of phenotypic effects among successive
+  allelic substitutions?
+- Is adaptation typically based on standing variation or new
+  mutations?
+- What is the relative importance of additive vs. nonadditive effects
+  on adaptive trait variation?
+- And what is the relative importance of structural vs. regulatory
+  changes in phenotypic evolution?
 
-Show Manhattan plot -> want the chimneys
+::: {.flushright .smallest}
 
-## Z-scores
+@storz_INVITEDREVIEWUsing_2005, Fig 1
 
-Show raw vs Z-score
+:::
 
-## Annotations
+:::
 
-Show how to compile data by feature using gff
+::::
+
+::: {.notes}
+
+@storz_INVITEDREVIEWUsing_2005 lays out genomic scans as an
+alternative approach to GWAS and QTL mapping for finding genetic
+determinants of adaptation. The reason is GWAS/QTL requires a
+phenotype whereas genome scans are data-driven.
+
+Caption (fig 1):
+
+> Fig. 1 (a) Effects of genetic hitch-hiking along a recombining
+> chromosome. Hori- zontal lines depict a population sample of
+> homologous chromosomes, and filled symbols depict neutral mutations.
+> In this example an advantageous mutation (open symbol) arises and is
+> rapidly driven to fixation by positive selection. Although the
+> mutation is recombined against new genetic backgrounds during the
+> course of the selective sweep, a sizable fraction of the ancestral
+> haplotype (shown in red) also becomes fixed. Consequently, neutral
+> variants that were initially linked to the advantageous mutation
+> undergo a dramatic increase in frequency as a result of hitchhiking.
+> (b) In this example, locus 3 has been rendered monomorphic by a
+> selective sweep. Sampled gene copies (denoted by tips of the gene
+> tree) share a very recent common ancestor, and π = 0 (where π =
+> nucleotide diversity; Nei & Li 1979). comparison, unlinked,
+> neutrally evolving regions of the genome (loci 1, 2, and 4) are
+> characterized by deeper genealogies, and higher levels of nucleotide
+> diversity (π = 0.019–0.020). Note that the gene trees depict the
+> true genealogies of the samples, not the genealogies inferred from
+> observed variation.
+
+:::
+
+## Example {.smaller}
+
+```{bash }
+#| label: genome-scan-example-fst
+#| echo: true
+#| eval: true
+#| results: hide
+vcftools --gzvcf allsites.vcf.gz --weir-fst-pop PUN-Y.txt \
+   --weir-fst-pop PUN-R.txt \
+   --fst-window-size 1000
+csvtk plot line --tabs out.windowed.weir.fst \
+   -x BIN_START -y MEAN_FST \
+   --point-size 2 --xlab "Position (bp)" \
+   --ylab "Fst" --title "LG4: PUN-Y vs PUN-R" \
+   --width 9.0 --height 3.5 --scatter \
+   > out.windowed.weir.fst.mean.png
+```
+
+:::{}
+
+![](out.windowed.weir.fst.mean.png){width=70% fig-align=center}
+
+:::
+
+## Z-scores can help identifying outliers {.smaller}
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r }
+#| label: r-zscore
+#| echo: true
+#| eval: true
+#| out-width: 100%
+#| fig-width: 12
+#| fig-height: 4
+data <- read.table("out.windowed.weir.fst", header = TRUE)
+x <- data$MEAN_FST
+z <- (x - mean(x)) / sd(x)
+plot(x = data$BIN_START, y = z, xlab = "Position (bp)")
+```
+
+:::
+
+::: {.column width="40%"}
+
+Raw data can be converted to **Z-scores** to highlight outliers. A
+Z-score is a measure of how far a data point is from the mean in terms
+of the number of standard deviations:
+
+$$
+Z = \frac{X - \mu}{\sigma}
+$$
+
+Threshold of a couple of standard deviations common.
+
+:::
+
+::::
+
+## LD decay and choice of window size
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<!-- markdownlint-disable MD013 -->
+
+![](https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg){width=80% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.column width="50%"}
+
+Properties of genetic variation and inferred demographic history in
+sampled *A. millepora*. @fuller_PopulationGeneticsCoral_2020,
+Figure 2. Upper left plot illustrates LD as a function of physical
+distance. Here, choosing a window size 20-30kb would ensure that most
+windows are independent.
+
+:::
+
+::::
+
+## Annotations {.smaller}
+
+```{bash }
+#| label: pixy-prepare-annotation
+#| echo: true
+#| eval: true
+csvtk filter2 --tabs annotation.gff --filter ' $3 == "CDS" ' |\
+ csvtk mutate2 --tabs -H -e '$4 - 12000000' -w 0 |\
+ csvtk mutate2 --tabs -H -e '$5 - 12000000' -w 0 |\
+ csvtk cut --tabs --fields 1,10,11 | bedtools sort | bedtools merge \
+    > CDS.bed 2>/dev/null
+head -n 3 CDS.bed
+```
+
+```{bash }
+#| label: pixy-calculate-by-annotation
+#| echo: true
+#| eval: true
+#| results: hide
+pixy --vcf allsites.vcf.gz --stats pi --vcf allsites.vcf.gz \
+ --populations populations.txt \
+ --output_prefix cds --bed_file CDS.bed
+pixy --vcf allsites.vcf.gz --stats pi --vcf allsites.vcf.gz \
+ --populations populations.txt --window_size 1000 \
+ --output_prefix all
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{bash }
+#| label: avg-pi-cds
+#| echo: true
+#| eval: true
+csvtk summary --tabs -i -g pop \
+   -f avg_pi:mean cds_pi.txt -w 5
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{bash }
+#| label: avg-pi-all
+#| echo: true
+#| eval: true
+csvtk summary --tabs -i -g pop \
+   -f avg_pi:mean all_pi.txt -w 5
+```
+
+:::
+
+::::
 
 # Genome diversity and differentiation landscapes
 
 ## Dissecting differentiation landscapes
 
-Briefly discuss Burris idea
+:::{}
+
+![@burri_DissectingDifferentiationLandscapes_2017 Fig. 1](assets/images/burri-2017-fig1.jpg)
+
+:::
+
+::: {.notes}
+
+:::
 
 ## Monkeyflower genomic landscape
 
-Comment Stankowich
+:::{}
+
+<!-- markdownlint-disable MD013 -->
+
+![@stankowski_WidespreadSelectionGene_2019 Fig. 1](assets/images/stankowski-2019-fig1.png){width=80% fig-align=center}
+
+<!-- markdownlint-enable MD013 -->
+
+:::
+
+::: {.notes}
+
+:::
 
 ## Exercise
-
-Comment exercise session
 
 ## Bibliography {.unnumbered .unlisted}
 
