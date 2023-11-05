@@ -6,6 +6,7 @@ author:
 format:
   revealjs:
     footer: Welcome
+    toc: false
 ---
 
 ## Setup  {visibility="hidden" .unnumbered .unlisted}
@@ -14,29 +15,287 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
-## Welcome to population genomics in practice
+```{r }
+#| label: load-participants
+#| echo: false
+#| eval: false
+library(stringr)
+data_untidy <- read.csv("../../participants.csv")
+colnames(data_untidy) <- c(
+  "Confirmed", "Invoice", "Dinner",
+  "Email", "First_name", "Last_name",
+  "Gender", "University_Organisation",
+  "Telephone", "Name_of_PI",
+  "Position", "NGS_data", "Ongoing_projects",
+  "Education", "Employments", "Linux_Unix_experience",
+  "R_experience", "Preferred_language", "UPPMAX_work",
+  "NBIS_courses", "Other_relevant_courses",
+  "Swedish_Bioinformatics_Advisory_Program",
+  "Course_benefit", "Allergies", "Invoice_number",
+  "Other_comments"
+)
+data_untidy <- as_tibble(data_untidy)
+data <- data_untidy %>% subset(Confirmed == "Yes")
+```
 
 ## Who are we?
 
-## Who are you?
+::: {.organisers-parent}
+::: {.organisers-child}
 
-::: {.callout-warning}
+![](../../assets/profile/per-unneberg.png)
+
+[Per Unneberg](https://nbis.se/about/staff)
+
+:::
+::: {.organisers-child}
+
+![](../../assets/profile/nikolay-oskolkov.jpg)
+
+[Nikolay Oskolkov](https://nbis.se/about/staff)
+
+:::
+::: {.organisers-child}
+
+![](../../assets/profile/jason-hill.jpg)
+
+[Jason Hill](https://nbis.se/about/staff)
+
+:::
+::: {.organisers-child}
+
+![](../../assets/profile/andre-soares.png)
+
+[André Soares](https://nbis.se/about/staff)
 
 :::
 
-## Where are we?
+:::
 
-Information about Navet: safety etc
+## Who are you?
 
-## Code of conduct
+::: {.fragment}
 
-# Program
+![](assets/images/guinea_pigs.webp){fig-align=center}
 
-List contents
+:::
 
-## Exercises
+## Who are you?
 
-## Refs {.unnumbered .unlisted}
+```{r }
+#| label: r-position
+#| echo: false
+#| eval: false
+x <- as.data.frame(table(data$Position))
+colnames(x) <- c("Position", "count")
+p <- ggplot(x, aes(x = "", y = count, fill = Position)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  xlab("") +
+  ylab("")
 
-::: { #refs }
+ggsave(
+  filename = "assets/images/position.png",
+  height = 4, width = 8,
+  plot = p,
+  device = "png"
+)
+```
+
+:::{}
+
+![](assets/images/position.png){width=100% fig-align=center}
+
+:::
+
+## Who are you?
+
+```{r }
+#| label: r-university
+#| echo: false
+#| eval: false
+uni <- data$University_Organisation %>%
+  str_replace(., "Uppsala University.*", "Uppsala University") %>%
+  str_replace(., "Stockholm University.*", "Stockholm University") %>%
+  str_replace(., ".*Agricultural*", "SLU") %>%
+  str_replace(., ".*Palaeo*", "Stockholm University") %>%
+  str_replace(., ".*genetics*", "Stockholm University") %>%
+  str_replace(., "SLU Sciences", "SLU") %>%
+  str_replace(., "SLU.*", "SLU") %>%
+  str_replace(., "Stockholm University,.*", "Stockholm University")
+
+x <- as.data.frame(table(uni))
+colnames(x) <- c("University", "count")
+
+p <- ggplot(x, aes(x = "", y = count, fill = University)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  xlab("") +
+  ylab("")
+
+ggsave(
+  filename = "assets/images/university.png",
+  width = 8, height = 4,
+  plot = p,
+  device = "png"
+)
+```
+
+:::{}
+
+![](assets/images/university.png){width=100% fig-align=center}
+
+:::
+
+## Who are you?
+
+```{r }
+#| label: r-scilife-courses
+#| echo: false
+#| eval: false
+courses <- c(2, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 2, 0, 1, 0, 0, 1, 1, 1)
+
+x <- as.data.frame(table(courses))
+x$courses <- c("No", "Yes", "Maybe")
+colnames(x) <- c("Courses", "count")
+
+p <- ggplot(x, aes(x = "", y = count, fill = Courses)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  xlab("") +
+  ylab("")
+
+ggsave(
+  filename = "assets/images/courses.png",
+  plot = p,
+  width = 8,
+  height = 4,
+  device = "png"
+)
+```
+
+:::{}
+
+![](assets/images/courses.png){width=100% fig-align=center}
+
+:::
+
+## Who are you?
+
+```{r }
+#| label: r-linux
+#| echo: false
+#| eval: false
+x <- as.data.frame(table(data$Linux_Unix_experience))
+colnames(x) <- c("Linux_UNIX", "count")
+p <- ggplot(x, aes(x = "", y = count, fill = Linux_UNIX)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  xlab("") +
+  ylab("")
+
+ggsave(
+  filename = "assets/images/linuxunix.png",
+  height = 4, width = 8,
+  plot = p,
+  device = "png"
+)
+```
+
+:::{}
+
+![](assets/images/linuxunix.png){width=100% fig-align=center}
+
+:::
+
+## Who are you?
+
+```{r }
+#| label: r-r
+#| echo: false
+#| eval: false
+x <- as.data.frame(table(data$R_experience))
+colnames(x) <- c("R", "count")
+p <- ggplot(x, aes(x = "", y = count, fill = R)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  xlab("") +
+  ylab("")
+
+ggsave(
+  filename = "assets/images/r.png",
+  height = 4, width = 8,
+  plot = p,
+  device = "png"
+)
+```
+
+:::{}
+
+![](assets/images/r.png){width=100% fig-align=center}
+
+:::
+
+## Who are you?
+
+```{r }
+#| label: r-lang
+#| echo: false
+#| eval: false
+lang <- data$Preferred_language %>%
+  str_replace(., "Both.*", "R/Python") %>%
+  str_replace(., "rarely.*", "Bash")
+
+x <- as.data.frame(table(lang))
+colnames(x) <- c("Language", "count")
+p <- ggplot(x, aes(x = "", y = count, fill = Language)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  xlab("") +
+  ylab("")
+
+ggsave(
+  filename = "assets/images/lang.png",
+  height = 4, width = 8,
+  plot = p,
+  device = "png"
+)
+```
+
+:::{}
+
+![](assets/images/lang.png){width=100% fig-align=center}
+
+:::
+
+## Information
+
+### Where are we?
+
+:::{.large}
+
+<https://www.bmc.uu.se/scilifelab-navet-inglish/>
+
+:::
+
+### Course dinner
+
+:::{.large}
+
+Wednesday?
+
+:::
+
+## Course website
+
+:::{.large}
+
+<https://uppsala.instructure.com/courses/86976>
+
+:::
+
+:::{.large}
+
+<https://nbisweden.github.io/workshop-pgip/>
+
 :::

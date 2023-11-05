@@ -28,6 +28,7 @@ project:
     - "exercises/selection/index.qmd"
     # Slides
     - "slides/index.qmd"
+    - "slides/introduction/index.qmd"
     - "slides/pgip/index.qmd"
     - "slides/foundations/index.qmd"
     - "slides/simulation/index.qmd"

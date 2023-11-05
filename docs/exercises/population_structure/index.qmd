@@ -1,0 +1,78 @@
+---
+title: Population structure
+author:
+  - Nikolay Oskolkov
+format: html
+---
+
+::: {.callout-important collapse=true}
+
+#### {{< fa server >}} Compute environment setup
+
+If you haven't already done so, please read [Compute
+environment](../compute_environment/index.qmd) for information on how
+to prepare your working directory.
+
+:::
+
+::: {.callout-tip collapse=true}
+
+## Learning objectives
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Data setup
+
+:::{.panel-tabset}
+
+#### UPPMAX
+
+#### Local
+
+:::
+
+:::
+
+::: {.callout-note collapse=true}
+
+## Tools
+
+:::{.panel-tabset}
+
+#### Listing
+
+#### UPPMAX modules
+
+Execute the following command to load modules:
+
+```{bash }
+#| label: uppmax-load-modules
+#| echo: true
+#| eval: false
+module load uppmax bioinfo-tools
+```
+
+#### Conda
+
+Copy the contents to a file `environment.yml` and install packages
+with `mamba env update -f environment.yml`.
+
+```{lang="text" }
+channels:
+  - conda-forge
+  - bioconda
+  - default
+# dependencies:
+```
+
+:::
+
+:::
+
+<!-- markdownlint-disable MD013 -->
+
+The instructions are located at <https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_mds_toy_example.html>
+
+<!-- markdownlint-enable MD013 -->
