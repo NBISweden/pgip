@@ -1,18 +1,5 @@
 [
   {
-    "listing": "/exercises/index.html",
-    "items": [
-      "/exercises/compute_environment/index.html",
-      "/exercises/datasets/monkeyflowers.html",
-      "/exercises/simulation/index.html",
-      "/exercises/variant_calling/index.html",
-      "/exercises/variant_filtering/index.html",
-      "/exercises/genetic_diversity/index.html",
-      "/exercises/demography/index.html",
-      "/exercises/selection/index.html"
-    ]
-  },
-  {
     "listing": "/slides/index.html",
     "items": [
       "/slides/pgip/index.html",
@@ -24,6 +11,20 @@
       "/slides/population_structure/index.html",
       "/slides/demography/index.html",
       "/slides/selection/index.html"
+    ]
+  },
+  {
+    "listing": "/exercises/index.html",
+    "items": [
+      "/exercises/compute_environment/index.html",
+      "/exercises/datasets/monkeyflowers.html",
+      "/exercises/simulation/index.html",
+      "/exercises/variant_calling/index.html",
+      "/exercises/variant_filtering/index.html",
+      "/exercises/genetic_diversity/index.html",
+      "/exercises/population_structure/index.html",
+      "/exercises/demography/index.html",
+      "/exercises/selection/index.html"
     ]
   }
 ]
