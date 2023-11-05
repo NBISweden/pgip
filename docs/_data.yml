@@ -162,5 +162,7 @@ slides/variant_filtering:
   - __reference__
 
 slides/genetic_diversity:
+  - __sampleinfo__
+  - annotation.gff: monkeyflower/tiny/MAUR_annotation_functional_submission.gff
   - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
   - allsites.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi
