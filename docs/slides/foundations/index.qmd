@@ -799,12 +799,12 @@ population. The frequency of allele $A$ is then the homozygote $AA$
 times two, plus one times the individuals carrying one $A$.
 
 The Punnett square shows that the expected homozygote frequencies are
-$0.49$ and $0.09$ for $AA$ and $aa$, and hence, the frequency of $Aa$ is
-$1 - 0.49 - 0.09 = 0.42 = 0.21 + 0.21 = 2pq$
+$0.49$ and $0.09$ for $AA$ and $aa$, and hence, the frequency of $Aa$
+is $1 - 0.49 - 0.09 = 0.42 = 0.21 + 0.21 = 2pq$
 
 :::
 
-## In absence of evolutionary forces alleles are in equilibrium
+## In absence of evolutionary forces alleles are in equilibrium{.smaller}
 
 ### The Hardy-Weinberg equilibrium
 
@@ -818,20 +818,20 @@ the **Hardy-Weinberg equilibrium** (**HWE**).
 
 ::: {.column width="45%"}
 
-|            |         |          |          |
-|------------|---------|----------|----------|
-| Genotype:  | $AA$    | $Aa$     | $aa$     |
-| Frequency: | $p^2$   | $2pq$    | $q^2$    |
-|            | $f_{AA} | $f_{Aa}$ | $f_{aa}$ |
+|           | $A$ ($p$) | $a$ ($q$) |
+|-----------|-----------|-----------|
+| $A$ ($p$) | $p^2$     | $pq$      |
+| $a$ ($q$) | $qp$      | $q^2$     |
 
 :::
 
 ::: {.column width="45%"}
 
-|           | $A$ ($p$) | $a$ ($q$) |
-|-----------|-----------|-----------|
-| $A$ ($p$) | $p^2$     | $pq$      |
-| $a$ ($q$) | $qp$      | $q^2$     |
+|            |          |          |          |
+|------------|----------|----------|----------|
+| Genotype:  | $AA$     | $Aa$     | $aa$     |
+| Frequency: | $p^2$    | $2pq$    | $q^2$    |
+|            | $f_{AA}$ | $f_{Aa}$ | $f_{aa}$ |
 
 :::
 
@@ -870,6 +870,8 @@ See next slide.
 
 ## Natural populations do mate randomly?
 
+:::{}
+
 ```{r }
 #| label: fig-hwe-1000genomes
 #| echo: false
@@ -891,6 +893,8 @@ See next slide.
 #|     Illustration inspired by @cooplab_PopulationGeneticsCourse_2011.
 #|     [{{< fa rectangle-list >}}]({{< var recipes.baseurl >}}#sec-recipe-slides-hwe)
 ```
+
+:::
 
 ::: {.notes }
 
@@ -1130,6 +1134,8 @@ wf <- wright_fisher_pop(n = 10, generations = 16)
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 y_range <- range(V(wf)$y)
@@ -1172,6 +1178,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %>%
@@ -1216,6 +1224,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %E>%
@@ -1264,6 +1274,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %E>%
@@ -1312,6 +1324,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %E>%
@@ -1360,6 +1374,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %E>%
@@ -1408,6 +1424,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %E>%
@@ -1456,6 +1474,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %E>%
@@ -1503,6 +1523,8 @@ genes (chromosomes) in a population under the following assumptions
 #| echo: false
 #| eval: true
 #| cache: false
+#| out-width: 90%
+#| fig-align: center
 #| fig-height: 7
 #| fig-width: 7
 wf %>%
@@ -1571,7 +1593,8 @@ See <https://mikeyharper.uk/animated-plots-with-r/>
 #|   WF model indicating time
 #|   direction from past (top) to present
 #|   (bottom).
-#| out-width: 90%
+#| out-width: 80%
+#| fig-align: center
 x_range <- range(vertex_attr(wf, "x"))
 y_range <- range(vertex_attr(wf, "y"))
 x1 <- x_range[1] - 0.5
@@ -1615,7 +1638,8 @@ wf %>% ggplot_wf(.) +
 #| label: fig-wf-model-genealogy
 #| echo: false
 #| eval: true
-#| out-width: 90%
+#| out-width: 80%
+#| fig-align: center
 #| fig-cap: "WF model tracing the genealogies of three extant chromosomes"
 obj <- wf
 i <- V(obj)[unlist(ego(obj, order = 16, nodes = c(152, 155, 158), mode = "in"))]
@@ -1683,7 +1707,7 @@ $$
 
 :::
 
-## Properties of Wright-Fisher sampling
+## Properties of Wright-Fisher sampling{.smaller}
 
 :::: {.columns}
 
@@ -2865,7 +2889,7 @@ G=probability that two alleles are IBS
 
 :::
 
-## Heterozygosity dynamics
+## Heterozygosity dynamics {.smaller}
 
 :::: {.columns}
 
@@ -3264,8 +3288,7 @@ value is simply chosen such that enough mutations show up in plot.
 #| eval: true
 #| fig-height: 15
 #| fig-width: 15
-#| out-height: 500
-#| out-width: 500
+#| out-width: 80%
 #| fig-align: center
 #| fig-cap: |
 #|   Different mutations suffer different fates.
@@ -3382,12 +3405,13 @@ $$
 
 :::: {.columns}
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 
 Mutation drift balance, together with the observation during 50's-60's
 that polymorphism was more common than expected, is the foundation of
 the **neutral theory** of evolution [@kimura_1983]: allele frequencies
-may change and fix due to chance alone and not selection.
+may change and fix due to chance alone and not selection; most
+mutations behave as if they are **neutral**.
 
 ::: {.fragment}
 
@@ -3400,16 +3424,17 @@ deleterious* and *purged* from population by natural selection.
 
 :::
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 ```{r }
 #| label: fig-heterozygosity-function-ne
 #| echo: false
 #| eval: true
-#| out-width: 50%
+#| out-width: 60%
 #| fig-align: center
 #| fig-cap:
-#|     Heterozygosity predicted by the neutral theory.
+#|     Heterozygosity H=\frac{\theta}{1 + \theta} predicted by
+#|     the neutral theory.
 #|     Shaded region shows typical heterozygosities in animals (y-axis).
 #|     The observed $N_e\mu$ range is higher than predicted from plot.
 #|     From @hurst_GeneticsUnderstandingSelection_2009, Fig 1.
@@ -3465,7 +3490,13 @@ that which is predicted by the plot, and since $\mu$ is constrained
 within a couple of orders of magnitude, $N_e$ must vary more than
 predicted by the (strictly) neutral theory.
 
-The general idea nearly neutral theory is that most mutations are
+Conversely: given a constrained $\mu$, we observe a range of $N_e\mu$
+that predicts a heterozygosity range H, which is much larger than that
+which we observe. In other words, the heterozygosity range is much
+lower than predicted by the neutral, given the observed $N_e\mu$
+range, so some other process must reduce variation somehow.
+
+The general idea of nearly neutral theory is that most mutations are
 slightly deleterious and therefore purged by natural selection,
 thereby reducing observed variation. The efficacy of purging depends
 in turn on the effective population size, such that species with small
@@ -3602,16 +3633,16 @@ For a list of methods see <https://methodspopgen.com/methods-to-detect-selection
 
 $$
 \begin{matrix}
-\mathrm{Genotype} & aa & aA & AA \\
+\mathrm{Genotype} & AA & Aa & aa \\
 \mathrm{Frequency\ in\ newborns} & p^2 & 2pq & q^2\\
-\mathrm{Viability} & w_{aa} & w_{aA} & w_{AA}\\
-\mathrm{Frequency\ after\ selection} & p^2w_{aa} / \bar{w} &
-    2pqw_{Aa} / \bar{w} & q^2w_{AA} / \bar{w} \\
+\mathrm{Viability} & w_{AA} & w_{Aa} & w_{aa}\\
+\mathrm{Frequency\ after\ selection} & p^2w_{AA} / \bar{w} &
+    2pqw_{Aa} / \bar{w} & q^2w_{aa} / \bar{w} \\
 \mathrm{Relative\ fitness} & 1 & 1-hs & 1-s\\
 \end{matrix}
 $$
 
-where $\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}$ is the **mean
+where $\bar{w} = p^2w_{AA} + 2pqw_{Aa} + q^2w_{aa}$ is the **mean
 fitness**.
 
 :::
@@ -3620,8 +3651,8 @@ fitness**.
 
 |         |                                        |
 |---------|----------------------------------------|
-| $h=0$   | $a$ dominant, $A$ recessive            |
-| $h=1$   | $A$ dominant, $a$ recessive            |
+| $h=0$   | $A$ dominant, $a$ recessive            |
+| $h=1$   | $a$ dominant, $A$ recessive            |
 | $0<h<1$ | incomplete dominance                   |
 | $h<0$   | overdominance (heterozygote advantage) |
 | $h>1$   | underdominance                         |
@@ -3652,8 +3683,8 @@ parametrizations exist in the literature.
 ## The most important equation in population genetics
 
 $$
-p^\prime - p = \Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} -
-w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
+p^\prime - p = \Delta_sp = \frac{pq[p(w_{AA} - w_{Aa}) + q(w_{Aa} -
+w_{aa})]}{p^2w_{AA} + 2pqw_{Aa} + q^2w_{aa}}
 $$
 
 ```{r }
@@ -3812,7 +3843,7 @@ ggplot(data, aes(x=Ne_s, y=thetaf)) + geom_line() +
 
 ::: {.column width="20%"}
 
-In red region ($|N_es|<0.005$) the probability of fixation is within
+In red region ($|N_es|<0.05$) the probability of fixation is within
 10% of neutral fixation.
 
 **Consequence**: for any population size there exists range of
@@ -3844,8 +3875,42 @@ In figure, we assume $s<0.1$, which is almost always the case
 
 ::: {.column width="50%"}
 
-For genes, the ratio of non-synonymous to synonymous substitutions can
-tell us about protein evolution.
+For genes, the ratio of nonsynonymous to synonymous substitutions can
+tell us about protein evolution:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```
+Synonymous substitution
+
+Protein          L
+DNA         --- CTT ---
+                  *
+DNA         --- CTC ---
+Protein          L
+```
+
+:::
+
+::: {.column width="50%"}
+
+```
+Nonsynonymous substitution
+
+Protein          L
+DNA         --- CTT ---
+                 *
+DNA         --- CHT ---
+Protein          H
+```
+
+:::
+
+::::
+
+:::{}
 
 **$\mathbf{d_N/d_S << 1}$**
 : negative (purifying) selection
@@ -3858,6 +3923,8 @@ tell us about protein evolution.
 
 **$\mathbf{d_N/d_S > 1}$**
 : positive selection
+
+:::
 
 :::
 
@@ -4061,7 +4128,7 @@ Main effect: association between loci breaks up.
 #| label: recombinant-chromosomes
 #| echo: false
 #| eval: true
-#| out-width: 80%
+#| out-width: 60%
 #| fig-align: center
 \begin{tikzpicture}[>=latex, thick, anchor=mid]
 \tikzset{

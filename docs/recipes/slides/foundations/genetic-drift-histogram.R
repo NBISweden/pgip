@@ -1,7 +1,9 @@
 # Recipe to generate genetic drift histogram. The procedure consists
 # of tracking a fixed number of allelic states for a system with two
 # alleles (say, a and A), where the variable x corresponds to the
-# *probability* of being in a particular state.
+# *probability* of being in a particular state. Default setting
+# reproduce the data in Figure 3.4 in The neutral theory of molecular
+# evolution (Kimura, 1983).
 
 library(expm) # Matrix exponential library
 

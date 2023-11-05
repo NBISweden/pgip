@@ -160,3 +160,7 @@ slides/variant_calling:
 slides/variant_filtering:
   - __redyellow_variants__
   - __reference__
+
+slides/genetic_diversity:
+  - allsites.vcf.gz: monkeyflower/tiny/redyellow.allsites.vcf.gz
+  - allsites.vcf.gz.tbi: monkeyflower/tiny/redyellow.allsites.vcf.gz.tbi

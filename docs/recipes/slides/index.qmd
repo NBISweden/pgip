@@ -12,7 +12,9 @@ knitr:
 
 # Recipes in slides {#sec-recipe-slides}
 
-## Hardy-Weinberg Equilibrium {#sec-recipe-slides-hwe}
+## Foundations
+
+### Hardy-Weinberg Equilibrium {#sec-recipe-slides-hwe}
 
 Code to generate Hardy-Weinberg equilibrium plot.
 
@@ -32,7 +34,7 @@ Code to generate Hardy-Weinberg equilibrium plot.
 #| file: foundations/hwe.R
 ```
 
-## Genetic drift as allele frequency distributions {#sec-recipe-slides-allele-frequency-distribution}
+### Genetic drift as allele frequency distributions {#sec-recipe-slides-allele-frequency-distribution}
 
 ```{r }
 #| label: recipe-slides-allele-frequency-distribution
@@ -42,7 +44,7 @@ Code to generate Hardy-Weinberg equilibrium plot.
 #| file: foundations/genetic-drift-histogram.R
 ```
 
-## dn/ds ratios of human versus rat {#sec-recipe-slides-dn-ds-ratio-human-rat}
+### dn/ds ratios of human versus rat {#sec-recipe-slides-dn-ds-ratio-human-rat}
 
 ```{r }
 #| label: recipe-slides-dn-ds-ratio-human-rat
@@ -54,7 +56,9 @@ Code to generate Hardy-Weinberg equilibrium plot.
 #| file: foundations/hsapiens-rat-dnds.R
 ```
 
-## msprime trees {#sec-recipe-msprime-trees}
+## Simulation
+
+### msprime trees {#sec-recipe-msprime-trees}
 
 ```{python }
 #| label: recipe-slides-simulation-msprime-trees
@@ -64,4 +68,17 @@ Code to generate Hardy-Weinberg equilibrium plot.
 #|     Python code to generate four coalescent trees under different
 #|     evolutionary scenarios.
 #| file: simulation/treeviz.py
+```
+
+## Genetic diversity
+
+### Trees {#sec-recipe-diversity-msprime-trees}
+
+```{python }
+#| label: recipe-slides-diversity-msprime-trees
+#| echo: true
+#| eval: false
+#| code-summary: |
+#|     Python code to generate example coalescent trees.
+#| file: genetic_diversity/trees.py
 ```

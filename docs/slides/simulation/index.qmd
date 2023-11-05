@@ -1850,7 +1850,7 @@ summing up relevant branches or time intervals.
 
 :::
 
-## Coalescent simulations vary in topology and height
+## Coalescent simulations vary in topology and height {.smaller}
 
 ```{python }
 #| label: msprime-simulations
