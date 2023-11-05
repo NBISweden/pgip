@@ -420,7 +420,7 @@
   <h3 class="subtitle">Foundations</h3>
   <h4 class="author">Per Unneberg</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">04-Nov-2023</h4>
+  <h4 class="date">05-Nov-2023</h4>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
@@ -1600,35 +1600,11 @@ Calculate the nucleotide diversity
           display:block!important;
       }</style></aside>
 </section>
-<section id="in-absence-of-evolutionary-forces-alleles-are-in-equilibrium" class="slide level2">
+<section id="in-absence-of-evolutionary-forces-alleles-are-in-equilibrium" class="slide level2 smaller">
 <h2>In absence of evolutionary forces alleles are in equilibrium</h2>
 <h3 id="the-hardy-weinberg-equilibrium">The Hardy-Weinberg equilibrium</h3>
 <p>For a locus, let <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> be two different alleles and let <span class="math inline">\(p\)</span> be the frequency of the <span class="math inline">\(A\)</span> allele and <span class="math inline">\(q=1-p\)</span> the frequency of the <span class="math inline">\(a\)</span> allele. In the <strong>absence</strong> of <strong>mutation</strong>, <strong>drift</strong>, <strong>migration</strong>, and other evolutionary processes, the equilibrium state is given by the <strong>Hardy-Weinberg equilibrium</strong> (<strong>HWE</strong>).</p>
 <div class="{.columns=center}">
-<div class="column" style="width:45%;">
-<table>
-<tbody>
-<tr class="odd">
-<td>Genotype:</td>
-<td><span class="math inline">\(AA\)</span></td>
-<td><span class="math inline">\(Aa\)</span></td>
-<td><span class="math inline">\(aa\)</span></td>
-</tr>
-<tr class="even">
-<td>Frequency:</td>
-<td><span class="math inline">\(p^2\)</span></td>
-<td><span class="math inline">\(2pq\)</span></td>
-<td><span class="math inline">\(q^2\)</span></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>$f_{AA}</td>
-<td><span class="math inline">\(f_{Aa}\)</span></td>
-<td><span class="math inline">\(f_{aa}\)</span></td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="column" style="width:45%;">
 <table>
 <thead>
@@ -1648,6 +1624,30 @@ Calculate the nucleotide diversity
 <td><span class="math inline">\(a\)</span> (<span class="math inline">\(q\)</span>)</td>
 <td><span class="math inline">\(qp\)</span></td>
 <td><span class="math inline">\(q^2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="column" style="width:45%;">
+<table>
+<tbody>
+<tr class="odd">
+<td>Genotype:</td>
+<td><span class="math inline">\(AA\)</span></td>
+<td><span class="math inline">\(Aa\)</span></td>
+<td><span class="math inline">\(aa\)</span></td>
+</tr>
+<tr class="even">
+<td>Frequency:</td>
+<td><span class="math inline">\(p^2\)</span></td>
+<td><span class="math inline">\(2pq\)</span></td>
+<td><span class="math inline">\(q^2\)</span></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(f_{AA}\)</span></td>
+<td><span class="math inline">\(f_{Aa}\)</span></td>
+<td><span class="math inline">\(f_{aa}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1678,8 +1678,19 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 </section>
 <section id="natural-populations-do-mate-randomly" class="slide level2">
 <h2>Natural populations do mate randomly?</h2>
-
-<img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. For each SNP, genotypes are given as counts (minor/heterozygote/major), converted to frequencies and plotted on the y-axis. Allele frequencies are obtained from genotype frequencies and plotted on the x-axis. Most observations follow HWE proportions. Deviations from HWE can indicate sample QC issues, or that there is population structure. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p><aside class="notes">
+<div>
+<div class="cell" data-layout-align="center" data-file="../../recipes/slides/foundations/hwe.R">
+<div class="cell-output-display">
+<div id="fig-hwe-1000genomes" class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption>Figure&nbsp;1: Hardy-Weinberg proportions in 10,000 SNPs on chromosome 22 from three populations based on 1000 genomes data. For each SNP, genotypes are given as counts (minor/heterozygote/major), converted to frequencies and plotted on the y-axis. Allele frequencies are obtained from genotype frequencies and plotted on the x-axis. Most observations follow HWE proportions. Deviations from HWE can indicate sample QC issues, or that there is population structure. Illustration inspired by <span class="citation" data-cites="cooplab_PopulationGeneticsCourse_2011">cooplab (<a href="#/bibliography" role="doc-biblioref" onclick="">2011</a>)</span>. <a href="../../recipes/slides/index.html#sec-recipe-slides-hwe"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-hwe-1000genomes-1.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
 <p>So how do the HWE assumptions hold up in real data? The figure shows three human populations from the 1000 genomes data, for which 10,000 SNPs have been selected. For each SNP, we know the genotype frequencies <span class="math inline">\(AA\)</span>, <span class="math inline">\(Aa\)</span>, <span class="math inline">\(aa\)</span> and can therefore calculate the allele frequencies for <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> using the equations on the preceding slide (e.g., <span class="math inline">\(p=p_{AA}+p_{Aa}/2\)</span>).</p>
 <p>Note that 1000 genomes data have sorted genotype frequencies, so to produce nice symmetrical plots, half the genotype frequencies have been reversed (minor/het/major -&gt; major/het/minor).</p>
 <!-- markdownlint-disable MD013 -->
@@ -1833,9 +1844,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Setup starting population at time zero</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-1-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-1-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1860,9 +1875,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Add offspring (same size) at time one</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-2-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-2-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1888,9 +1907,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.0-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-3.0-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1916,9 +1939,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.1-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-3.1-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1944,9 +1971,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.1b-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-3.1b-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1972,9 +2003,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3.2-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-3.2-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2000,9 +2035,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-3-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2028,9 +2067,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-3-untangled-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-3-untangled-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2056,9 +2099,13 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <li>Select parents to offspring at random</li>
 </ol>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/wf-4-1.svg" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/wf-4-1.svg" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2085,24 +2132,24 @@ q = f_{aa} + \frac{f_{Aa}}{2} = q^2 + pq\\
 <h2>Wright-Fisher model</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-left">
+<div id="fig-wright-fisher-model-gganimation-last" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;3: WF model indicating time direction from past (top) to present (bottom).</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:90.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wright-fisher-model-gganimation-last-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-left">
+<div id="fig-wf-model-genealogy" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;4: WF model tracing the genealogies of three extant chromosomes</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" style="width:90.0%"></p>
+<p><img data-src="index_files/figure-revealjs/fig-wf-model-genealogy-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -2139,7 +2186,7 @@ P(v=k) = {2N\choose k}\left( \frac{1}{2N} \right)^k
           display:block!important;
       }</style></aside>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>For a more extensive treatment, see <span class="citation" data-cites="hermisson_MathematicalPopulationGenetics_2017">Hermisson (<a href="#/bibliography" role="doc-biblioref" onclick="">2017</a>)</span> or <span class="citation" data-cites="hein2005gene">Hein et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2005</a>)</span></p></li></ol></aside></section>
-<section id="properties-of-wright-fisher-sampling" class="slide level2">
+<section id="properties-of-wright-fisher-sampling" class="slide level2 smaller">
 <h2>Properties of Wright-Fisher sampling</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -2679,7 +2726,7 @@ p_{t+1} = P(v_A=k) = {2N\choose k}\left( \frac{i}{2N} \right)^k
           display:block!important;
       }</style></aside>
 </section>
-<section id="heterozygosity-dynamics-1" class="slide level2">
+<section id="heterozygosity-dynamics-1" class="slide level2 smaller">
 <h2>Heterozygosity dynamics</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -2911,7 +2958,7 @@ DNA sequences
 <div id="fig-tracing-evolution-of-mutations" class="quarto-figure quarto-figure-center">
 <figure>
 <figcaption>Figure&nbsp;13: Different mutations suffer different fates. Most mutations are lost in a couple of generations. Mutant alleles are colored black and their genealogies are highlighted with thicker edges.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" width="500" height="500"></p>
+<p><img data-src="index_files/figure-revealjs/fig-tracing-evolution-of-mutations-1.svg" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -2981,18 +3028,18 @@ DNA sequences
 <section id="the-neutral-theory-of-evolution" class="slide level2">
 <h2>The neutral theory of evolution</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
-<p>Mutation drift balance, together with the observation during 50’s-60’s that polymorphism was more common than expected, is the foundation of the <strong>neutral theory</strong> of evolution <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983</a>)</span>: allele frequencies may change and fix due to chance alone and not selection.</p>
+<div class="column" style="width:50%;">
+<p>Mutation drift balance, together with the observation during 50’s-60’s that polymorphism was more common than expected, is the foundation of the <strong>neutral theory</strong> of evolution <span class="citation" data-cites="kimura_1983">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura, 1983</a>)</span>: allele frequencies may change and fix due to chance alone and not selection; most mutations behave as if they are <strong>neutral</strong>.</p>
 <div class="fragment">
 <p><strong>Nearly neutral theory</strong> <span class="citation" data-cites="ohta_SlightlyDeleteriousMutant_1973">(<a href="#/bibliography" role="doc-biblioref" onclick="">Ohta, 1973</a>)</span> was later developed to explain failure to predict scaling of polymorphism with population size: most mutations are not neutral but <em>slightly deleterious</em> and <em>purged</em> from population by natural selection.</p>
 </div>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-heterozygosity-function-ne" class="quarto-figure quarto-figure-center">
 <figure>
-<figcaption>Figure&nbsp;14: Heterozygosity predicted by the neutral theory. Shaded region shows typical heterozygosities in animals (y-axis). The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
-<p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:50.0%"></p>
+<figcaption>Figure&nbsp;14: Heterozygosity H= predicted by the neutral theory. Shaded region shows typical heterozygosities in animals (y-axis). The observed <span class="math inline">\(N_e\mu\)</span> range is higher than predicted from plot. From <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">Hurst (<a href="#/bibliography" role="doc-biblioref" onclick="">2009</a>)</span>, Fig 1.</figcaption>
+<p><img data-src="index_files/figure-revealjs/fig-heterozygosity-function-ne-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -3004,7 +3051,8 @@ DNA sequences
 <p>Motivation: if polymorphic sites deleterious, should not expect much polymorphism.</p>
 <p>Low levels of polymorphism expected assuming little balancing selection <span class="citation" data-cites="hurst_GeneticsUnderstandingSelection_2009">(<a href="#/bibliography" role="doc-biblioref" onclick="">Hurst, 2009, p. 87</a>)</span>; however electrophoretic studies showed polymorphism common. Would lead to detrimental load <span class="citation" data-cites="kimura_ProteinPolymorphismPhase_1971">(<a href="#/bibliography" role="doc-biblioref" onclick="">Kimura &amp; Ohta, 1971</a>)</span> -&gt; therefore majority of polymorphism must evolve neutrally (dynamics). Also: rate of evolution (on protein level) too high (Haldane’s dilemma)</p>
 <p>On the shaded region: the observed range of <span class="math inline">\(N_e\mu\)</span> is larger than that which is predicted by the plot, and since <span class="math inline">\(\mu\)</span> is constrained within a couple of orders of magnitude, <span class="math inline">\(N_e\)</span> must vary more than predicted by the (strictly) neutral theory.</p>
-<p>The general idea nearly neutral theory is that most mutations are slightly deleterious and therefore purged by natural selection, thereby reducing observed variation. The efficacy of purging depends in turn on the effective population size, such that species with small <span class="math inline">\(N_e\)</span> will have a harder time getting rid of potentially damaging variants.</p>
+<p>Conversely: given a constrained <span class="math inline">\(\mu\)</span>, we observe a range of <span class="math inline">\(N_e\mu\)</span> that predicts a heterozygosity range H, which is much larger than that which we observe. In other words, the heterozygosity range is much lower than predicted by the neutral, given the observed <span class="math inline">\(N_e\mu\)</span> range, so some other process must reduce variation somehow.</p>
+<p>The general idea of nearly neutral theory is that most mutations are slightly deleterious and therefore purged by natural selection, thereby reducing observed variation. The efficacy of purging depends in turn on the effective population size, such that species with small <span class="math inline">\(N_e\)</span> will have a harder time getting rid of potentially damaging variants.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3093,25 +3141,25 @@ DNA sequences
 <div class="column fragment" style="width:50%;">
 <p><span class="math display">\[
 \begin{matrix}
-\mathrm{Genotype} &amp; aa &amp; aA &amp; AA \\
+\mathrm{Genotype} &amp; AA &amp; Aa &amp; aa \\
 \mathrm{Frequency\ in\ newborns} &amp; p^2 &amp; 2pq &amp; q^2\\
-\mathrm{Viability} &amp; w_{aa} &amp; w_{aA} &amp; w_{AA}\\
-\mathrm{Frequency\ after\ selection} &amp; p^2w_{aa} / \bar{w} &amp;
-    2pqw_{Aa} / \bar{w} &amp; q^2w_{AA} / \bar{w} \\
+\mathrm{Viability} &amp; w_{AA} &amp; w_{Aa} &amp; w_{aa}\\
+\mathrm{Frequency\ after\ selection} &amp; p^2w_{AA} / \bar{w} &amp;
+    2pqw_{Aa} / \bar{w} &amp; q^2w_{aa} / \bar{w} \\
 \mathrm{Relative\ fitness} &amp; 1 &amp; 1-hs &amp; 1-s\\
 \end{matrix}
 \]</span></p>
-<p>where <span class="math inline">\(\bar{w} = p^2w_{aa} + 2pqw_{Aa} + q^2w_{AA}\)</span> is the <strong>mean fitness</strong>.</p>
+<p>where <span class="math inline">\(\bar{w} = p^2w_{AA} + 2pqw_{Aa} + q^2w_{aa}\)</span> is the <strong>mean fitness</strong>.</p>
 </div><div class="column fragment" style="width:50%;">
 <table>
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(h=0\)</span></td>
-<td><span class="math inline">\(a\)</span> dominant, <span class="math inline">\(A\)</span> recessive</td>
+<td><span class="math inline">\(A\)</span> dominant, <span class="math inline">\(a\)</span> recessive</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(h=1\)</span></td>
-<td><span class="math inline">\(A\)</span> dominant, <span class="math inline">\(a\)</span> recessive</td>
+<td><span class="math inline">\(a\)</span> dominant, <span class="math inline">\(A\)</span> recessive</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(0&lt;h&lt;1\)</span></td>
@@ -3150,8 +3198,8 @@ DNA sequences
 <section id="the-most-important-equation-in-population-genetics" class="slide level2">
 <h2>The most important equation in population genetics</h2>
 <p><span class="math display">\[
-p^\prime - p = \Delta_sp = \frac{pq[p(w_{aa} - w_{aA}) + q(w_{aA} -
-w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
+p^\prime - p = \Delta_sp = \frac{pq[p(w_{AA} - w_{Aa}) + q(w_{Aa} -
+w_{aa})]}{p^2w_{AA} + 2pqw_{Aa} + q^2w_{aa}}
 \]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -3209,7 +3257,7 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 </div>
 </div>
 </div><div class="column" style="width:20%;">
-<p>In red region (<span class="math inline">\(|N_es|&lt;0.005\)</span>) the probability of fixation is within 10% of neutral fixation.</p>
+<p>In red region (<span class="math inline">\(|N_es|&lt;0.05\)</span>) the probability of fixation is within 10% of neutral fixation.</p>
 <p><strong>Consequence</strong>: for any population size there exists range of selection coefficients where mutant alleles <span class="math inline">\(\approx\)</span> neutral (<strong>effective neutrality</strong>).</p>
 </div>
 </div>
@@ -3234,7 +3282,27 @@ w_{AA})]}{p^2w_{aa} + 2pqw_{aA} + q^2w_{AA}}
 <h2>Direct selection can be inferred from protein substitutions</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>For genes, the ratio of non-synonymous to synonymous substitutions can tell us about protein evolution.</p>
+<p>For genes, the ratio of nonsynonymous to synonymous substitutions can tell us about protein evolution:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<pre><code>Synonymous substitution
+
+Protein          L
+DNA         --- CTT ---
+                  *
+DNA         --- CTC ---
+Protein          L</code></pre>
+</div><div class="column" style="width:50%;">
+<pre><code>Nonsynonymous substitution
+
+Protein          L
+DNA         --- CTT ---
+                 *
+DNA         --- CHT ---
+Protein          H</code></pre>
+</div>
+</div>
+<div>
 <dl>
 <dt><strong><span class="math inline">\(\mathbf{d_N/d_S &lt;&lt; 1}\)</span></strong></dt>
 <dd>
@@ -3253,6 +3321,7 @@ neutral or mix neutral / advantageous / deleterious mutations
 positive selection
 </dd>
 </dl>
+</div>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-file="../../recipes/slides/foundations/hsapiens-rat-dnds.R">
 <div class="cell-output-display">
@@ -3337,7 +3406,7 @@ positive selection
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/recombinant-chromosomes-1.svg" style="width:80.0%"></p>
+<p><img data-src="index_files/figure-revealjs/recombinant-chromosomes-1.svg" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -3410,8 +3479,8 @@ D_t = (1-r)^tD_0
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -3438,8 +3507,8 @@ D_t = (1-r)^tD_0
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">pgip-slim</span> <span class="at">--seed</span> 42 <span class="at">-n</span> 1000 <span class="at">-r</span> 1e-6 <span class="at">-m</span> 1e-7 <span class="at">--threads</span> 12 recipes/slim/selective_sweep.slim <span class="at">-l</span> 1000000 <span class="at">--outdir</span> results/slim</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">pgip-tsstat</span> results/slim/slim<span class="pp">*</span>.trees <span class="at">-n</span> 10 <span class="at">--seed</span> 31 <span class="at">-s</span> pi <span class="at">-s</span> S <span class="at">-s</span> TajD <span class="at">-w</span> 500 <span class="at">--threads</span> 10 <span class="kw">|</span> <span class="fu">gzip</span> <span class="at">-v</span> <span class="at">-</span> <span class="op">&gt;</span> results/slim/selective_sweep.w500.csv.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- markdownlint-enable MD013 -->

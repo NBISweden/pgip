@@ -348,10 +348,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <a href="#sec-recipe-slides" id="toc-sec-recipe-slides" class="nav-link active" data-scroll-target="#sec-recipe-slides"><span class="header-section-number">1</span> Recipes in slides</a>
   <ul class="collapse">
-<li><a href="#sec-recipe-slides-hwe" id="toc-sec-recipe-slides-hwe" class="nav-link" data-scroll-target="#sec-recipe-slides-hwe"><span class="header-section-number">1.1</span> Hardy-Weinberg Equilibrium</a></li>
-  <li><a href="#sec-recipe-slides-allele-frequency-distribution" id="toc-sec-recipe-slides-allele-frequency-distribution" class="nav-link" data-scroll-target="#sec-recipe-slides-allele-frequency-distribution"><span class="header-section-number">1.2</span> Genetic drift as allele frequency distributions</a></li>
-  <li><a href="#sec-recipe-slides-dn-ds-ratio-human-rat" id="toc-sec-recipe-slides-dn-ds-ratio-human-rat" class="nav-link" data-scroll-target="#sec-recipe-slides-dn-ds-ratio-human-rat"><span class="header-section-number">1.3</span> dn/ds ratios of human versus rat</a></li>
-  <li><a href="#sec-recipe-msprime-trees" id="toc-sec-recipe-msprime-trees" class="nav-link" data-scroll-target="#sec-recipe-msprime-trees"><span class="header-section-number">1.4</span> msprime trees</a></li>
+<li>
+<a href="#foundations" id="toc-foundations" class="nav-link" data-scroll-target="#foundations"><span class="header-section-number">1.1</span> Foundations</a>
+  <ul class="collapse">
+<li><a href="#sec-recipe-slides-hwe" id="toc-sec-recipe-slides-hwe" class="nav-link" data-scroll-target="#sec-recipe-slides-hwe"><span class="header-section-number">1.1.1</span> Hardy-Weinberg Equilibrium</a></li>
+  <li><a href="#sec-recipe-slides-allele-frequency-distribution" id="toc-sec-recipe-slides-allele-frequency-distribution" class="nav-link" data-scroll-target="#sec-recipe-slides-allele-frequency-distribution"><span class="header-section-number">1.1.2</span> Genetic drift as allele frequency distributions</a></li>
+  <li><a href="#sec-recipe-slides-dn-ds-ratio-human-rat" id="toc-sec-recipe-slides-dn-ds-ratio-human-rat" class="nav-link" data-scroll-target="#sec-recipe-slides-dn-ds-ratio-human-rat"><span class="header-section-number">1.1.3</span> dn/ds ratios of human versus rat</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation"><span class="header-section-number">1.2</span> Simulation</a>
+  <ul class="collapse">
+<li><a href="#sec-recipe-msprime-trees" id="toc-sec-recipe-msprime-trees" class="nav-link" data-scroll-target="#sec-recipe-msprime-trees"><span class="header-section-number">1.2.1</span> msprime trees</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#genetic-diversity" id="toc-genetic-diversity" class="nav-link" data-scroll-target="#genetic-diversity"><span class="header-section-number">1.3</span> Genetic diversity</a>
+  <ul class="collapse">
+<li><a href="#sec-recipe-diversity-msprime-trees" id="toc-sec-recipe-diversity-msprime-trees" class="nav-link" data-scroll-target="#sec-recipe-diversity-msprime-trees"><span class="header-section-number">1.3.1</span> Trees</a></li>
+  </ul>
+</li>
   </ul>
 </li>
   </ul></nav>
@@ -359,8 +375,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content"><section id="sec-recipe-slides" class="level1" data-number="1"><h1 data-number="1">
 <span class="header-section-number">1</span> Recipes in slides</h1>
-<section id="sec-recipe-slides-hwe" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="sec-recipe-slides-hwe">
-<span class="header-section-number">1.1</span> Hardy-Weinberg Equilibrium</h2>
+<section id="foundations" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="foundations">
+<span class="header-section-number">1.1</span> Foundations</h2>
+<section id="sec-recipe-slides-hwe" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="sec-recipe-slides-hwe">
+<span class="header-section-number">1.1.1</span> Hardy-Weinberg Equilibrium</h3>
 <p>Code to generate Hardy-Weinberg equilibrium plot.</p>
 <div class="cell" data-file="foundations/hwe.sh">
 <details><summary>Bash script to download data from 1000 genomes</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz</span>
@@ -445,13 +463,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>        shape <span class="op">=</span> <span class="va">shape_hwe</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="sec-recipe-slides-allele-frequency-distribution" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="sec-recipe-slides-allele-frequency-distribution">
-<span class="header-section-number">1.2</span> Genetic drift as allele frequency distributions</h2>
+</section><section id="sec-recipe-slides-allele-frequency-distribution" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="sec-recipe-slides-allele-frequency-distribution">
+<span class="header-section-number">1.1.2</span> Genetic drift as allele frequency distributions</h3>
 <div class="cell" data-file="foundations/genetic-drift-histogram.R">
 <details><summary>R code to generate and plot allele frequency distribution</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Recipe to generate genetic drift histogram. The procedure consists of</span></span>
 <span><span class="co"># tracking a fixed number of allelic states for a system with two alleles (say,</span></span>
 <span><span class="co"># a and A), where the variable x corresponds to the *probability* of being in a</span></span>
-<span><span class="co"># particular state.</span></span>
+<span><span class="co"># particular state. Default setting reproduce the data in Figure 3.4 in The</span></span>
+<span><span class="co"># neutral theory of molecular evolution (Kimura, 1983).</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://R-Forge.R-project.org/projects/expm/">expm</a></span><span class="op">)</span>  <span class="co"># Matrix exponential library</span></span>
 <span></span>
@@ -499,8 +518,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span>height <span class="op">=</span> <span class="va">data</span>, beside <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="va">class_col</span>, names.arg <span class="op">=</span> <span class="va">xl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="sec-recipe-slides-dn-ds-ratio-human-rat" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="sec-recipe-slides-dn-ds-ratio-human-rat">
-<span class="header-section-number">1.3</span> dn/ds ratios of human versus rat</h2>
+</section><section id="sec-recipe-slides-dn-ds-ratio-human-rat" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" class="anchored" data-anchor-id="sec-recipe-slides-dn-ds-ratio-human-rat">
+<span class="header-section-number">1.1.3</span> dn/ds ratios of human versus rat</h3>
 <div class="cell" data-file="foundations/hsapiens-rat-dnds.R">
 <details><summary>R code to download dn/ds data for <em>H.sapiens</em> versus <em>R.norvegicus</em> from ensembl and plot</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="st">"assets/data/hsapiens_rat.dnds.tsv"</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -523,8 +542,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>    <span class="va">d</span><span class="op">[</span><span class="va">s</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Frequency"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">" human-rat orthologue pairs"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="sec-recipe-msprime-trees" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="sec-recipe-msprime-trees">
-<span class="header-section-number">1.4</span> msprime trees</h2>
+</section></section><section id="simulation" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="simulation">
+<span class="header-section-number">1.2</span> Simulation</h2>
+<section id="sec-recipe-msprime-trees" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="sec-recipe-msprime-trees">
+<span class="header-section-number">1.2.1</span> msprime trees</h3>
 <div class="cell" data-file="simulation/treeviz.py">
 <details><summary>Python code to generate four coalescent trees under different evolutionary scenarios.</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> msprime</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -583,9 +604,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ts.draw_svg(<span class="op">**</span>kwargs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section></section><section id="genetic-diversity" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="genetic-diversity">
+<span class="header-section-number">1.3</span> Genetic diversity</h2>
+<section id="sec-recipe-diversity-msprime-trees" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="sec-recipe-diversity-msprime-trees">
+<span class="header-section-number">1.3.1</span> Trees</h3>
+<div class="cell" data-file="genetic_diversity/trees.py">
+<details><summary>Python code to generate example coalescent trees.</summary><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> msprime</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Small tree for calculation purposes</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ts_small <span class="op">=</span> msprime.sim_ancestry(<span class="dv">2</span>, sequence_length<span class="op">=</span><span class="fl">1e4</span>, random_seed<span class="op">=</span><span class="dv">38</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ts_small_mut <span class="op">=</span> msprime.sim_mutations(ts_small, rate<span class="op">=</span><span class="fl">3e-5</span>, random_seed<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Balancing selection topology</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ts_small_balance <span class="op">=</span> msprime.sim_ancestry(<span class="dv">2</span>, sequence_length<span class="op">=</span><span class="fl">1e4</span>, random_seed<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ts_small_balance_mut <span class="op">=</span> msprime.sim_mutations(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ts_small_balance, rate<span class="op">=</span><span class="fl">2.5e-5</span>, random_seed<span class="op">=</span><span class="dv">7</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> genotypes(ts, <span class="op">*</span>, sample_names<span class="op">=</span><span class="va">True</span>, sample_prefix<span class="op">=</span><span class="st">"sample "</span>, collapse<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    gt <span class="op">=</span> ts.genotype_matrix().T</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pd.DataFrame(gt)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> collapse:</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.<span class="bu">apply</span>(<span class="kw">lambda</span> row: <span class="st">""</span>.join(row.values.astype(<span class="bu">str</span>)), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> sample_names:</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        x.index <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>sample_prefix<span class="sc">}{</span>i<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> x.index]</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tree(</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    ts, <span class="op">*</span>, id_string, show_sequences<span class="op">=</span><span class="va">True</span>, node_labels<span class="op">=</span><span class="bu">dict</span>(), size<span class="op">=</span>(<span class="dv">250</span>, <span class="dv">300</span>), <span class="op">**</span>kwargs</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    css_extra <span class="op">=</span> kwargs.pop(<span class="st">"css_extra"</span>, <span class="st">""</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    css_string <span class="op">=</span> (</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">".edge {stroke: black; stroke-width: 3px}"</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">".node &gt; .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}"</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">".node &gt; .sym, .node:not(.leaf) &gt; .lab {display: none}"</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">".node:not(.leaf) &gt; .lab {display: none}"</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span> css_extra</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    css <span class="op">=</span> kwargs.pop(<span class="st">"css_string"</span>, css_string)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    node_labels <span class="op">=</span> kwargs.pop(<span class="st">"node_labels"</span>, <span class="va">None</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_sequences:</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        node_labels <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ind <span class="kw">in</span> <span class="bu">range</span>(ts.num_samples):</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            node_labels[ind] <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>ind<span class="sc">}</span><span class="ss">: "</span> <span class="op">+</span> <span class="st">""</span>.join(</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>                [<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> ts.genotype_matrix()[:, ind]]</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    style <span class="op">=</span> <span class="ss">f"#</span><span class="sc">{</span>id_string<span class="sc">}</span><span class="ss"> </span><span class="ch">{{</span><span class="ss">"</span> <span class="op">+</span> css <span class="op">+</span> <span class="st">"}"</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ts.draw_svg(</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        size<span class="op">=</span>size,</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        node_labels<span class="op">=</span>node_labels,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        style<span class="op">=</span>style,</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        root_svg_attributes<span class="op">=</span>{<span class="st">"id"</span>: id_string},</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>kwargs,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

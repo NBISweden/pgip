@@ -379,9 +379,10 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#genome-scans" id="toc-genome-scans" class="nav-link" data-scroll-target="#genome-scans">Genome scans</a>
+<a href="#genome-scans-and-genomic-features" id="toc-genome-scans-and-genomic-features" class="nav-link" data-scroll-target="#genome-scans-and-genomic-features">Genome scans and genomic features</a>
   <ul class="collapse">
 <li><a href="#working-with-z-transformed-data" id="toc-working-with-z-transformed-data" class="nav-link" data-scroll-target="#working-with-z-transformed-data">Working with Z-transformed data</a></li>
+  <li><a href="#stratifying-by-genomic-feature" id="toc-stratifying-by-genomic-feature" class="nav-link" data-scroll-target="#stratifying-by-genomic-feature">Stratifying by genomic feature</a></li>
   </ul>
 </li>
   <li><a href="#monkeyflower-diversity-landscape" id="toc-monkeyflower-diversity-landscape" class="nav-link" data-scroll-target="#monkeyflower-diversity-landscape">Monkeyflower diversity landscape</a></li>
@@ -407,7 +408,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">04-Nov-2023</p>
+      <p class="date">05-Nov-2023</p>
     </div>
   </div>
   
@@ -696,11 +697,11 @@ dependencies:
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div id="fig-evolutionary-relationship" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="../datasets/assets/images/stankowski-2019-fig1A.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Evolutionary relationships across the radiation"><img src="../datasets/assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="../datasets/assets/images/stankowski-2019-fig1A.png" class="lightbox" title="Evolutionary relationships across the radiation" data-gallery="quarto-lightbox-gallery-1"><img src="../datasets/assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Evolutionary relationships across the radiation</figcaption></figure>
 </div>
 <div id="fig-monkeyflower-sampling-location" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Monkeyflower sampling locations"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" title="Monkeyflower sampling locations" data-gallery="quarto-lightbox-gallery-2"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Monkeyflower sampling locations</figcaption></figure>
 </div>
 </div></div><p>We convert the sample information with <code>csvtk</code>. We also add a populations file with all samples belonging to the same population:</p>
@@ -772,7 +773,7 @@ On genome scans and window sizes
 <div class="no-row-height column-margin column-container"><div class="callout-6-contents callout-collapse collapse callout-margin-content">
 <!-- markdownlint-disable MD013 -->
 <div id="fig-ld-decay-fuller" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Properties of genetic variation and inferred demographic history in sampled A. millepora. @fuller_PopulationGeneticsCoral_2020, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent."><img src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="lightbox" title="Properties of genetic variation and inferred demographic history in sampled A. millepora. @fuller_PopulationGeneticsCoral_2020, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent." data-gallery="quarto-lightbox-gallery-8"><img src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Properties of genetic variation and inferred demographic history in sampled <em>A. millepora</em>. <span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span>, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent.</figcaption></figure>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -948,8 +949,9 @@ Hint
 </div>
 </div>
 </div>
-</section></section><section id="genome-scans" class="level2"><h2 class="anchored" data-anchor-id="genome-scans">Genome scans</h2>
+</section></section><section id="genome-scans-and-genomic-features" class="level2"><h2 class="anchored" data-anchor-id="genome-scans-and-genomic-features">Genome scans and genomic features</h2>
 <section id="working-with-z-transformed-data" class="level3"><h3 class="anchored" data-anchor-id="working-with-z-transformed-data">Working with Z-transformed data</h3>
+</section><section id="stratifying-by-genomic-feature" class="level3"><h3 class="anchored" data-anchor-id="stratifying-by-genomic-feature">Stratifying by genomic feature</h3>
 </section></section><section id="monkeyflower-diversity-landscape" class="level2"><h2 class="anchored" data-anchor-id="monkeyflower-diversity-landscape">Monkeyflower diversity landscape</h2>
 <p>Drawing on what you learned earlier today about filtering, and with the help of the command examples above, you can now start exploring the Monkeyflower diversity landscape. Try different population comparisons, perform outlier analyses, and see if you can find candidate regions of interest. If you want inspiration, take a look at the methods section of <span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<a href="#ref-stankowski_WidespreadSelectionGene_2019" role="doc-biblioref">2019</a>)</span>.</p>
 <p>To get you started, here are some exercise templates:</p>
@@ -1249,7 +1251,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true});</script>
 
 
 </body></html>
