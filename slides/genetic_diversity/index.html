@@ -450,7 +450,7 @@
 </div><div class="column" style="width:70%;">
 <p>The usual questions:</p>
 <blockquote>
-<p>What evolutionary forces maintain genetic diversity in natural populations? How do diversity levels relate to census population sizes…? Do low levels of diversity limit adaptation to selective pressures</p>
+<p>What evolutionary forces maintain genetic diversity in natural populations? How do diversity levels relate to census population sizes…? Do low levels of diversity limit adaptation to selective pressures?</p>
 </blockquote>
 <div class="flushright smallest translatey50">
 <p><span class="citation" data-cites="leffler_RevisitingOldRiddle_2012">Leffler et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2012</a>)</span></p>
@@ -530,7 +530,7 @@
 </section>
 <section id="why-we-measure-patterns-of-genetic-variation" class="slide level2">
 <h2>Why we measure patterns of genetic variation</h2>
-<p>Genetic variation patterns are informative of evolutionary and demographic processes. We often use <strong>summary statistics</strong> to describe the patterns, and to estimate parameters such as <strong>effective population size</strong> and <strong>mutation rate</strong> from genetic variation data.</p>
+<p>Genetic variation patterns are informative of evolutionary and demographic processes. We often use <strong>summary statistics</strong> to describe the patterns, and to estimate parameters such as <strong>effective population size</strong> and <strong>mutation rate</strong> from genetic variation data (<span class="math inline">\(\theta = 4N_e\mu\)</span>)</p>
 <div class="fragment">
 <div>
 <p>Often critical first step of analysis, such as</p>
@@ -545,19 +545,56 @@
 </div>
 </div>
 </section>
-<section id="genetic-basis-of-adaptation-and-genome-scans" class="slide level2">
-<h2>Genetic basis of adaptation and genome scans</h2>
-<p>Fundamental questions:</p>
-<ul>
-<li>How many genes are involved in the evolution of adaptive traits?</li>
-<li>What is the distribution of phenotypic effects among successive allelic substitutions?</li>
-<li>Is adaptation typically based on standing variation or new mutations?</li>
-<li>What is the relative importance of additive vs.&nbsp;nonadditive effects on adaptive trait variation?</li>
-<li>And what is the relative importance of structural vs.&nbsp;regulatory changes in phenotypic evolution?</li>
-</ul>
-<div class="flushright smallest">
-<p><span class="citation" data-cites="storz_INVITEDREVIEWUsing_2005">(<a href="#/bibliography" role="doc-biblioref" onclick="">Storz, 2005</a>)</span></p>
+<section id="genetic-diversity-in-conservation-biology" class="slide level2 smaller">
+<h2>Genetic diversity in conservation biology</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption><span class="citation" data-cites="kuderna_GlobalCatalogWholegenome_2023">Kuderna et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2023</a>)</span>, Fig 2</figcaption>
+<p><img data-src="assets/images/kuderna-2023-fig2.jpg" style="width:100.0%"></p>
+</figure>
 </div>
+<blockquote>
+<p>…no global relationship between numerically coded IUCN extinction risk categories and estimated heterozygosity…</p>
+</blockquote>
+</div><div class="column" style="width:50%;">
+<div>
+<p>Low genetic diversity symptom of past genetic drift inbreeding (higher levels of homozygosity), caused by low <span class="math inline">\(N_e\)</span></p>
+<div class="flushright smallest">
+<p><span class="citation" data-cites="garcia-dorado_NeutralGeneticDiversity_2021">García-Dorado &amp; Caballero (<a href="#/bibliography" role="doc-biblioref" onclick="">2021</a>)</span></p>
+</div>
+</div>
+<p><br><br></p>
+<div>
+<p>However: if population decline is rapid, may be too little time for inbreeding to occur <span class="math inline">\(\Rightarrow\)</span> genetic diversity within species not necessarily aligned to extinction risk</p>
+<div class="flushright smallest">
+<p><span class="citation" data-cites="lewis_BiggestEverStudy_2023">Lewis (<a href="#/bibliography" role="doc-biblioref" onclick="">2023</a>)</span></p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Take home <span class="citation" data-cites="lewis_BiggestEverStudy_2023">(<a href="#/bibliography" role="doc-biblioref" onclick="">Lewis, 2023</a>)</span>: genetic diversity within a species does not necessarily align with its extinction risk. Possible explanation: population decline has been so rapid that there hasn’t been time for inbreeding to occur. Other factors (e.g., habitat destruction) greater threat.</p>
+<p>Caption:</p>
+<blockquote>
+<p>Runs of homozygosity and impact of extinction risk on diversity (A) Relationship between IUCN extinction risk categories and heterozygosity. Solid black circles and bars denote median and IQR. (B) Partition into threatened (T: VU, EN, CR) and nonthreatened (N: LC, NT) categories for all families with more than one species in either partition. Significant differences (p &lt; 0.05, one-sided rank-sum test) are marked with an asterisk. (C) Median number of tracts of homozygosity versus median proportion of the genome in runs of homozygosity per species. Species with a fraction over 1/3 are highlighted. Solid black dots within highlights denote threatened species (VU, EN, CR).</p>
+</blockquote>
+<p>On Figure 2A:</p>
+<blockquote>
+<p>We investigated whether genetic diversity estimates are correlated with extinction risk in primates, a subject of previous debate (17, 33, 34). Despite our broad sampling, we find no global relationship between numerically coded IUCN extinction risk categories and estimated heterozygosity [p &gt; 0.05, phylogenetic generalized least squares (PGLS)] (Fig. 2A) (16).</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="measuring-genetic-diversity" class="title-slide slide level1 center">
@@ -598,8 +635,8 @@ sample 3:   10010</code></pre>
 </div>
 </div>
 </section>
-<section id="wattersons-theta" class="slide level2">
-<h2>Watterson’s <span class="math inline">\(\theta\)</span></h2>
+<section id="wattersons-theta_w" class="slide level2">
+<h2>Watterson’s <span class="math inline">\(\theta_W\)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -619,7 +656,7 @@ sample 3:   10010</code></pre>
 \]</span></p>
 </div>
 <div class="fragment" data-fragment-index="3">
-<p>Important: under neutrality, <span class="math inline">\(E(\pi) = E(\theta_W)\)</span>. Difference between two the basis for <strong>Tajima’s D</strong> that is a test for selection</p>
+<p>Important: under neutrality, <span class="math inline">\(\theta = E(\pi) = E(\theta_W)\)</span>. Difference between two the basis for <strong>Tajima’s D</strong> that is a test for selection</p>
 </div>
 </div><div class="column" style="width:50%;">
 <div>
@@ -628,6 +665,9 @@ sample 3:   10010</code></pre>
 <style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimetreethetaw {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}}</style>
 </defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 318.678)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -2.19703)"><line x1="0" x2="0" y1="0" y2="2.19703"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -7.74814)"><line x1="0" x2="0" y1="0" y2="7.74814"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -318.678 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 190.676)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -19.9074)"><line x1="0" x2="0" y1="0" y2="19.9074"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -98.2843)"><line x1="0" x2="0" y1="0" y2="98.2843"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -190.676 H -105"></path><g class="mut m3 s3" transform="translate(0 -148.61)"><line x1="0" x2="0" y1="0" y2="148.61"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
 </svg>
+<div class="flushright smallest">
+<p>Tree plot with mutations and sequences <a href="../../recipes/slides/index.html#sec-recipe-diversity-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
+</div>
 </div>
 </div>
 </div>
@@ -671,19 +711,21 @@ sample 3:   10010</code></pre>
 <span id="cb4-10"><a href="#cb4-10"></a></span>
 <span id="cb4-11"><a href="#cb4-11"></a><span class="bu">print</span>(<span class="ss">f"Diversity:           </span><span class="sc">{</span>pi<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
 <span id="cb4-12"><a href="#cb4-12"></a>      <span class="ss">f"Watterson's theta:   </span><span class="sc">{</span>thetaW<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13"></a>      sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-13"><a href="#cb4-13"></a>      <span class="ss">f"Sequence length:     </span><span class="sc">{</span>ts<span class="sc">.</span>sequence_length<span class="sc">:.0f}</span><span class="ss">"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14"></a>      sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Diversity:           0.000267
-Watterson's theta:   0.000273</code></pre>
+Watterson's theta:   0.000273
+Sequence length:     10000</code></pre>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div>
-<svg baseprofile="full" height="500" id="msprimetreediversity" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<svg baseprofile="full" height="500" id="msprimecalctreediversity" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
 <defs>
-<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimetreediversity {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}}</style>
-</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 318.678)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -2.19703)"><line x1="0" x2="0" y1="0" y2="2.19703"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -7.74814)"><line x1="0" x2="0" y1="0" y2="7.74814"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -318.678 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 190.676)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -19.9074)"><line x1="0" x2="0" y1="0" y2="19.9074"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -98.2843)"><line x1="0" x2="0" y1="0" y2="98.2843"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -190.676 H -105"></path><g class="mut m3 s3" transform="translate(0 -148.61)"><line x1="0" x2="0" y1="0" y2="148.61"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimecalctreediversity {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}}</style>
+</defs><g class="tree-sequence"><g class="background"><path d="M20,0 l460,0 l0,338.2 l0,25 l0,5 l-460,0 l0,-5 l0,-25 l0,-338.2z"></path></g><g class="axes"><g class="x-axis"><g class="title" transform="translate(250 400)"><text class="lab" text-anchor="middle" transform="translate(0 -11)">Genome position</text></g><line class="ax-line" x1="20" x2="480" y1="363.2" y2="363.2"></line><g class="ticks"><g class="tick" transform="translate(20 363.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">0</text></g></g><g class="tick" transform="translate(480 363.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">10000</text></g></g></g><g class="site s0" transform="translate(22.852 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m0"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s1" transform="translate(119.36 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m1"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s2" transform="translate(271.712 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m2"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s3" transform="translate(311.134 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m3"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s4" transform="translate(348.808 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m4"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g></g></g><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 283.291)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 11.3093)"><path class="edge" d="M 0 0 V -11.3093 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -1.95306)"><line x1="0" x2="0" y1="0" y2="1.95306"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 11.3093)"><path class="edge" d="M 0 0 V -11.3093 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -6.88775)"><line x1="0" x2="0" y1="0" y2="6.88775"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -283.291 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 169.503)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 125.097)"><path class="edge" d="M 0 0 V -125.097 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -17.6968)"><line x1="0" x2="0" y1="0" y2="17.6968"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 125.097)"><path class="edge" d="M 0 0 V -125.097 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -87.3704)"><line x1="0" x2="0" y1="0" y2="87.3704"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -169.503 H -105"></path><g class="mut m3 s3" transform="translate(0 -132.108)"><line x1="0" x2="0" y1="0" y2="132.108"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
 </svg>
 <div class="flushright smallest">
 <p>Tree plot with mutations and sequences <a href="../../recipes/slides/index.html#sec-recipe-diversity-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
@@ -704,20 +746,14 @@ sample 2:   01010
 sample 3:   10010</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> trees <span class="im">import</span> ts_small_mut <span class="im">as</span> ts</span>
-<span id="cb7-2"><a href="#cb7-2"></a></span>
-<span id="cb7-3"><a href="#cb7-3"></a>sample_sets <span class="op">=</span> [[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">3</span>]]</span>
-<span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5"></a>dxy <span class="op">=</span> ts.divergence(sample_sets<span class="op">=</span>sample_sets)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>fst <span class="op">=</span> ts.Fst(sample_sets<span class="op">=</span>sample_sets)</span>
-<span id="cb7-7"><a href="#cb7-7"></a></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="bu">print</span>(<span class="ss">f"Divergence:   </span><span class="sc">{</span>dxy<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb7-9"><a href="#cb7-9"></a>      <span class="ss">f"Fst:          </span><span class="sc">{</span>fst<span class="sc">:.6f}</span><span class="ss">"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Divergence:   0.000300
-Fst:          0.200000</code></pre>
+<p>Divergence: for each site, count and sum differences between all pairs of samples <em>between</em> two populations</p>
+<div class="fragment">
+<p>Example: for site 0, compare samples 0-2 (0 diffs), samples 0-3 (1 diff), samples 1-2 (0 diffs), samples 1-3 (1 diff), and so on. Call differences <span class="math inline">\(k_ij\)</span>, let <span class="math inline">\(n_X\)</span>, <span class="math inline">\(n_Y\)</span> be sample size in populations <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>. Then</p>
 </div>
+<div class="fragment">
+<p><span class="math display">\[
+d_{XY} = \frac{1}{n_Xn_Y}\sum_{i=1}^{n_X}\sum_{i=1}^{n_Y}k_{ij}
+\]</span></p>
 </div>
 </div><div class="column" style="width:50%;">
 <svg baseprofile="full" height="500" id="msprimetreedivergence" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
@@ -731,15 +767,205 @@ Fst:          0.200000</code></pre>
 </div>
 </div>
 </section>
-<section id="diversity-measures" class="slide level2">
-<h2>Diversity measures</h2>
-<p>summarize in final tree? thinking relation between</p>
-<p>Simple binary tree from Hahn or similar</p>
-<p>Want to describe/define pi, dxy, fst, AD, theta_W</p>
+<section id="divergence---dxy-1" class="slide level2">
+<h2>Divergence - dXY</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>sample 0:   00100
+sample 1:   00001
+sample 2:   01010
+sample 3:   10010</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">from</span> trees <span class="im">import</span> ts_small_mut <span class="im">as</span> ts</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>sample_sets <span class="op">=</span> [[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">3</span>]]</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>dxy <span class="op">=</span> ts.divergence(sample_sets<span class="op">=</span>sample_sets)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="bu">print</span>(<span class="ss">f"Divergence:   </span><span class="sc">{</span>dxy<span class="sc">:.6f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Divergence:   0.000300</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<svg baseprofile="full" height="500" id="msprimetreedivergence" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimetreedivergence {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}.n4 .edge {stroke: blue }}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 318.678)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -2.19703)"><line x1="0" x2="0" y1="0" y2="2.19703"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -7.74814)"><line x1="0" x2="0" y1="0" y2="7.74814"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -318.678 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 190.676)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -19.9074)"><line x1="0" x2="0" y1="0" y2="19.9074"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -98.2843)"><line x1="0" x2="0" y1="0" y2="98.2843"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -190.676 H -105"></path><g class="mut m3 s3" transform="translate(0 -148.61)"><line x1="0" x2="0" y1="0" y2="148.61"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<div class="flushright smallest">
+<p>Tree plot with mutations and sequences <a href="../../recipes/slides/index.html#sec-recipe-diversity-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
+</div>
+</div>
+</div>
 <aside class="notes">
-<p>tskit calculates fst as follows:</p>
-<p>fst = 1 - 2(dX + dY)/(dX + dXY + dY)</p>
-<p>dXY is the average number of differences between two sample sets. If X=Y, it is simply the diversity (dX), i.e.&nbsp;the divergence of a sample set with itself is equal to the diversity. dXY reference is Nei and Li (1979)</p>
+<p><span class="math inline">\(F_ST\)</span> (later) and related statistics are strongly affected by within-subpopulation genetic variance. <span class="citation" data-cites="nei_AnalysisGeneDiversity_1973">Nei (<a href="#/bibliography" role="doc-biblioref" onclick="">1973</a>)</span> proposed dXY as an alternative that does not depend on the levels of diversity <em>within</em> subpopulations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="differentiation---afd-allele-frequency-difference" class="slide level2 smaller">
+<h2>Differentiation - AFD (allele frequency difference)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>sample 0:   00100
+sample 1:   00001
+sample 2:   01010
+sample 3:   10010</code></pre>
+</div>
+</div>
+<p>Allele Frequency Difference (AFD) proposed as intuitive alternative to <span class="math inline">\(F_{\mathrm{ST}}\)</span>. For each site, count the difference in allele frequency between two populations.</p>
+<div class="fragment">
+<p>Example: site 0, frequency in blue is 0, in black 1/2, so difference=1/2, site 1, frequency in blue 0, in black 1/2, and so on</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+AFD = \frac{1}{2}\sum_{i=1}^n| (f_{i1} - f_{i2})|
+\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of different alleles (<span class="math inline">\(n=2\)</span> for biallelic SNPs), <span class="math inline">\(f_{ij}\)</span> is the frequency of allele <span class="math inline">\(i\)</span> in population <span class="math inline">\(j\)</span></p>
+<div class="flushright smallest">
+<p><span class="citation" data-cites="berner_AlleleFrequencyDifference_2019">Berner (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<svg baseprofile="full" height="500" id="msprimetreeafd" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimetreeafd {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}.n4 .edge {stroke: blue }}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 318.678)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -2.19703)"><line x1="0" x2="0" y1="0" y2="2.19703"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -7.74814)"><line x1="0" x2="0" y1="0" y2="7.74814"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -318.678 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 190.676)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -19.9074)"><line x1="0" x2="0" y1="0" y2="19.9074"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -98.2843)"><line x1="0" x2="0" y1="0" y2="98.2843"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -190.676 H -105"></path><g class="mut m3 s3" transform="translate(0 -148.61)"><line x1="0" x2="0" y1="0" y2="148.61"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<div class="flushright smallest">
+<p>Tree plot with mutations and sequences <a href="../../recipes/slides/index.html#sec-recipe-diversity-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>AFD proposed as a more intuitive and easier to understand statistic than Fst</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="differentiation---var-fst" class="slide level2 smaller">
+<h2>Differentiation - <span class="math inline">\(F_{\mathrm{ST}}\)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>sample 0:   00100
+sample 1:   00001
+sample 2:   01010
+sample 3:   10010</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(F_{\mathrm{ST}}\)</span> is another measure of differention among subpopulations <span class="citation" data-cites="wright_EvolutionMendelianPopulations_1931">(<a href="#/bibliography" role="doc-biblioref" onclick="">Wright, 1931</a>)</span>. It ranges between 0 and 1 and has the interpretation 0: no differentiation, 1: complete fixation of alternate alleles in subpopulations</p>
+<div class="fragment">
+<p>Example: site 3 has <span class="math inline">\(F_{\mathrm{ST}}\)</span>=1 as it is fixed in black, not present in blue</p>
+</div>
+<div class="fragment">
+<p>There are <em>many</em> ways to express and calculate <span class="math inline">\(F_{\mathrm{ST}}\)</span>. Example:</p>
+<p><span class="math display">\[
+F_{\mathrm{ST}} = \frac{h_{\mathrm{T}} - h_{\mathrm{S}}}{h_{\mathrm{T}}}
+\]</span></p>
+<p>where <span class="math inline">\(h_{\mathrm{T}}\)</span> is the expected heterozygosity in the total population, <span class="math inline">\(h_{\mathrm{S}}\)</span> the <em>average</em> of expected heterozygosities across subpopulations. For site 3, <span class="math inline">\(h_{\mathrm{S}}=0\)</span>, <span class="math inline">\(h_{\mathrm{T}}=2/3\)</span>.</p>
+</div>
+<div class="fragment">
+<p>Caveats: strongly influenced by <em>within</em> subpopulation levels of variation. Therefore considered <em>relative</em> measure (cf <span class="math inline">\(d_{\mathrm{XY}}\)</span>, which is an <em>absolute</em> measure).</p>
+</div>
+</div><div class="column" style="width:50%;">
+<svg baseprofile="full" height="500" id="msprimetreefst" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimetreefst {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}.n4 .edge {stroke: blue }}</style>
+</defs><g class="tree-sequence"><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 318.678)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -2.19703)"><line x1="0" x2="0" y1="0" y2="2.19703"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 12.722)"><path class="edge" d="M 0 0 V -12.722 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -7.74814)"><line x1="0" x2="0" y1="0" y2="7.74814"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -318.678 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 190.676)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -19.9074)"><line x1="0" x2="0" y1="0" y2="19.9074"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 140.724)"><path class="edge" d="M 0 0 V -140.724 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -98.2843)"><line x1="0" x2="0" y1="0" y2="98.2843"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -190.676 H -105"></path><g class="mut m3 s3" transform="translate(0 -148.61)"><line x1="0" x2="0" y1="0" y2="148.61"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<div class="flushright smallest">
+<p>Tree plot with mutations and sequences <a href="../../recipes/slides/index.html#sec-recipe-diversity-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Wright’s fst measures differentiation among subpopulations. Interpretation: 0 no differentiation, 1 complete fixation of alternate alleles. Has therefore become a popular statistic for quantifying differentiation from molecular data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="differentiation---var-fst-1" class="slide level2 smaller">
+<h2>Differentiation - <span class="math inline">\(F_{\mathrm{ST}}\)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>sample 0:   00100
+sample 1:   00001
+sample 2:   01010
+sample 3:   10010</code></pre>
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">from</span> trees <span class="im">import</span> ts_small_mut <span class="im">as</span> ts</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>sample_sets <span class="op">=</span> [[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">3</span>]]</span>
+<span id="cb13-4"><a href="#cb13-4"></a>win <span class="op">=</span> [<span class="dv">0</span>] <span class="op">+</span> [<span class="bu">int</span>(x.position)<span class="op">+</span><span class="dv">1</span> <span class="cf">for</span> x <span class="kw">in</span> ts.sites()]</span>
+<span id="cb13-5"><a href="#cb13-5"></a>_ <span class="op">=</span> win.pop()</span>
+<span id="cb13-6"><a href="#cb13-6"></a>win <span class="op">=</span> win <span class="op">+</span> [ts.sequence_length]</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>fst <span class="op">=</span> ts.Fst(sample_sets<span class="op">=</span>sample_sets)</span>
+<span id="cb13-9"><a href="#cb13-9"></a>fst_sites <span class="op">=</span> ts.Fst(sample_sets<span class="op">=</span>sample_sets,</span>
+<span id="cb13-10"><a href="#cb13-10"></a>                   windows<span class="op">=</span>win)</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="bu">print</span>(<span class="ss">f"Site id:       </span><span class="sc">{</span><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>))<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13"></a>      <span class="ss">f"Fst per site:  </span><span class="sc">{</span>fst_sites<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14"></a>      <span class="ss">f"Overall Fst:   </span><span class="sc">{</span>fst<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15"></a>      sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Site id:       [0, 1, 2, 3, 4]
+Fst per site:  [0. 0. 0. 1. 0.]
+Overall Fst:   0.200000</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<svg baseprofile="full" height="500" id="msprimetreefst" version="1.1" width="1200" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">.background path {fill: #808080; fill-opacity: 0}.background path:nth-child(odd) {fill-opacity: .1}.axes {font-size: 14px}.x-axis .tick .lab {font-weight: bold; dominant-baseline: hanging}.axes, .tree {font-size: 14px; text-anchor: middle}.axes line, .edge {stroke: black; fill: none}.axes .ax-skip {stroke-dasharray: 4}.y-axis .grid {stroke: #FAFAFA}.node > .sym {fill: black; stroke: none}.site > .sym {stroke: black}.mut text {fill: red; font-style: italic}.mut.extra text {fill: hotpink}.mut line {fill: none; stroke: none}.mut .sym {fill: none; stroke: red}.mut.extra .sym {stroke: hotpink}.node .mut .sym {stroke-width: 1.5px}.tree text, .tree-sequence text {dominant-baseline: central}.plotbox .lab.lft {text-anchor: end}.plotbox .lab.rgt {text-anchor: start}#msprimetreefst {.edge {stroke: black; stroke-width: 3px}.node > .lab {text-anchor: end; transform: rotate(-45deg) translate(-5px, 8px);}.node > .sym, .node:not(.leaf) > .lab {display: none}.node:not(.leaf) > .lab {display: none}.n4 .edge {stroke: blue }}</style>
+</defs><g class="tree-sequence"><g class="background"><path d="M20,0 l460,0 l0,338.2 l0,25 l0,5 l-460,0 l0,-5 l0,-25 l0,-338.2z"></path></g><g class="axes"><g class="x-axis"><g class="title" transform="translate(250 400)"><text class="lab" text-anchor="middle" transform="translate(0 -11)">Genome position</text></g><line class="ax-line" x1="20" x2="480" y1="363.2" y2="363.2"></line><g class="ticks"><g class="tick" transform="translate(20 363.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">0</text></g></g><g class="tick" transform="translate(480 363.2)"><line x1="0" x2="0" y1="0" y2="5"></line><g transform="translate(0 6)"><text class="lab">10000</text></g></g></g><g class="site s0" transform="translate(22.852 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m0"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s1" transform="translate(119.36 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m1"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s2" transform="translate(271.712 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m2"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s3" transform="translate(311.134 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m3"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g><g class="site s4" transform="translate(348.808 363.2)"><line class="sym" x1="0" x2="0" y1="0" y2="-10"></line><g class="mut m4"><polyline class="sym" points="2.5,-6.5 0,-1.5 -2.5,-6.5"></polyline></g></g></g></g><g class="plotbox trees"><g class="tree t0" transform="translate(20 0)"><g class="plotbox"><g class="c2 node n6 p0 root" transform="translate(230 26.8)"><g class="a6 c2 node n4 p0" transform="translate(-105 283.291)"><g class="a4 i0 leaf m2 node n0 p0 s2 sample" transform="translate(-52.5 11.3093)"><path class="edge" d="M 0 0 V -11.3093 H 52.5"></path><g class="mut m2 s2" transform="translate(0 -1.95306)"><line x1="0" x2="0" y1="0" y2="1.95306"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">2</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">0: 00100</text></g><g class="a4 i0 leaf m4 node n1 p0 s4 sample" transform="translate(52.5 11.3093)"><path class="edge" d="M 0 0 V -11.3093 H -52.5"></path><g class="mut m4 s4" transform="translate(0 -6.88775)"><line x1="0" x2="0" y1="0" y2="6.88775"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">4</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">1: 00001</text></g><path class="edge" d="M 0 0 V -283.291 H 105"></path><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab lft" transform="translate(-3 -7.0)"></text></g><g class="a6 c2 m3 node n5 p0 s3" transform="translate(105 169.503)"><g class="a5 i1 leaf m1 node n2 p0 s1 sample" transform="translate(-52.5 125.097)"><path class="edge" d="M 0 0 V -125.097 H 52.5"></path><g class="mut m1 s1" transform="translate(0 -17.6968)"><line x1="0" x2="0" y1="0" y2="17.6968"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab lft" transform="translate(-5 0)">1</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">2: 01010</text></g><g class="a5 i1 leaf m0 node n3 p0 s0 sample" transform="translate(52.5 125.097)"><path class="edge" d="M 0 0 V -125.097 H -52.5"></path><g class="mut m0 s0" transform="translate(0 -87.3704)"><line x1="0" x2="0" y1="0" y2="87.3704"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">0</text></g><rect class="sym" height="6" width="6" x="-3" y="-3"></rect><text class="lab" transform="translate(0 11)">3: 10010</text></g><path class="edge" d="M 0 0 V -169.503 H -105"></path><g class="mut m3 s3" transform="translate(0 -132.108)"><line x1="0" x2="0" y1="0" y2="132.108"></line><path class="sym" d="M -3,-3 l 6,6 M -3,3 l 6,-6"></path><text class="lab rgt" transform="translate(5 0)">3</text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab rgt" transform="translate(3 -7.0)"></text></g><circle class="sym" cx="0" cy="0" r="3"></circle><text class="lab" transform="translate(0 -11)"></text></g></g></g></g></g>
+</svg>
+<div class="flushright smallest">
+<p>Tree plot with mutations and sequences <a href="../../recipes/slides/index.html#sec-recipe-diversity-msprime-trees"><i class="fa-solid fa-rectangle-list" aria-label="rectangle-list"></i></a></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -826,11 +1052,11 @@ d_{XY} = \frac{1}{n_Xn_Y}\sum_{i=1}^{n_X}\sum_{j=1}^{n_Y}k_{ij}
 <section id="nucleotide-diversity-landscapes" class="slide level2">
 <h2>Nucleotide diversity landscapes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> allsites.vcf.gz <span class="at">--window-pi</span> 1000</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">csvtk</span> plot line <span class="at">--tabs</span> out.windowed.pi <span class="at">-x</span> BIN_START <span class="at">-y</span> PI <span class="dt">\</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>   <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>   <span class="at">--ylab</span> <span class="st">"Diversity"</span> <span class="at">--title</span> LG4 <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>   <span class="op">&gt;</span> out.windowed.pi.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> allsites.vcf.gz <span class="at">--window-pi</span> 1000</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">csvtk</span> plot line <span class="at">--tabs</span> out.windowed.pi <span class="at">-x</span> BIN_START <span class="at">-y</span> PI <span class="dt">\</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>   <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>   <span class="at">--ylab</span> <span class="st">"Diversity"</span> <span class="at">--title</span> LG4 <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="dt">\</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>   <span class="op">&gt;</span> out.windowed.pi.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div>
 <p><img data-src="out.windowed.pi.png" style="width:80.0%"></p>
@@ -854,30 +1080,152 @@ d_{XY} = \frac{1}{n_Xn_Y}\sum_{i=1}^{n_X}\sum_{j=1}^{n_Y}k_{ij}
 <h1>On genome scans</h1>
 
 </section>
-<section id="motivation" class="slide level2">
-<h2>Motivation</h2>
-<p>Classical approach (2005): GWAS -&gt; identify locus -&gt; QTL</p>
-<p>Alternative: screen genome-wide patterns of DNA polymorphism <span class="citation" data-cites="storz_INVITEDREVIEWUsing_2005">(<a href="#/bibliography" role="doc-biblioref" onclick="">Storz, 2005, p. 672</a>)</span></p>
+<section id="genetic-basis-of-adaptation-and-genome-scans" class="slide level2">
+<h2>Genetic basis of adaptation and genome scans</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/images/storz-2005-fig1.png" style="width:60.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Fundamental questions:</p>
+<ul>
+<li>How many genes are involved in the evolution of adaptive traits?</li>
+<li>What is the distribution of phenotypic effects among successive allelic substitutions?</li>
+<li>Is adaptation typically based on standing variation or new mutations?</li>
+<li>What is the relative importance of additive vs.&nbsp;nonadditive effects on adaptive trait variation?</li>
+<li>And what is the relative importance of structural vs.&nbsp;regulatory changes in phenotypic evolution?</li>
+</ul>
+<div class="flushright smallest">
+<p><span class="citation" data-cites="storz_INVITEDREVIEWUsing_2005">Storz (<a href="#/bibliography" role="doc-biblioref" onclick="">2005</a>)</span>, Fig 1</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p><span class="citation" data-cites="storz_INVITEDREVIEWUsing_2005">Storz (<a href="#/bibliography" role="doc-biblioref" onclick="">2005</a>)</span> lays out genomic scans as an alternative approach to GWAS and QTL mapping for finding genetic determinants of adaptation. The reason is GWAS/QTL requires a phenotype whereas genome scans are data-driven.</p>
+<p>Caption (fig 1):</p>
+<blockquote>
+<p>Fig. 1 (a) Effects of genetic hitch-hiking along a recombining chromosome. Hori- zontal lines depict a population sample of homologous chromosomes, and filled symbols depict neutral mutations. In this example an advantageous mutation (open symbol) arises and is rapidly driven to fixation by positive selection. Although the mutation is recombined against new genetic backgrounds during the course of the selective sweep, a sizable fraction of the ancestral haplotype (shown in red) also becomes fixed. Consequently, neutral variants that were initially linked to the advantageous mutation undergo a dramatic increase in frequency as a result of hitchhiking. (b) In this example, locus 3 has been rendered monomorphic by a selective sweep. Sampled gene copies (denoted by tips of the gene tree) share a very recent common ancestor, and π = 0 (where π = nucleotide diversity; Nei &amp; Li 1979). comparison, unlinked, neutrally evolving regions of the genome (loci 1, 2, and 4) are characterized by deeper genealogies, and higher levels of nucleotide diversity (π = 0.019–0.020). Note that the gene trees depict the true genealogies of the samples, not the genealogies inferred from observed variation.</p>
+</blockquote>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="example" class="slide level2">
+<section id="example" class="slide level2 smaller">
 <h2>Example</h2>
-<p>Show genome scan of Monkeyflower</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> allsites.vcf.gz <span class="at">--weir-fst-pop</span> PUN-Y.txt <span class="dt">\</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>   <span class="at">--weir-fst-pop</span> PUN-R.txt <span class="dt">\</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>   <span class="at">--fst-window-size</span> 1000</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="ex">csvtk</span> plot line <span class="at">--tabs</span> out.windowed.weir.fst <span class="dt">\</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>   <span class="at">-x</span> BIN_START <span class="at">-y</span> MEAN_FST <span class="dt">\</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>   <span class="at">--point-size</span> 2 <span class="at">--xlab</span> <span class="st">"Position (bp)"</span> <span class="dt">\</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>   <span class="at">--ylab</span> <span class="st">"Fst"</span> <span class="at">--title</span> <span class="st">"LG4: PUN-Y vs PUN-R"</span> <span class="dt">\</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>   <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="at">--scatter</span> <span class="dt">\</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>   <span class="op">&gt;</span> out.windowed.weir.fst.mean.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="out.windowed.weir.fst.mean.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
 </section>
-<section id="window-size" class="slide level2">
-<h2>Window size</h2>
-<p>Plot LD decay -&gt; independence among windows</p>
+<section id="z-scores-can-help-identifying-outliers" class="slide level2 smaller">
+<h2>Z-scores can help identifying outliers</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"out.windowed.weir.fst"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>x <span class="ot">&lt;-</span> data<span class="sc">$</span>MEAN_FST</span>
+<span id="cb17-3"><a href="#cb17-3"></a>z <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">/</span><span class="fu">sd</span>(x)</span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="fu">plot</span>(<span class="at">x =</span> data<span class="sc">$</span>BIN_START, <span class="at">y =</span> z, <span class="at">xlab =</span> <span class="st">"Position (bp)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/r-zscore-1.svg" style="width:100.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>Raw data can be converted to <strong>Z-scores</strong> to highlight outliers. A Z-score is a measure of how far a data point is from the mean in terms of the number of standard deviations:</p>
+<p><span class="math display">\[
+Z = \frac{X - \mu}{\sigma}
+\]</span></p>
+<p>Threshold of a couple of standard deviations common.</p>
+</div>
+</div>
 </section>
-<section id="outlier-analyses" class="slide level2">
-<h2>Outlier analyses</h2>
-<p>Show Manhattan plot -&gt; want the chimneys</p>
+<section id="ld-decay-and-choice-of-window-size" class="slide level2">
+<h2>LD decay and choice of window size</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<!-- markdownlint-disable MD013 -->
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" style="width:80.0%"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div><div class="column" style="width:50%;">
+<p>Properties of genetic variation and inferred demographic history in sampled <em>A. millepora</em>. <span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2020</a>)</span>, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent.</p>
+</div>
+</div>
 </section>
-<section id="z-scores" class="slide level2">
-<h2>Z-scores</h2>
-<p>Show raw vs Z-score</p>
-</section>
-<section id="annotations" class="slide level2">
+<section id="annotations" class="slide level2 smaller">
 <h2>Annotations</h2>
-<p>Show how to compile data by feature using gff</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">csvtk</span> filter2 <span class="at">--tabs</span> annotation.gff <span class="at">--filter</span> <span class="st">' $3 == "CDS" '</span> <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a> <span class="ex">csvtk</span> mutate2 <span class="at">--tabs</span> <span class="at">-H</span> <span class="at">-e</span> <span class="st">'$4 - 12000000'</span> <span class="at">-w</span> 0 <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a> <span class="ex">csvtk</span> mutate2 <span class="at">--tabs</span> <span class="at">-H</span> <span class="at">-e</span> <span class="st">'$5 - 12000000'</span> <span class="at">-w</span> 0 <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a> <span class="ex">csvtk</span> cut <span class="at">--tabs</span> <span class="at">--fields</span> 1,10,11 <span class="kw">|</span> <span class="ex">bedtools</span> sort <span class="kw">|</span> <span class="ex">bedtools</span> merge <span class="dt">\</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="op">&gt;</span> CDS.bed <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="fu">head</span> <span class="at">-n</span> 3 CDS.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LG4 12032   12121
+LG4 12214   12658
+LG4 12774   12830</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">pixy</span> <span class="at">--vcf</span> allsites.vcf.gz <span class="at">--stats</span> pi <span class="at">--vcf</span> allsites.vcf.gz <span class="dt">\</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a> <span class="at">--populations</span> populations.txt <span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a> <span class="at">--output_prefix</span> cds <span class="at">--bed_file</span> CDS.bed</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="ex">pixy</span> <span class="at">--vcf</span> allsites.vcf.gz <span class="at">--stats</span> pi <span class="at">--vcf</span> allsites.vcf.gz <span class="dt">\</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a> <span class="at">--populations</span> populations.txt <span class="at">--window_size</span> 1000 <span class="dt">\</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a> <span class="at">--output_prefix</span> all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">csvtk</span> summary <span class="at">--tabs</span> <span class="at">-i</span> <span class="at">-g</span> pop <span class="dt">\</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>   <span class="at">-f</span> avg_pi:mean cds_pi.txt <span class="at">-w</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>pop avg_pi:mean
+PUN-R   0.00391
+PUN-Y   0.00516</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">csvtk</span> summary <span class="at">--tabs</span> <span class="at">-i</span> <span class="at">-g</span> pop <span class="dt">\</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>   <span class="at">-f</span> avg_pi:mean all_pi.txt <span class="at">-w</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>pop avg_pi:mean
+PUN-R   0.00796
+PUN-Y   0.01129</code></pre>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="genome-diversity-and-differentiation-landscapes" class="title-slide slide level1 center">
@@ -886,24 +1234,65 @@ d_{XY} = \frac{1}{n_Xn_Y}\sum_{i=1}^{n_X}\sum_{j=1}^{n_Y}k_{ij}
 </section>
 <section id="dissecting-differentiation-landscapes" class="slide level2">
 <h2>Dissecting differentiation landscapes</h2>
-<p>Briefly discuss Burris idea</p>
+<div>
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<figcaption><span class="citation" data-cites="burri_DissectingDifferentiationLandscapes_2017">Burri (<a href="#/bibliography" role="doc-biblioref" onclick="">2017</a>)</span> Fig. 1</figcaption>
+<p><img data-src="assets/images/burri-2017-fig1.jpg"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="monkeyflower-genomic-landscape" class="slide level2">
 <h2>Monkeyflower genomic landscape</h2>
-<p>Comment Stankowich</p>
+<div>
+<!-- markdownlint-disable MD013 -->
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<figcaption><span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<a href="#/bibliography" role="doc-biblioref" onclick="">2019</a>)</span> Fig. 1</figcaption>
+<p><img data-src="assets/images/stankowski-2019-fig1.png" style="width:80.0%"></p>
+</figure>
+</div>
+<!-- markdownlint-enable MD013 -->
+</div>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
-<p>Comment exercise session</p>
 </section>
 <section id="bibliography" class="slide level2 unnumbered unlisted smaller scrollable">
 <h2>Bibliography</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-begun_PopulationGenomicsWholeGenome_2007" class="csl-entry" role="listitem">
-Begun, D. J., Holloway, A. K., Stevens, K., Hillier, L. W., Poh, Y.-P., Hahn, M. W., Nista, P. M., Jones, C. D., Kern, A. D., Dewey, C. N., Pachter, L., Myers, E., &amp; Langley, C. H. (2007). Population <span>Genomics</span>: <span>Whole-Genome Analysis</span> of <span>Polymorphism</span> and <span>Divergence</span> in <span>Drosophila</span> simulans. <em>PLOS Biology</em>, <em>5</em>(11), e310. <a href="https://doi.org/10.1371/journal.pbio.0050310">https://doi.org/10.1371/journal.pbio.0050310</a>
+<div id="ref-berner_AlleleFrequencyDifference_2019" class="csl-entry" role="listitem">
+Berner, D. (2019). Allele <span>Frequency Difference AFD</span> to <span>FST</span> for <span>Quantifying Genetic Population Differentiation</span>. <em>Genes</em>, <em>10</em>(4), 308. <a href="https://doi.org/10.3390/genes10040308">https://doi.org/10.3390/genes10040308</a>
 </div>
-<div id="ref-bergeron_EvolutionGermlineMutation_2023" class="csl-entry" role="listitem">
-Bergeron, L. A., Besenbacher, S., Zheng, J., Li, P., Bertelsen, M. F., Quintard, B., Hoffman, J. I., Li, Z., St. Leger, J., Shao, C., Stiller, J., Gilbert, M. T. P., Schierup, M. H., &amp; Zhang, G. (2023). Evolution of the germline mutation rate across vertebrates. <em>Nature</em>, <em>615</em>(7951), 285–291. <a href="https://doi.org/10.1038/s41586-023-05752-y">https://doi.org/10.1038/s41586-023-05752-y</a>
+<div id="ref-burri_DissectingDifferentiationLandscapes_2017" class="csl-entry" role="listitem">
+Burri, R. (2017). Dissecting differentiation landscapes: A linked selection’s perspective. <em>Journal of Evolutionary Biology</em>, <em>30</em>(8), 1501–1505. <a href="https://doi.org/10.1111/jeb.13108">https://doi.org/10.1111/jeb.13108</a>
 </div>
 <div id="ref-charlesworth_HowCanWe_2022" class="csl-entry" role="listitem">
 Charlesworth, B., &amp; Jensen, J. D. (2022). How <span>Can We Resolve Lewontin</span>’s <span>Paradox</span>? <em>Genome Biology and Evolution</em>, <em>14</em>(7), evac096. <a href="https://doi.org/10.1093/gbe/evac096">https://doi.org/10.1093/gbe/evac096</a>
@@ -911,20 +1300,20 @@ Charlesworth, B., &amp; Jensen, J. D. (2022). How <span>Can We Resolve Lewontin<
 <div id="ref-corbett-detig_NaturalSelectionConstrains_2015" class="csl-entry" role="listitem">
 Corbett-Detig, R. B., Hartl, D. L., &amp; Sackton, T. B. (2015). Natural <span>Selection Constrains Neutral Diversity</span> across <span>A Wide Range</span> of <span>Species</span>. <em>PLOS Biology</em>, <em>13</em>(4), e1002112. <a href="https://doi.org/10.1371/journal.pbio.1002112">https://doi.org/10.1371/journal.pbio.1002112</a>
 </div>
-<div id="ref-desroches_ConservingIntraspecificVariation_2021" class="csl-entry" role="listitem">
-Des Roches, S., Pendleton, L. H., Shapiro, B., &amp; Palkovacs, E. P. (2021). Conserving intraspecific variation for nature’s contributions to people. <em>Nature Ecology &amp; Evolution</em>, <em>5</em>(5), 574–582. <a href="https://doi.org/10.1038/s41559-021-01403-5">https://doi.org/10.1038/s41559-021-01403-5</a>
-</div>
 <div id="ref-ellegren_DeterminantsGeneticDiversity_2016" class="csl-entry" role="listitem">
 Ellegren, H., &amp; Galtier, N. (2016). Determinants of genetic diversity. <em>Nature Reviews Genetics</em>, <em>17</em>(7), 422–433. <a href="https://doi.org/10.1038/nrg.2016.58">https://doi.org/10.1038/nrg.2016.58</a>
 </div>
-<div id="ref-hurst_GeneticsUnderstandingSelection_2009" class="csl-entry" role="listitem">
-Hurst, L. D. (2009). Genetics and the understanding of selection. <em>Nature Reviews Genetics</em>, <em>10</em>(2), 83–93. <a href="https://doi.org/10.1038/nrg2506">https://doi.org/10.1038/nrg2506</a>
+<div id="ref-fuller_PopulationGeneticsCoral_2020" class="csl-entry" role="listitem">
+Fuller, Z. L., Mocellin, V. J. L., Morris, L. A., Cantin, N., Shepherd, J., Sarre, L., Peng, J., Liao, Y., Pickrell, J., Andolfatto, P., Matz, M., Bay, L. K., &amp; Przeworski, M. (2020). Population genetics of the coral <span>Acropora</span> millepora: <span>Toward</span> genomic prediction of bleaching. <em>Science</em>, <em>369</em>(6501), eaba4674. <a href="https://doi.org/10.1126/science.aba4674">https://doi.org/10.1126/science.aba4674</a>
 </div>
-<div id="ref-kimura_1983" class="csl-entry" role="listitem">
-Kimura, M. (1983). <em>The neutral theory of molecular evolution</em>. <span>Cambridge University Press</span>. <a href="https://doi.org/10.1017/CBO9780511623486">https://doi.org/10.1017/CBO9780511623486</a>
+<div id="ref-garcia-dorado_NeutralGeneticDiversity_2021" class="csl-entry" role="listitem">
+García-Dorado, A., &amp; Caballero, A. (2021). Neutral genetic diversity as a useful tool for conservation biology. <em>Conservation Genetics</em>, <em>22</em>(4), 541–545. <a href="https://doi.org/10.1007/s10592-021-01384-9">https://doi.org/10.1007/s10592-021-01384-9</a>
 </div>
 <div id="ref-korunes_PixyUnbiasedEstimation_2021" class="csl-entry" role="listitem">
 Korunes, K. L., &amp; Samuk, K. (2021). Pixy: <span>Unbiased</span> estimation of nucleotide diversity and divergence in the presence of missing data. <em>Molecular Ecology Resources</em>, <em>21</em>(4), 1359–1368. <a href="https://doi.org/10.1111/1755-0998.13326">https://doi.org/10.1111/1755-0998.13326</a>
+</div>
+<div id="ref-kuderna_GlobalCatalogWholegenome_2023" class="csl-entry" role="listitem">
+Kuderna, L. F. K., Gao, H., Janiak, M. C., Kuhlwilm, M., Orkin, J. D., Bataillon, T., Manu, S., Valenzuela, A., Bergman, J., Rousselle, M., Silva, F. E., Agueda, L., Blanc, J., Gut, M., de Vries, D., Goodhead, I., Harris, R. A., Raveendran, M., Jensen, A., … Marques Bonet, T. (2023). A global catalog of whole-genome diversity from 233 primate species. <em>Science</em>, <em>380</em>(6648), 906–913. <a href="https://doi.org/10.1126/science.abn7829">https://doi.org/10.1126/science.abn7829</a>
 </div>
 <div id="ref-leffler_RevisitingOldRiddle_2012" class="csl-entry" role="listitem">
 Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venkat, A., Andolfatto, P., &amp; Przeworski, M. (2012). Revisiting an <span>Old Riddle</span>: <span>What Determines Genetic Diversity Levels</span> within <span>Species</span>? <em>PLOS Biology</em>, <em>10</em>(9), e1001388. <a href="https://doi.org/10.1371/journal.pbio.1001388">https://doi.org/10.1371/journal.pbio.1001388</a>
@@ -932,17 +1321,17 @@ Leffler, E. M., Bullaughey, K., Matute, D. R., Meyer, W. K., Ségurel, L., Venka
 <div id="ref-lewis_BiggestEverStudy_2023" class="csl-entry" role="listitem">
 Lewis, D. (2023). Biggest ever study of primate genomes has surprises for humanity. <em>Nature</em>. <a href="https://doi.org/10.1038/d41586-023-01776-6">https://doi.org/10.1038/d41586-023-01776-6</a>
 </div>
-<div id="ref-romiguier_ComparativePopulationGenomics_2014" class="csl-entry" role="listitem">
-Romiguier, J., Gayral, P., Ballenghien, M., Bernard, A., Cahais, V., Chenuil, A., Chiari, Y., Dernat, R., Duret, L., Faivre, N., Loire, E., Lourenco, J. M., Nabholz, B., Roux, C., Tsagkogeorga, G., Weber, A. a.-T., Weinert, L. A., Belkhir, K., Bierne, N., … Galtier, N. (2014). Comparative population genomics in animals uncovers the determinants of genetic diversity. <em>Nature</em>, <em>515</em>(7526), 261–263. <a href="https://doi.org/10.1038/nature13685">https://doi.org/10.1038/nature13685</a>
+<div id="ref-nei_AnalysisGeneDiversity_1973" class="csl-entry" role="listitem">
+Nei, M. (1973). Analysis of <span>Gene Diversity</span> in <span>Subdivided Populations</span>. <em>Proceedings of the National Academy of Sciences</em>, <em>70</em>(12), 3321–3323. <a href="https://doi.org/10.1073/pnas.70.12.3321">https://doi.org/10.1073/pnas.70.12.3321</a>
+</div>
+<div id="ref-stankowski_WidespreadSelectionGene_2019" class="csl-entry" role="listitem">
+Stankowski, S., Chase, M. A., Fuiten, A. M., Rodrigues, M. F., Ralph, P. L., &amp; Streisfeld, M. A. (2019). Widespread selection and gene flow shape the genomic landscape during a radiation of monkeyflowers. <em>PLOS Biology</em>, <em>17</em>(7), e3000391. <a href="https://doi.org/10.1371/journal.pbio.3000391">https://doi.org/10.1371/journal.pbio.3000391</a>
 </div>
 <div id="ref-storz_INVITEDREVIEWUsing_2005" class="csl-entry" role="listitem">
 Storz, J. F. (2005). <span>INVITED REVIEW</span>: <span>Using</span> genome scans of <span>DNA</span> polymorphism to infer adaptive population divergence. <em>Molecular Ecology</em>, <em>14</em>(3), 671–688. <a href="https://doi.org/10.1111/j.1365-294X.2005.02437.x">https://doi.org/10.1111/j.1365-294X.2005.02437.x</a>
 </div>
-<div id="ref-webstermatthew_GeneticVariationMountain_2022" class="csl-entry" role="listitem">
-Webster, Matthew, &amp; Yuanzhen Liu. (2022). <em>Genetic <span>Variation</span> in <span>Mountain Bumblebees</span></em>.
-</div>
-<div id="ref-willi_ConservationGeneticsManagement_2022" class="csl-entry" role="listitem">
-Willi, Y., Kristensen, T. N., Sgrò, C. M., Weeks, A. R., Ørsted, M., &amp; Hoffmann, A. A. (2022). Conservation genetics as a management tool: <span>The</span> five best-supported paradigms to assist the management of threatened species. <em>Proceedings of the National Academy of Sciences</em>, <em>119</em>(1), e2105076119. <a href="https://doi.org/10.1073/pnas.2105076119">https://doi.org/10.1073/pnas.2105076119</a>
+<div id="ref-wright_EvolutionMendelianPopulations_1931" class="csl-entry" role="listitem">
+Wright, S. (1931). Evolution in <span>Mendelian Populations</span>. <em>Genetics</em>, <em>16</em>(2), 97–159. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1201091/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1201091/</a>
 </div>
 </div>
 
