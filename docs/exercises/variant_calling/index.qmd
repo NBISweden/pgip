@@ -117,7 +117,7 @@ see what is going to happen; just remove it when you are content:
 ```bash
 # Remove the dry run option to retrieve data
 rsync --dry-run -av \
-      /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/small .
+      /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/small/ .
 ```
 
 #### {{< fa laptop >}} Local
