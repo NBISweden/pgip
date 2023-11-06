@@ -384,7 +384,7 @@ div.csl-indent {
   <li>
 <a href="#genome-scans-and-genomic-features" id="toc-genome-scans-and-genomic-features" class="nav-link" data-scroll-target="#genome-scans-and-genomic-features">Genome scans and genomic features</a>
   <ul class="collapse">
-<li><a href="#working-with-z-transformed-data" id="toc-working-with-z-transformed-data" class="nav-link" data-scroll-target="#working-with-z-transformed-data">Working with Z-transformed data</a></li>
+<li><a href="#fa-brands-r-project-working-with-z-transformed-data" id="toc-fa-brands-r-project-working-with-z-transformed-data" class="nav-link" data-scroll-target="#fa-brands-r-project-working-with-z-transformed-data"><i class="fa-brands fa-r-project" aria-label="r-project"></i> Working with Z-transformed data</a></li>
   <li><a href="#stratifying-by-genomic-feature" id="toc-stratifying-by-genomic-feature" class="nav-link" data-scroll-target="#stratifying-by-genomic-feature">Stratifying by genomic feature</a></li>
   </ul>
 </li>
@@ -411,7 +411,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">05-Nov-2023</p>
+      <p class="date">06-Nov-2023</p>
     </div>
   </div>
   
@@ -803,7 +803,7 @@ On genome scans and window sizes
 </div>
 <p>With some <code>csvtk</code> magic we can combine the measures and plot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># When assigning a constant</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># When assigning a constant must enclose it in single quotes within double quotes</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate2 <span class="at">--tabs</span> <span class="at">--name</span> Population <span class="at">--expression</span> <span class="st">" 'ARI' "</span> <span class="dt">\</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="va">$OUT</span>.ARI.windowed.pi <span class="op">&gt;</span> <span class="va">$OUT</span>.ARI.wpi</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate2 <span class="at">--tabs</span> <span class="at">--name</span> Population <span class="at">--expression</span> <span class="st">" 'PAR' "</span> <span class="dt">\</span></span>
@@ -913,7 +913,7 @@ PAR LG4 1   1000    0.0008201763379126  625 12  14631   3653</code></pre>
 </div>
 <p>Comparing <a href="#fig-02-pixy-fst-ARI-PAR">Figure&nbsp;8</a> to <a href="#fig-01-vcftools-fst">Figure&nbsp;6</a> shows a stark contrast, so clearly, how you filter and handle invariant/missing data will strongly affect the outcome.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -922,44 +922,46 @@ OPTIONAL: Apply filters to pixy and vcftools output and compare
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Generate depth filters, utilizing the knowledge from the variant filtering lab, and apply them to the VCF file. Rerun a couple of pixy and vcftools stats to see how it affects the outcome.</p>
-<div class="callout callout-style-default callout-hint no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hint
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div>
-<div class="callout-hint">
-<p>FIXME: add filter values and command here</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p>Generate depth filters, utilizing the knowledge from the variant filtering lab, and apply them to the VCF file. Rerun a couple of pixy and vcftools stats to see how it affects the outcome. Provided you use identical window sizes, you could make a scatter plot of a statistic of the two tools against oneanother.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section></section><section id="genome-scans-and-genomic-features" class="level2"><h2 class="anchored" data-anchor-id="genome-scans-and-genomic-features">Genome scans and genomic features</h2>
-<section id="working-with-z-transformed-data" class="level3"><h3 class="anchored" data-anchor-id="working-with-z-transformed-data">Working with Z-transformed data</h3>
+<section id="fa-brands-r-project-working-with-z-transformed-data" class="level3"><h3 class="anchored" data-anchor-id="fa-brands-r-project-working-with-z-transformed-data">
+<i class="fa-brands fa-r-project" aria-label="r-project"></i> Working with Z-transformed data</h3>
+<p>Transforming raw data to Z-scores can facilitate the scan for outlier regions. However, there is no easy way to do this with <code>csvtk</code>, so here is some template <code>R</code> code to do this from <code>pixy</code> data.</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"pixy_pi.txt"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Select population PAR</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">pop</span> <span class="op">==</span> <span class="st">"PAR"</span>, <span class="op">]</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">avg_pi</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Plot data along chromosome and identify region by eye plot(x =</span></span>
+<span><span class="co"># data$window_pos_1, y = z, xlab = 'Position (bp)')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section><section id="stratifying-by-genomic-feature" class="level3"><h3 class="anchored" data-anchor-id="stratifying-by-genomic-feature">Stratifying by genomic feature</h3>
+<p><code>pixy</code> accepts as input a BED file that defines coordinates of genome features. Here is an example of how to extract CDS regions and then compile results with <code>pixy</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter2 <span class="at">--tabs</span> annotation.gff <span class="at">--filter</span> <span class="st">' $3 == "CDS" '</span> <span class="kw">|</span><span class="dt">\</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> cut <span class="at">--tabs</span> <span class="at">--fields</span> 1,10,11 <span class="kw">|</span> <span class="ex">bedtools</span> sort <span class="kw">|</span> <span class="ex">bedtools</span> merge <span class="dt">\</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;</span> CDS.bed <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixy</span> <span class="at">--vcf</span> allsites.vcf.gz <span class="at">--stats</span> pi <span class="dt">\</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a> <span class="at">--populations</span> populations.txt <span class="dt">\</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a> <span class="at">--output_prefix</span> cds <span class="at">--bed_file</span> CDS.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section></section><section id="monkeyflower-diversity-landscape" class="level2"><h2 class="anchored" data-anchor-id="monkeyflower-diversity-landscape">Monkeyflower diversity landscape</h2>
 <p>Drawing on what you learned earlier today about filtering, and with the help of the command examples above, you can now start exploring the Monkeyflower diversity landscape. Try different population comparisons, perform outlier analyses, and see if you can find candidate regions of interest. If you want inspiration, take a look at the methods section of <span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<a href="#ref-stankowski_WidespreadSelectionGene_2019" role="doc-biblioref">2019</a>)</span>.</p>
-<p>To get you started, here are some exercise templates:</p>
+<p>Here are some suggested actions that you can take, but feel free to look at the data in any way you want.</p>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -968,27 +970,99 @@ Apply depth filter to VCF
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<p>Create a VCF subset of all samples and generate a depth filter, following the guidelines in the filtering exercise.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Run an outlier analysis and investigate significant loci
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div>
 <div class="callout-exercise">
-<p>Start by applying a depth filter to the VCF.</p>
+<p>Z-transform a statistic and try to identify outliers. You can compare the coordinates of any significant locus with those in the provided annotation file <code>MAUR_annotation_functional_submission.gff</code>.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="hidden">
-<section id="reconciling-results-with-filters" class="level3"><h3 class="anchored" data-anchor-id="reconciling-results-with-filters">Reconciling results with filters</h3>
-<p>Show how we can reconcile results? After all, pixy cannot be used for species that lack variant sites</p>
-</section><section id="genome-scan-with-vcftools" class="level3"><h3 class="anchored" data-anchor-id="genome-scan-with-vcftools">Genome scan with vcftools</h3>
-<p>Since pixy takes care of everything, run Tajima’s with vcftools?</p>
-</section><section id="outlier-analyses" class="level3"><h3 class="anchored" data-anchor-id="outlier-analyses">Outlier analyses</h3>
-<p>Must introduce Z-transformed stats and explain; hopefully region in paper shows up</p>
-</section><section id="genic-structure" class="level3"><h3 class="anchored" data-anchor-id="genic-structure">Genic structure</h3>
-<p>Show an example of bed file</p>
-</section><section id="investigations" class="level2"><h2 class="anchored" data-anchor-id="investigations">Investigations</h2>
-</section>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Compile data by genome feature
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<p>Use the annotation file <code>MAUR_annotation_functional_submission.gff</code> to generate BED files that define the regions of some features of interest, e.g., genes, introns, or UTRs. Do the results make sense?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reproduce distributions of diversity statistics for different population comparisons
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<!-- markdownlint-disable MD013 -->
+<p>See if you can reproduce some of the results in <a href="https://journals.plos.org/plosbiology/article/figure?id=10.1371/journal.pbio.3000391.g001"><span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<span>2019</span>)</span>, Fig. 2</a></p>
+<!-- markdownlint-enable MD013 -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Investigate a known adaptive locus on LG4
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div>
+<div class="callout-exercise">
+<!-- markdownlint-disable MD013 -->
+<p>Investigate more closely the known adaptive locus on LG4, as illustrated in <a href="https://journals.plos.org/plosbiology/article/figure?id=10.1371/journal.pbio.3000391.g004"><span class="citation" data-cites="stankowski_WidespreadSelectionGene_2019">Stankowski et al. (<span>2019</span>)</span>, Fig. 4</a></p>
+<!-- markdownlint-enable MD013 -->
+</div>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -1254,7 +1328,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 </body></html>
