@@ -1191,10 +1191,10 @@ head -n 3 CDS.bed
 #| echo: true
 #| eval: true
 #| results: hide
-pixy --vcf allsites.vcf.gz --stats pi --vcf allsites.vcf.gz \
+pixy --vcf allsites.vcf.gz --stats pi \
  --populations populations.txt \
  --output_prefix cds --bed_file CDS.bed
-pixy --vcf allsites.vcf.gz --stats pi --vcf allsites.vcf.gz \
+pixy --vcf allsites.vcf.gz --stats pi \
  --populations populations.txt --window_size 1000 \
  --output_prefix all
 ```
