@@ -428,7 +428,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">06-Nov-2023</p>
+      <p class="date">07-Nov-2023</p>
     </div>
   </div>
   
@@ -513,9 +513,11 @@ Data setup
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> monkeyflower</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> monkeyflower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Retrieve the data with <code>rsync</code>. You can use the <code>--dry-run</code> option to see what is going to happen; just remove it when you are content:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the dry run option to retrieve data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-av</span> <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-av</span> <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the dry run option to actually retrieve data. The dot is</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># important!</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-av</span> /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Create an exercise directory called <code>monkeyflower</code> and <code>cd</code> to it:</p>
@@ -668,7 +670,7 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats variantsites.subset.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"number of records:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SN  0   number of records:  102884</code></pre>
+<pre><code>SN  0   number of records:  102590</code></pre>
 </div>
 </div>
 <p>The <code>-r</code> parameter sets the <em>rate</em> of sampling which is why we get <em>approximately</em> 100,000 sites. You will need to adjust this parameter accordingly.</p>
@@ -688,18 +690,18 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> MEAN_DEPTH:mean <span class="va">${OUT}</span>.idepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_SITES MEAN_DEPTH
-PUN-R-ELF   102694  8.57277
-PUN-R-JMC   102681  9.50149
-PUN-R-LH    102723  9.21102
-PUN-R-MT    102685  9.40877
-PUN-R-UCSD  102765  8.8871
-PUN-Y-BCRD  102681  9.84442
-PUN-Y-INJ   102649  8.20024
-PUN-Y-LO    102649  7.80172
-PUN-Y-PCT   102631  9.09107
-PUN-Y-POTR  102610  8.46721
+PUN-R-ELF   102402  8.55983
+PUN-R-JMC   102391  9.52674
+PUN-R-LH    102424  9.24296
+PUN-R-MT    102384  9.45553
+PUN-R-UCSD  102466  8.89254
+PUN-Y-BCRD  102392  9.85856
+PUN-Y-INJ   102348  8.2588
+PUN-Y-LO    102355  7.81509
+PUN-Y-PCT   102341  9.14405
+PUN-Y-POTR  102325  8.47222
 MEAN_DEPTH:mean
-8.90</code></pre>
+8.92</code></pre>
 </div>
 </div>
 <p>The average coverage over all samples is 8.9X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
@@ -751,7 +753,7 @@ On csvtk as plotting software
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> 3:min,3:q1,3:median,3:mean,3:q3,3:max,3:stdev vcftools/variantsites.subset.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SUM_DEPTH:min   SUM_DEPTH:q1    SUM_DEPTH:median    SUM_DEPTH:mean  SUM_DEPTH:q3    SUM_DEPTH:max   SUM_DEPTH:stdev
-1.00    55.00   72.00   88.81   88.00   14865.00    221.60</code></pre>
+1.00    55.00   72.00   89.05   88.00   33988.00    242.59</code></pre>
 </div>
 </div>
 <p>The range from the first quartile (<code>q1</code>) to the third (<code>q3</code>) is 55-88, showing most sites have a depth between 50-100X. We redraw the plot to zoom in on the peak:</p>
@@ -834,8 +836,8 @@ LG4 2130    2   14  0.857143    0.142857</code></pre>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.imiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
-PUN-R-ELF   102884  0   6933    0.0673866
-PUN-R-JMC   102884  0   6603    0.0641791</code></pre>
+PUN-R-ELF   102590  0   6911    0.0673652
+PUN-R-JMC   102590  0   6588    0.0642168</code></pre>
 </div>
 </div>
 <p>and look at the results, focusing on the <code>F_MISS</code> column (proportion missing sites):</p>
@@ -887,16 +889,16 @@ LG4 2130    20  0   6   0.3</code></pre>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.het</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   72458   65539.4 87269   0.31840
-PUN-R-JMC   68101   65750.5 87488   0.10813
-PUN-R-LH    70901   66001.2 87826   0.22451
-PUN-R-MT    69917   65722.5 87414   0.19337
-PUN-R-UCSD  74604   65482.5 87427   0.41566
-PUN-Y-BCRD  69312   64876.5 86256   0.20747
-PUN-Y-INJ   71121   64049.2 84944   0.33845
-PUN-Y-LO    72736   63325.0 84378   0.44701
-PUN-Y-PCT   74430   64375.8 85834   0.46855
-PUN-Y-POTR  71556   64481.0 85745   0.33272</code></pre>
+PUN-R-ELF   72100   65267.6 86983   0.31463
+PUN-R-JMC   67871   65458.4 87179   0.11107
+PUN-R-LH    70524   65653.5 87430   0.22366
+PUN-R-MT    69560   65381.0 87028   0.19305
+PUN-R-UCSD  74271   65214.7 87162   0.41264
+PUN-Y-BCRD  68937   64547.6 85883   0.20573
+PUN-Y-INJ   70810   63737.1 84608   0.33889
+PUN-Y-LO    72427   62975.0 83991   0.44975
+PUN-Y-PCT   74072   64096.2 85537   0.46527
+PUN-Y-POTR  71243   64148.5 85373   0.33426</code></pre>
 </div>
 </div>
 <p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, which you can verify by substituting the variables in the output.</p>
@@ -951,11 +953,11 @@ Answer
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--het</span> <span class="at">--stdout</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   41709   37651.1 56520   0.21506
-PUN-R-JMC   37263   37740.6 56650   -0.02526
-PUN-R-LH    39863   37850.9 56788   0.10625
-PUN-R-MT    38852   37591.9 56349   0.06718
-PUN-R-UCSD  43501   37423.1 56324   0.32157</code></pre>
+PUN-R-ELF   41674   37654.5 56557   0.21264
+PUN-R-JMC   37344   37720.2 56652   -0.01987
+PUN-R-LH    39812   37798.2 56718   0.10644
+PUN-R-MT    38811   37532.7 56279   0.06819
+PUN-R-UCSD  43475   37421.8 56366   0.31953</code></pre>
 </div>
 </div>
 </div>
@@ -991,14 +993,14 @@ PUN-R-UCSD  43501   37423.1 56324   0.32157</code></pre>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="va">$OUTVCF</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  37769
+SN  0   number of records:  37596
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 37571
+SN  0   number of SNPs: 37389
 SN  0   number of MNPs: 0
 SN  0   number of indels:   0
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1674
-SN  0   number of multiallelic SNP sites:   698</code></pre>
+SN  0   number of multiallelic sites:   1640
+SN  0   number of multiallelic SNP sites:   679</code></pre>
 </div>
 </div>
 <p>Quite a substantial portion variants have in fact been removed, which here can most likely be attributed to the low average sequencing coverage.</p>
@@ -1007,7 +1009,7 @@ SN  0   number of multiallelic SNP sites:   698</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-coverage-filters" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="index_files/figure-html/fig-coverage-filters-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples."><img src="index_files/figure-html/fig-coverage-filters-1.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="index_files/figure-html/fig-coverage-filters-1.svg" class="lightbox" title="Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples." data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/fig-coverage-filters-1.svg" class="img-fluid figure-img" width="672"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;7: Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples.</figcaption></figure>
 </div>
 </div>
@@ -1317,10 +1319,13 @@ Important
 <p>The syntax to generate coverage information for a BAM file is <code>mosdepth &lt;prefix&gt; &lt;input file&gt;</code>. Here, we add the <code>-Q</code> option to exclude reads with a mapping quality less than 20:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosdepth</span> <span class="at">-Q</span> 20 PUN-Y-INJ PUN-Y-INJ.sort.dup.recal.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[W::hts_idx_load3] The index file is older than the data file: PUN-Y-INJ.sort.dup.recal.bai</code></pre>
+</div>
 </div>
 <p>The per-base coverage output file will be named <code>PUN-Y-INJ.per-base.bed.gz</code> and can be viewed with <code>bgzip</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> PUN-Y-INJ.per-base.bed.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> PUN-Y-INJ.per-base.bed.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>LG4 0   9   3
 LG4 9   13  4
@@ -1334,11 +1339,11 @@ LG4 56  62  7</code></pre>
 <p>The second is <code>csvtk</code>, a program that provides tools for dealing with tab- or comma-separated text files. Avid <code>R</code> users will see that many of the subcommands are similar to those in the <a href="https://dplyr.tidyverse.org/"><code>tidyverse dplyr</code></a> package.</p>
 <p>We can use these programs in a one-liner to generate a simple coverage plot (<a href="#fig-plot-coverage">Figure&nbsp;10</a>)<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="op">&lt;(</span><span class="ex">bedtools</span> makewindows <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-w</span> 1000<span class="op">)</span> <span class="dt">\</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">-b</span> PUN-Y-INJ.per-base.bed.gz <span class="at">-wa</span> <span class="at">-wb</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bedtools</span> groupby <span class="at">-i</span> <span class="at">-</span> <span class="at">-g</span> 1,2,3 <span class="at">-c</span> 7 <span class="at">-o</span> mean <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> plot <span class="at">-t</span> line <span class="at">-x</span> 2 <span class="at">-y</span> 4 <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> Position <span class="dt">\</span></span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">--ylab</span> Coverage <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-coverage.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="op">&lt;(</span><span class="ex">bedtools</span> makewindows <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-w</span> 1000<span class="op">)</span> <span class="dt">\</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">-b</span> PUN-Y-INJ.per-base.bed.gz <span class="at">-wa</span> <span class="at">-wb</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bedtools</span> groupby <span class="at">-i</span> <span class="at">-</span> <span class="at">-g</span> 1,2,3 <span class="at">-c</span> 7 <span class="at">-o</span> mean <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> plot <span class="at">-t</span> line <span class="at">-x</span> 2 <span class="at">-y</span> 4 <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> Position <span class="dt">\</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">--ylab</span> Coverage <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-coverage.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-plot-coverage" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><div class="quarto-figure quarto-figure-center">
@@ -1349,21 +1354,22 @@ LG4 56  62  7</code></pre>
 </div>
 <p>Apparently there are some high-coverage regions that could be associated with, e.g., collapsed repeat regions in the assembly. Let’s compile coverage results for all samples, using bash string manipulation to generate file prefix<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [A-Z] matches characters A-Z, * is a wildcard character that matches</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># anything</span></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> <span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]*</span>.sort.dup.recal.bam<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># Extract the prefix by removing .sort.dup.recal.bam</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a> <span class="va">prefix</span><span class="op">=</span><span class="va">${f</span><span class="op">%</span>.sort.dup.recal.bam<span class="va">}</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">mosdepth</span> <span class="at">-Q</span> 20 <span class="va">$prefix</span> <span class="va">$f</span></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># Print sample name</span></span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> <span class="at">-e</span> <span class="at">-n</span> <span class="st">"</span><span class="va">$prefix</span><span class="st">\t"</span></span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a> <span class="co"># Get the summary line containing the total coverage</span></span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">cat</span> <span class="va">$prefix</span>.mosdepth.summary.txt <span class="kw">|</span> <span class="fu">grep</span> total</span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&gt;</span> ALL.mosdepth.summary.txt</span>
-<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="co"># View the file</span></span>
-<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ALL.mosdepth.summary.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [A-Z] matches characters A-Z, * is a wildcard character that matches</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co"># anything</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> <span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]*</span>.sort.dup.recal.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># Extract the prefix by removing .sort.dup.recal.bam</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a> <span class="va">prefix</span><span class="op">=</span><span class="va">${f</span><span class="op">%</span>.sort.dup.recal.bam<span class="va">}</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">mosdepth</span> <span class="at">-Q</span> 20 <span class="va">$prefix</span> <span class="va">$f</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># Print sample name</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> <span class="at">-e</span> <span class="at">-n</span> <span class="st">"</span><span class="va">$prefix</span><span class="st">\t"</span></span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a> <span class="co"># Get the summary line containing the total coverage</span></span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">cat</span> <span class="va">$prefix</span>.mosdepth.summary.txt <span class="kw">|</span> <span class="fu">grep</span> total</span>
+<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&gt;</span> ALL.mosdepth.summary.txt</span>
+<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a><span class="co"># View the file</span></span>
+<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ALL.mosdepth.summary.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>PUN-R-ELF   total   100000  845166  8.45    0   187
+<pre><code>[W::hts_idx_load3] The index file is older than the data file: PUN-Y-INJ.sort.dup.recal.bai
+PUN-R-ELF   total   100000  845166  8.45    0   187
 PUN-R-JMC   total   100000  934032  9.34    0   244
 PUN-R-LH    total   100000  940246  9.40    0   225
 PUN-R-MT    total   100000  956272  9.56    0   233
@@ -1377,7 +1383,7 @@ PUN-Y-POTR  total   100000  795201  7.95    0   205</code></pre>
 </div>
 <p>We can calculate the total coverage by summing the values of the fifth column with <code>csvtk</code> as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-H</span> <span class="at">-t</span> ALL.mosdepth.summary.txt <span class="at">-f</span> 5:sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-H</span> <span class="at">-t</span> ALL.mosdepth.summary.txt <span class="at">-f</span> 5:sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>to get the total coverage 84.78, which gives a hint at where the diploid coverage peak should be.</p>
 </section><section id="sample-set-coverages" class="level3"><h3 class="anchored" data-anchor-id="sample-set-coverages">Sample set coverages</h3>
@@ -1385,10 +1391,10 @@ PUN-Y-POTR  total   100000  795201  7.95    0   205</code></pre>
 <p>We can combine the coverage output from different samples with <code>bedtools unionbedg</code>. We begin by generating a coverage file for all samples, where the output columns will correspond to individual samples. To save typing, we collect the sample names and generate matching BED file names to pass as arguments to options <code>-names</code> and <code>-i</code>, respectively. Also, we include positions with no coverage (<code>-empty</code>) which requires the use of a genome file (option <code>-g</code>). The BED output is piped to <code>bgzip</code> which compresses the output, before finally indexing with <code>tabix</code><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLES</span><span class="op">=</span><span class="va">$(</span><span class="ex">csvtk</span> grep <span class="at">-f</span> Taxon <span class="at">-r</span> <span class="at">-p</span> <span class="st">"yellow"</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"red"</span> sampleinfo.csv <span class="kw">|</span> <span class="ex">csvtk</span> cut <span class="at">-f</span> SampleAlias <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> SampleAlias <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\n"</span> <span class="st">" "</span><span class="va">)</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="va">BEDGZ</span><span class="op">=</span><span class="va">$(</span><span class="cf">for</span> sm <span class="kw">in</span> <span class="va">$SAMPLES</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="at">-e</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${sm}</span><span class="st">.per-base.bed.gz "</span><span class="kw">;</span> <span class="cf">done</span><span class="va">)</span></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> unionbedg <span class="at">-header</span> <span class="at">-names</span> <span class="va">$SAMPLES</span> <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-empty</span> <span class="at">-i</span> <span class="va">$BEDGZ</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.bg.gz</span>
-<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="at">-S</span> 1 ALL.bg.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLES</span><span class="op">=</span><span class="va">$(</span><span class="ex">csvtk</span> grep <span class="at">-f</span> Taxon <span class="at">-r</span> <span class="at">-p</span> <span class="st">"yellow"</span> <span class="at">-r</span> <span class="at">-p</span> <span class="st">"red"</span> sampleinfo.csv <span class="kw">|</span> <span class="ex">csvtk</span> cut <span class="at">-f</span> SampleAlias <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> SampleAlias <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\n"</span> <span class="st">" "</span><span class="va">)</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="va">BEDGZ</span><span class="op">=</span><span class="va">$(</span><span class="cf">for</span> sm <span class="kw">in</span> <span class="va">$SAMPLES</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="at">-e</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${sm}</span><span class="st">.per-base.bed.gz "</span><span class="kw">;</span> <span class="cf">done</span><span class="va">)</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> unionbedg <span class="at">-header</span> <span class="at">-names</span> <span class="va">$SAMPLES</span> <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-empty</span> <span class="at">-i</span> <span class="va">$BEDGZ</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.bg.gz</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="at">-S</span> 1 ALL.bg.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
@@ -1461,12 +1467,12 @@ Answer
 <!-- markdownlint-disable MD013 -->
 <p>An example using a for loop is shown here. You could copy-paste the code above and explicitly write out the population labels.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a> <span class="va">SAMPLES</span><span class="op">=</span><span class="va">$(</span><span class="ex">csvtk</span> grep <span class="at">-f</span> Taxon <span class="at">-r</span> <span class="at">-p</span> <span class="va">$pop</span> sampleinfo.csv <span class="kw">|</span> <span class="ex">csvtk</span> cut <span class="at">-f</span> SampleAlias <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> SampleAlias <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\n"</span> <span class="st">" "</span><span class="va">)</span></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a> <span class="va">BEDGZ</span><span class="op">=</span><span class="va">$(</span><span class="cf">for</span> sm <span class="kw">in</span> <span class="va">$SAMPLES</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="at">-e</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${sm}</span><span class="st">.per-base.bed.gz "</span><span class="kw">;</span> <span class="cf">done</span><span class="va">)</span></span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">bedtools</span> unionbedg <span class="at">-header</span> <span class="at">-names</span> <span class="va">$SAMPLES</span> <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-empty</span> <span class="at">-i</span> <span class="va">$BEDGZ</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.bg.gz</span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="at">-S</span> 1 <span class="va">$pop</span>.bg.gz</span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a> <span class="va">SAMPLES</span><span class="op">=</span><span class="va">$(</span><span class="ex">csvtk</span> grep <span class="at">-f</span> Taxon <span class="at">-r</span> <span class="at">-p</span> <span class="va">$pop</span> sampleinfo.csv <span class="kw">|</span> <span class="ex">csvtk</span> cut <span class="at">-f</span> SampleAlias <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> SampleAlias <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\n"</span> <span class="st">" "</span><span class="va">)</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a> <span class="va">BEDGZ</span><span class="op">=</span><span class="va">$(</span><span class="cf">for</span> sm <span class="kw">in</span> <span class="va">$SAMPLES</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="at">-e</span> <span class="at">-n</span> <span class="st">"</span><span class="va">${sm}</span><span class="st">.per-base.bed.gz "</span><span class="kw">;</span> <span class="cf">done</span><span class="va">)</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">bedtools</span> unionbedg <span class="at">-header</span> <span class="at">-names</span> <span class="va">$SAMPLES</span> <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-empty</span> <span class="at">-i</span> <span class="va">$BEDGZ</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.bg.gz</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="at">-S</span> 1 <span class="va">$pop</span>.bg.gz</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- markdownlint-enable MD013 -->
 </div>
@@ -1483,21 +1489,21 @@ Answer
 <p>Since we eventually want to filter on total coverage, we sum per sample coverages for each sample set with <code>awk</code>:</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> ALL.bg.gz <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="at">-v</span> OFS=<span class="st">"\t"</span> <span class="st">'NR &gt; 1 {sum=0; for (i=4; i&lt;=NF; i++) sum+=$i; print $1, $2, $3, sum}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.sum.bed.gz</span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.sum.bed.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> ALL.bg.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="at">-v</span> OFS=<span class="st">"\t"</span> <span class="st">'NR &gt; 1 {sum=0; for (i=4; i&lt;=NF; i++) sum+=$i; print $1, $2, $3, sum}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.sum.bed.gz</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.sum.bed.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here we use <code>awk</code> to sum from columns 4 and up (<code>NF</code> is the number of the last column).</p>
 <!-- markdownlint-enable MD013 -->
 <p>For illustration, we plot the total coverage:</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="op">&lt;(</span><span class="ex">bedtools</span> makewindows <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-w</span> 1000<span class="op">)</span> <span class="dt">\</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-b</span> ALL.sum.bed.gz <span class="at">-wa</span> <span class="at">-wb</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bedtools</span> groupby <span class="at">-i</span> <span class="at">-</span> <span class="at">-g</span> 1,2,3 <span class="at">-c</span> 7 <span class="at">-o</span> mean <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> plot <span class="at">-t</span> line <span class="at">-x</span> 2 <span class="at">-y</span> 4 <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> Position <span class="dt">\</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ylab</span> Coverage <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-total-coverage.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="op">&lt;(</span><span class="ex">bedtools</span> makewindows <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="at">-w</span> 1000<span class="op">)</span> <span class="dt">\</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-b</span> ALL.sum.bed.gz <span class="at">-wa</span> <span class="at">-wb</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bedtools</span> groupby <span class="at">-i</span> <span class="at">-</span> <span class="at">-g</span> 1,2,3 <span class="at">-c</span> 7 <span class="at">-o</span> mean <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> plot <span class="at">-t</span> line <span class="at">-x</span> 2 <span class="at">-y</span> 4 <span class="at">--point-size</span> 0.01 <span class="at">--xlab</span> Position <span class="dt">\</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ylab</span> Coverage <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-total-coverage.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- markdownlint-enable MD013 -->
 <div id="fig-plot-total-coverage" class="quarto-figure quarto-figure-center anchored">
@@ -1510,35 +1516,35 @@ Answer
 <p>In order to define thresholds for subsequent filtering, we need to know the total coverage distribution. Therefore, we plot the proportion of the genome coverage versus depth of coverage (similar to k-mer plots in sequence assembly projects). To do so we must summarize our coverage file such that we count how many bases have a given coverage. This can be achieved by noting that each row in the BED file consists of the columns <code>CHROM</code>, <code>START</code>, <code>END</code>, and <code>COVERAGE</code>. We can generate a histogram table by, for each value of <code>COVERAGE</code>, summing the length of the regions (<code>END</code> - <code>START</code>).</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column containing length of region (end - start)</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate2 <span class="at">-t</span> <span class="at">-H</span> <span class="at">-w</span> 0 <span class="at">-e</span> <span class="st">'$3-$2'</span> ALL.sum.bed.gz <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a> <span class="co"># Sum the regions and *group* by the coverage (fourth column);</span></span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># this gives the total number of bases with a given coverage</span></span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-H</span> <span class="at">-g</span> 4 <span class="at">-f</span> 5:sum <span class="at">-w</span> 0 <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> sort <span class="at">-t</span> <span class="at">-k</span> 1:n <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">awk</span> <span class="at">-v</span> cumsum=0 <span class="st">'BEGIN {OFS=","; cumsum=0} {cumsum += $2; print $1,$2,cumsum}'</span> <span class="op">&gt;</span> ALL.sum.bed.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column containing length of region (end - start)</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> mutate2 <span class="at">-t</span> <span class="at">-H</span> <span class="at">-w</span> 0 <span class="at">-e</span> <span class="st">'$3-$2'</span> ALL.sum.bed.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a> <span class="co"># Sum the regions and *group* by the coverage (fourth column);</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># this gives the total number of bases with a given coverage</span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-H</span> <span class="at">-g</span> 4 <span class="at">-f</span> 5:sum <span class="at">-w</span> 0 <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> sort <span class="at">-t</span> <span class="at">-k</span> 1:n <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">awk</span> <span class="at">-v</span> cumsum=0 <span class="st">'BEGIN {OFS=","; cumsum=0} {cumsum += $2; print $1,$2,cumsum}'</span> <span class="op">&gt;</span> ALL.sum.bed.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- markdownlint-enable MD013 -->
 <p>We plot the coverage distribution below, along with a plot of the cumulative coverage.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">-H</span> ALL.sum.bed.csv <span class="at">-x</span> 1 <span class="at">-y</span> 2 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Genome coverage (bp)"</span> <span class="dt">\</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-total-coverage-distribution.png</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">-H</span> ALL.sum.bed.csv <span class="at">-x</span> 1 <span class="at">-y</span> 3 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Cumulative genome coverage (kbp)"</span> <span class="dt">\</span></span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-total-coverage-distribution-cumulative.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">-H</span> ALL.sum.bed.csv <span class="at">-x</span> 1 <span class="at">-y</span> 2 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Genome coverage (bp)"</span> <span class="dt">\</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-total-coverage-distribution.png</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">-H</span> ALL.sum.bed.csv <span class="at">-x</span> 1 <span class="at">-y</span> 3 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Cumulative genome coverage (kbp)"</span> <span class="dt">\</span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="op">&gt;</span> fig-plot-total-coverage-distribution-cumulative.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-plot-total-coverage-distribution" class="quarto-layout-panel" data-attr-output=".details summary=&quot;Output&quot;">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-hist" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Genome coverage"><img src="fig-plot-total-coverage-distribution.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution.png" class="lightbox" title="Genome coverage" data-gallery="quarto-lightbox-gallery-12"><img src="fig-plot-total-coverage-distribution.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(a) Genome coverage</figcaption></figure>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-cumulative" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-cumulative.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Cumulative genome coverage"><img src="fig-plot-total-coverage-distribution-cumulative.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-cumulative.png" class="lightbox" title="Cumulative genome coverage" data-gallery="quarto-lightbox-gallery-13"><img src="fig-plot-total-coverage-distribution-cumulative.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(b) Cumulative genome coverage</figcaption></figure>
 </div>
 </div>
@@ -1548,14 +1554,14 @@ Answer
 <!-- markdownlint-enable MD013 -->
 <p>In <a href="#fig-plot-total-coverage-distribution">Figure&nbsp;12</a> a, a diploid peak is evident at around coverage X=100; we zoom in on that region to get a better view:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">-H</span> ALL.sum.bed.csv <span class="at">-x</span> 1 <span class="at">-y</span> 2 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Genome coverage (bp)"</span> <span class="dt">\</span></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="at">--x-min</span> 40 <span class="at">--x-max</span> 140</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> plot line <span class="at">-H</span> ALL.sum.bed.csv <span class="at">-x</span> 1 <span class="at">-y</span> 2 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Genome coverage (bp)"</span> <span class="dt">\</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="at">--x-min</span> 40 <span class="at">--x-max</span> 140</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- markdownlint-disable MD013 -->
 <div id="fig-plot-total-coverage-distribution-zoom-in" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><div id="fig-plot-total-coverage-distribution-hist-zoom-in" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Genome coverage"><img src="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="lightbox" title="Genome coverage" data-gallery="quarto-lightbox-gallery-14"><img src="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(a) Genome coverage</figcaption></figure>
 </div>
 <figcaption class="figure-caption">Figure&nbsp;13: Genome coverage vs depth of coverage.</figcaption></figure>
@@ -1565,10 +1571,10 @@ Answer
 <p>We then use these thresholds to generate a BED file containing regions that are accessible, i.e., have sufficient coverage for downstream analyses. We also calculate the number of bases that pass the filtering criteria.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> ALL.sum.bed.gz <span class="at">-f</span> <span class="st">'4&gt;50'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> <span class="at">-f</span> <span class="st">'4&lt;110'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> ALL.sum.depth.bed.gz</span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> ALL.sum.depth.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai  <span class="kw">|</span> <span class="fu">grep</span> genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> ALL.sum.bed.gz <span class="at">-f</span> <span class="st">'4&gt;50'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> <span class="at">-f</span> <span class="st">'4&lt;110'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> ALL.sum.depth.bed.gz</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> ALL.sum.depth.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai  <span class="kw">|</span> <span class="fu">grep</span> genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- markdownlint-enable MD013 -->
 <p>Consequently, 75.2% of the genome is accessible by depth.</p>
@@ -1604,37 +1610,37 @@ Answer
 <p>We base the answer on the previous code.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> <span class="va">$pop</span>.bg.gz <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="at">-v</span> OFS=<span class="st">"\t"</span> <span class="st">'NR &gt; 1 {sum=0; for (i=4; i&lt;=NF; i++) sum+=$i; print $1, $2, $3, sum}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.sum.bed.gz</span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="va">$pop</span>.sum.bed.gz</span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> mutate2 <span class="at">-t</span> <span class="at">-H</span> <span class="at">-w</span> 0 <span class="at">-e</span> <span class="st">'$3-$2'</span> <span class="va">$pop</span>.sum.bed.gz <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-H</span> <span class="at">-g</span> 4 <span class="at">-f</span> 5:sum <span class="at">-w</span> 0 <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> sort <span class="at">-t</span> <span class="at">-k</span> 1:n <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">awk</span> <span class="at">-v</span> cumsum=0 <span class="st">'BEGIN {OFS=","; cumsum=0} {cumsum += $2; print $1,$2,cumsum}'</span> <span class="op">&gt;</span> <span class="va">$pop</span>.sum.bed.csv</span>
-<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> <span class="va">$pop</span>.bg.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="at">-v</span> OFS=<span class="st">"\t"</span> <span class="st">'NR &gt; 1 {sum=0; for (i=4; i&lt;=NF; i++) sum+=$i; print $1, $2, $3, sum}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.sum.bed.gz</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="va">$pop</span>.sum.bed.gz</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> mutate2 <span class="at">-t</span> <span class="at">-H</span> <span class="at">-w</span> 0 <span class="at">-e</span> <span class="st">'$3-$2'</span> <span class="va">$pop</span>.sum.bed.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-H</span> <span class="at">-g</span> 4 <span class="at">-f</span> 5:sum <span class="at">-w</span> 0 <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> sort <span class="at">-t</span> <span class="at">-k</span> 1:n <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">awk</span> <span class="at">-v</span> cumsum=0 <span class="st">'BEGIN {OFS=","; cumsum=0} {cumsum += $2; print $1,$2,cumsum}'</span> <span class="op">&gt;</span> <span class="va">$pop</span>.sum.bed.csv</span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- markdownlint-enable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${pop}</span>.sum.bed.csv <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> plot line <span class="at">-x</span> 1 <span class="at">-y</span> 2 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Genome coverage (bp)"</span> <span class="dt">\</span></span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="at">--x-min</span> 0 <span class="at">--x-max</span> 100 <span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>    fig-plot-total-coverage-distribution-hist-zoom-in-<span class="va">$pop</span>.png</span>
-<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${pop}</span>.sum.bed.csv <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">csvtk</span> plot line <span class="at">-x</span> 1 <span class="at">-y</span> 2 <span class="at">--point-size</span> 0.01 <span class="dt">\</span></span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--xlab</span> <span class="st">"Depth of coverage (X)"</span> <span class="at">--ylab</span> <span class="st">"Genome coverage (bp)"</span> <span class="dt">\</span></span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--width</span> 9.0 <span class="at">--height</span> 3.5 <span class="at">--x-min</span> 0 <span class="at">--x-max</span> 100 <span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>    fig-plot-total-coverage-distribution-hist-zoom-in-<span class="va">$pop</span>.png</span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-plot-population-coverage-distribution" class="quarto-layout-panel" data-attr-output=".details summary=&quot;Output&quot;">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-hist-zoom-in-red" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Zoomed in genome coverage, red"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="lightbox" title="Zoomed in genome coverage, red" data-gallery="quarto-lightbox-gallery-15"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(a) Zoomed in genome coverage, red</figcaption></figure>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-hist-zoom-in-yellow" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Zoomed in genome coverage, yellow"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="lightbox" title="Zoomed in genome coverage, yellow" data-gallery="quarto-lightbox-gallery-16"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(b) Zoomed in genome coverage, yellow</figcaption></figure>
 </div>
 </div>
@@ -1643,17 +1649,17 @@ Answer
 </div>
 <p>Based on <a href="#fig-plot-population-coverage-distribution">Figure&nbsp;14</a>, we generate bed files with depths passing cutoffs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># red filter: 20-60</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> red.sum.bed.gz <span class="at">-f</span> <span class="st">'4&gt;20'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> <span class="at">-f</span> <span class="st">'4&lt;60'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> red.sum.depth.bed.gz</span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> red.sum.depth.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai  <span class="kw">|</span> <span class="fu">grep</span> genome</span>
-<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="co"># yellow filter: 20-55</span></span>
-<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> yellow.sum.bed.gz <span class="at">-f</span> <span class="st">'4&gt;20'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> <span class="at">-f</span> <span class="st">'4&lt;55'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> yellow.sum.depth.bed.gz</span>
-<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> yellow.sum.depth.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai  <span class="kw">|</span> <span class="fu">grep</span> genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># red filter: 20-60</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> red.sum.bed.gz <span class="at">-f</span> <span class="st">'4&gt;20'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> <span class="at">-f</span> <span class="st">'4&lt;60'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> red.sum.depth.bed.gz</span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> red.sum.depth.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai  <span class="kw">|</span> <span class="fu">grep</span> genome</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="co"># yellow filter: 20-55</span></span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> yellow.sum.bed.gz <span class="at">-f</span> <span class="st">'4&gt;20'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">csvtk</span> filter <span class="at">-t</span> <span class="at">-H</span> <span class="at">-f</span> <span class="st">'4&lt;55'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> yellow.sum.depth.bed.gz</span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> yellow.sum.depth.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai  <span class="kw">|</span> <span class="fu">grep</span> genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>genome  0   20853   100000  0.20853
 genome  1   79147   100000  0.79147
@@ -1676,10 +1682,10 @@ genome  1   76769   100000  0.76769</code></pre>
 <p>In addition to filtering on total coverage, we will also filter on the minimum number of individuals with a minimum depth. This is to account for cases where regions that pass the minimum coverage filter originate from just a few samples with unusually high coverage. Here, we will remove sites where more than 50% of individuals have zero coverage.</p>
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> ALL.bg.gz <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="st">'BEGIN {OFS="\t"} NR &gt; 1 {count=0; for (i=4; i&lt;=NF; i++) {if ($i&gt;0) count+=1}; if (count&gt;=((NF-3)*0.5)) {print $1, $2, $3}}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.ind.bed.gz</span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.ind.bed.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> ALL.bg.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="st">'BEGIN {OFS="\t"} NR &gt; 1 {count=0; for (i=4; i&lt;=NF; i++) {if ($i&gt;0) count+=1}; if (count&gt;=((NF-3)*0.5)) {print $1, $2, $3}}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.ind.bed.gz</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.ind.bed.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="true" aria-label="Toggle callout">
@@ -1711,7 +1717,7 @@ Answer
 <div>
 <div class="callout-answer">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> ALL.ind.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> ALL.ind.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>LG4 0   7694    100000  0.07694
 LG4 1   92306   100000  0.92306
@@ -1761,10 +1767,10 @@ Answer
 <div class="callout-answer">
 <!-- markdownlint-disable MD013 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> <span class="va">$pop</span>.bed.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="st">'BEGIN {OFS="\t"} NR &gt; 1 {count=0; for (i=4; i&lt;=NF; i++) {if ($i&gt;0) count+=1}; if (count&gt;=((NF-3)*0.5)) {print $1, $2, $3}}'</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.ind.bed.gz</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="va">$pop</span>.ind.bed.gz</span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bgzip</span> <span class="at">-c</span> <span class="at">-d</span> <span class="va">$pop</span>.bed.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> FS=<span class="st">"\t"</span> <span class="st">'BEGIN {OFS="\t"} NR &gt; 1 {count=0; for (i=4; i&lt;=NF; i++) {if ($i&gt;0) count+=1}; if (count&gt;=((NF-3)*0.5)) {print $1, $2, $3}}'</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.ind.bed.gz</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="va">$pop</span>.ind.bed.gz</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[bgzip] Could not open red.bed.gz: No such file or directory
 [bgzip] Could not open yellow.bed.gz: No such file or directory</code></pre>
@@ -1784,17 +1790,17 @@ Answer
 </section><section id="sequence-masks-1" class="level3"><h3 class="anchored" data-anchor-id="sequence-masks-1">Sequence masks</h3>
 <p>Finally, as before, we can convert the BED output to sequence mask files in FASTA format. Recall that we first have to make a template genome mask file where all positions are masked:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"} {print $1, 0, $2}'</span> <span class="va">${REF}</span>.fai <span class="op">&gt;</span> <span class="va">${REF}</span>.bed</span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span> <span class="at">-mc</span> 1 <span class="at">-fo</span> <span class="va">${REF}</span>.mask.fa <span class="at">-bed</span> <span class="va">${REF}</span>.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"} {print $1, 0, $2}'</span> <span class="va">${REF}</span>.fai <span class="op">&gt;</span> <span class="va">${REF}</span>.bed</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span> <span class="at">-mc</span> 1 <span class="at">-fo</span> <span class="va">${REF}</span>.mask.fa <span class="at">-bed</span> <span class="va">${REF}</span>.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, for each sample set, we will use <code>bedtools intersect</code> to intersect the BED files corresponding to the total sum coverage and the filter on number of individuals. <code>bedtools intersect</code> makes it easy to combine multiple BED files, so any other filters, or genomic features such as exons, could be added to make a compound mask file. The resulting BED files is used as input to <code>bedtools maskfasta</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> ALL.sum.depth.bed.gz <span class="at">-b</span> ALL.ind.bed.gz <span class="dt">\</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.unmask.bed.gz</span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.unmask.bed.gz</span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span>.mask.fa <span class="at">-mc</span> 0 <span class="at">-fo</span> <span class="va">${REF}</span>.unmask.fa <span class="dt">\</span></span>
-<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">-bed</span> ALL.unmask.bed.gz</span>
-<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${REF}</span>.unmask.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-a</span> ALL.sum.depth.bed.gz <span class="at">-b</span> ALL.ind.bed.gz <span class="dt">\</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> ALL.unmask.bed.gz</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed ALL.unmask.bed.gz</span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span>.mask.fa <span class="at">-mc</span> 0 <span class="at">-fo</span> <span class="va">${REF}</span>.unmask.fa <span class="dt">\</span></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">-bed</span> ALL.unmask.bed.gz</span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${REF}</span>.unmask.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&gt;LG4
 111111111111111111111111111111111111111111111111111111111111
@@ -1803,10 +1809,10 @@ Answer
 </div>
 <p>We can once again convince ourselves that this has worked by counting the number of unmasked positions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tr: -d deletes all characters not (-c, complement) in the character</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set '0'. wc: -m option counts characters</span></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${REF}</span>.unmask.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="at">-c</span> <span class="st">'0'</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-m</span></span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> ALL.unmask.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="kw">|</span> <span class="fu">grep</span> genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tr: -d deletes all characters not (-c, complement) in the character</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set '0'. wc: -m option counts characters</span></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${REF}</span>.unmask.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="at">-c</span> <span class="st">'0'</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-m</span></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> genomecov <span class="at">-i</span> ALL.unmask.bed.gz <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="kw">|</span> <span class="fu">grep</span> genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>75236
 genome  0   24764   100000  0.24764
@@ -1844,13 +1850,13 @@ Answer
 <div>
 <div class="callout-answer">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="va">$pop</span>.sum.depth.bed.gz <span class="at">-b</span> <span class="va">$pop</span>.ind.bed.gz <span class="dt">\</span></span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.unmask.bed.gz</span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="va">$pop</span>.unmask.bed.gz</span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span>.mask.fa <span class="at">-mc</span> 0 <span class="at">-fo</span> <span class="va">${REF}</span>.<span class="va">$pop</span>.unmask.fa <span class="dt">\</span></span>
-<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">-bed</span> <span class="va">$pop</span>.unmask.bed.gz</span>
-<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pop <span class="kw">in</span> red yellow<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">bedtools</span> intersect <span class="at">-a</span> <span class="va">$pop</span>.sum.depth.bed.gz <span class="at">-b</span> <span class="va">$pop</span>.ind.bed.gz <span class="dt">\</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-g</span> <span class="va">${REF}</span>.fai <span class="kw">|</span> <span class="ex">bgzip</span> <span class="op">&gt;</span> <span class="va">$pop</span>.unmask.bed.gz</span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-p</span> bed <span class="va">$pop</span>.unmask.bed.gz</span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">bedtools</span> maskfasta <span class="at">-fi</span> <span class="va">${REF}</span>.mask.fa <span class="at">-mc</span> 0 <span class="at">-fo</span> <span class="va">${REF}</span>.<span class="va">$pop</span>.unmask.fa <span class="dt">\</span></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">-bed</span> <span class="va">$pop</span>.unmask.bed.gz</span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2161,7 +2167,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 </body></html>

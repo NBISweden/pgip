@@ -411,7 +411,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">06-Nov-2023</p>
+      <p class="date">07-Nov-2023</p>
     </div>
   </div>
   
@@ -497,9 +497,10 @@ Data setup
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> monkeyflower</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> monkeyflower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Retrieve the data with <code>rsync</code>. You can use the <code>--dry-run</code> option to see what is going to happen; just remove it when you are content:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the dry run option to retrieve data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-av</span> <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-av</span> <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the dry run option to retrieve data. The dot is important!</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-av</span> /proj/naiss2023-22-1084/webexport/monkeyflower/LG4/<span class="pp">*</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Create an exercise directory called <code>monkeyflower</code> and <code>cd</code> to it:</p>
@@ -700,11 +701,11 @@ dependencies:
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div id="fig-evolutionary-relationship" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="../datasets/assets/images/stankowski-2019-fig1A.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Evolutionary relationships across the radiation"><img src="../datasets/assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="../datasets/assets/images/stankowski-2019-fig1A.png" class="lightbox" title="Evolutionary relationships across the radiation" data-gallery="quarto-lightbox-gallery-1"><img src="../datasets/assets/images/stankowski-2019-fig1A.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;1: Evolutionary relationships across the radiation</figcaption></figure>
 </div>
 <div id="fig-monkeyflower-sampling-location" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Monkeyflower sampling locations"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="lightbox" title="Monkeyflower sampling locations" data-gallery="quarto-lightbox-gallery-2"><img src="../../slides/simulation/assets/images/stankowski-2019-figs2.jpg" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Monkeyflower sampling locations</figcaption></figure>
 </div>
 </div></div><p>We convert the sample information with <code>csvtk</code>. We also add a populations file with all samples belonging to the same population:</p>
@@ -776,7 +777,7 @@ On genome scans and window sizes
 <div class="no-row-height column-margin column-container"><div class="callout-6-contents callout-collapse collapse callout-margin-content">
 <!-- markdownlint-disable MD013 -->
 <div id="fig-ld-decay-fuller" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Properties of genetic variation and inferred demographic history in sampled A. millepora. @fuller_PopulationGeneticsCoral_2020, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent."><img src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="lightbox" title="Properties of genetic variation and inferred demographic history in sampled A. millepora. @fuller_PopulationGeneticsCoral_2020, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent." data-gallery="quarto-lightbox-gallery-8"><img src="https://www.science.org/cms/10.1126/science.aba4674/asset/661d50bb-a085-41af-abdb-06c487ed4e63/assets/graphic/369_aba4674_f2.jpeg" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;3: Properties of genetic variation and inferred demographic history in sampled <em>A. millepora</em>. <span class="citation" data-cites="fuller_PopulationGeneticsCoral_2020">Fuller et al. (<a href="#ref-fuller_PopulationGeneticsCoral_2020" role="doc-biblioref">2020</a>)</span>, Figure 2. Upper left plot illustrates LD as a function of physical distance. Here, choosing a window size 20-30kb would ensure that most windows are independent.</figcaption></figure>
 </div>
 <!-- markdownlint-enable MD013 -->
@@ -1328,7 +1329,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 </body></html>
