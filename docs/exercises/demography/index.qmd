@@ -116,8 +116,9 @@ I recommend this option for *today*.
 How to start interactive mode on Rackham:
 
 ```         
-interactive -A {{< var uppmaxproject >}} -t 4:00:00 -n 10
-```
+interactive -A {{< var uppmaxproject >}} -n 4 \
+   --partition core --time 08:00:00 \
+   --reservation={{< var uppmaxproject >}}_4```
 
 You need to load all modules on Rackham so you don't have to worry about
 installing each program that we will need in this exercise.
@@ -136,7 +137,7 @@ You will need your file that has a list with all BAM files from all individuals 
 Just run:
 
 ```         
-angsd -b ALL.bamlist -GL 2 -doMajorMinor 1 -doMaf 2 -minMapQ 30 -minQ 20 -nThreads 10
+angsd -b ALL.bamlist -GL 2 -doMajorMinor 1 -doMaf 2 -minMapQ 30 -minQ 20 -nThreads 4
 ```
 
 ```         
@@ -146,7 +147,7 @@ angsd -b ALL.bamlist -GL 2 -doMajorMinor 1 -doMaf 2 -minMapQ 30 -minQ 20 -nThrea
 -doMaf 2 = It will use the inferred major alleles, but it does not assume known minor alleles.
 -minMapQ 30 = mapping quality filter
 -minQ 20 = base quality filter
--nThreads 10 = will use 10 threads (cores) to perform all calculations.
+-nThreads 4 = will use 4 threads (cores) to perform all calculations.
 ```
 
 The output will be `angsdput.mafs.gz`.
@@ -184,7 +185,7 @@ You will need your file that has a list with all BAM files from all individuals 
 Just run:
 
 ```         
-angsd -GL 2 -doGlf 2 -b ALL.bamlist -doMajorMinor 1 -SNP_pval 1e-6 -doMaf 1 -nThreads 10
+angsd -GL 2 -doGlf 2 -b ALL.bamlist -doMajorMinor 1 -SNP_pval 1e-6 -doMaf 1 -nThreads 4
 ```
 
 ```         
@@ -227,7 +228,7 @@ First we need the allele frequencies.
 Just run:
 
 ```         
-angsd -bam ALL.bamlist -anc anc.fa.gz -doSaf 1 -GL 2 -nThreads 10
+angsd -bam ALL.bamlist -anc anc.fa.gz -doSaf 1 -GL 2 -nThreads 4
 ```
 
 ```         
@@ -243,7 +244,7 @@ But now that we have calculated allele frequencies, let's calculate the genotype
 Just run:
 
 ```         
-angsd -bam ALL.bamlist -doSaf 1 -out output_gl -anc anc.fa.gz -GL 2 -P 10 -minMapQ 1 -minQ 20
+angsd -bam ALL.bamlist -doSaf 1 -out output_gl -anc anc.fa.gz -GL 2 -P 4 -minMapQ 1 -minQ 20
 ```
 
 ```         
@@ -256,7 +257,7 @@ angsd -bam ALL.bamlist -doSaf 1 -out output_gl -anc anc.fa.gz -GL 2 -P 10 -minMa
 Now that all calculations have been done, let's output the SFS based on them. Just run:
 
 ```         
-realSFS angsdput.saf.idx -maxIter 100 -P 10 >results.sfs
+realSFS angsdput.saf.idx -maxIter 100 -P 4 >results.sfs
 ```
 
 **One you have done it, repeat it with our populations: PEL, TSI and LWK. Do not forget to add the option `-out name` to name your output files so you can identify each population results.**
