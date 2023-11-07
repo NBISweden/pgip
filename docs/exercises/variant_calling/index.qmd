@@ -115,9 +115,11 @@ Retrieve the data with `rsync`. You can use the `--dry-run` option to
 see what is going to happen; just remove it when you are content:
 
 ```bash
-# Remove the dry run option to retrieve data
 rsync --dry-run -av \
       /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/small/ .
+# Remove the dry run option to actually retrieve data. The dot is
+# important!
+rsync -av /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/small/ .
 ```
 
 #### {{< fa laptop >}} Local
@@ -427,7 +429,16 @@ toolkit.
 On UPPMAX, the command to run `picard` is `java -jar
 $PICARD_HOME/picard.jar`. The UPPMAX command version is included as a
 comment whenever there is a command running `picard`. Make sure to
-uncomment when copying the code.
+uncomment when copying the code. If you have problems running the
+command, it may be because an incompatible `java` version is loaded as
+a module. To remedy this situation, run
+
+```{bash }
+#| label: module-unload-java
+#| echo: true
+#| eval: false
+module unload java
+```
 
 :::
 
