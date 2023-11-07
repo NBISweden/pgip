@@ -84,9 +84,10 @@ Retrieve the data with `rsync`. You can use the `--dry-run` option to
 see what is going to happen; just remove it when you are content:
 
 ```bash
-# Remove the dry run option to retrieve data
 rsync --dry-run -av \
       /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/LG4/* .
+# Remove the dry run option to retrieve data. The dot is important!
+rsync --dry-run -av /proj/{{< var uppmaxproject >}}/webexport/monkeyflower/LG4/* .
 ```
 
 #### {{< fa laptop >}} Local
