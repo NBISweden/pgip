@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="André Soares">
-
 <title>DDLS Population genomics in practice - Demographic inference</title>
 <style>
 code{white-space: pre-wrap;}
@@ -21,27 +18,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
-
+</style>
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
@@ -61,8 +72,7 @@ div.csl-indent {
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -81,23 +91,15 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo">
-    </a>
+    <img src="../../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">DDLS Population genomics in practice</span>
     </a>
@@ -108,7 +110,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
@@ -155,13 +157,11 @@ div.csl-indent {
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -169,15 +169,11 @@ div.csl-indent {
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Slides</span></a>
@@ -185,8 +181,8 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../slides/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Slides</span></a>
@@ -247,7 +243,7 @@ div.csl-indent {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -256,8 +252,8 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
@@ -271,8 +267,8 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/compute_environment/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Compute environment</span></a>
@@ -285,7 +281,7 @@ div.csl-indent {
   </div>
 </li>
       </ul>
-  </li>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/simulation/index.html" class="sidebar-item-text sidebar-link">
@@ -329,7 +325,7 @@ div.csl-indent {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
@@ -338,28 +334,39 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../recipes/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code recipes</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#practical-information" id="toc-practical-information" class="nav-link active" data-scroll-target="#practical-information">Practical information</a></li>
+  <li>
+<a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First steps</a>
+  <ul class="collapse">
+<li><a href="#calculate-allele-frequencies" id="toc-calculate-allele-frequencies" class="nav-link" data-scroll-target="#calculate-allele-frequencies">Calculate allele frequencies</a></li>
+  <li><a href="#generate-the-genotype-likelihood-files" id="toc-generate-the-genotype-likelihood-files" class="nav-link" data-scroll-target="#generate-the-genotype-likelihood-files">Generate the genotype likelihood files</a></li>
+  <li><a href="#sfs-estimation" id="toc-sfs-estimation" class="nav-link" data-scroll-target="#sfs-estimation">SFS estimation</a></li>
+  </ul>
+</li>
+  <li><a href="#switching-to-your-local-computer" id="toc-switching-to-your-local-computer" class="nav-link" data-scroll-target="#switching-to-your-local-computer">Switching to your local computer</a></li>
+  <li><a href="#plotting-sfs" id="toc-plotting-sfs" class="nav-link" data-scroll-target="#plotting-sfs">Plotting SFS</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Demographic inference</h1>
 </div>
 
@@ -385,9 +392,7 @@ div.csl-indent {
   </div>
   
 
-</header>
-
-<div class="callout callout-style-default callout-important callout-titled">
+</header><div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -415,7 +420,10 @@ Learning objectives
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<ul>
+<li>Perform basic ANGSD commands and analyses</li>
+<li>Look and interpret SFS plots</li>
+</ul>
 </div>
 </div>
 </div>
@@ -432,13 +440,25 @@ Data setup
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">UPPMAX</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Local</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true"><i class="fa-solid fa-server" aria-label="server"></i> UPPMAX</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><i class="fa-solid fa-laptop" aria-label="laptop"></i> Local</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-
+<!-- markdownlint-disable MD038 -->
+<p>Move to your course working directory <code>/proj/naiss2023-22-1084/users/USERNAME</code>, create an exercise directory called <code>demography</code> and <code>cd</code> to it:</p>
+<!-- markdownlint-enable MD038 -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /proj/naiss2023-22-1084/users/USERNAME</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> demography</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> demography</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will run most analyses on Rackham, so just go to your directory to start. You will need to download the results files to you computer afterwards, you can use <code>wget</code> like you’d done multiple times by now.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-
+<p>You will run R, either via <code>R Studio</code> or on the command line, you can choose.</p>
+<p>I recommend downloading the <code>Rmd</code> file that has all the instructions for this exercise and all the R code necessary to generate the plots we want to see today.</p>
+<p>Just download it from <code>https://export.uppmax.uu.se/naiss2023-22-1084/demography/demography.Rmd</code> with <code>wget</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--user</span> pgip <span class="at">--password</span> PASSWORD https://export.uppmax.uu.se/naiss2023-22-1084/demography/demography.Rmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -451,52 +471,220 @@ Data setup
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tools
+Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<p>:::</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tools
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Listing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">UPPMAX modules</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Conda</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">UPPMAX modules</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Everything you need is on Uppmax. Execute the following command to load modules:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="practical-information" class="level2"><h2 class="anchored" data-anchor-id="practical-information">Practical information</h2>
+<p>This exercise is divided into two parts. The first part will happen on Rackham. All the files you need are located here: <code>/proj/naiss2023-22-1084/private/demography</code>. The second part will happen inside R Studio locally.</p>
+<p>We will be using ANGSD (https://github.com/ANGSD/angsd).</p>
+<p>What has been prepared for you: - Dataset. Data from 3 human populations (TSI, PEL and LWK). - You are also being provided with files with the extension <code>*.filelist</code>. These files contain a list with all the BAM files needed for this exercise.</p>
+<p>You have two options now: 1) Create a bash script and submit to SLURM; 2) Start an Interactive session on Rackham and run manually each step. I recommend this option for <em>today</em>.</p>
+<p>How to start interactive mode on Rackham:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: uppmax-interactive-mode</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">interactive</span> <span class="at">-A</span> naiss2023-22-1084 <span class="at">-n</span> 4 <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">--partition</span> core <span class="at">--time</span> 08:00:00 <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">--reservation</span><span class="op">=</span>naiss2023-22-1084_4<span class="kw">```</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">You</span> need to load all modules on Rackham so you don<span class="st">'t have to worry about</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">installing each program that we will need in this exercise.</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">```bash</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">#| label: load-modules</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">#| echo: true</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">#| eval: false       </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="first-steps" class="level2"><h2 class="anchored" data-anchor-id="first-steps">First steps</h2>
+<section id="calculate-allele-frequencies" class="level3"><h3 class="anchored" data-anchor-id="calculate-allele-frequencies">Calculate allele frequencies</h3>
+<p>You will need your file that has a list with all BAM files from all individuals from all populations (<code>/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist</code>).</p>
+<p>Just run:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: angsd-basic-command</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false         </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-b</span> ALL.bamlist <span class="at">-GL</span> 2 <span class="at">-doMajorMinor</span> 1 <span class="at">-doMaf</span> 2 <span class="at">-minMapQ</span> 30 <span class="at">-minQ</span> 20 <span class="at">-nThreads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>-b = your file with your BAM files list
+-GL 2 = This will calculate the genotype likelihood for you. "2" means it will use the same method as GATK. If you use -GL 1 it will use the same method as Samtools.
+-doMajorMinor 1 = Many methods assume that each site is diallelic, so this option will use the genotype likelihood to infer the major and minor alleles.
+-doMaf 2 = It will use the inferred major alleles, but it does not assume known minor alleles.
+-minMapQ 30 = mapping quality filter
+-minQ 20 = base quality filter
+-nThreads 4 = will use 4 threads (cores) to perform all calculations.</code></pre>
+<p>The output will be <code>angsdput.mafs.gz</code>.</p>
+<p>Take a look inside the results file. This file is formatted such as:</p>
+<pre><code>chromo  position        major   minor   unknownEM       nInd
+11      61005493        C       A       0.000006        1
+11      61005494        A       C       0.000006        1
+11      61005495        C       A       0.000006        1
+11      61005496        G       A       0.000006        1
+11      61005497        G       A       0.000006        1
+11      61005498        T       A       0.000006        1
+11      61005499        A       C       0.000006        1
+11      61005500        C       A       0.000006        1
+11      61005501        A       C       0.000006        1</code></pre>
+<pre><code>chromo = chromosome name
+position = position…
+major = major allele
+minor = minor allele
+knownEM = frequency using -doMaf1
+unknownEM = frequency using -doMaf2
+pK-EM = p-value for the frequency of the minor allele
+nInd = Number of individuals with data</code></pre>
+</section><section id="generate-the-genotype-likelihood-files" class="level3"><h3 class="anchored" data-anchor-id="generate-the-genotype-likelihood-files">Generate the genotype likelihood files</h3>
+<p>You will need your file that has a list with all BAM files from all individuals from all populations (<code>/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist</code>).</p>
+<p>Just run:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-GL</span> 2 <span class="at">-doGlf</span> 2 <span class="at">-b</span> ALL.bamlist <span class="at">-doMajorMinor</span> 1 <span class="at">-SNP_pval</span> 1e-6 <span class="at">-doMaf</span> 1 <span class="at">-nThreads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>-doGlf 2 = will create the beagle likelihood file
+-SNP_pval = it will use 10^-6 as a p-value for the LRT to calculate which sites are polymorphic.</code></pre>
+<p>The output will be <code>angsdput.mafs.gz</code> and <code>angsdput.beagle.gz</code></p>
+<p>You already know what’s inside the mafs.gz file, but let’s take a look inside the Beagle format:</p>
+<pre><code>marker  allele1 allele2 Ind0    Ind0    Ind0    Ind1    Ind1    Ind1    Ind2    Ind2    Ind2    Ind3    Ind3    Ind3    Ind4    Ind4    Ind4    Ind5    Ind5    Ind5    Ind6    Ind6    Ind6    Ind7    Ind7    Ind7    Ind8    Ind8    Ind8    Ind9    Ind9    Ind9
+1_14000202      2       0       0.000532        0.999468        0.000000        0.333333        0.333333        0.333333        0.333333        0.333333        0.333333        0.666490        0.333333        0.000177        0.333333        0.333333        0.333333        0.002660        0.997340        0.000001        0.799744        0.200255        0.000000        0.000842        0.999157        0.000001        0.888820        0.111180        0.000000        0.799988        0.200012        0.000000
+1_14000873      2       0       0.000000        0.030324        0.969676        0.663107        0.333333        0.003560        0.888698        0.111302        0.000000        0.992114        0.007886        0.000000        0.999013        0.000987        0.000000        0.000009        0.991658        0.008334        0.888726        0.111274        0.000000        0.799696        0.200303        0.000001        0.000000        0.030330        0.969670        0.666490        0.333333        0.000177
+1_14001018      3       1       0.000000        0.015429        0.984571        0.799823        0.200177        0.000000        0.050636        0.949364        0.000000        0.941120        0.058880        0.000000        0.888842        0.111158        0.000000        0.799970        0.200030        0.000000        0.333333        0.333333        0.333333        0.992231        0.007769        0.000000        0.000140        0.333333        0.666526        0.666622        0.333333        0.000044</code></pre>
+<p>You will see that each individual has three columns in the file.</p>
+<pre><code>marker = chromosome and position (chr_position)
+allele1 = major allele as: 0=A, 1=C, 2=G, 3=T
+allele2 = minor allele as: 0=A, 1=C, 2=G, 3=T
+Ind0 = 1st column is the genotype likelihood for major/major genotype
+Ind0 = 2nd column is the genotype likelihood for major/minor genotype
+Ind0 = 3rd column is the genotype likelihood for minor/minor genotype</code></pre>
+</section><section id="sfs-estimation" class="level3"><h3 class="anchored" data-anchor-id="sfs-estimation">SFS estimation</h3>
+<p>Let’s look into the Site Frequency Spectrum (SFS) for these populations. As you saw in the theoretical part earlier today, the SFS will show you the proportions of sites at different allele frequencies. And to calculate the unfolded SFS we will need an outgroup species to be used as the ancestral state. One important caveat to remember is that during out exercises we are using only a portion of one chromosome, but for real world data usage it is important to use the whole genome so you have enough information.</p>
+<p>We usually run SFS per population, but let’s try running it for all individuals in our dataset first, just out of curiosity.</p>
+<p>You will need your file that has a list with all BAM files from all individuals from all populations (<code>naiss2023-22-1084/demography/dataset/ALL.bamlist</code>). You will also need <code>/proj/naiss2023-22-1084/private/demography/dataset/anc.fa.gz</code>, which has the ancestral state for your individuals. Let’s calculate the unfolded SFS.</p>
+<p>First we need the allele frequencies.</p>
+<p>Just run:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-bam</span> ALL.bamlist <span class="at">-anc</span> anc.fa.gz <span class="at">-doSaf</span> 1 <span class="at">-GL</span> 2 <span class="at">-nThreads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>-doSaf 1 = it will calculate allele frequency likelihood based on individual genotypoe likelihoods assuming Hardy-Weinberg.</code></pre>
+<p>The output will be <code>angsdput.saf.idx</code>, <code>angsdput.saf.pos.gz</code>, <code>angsdput.saf.gz</code>. If you want to know more about these files, read <code>https://github.com/ANGSD/angsd/blob/newsaf/doc/formats.pdf</code>.</p>
+<p>But now that we have calculated allele frequencies, let’s calculate the genotype likelihood:</p>
+<p>Just run:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-bam</span> ALL.bamlist <span class="at">-doSaf</span> 1 <span class="at">-out</span> output_gl <span class="at">-anc</span> anc.fa.gz <span class="at">-GL</span> 2 <span class="at">-P</span> 4 <span class="at">-minMapQ</span> 1 <span class="at">-minQ</span> 20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>-doSaf 1 = it will calculate allele frequency likelihood based on individual genotypoe likelihoods assuming Hardy-Weinberg.
+-out = choose a name for your output files
+-anc chimpHg19.fa.gz = we have to supply a file with the ancestral state if we want to find unfolded SFS
+-P = just another way to use "nThreads"</code></pre>
+<p>Now that all calculations have been done, let’s output the SFS based on them. Just run:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false         </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">realSFS</span> angsdput.saf.idx <span class="at">-maxIter</span> 100 <span class="at">-P</span> 4 <span class="op">&gt;</span>results.sfs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>One you have done it, repeat it with our populations: PEL, TSI and LWK. Do not forget to add the option <code>-out name</code> to name your output files so you can identify each population results.</strong></p>
+</section></section><section id="switching-to-your-local-computer" class="level2"><h2 class="anchored" data-anchor-id="switching-to-your-local-computer">Switching to your local computer</h2>
+<p>Alright, now you need to have this .Rmd file and all outputs in the same directory. You can copy to your machine. Or you can remote access it somewhere. It’s up to you. But if you followed the instructions at the top of the page you’ll have all you need already in your local machine.</p>
+</section><section id="plotting-sfs" class="level2"><h2 class="anchored" data-anchor-id="plotting-sfs">Plotting SFS</h2>
+<p>You can run the code below in R to see how the SFS plots look like. Does it look like the plot we’ve seen during the theoretical session?</p>
+<p>Let’s look population by population.</p>
+<p>First, PEL:</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function to normalize</span></span>
+<span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># read data</span></span>
+<span><span class="va">sfs</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span><span class="op">(</span><span class="st">"pel_results.sfs"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># the variability as percentile</span></span>
+<span><span class="va">pvar</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">sfs</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">sfs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span><span class="co"># the variable categories of the sfs</span></span>
+<span><span class="va">sfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/norm.html">norm</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">sfs</span>, xlab <span class="op">=</span> <span class="st">"Derived allele frequency"</span>, names <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"Proportions"</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"SFS plot"</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>then LWK:</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function to normalize</span></span>
+<span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># read data</span></span>
+<span><span class="va">sfs</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span><span class="op">(</span><span class="st">"lwk_results.sfs"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># the variability as percentile</span></span>
+<span><span class="va">pvar</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">sfs</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">sfs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span><span class="co"># the variable categories of the sfs</span></span>
+<span><span class="va">sfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/norm.html">norm</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">sfs</span>, xlab <span class="op">=</span> <span class="st">"Derived allele frequency"</span>, names <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"Proportions"</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"SFS plot"</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And TSI:</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function to normalize</span></span>
+<span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># read data</span></span>
+<span><span class="va">sfs</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span><span class="op">(</span><span class="st">"tsi_results.sfs"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># the variability as percentile</span></span>
+<span><span class="va">pvar</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">sfs</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">sfs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span><span class="co"># the variable categories of the sfs</span></span>
+<span><span class="va">sfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/norm.html">norm</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">sfs</span>, xlab <span class="op">=</span> <span class="st">"Derived allele frequency"</span>, names <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sfs</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="st">"Proportions"</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"SFS plot"</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>They are all a bit different, why do you think is that?</p>
+<p>Let’s see them all together:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function to normalize</span></span>
+<span><span class="va">nnorm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># expected number of sites with 1:20 derived alleles</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>PEL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span><span class="op">(</span><span class="st">"pel_results.sfs"</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, LWK <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span><span class="op">(</span><span class="st">"LWK_results.sfs"</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>    TSI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span><span class="op">(</span><span class="st">"TSI_results.sfs"</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
+<span></span>
+<span><span class="co"># density instead of expected counts</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">1</span>, <span class="va">nnorm</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot the polymorphic sites.</span></span>
+<span><span class="va">resPoly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span>, <span class="op">-</span><span class="fl">20</span><span class="op">]</span>, <span class="fl">1</span>, <span class="va">nnorm</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">resPoly</span>, beside <span class="op">=</span> <span class="cn">T</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PEL"</span>, <span class="st">"LWK"</span>, <span class="st">"TSI"</span><span class="op">)</span>, names <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">19</span>, main <span class="op">=</span> <span class="st">"Derived allele frequencies"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li><a href="https://github.com/lh3/psmc">psmc</a> <span class="citation" data-cites="li_InferenceHumanPopulation_2011">(<a href="#ref-li_InferenceHumanPopulation_2011" role="doc-biblioref">Li &amp; Durbin, 2011</a>)</span></li>
+<li>You can learn a lot by browsing the ANGSD website: http://www.popgen.dk/angsd/index.php/ANGSD</li>
+<li>All data comes from the 1000 Genomes Project https://www.nature.com/articles/nature15393</li>
+<li>You can check Matteo Fumagalli’s ngsTools Tutorial page for more exercises using the same dataset. It will show you how to do other things we didn’t have time to do today, like FST, PCAs, etc, using ANGSD/ngsTools: https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md</li>
+<li>This exercise just scratched the surface of what you can do with this type of data. If you are interested in running more interesting analyses, I recommend that you take a look at dadi: https://dadi.readthedocs.io/en/latest/ They have a nice Jupyterlab notebook (like you have been using in the previous days) which will help you a lot.</li>
+<li>I also recommend Fastsimcoal2: http://cmpg.unibe.ch/software/fastsimcoal2/</li>
 </ul>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<p>Execute the following command to load modules:</p>
-<pre class="{bash }"><code>#| label: uppmax-load-modules
-#| echo: true
-#| eval: false
-module load uppmax bioinfo-tools \
-    psmc/0.6.5-r67-e5f7df5</code></pre>
-</div>
-<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
-<p>Copy the contents to a file <code>environment.yml</code> and install packages with <code>mamba env update -f environment.yml</code>.</p>
-<pre lang="text"><code>channels:
-  - conda-forge
-  - bioconda
-  - default
-dependencies:
-  - psmc</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
 
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-li_InferenceHumanPopulation_2011" class="csl-entry" role="listitem">
-Li, H., &amp; Durbin, R. (2011). Inference of human population history from individual whole-genome sequences. <em>Nature</em>, <em>475</em>(7357), 493–496. <a href="https://doi.org/10.1038/nature10231">https://doi.org/10.1038/nature10231</a>
-</div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<ol>
+<li id="fn1"><p>The password is provided by the course instructor<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -730,16 +918,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">2023 <a href="about.html">NBIS</a> | <a href="https://choosealicense.com/licenses/gpl-3.0/">GPL-3 License</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
+    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
 </footer>
-
 
 
 </body></html>
