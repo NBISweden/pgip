@@ -100,7 +100,7 @@ module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib
 
 ## Practical information
 
-This exercise is divided into two parts. The first part will happen on Rackham. All the files you need are located here: ```{{< var uppmaxproject >}}```, inside the directory `/demography`. The second part will happen inside R Studio locally.
+This exercise is divided into two parts. The first part will happen on Rackham. All the files you need are located here: ```/proj/{{< var uppmaxproject >}}/private/demography```. The second part will happen inside R Studio locally.
 
 We will be using ANGSD (https://github.com/ANGSD/angsd).
 
@@ -130,7 +130,8 @@ module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib
 
 ### Calculate allele frequencies
 
-You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist`).
+You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/{{< var uppmaxproject
+>}}/private/demography/dataset/ALL.bamlist`).
 
 Just run:
 
@@ -177,7 +178,8 @@ nInd = Number of individuals with data
 
 ### Generate the genotype likelihood files
 
-You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/naiss2023-22-1084/private/demography/dataset/ALL.bamlist`).
+You will need your file that has a list with all BAM files from all individuals from all populations (`/proj/{{< var uppmaxproject
+>}}/private/demography/dataset/ALL.bamlist`).
 
 Just run:
 
