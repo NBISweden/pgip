@@ -46,8 +46,8 @@ with the `interactive` command. For example, to request an eight hour
 job on 4 cores, run
 
 ```bash
-interactive -A {{< var uppmaxproject >}} --cores 4 \
-   --partition core --time 08:00:00 \
+interactive -A {{< var uppmaxproject >}} -n 4 \
+   --time 08:00:00 \
    --reservation={{< var uppmaxproject >}}
 ```
 
