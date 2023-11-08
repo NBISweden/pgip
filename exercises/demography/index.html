@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">07-Nov-2023</p>
+      <p class="date">08-Nov-2023</p>
     </div>
   </div>
   
@@ -510,9 +510,17 @@ Tools
 </div>
 <section id="practical-information" class="level2"><h2 class="anchored" data-anchor-id="practical-information">Practical information</h2>
 <p>This exercise is divided into two parts. The first part will happen on Rackham. All the files you need are located here: <code>/proj/naiss2023-22-1084/private/demography</code>. The second part will happen inside R Studio locally.</p>
-<p>We will be using ANGSD (https://github.com/ANGSD/angsd).</p>
-<p>What has been prepared for you: - Dataset. Data from 3 human populations (TSI, PEL and LWK). - You are also being provided with files with the extension <code>*.filelist</code>. These files contain a list with all the BAM files needed for this exercise.</p>
-<p>You have two options now: 1) Create a bash script and submit to SLURM; 2) Start an Interactive session on Rackham and run manually each step. I recommend this option for <em>today</em>.</p>
+<p>We will be using ANGSD (<a href="https://github.com/ANGSD/angsd" class="uri">https://github.com/ANGSD/angsd</a>).</p>
+<p>What has been prepared for you:</p>
+<ul>
+<li>Dataset. Data from 3 human populations (TSI, PEL and LWK).</li>
+<li>You are also being provided with files with the extension <code>*.filelist</code>. These files contain a list with all the BAM files needed for this exercise.</li>
+</ul>
+<p>You have two options now:</p>
+<ol type="1">
+<li>Create a bash script and submit to SLURM;</li>
+<li>Start an Interactive session on Rackham and run manually each step. I recommend this option for <em>today</em>.</li>
+</ol>
 <p>How to start interactive mode on Rackham:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: uppmax-interactive-mode</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
@@ -527,7 +535,7 @@ Tools
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">```bash</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">#| label: load-modules</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">#| echo: true</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">#| eval: false       </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">#| eval: false</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="first-steps" class="level2"><h2 class="anchored" data-anchor-id="first-steps">First steps</h2>
 <section id="calculate-allele-frequencies" class="level3"><h3 class="anchored" data-anchor-id="calculate-allele-frequencies">Calculate allele frequencies</h3>
@@ -535,12 +543,17 @@ Tools
 <p>Just run:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: angsd-basic-command</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false         </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-b</span> ALL.bamlist <span class="at">-GL</span> 2 <span class="at">-doMajorMinor</span> 1 <span class="at">-doMaf</span> 2 <span class="at">-minMapQ</span> 30 <span class="at">-minQ</span> 20 <span class="at">-nThreads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>-b = your file with your BAM files list
--GL 2 = This will calculate the genotype likelihood for you. "2" means it will use the same method as GATK. If you use -GL 1 it will use the same method as Samtools.
--doMajorMinor 1 = Many methods assume that each site is diallelic, so this option will use the genotype likelihood to infer the major and minor alleles.
--doMaf 2 = It will use the inferred major alleles, but it does not assume known minor alleles.
+-GL 2 = This will calculate the genotype likelihood for you. "2" means it
+    will use the same method as GATK. If you use -GL 1 it will use the
+    same method as Samtools.
+-doMajorMinor 1 = Many methods assume that each site is diallelic, so
+    this option will use the genotype likelihood to infer the major and
+    minor alleles.
+-doMaf 2 = It will use the inferred major alleles, but it does not assume
+    known minor alleles.
 -minMapQ 30 = mapping quality filter
 -minQ 20 = base quality filter
 -nThreads 4 = will use 4 threads (cores) to perform all calculations.</code></pre>
@@ -574,10 +587,12 @@ nInd = Number of individuals with data</code></pre>
 -SNP_pval = it will use 10^-6 as a p-value for the LRT to calculate which sites are polymorphic.</code></pre>
 <p>The output will be <code>angsdput.mafs.gz</code> and <code>angsdput.beagle.gz</code></p>
 <p>You already know what’s inside the mafs.gz file, but let’s take a look inside the Beagle format:</p>
+<!-- markdownlint-disable MD013 -->
 <pre><code>marker  allele1 allele2 Ind0    Ind0    Ind0    Ind1    Ind1    Ind1    Ind2    Ind2    Ind2    Ind3    Ind3    Ind3    Ind4    Ind4    Ind4    Ind5    Ind5    Ind5    Ind6    Ind6    Ind6    Ind7    Ind7    Ind7    Ind8    Ind8    Ind8    Ind9    Ind9    Ind9
 1_14000202      2       0       0.000532        0.999468        0.000000        0.333333        0.333333        0.333333        0.333333        0.333333        0.333333        0.666490        0.333333        0.000177        0.333333        0.333333        0.333333        0.002660        0.997340        0.000001        0.799744        0.200255        0.000000        0.000842        0.999157        0.000001        0.888820        0.111180        0.000000        0.799988        0.200012        0.000000
 1_14000873      2       0       0.000000        0.030324        0.969676        0.663107        0.333333        0.003560        0.888698        0.111302        0.000000        0.992114        0.007886        0.000000        0.999013        0.000987        0.000000        0.000009        0.991658        0.008334        0.888726        0.111274        0.000000        0.799696        0.200303        0.000001        0.000000        0.030330        0.969670        0.666490        0.333333        0.000177
 1_14001018      3       1       0.000000        0.015429        0.984571        0.799823        0.200177        0.000000        0.050636        0.949364        0.000000        0.941120        0.058880        0.000000        0.888842        0.111158        0.000000        0.799970        0.200030        0.000000        0.333333        0.333333        0.333333        0.992231        0.007769        0.000000        0.000140        0.333333        0.666526        0.666622        0.333333        0.000044</code></pre>
+<!-- markdownlint-enable MD013 -->
 <p>You will see that each individual has three columns in the file.</p>
 <pre><code>marker = chromosome and position (chr_position)
 allele1 = major allele as: 0=A, 1=C, 2=G, 3=T
@@ -588,26 +603,33 @@ Ind0 = 3rd column is the genotype likelihood for minor/minor genotype</code></pr
 </section><section id="sfs-estimation" class="level3"><h3 class="anchored" data-anchor-id="sfs-estimation">SFS estimation</h3>
 <p>Let’s look into the Site Frequency Spectrum (SFS) for these populations. As you saw in the theoretical part earlier today, the SFS will show you the proportions of sites at different allele frequencies. And to calculate the unfolded SFS we will need an outgroup species to be used as the ancestral state. One important caveat to remember is that during out exercises we are using only a portion of one chromosome, but for real world data usage it is important to use the whole genome so you have enough information.</p>
 <p>We usually run SFS per population, but let’s try running it for all individuals in our dataset first, just out of curiosity.</p>
+<!-- markdownlint-disable MD038 -->
 <p>You will need your file that has a list with all BAM files from all individuals from all populations (<code>naiss2023-22-1084/demography/dataset/ALL.bamlist</code>). You will also need <code>/proj/naiss2023-22-1084/private/demography/dataset/anc.fa.gz</code>, which has the ancestral state for your individuals. Let’s calculate the unfolded SFS.</p>
+<!-- markdownlint-enable MD038 -->
 <p>First we need the allele frequencies.</p>
 <p>Just run:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-bam</span> ALL.bamlist <span class="at">-anc</span> anc.fa.gz <span class="at">-doSaf</span> 1 <span class="at">-GL</span> 2 <span class="at">-nThreads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>-doSaf 1 = it will calculate allele frequency likelihood based on individual genotypoe likelihoods assuming Hardy-Weinberg.</code></pre>
+<pre><code>-doSaf 1 = it will calculate allele frequency likelihood based on
+    individual genotype likelihoods assuming Hardy-Weinberg.</code></pre>
 <p>The output will be <code>angsdput.saf.idx</code>, <code>angsdput.saf.pos.gz</code>, <code>angsdput.saf.gz</code>. If you want to know more about these files, read <code>https://github.com/ANGSD/angsd/blob/newsaf/doc/formats.pdf</code>.</p>
 <p>But now that we have calculated allele frequencies, let’s calculate the genotype likelihood:</p>
 <p>Just run:</p>
+<!-- markdownlint-disable MD013 -->
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">angsd</span> <span class="at">-bam</span> ALL.bamlist <span class="at">-doSaf</span> 1 <span class="at">-out</span> output_gl <span class="at">-anc</span> anc.fa.gz <span class="at">-GL</span> 2 <span class="at">-P</span> 4 <span class="at">-minMapQ</span> 1 <span class="at">-minQ</span> 20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>-doSaf 1 = it will calculate allele frequency likelihood based on individual genotypoe likelihoods assuming Hardy-Weinberg.
+<!-- markdownlint-enable MD013 -->
+<pre><code>-doSaf 1 = it will calculate allele frequency likelihood based on
+    individual genotypoe likelihoods assuming Hardy-Weinberg.
 -out = choose a name for your output files
--anc chimpHg19.fa.gz = we have to supply a file with the ancestral state if we want to find unfolded SFS
+-anc chimpHg19.fa.gz = we have to supply a file with the ancestral state
+    if we want to find unfolded SFS
 -P = just another way to use "nThreads"</code></pre>
 <p>Now that all calculations have been done, let’s output the SFS based on them. Just run:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false         </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">realSFS</span> angsdput.saf.idx <span class="at">-maxIter</span> 100 <span class="at">-P</span> 4 <span class="op">&gt;</span>results.sfs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>One you have done it, repeat it with our populations: PEL, TSI and LWK. Do not forget to add the option <code>-out name</code> to name your output files so you can identify each population results.</strong></p>
 </section></section><section id="switching-to-your-local-computer" class="level2"><h2 class="anchored" data-anchor-id="switching-to-your-local-computer">Switching to your local computer</h2>
@@ -673,11 +695,15 @@ Ind0 = 3rd column is the genotype likelihood for minor/minor genotype</code></pr
 </div>
 </section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>You can learn a lot by browsing the ANGSD website: http://www.popgen.dk/angsd/index.php/ANGSD</li>
-<li>All data comes from the 1000 Genomes Project https://www.nature.com/articles/nature15393</li>
-<li>You can check Matteo Fumagalli’s ngsTools Tutorial page for more exercises using the same dataset. It will show you how to do other things we didn’t have time to do today, like FST, PCAs, etc, using ANGSD/ngsTools: https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md</li>
-<li>This exercise just scratched the surface of what you can do with this type of data. If you are interested in running more interesting analyses, I recommend that you take a look at dadi: https://dadi.readthedocs.io/en/latest/ They have a nice Jupyterlab notebook (like you have been using in the previous days) which will help you a lot.</li>
-<li>I also recommend Fastsimcoal2: http://cmpg.unibe.ch/software/fastsimcoal2/</li>
+<li>You can learn a lot by browsing the ANGSD website: <a href="http://www.popgen.dk/angsd/index.php/ANGSD" class="uri">http://www.popgen.dk/angsd/index.php/ANGSD</a>
+</li>
+<li>All data comes from the 1000 Genomes Project <a href="https://www.nature.com/articles/nature15393" class="uri">https://www.nature.com/articles/nature15393</a>
+</li>
+<li>You can check Matteo Fumagalli’s ngsTools Tutorial page for more exercises using the same dataset. It will show you how to do other things we didn’t have time to do today, like FST, PCAs, etc, using ANGSD/ngsTools: <a href="https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md" class="uri">https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md</a>
+</li>
+<li>This exercise just scratched the surface of what you can do with this type of data. If you are interested in running more interesting analyses, I recommend that you take a look at dadi: <a href="https://dadi.readthedocs.io/en/latest/" class="uri">https://dadi.readthedocs.io/en/latest/</a> They have a nice Jupyterlab notebook (like you have been using in the previous days) which will help you a lot.</li>
+<li>I also recommend Fastsimcoal2: <a href="http://cmpg.unibe.ch/software/fastsimcoal2/" class="uri">http://cmpg.unibe.ch/software/fastsimcoal2/</a>
+</li>
 </ul>
 
 
