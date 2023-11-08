@@ -71,8 +71,15 @@ channels:
 
 :::
 
+## Rendered notebooks
+
 <!-- markdownlint-disable MD013 -->
 
-The instructions are located at <https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_mds_toy_example.html>
+The rendered notebook instructions are located as html files at
+<https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_mds_toy_example.html>
 
 <!-- markdownlint-enable MD013 -->
+
+## Jupyter Notebooks
+
+Notebooks are available for download at <https://uppsala.instructure.com/courses/86976/pages/population-structure-notebooks>
