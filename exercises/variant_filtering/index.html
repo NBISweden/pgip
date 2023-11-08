@@ -676,7 +676,7 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats variantsites.subset.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"number of records:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SN  0   number of records:  102837</code></pre>
+<pre><code>SN  0   number of records:  102863</code></pre>
 </div>
 </div>
 <p>The <code>-r</code> parameter sets the <em>rate</em> of sampling which is why we get <em>approximately</em> 100,000 sites. You will need to adjust this parameter accordingly.</p>
@@ -696,18 +696,18 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> MEAN_DEPTH:mean <span class="va">${OUT}</span>.idepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_SITES MEAN_DEPTH
-PUN-R-ELF   102661  8.56171
-PUN-R-JMC   102641  9.49788
-PUN-R-LH    102678  9.17452
-PUN-R-MT    102635  9.4127
-PUN-R-UCSD  102720  8.83886
-PUN-Y-BCRD  102625  9.82563
-PUN-Y-INJ   102597  8.2163
-PUN-Y-LO    102605  7.80022
-PUN-Y-PCT   102581  9.049
-PUN-Y-POTR  102561  8.43227
+PUN-R-ELF   102673  8.55479
+PUN-R-JMC   102660  9.51204
+PUN-R-LH    102700  9.2064
+PUN-R-MT    102652  9.38376
+PUN-R-UCSD  102740  8.88498
+PUN-Y-BCRD  102657  9.80118
+PUN-Y-INJ   102633  8.23892
+PUN-Y-LO    102622  7.8023
+PUN-Y-PCT   102611  9.0973
+PUN-Y-POTR  102597  8.49077
 MEAN_DEPTH:mean
-8.88</code></pre>
+8.90</code></pre>
 </div>
 </div>
 <p>The average coverage over all samples is 8.9X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
@@ -717,8 +717,8 @@ MEAN_DEPTH:mean
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>CHROM   POS SUM_DEPTH   SUMSQ_DEPTH
-LG4 2105    9   23
-LG4 2130    11  21</code></pre>
+LG4 2130    11  21
+LG4 2139    12  26</code></pre>
 </div>
 </div>
 <p>So, for each position, we have a value (column <code>SUM_DEPTH</code>) for the total depth across all samples.</p>
@@ -759,7 +759,7 @@ On csvtk as plotting software
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> 3:min,3:q1,3:median,3:mean,3:q3,3:max,3:stdev vcftools/variantsites.subset.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SUM_DEPTH:min   SUM_DEPTH:q1    SUM_DEPTH:median    SUM_DEPTH:mean  SUM_DEPTH:q3    SUM_DEPTH:max   SUM_DEPTH:stdev
-1.00    55.00   72.00   88.63   88.00   33988.00    235.62</code></pre>
+1.00    55.00   72.00   88.79   88.00   33988.00    235.77</code></pre>
 </div>
 </div>
 <p>The range from the first quartile (<code>q1</code>) to the third (<code>q3</code>) is 55-88, showing most sites have a depth between 50-100X. We redraw the plot to zoom in on the peak:</p>
@@ -777,8 +777,8 @@ On csvtk as plotting software
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.ldepth.mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>CHROM   POS MEAN_DEPTH  VAR_DEPTH
-LG4 2105    0.9 1.65556
-LG4 2130    1.1 0.988889</code></pre>
+LG4 2130    1.1 0.988889
+LG4 2139    1.2 1.28889</code></pre>
 </div>
 </div>
 </section><section id="variant-quality-distribution" class="level4"><h4 class="anchored" data-anchor-id="variant-quality-distribution">Variant quality distribution</h4>
@@ -812,8 +812,8 @@ LG4 2130    1.1 0.988889</code></pre>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.frq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>CHROM   POS N_ALLELES   N_CHR   {FREQ}
-LG4 2105    2   4   0   1
-LG4 2130    2   14  0.857143    0.142857</code></pre>
+LG4 2130    2   14  0.857143    0.142857
+LG4 2139    2   8   0.25    0.75</code></pre>
 </div>
 </div>
 <p>The last two columns are frequencies ordered according to the reference allele. Therefore, we need to pick the minimum value to get the MAF. We can use <code>csvtk mutate</code> to create a new column</p>
@@ -842,8 +842,8 @@ LG4 2130    2   14  0.857143    0.142857</code></pre>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.imiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
-PUN-R-ELF   102837  0   6856    0.0666686
-PUN-R-JMC   102837  0   6544    0.0636347</code></pre>
+PUN-R-ELF   102863  0   6940    0.0674684
+PUN-R-JMC   102863  0   6558    0.0637547</code></pre>
 </div>
 </div>
 <p>and look at the results, focusing on the <code>F_MISS</code> column (proportion missing sites):</p>
@@ -864,8 +864,8 @@ PUN-R-JMC   102837  0   6544    0.0636347</code></pre>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.lmiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>CHR POS N_DATA  N_GENOTYPE_FILTERED N_MISS  F_MISS
-LG4 2105    20  0   16  0.8
-LG4 2130    20  0   6   0.3</code></pre>
+LG4 2130    20  0   6   0.3
+LG4 2139    20  0   12  0.6</code></pre>
 </div>
 </div>
 <p>and plot to get an idea of if there are sites that lack data.</p>
@@ -895,16 +895,16 @@ LG4 2130    20  0   6   0.3</code></pre>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.het</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   72504   65550.5 87270   0.32015
-PUN-R-JMC   68142   65746.6 87478   0.11023
-PUN-R-LH    70774   65951.2 87753   0.22121
-PUN-R-MT    69881   65680.2 87353   0.19383
-PUN-R-UCSD  74596   65493.4 87440   0.41476
-PUN-Y-BCRD  69232   64812.3 86131   0.20731
-PUN-Y-INJ   71134   64080.6 84976   0.33756
-PUN-Y-LO    72702   63237.7 84256   0.45029
-PUN-Y-PCT   74423   64380.1 85831   0.46818
-PUN-Y-POTR  71638   64426.3 85646   0.33986</code></pre>
+PUN-R-ELF   72402   65463.8 87190   0.31935
+PUN-R-JMC   68073   65681.8 87430   0.10995
+PUN-R-LH    70785   65912.1 87739   0.22325
+PUN-R-MT    69669   65584.5 87243   0.18859
+PUN-R-UCSD  74473   65433.2 87398   0.41156
+PUN-Y-BCRD  69312   64803.3 86180   0.21092
+PUN-Y-INJ   71006   63993.0 84897   0.33549
+PUN-Y-LO    72680   63251.4 84323   0.44746
+PUN-Y-PCT   74305   64342.0 85818   0.46391
+PUN-Y-POTR  71515   64385.1 85647   0.33534</code></pre>
 </div>
 </div>
 <p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, which you can verify by substituting the variables in the output.</p>
@@ -959,11 +959,11 @@ Answer
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--het</span> <span class="at">--stdout</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   41876   37724.6 56642   0.21945
-PUN-R-JMC   37403   37798.4 56739   -0.02087
-PUN-R-LH    39878   37895.0 56857   0.10458
-PUN-R-MT    38950   37637.9 56422   0.06985
-PUN-R-UCSD  43575   37488.3 56419   0.32153</code></pre>
+PUN-R-ELF   41778   37643.4 56566   0.21850
+PUN-R-JMC   37318   37713.4 56675   -0.02085
+PUN-R-LH    39856   37827.6 56810   0.10686
+PUN-R-MT    38753   37546.7 56327   0.06423
+PUN-R-UCSD  43467   37436.1 56392   0.31816</code></pre>
 </div>
 </div>
 </div>
@@ -999,14 +999,14 @@ PUN-R-UCSD  43575   37488.3 56419   0.32153</code></pre>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="va">$OUTVCF</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  37757
+SN  0   number of records:  37774
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 37560
+SN  0   number of SNPs: 37559
 SN  0   number of MNPs: 0
 SN  0   number of indels:   0
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1629
-SN  0   number of multiallelic SNP sites:   665</code></pre>
+SN  0   number of multiallelic sites:   1641
+SN  0   number of multiallelic SNP sites:   675</code></pre>
 </div>
 </div>
 <p>Quite a substantial portion variants have in fact been removed, which here can most likely be attributed to the low average sequencing coverage.</p>
@@ -1015,7 +1015,7 @@ SN  0   number of multiallelic SNP sites:   665</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-coverage-filters" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="index_files/figure-html/fig-coverage-filters-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples."><img src="index_files/figure-html/fig-coverage-filters-1.svg" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="index_files/figure-html/fig-coverage-filters-1.svg" class="lightbox" title="Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples." data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/fig-coverage-filters-1.svg" class="img-fluid figure-img" width="672"></a></p>
 <figcaption class="figure-caption">Figure&nbsp;7: Coverage distributions for three hypothetical samples along with the cumulative coverage for all samples.</figcaption></figure>
 </div>
 </div>
@@ -1540,13 +1540,13 @@ Answer
 <div id="fig-plot-total-coverage-distribution" class="quarto-layout-panel" data-attr-output=".details summary=&quot;Output&quot;">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-hist" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Genome coverage"><img src="fig-plot-total-coverage-distribution.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution.png" class="lightbox" title="Genome coverage" data-gallery="quarto-lightbox-gallery-12"><img src="fig-plot-total-coverage-distribution.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(a) Genome coverage</figcaption></figure>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-cumulative" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-cumulative.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Cumulative genome coverage"><img src="fig-plot-total-coverage-distribution-cumulative.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-cumulative.png" class="lightbox" title="Cumulative genome coverage" data-gallery="quarto-lightbox-gallery-13"><img src="fig-plot-total-coverage-distribution-cumulative.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(b) Cumulative genome coverage</figcaption></figure>
 </div>
 </div>
@@ -1563,7 +1563,7 @@ Answer
 <!-- markdownlint-disable MD013 -->
 <div id="fig-plot-total-coverage-distribution-zoom-in" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><div id="fig-plot-total-coverage-distribution-hist-zoom-in" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Genome coverage"><img src="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="lightbox" title="Genome coverage" data-gallery="quarto-lightbox-gallery-14"><img src="fig-plot-total-coverage-distribution-hist-zoom-in.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(a) Genome coverage</figcaption></figure>
 </div>
 <figcaption class="figure-caption">Figure&nbsp;13: Genome coverage vs depth of coverage.</figcaption></figure>
@@ -1636,13 +1636,13 @@ Answer
 <div id="fig-plot-population-coverage-distribution" class="quarto-layout-panel" data-attr-output=".details summary=&quot;Output&quot;">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-hist-zoom-in-red" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Zoomed in genome coverage, red"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="lightbox" title="Zoomed in genome coverage, red" data-gallery="quarto-lightbox-gallery-15"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-red.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(a) Zoomed in genome coverage, red</figcaption></figure>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-plot-total-coverage-distribution-hist-zoom-in-yellow" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 100.0%;justify-content: center;">
-<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Zoomed in genome coverage, yellow"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="lightbox" title="Zoomed in genome coverage, yellow" data-gallery="quarto-lightbox-gallery-16"><img src="fig-plot-total-coverage-distribution-hist-zoom-in-yellow.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">(b) Zoomed in genome coverage, yellow</figcaption></figure>
 </div>
 </div>
@@ -2169,7 +2169,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 </body></html>
