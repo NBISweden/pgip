@@ -17,6 +17,7 @@ listing:
     - genetic_diversity/index.qmd
     - population_structure/index.qmd
     - demography/index.qmd
+    - psmc/index.qmd
     - selection/index.qmd
 date: ""
 toc: false
