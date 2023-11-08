@@ -1,19 +1,5 @@
 [
   {
-    "listing": "/slides/index.html",
-    "items": [
-      "/slides/pgip/index.html",
-      "/slides/foundations/index.html",
-      "/slides/simulation/index.html",
-      "/slides/variant_calling/index.html",
-      "/slides/variant_filtering/index.html",
-      "/slides/genetic_diversity/index.html",
-      "/slides/population_structure/index.html",
-      "/slides/demography/index.html",
-      "/slides/selection/index.html"
-    ]
-  },
-  {
     "listing": "/exercises/index.html",
     "items": [
       "/exercises/compute_environment/index.html",
@@ -26,6 +12,20 @@
       "/exercises/demography/index.html",
       "/exercises/psmc/index.html",
       "/exercises/selection/index.html"
+    ]
+  },
+  {
+    "listing": "/slides/index.html",
+    "items": [
+      "/slides/pgip/index.html",
+      "/slides/foundations/index.html",
+      "/slides/simulation/index.html",
+      "/slides/variant_calling/index.html",
+      "/slides/variant_filtering/index.html",
+      "/slides/genetic_diversity/index.html",
+      "/slides/population_structure/index.html",
+      "/slides/demography/index.html",
+      "/slides/selection/index.html"
     ]
   }
 ]
