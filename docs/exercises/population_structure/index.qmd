@@ -75,8 +75,11 @@ channels:
 
 <!-- markdownlint-disable MD013 -->
 
-The rendered notebook instructions are located as html files at
+The rendered notebook instructions are located as html files at:
+
 <https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_mds_toy_example.html>
+
+<https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_admixture_1000G.html>
 
 <!-- markdownlint-enable MD013 -->
 
