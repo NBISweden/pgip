@@ -48,8 +48,11 @@ job on 4 cores, run
 ```bash
 interactive -A {{< var uppmaxproject >}} -n 4 \
    --time 08:00:00 \
-   --reservation={{< var uppmaxproject >}}
+   --reservation={{< var uppmaxproject >}}_#
 ```
+
+where `#` is a number that corresponds to the day of the week,
+starting from 1 (Monday=1, Tuesday=2, and so on).
 
 ::: {.callout-important}
 
