@@ -125,7 +125,7 @@ I recommend this option for *today*.
 
 How to start interactive mode on Rackham:
 
-```bash
+```{bash } 
 #| label: uppmax-interactive-mode
 #| echo: true
 #| eval: false
@@ -136,7 +136,7 @@ interactive -A {{< var uppmaxproject >}} -n 4 \
 You need to load all modules on Rackham so you don't have to worry about
 installing each program that we will need in this exercise.
 
-```bash
+```{bash } 
 #| label: load-modules
 #| echo: true
 #| eval: false
@@ -153,7 +153,7 @@ individuals from all populations (`/proj/{{< var uppmaxproject
 
 Just run:
 
-```bash
+```{bash } 
 #| label: angsd-basic-command
 #| echo: true
 #| eval: false
@@ -211,7 +211,7 @@ individuals from all populations (`/proj/{{< var uppmaxproject
 
 Just run:
 
-```bash
+```{bash } 
 #| echo: true
 #| eval: false
 angsd -GL 2 -doGlf 2 -b ALL.bamlist -doMajorMinor 1 -SNP_pval 1e-6 -doMaf 1 -nThreads 4
@@ -278,7 +278,7 @@ First we need the allele frequencies.
 
 Just run:
 
-```bash
+```{bash } 
 #| echo: true
 #| eval: false
 angsd -bam ALL.bamlist -anc anc.fa.gz -doSaf 1 -GL 2 -nThreads 4
@@ -299,7 +299,7 @@ Just run:
 
 <!-- markdownlint-disable MD013 -->
 
-```bash
+```{bash } 
 #| echo: true
 #| eval: false
 angsd -bam ALL.bamlist -doSaf 1 -out output_gl -anc anc.fa.gz -GL 2 -P 4 -minMapQ 1 -minQ 20
@@ -318,7 +318,7 @@ angsd -bam ALL.bamlist -doSaf 1 -out output_gl -anc anc.fa.gz -GL 2 -P 4 -minMap
 
 Now that all calculations have been done, let's output the SFS based on them. Just run:
 
-```bash
+```{bash } 
 #| echo: true
 #| eval: false
 realSFS angsdput.saf.idx -maxIter 100 -P 4 >results.sfs
