@@ -70,10 +70,7 @@ entirely on Uppmax.
 Everything you need is on Uppmax. Execute the following command to
 load modules:
 
-```{bash }
-#| label: uppmax-load-modules
-#| echo: true
-#| eval: false
+```bash
 module load bioinfo-tools bcftools psmc samtools htslib biopython
 ```
 
