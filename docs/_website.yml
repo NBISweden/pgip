@@ -27,7 +27,7 @@ website:
         href: "https://github.com/NBISweden/workshop-pgip"
   page-footer:
     border: false
-    left: "2023 [NBIS](about.html) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
+    left: "2023 [NBIS](https://nbis.se) | [GPL-3 License](https://choosealicense.com/licenses/gpl-3.0/)"
     right: "Published with [Quarto](https://quarto.org/) v<?quarto.version?>"
   favicon: assets/logos/nbislogo-green.svg
 
@@ -58,6 +58,7 @@ website:
           - exercises/genetic_diversity/index.qmd
           - exercises/population_structure/index.qmd
           - exercises/demography/index.qmd
+          - exercises/psmc/index.qmd
           - exercises/selection/index.qmd
       - section: Code recipes
         contents:

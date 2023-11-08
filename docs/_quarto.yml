@@ -25,6 +25,7 @@ project:
     - "exercises/genetic_diversity/index.qmd"
     - "exercises/population_structure/index.qmd"
     - "exercises/demography/index.qmd"
+    - "exercises/psmc/index.qmd"
     - "exercises/selection/index.qmd"
     # Slides
     - "slides/index.qmd"
