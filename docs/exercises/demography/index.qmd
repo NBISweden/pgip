@@ -263,12 +263,16 @@ important to use the whole genome so you have enough information.
 We usually run SFS per population, but let's try running it for all
 individuals in our dataset first, just out of curiosity.
 
+<!-- markdownlint-disable MD038 -->
+
 You will need your file that has a list with all BAM files from all
 individuals from all populations (`{{< var uppmaxproject
->}}/demography/dataset/ALL.bamlist`). You will also need
-`/proj/naiss2023-22-1084/private/demography/dataset/anc.fa.gz`, which
-has the ancestral state for your individuals. Let's calculate the
-unfolded SFS.
+>}}/demography/dataset/ALL.bamlist`). You will also need `/proj/{{<
+var uppmaxproject >}}/private/demography/dataset/anc.fa.gz`, which has
+the ancestral state for your individuals. Let's calculate the unfolded
+SFS.
+
+<!-- markdownlint-enable MD038 -->
 
 First we need the allele frequencies.
 
