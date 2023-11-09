@@ -125,12 +125,16 @@ How to start interactive mode on Rackham:
 #| eval: false
 interactive -A {{< var uppmaxproject >}} -n 4 \
    --partition core --time 08:00:00 \
-   --reservation={{< var uppmaxproject >}}_4```
+   --reservation={{< var uppmaxproject >}}_4
+```
 
-You need to load all modules on Rackham so you don't have to worry about
-installing each program that we will need in this exercise.
+You need to load all modules on Rackham so you don't have to worry
+about installing each program that we will need in this exercise.
 
-**You might need to re-index the reference genome once you copy things over, since ANGSD might give you a "the index file is older than the reference file"-type error. Just run the command below if that happens:
+You might need to re-index the reference genome once you copy things
+over, since ANGSD might give you a "the index file is older than the
+reference file"-type error. Just run the command below if that
+happens:
 
 ```{bash }
 #| label: load-modules
