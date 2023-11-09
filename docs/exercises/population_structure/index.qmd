@@ -47,11 +47,8 @@ to prepare your working directory.
 
 Execute the following command to load modules:
 
-```{bash }
-#| label: uppmax-load-modules
-#| echo: true
-#| eval: false
-module load uppmax bioinfo-tools
+```bash
+module load uppmax bioinfo-tools ANGSD R_packages
 ```
 
 #### Conda
@@ -64,7 +61,9 @@ channels:
   - conda-forge
   - bioconda
   - default
-# dependencies:
+dependencies:
+  - r-base
+  - angsd
 ```
 
 :::
