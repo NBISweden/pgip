@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nikolay Oskolkov">
 
-<title>DDLS Population genomics in practice - PCA and MDS for population genetics</title>
+<title>DDLS Population genomics in practice – pca_mds_toy_example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -348,13 +348,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#principal-component-analysis-pca-and-multidimensional-scaling-mds" id="toc-principal-component-analysis-pca-and-multidimensional-scaling-mds" class="nav-link active" data-scroll-target="#principal-component-analysis-pca-and-multidimensional-scaling-mds">Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</a>
+  <li><a href="#jupyter-notebook" id="toc-jupyter-notebook" class="nav-link active" data-scroll-target="#jupyter-notebook">Jupyter Notebook</a></li>
+  <li><a href="#principal-component-analysis-pca-and-multidimensional-scaling-mds" id="toc-principal-component-analysis-pca-and-multidimensional-scaling-mds" class="nav-link" data-scroll-target="#principal-component-analysis-pca-and-multidimensional-scaling-mds">Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</a>
   <ul class="collapse">
   <li><a href="#pca-for-population-genetics" id="toc-pca-for-population-genetics" class="nav-link" data-scroll-target="#pca-for-population-genetics">PCA for population genetics</a></li>
   <li><a href="#mds-for-population-genetics" id="toc-mds-for-population-genetics" class="nav-link" data-scroll-target="#mds-for-population-genetics">MDS for population genetics</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="pca_mds_toy_example.ipynb.html"><i class="bi bi-journal-code"></i>pca_mds_toy_example.ipynb</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -368,12 +369,6 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nikolay Oskolkov </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -388,7 +383,10 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="principal-component-analysis-pca-and-multidimensional-scaling-mds" class="level1">
+<section id="jupyter-notebook" class="level1">
+<h1>Jupyter Notebook</h1>
+</section>
+<section id="principal-component-analysis-pca-and-multidimensional-scaling-mds" class="level1 quarto-embed-nb-cell">
 <h1>Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</h1>
 <p>In this notebook, we will learn similarities and differences between PCA and MDS and compute both of them from scratch.</p>
 <section id="pca-for-population-genetics" class="level2">
@@ -402,10 +400,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>In population genetics, we typically work with genetic variation (genotype) data encoded as 0, 1 and 2 by the number of minor allele carrier in the sample. Let us generate a toy genotype matrix for 5 individuals and 7 genetic variants.</p>
 <div class="cell" data-kernel="R" data-execution_count="1">
-<pre class="sos cell-code"><code>gen &lt;- t(matrix(c(1, 0, 2, 0, 2, 0, 2, 1, 1, 1, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1, 0, 1, 0, 2, 0, 1, 1, 0, 2, 1, 2, 0, 1, 0), 5, by = TRUE))
-colnames(gen) &lt;- paste0("Ind", 1:5)
-rownames(gen) &lt;- paste0("SNP", 1:7)
-print(gen)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
 SNP1    1    1    1    0    0
@@ -425,11 +419,6 @@ SNP7    2    2    1    1    0</code></pre>
 </ul>
 <p>Below, we will implement the three steps with repsect to the genotype matrix, and display the fraction of variance explained by each principal component.</p>
 <div class="cell" data-kernel="R" data-execution_count="2">
-<pre class="sos cell-code"><code>gen_centered &lt;- scale(gen, center = TRUE, scale = FALSE) # mean centering
-covariance &lt;- t(gen_centered) %*% gen_centered # computing variance-covariance matrix
-eig &lt;- eigen(covariance) # performing eigen value decomposition of the variance-covariance matrix
-
-barplot(eig$values / sum(eig$values), names = paste0("PC", 1:5))</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -440,8 +429,6 @@ barplot(eig$values / sum(eig$values), names = paste0("PC", 1:5))</code></pre>
 </div>
 <p>From the barplot above we can conclude that PC1 explains most of the variation (approximately 70%) in the genotype data, while the other PCs explain limited amount of variation, therefore one can say that our original 7-dimensional data is essentially 1-dimensional, or can be approximated with only <strong>one dimension</strong> with good accuracy. In this way we <strong>dramatically reduced dimensionality of the data</strong> from seven to one. Finally, let us visualize the 5 generated samples in two-dimensional space, i.e.&nbsp;using the leading PC1 and PC2 variables.</p>
 <div class="cell" data-kernel="R" data-execution_count="3">
-<pre class="sos cell-code"><code>plot(eig$vectors[, 1:2], xlab = "PC1", ylab = "PC2", pch = 16, cex = 5, col = 2:6)
-points(eig$vectors[, 1:2], pch = as.character(1:5))</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -462,11 +449,6 @@ points(eig$vectors[, 1:2], pch = as.character(1:5))</code></pre>
 </div>
 <p>Below, we will use the same genotype matrix as for PCA, and compute Manhattan distances between all pairs of data points, which is the sum of absolute values of pairwise genotype differences.</p>
 <div class="cell" data-kernel="R" data-execution_count="4">
-<pre class="sos cell-code"><code>gen &lt;- t(matrix(c(1, 0, 2, 0, 2, 0, 2, 1, 1, 1, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1,
-    0, 1, 0, 2, 0, 1, 1, 0, 2, 1, 2, 0, 1, 0), 5, by = TRUE))
-colnames(gen) &lt;- paste0("Ind", 1:5)
-rownames(gen) &lt;- paste0("SNP", 1:7)
-print(gen)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
 SNP1    1    1    1    0    0
@@ -479,8 +461,6 @@ SNP7    2    2    1    1    0</code></pre>
 </div>
 </div>
 <div class="cell" data-kernel="R" data-execution_count="5">
-<pre class="sos cell-code"><code>my_dist &lt;- dist(t(gen), method = "manhattan", upper = TRUE, diag = TRUE)
-my_dist</code></pre>
 <div class="cell-output cell-output-display">
 <pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
 Ind1    0    3    7   10   11
@@ -492,8 +472,6 @@ Ind5   11    8    4    3    0</code></pre>
 </div>
 <p>Here, we can see that the Manhattan distance between for example individuals one and two is equal to 3 because there are three genotype differences at SNP2, SNP3 and SNP5. Now, we will use the <strong>cmdscale</strong> function in R that performs the classic / metric MDS. Under the hood this function does an eigen value decomposition of the matrix of pairwise Manhattan distances.</p>
 <div class="cell" data-kernel="R" data-execution_count="6">
-<pre class="sos cell-code"><code>my_mds &lt;- cmdscale(my_dist)
-my_mds</code></pre>
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>A matrix: 5 × 2 of type dbl</caption>
@@ -529,8 +507,6 @@ my_mds</code></pre>
 </div>
 <p>Please take a look at the first latent variable in <strong>my_mds</strong>. Interestengly, if you look at the absolute value of the difference between e.g.&nbsp;individuals 1 and 2, it will be close to 3, between individuals 1 and 3 will be nearly 7 etc. This corresponds to the values in the pairwise Manhattan distances in the <strong>my_dist</strong> matrix above. Therefore, as it was emphasized previously, the point of MDS is to preserve pairwise distances while doing dimension reduction. Finally, let us visualize the 5 individuals in the MDS space and compare it with PCA.</p>
 <div class="cell" data-kernel="R" data-execution_count="7">
-<pre class="sos cell-code"><code>plot(my_mds, xlab = "MDS1", ylab = "MDS2", pch = 16, cex = 5, col = 6:2)
-points(my_mds, pch = as.character(5:1))</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -540,10 +516,10 @@ points(my_mds, pch = as.character(5:1))</code></pre>
 </div>
 </div>
 <p>Overall, this picture looks quite similar to the PCA plot above. This is not suprising since both PCA and MDS are based on very similar principles, and typically agree with each other for real-world datasets.</p>
+</section>
+<a class="quarto-notebook-link" id="nblink-1" href="pca_mds_toy_example.ipynb.html">Source: pca_mds_toy_example.ipynb</a></section>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -789,7 +765,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom"});</script>
 
 
 

@@ -676,7 +676,7 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats variantsites.subset.vcf.gz <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"number of records:"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SN  0   number of records:  102802</code></pre>
+<pre><code>SN  0   number of records:  102564</code></pre>
 </div>
 </div>
 <p>The <code>-r</code> parameter sets the <em>rate</em> of sampling which is why we get <em>approximately</em> 100,000 sites. You will need to adjust this parameter accordingly.</p>
@@ -696,18 +696,18 @@ SN  0   number of multiallelic SNP sites:   2108</code></pre>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> MEAN_DEPTH:mean <span class="va">${OUT}</span>.idepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_SITES MEAN_DEPTH
-PUN-R-ELF   102603  8.57844
-PUN-R-JMC   102606  9.54266
-PUN-R-LH    102639  9.23909
-PUN-R-MT    102597  9.38588
-PUN-R-UCSD  102682  8.91687
-PUN-Y-BCRD  102593  9.84025
-PUN-Y-INJ   102552  8.25815
-PUN-Y-LO    102559  7.84449
-PUN-Y-PCT   102543  9.09959
-PUN-Y-POTR  102528  8.53472
+PUN-R-ELF   102371  8.56721
+PUN-R-JMC   102360  9.50006
+PUN-R-LH    102405  9.2507
+PUN-R-MT    102369  9.44821
+PUN-R-UCSD  102444  8.85813
+PUN-Y-BCRD  102359  9.87493
+PUN-Y-INJ   102333  8.19376
+PUN-Y-LO    102317  7.82044
+PUN-Y-PCT   102316  9.12309
+PUN-Y-POTR  102285  8.43967
 MEAN_DEPTH:mean
-8.92</code></pre>
+8.91</code></pre>
 </div>
 </div>
 <p>The average coverage over all samples is 8.9X. This actually is in the low range for a protocol based on explicitly calling genotypes. At 5X coverage, there may be a high probability that only one of the alleles has been sampled <span class="citation" data-cites="nielsen_GenotypeSNPCalling_2011">(<a href="#ref-nielsen_GenotypeSNPCalling_2011" role="doc-biblioref">Nielsen et al., 2011</a>)</span>, whereby sequencing errors may be mistaken for true variation.</p>
@@ -759,7 +759,7 @@ On csvtk as plotting software
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csvtk</span> summary <span class="at">-t</span> <span class="at">-f</span> 3:min,3:q1,3:median,3:mean,3:q3,3:max,3:stdev vcftools/variantsites.subset.ldepth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SUM_DEPTH:min   SUM_DEPTH:q1    SUM_DEPTH:median    SUM_DEPTH:mean  SUM_DEPTH:q3    SUM_DEPTH:max   SUM_DEPTH:stdev
-1.00    55.00   72.00   89.06   88.00   33988.00    243.86</code></pre>
+1.00    55.00   72.00   88.90   88.00   33988.00    238.83</code></pre>
 </div>
 </div>
 <p>The range from the first quartile (<code>q1</code>) to the third (<code>q3</code>) is 55-88, showing most sites have a depth between 50-100X. We redraw the plot to zoom in on the peak:</p>
@@ -842,8 +842,8 @@ LG4 2130    2   14  0.857143    0.142857</code></pre>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 <span class="va">${OUT}</span>.imiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
-PUN-R-ELF   102802  0   6990    0.0679948
-PUN-R-JMC   102802  0   6634    0.0645318</code></pre>
+PUN-R-ELF   102564  0   6899    0.0672653
+PUN-R-JMC   102564  0   6634    0.0646816</code></pre>
 </div>
 </div>
 <p>and look at the results, focusing on the <code>F_MISS</code> column (proportion missing sites):</p>
@@ -895,16 +895,16 @@ LG4 2130    20  0   6   0.3</code></pre>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">${OUT}</span>.het</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   72374   65438.3 87144   0.31953
-PUN-R-JMC   67977   65658.5 87385   0.10671
-PUN-R-LH    70749   65863.6 87661   0.22413
-PUN-R-MT    69721   65615.7 87280   0.18949
-PUN-R-UCSD  74422   65394.9 87336   0.41143
-PUN-Y-BCRD  69312   64771.5 86118   0.21270
-PUN-Y-INJ   71076   63996.5 84900   0.33867
-PUN-Y-LO    72616   63217.5 84271   0.44641
-PUN-Y-PCT   74348   64341.7 85806   0.46618
-PUN-Y-POTR  71558   64394.8 85646   0.33707</code></pre>
+PUN-R-ELF   72104   65277.1 86951   0.31498
+PUN-R-JMC   67848   65441.3 87109   0.11107
+PUN-R-LH    70537   65707.2 87451   0.22212
+PUN-R-MT    69628   65431.4 87052   0.19410
+PUN-R-UCSD  74281   65236.5 87137   0.41298
+PUN-Y-BCRD  69060   64600.6 85904   0.20933
+PUN-Y-INJ   70921   63783.8 84618   0.34257
+PUN-Y-LO    72378   63049.3 84053   0.44415
+PUN-Y-PCT   74093   64150.4 85562   0.46436
+PUN-Y-POTR  71321   64192.3 85392   0.33626</code></pre>
 </div>
 </div>
 <p>Here, F is a measure of how much the observed homozygotes <code>O(HOM)</code> differ from the expected (<code>E(HOM)</code>; expected <em>by chance</em> under Hardy-Weinberg equilibrium), and may be negative. <code>vcftools</code> calculates F from the expression <span class="math inline">\(F=(O-E)/(N-E)\)</span><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, which you can verify by substituting the variables in the output.</p>
@@ -959,11 +959,11 @@ Answer
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">vcftools</span> <span class="at">--vcf</span> <span class="at">-</span> <span class="at">--het</span> <span class="at">--stdout</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>INDV    O(HOM)  E(HOM)  N_SITES F
-PUN-R-ELF   41784   37666.5 56554   0.21800
-PUN-R-JMC   37277   37752.9 56685   -0.02514
-PUN-R-LH    39892   37846.5 56804   0.10790
-PUN-R-MT    38809   37594.6 56368   0.06469
-PUN-R-UCSD  43468   37450.9 56382   0.31784</code></pre>
+PUN-R-ELF   41509   37525.0 56356   0.21157
+PUN-R-JMC   37184   37582.9 56445   -0.02115
+PUN-R-LH    39666   37704.3 56580   0.10393
+PUN-R-MT    38720   37444.5 56144   0.06821
+PUN-R-UCSD  43349   37328.0 56205   0.31896</code></pre>
 </div>
 </div>
 </div>
@@ -999,14 +999,14 @@ PUN-R-UCSD  43468   37450.9 56382   0.31784</code></pre>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="va">$OUTVCF</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  37611
+SN  0   number of records:  37563
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 37420
+SN  0   number of SNPs: 37364
 SN  0   number of MNPs: 0
 SN  0   number of indels:   0
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1640
-SN  0   number of multiallelic SNP sites:   670</code></pre>
+SN  0   number of multiallelic sites:   1641
+SN  0   number of multiallelic SNP sites:   680</code></pre>
 </div>
 </div>
 <p>Quite a substantial portion variants have in fact been removed, which here can most likely be attributed to the low average sequencing coverage.</p>
@@ -2169,7 +2169,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version ?--></div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":true});</script>
 
 
 </body></html>

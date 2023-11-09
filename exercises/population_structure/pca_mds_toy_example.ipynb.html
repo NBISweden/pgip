@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="quarto-1.3.450">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <meta name="author" content="Nikolay Oskolkov">
+
+    <title>DDLS Population genomics in practice - PCA and MDS for population genetics</title>    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+        vertical-align: middle;
+      }
+    </style>
+    <style>
+      .quarto-embed-header {
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px;
+      }
+      .quarto-embed-header h6 {
+        font-size: 1em;
+        padding-top: 0.6em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-weight: 300;
+      }
+      .quarto-embed-header a.quarto-download-embed {
+        font-size: 0.7em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+    </style>
+    
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/logos/nbislogo-green.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+     <script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script> 
+      </head>
+  <body class="nav-sidebar floating nav-fixed quarto-notebook">
+    <div class="quarto-embed-header">
+      <h6><i class="bi bi-journal-code"></i> pca_mds_toy_example.ipynb</h6>
+      <a href="../../exercises/population_structure/pca_mds_toy_example.ipynb" class="btn btn-primary quarto-download-embed" download="pca_mds_toy_example.ipynb">Download Notebook</a>
+    </div>
+     <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/logos/nbislogo-green.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">DDLS Population genomics in practice</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../precourse.html" rel="" target="">
+ <span class="menu-text">Precourse</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contents.html" rel="" target="">
+ <span class="menu-text">Contents</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../info.html" rel="" target="">
+ <span class="menu-text">Info</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../slides/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Slides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises/index.html" rel="" target="">
+ <span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../recipes/index.html" rel="" target="">
+ <span class="menu-text">Code recipes</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/NBISwe" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/NBISweden/workshop-pgip" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">PCA and MDS for population genetics</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/pgip/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population genomics in practice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/foundations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population genetics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/simulation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/variant_calling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/variant_filtering/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/genetic_diversity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic diversity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/population_structure/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/demography/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographic inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/selection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Exercises</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/compute_environment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Compute environment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/datasets/monkeyflowers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Monkeyflowers dataset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/simulation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/variant_calling/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant calling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/variant_filtering/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variant filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/genetic_diversity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic diversity landscapes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/population_structure/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/demography/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demographic inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/psmc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PSMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/selection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Code recipes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../recipes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code recipes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#principal-component-analysis-pca-and-multidimensional-scaling-mds" id="toc-principal-component-analysis-pca-and-multidimensional-scaling-mds" class="nav-link active" data-scroll-target="#principal-component-analysis-pca-and-multidimensional-scaling-mds">Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</a>
+  <ul class="collapse">
+  <li><a href="#pca-for-population-genetics" id="toc-pca-for-population-genetics" class="nav-link" data-scroll-target="#pca-for-population-genetics">PCA for population genetics</a></li>
+  <li><a href="#mds-for-population-genetics" id="toc-mds-for-population-genetics" class="nav-link" data-scroll-target="#mds-for-population-genetics">MDS for population genetics</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">      <header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">PCA and MDS for population genetics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nikolay Oskolkov </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">09-Nov-2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>     <section id="principal-component-analysis-pca-and-multidimensional-scaling-mds" class="level1 page-columns page-full">
+<h1>Principal Component Analysis (PCA) and Multidimensional Scaling (MDS)</h1>
+<p>In this notebook, we will learn similarities and differences between PCA and MDS and compute both of them from scratch.</p>
+<section id="pca-for-population-genetics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="pca-for-population-genetics">PCA for population genetics</h2>
+<p>PCA is a matrix factorization (eigen value decomposition) problem that attempts to project the data into a low dimensional space that explains the largest amount of variance in the data. The motivation is that, if the data is high-dimensional, many features (axes) can be redundant, therefore one can reduce the number of dimensions and make the statistical analysis more robust in this way. Graphically, PCA can be viewed as rotation and shift of coordinate system where the original 2D data with XY-coordinates are replaced by e.g.&nbsp;1D data as PC1 which keeps most of the variation in the data. Note, that some information can be lost in this way, however, it can be statistically very benificial to work with lower-dimensional data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/pca_rotation.png" class="lightbox" title="idea of PCA" data-gallery="quarto-lightbox-gallery-1"><img src="assets/pca_rotation.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">idea of PCA</figcaption>
+</figure>
+</div>
+<p>In population genetics, we typically work with genetic variation (genotype) data encoded as 0, 1 and 2 by the number of minor allele carrier in the sample. Let us generate a toy genotype matrix for 5 individuals and 7 genetic variants.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-kernel="R" data-execution_count="1">
+<pre class="sos cell-code"><code>gen &lt;- t(matrix(c(1, 0, 2, 0, 2, 0, 2, 1, 1, 1, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1, 0, 1, 0, 2, 0, 1, 1, 0, 2, 1, 2, 0, 1, 0), 5, by = TRUE))
+colnames(gen) &lt;- paste0("Ind", 1:5)
+rownames(gen) &lt;- paste0("SNP", 1:7)
+print(gen)</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
+SNP1    1    1    1    0    0
+SNP2    0    1    2    1    2
+SNP3    2    1    1    0    1
+SNP4    0    0    1    2    2
+SNP5    2    1    1    0    0
+SNP6    0    0    1    1    1
+SNP7    2    2    1    1    0</code></pre>
+</div>
+</div></div>
+<p>Now we are going to compute PCA from scratch in R. The PCA algorithm includes three steps:</p>
+<ul>
+<li>mean centering the data</li>
+<li>computing variance-covariance matrix</li>
+<li>performing eigen value decomposition on the variance-covariance matrix</li>
+</ul>
+<p>Below, we will implement the three steps with repsect to the genotype matrix, and display the fraction of variance explained by each principal component.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-kernel="R" data-execution_count="2">
+<pre class="sos cell-code"><code>gen_centered &lt;- scale(gen, center = TRUE, scale = FALSE) # mean centering
+covariance &lt;- t(gen_centered) %*% gen_centered # computing variance-covariance matrix
+eig &lt;- eigen(covariance) # performing eigen value decomposition of the variance-covariance matrix
+
+barplot(eig$values / sum(eig$values), names = paste0("PC", 1:5))</code></pre>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="pca_mds_toy_example_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="pca_mds_toy_example_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+<p>From the barplot above we can conclude that PC1 explains most of the variation (approximately 70%) in the genotype data, while the other PCs explain limited amount of variation, therefore one can say that our original 7-dimensional data is essentially 1-dimensional, or can be approximated with only <strong>one dimension</strong> with good accuracy. In this way we <strong>dramatically reduced dimensionality of the data</strong> from seven to one. Finally, let us visualize the 5 generated samples in two-dimensional space, i.e.&nbsp;using the leading PC1 and PC2 variables.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-kernel="R" data-execution_count="3">
+<pre class="sos cell-code"><code>plot(eig$vectors[, 1:2], xlab = "PC1", ylab = "PC2", pch = 16, cex = 5, col = 2:6)
+points(eig$vectors[, 1:2], pch = as.character(1:5))</code></pre>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="pca_mds_toy_example_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="pca_mds_toy_example_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="mds-for-population-genetics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="mds-for-population-genetics">MDS for population genetics</h2>
+<p>Multidimensional Scaling (MDS) is very closely related to PCA and sometimes used as a synonim. The idea of MDS is to project the data into a low dimensional space and preserve pairwise distances between data points as much as possible. Under the hood this is done by solving eigen value decomposition problem for a matrix of paiwise distances. Compare with PCA, where we did eigen value decomposition of a variance-covariance matrix, the latter can be sometimes viewed as a pairwise distance matrix. This is how MDS is related to PCA. Both do eigen value decomposition of some sort of matrix of pairwise distances. Note, some implementation of MDS do not perform eigen value decomposition but instead do a gradient descent minimization of <strong>euclidean distance between the original data and an approximation as a product of two matrices (loadings and scores)</strong>. This represents an alternative, machine learning style of matrix factorization.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/mds.png" class="lightbox" title="machine learning idea of MDS" data-gallery="quarto-lightbox-gallery-4"><img src="assets/mds.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">machine learning idea of MDS</figcaption>
+</figure>
+</div>
+<p>Below, we will use the same genotype matrix as for PCA, and compute Manhattan distances between all pairs of data points, which is the sum of absolute values of pairwise genotype differences.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-kernel="R" data-execution_count="4">
+<pre class="sos cell-code"><code>gen &lt;- t(matrix(c(1, 0, 2, 0, 2, 0, 2, 1, 1, 1, 0, 1, 0, 2, 1, 2, 1, 1, 1, 1, 1,
+    0, 1, 0, 2, 0, 1, 1, 0, 2, 1, 2, 0, 1, 0), 5, by = TRUE))
+colnames(gen) &lt;- paste0("Ind", 1:5)
+rownames(gen) &lt;- paste0("SNP", 1:7)
+print(gen)</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
+SNP1    1    1    1    0    0
+SNP2    0    1    2    1    2
+SNP3    2    1    1    0    1
+SNP4    0    0    1    2    2
+SNP5    2    1    1    0    0
+SNP6    0    0    1    1    1
+SNP7    2    2    1    1    0</code></pre>
+</div>
+</div></div>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell" data-kernel="R" data-execution_count="5">
+<pre class="sos cell-code"><code>my_dist &lt;- dist(t(gen), method = "manhattan", upper = TRUE, diag = TRUE)
+my_dist</code></pre>
+<div class="cell-output cell-output-display">
+<pre><code>     Ind1 Ind2 Ind3 Ind4 Ind5
+Ind1    0    3    7   10   11
+Ind2    3    0    4    7    8
+Ind3    7    4    0    5    4
+Ind4   10    7    5    0    3
+Ind5   11    8    4    3    0</code></pre>
+</div>
+</div></div>
+<p>Here, we can see that the Manhattan distance between for example individuals one and two is equal to 3 because there are three genotype differences at SNP2, SNP3 and SNP5. Now, we will use the <strong>cmdscale</strong> function in R that performs the classic / metric MDS. Under the hood this function does an eigen value decomposition of the matrix of pairwise Manhattan distances.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell" data-kernel="R" data-execution_count="6">
+<pre class="sos cell-code"><code>my_mds &lt;- cmdscale(my_dist)
+my_mds</code></pre>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 5 × 2 of type dbl</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">Ind1</td>
+<td>-6.114866</td>
+<td>0.2977272</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">Ind2</td>
+<td>-3.077094</td>
+<td>0.2402932</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">Ind3</td>
+<td>0.621230</td>
+<td>-1.7944048</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">Ind4</td>
+<td>3.723118</td>
+<td>2.1483083</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">Ind5</td>
+<td>4.847612</td>
+<td>-0.8919238</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div>
+<p>Please take a look at the first latent variable in <strong>my_mds</strong>. Interestengly, if you look at the absolute value of the difference between e.g.&nbsp;individuals 1 and 2, it will be close to 3, between individuals 1 and 3 will be nearly 7 etc. This corresponds to the values in the pairwise Manhattan distances in the <strong>my_dist</strong> matrix above. Therefore, as it was emphasized previously, the point of MDS is to preserve pairwise distances while doing dimension reduction. Finally, let us visualize the 5 individuals in the MDS space and compare it with PCA.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell" data-kernel="R" data-execution_count="7">
+<pre class="sos cell-code"><code>plot(my_mds, xlab = "MDS1", ylab = "MDS2", pch = 16, cex = 5, col = 6:2)
+points(my_mds, pch = as.character(5:1))</code></pre>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="pca_mds_toy_example_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="pca_mds_toy_example_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div></div>
+<p>Overall, this picture looks quite similar to the PCA plot above. This is not suprising since both PCA and MDS are based on very similar principles, and typically agree with each other for real-world datasets.</p>
+
+
+</section>
+</section>
+     </main> <!-- /main -->  <script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>  </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">2023 <a href="https://nbis.se">NBIS</a> | <a href="https://choosealicense.com/licenses/gpl-3.0/">GPL-3 License</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
+  </div>
+</footer>  <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script> 
+  
+
+</body></html>

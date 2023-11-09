@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nikolay Oskolkov">
 
-<title>DDLS Population genomics in practice - PCA and Admixture for 1000 genomes (1000G) project</title>
+<title>DDLS Population genomics in practice – pca_admixture_1000g</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -345,14 +345,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pca-and-admixture-for-1000-genomes-1000g-project" id="toc-pca-and-admixture-for-1000-genomes-1000g-project" class="nav-link active" data-scroll-target="#pca-and-admixture-for-1000-genomes-1000g-project">PCA and Admixture for 1000 genomes (1000G) project</a>
+  <li><a href="#jupyter-notebook" id="toc-jupyter-notebook" class="nav-link active" data-scroll-target="#jupyter-notebook">Jupyter Notebook</a></li>
+  <li><a href="#pca-and-admixture-for-1000-genomes-1000g-project" id="toc-pca-and-admixture-for-1000-genomes-1000g-project" class="nav-link" data-scroll-target="#pca-and-admixture-for-1000-genomes-1000g-project">PCA and Admixture for 1000 genomes (1000G) project</a>
   <ul class="collapse">
   <li><a href="#pca-on-1000g-data" id="toc-pca-on-1000g-data" class="nav-link" data-scroll-target="#pca-on-1000g-data">PCA on 1000G data</a></li>
   <li><a href="#admixture-on-1000g-data" id="toc-admixture-on-1000g-data" class="nav-link" data-scroll-target="#admixture-on-1000g-data">Admixture on 1000G data</a></li>
   <li><a href="#fst-analysis-on-1000g-data" id="toc-fst-analysis-on-1000g-data" class="nav-link" data-scroll-target="#fst-analysis-on-1000g-data">Fst analysis on 1000G data</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="pca_admixture_1000G.ipynb.html"><i class="bi bi-journal-code"></i>pca_admixture_1000G.ipynb</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -366,12 +367,6 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nikolay Oskolkov </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -386,12 +381,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="pca-and-admixture-for-1000-genomes-1000g-project" class="level1">
+<section id="jupyter-notebook" class="level1">
+<h1>Jupyter Notebook</h1>
+</section>
+<section id="pca-and-admixture-for-1000-genomes-1000g-project" class="level1 quarto-embed-nb-cell">
 <h1>PCA and Admixture for 1000 genomes (1000G) project</h1>
 <p>In this notebook, we will apply PCA and Admixture analyses to real human data from the 1000 genomes project that aims to explore genetic diversity of human populations across the globe.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="assets/1000G.png" class="lightbox" title="1000 genomes project" data-gallery="quarto-lightbox-gallery-1"><img src="assets/1000G.png" class="img-fluid figure-img"></a></p>
+<p><a href="assets/1000G.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="1000 genomes project"><img src="assets/1000G.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">1000 genomes project</figcaption>
 </figure>
 </div>
@@ -399,10 +397,6 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="pca-on-1000g-data">PCA on 1000G data</h2>
 <p>We will be using low-coverage Phase 1 human from from the 1000G project. The data are not heavy, so easy to download and work with, and one can test a few popgen methods using these real data. First, you will need to make a directory, for example <strong>population_structure</strong>, for running the population structure analysis.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="1">
-<pre class="sos cell-code"><code>cd /home/nikolay/Documents/Teaching/PopGen_2023
-mkdir population_structure
-cd population_structure
-pwd</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>/home/nikolay/Documents/Teaching/PopGen_2023/population_structure
 </code></pre>
@@ -410,10 +404,6 @@ pwd</code></pre>
 </div>
 <p>Next, we will download the bam-alignments from the 1000G project and unzip them.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="2">
-<pre class="sos cell-code"><code>wget https://export.uppmax.uu.se/uppstore2018095/1000G.tar.gz
-#wget https://export.uppmax.uu.se/naiss2023-22-1084/1000G.tar.gz
-tar -xzf 1000G.tar.gz
-rm 1000G.tar.gz</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>--2023-11-07 13:14:16--  https://export.uppmax.uu.se/uppstore2018095/1000G.tar.gz
 Resolving export.uppmax.uu.se (export.uppmax.uu.se)... 89.44.248.44
@@ -431,10 +421,6 @@ Saving to: ‘1000G.tar.gz’
 </div>
 <p>For running the PCA and Admixture analyses with <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-014-0356-4">ANGSD</a>, we will need to build a list of the available bam-files. It is also useful for us to check from this list what human populations are present in the Phase 1 of 1000G project.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="3">
-<pre class="sos cell-code"><code>cd 1000G_bam_files
-find $PWD -name '*.bam' &gt; ../1000G_bam_list.txt
-cd ..
-head 1000G_bam_list.txt</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>/home/nikolay/Documents/Teaching/PopGen_2023/population_structure/1000G_bam_files/small.NA18543.mapped.ILLUMINA.bwa.CHB.low_coverage.20130415.bam
 /home/nikolay/Documents/Teaching/PopGen_2023/population_structure/1000G_bam_files/small.NA20334.mapped.ILLUMINA.bwa.ASW.low_coverage.20120522.bam
@@ -450,7 +436,6 @@ head 1000G_bam_list.txt</code></pre>
 </div>
 </div>
 <div class="cell" data-kernel="Bash" data-execution_count="5">
-<pre class="sos cell-code"><code>wc -l 1000G_bam_list.txt</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>435 1000G_bam_list.txt
 </code></pre>
@@ -458,7 +443,6 @@ head 1000G_bam_list.txt</code></pre>
 </div>
 <p>We can see that in total our dataset includes <strong>435 bam-files</strong> corresponding to <strong>African (YRI)</strong>, <strong>European (CEU)</strong> and <strong>Asian (CHB)</strong> populations, as well as two admixed populations: <strong>African-American (ASW)</strong> and <strong>Mexican (MXL)</strong>. ANGSD operates with genetic variation computed via genotype likelihoods. Therefore, we will have to perform genotype likelihoods variant calling prior to PCA and Admixture analyses. If you do not have ANGSD installed already, it can be downloaded and installed using instrictions from <a href="http://www.popgen.dk/angsd/index.php/Installation">http://www.popgen.dk/angsd/index.php/Installation</a>.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="4">
-<pre class="sos cell-code"><code>angsd -bam 1000G_bam_list.txt -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 2e-6 -minMapQ 30 -minQ 20 -minInd 25 -minMaf 0.05 -doGlf 2 -out 1000G -P 5</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>    -&gt; angsd version: 0.940-dirty (htslib: 1.16) build(Aug 23 2023 11:40:54)
     -&gt; angsd -bam 1000G_bam_list.txt -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 2e-6 -minMapQ 30 -minQ 20 -minInd 25 -minMaf 0.05 -doGlf 2 -out 1000G -P 5 
@@ -510,7 +494,6 @@ head 1000G_bam_list.txt</code></pre>
 </div>
 <p>The calculated genotype likelihoods for <strong>106 variable sites</strong> are contained within the <strong>1000G.beagle.gz</strong> file, which we are now going to use for performing PCA analysis. The second returned file, <strong>1000G.mafs.gz</strong>, contains information about allele frequencies of the identified genetic variants. You can read about advantages of doing PCA via genotype likelihoods for example <a href="http://www.popgen.dk/software/index.php/PCAngsd">here</a>. The PCANGSD method can be installed separately from ANGSD from <a href="https://github.com/Rosemeis/pcangsd">https://github.com/Rosemeis/pcangsd</a>.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="5">
-<pre class="sos cell-code"><code>pcangsd -b 1000G.beagle.gz -o pca_1000G -t 4</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>-------------------------------------
 PCAngsd v1.2
@@ -637,19 +620,6 @@ Total elapsed time: 0m3s
 </div>
 <p>A peculiarity of computing PCA via ANGSD is that it does not directly generates a PCA plot but returns a variance-covariance matrix <strong>pca_1000G.cov</strong> which you will have to manually eigen-value-decompose and plot the eigen vectors in R. Note, that in order to color data points on the PCA plot, we will parse the list of bam-files from above in R, and extract the populations labels.</p>
 <div class="cell" data-kernel="R" data-execution_count="9">
-<pre class="sos cell-code"><code>setwd("/home/nikolay/Documents/Teaching/PopGen_2023/population_structure")
-
-C &lt;- as.matrix(read.table("pca_1000G.cov"))
-e &lt;- eigen(C)
-pops &lt;- readLines("1000G_bam_list.txt")
-pops &lt;- sapply(strsplit(pops, "\\."), function(x) x[6])
-mycolor &lt;- rep("red", length(pops))
-mycolor[pops == "CEU"] &lt;- "blue"
-mycolor[pops == "CHB"] &lt;- "green"
-mycolor[pops == "MXL"] &lt;- "brown"
-mycolor[pops == "ASW"] &lt;- "magenta"
-plot(e$vectors[, 1:2], xlab = "PC1", ylab = "PC2", main = "PCA 1000G Project", col = mycolor, pch = 19)
-legend("bottomright", c("YRI", "CEU", "CHB", "MXL", "ASW"), fill = c("red", "blue", "green", "brown", "magenta"), cex = 1, inset = 0.02)</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -664,7 +634,6 @@ legend("bottomright", c("YRI", "CEU", "CHB", "MXL", "ASW"), fill = c("red", "blu
 <h2 class="anchored" data-anchor-id="admixture-on-1000g-data">Admixture on 1000G data</h2>
 <p>In this section, we will perform admixture analysis using the genetic variation data from 1000G project identified in the previous section, i.e.&nbsp;the file 1000G.beagle.gz. We will keep using the genotype likelihoods approach with ANGSD, and utilize <strong>NGSadmix</strong>, which is a tool within ANGSD. You do not need to install NGSadmix separetely as it is installed together with ANGSD, however, in case there are problems, the NGSadmix executable can be found within <em>pcangsd/misc</em> and launched from there. Please note that below we explicitly ask NGSadmix to detect K = 3 clusters.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="12">
-<pre class="sos cell-code"><code>NGSadmix -likes 1000G.beagle.gz -K 3 -minMaf 0.05 -seed 1 -o 1000G</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Input: lname=1000G.beagle.gz nPop=3, fname=(null) qname=(null) outfiles=1000G
 Setup: seed=1 nThreads=1 method=1
@@ -687,7 +656,6 @@ best like=-454474.752968 after 115 iterations
 </div>
 <p>NGSadmix produces two files: <strong>1000G.qopt</strong> and <strong>1000G.fopt.gz</strong> containing admixture proportions and allele frequencies, respectively. If we look inside the 1000G.qopt files, we will see that for eahc of the 435 data points it contains fractions (i.e.&nbsp;contributions) of each of the 3 clusters that we required NGSadmix to identify.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="6">
-<pre class="sos cell-code"><code>head 1000G.qopt</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.00543120337380969750 0.03047764250291678037 0.96409115412327339723 
 0.39746657097866411323 0.59699325992555196674 0.00554016909578402498 
@@ -704,16 +672,6 @@ best like=-454474.752968 after 115 iterations
 </div>
 <p>Finally, we will plot the results using some helping functions from the ANGSD and NGSadmix developers.</p>
 <div class="cell" data-kernel="R" data-execution_count="26">
-<pre class="sos cell-code"><code>setwd("/home/nikolay/Documents/Teaching/PopGen_2023/population_structure")
-
-pops &lt;- readLines("1000G_bam_list.txt")
-pops &lt;- sapply(strsplit(pops, "\\."), function(x) x[6])
-source("https://raw.githubusercontent.com/GenisGE/evalAdmix/master/visFuns.R")
-qopts &lt;- read.table("1000G.qopt")
-ord &lt;- orderInds(pop = pops, q = qopts, popord = c("YRI", "ASW", "CEU", "MXL", "CHB"))
-barplot(t(qopts)[, ord], col = c(3, 2, 4), las = 2, space = 0, border = NA)
-text(sort(tapply(1:length(pops), pops[ord], mean)), 0.1, unique(pops[ord]))
-abline(v = cumsum(sapply(unique(pops[ord]), function(x) {sum(pops[ord] == x)})), col = 1, lwd = 1.2)</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -728,9 +686,6 @@ abline(v = cumsum(sapply(unique(pops[ord]), function(x) {sum(pops[ord] == x)})),
 <h2 class="anchored" data-anchor-id="fst-analysis-on-1000g-data">Fst analysis on 1000G data</h2>
 <p>In this section, we will perform Fst analysis via genotype likelihoods using the 1000G data, i.e.&nbsp;we will compare allele frequencies between European (CEU) and African (YRI) populations. The way ANGSD does it, it first computes Site Frequency Spectra (SFS) for CEU and YRI individually. So we will have to subset the list of bam-files to CEU and YRI individuals only and compute SFS. Below, we will start with CEU:</p>
 <div class="cell" data-kernel="Bash" data-execution_count="11">
-<pre class="sos cell-code"><code>grep CEU 1000G_bam_list.txt &gt; 1000G_CEU_bam_list.txt
-wc -l 1000G_CEU_bam_list.txt
-head 1000G_CEU_bam_list.txt</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>99 1000G_CEU_bam_list.txt
 /home/nikolay/Documents/Teaching/PopGen_2023/population_structure/1000G_bam_files/small.NA12348.mapped.ILLUMINA.bwa.CEU.low_coverage.20130415.bam
@@ -747,7 +702,6 @@ head 1000G_CEU_bam_list.txt</code></pre>
 </div>
 </div>
 <div class="cell" data-kernel="Bash" data-execution_count="15">
-<pre class="sos cell-code"><code>angsd -b 1000G_CEU_bam_list.txt -anc anc.fa -out CEU -dosaf 1 -gl 1</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>    -&gt; angsd version: 0.940-dirty (htslib: 1.16) build(Aug 23 2023 11:40:54)
     -&gt; angsd -b 1000G_CEU_bam_list.txt -anc anc.fa -out CEU -dosaf 1 -gl 1 
@@ -774,9 +728,6 @@ head 1000G_CEU_bam_list.txt</code></pre>
 </div>
 <p>Now, we will subset YRI individuals and compute SFS for the African population.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="12">
-<pre class="sos cell-code"><code>grep YRI 1000G_bam_list.txt &gt; 1000G_YRI_bam_list.txt
-wc -l 1000G_YRI_bam_list.txt
-head 1000G_YRI_bam_list.txt</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>108 1000G_YRI_bam_list.txt
 /home/nikolay/Documents/Teaching/PopGen_2023/population_structure/1000G_bam_files/small.NA19213.mapped.ILLUMINA.bwa.YRI.low_coverage.20120522.bam
@@ -793,7 +744,6 @@ head 1000G_YRI_bam_list.txt</code></pre>
 </div>
 </div>
 <div class="cell" data-kernel="Bash" data-execution_count="16">
-<pre class="sos cell-code"><code>angsd -b 1000G_YRI_bam_list.txt -anc anc.fa -out YRI -dosaf 1 -gl 1</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>    -&gt; angsd version: 0.940-dirty (htslib: 1.16) build(Aug 23 2023 11:40:54)
     -&gt; angsd -b 1000G_YRI_bam_list.txt -anc anc.fa -out YRI -dosaf 1 -gl 1 
@@ -819,7 +769,6 @@ head 1000G_YRI_bam_list.txt</code></pre>
 </div>
 </div>
 <div class="cell" data-kernel="Bash" data-execution_count="17">
-<pre class="sos cell-code"><code>realSFS CEU.saf.idx YRI.saf.idx &gt; CEU.YRI.ml</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[persaf::persaf_init] Version of CEU.saf.idx is 3
 [persaf::persaf_init] Assuming .saf.gz file is CEU.saf.gz
@@ -1093,7 +1042,6 @@ likelihood: -35430.032761
 </div>
 </div>
 <div class="cell" data-kernel="Bash" data-execution_count="22">
-<pre class="sos cell-code"><code>realSFS fst index CEU.saf.idx YRI.saf.idx -sfs CEU.YRI.ml -fstout CEU_YRI</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[persaf::persaf_init] Version of CEU.saf.idx is 3
 [persaf::persaf_init] Assuming .saf.gz file is CEU.saf.gz
@@ -1327,7 +1275,6 @@ likelihood: -35430.032761
 </div>
 <p>Now we will compute the average Fst for CEU vs, YRI populations.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="23">
-<pre class="sos cell-code"><code>realSFS fst stats CEU_YRI.fst.idx </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>    -&gt; Assuming idxname:CEU_YRI.fst.idx
     -&gt; Assuming .fst.gz file: CEU_YRI.fst.gz
@@ -1338,7 +1285,6 @@ likelihood: -35430.032761
 </div>
 <p>The average Fst is not very informative as we do not know what loci the selection signal comes from. To figure tis out, we will have to compute Fst for CEU vs, YRI populations in a sliding window.</p>
 <div class="cell" data-kernel="Bash" data-execution_count="24">
-<pre class="sos cell-code"><code>realSFS fst stats2 CEU_YRI.fst.idx -win 50 -step 10 &gt; slidingwindow_win50_step10</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>    -&gt; Assuming idxname:CEU_YRI.fst.idx
     -&gt; Assuming .fst.gz file: CEU_YRI.fst.gz
@@ -1370,16 +1316,6 @@ nSites:6247
 </div>
 <p>And finally we will plot the results using custom R scripts:</p>
 <div class="cell" data-kernel="R" data-execution_count="27">
-<pre class="sos cell-code"><code>df &lt;- read.delim("slidingwindow_win50_step10", header = FALSE)
-df &lt;- df[-1, ]
-df$V2 &lt;- as.numeric(df$V2)
-df$V3 &lt;- as.numeric(df$V3)
-df$V5 &lt;- as.numeric(df$V5)
-df &lt;- df[order(df$V2, df$V3), ]
-rownames(df) &lt;- seq(1, dim(df)[1], 1)
-plot(df$V5, col = df$V2, xlab = "Chromosomes", ylab = "Fst", xaxt = "n")
-myticks &lt;- as.numeric(rownames(df[!duplicated(df$V2), ]))
-axis(side = 1, at = myticks, labels = seq(1, 21, 1))</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1388,10 +1324,10 @@ axis(side = 1, at = myticks, labels = seq(1, 21, 1))</code></pre>
 </div>
 </div>
 </div>
+</section>
+<a class="quarto-notebook-link" id="nblink-1" href="pca_admixture_1000G.ipynb.html">Source: pca_admixture_1000G.ipynb</a></section>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1637,7 +1573,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 
