@@ -130,8 +130,6 @@ to be diploid.
 using a command like:
 
 ```{bash }
-#| echo: true
-#| eval: false
 bcftools mpileup -C50 -uf ref.fa aln.bam | bcftools view -c - \
       | vcfutils.pl vcf2fq -d 10 -D 100 | gzip > diploid.fq.gz
 ```
@@ -140,8 +138,6 @@ After that you will need to convert the diploid consensus to a PSMC
 input file. PSMC comes with a script for that:
 
 ```{bash }
-#| echo: true
-#| eval: false
 fq2psmcfa -q20 diploid.fq.gz > diploid.psmcfa
 ```
 
@@ -176,8 +172,6 @@ a T or a K. Can you guess what T and K means in this context?
 We will be running PSMC as:
 
 ```{bash }
-#| echo: true
-#| eval: false
 psmc -N25 -t15 -r5 -p 4+25*2+4+6 -o output.psmc psmc_input.psmcfa
 ```
 
@@ -241,8 +235,6 @@ from the regular PSMC plotting tool below.
 <!-- markdownlint-enable MD029 -->
 
 ```{bash }
-#| echo: true
-#| eval: false
 psmc_plot.pl -u 2.5e-8 -g 25 psmc_plot results.psmc
 ```
 

@@ -130,11 +130,13 @@ interactive -A {{< var uppmaxproject >}} -n 4 \
 You need to load all modules on Rackham so you don't have to worry about
 installing each program that we will need in this exercise.
 
+**You might need to re-index the reference genome once you copy things over, since ANGSD might give you a "the index file is older than the reference file"-type error. Just run the command below if that happens:
+
 ```{bash }
 #| label: load-modules
 #| echo: true
 #| eval: false
-module load bioinfo-tools samtools PCAngsd ANGSD bcftools plink htslib
+samtools faidx ref.fa.gz
 ```
 
 ## First steps
@@ -315,7 +317,7 @@ Now that all calculations have been done, let's output the SFS based on them. Ju
 ```{bash }
 #| echo: true
 #| eval: false
-realSFS angsdput.saf.idx -maxIter 100 -P 4 >results.sfs
+realSFS output_gl.saf.idx -maxIter 100 -P 4 >results.sfs
 ```
 
 **One you have done it, repeat it with our populations: PEL, TSI and
