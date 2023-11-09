@@ -708,14 +708,14 @@ Variant Quality Score Recalibration
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">bcftools</span> stats variantsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  12827
+SN  0   number of records:  12596
 SN  0   number of no-ALTs:  0
-SN  0   number of SNPs: 10500
+SN  0   number of SNPs: 10429
 SN  0   number of MNPs: 0
-SN  0   number of indels:   2335
+SN  0   number of indels:   2225
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   1008
-SN  0   number of multiallelic SNP sites:   231</code></pre>
+SN  0   number of multiallelic sites:   1011
+SN  0   number of multiallelic SNP sites:   196</code></pre>
 </div>
 </div>
 <p>Use <code>vcftools</code> to compile data to generate summary statistics</p>
@@ -883,14 +883,14 @@ SN  0   number of multiallelic SNP sites:   231</code></pre>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">bcftools</span> stats allsites.vcf.gz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"^SN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SN  0   number of samples:  10
-SN  0   number of records:  10068
-SN  0   number of no-ALTs:  9268
-SN  0   number of SNPs: 393
+SN  0   number of records:  10174
+SN  0   number of no-ALTs:  9341
+SN  0   number of SNPs: 416
 SN  0   number of MNPs: 0
-SN  0   number of indels:   114
+SN  0   number of indels:   105
 SN  0   number of others:   0
-SN  0   number of multiallelic sites:   50
-SN  0   number of multiallelic SNP sites:   7</code></pre>
+SN  0   number of multiallelic sites:   53
+SN  0   number of multiallelic SNP sites:   11</code></pre>
 </div>
 </div>
 <p>Filtering as before but excluding MAF, variant quality filters</p>

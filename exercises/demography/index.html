@@ -514,13 +514,10 @@ Tools
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">interactive</span> <span class="at">-A</span> {{<span class="op">&lt;</span> var uppmaxproject <span class="op">&gt;</span>}} <span class="at">-n</span> 4 <span class="dt">\</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--partition</span> core <span class="at">--time</span> 08:00:00 <span class="dt">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--reservation</span><span class="op">=</span>{{<span class="op">&lt;</span> var uppmaxproject <span class="op">&gt;</span>}}_4<span class="kw">```</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">You</span> need to load all modules on Rackham so you don<span class="st">'t have to worry about</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">installing each program that we will need in this exercise.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">**You might need to re-index the reference genome once you copy things over, since ANGSD might give you a "the index file is older than the reference file"-type error. Just run the command below if that happens:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--reservation</span><span class="op">=</span>{{<span class="op">&lt;</span> var uppmaxproject <span class="op">&gt;</span>}}_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>You need to load all modules on Rackham so you don’t have to worry about installing each program that we will need in this exercise.</p>
+<p>You might need to re-index the reference genome once you copy things over, since ANGSD might give you a “the index file is older than the reference file”-type error. Just run the command below if that happens:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx ref.fa.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
