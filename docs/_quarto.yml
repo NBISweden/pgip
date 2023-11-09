@@ -6,6 +6,8 @@ project:
     - ../scripts/init-site.sh
     - ../scripts/setup-pgip-data.sh
     - ../scripts/setup-data.py
+  post-render:
+    - ../scripts/post-render.py
   render:
     # Root
     - "index.qmd"
