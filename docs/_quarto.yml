@@ -26,6 +26,8 @@ project:
     - "exercises/variant_filtering/index.qmd"
     - "exercises/genetic_diversity/index.qmd"
     - "exercises/population_structure/index.qmd"
+    - "exercises/population_structure/pca_mds_toy_example.qmd"
+    - "exercises/population_structure/pca_admixture_1000G.qmd"
     - "exercises/demography/index.qmd"
     - "exercises/psmc/index.qmd"
     - "exercises/selection/index.qmd"

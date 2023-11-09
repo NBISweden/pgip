@@ -78,10 +78,10 @@ The rendered notebook instructions are located as html files, with
 embedded buttons to download the actual notebooks (keep an eye out for
 the `Download Notebook` button in the top right), here:
 
-<a class="quarto-notebook-link" id="nblink-1" href="pca_mds_toy_example.ipynb.html">Source:
+<a class="quarto-notebook-link" id="pca_mds_toy_example" href="pca_mds_toy_example.ipynb.html">Source:
 pca_mds_toy_example.ipynb</a>
 
-<a class="quarto-notebook-link" id="nblink-1" href="pca_admixture_1000G.html">Source: pca_admixture_1000G.ipynb</a>
+<a class="quarto-notebook-link" id="pca_admixture_1000G" href="pca_admixture_1000G.ipynb.html">Source: pca_admixture_1000G.ipynb</a>
 
 <!-- markdownlint-enable MD013 -->
 

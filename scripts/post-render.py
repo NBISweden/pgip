@@ -30,8 +30,6 @@ files = [
     "slides/demography/part1-pop-gen-demography-lecture.pdf",
     "slides/demography/part2-psmc-pop-gen-demography-lecture.pdf",
     "slides/selection/selection.pdf",
-    "exercises/population_structure/pca_admixture_1000G.ipynb",
-    "exercises/population_structure/pca_mds_toy_example.ipynb",
 ]
 
 for fn in files:
