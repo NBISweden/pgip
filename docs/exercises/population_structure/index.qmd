@@ -70,18 +70,19 @@ dependencies:
 
 :::
 
-## Rendered notebooks
+## Jupyter notebooks
 
 <!-- markdownlint-disable MD013 -->
 
-The rendered notebook instructions are located as html files at:
+The rendered notebook instructions are located as html files, with
+embedded buttons to download the actual notebooks (keep an eye out for
+the `Download Notebook` button in the top right), here:
 
-<https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_mds_toy_example.html>
+<a class="quarto-notebook-link" id="pca_mds_toy_example" href="pca_mds_toy_example.ipynb.html">Source:
+pca_mds_toy_example.ipynb</a>
 
-<https://nbisweden.github.io/workshop-pgip/exercises/population_structure/pca_admixture_1000G.html>
+<a class="quarto-notebook-link" id="pca_admixture_1000G" href="pca_admixture_1000G.ipynb.html">Source: pca_admixture_1000G.ipynb</a>
 
 <!-- markdownlint-enable MD013 -->
 
-## Jupyter Notebooks
-
-Notebooks are available for download at <https://uppsala.instructure.com/courses/86976/pages/population-structure-notebooks>
+Notebooks are also available for download at <https://uppsala.instructure.com/courses/86976/pages/population-structure-notebooks>

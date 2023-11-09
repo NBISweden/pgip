@@ -1,0 +1,7 @@
+---
+format: html
+---
+
+# Jupyter Notebook
+
+{{< embed pca_admixture_1000G.ipynb >}}
