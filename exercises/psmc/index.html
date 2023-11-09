@@ -538,14 +538,10 @@ interactive -A naiss2023-22-1084 -n 4 \
 <li><p>You will need a BAM file with reads mapped to a reference genome, just like you did on Tuesday at the Variant Calling exercise (<a href="https://nbisweden.github.io/workshop-pgip/exercises/variant_calling/#variant-calling-overview" class="uri">https://nbisweden.github.io/workshop-pgip/exercises/variant_calling/#variant-calling-overview</a>). For PSMC and MSMC it is recommended a minimum of 12x coverage, we discussed this a bit more during the lecture. The organism also needs to be diploid.</p></li>
 <li><p>For PSMC you need to get a diploid consensus from the BAM file, using a command like:</p></li>
 </ol>
-<pre class="{bash }"><code>#| echo: true
-#| eval: false
-bcftools mpileup -C50 -uf ref.fa aln.bam | bcftools view -c - \
+<pre class="{bash }"><code>bcftools mpileup -C50 -uf ref.fa aln.bam | bcftools view -c - \
       | vcfutils.pl vcf2fq -d 10 -D 100 | gzip &gt; diploid.fq.gz</code></pre>
 <p>After that you will need to convert the diploid consensus to a PSMC input file. PSMC comes with a script for that:</p>
-<pre class="{bash }"><code>#| echo: true
-#| eval: false
-fq2psmcfa -q20 diploid.fq.gz &gt; diploid.psmcfa</code></pre>
+<pre class="{bash }"><code>fq2psmcfa -q20 diploid.fq.gz &gt; diploid.psmcfa</code></pre>
 <p>Then you will run PSMC for your sample. It is important downstream to know the generation time and mutation rate for your species.</p>
 <p>For today we will be using a pre-made psmcfa file. This file was generated based on a simulated dataset created with <code>ms</code>.</p>
 <section id="psmc-input-file" class="level3">
@@ -563,9 +559,7 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTKTTTTTTTTTTTTTTTTTTTT
 <section id="running-psmc" class="level3">
 <h3 class="anchored" data-anchor-id="running-psmc">Running PSMC</h3>
 <p>We will be running PSMC as:</p>
-<pre class="{bash }"><code>#| echo: true
-#| eval: false
-psmc -N25 -t15 -r5 -p 4+25*2+4+6 -o output.psmc psmc_input.psmcfa</code></pre>
+<pre class="{bash }"><code>psmc -N25 -t15 -r5 -p 4+25*2+4+6 -o output.psmc psmc_input.psmcfa</code></pre>
 <p>PSMC has a lot of parameters, and it can feel a bit of a black box for most users.</p>
 <pre><code>-N = number of iterations
 –p = number of free atomic time intervals. This can be confusing. It
@@ -592,9 +586,7 @@ coalescence time</code></pre>
 <li>PSMC has a script for plotting the results. Just run the command:</li>
 </ol>
 <!-- markdownlint-enable MD029 -->
-<pre class="{bash }"><code>#| echo: true
-#| eval: false
-psmc_plot.pl -u 2.5e-8 -g 25 psmc_plot results.psmc</code></pre>
+<pre class="{bash }"><code>psmc_plot.pl -u 2.5e-8 -g 25 psmc_plot results.psmc</code></pre>
 <p>It includes the µ for this “species” (2.5e-8), and the generation time (25). These parameters are fundamental to scale the x axis of the plot. If you provide the plotting tool with the wrong information, your x axis scale will be off and your interpretations will be essentially meaningless. If you are curious about how psmc_plot rescales the time, you can read about it in detail at the program’s paper here (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3154645/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3154645/</a>).</p>
 </section>
 </section>
