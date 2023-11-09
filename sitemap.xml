@@ -2,138 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/population_structure/pca_mds_toy_example.html</loc>
-    <lastmod>2023-11-08T16:03:02.610Z</lastmod>
+    <lastmod>2023-11-09T08:26:22.784Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/recipes/slides/index.html</loc>
-    <lastmod>2023-11-08T16:03:00.306Z</lastmod>
+    <lastmod>2023-11-09T08:26:20.920Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/recipes/index.html</loc>
-    <lastmod>2023-11-08T16:02:50.478Z</lastmod>
+    <lastmod>2023-11-09T08:26:12.564Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/demography/index.html</loc>
-    <lastmod>2023-11-08T16:02:48.282Z</lastmod>
+    <lastmod>2023-11-09T08:26:10.696Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/genetic_diversity/index.html</loc>
-    <lastmod>2023-11-08T16:02:44.074Z</lastmod>
+    <lastmod>2023-11-09T08:26:07.204Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/variant_calling/index.html</loc>
-    <lastmod>2023-11-08T16:01:48.890Z</lastmod>
+    <lastmod>2023-11-09T08:25:21.372Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/foundations/index.html</loc>
-    <lastmod>2023-11-08T16:01:05.290Z</lastmod>
+    <lastmod>2023-11-09T08:24:45.396Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/introduction/index.html</loc>
-    <lastmod>2023-11-08T15:58:00.590Z</lastmod>
+    <lastmod>2023-11-09T08:22:23.993Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/selection/index.html</loc>
-    <lastmod>2023-11-08T15:57:57.370Z</lastmod>
+    <lastmod>2023-11-09T08:22:21.329Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/demography/index.html</loc>
-    <lastmod>2023-11-08T15:57:50.723Z</lastmod>
+    <lastmod>2023-11-09T08:22:15.585Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/genetic_diversity/index.html</loc>
-    <lastmod>2023-11-08T15:57:44.267Z</lastmod>
+    <lastmod>2023-11-09T08:22:12.689Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/variant_calling/index.html</loc>
-    <lastmod>2023-11-08T15:56:44.779Z</lastmod>
+    <lastmod>2023-11-09T08:21:22.525Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/datasets/monkeyflowers.html</loc>
-    <lastmod>2023-11-08T15:55:05.991Z</lastmod>
+    <lastmod>2023-11-09T08:19:58.478Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/index.html</loc>
-    <lastmod>2023-11-08T15:55:00.147Z</lastmod>
+    <lastmod>2023-11-09T08:19:53.590Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/schedule.html</loc>
-    <lastmod>2023-11-08T15:54:58.455Z</lastmod>
+    <lastmod>2023-11-09T08:19:52.186Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/precourse.html</loc>
-    <lastmod>2023-11-08T15:54:54.683Z</lastmod>
+    <lastmod>2023-11-09T08:19:48.994Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/contents.html</loc>
-    <lastmod>2023-11-08T15:54:50.451Z</lastmod>
+    <lastmod>2023-11-09T08:19:45.438Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/index.html</loc>
-    <lastmod>2023-11-08T15:54:49.827Z</lastmod>
+    <lastmod>2023-11-09T08:19:44.906Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/info.html</loc>
-    <lastmod>2023-11-08T15:54:52.527Z</lastmod>
+    <lastmod>2023-11-09T08:19:47.186Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/references.html</loc>
-    <lastmod>2023-11-08T15:54:55.559Z</lastmod>
+    <lastmod>2023-11-09T08:19:49.758Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/syllabus.html</loc>
-    <lastmod>2023-11-08T15:54:59.079Z</lastmod>
+    <lastmod>2023-11-09T08:19:52.698Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/compute_environment/index.html</loc>
-    <lastmod>2023-11-08T15:55:03.059Z</lastmod>
+    <lastmod>2023-11-09T08:19:56.026Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/simulation/index.html</loc>
-    <lastmod>2023-11-08T15:55:06.519Z</lastmod>
+    <lastmod>2023-11-09T08:19:58.926Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/variant_filtering/index.html</loc>
-    <lastmod>2023-11-08T15:57:34.387Z</lastmod>
+    <lastmod>2023-11-09T08:22:04.617Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/population_structure/index.html</loc>
-    <lastmod>2023-11-08T15:57:47.847Z</lastmod>
+    <lastmod>2023-11-09T08:22:13.209Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/psmc/index.html</loc>
-    <lastmod>2023-11-08T15:57:54.110Z</lastmod>
+    <lastmod>2023-11-09T08:22:18.629Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/index.html</loc>
-    <lastmod>2023-11-08T15:57:58.434Z</lastmod>
+    <lastmod>2023-11-09T08:22:22.213Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/pgip/index.html</loc>
-    <lastmod>2023-11-08T15:58:03.954Z</lastmod>
+    <lastmod>2023-11-09T08:22:26.769Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/simulation/index.html</loc>
-    <lastmod>2023-11-08T16:01:41.542Z</lastmod>
+    <lastmod>2023-11-09T08:25:15.476Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/variant_filtering/index.html</loc>
-    <lastmod>2023-11-08T16:02:24.038Z</lastmod>
+    <lastmod>2023-11-09T08:25:50.720Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/population_structure/index.html</loc>
-    <lastmod>2023-11-08T16:02:47.358Z</lastmod>
+    <lastmod>2023-11-09T08:26:09.928Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/slides/selection/index.html</loc>
-    <lastmod>2023-11-08T16:02:48.810Z</lastmod>
+    <lastmod>2023-11-09T08:26:11.152Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/recipes/slim/index.html</loc>
-    <lastmod>2023-11-08T16:02:53.066Z</lastmod>
+    <lastmod>2023-11-09T08:26:14.732Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/NBISweden/workshop-pgip/exercises/population_structure/pca_admixture_1000G.html</loc>
-    <lastmod>2023-11-08T16:03:01.670Z</lastmod>
+    <lastmod>2023-11-09T08:26:21.996Z</lastmod>
   </url>
 </urlset>
