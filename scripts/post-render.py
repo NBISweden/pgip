@@ -31,6 +31,8 @@ files = [
     "slides/demography/part2-psmc-pop-gen-demography-lecture.pdf",
     "slides/selection/selection.pdf",
     "slides/guest_lecture/webster_bumbles_NGIcourse_nov23.pdf",
+    "archive/.footer.html",
+    "archive/.header.html",
 ]
 
 for fn in files:
