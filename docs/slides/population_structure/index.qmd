@@ -468,22 +468,21 @@ pheatmap(mat,cluster_rows = TRUE,cluster_cols = TRUE)
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
 
-cd /home/nikolay/Documents/Teaching/PopGen_2023/data/DavidReich
-head AADR.ind
+head data/DavidReich/AADR.ind
 ```
 
 ```{bash}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
-cd /home/nikolay/Documents/Teaching/PopGen_2023/data/DavidReich
-head -8 AADR.snp
+
+head -n 8 data/DavidReich/AADR.snp
 ```
 
 ```{bash}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
-cd /home/nikolay/Documents/Teaching/PopGen_2023/data/DavidReich
-head AADR.geno
+
+head data/DavidReich/AADR.geno
 ```
 :::
 :::
@@ -709,12 +708,6 @@ Rscript jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_results
 and, finally, we will display the resulting table of D-statistics, and plot the ABBA and BABA counts (note the very low, ~100, number of sites):
 
 ```{r}
-#| eval: true
-#| echo: false
-path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
-```
-
-```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
 #| fig-width: 10
@@ -722,7 +715,7 @@ path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
 
-df<-read.delim(paste0(path,"out_abbababa_results.txt"),header=T,sep="\t")
+df<-read.delim("data/out_abbababa_results.txt",header=T,sep="\t")
 df<-df[grepl("Neandertal",as.character(df$H3)),]
 df<-df[grepl("CEU",as.character(df$H2)),]
 df<-df[grepl("YRI",as.character(df$H1)),]
@@ -733,14 +726,16 @@ df$H2<-paste(CEU[,6], CEU[,2], sep="_")
 df$H3<-"NEAND"
 df[1:8,1:8]
 ```
+
 :::
 ::: {.column width="50%"}
+
 
 ```{r}
 #| eval: true
 #| echo: false
-path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
-df<-read.delim(paste0(path,"out_abbababa_results.txt"),header=T,sep="\t")
+
+df<-read.delim("data/out_abbababa_results.txt",header=T,sep="\t")
 df<-df[grepl("Neandertal",as.character(df$H3)),]
 df<-df[grepl("CEU",as.character(df$H2)),]
 df<-df[grepl("YRI",as.character(df$H1)),]
@@ -757,6 +752,7 @@ df<-df[grepl("YRI",as.character(df$H1)),]
 boxplot(df$nABBA,df$nBABA,names=c("ABBA","BABA"),ylab="COUNTS",col=2)
 wilcox.test(df$nABBA,df$nBABA)
 ```
+
 :::
 ::::
 
@@ -783,12 +779,6 @@ angsd -out out -doAbbababa 1 -bam bams -doCounts 1 -anc anc.fa
 Rscript jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_highcov
 ```
 
-```{r}
-#| eval: true
-#| echo: false
-path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
-```
-
 
 ```{r}
 #| class-source: my_code_size_abitsmaller
@@ -798,7 +788,7 @@ path<-"/home/nikolay/Documents/Teaching/PopGen_2023/data/"
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
 
-df <- read.delim(paste0(path, "out_abbababa_highcov.txt"), header = T, sep = "\t")
+df <- read.delim("data/out_abbababa_highcov.txt", header = T, sep = "\t")
 df
 ```
 First line of the output corresponds to the tree displayed on the previous slide, i.e. where we test for potential gene flow from Neanderthals to modern Europeans or Africans. Large number of genomic sites ensures confident positivity of the D-statistic.
@@ -816,7 +806,7 @@ First line of the output corresponds to the tree displayed on the previous slide
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
 
-df <- read.delim(paste0(path, "out_abbababa_highcov.txt"), header = T, sep = "\t")
+df <- read.delim("data/out_abbababa_highcov.txt", header = T, sep = "\t")
 y <- df$Dstat[1]
 y.sd <- df$SE[1]
 mid <- barplot(y,plot = FALSE)

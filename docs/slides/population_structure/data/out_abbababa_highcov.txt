@@ -1,0 +1,5 @@
+H1	H2	H3	nABBA	nBABA	Dstat	jackEst	SE	Z
+Yoruba.bam	French.bam	Neandertal.bam	267387	249721	0.03416308	0.03416308	0.002764548	12.35756
+Neandertal.bam	French.bam	Yoruba.bam	732198	249721	0.4913613	0.4913613	0.002449853	200.5676
+Neandertal.bam	Yoruba.bam	French.bam	732198	267387	0.465004	0.465004	0.002868187	162.1247
+
