@@ -19,12 +19,12 @@ format:
 
 {{< include ../_rlibs.qmd >}}
 
+
 ## PCA in population genetics: Cavalli-Sforza
 
 ![](assets/Cavalli_Sforza.png){width="90%"}
 
-[@Cavalli_Sforza_1978] noticed that genetic distances seem to
-correlate with geographical distances
+[@Cavalli_Sforza_1978] noticed that genetic distances seem to correlate with geographical distances
 
 ## PCA in population genetics: John Novembre
 
@@ -35,7 +35,6 @@ correlate with geographical distances
 [@Novembre_2008]
 :::
 ::: {.column width="40%"}
-
 - genetics seems to mirrow the map of Europe
 - caveate: it is not always the case
 - J. Novembre selected samples
@@ -50,7 +49,6 @@ correlate with geographical distances
 
 :::: {.columns}
 ::: {.column width="49%"}
-
 ```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
@@ -58,22 +56,12 @@ correlate with geographical distances
 #| fig-height: 6
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
-gen <- t(matrix(
-  c(
-    1, 0, 2, 0, 2, 0, 2, 1, 1, 1,
-    0, 1, 0, 2, 1, 2, 1, 1, 1, 1,
-    1, 0, 1, 0, 2, 0, 1, 1, 0, 2,
-    1, 2, 0, 1, 0
-  ), 5,
-  by = TRUE
-))
-colnames(gen) <- paste0("Ind", 1:5)
-rownames(gen) <- paste0("SNP", 1:7)
+gen <-t(matrix(c(1,0,2,0,2,0,2,1,1,1,0,1,0,2,1,2,1,1,1,1,1,0,1,0,2,0,1,1,0,2,1,2,0,1,0),5,by=TRUE))
+colnames(gen)<-paste0("Ind",1:5)
+rownames(gen)<-paste0("SNP",1:7)
 print(gen)
 ```
-
 ::: {.fragment}
-
 ```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
@@ -84,15 +72,13 @@ print(gen)
 gen_centered <- scale(gen, center = TRUE, scale = FALSE)
 covariance <- t(gen_centered) %*% gen_centered
 eig <- eigen(covariance)
-barplot(eig$values / sum(eig$values), names = paste0("PC", 1:5))
+barplot(eig$values / sum(eig$values),names=paste0("PC",1:5))
 ```
-
 :::
 
 :::
 ::: {.column width="51%"}
 ::: {.fragment}
-
 ```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
@@ -100,8 +86,8 @@ barplot(eig$values / sum(eig$values), names = paste0("PC", 1:5))
 #| fig-height: 6.5
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
-plot(eig$vectors[, 1:2], xlab = "PC1", ylab = "PC2", pch = 16, cex = 5, col = 2:6)
-points(eig$vectors[, 1:2], pch = as.character(1:5))
+plot(eig$vectors[,1:2],xlab="PC1",ylab="PC2",pch=16,cex=5,col=2:6)
+points(eig$vectors[,1:2], pch = as.character(1:5))
 ```
 
 Idea: project the data into a low dimensional space that explains
@@ -110,15 +96,16 @@ the largest amount of variance
 :::
 ::::
 
+
 ## Variance maximization and eigen value decomposition
 
 ![](assets/max_variance.png){fig-align="center"}
+
 
 ## Toy example of MDS for population genetics
 
 :::: {.columns}
 ::: {.column width="49%"}
-
 ```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
@@ -126,22 +113,12 @@ the largest amount of variance
 #| fig-height: 6
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
-gen <- t(matrix(
-  c(
-    1, 0, 2, 0, 2, 0, 2, 1, 1, 1,
-    0, 1, 0, 2, 1, 2, 1, 1, 1, 1,
-    1, 0, 1, 0, 2, 0, 1, 1, 0, 2,
-    1, 2, 0, 1, 0
-  ), 5,
-  by = TRUE
-))
-colnames(gen) <- paste0("Ind", 1:5)
-rownames(gen) <- paste0("SNP", 1:7)
+gen <-t(matrix(c(1,0,2,0,2,0,2,1,1,1,0,1,0,2,1,2,1,1,1,1,1,0,1,0,2,0,1,1,0,2,1,2,0,1,0),5,by=TRUE))
+colnames(gen)<-paste0("Ind",1:5)
+rownames(gen)<-paste0("SNP",1:7)
 print(gen)
 ```
-
 ::: {.fragment}
-
 ```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
@@ -152,16 +129,14 @@ print(gen)
 
 my_dist <- dist(t(gen), method = "manhattan", upper = TRUE, diag = TRUE)
 my_dist
-my_mds <- cmdscale(my_dist)
+my_mds<-cmdscale(my_dist)
 my_mds
 ```
-
 :::
 
 :::
 ::: {.column width="51%"}
 ::: {.fragment}
-
 ```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
@@ -179,13 +154,13 @@ distances
 :::
 ::::
 
+
 ## Example of PCA plot from 1000G project
 
 :::: {.columns}
 ::: {.column width="50%"}
 
-We will use ANGSD [@Korneliussen_2014] and compute genotype
-likelihoods on 435 bam-files from the 1000G project.
+We will use ANGSD [@Korneliussen_2014] and compute genotype likelihoods on 435 bam-files from the 1000G project.
 
 ```{bash}
 #| eval: false
@@ -201,7 +176,6 @@ find $PWD -name '*.bam' > 1000G_bam_list.txt
 angsd -bam 1000G_bam_list.txt -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 2e-6 \
 -minMapQ 30 -minQ 20 -minInd 25 -minMaf 0.05 -doGlf 2 -out 1000G -P 5
 ```
-
 Next, we will run PCAANGSD to infer admixures proportions:
 
 ```{bash}
@@ -216,7 +190,7 @@ Next, we will run PCAANGSD to infer admixures proportions:
 pcangsd -b 1000G.beagle.gz -o pca_1000G -t 4
 ```
 
-and finally we will plots the results using custom R scripts:
+and finally we will plot the results using custom R scripts:
 
 ```{r}
 #| eval: false
@@ -230,27 +204,17 @@ C <- as.matrix(read.table("pca_1000G.cov"))
 e <- eigen(C)
 pops <- readLines("1000G_bam_list.txt")
 pops <- sapply(strsplit(pops, "\\."), function(x) x[6])
-mycolor <- rep("red", length(pops))
-mycolor[pops == "CEU"] <- "blue"
-mycolor[pops == "CHB"] <- "green"
-mycolor[pops == "MXL"] <- "brown"
-mycolor[pops == "ASW"] <- "magenta"
-plot(e$vectors[, 1:2],
-  xlab = "PC1", ylab = "PC2",
-  main = "PCA 1000G Project", col = mycolor, pch = 19
-)
-legend("topright",
-  c("YRI", "CEU", "CHB", "MXL", "ASW"),
-  fill = c("red", "blue", "green", "brown", "magenta"),
-  cex = 2, inset = 0.02
-)
+mycolor<-rep("red",length(pops))
+mycolor[pops=="CEU"]<-"blue"; mycolor[pops=="CHB"]<-"green"; mycolor[pops=="MXL"]<-"brown"; mycolor[pops=="ASW"]<-"magenta"
+plot(e$vectors[,1:2], xlab="PC1", ylab="PC2", main="PCA 1000G Project", col=mycolor, pch=19)
+legend("topright",c("YRI","CEU","CHB","MXL","ASW"),fill=c("red","blue","green","brown","magenta"),cex=2,inset=0.02)
 ```
-
 :::
 ::: {.column width="50%"}
 ![](assets/pca_1000G.png){width="200%"}
 :::
 ::::
+
 
 ## ANGSD: genotype likelihood tool for low-coverage data
 
@@ -258,21 +222,22 @@ legend("topright",
 
 [@Korneliussen_2014]
 
+
 ## Hard genotype calls vs. genotype likelihoods
 
 ![](assets/likes.png){fig-align="center"}
 
 ::: {.fragment}
-
 - Minor allele frequency based on hard calls:
 $$\rm{MAF_{hc}}=\frac{1+1+2}{2*5}=\frac{4}{10}$$
 :::
 
-::: {.fragment}
 
+::: {.fragment}
 - Minor allele frequency based on genotype likelihoods:
 $$\rm{MAF_{gl}}=\frac{0*(0.98+0.20+0.89+0.10+0.15)+1*(0.02+0.75+0.10+0.80+0.20)+2*(0.00+0.05+0.01+0.10+0.65)}{2*5}=\frac{3.49}{10}$$
 :::
+
 
 ## A known pitfall of PCA: uneven sampling
 
@@ -283,25 +248,19 @@ $$\rm{MAF_{gl}}=\frac{0*(0.98+0.20+0.89+0.10+0.15)+1*(0.02+0.75+0.10+0.80+0.20)+
 [@McVean_2009]
 :::
 ::: {.column width="60%"}
-
-“The results described here provide an explanation. First, from
-Equation 10 it can be seen that **the matrix M is influenced by the
-relative sample size from each population through the components
-$t_i$**. For instance, even if all populations are equally divergent
-from each other, those for which there are fewer samples will have
-larger values of $t_i$ because relatively more pairwise comparisons
-are between populations.”
+“The results described here provide an explanation. First, from Equation 10 it can be seen that **the matrix M is influenced by the relative sample size from each population through the components $t_i$**. For instance, even if all populations are equally divergent from each other, those for which there are fewer samples will have larger values of $t_i$ because relatively more pairwise comparisons are between populations.”
 
 $$M=XX^T=\frac{1}{N}\sum_{ij}x_ix_j$$
 $$N=N_{pop1}+N_{pop2}+N_{pop3}+...=\sum_k N_k$$
 $$M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}$$
 
-- Potential solution: normalize each sample by its population size
-  before computing the covariance matrix.
+- Potential solution: normalize each sample by its population size before computing the covariance matrix.
+
 - Is it still an unsupervised technique?
 
 :::
 ::::
+
 
 ## Example of uneven sampling from 1000G project
 
@@ -318,6 +277,7 @@ $$M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}$$
 :::
 ::::
 
+
 ## Admixture: underlying assumtions
 
 :::: {.columns}
@@ -326,7 +286,6 @@ $$M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}$$
 
 :::
 ::: {.column width="30%"}
-
 - genetic clustering algorithm
 - at least two unadmixed populations
 - at least one admixed population
@@ -337,9 +296,11 @@ $$M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}$$
 :::
 ::::
 
+
 ## Q and F outputs of admixture analysis
 
 ![](assets/QF.png){fig-align="center"}
+
 
 ## NGSadmix vs. ADMIXTURE
 
@@ -352,13 +313,13 @@ $$M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}$$
 :::
 ::::
 
+
 ## Example of admixture plot from 1000G project
 
 :::: {.columns}
 ::: {.column width="50%"}
 
-We will use ANGSD [@Korneliussen_2014] and compute genotype
-likelihoods on 435 bam-files from the 1000G project.
+We will use ANGSD [@Korneliussen_2014] and compute genotype likelihoods on 435 bam-files from the 1000G project.
 
 ```{bash}
 #| eval: false
@@ -374,7 +335,6 @@ find $PWD -name '*.bam' > 1000G_bam_list.txt
 angsd -bam 1000G_bam_list.txt -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 2e-6 \
 -minMapQ 30 -minQ 20 -minInd 25 -minMaf 0.05 -doGlf 2 -out 1000G -P 5
 ```
-
 Next, we will run NGSadmix to infer admixures proportions:
 
 ```{bash}
@@ -389,7 +349,7 @@ Next, we will run NGSadmix to infer admixures proportions:
 NGSadmix -likes 1000G.beagle.gz -K 3 -minMaf 0.05 -seed 1 -o 1000G
 ```
 
-and finally we will plots the results using custom R scripts:
+and finally we will plot the results using custom R scripts:
 
 ```{r}
 #| eval: false
@@ -399,29 +359,28 @@ and finally we will plots the results using custom R scripts:
 #| fig-height: 6
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
-pops <- readLines("1000G_bam_list.txt")
-pops <- sapply(strsplit(pops, "\\."), function(x) x[6])
+pops<-readLines("1000G_bam_list.txt")
+pops<-sapply(strsplit(pops,"\\."),function(x) x[6])
 source("https://raw.githubusercontent.com/GenisGE/evalAdmix/master/visFuns.R")
-qopts <- read.table("1000G.qopt")
-ord <- orderInds(pop = pops, q = qopts, popord = c("YRI", "ASW", "CEU", "MXL", "CHB"))
-barplot(t(qopts)[, ord], col = c(3, 2, 4), las = 2, space = 0, border = NA)
-text(sort(tapply(1:length(pops), pops[ord], mean)), -0.05, unique(pops[ord]))
-abline(v = cumsum(sapply(unique(pops[ord]), function(x) {
-  sum(pops[ord] == x)
-})), col = 1, lwd = 1.2)
+qopts<-read.table("1000G.qopt")
+ord <- orderInds(pop=pops,q=qopts, popord=c("YRI", "ASW", "CEU", "MXL", "CHB"))
+barplot(t(qopts)[,ord],col=c(3,2,4),las=2, space=0, border=NA)
+text(sort(tapply(1:length(pops),pops[ord],mean)),-0.05,unique(pops[ord]))
+abline(v=cumsum(sapply(unique(pops[ord]),function(x){sum(pops[ord]==x)})),col=1,lwd=1.2)
 ```
-
 :::
 ::: {.column width="50%"}
 ![](assets/admixture_1000G.png){width="200%"}
 :::
 ::::
 
+
 ## Admixture bar plots should not be over-interpreted
 
 ![](assets/Falush.png){fig-align="center"}
 
 [@Lawson_2018]
+
 
 ## Haplotype clustering
 
@@ -430,19 +389,14 @@ abline(v = cumsum(sapply(unique(pops[ord]), function(x) {
 ![](assets/haplo_clustering.png){fig-align="center"}
 :::
 ::: {.column width="30%"}
+- Ancestry assignments in STRUCTURE / ADMIXTURE do not identify where admixture has occurred
 
-- Ancestry assignments in STRUCTURE / ADMIXTURE do not identify where
-  admixture has occurred
+- Haplotype-based methods explore **local ancestry**, LD, recombination and subsequently fine-scale patterns of population structure at different scales
 
-- Haplotype-based methods explore **local ancestry**, LD,
-  recombination and subsequently fine-scale patterns of population
-  structure at different scales
+- Chromosome painting: the genome is a mosaic of LD blocks separated by recombination
 
-- Chromosome painting: the genome is a mosaic of LD blocks separated
-  by recombination
-
-- ChromoPainter and fineSTRUCTURE are tools for resolving **subtle
-differences** between populations.
+- ChromoPainter and fineSTRUCTURE are tools for resolving **subtle differences**
+between populations.
 
 [@Lawson_2012]
 
@@ -450,21 +404,18 @@ differences** between populations.
 :::
 ::::
 
+
+
 ## Fixation index $F_{st}$
 
 :::: {.columns}
 ::: {.column width="45%"}
 
-- $F_{st}$ is a measure of population differentiation due to
-  population structure
-- Expressed through nucleotide diversity $\pi$ as relative nucleotide
-  diversity between populations minus average nucleotide diversity
-  within populations. If we have two populations 1 and 2, then:
+- $F_{st}$ is a measure of population differentiation due to population structure
+- Expressed through nucleotide diversity $\pi$ as relative nucleotide diversity between populations minus average nucleotide diversity within populations. If we have two populations 1 and 2, then:
 
-$$
-F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
-\frac{\sigma_{subpops}^2}{\sigma_{total}^2}
-$$
+$$F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim \frac{\sigma_{subpops}^2}{\sigma_{total}^2}$$
+
 
 ```{r}
 #| eval: false
@@ -478,20 +429,19 @@ $$
 library("admixtools")
 library("tidyverse")
 
-admixtools::extract_f2("AADR", outdir = "f2_AADR")
+admixtools::extract_f2('AADR', outdir='f2_AADR')
 
 f2_aadr <- read_f2("f2_AADR")
 fst_aadr <- fst(f2_aadr)
 fst_aadr
 
-mat <- f2(f2_aadr, unique_only = F) %>%
-  select(-se) %>%
-  pivot_wider(names_from = pop2, values_from = est) %>%
-  column_to_rownames("pop1") %>%
-  as.matrix()
+mat = f2(f2_aadr, unique_only=F) %>% 
+  select(-se) %>% 
+  pivot_wider(names_from=pop2, values_from = est) %>% 
+  column_to_rownames('pop1') %>% as.matrix
 
 library("pheatmap")
-pheatmap(mat, cluster_rows = TRUE, cluster_cols = TRUE)
+pheatmap(mat,cluster_rows = TRUE,cluster_cols = TRUE)
 ```
 
 :::
@@ -501,9 +451,8 @@ pheatmap(mat, cluster_rows = TRUE, cluster_cols = TRUE)
 :::
 ::::
 
-## Allen Ancient DNA Resource (AADR) dataset
 
-<!-- markdownlint-disable MD013 -->
+## Allen Ancient DNA Resource (AADR) dataset
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -511,40 +460,42 @@ pheatmap(mat, cluster_rows = TRUE, cluster_cols = TRUE)
 [https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data](https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data)
 :::
 
+
 ::: {.column width="50%"}
 ::: {.fragment}
 
 ```{bash}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
+
 head data/DavidReich/AADR.ind
 ```
 
 ```{bash}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
+
 head -n 8 data/DavidReich/AADR.snp
 ```
 
 ```{bash}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
+
 head data/DavidReich/AADR.geno
 ```
-
 :::
 :::
 ::::
 
-<!-- markdownlint-enable MD013 -->
+
 
 ## Example of Fst computation from 1000G project
 
 :::: {.columns}
 ::: {.column width="50%"}
 
-We will use ANGSD [@Korneliussen_2014] and compute Fst between CEU and
-YRI populations from the 1000G project.
+We will use ANGSD [@Korneliussen_2014] and compute Fst between CEU and YRI populations from the 1000G project.
 
 ```{bash}
 #| eval: false
@@ -559,11 +510,11 @@ angsd -b 1000G_CEU_bam_list.txt -anc anc.fa -out CEU -dosaf 1 -gl 1
 angsd -b 1000G_YRI_bam_list.txt -anc anc.fa -out YRI -dosaf 1 -gl 1
 realSFS CEU.saf.idx YRI.saf.idx > CEU.YRI.ml
 realSFS fst index CEU.saf.idx YRI.saf.idx -sfs CEU.YRI.ml -fstout CEU_YRI
-realSFS fst stats  CEU_YRI.fst.idx
+realSFS fst stats  CEU_YRI.fst.idx 
 realSFS fst stats2 CEU_YRI.fst.idx -win 50 -step 10 > slidingwindow_win50_step10
 ```
 
-and finally we will plots the results using custom R scripts:
+and finally we will plot the results using custom R scripts:
 
 ```{r}
 #| eval: false
@@ -574,23 +525,23 @@ and finally we will plots the results using custom R scripts:
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
 
-df <- read.delim("slidingwindow_win50_step10", header = FALSE)
-df <- df[-1, ]
-df$V2 <- as.numeric(df$V2)
-df$V3 <- as.numeric(df$V3)
-df$V5 <- as.numeric(df$V5)
-df <- df[order(df$V2, df$V3), ]
-rownames(df) <- seq(1, dim(df)[1], 1)
-plot(df$V5, col = df$V2, xlab = "Chromosomes", ylab = "Fst", xaxt = "n")
-myticks <- as.numeric(rownames(df[!duplicated(df$V2), ]))
-axis(side = 1, at = myticks, labels = seq(1, 21, 1))
+df<-read.delim("slidingwindow_win50_step10",header=FALSE)
+df<-df[-1,]
+df$V2<-as.numeric(df$V2)
+df$V3<-as.numeric(df$V3)
+df$V5<-as.numeric(df$V5)
+df<-df[order(df$V2,df$V3),]
+rownames(df)<-seq(1,dim(df)[1],1)
+plot(df$V5,col=df$V2,xlab="Chromosomes",ylab="Fst",xaxt='n')
+myticks<-as.numeric(rownames(df[!duplicated(df$V2),]))
+axis(side=1,at=myticks,labels=seq(1,21,1))
 ```
-
 :::
 ::: {.column width="50%"}
 ![](assets/Fst_1000G.png){width="200%"}
 :::
 ::::
+
 
 ## F-statistics: underlying assumtions
 
@@ -600,37 +551,36 @@ axis(side = 1, at = myticks, labels = seq(1, 21, 1))
 
 :::
 ::: {.column width="50%"}
+- Treeness test: are populations related in a tree-like fashion (Reich et al. 2009)?
 
-- Treeness test: are populations related in a tree-like fashion (Reich
-  et al. 2009)?
+- Admixture test: ss a particular population descended from
+multiple ancestral populations (Reich et al. 2009)?
 
-- Admixture test: ss a particular population descended from multiple
-  ancestral populations (Reich et al. 2009)?
+- Admixture proportions: what are the contributions from
+different populations to a focal population (Green et al.
+2010; Haak et al. 2015)?
 
-- Admixture proportions: what are the contributions from different
-  populations to a focal population (Green et al. 2010; Haak et al.
-  2015)?
+- Number of founders: how many founder populations are
+there for a certain region (Reich et al. 2012; Lazaridis et al.
+2014)?
 
-- Number of founders: how many founder populations are there for a
-  certain region (Reich et al. 2012; Lazaridis et al. 2014)?
+- Complex demography: how can mixtures and splits of
+population explain demography (Patterson et al. 2012;
+Lipson et al. 2013)?
 
-- Complex demography: how can mixtures and splits of population
-  explain demography (Patterson et al. 2012; Lipson et al. 2013)?
-
-- Closest relative: what is the closest relative to a contemporary or
-  ancient population (Raghavan et al. 2014)?
+- Closest relative: what is the closest relative to a contemporary or ancient population (Raghavan et al. 2014)?
 
 [@Peter_2016]
 :::
 ::::
+
 
 ## F2-statistic and F3-statistic
 
 :::: {.columns}
 ::: {.column width="65%"}
 
-- $F_2$ is a covarinace in contrast to $F_{st}$ which is a correlation
-  coefficeint, therefore $F_2$ is tree-additive by its definition
+- $F_2$ is a covarinace in contrast to $F_{st}$ which is a correlation coefficeint, therefore $F_2$ is tree-additive by its definition
 
 $$F_2=2\pi_{12}-\pi_{1}-\pi_{2}$$
 
@@ -638,9 +588,7 @@ $$F_2=2\pi_{12}-\pi_{1}-\pi_{2}$$
 
 $$F_3(P_X; P_1, P_2)=\frac{1}{2}\left(F_2(P_X, P_1)+F_2(P_X, P_2)-F_2(P_1, P_2)\right)$$
 
-- Outgroup $F_3$-statistic: for an unknown population $P_X$ find the
-  closest population from a panel $P_i$ computing the distances via an
-  outgroup $P_O$.
+- Outgroup $F_3$-statistic: for an unknown population $P_X$ find the closest population from a panel $P_i$ computing the distances via an outgroup $P_O$.
 
 ![](assets/F3_outgroup.png){width=30%}
 :::
@@ -650,15 +598,13 @@ $$F_3(P_X; P_1, P_2)=\frac{1}{2}\left(F_2(P_X, P_1)+F_2(P_X, P_2)-F_2(P_1, P_2)\
 :::
 ::::
 
+
 ## Example of F3-outgroup-statistic for an Unknown population
 
 :::: {.columns}
 ::: {.column width="53%"}
 
-We will use the AADR dataset and compute F3-statistic for a
-(presumably!) European population, which is marked as **Unknown** in
-the dataset, with respect to a panel of other World populations using
-a Mbuti as an outgroup population.
+We will use the AADR dataset and compute F3-statistic for a (presumably!) European population, which is marked as **Unknown** in the dataset, with respect to a panel of other World populations using a Mbuti as an outgroup population.
 
 ```{r}
 #| eval: false
@@ -672,30 +618,24 @@ a Mbuti as an outgroup population.
 library("admixtools")
 library("tidyverse")
 
-admixtools::extract_f2("AADR", outdir = "f2_AADR")
+admixtools::extract_f2('AADR', outdir='f2_AADR')
 
 f2_aadr <- read_f2("f2_AADR")
 fst_aadr <- fst(f2_aadr)
 fst_aadr
 
-f3_aadr <- f3(f2_aadr, pop1 = "Mbuti", pop2 = "Unknown", pop3 = unique(ind$pop)) %>% arrange(est)
+f3_aadr <- f3(f2_aadr, pop1='Mbuti', pop2='Unknown', pop3=unique(ind$pop)) %>% arrange(est)
 f3_aadr
 
 
-viz_outgroup_f3 <- function(f3_res) {
-  f3_res %>%
-    mutate(pop3 = fct_reorder(pop3, est)) %>%
-    ggplot(aes(x = pop3, y = est, ymin = est - 3 * se, ymax = est + 3 * se)) +
-    geom_point() +
-    geom_errorbar() +
-    coord_flip() +
-    theme_bw(25) +
-    xlab(NULL) +
-    ylab("f3")
+viz_outgroup_f3 <- function(f3_res){
+  f3_res %>% mutate(pop3=fct_reorder(pop3, est)) %>%  
+    ggplot(aes(x=pop3, y=est, ymin=est-3*se, ymax = est+3*se)) +
+    geom_point() + geom_errorbar() +
+    coord_flip() + theme_bw(25) + xlab(NULL) + ylab("f3")
 }
 viz_outgroup_f3(f3_aadr)
 ```
-
 **Can you guess what was the Unknown population?**
 
 :::
@@ -705,11 +645,13 @@ viz_outgroup_f3(f3_aadr)
 :::
 ::::
 
+
 ## Relation between F-statistics and PCA
 
 ![](assets/F_stats_PCA.png){fig-align="center"}
 
 [@Peter_2022]
+
 
 ## F4-statistic, D-statistic: ABBA-BABA test
 
@@ -720,8 +662,7 @@ viz_outgroup_f3(f3_aadr)
 
 ::: {.column width="30%"}
 
-- Four populations considered: Ape is an outgroup, Europeans and
-  Africans are tested for their gene flow with Neanderthals
+- Four populations considered: Ape is an outgroup, Europeans and Africans are tested for their gene flow with Neanderthals
 
 - A – ancestral allele, B – derived allele
 
@@ -729,11 +670,10 @@ viz_outgroup_f3(f3_aadr)
 
 $$D=\frac{N_{ABBA}-N_{BABA}}{N_{ABBA}+N_{BABA}}$$
 
-- $N_{ABBA}$ the total counts of ABBA patterns, $N_{BABA}$ the total
-  counts of BABA patterns
+- $N_{ABBA}$ the total counts of ABBA patterns, $N_{BABA}$ the total counts of BABA patterns
 
-- Exess of shared derived alleles between Europeans and Neanderthals
-  indicates a gene flow between them
+- Exess of shared derived alleles between Europeans and 
+Neanderthals indicates a gene flow between them
 
 - Positive values of D imply Neanderthals are closer to Europeans
 
@@ -742,14 +682,12 @@ $$D=\frac{N_{ABBA}-N_{BABA}}{N_{ABBA}+N_{BABA}}$$
 :::
 ::::
 
+
 ## Example of D-statistic computation from 1000G project
 
 :::: {.columns}
 ::: {.column width="50%"}
-
-We will use ANGSD [@Korneliussen_2014] and compute D-statistic in
-irder to test potential Neanderthal introgression to European (CEU)
-and African (YRI) populations from the 1000G project.
+We will use ANGSD [@Korneliussen_2014] and compute D-statistic in order to test for potential Neanderthal introgression to European (CEU) and African (YRI) populations from the 1000G project.
 
 ```{bash}
 #| eval: false
@@ -759,6 +697,7 @@ and African (YRI) populations from the 1000G project.
 #| fig-height: 6
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
+
 echo Neandertal.bam > bams
 find $PWD -name '*YRI*.bam' | head -10 >> bams
 find $PWD -name '*CEU*.bam' | head -10 >> bams
@@ -766,13 +705,40 @@ angsd -out out -doAbbababa 1 -bam bams -doCounts 1 -anc anc.fa
 Rscript jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_results
 ```
 
-and, finally, we will display the resulting table of D-statistics and
-plot the ABBA and BABA counts using custom R scripts:
+and, finally, we will display the resulting table of D-statistics, and plot the ABBA and BABA counts (note the very low, ~100, number of sites):
+
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+df<-read.delim("data/out_abbababa_results.txt",header=T,sep="\t")
+df<-df[grepl("Neandertal",as.character(df$H3)),]
+df<-df[grepl("CEU",as.character(df$H2)),]
+df<-df[grepl("YRI",as.character(df$H1)),]
+YRI<-matrix(unlist(strsplit(as.character(df$H1),"\\.")),ncol=9,byrow=T)
+df$H1<-paste(YRI[,6], YRI[,2], sep="_")
+CEU<-matrix(unlist(strsplit(as.character(df$H2),"\\.")),ncol=9,byrow=T)
+df$H2<-paste(CEU[,6], CEU[,2], sep="_")
+df$H3<-"NEAND"
+df[1:8,1:8]
+```
+
+:::
+::: {.column width="50%"}
+
 
 ```{r}
 #| eval: true
 #| echo: false
-path <- file.path(getwd(), "data")
+
+df<-read.delim("data/out_abbababa_results.txt",header=T,sep="\t")
+df<-df[grepl("Neandertal",as.character(df$H3)),]
+df<-df[grepl("CEU",as.character(df$H2)),]
+df<-df[grepl("YRI",as.character(df$H1)),]
 ```
 
 ```{r}
@@ -782,17 +748,50 @@ path <- file.path(getwd(), "data")
 #| fig-height: 6
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
-df <- read.delim(file.path(path, "out_abbababa_results.txt"), header = T, sep = "\t")
-df <- df[grepl("Neandertal", as.character(df$H3)), ]
-df <- df[grepl("CEU", as.character(df$H2)), ]
-df <- df[grepl("YRI", as.character(df$H1)), ]
-YRI <- matrix(unlist(strsplit(as.character(df$H1), "\\.")), ncol = 9, byrow = T)
-df$H1 <- paste(YRI[, 6], YRI[, 2], sep = "_")
-CEU <- matrix(unlist(strsplit(as.character(df$H2), "\\.")), ncol = 9, byrow = T)
-df$H2 <- paste(CEU[, 6], CEU[, 2], sep = "_")
-df$H3 <- "NEAND"
-df[1:8, 1:8]
+
+boxplot(df$nABBA,df$nBABA,names=c("ABBA","BABA"),ylab="COUNTS",col=2)
+wilcox.test(df$nABBA,df$nBABA)
 ```
+
+:::
+::::
+
+
+## D-statistic computation for higher coverage samples
+
+:::: {.columns}
+::: {.column width="50%"}
+D-statistic analysis requires large number of genomic sites, therefore the low-coverage 1000G data are not optimal. Now, we are going to use French and Yoruba samples from the **Draft Neanderthal genome** project where Nenandertal introgression was first detected:
+
+```{bash}
+#| eval: false
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+echo Neandertal.bam > bams
+echo Yoruba.bam >> bams
+echo French.bam >> bams
+angsd -out out -doAbbababa 1 -bam bams -doCounts 1 -anc anc.fa
+Rscript jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_highcov
+```
+
+
+```{r}
+#| class-source: my_code_size_abitsmaller
+#| classes: my_code_size_abitsmaller
+#| fig-width: 10
+#| fig-height: 6
+#| tidy: true
+#| tidy.opts: { width.cutoff: 78 }
+
+df <- read.delim("data/out_abbababa_highcov.txt", header = T, sep = "\t")
+df
+```
+First line of the output corresponds to the tree displayed on the previous slide, i.e. where we test for potential gene flow from Neanderthals to modern Europeans or Africans. Large number of genomic sites ensures confident positivity of the D-statistic.
 
 :::
 ::: {.column width="50%"}
@@ -800,26 +799,27 @@ df[1:8, 1:8]
 ```{r}
 #| eval: true
 #| echo: false
-path <- file.path(getwd(), "data")
-df <- read.delim(file.path(path, "out_abbababa_results.txt"), header = T, sep = "\t")
-df <- df[grepl("Neandertal", as.character(df$H3)), ]
-df <- df[grepl("CEU", as.character(df$H2)), ]
-df <- df[grepl("YRI", as.character(df$H1)), ]
-```
-
-```{r}
 #| class-source: my_code_size_abitsmaller
 #| classes: my_code_size_abitsmaller
 #| fig-width: 10
-#| fig-height: 6
+#| fig-height: 7
 #| tidy: true
 #| tidy.opts: { width.cutoff: 78 }
-boxplot(df$nABBA, df$nBABA, names = c("ABBA", "BABA"), ylab = "COUNTS", col = 2)
-wilcox.test(df$nABBA, df$nBABA)
+
+df <- read.delim("data/out_abbababa_highcov.txt", header = T, sep = "\t")
+y <- df$Dstat[1]
+y.sd <- df$SE[1]
+mid <- barplot(y,plot = FALSE)
+barplot(y,ylim=c(0,0.04),ylab="D-statistic")
+arrows(x0=mid, y0=y-y.sd, x1=mid, y1=y+y.sd, code=3, angle=90, length=0.3)
 ```
+
+Positive D-statistic with erors bars not overlapping zero implies a gene flow between Neandertals and modern Europeans.
 
 :::
 ::::
+
+
 
 ## Refs {.unnumbered .unlisted}
 
