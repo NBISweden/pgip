@@ -100,6 +100,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Render tag and save rendered state in separate branch
+        uses: quarto-dev/quarto-actions/publish@v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           target: ${{ github.ref_name }}
