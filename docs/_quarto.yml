@@ -14,7 +14,7 @@ project:
     - "contents.qmd"
     - "info.qmd"
     - "precourse.qmd"
-    - "references.qmd"
+    #- "references.qmd"
     - "schedule.qmd"
     - "syllabus.qmd"
     # Exercises

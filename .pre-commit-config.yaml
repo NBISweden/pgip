@@ -68,7 +68,9 @@ repos:
           (?x)^(
           docs/slides/population_structure/data/DavidReich/AADR\.ind|
           docs/slides/population_structure/data/DavidReich/AADR\.snp|
-          docs/slides/population_structure/data/DavidReich/AADR\.geno
+          docs/slides/population_structure/data/DavidReich/AADR\.geno|
+          docs/archive/.footer.html|
+          docs/archive/.header.html|
           )
   - repo: https://github.com/lorenzwalthert/precommit
     rev: v0.3.2.9023
