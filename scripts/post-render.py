@@ -5,6 +5,16 @@ import os
 import shutil
 
 
+def safe_mkdir(dirname):
+    logging.debug(f"Making directory {dirname}")
+    if not os.path.exists(dirname):
+        try:
+            os.mkdir(dirname)
+        except FileNotFoundError as e:
+            print(e)
+            raise
+
+
 def safe_copy(src, dst):
     logging.debug(f"Copy {dst} -> {src}")
     if not os.path.exists(src):
@@ -38,4 +48,6 @@ files = [
 for fn in files:
     src = os.path.join(qpd, fn)
     dst = os.path.join(SITE_DIR, fn)
+    dirname = os.path.dirname(dst)
+    safe_mkdir(dirname)
     safe_copy(src, dst)
