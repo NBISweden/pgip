@@ -626,8 +626,8 @@ Ind5  4.847612 -0.8919238</code></pre>
 <p>“The results described here provide an explanation. First, from Equation 10 it can be seen that <strong>the matrix M is influenced by the relative sample size from each population through the components <span class="math inline">\(t_i\)</span></strong>. For instance, even if all populations are equally divergent from each other, those for which there are fewer samples will have larger values of <span class="math inline">\(t_i\)</span> because relatively more pairwise comparisons are between populations.”</p>
 <p><span class="math display">\[M=XX^T=\frac{1}{N}\sum_{ij}x_ix_j\]</span> <span class="math display">\[N=N_{pop1}+N_{pop2}+N_{pop3}+...=\sum_k N_k\]</span> <span class="math display">\[M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}\]</span></p>
 <ul>
-<li><p>Potential solution: normalize each sample by its population size before computing the covariance matrix.</p></li>
-<li><p>Is it still an unsupervised technique?</p></li>
+<li>Potential solution: normalize each sample by its population size before computing the covariance matrix.</li>
+<li>Is it still an unsupervised technique?</li>
 </ul>
 </div>
 </div>
@@ -755,11 +755,11 @@ Ind5  4.847612 -0.8919238</code></pre>
 <span id="cb18-7"><a href="#cb18-7"></a>fst_aadr <span class="ot">&lt;-</span> <span class="fu">fst</span>(f2_aadr)</span>
 <span id="cb18-8"><a href="#cb18-8"></a>fst_aadr</span>
 <span id="cb18-9"><a href="#cb18-9"></a></span>
-<span id="cb18-10"><a href="#cb18-10"></a>mat <span class="ot">=</span> <span class="fu">f2</span>(f2_aadr, <span class="at">unique_only =</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>mat <span class="ot">&lt;-</span> <span class="fu">f2</span>(f2_aadr, <span class="at">unique_only =</span> F) <span class="sc">%&gt;%</span></span>
 <span id="cb18-11"><a href="#cb18-11"></a>    <span class="fu">select</span>(<span class="sc">-</span>se) <span class="sc">%&gt;%</span></span>
 <span id="cb18-12"><a href="#cb18-12"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> pop2, <span class="at">values_from =</span> est) <span class="sc">%&gt;%</span></span>
 <span id="cb18-13"><a href="#cb18-13"></a>    <span class="fu">column_to_rownames</span>(<span class="st">"pop1"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a>    as.matrix</span>
+<span id="cb18-14"><a href="#cb18-14"></a>    <span class="fu">as.matrix</span>()</span>
 <span id="cb18-15"><a href="#cb18-15"></a></span>
 <span id="cb18-16"><a href="#cb18-16"></a><span class="fu">library</span>(<span class="st">"pheatmap"</span>)</span>
 <span id="cb18-17"><a href="#cb18-17"></a><span class="fu">pheatmap</span>(mat, <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -833,7 +833,7 @@ Ind5  4.847612 -0.8919238</code></pre>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="ex">angsd</span> <span class="at">-b</span> 1000G_YRI_bam_list.txt <span class="at">-anc</span> anc.fa <span class="at">-out</span> YRI <span class="at">-dosaf</span> 1 <span class="at">-gl</span> 1</span>
 <span id="cb25-3"><a href="#cb25-3"></a><span class="ex">realSFS</span> CEU.saf.idx YRI.saf.idx <span class="op">&gt;</span> CEU.YRI.ml</span>
 <span id="cb25-4"><a href="#cb25-4"></a><span class="ex">realSFS</span> fst index CEU.saf.idx YRI.saf.idx <span class="at">-sfs</span> CEU.YRI.ml <span class="at">-fstout</span> CEU_YRI</span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="ex">realSFS</span> fst stats  CEU_YRI.fst.idx </span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="ex">realSFS</span> fst stats  CEU_YRI.fst.idx</span>
 <span id="cb25-6"><a href="#cb25-6"></a><span class="ex">realSFS</span> fst stats2 CEU_YRI.fst.idx <span class="at">-win</span> 50 <span class="at">-step</span> 10 <span class="op">&gt;</span> slidingwindow_win50_step10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and finally we will plot the results using custom R scripts:</p>
