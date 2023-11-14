@@ -100,18 +100,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout archived course versions
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-        #env:
-        #  GITHUB_EMAIL: do_not_email@example.com
-        #  GITHUB_USERNAME: gh_action
-        #  TARGET: gh_pages
+        env:
+          GITHUB_EMAIL: do_not_email@example.com
+          GITHUB_USERNAME: gh_action
+          TARGET: gh_pages
         run: |
           # Add git info
-          #git config --global user.email "${{ env.GITHUB_EMAIL }}"
-          #git config --global user.name "${{ env.GITHUB_USERNAME }}"
-          #git clone --depth 1 --branch $tag "https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" $tag
+          git config --global user.email "${{ env.GITHUB_EMAIL }}"
+          git config --global user.name "${{ env.GITHUB_USERNAME }}"
+          git checkout --depth 1 --branch ${{ env.TARGET }} "https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" $tag
           mkdir -p archive
           cd archive
 
