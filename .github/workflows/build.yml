@@ -98,3 +98,33 @@ jobs:
           path: docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout archived course versions
+        env:
+          GITHUB_EMAIL: do_not_email@example.com
+          GITHUB_USERNAME: gh_action
+          TARGET: gh_pages
+        run: |
+          # Add git info
+          git config --global user.email "${{ env.GITHUB_EMAIL }}"
+          git config --global user.name "${{ env.GITHUB_USERNAME }}"
+          git checkout ${{ env.TARGET }}
+          mkdir -p archive
+          cd archive
+
+          # Add archive index page
+          cat .header.html > index.html
+
+          # Loop tags that match v\d+
+          for tag in $(git tag --list v[0-9][0-9][0-9][0-9]); do
+              git clone --depth 1 $tag
+              contents=$(git tag -n 100 $tag --format "%(contents)")
+              echo "<section id=\"$tag\" class=\"level3\">" >> index.html
+              echo "<h3 class=\"anchored\" data-anchor-id=\"$tag\">" >> index.html
+              echo "<a href=\"$link\">$tag</a>" >> index.html
+              echo "</h3>" >> index.html
+              echo "<p>$contents</p>" >> index.html
+              echo "</section>" >> index.html
+          done
+
+          cat .footer.html >> index.html

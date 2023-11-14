@@ -1,4 +1,10 @@
 current: NBIS_POPGENIP_H23
+NBIS_POPGENIP_TBA:
+  start_time: null
+  end_time: null
+  application_opens: null
+  application_closes: null
+  canvas_home_page: null
 NBIS_POPGENIP_H23:
   start_time: 2023/11/06
   end_time: 2023/11/10

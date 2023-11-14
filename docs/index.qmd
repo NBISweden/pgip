@@ -27,6 +27,9 @@ library(yaml)
 
 current <- yaml::read_yaml("_course_info.yml")$current
 session <- yaml::read_yaml("_course_info.yml")[[as.character(current)]]
+if (grepl("TBA$", current)) {
+  current <- "(To be announced)"
+}
 ```
 
 ### NBIS • Workshop
@@ -111,6 +114,11 @@ ax
 :::
 
 ::::
+
+#### Course archive
+
+For a list of archived courses, navigate to
+[Course archive](archive/index.html).
 
 <br>
 
