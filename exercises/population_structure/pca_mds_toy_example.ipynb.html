@@ -394,7 +394,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">13-Nov-2023</p>
+      <p class="date">14-Nov-2023</p>
     </div>
   </div>
   
@@ -410,7 +410,7 @@
 <p>PCA is a matrix factorization (eigen value decomposition) problem that attempts to project the data into a low dimensional space that explains the largest amount of variance in the data. The motivation is that, if the data is high-dimensional, many features (axes) can be redundant, therefore one can reduce the number of dimensions and make the statistical analysis more robust in this way. Graphically, PCA can be viewed as rotation and shift of coordinate system where the original 2D data with XY-coordinates are replaced by e.g.&nbsp;1D data as PC1 which keeps most of the variation in the data. Note, that some information can be lost in this way, however, it can be statistically very benificial to work with lower-dimensional data.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="assets/pca_rotation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="idea of PCA"><img src="assets/pca_rotation.png" class="img-fluid figure-img"></a></p>
+<p><a href="assets/pca_rotation.png" class="lightbox" title="idea of PCA" data-gallery="quarto-lightbox-gallery-1"><img src="assets/pca_rotation.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">idea of PCA</figcaption>
 </figure>
 </div>
@@ -470,7 +470,7 @@ points(eig$vectors[, 1:2], pch = as.character(1:5))</code></pre>
 <p>Multidimensional Scaling (MDS) is very closely related to PCA and sometimes used as a synonim. The idea of MDS is to project the data into a low dimensional space and preserve pairwise distances between data points as much as possible. Under the hood this is done by solving eigen value decomposition problem for a matrix of paiwise distances. Compare with PCA, where we did eigen value decomposition of a variance-covariance matrix, the latter can be sometimes viewed as a pairwise distance matrix. This is how MDS is related to PCA. Both do eigen value decomposition of some sort of matrix of pairwise distances. Note, some implementation of MDS do not perform eigen value decomposition but instead do a gradient descent minimization of <strong>euclidean distance between the original data and an approximation as a product of two matrices (loadings and scores)</strong>. This represents an alternative, machine learning style of matrix factorization.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="assets/mds.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="machine learning idea of MDS"><img src="assets/mds.png" class="img-fluid figure-img"></a></p>
+<p><a href="assets/mds.png" class="lightbox" title="machine learning idea of MDS" data-gallery="quarto-lightbox-gallery-4"><img src="assets/mds.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">machine learning idea of MDS</figcaption>
 </figure>
 </div>
@@ -799,7 +799,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
     <div class="nav-footer-right">Published with <a href="https://quarto.org/">Quarto</a> v<!--?quarto.version?--></div>
   </div>
-</footer>  <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script> 
+</footer>  <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script> 
   
 
 </body></html>

@@ -421,7 +421,7 @@
   <h4 class="author">Nikolay Oskolkov</h4>
   <h4 class="author">(uses material from lectures of Ben Peter, Anders Albrechtsen, Ida Moltke, Graham Coop)</h4>
   <h4 class="institute">NBIS</h4>
-  <h4 class="date">13-Nov-2023</h4>
+  <h4 class="date">14-Nov-2023</h4>
 </section>
 
 <section id="pca-in-population-genetics-cavalli-sforza" class="slide level2 center">
@@ -572,7 +572,7 @@ Ind5  4.847612 -0.8919238</code></pre>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">pcangsd</span> <span class="at">-b</span> 1000G.beagle.gz <span class="at">-o</span> pca_1000G <span class="at">-t</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>and finally we will plots the results using custom R scripts:</p>
+<p>and finally we will plot the results using custom R scripts:</p>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>C <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.table</span>(<span class="st">"pca_1000G.cov"</span>))</span>
 <span id="cb14-2"><a href="#cb14-2"></a>e <span class="ot">&lt;-</span> <span class="fu">eigen</span>(C)</span>
@@ -626,8 +626,8 @@ Ind5  4.847612 -0.8919238</code></pre>
 <p>“The results described here provide an explanation. First, from Equation 10 it can be seen that <strong>the matrix M is influenced by the relative sample size from each population through the components <span class="math inline">\(t_i\)</span></strong>. For instance, even if all populations are equally divergent from each other, those for which there are fewer samples will have larger values of <span class="math inline">\(t_i\)</span> because relatively more pairwise comparisons are between populations.”</p>
 <p><span class="math display">\[M=XX^T=\frac{1}{N}\sum_{ij}x_ix_j\]</span> <span class="math display">\[N=N_{pop1}+N_{pop2}+N_{pop3}+...=\sum_k N_k\]</span> <span class="math display">\[M_{uneven}=\sum_{ijk}\frac{1}{N_k}x_{ik}x_{jk}\]</span></p>
 <ul>
-<li>Potential solution: normalize each sample by its population size before computing the covariance matrix.</li>
-<li>Is it still an unsupervised technique?</li>
+<li><p>Potential solution: normalize each sample by its population size before computing the covariance matrix.</p></li>
+<li><p>Is it still an unsupervised technique?</p></li>
 </ul>
 </div>
 </div>
@@ -691,7 +691,7 @@ Ind5  4.847612 -0.8919238</code></pre>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">NGSadmix</span> <span class="at">-likes</span> 1000G.beagle.gz <span class="at">-K</span> 3 <span class="at">-minMaf</span> 0.05 <span class="at">-seed</span> 1 <span class="at">-o</span> 1000G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>and finally we will plots the results using custom R scripts:</p>
+<p>and finally we will plot the results using custom R scripts:</p>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>pops <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"1000G_bam_list.txt"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2"></a>pops <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(pops, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>), <span class="cf">function</span>(x) x[<span class="dv">6</span>])</span>
@@ -744,10 +744,7 @@ Ind5  4.847612 -0.8919238</code></pre>
 <li><span class="math inline">\(F_{st}\)</span> is a measure of population differentiation due to population structure</li>
 <li>Expressed through nucleotide diversity <span class="math inline">\(\pi\)</span> as relative nucleotide diversity between populations minus average nucleotide diversity within populations. If we have two populations 1 and 2, then:</li>
 </ul>
-<p><span class="math display">\[
-F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
-\frac{\sigma_{subpops}^2}{\sigma_{total}^2}
-\]</span></p>
+<p><span class="math display">\[F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim \frac{\sigma_{subpops}^2}{\sigma_{total}^2}\]</span></p>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(<span class="st">"admixtools"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
@@ -758,11 +755,11 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb18-7"><a href="#cb18-7"></a>fst_aadr <span class="ot">&lt;-</span> <span class="fu">fst</span>(f2_aadr)</span>
 <span id="cb18-8"><a href="#cb18-8"></a>fst_aadr</span>
 <span id="cb18-9"><a href="#cb18-9"></a></span>
-<span id="cb18-10"><a href="#cb18-10"></a>mat <span class="ot">&lt;-</span> <span class="fu">f2</span>(f2_aadr, <span class="at">unique_only =</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>mat <span class="ot">=</span> <span class="fu">f2</span>(f2_aadr, <span class="at">unique_only =</span> F) <span class="sc">%&gt;%</span></span>
 <span id="cb18-11"><a href="#cb18-11"></a>    <span class="fu">select</span>(<span class="sc">-</span>se) <span class="sc">%&gt;%</span></span>
 <span id="cb18-12"><a href="#cb18-12"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> pop2, <span class="at">values_from =</span> est) <span class="sc">%&gt;%</span></span>
 <span id="cb18-13"><a href="#cb18-13"></a>    <span class="fu">column_to_rownames</span>(<span class="st">"pop1"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a>    <span class="fu">as.matrix</span>()</span>
+<span id="cb18-14"><a href="#cb18-14"></a>    as.matrix</span>
 <span id="cb18-15"><a href="#cb18-15"></a></span>
 <span id="cb18-16"><a href="#cb18-16"></a><span class="fu">library</span>(<span class="st">"pheatmap"</span>)</span>
 <span id="cb18-17"><a href="#cb18-17"></a><span class="fu">pheatmap</span>(mat, <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -774,7 +771,6 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 </section>
 <section id="allen-ancient-dna-resource-aadr-dataset" class="slide level2 center">
 <h2>Allen Ancient DNA Resource (AADR) dataset</h2>
-<!-- markdownlint-disable MD013 -->
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="assets/AADR.png" data-fig-align="center"> <a href="https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data">https://reich.hms.harvard.edu/allen-ancient-dna-resource-aadr-downloadable-genotypes-present-day-and-ancient-dna-data</a></p>
@@ -826,7 +822,6 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 </div>
 </div>
 </div>
-<!-- markdownlint-enable MD013 -->
 </section>
 <section id="example-of-fst-computation-from-1000g-project" class="slide level2 center">
 <h2>Example of Fst computation from 1000G project</h2>
@@ -838,10 +833,10 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb25-2"><a href="#cb25-2"></a><span class="ex">angsd</span> <span class="at">-b</span> 1000G_YRI_bam_list.txt <span class="at">-anc</span> anc.fa <span class="at">-out</span> YRI <span class="at">-dosaf</span> 1 <span class="at">-gl</span> 1</span>
 <span id="cb25-3"><a href="#cb25-3"></a><span class="ex">realSFS</span> CEU.saf.idx YRI.saf.idx <span class="op">&gt;</span> CEU.YRI.ml</span>
 <span id="cb25-4"><a href="#cb25-4"></a><span class="ex">realSFS</span> fst index CEU.saf.idx YRI.saf.idx <span class="at">-sfs</span> CEU.YRI.ml <span class="at">-fstout</span> CEU_YRI</span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="ex">realSFS</span> fst stats  CEU_YRI.fst.idx</span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="ex">realSFS</span> fst stats  CEU_YRI.fst.idx </span>
 <span id="cb25-6"><a href="#cb25-6"></a><span class="ex">realSFS</span> fst stats2 CEU_YRI.fst.idx <span class="at">-win</span> 50 <span class="at">-step</span> 10 <span class="op">&gt;</span> slidingwindow_win50_step10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>and finally we will plots the results using custom R scripts:</p>
+<p>and finally we will plot the results using custom R scripts:</p>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"slidingwindow_win50_step10"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb26-2"><a href="#cb26-2"></a>df <span class="ot">&lt;-</span> df[<span class="sc">-</span><span class="dv">1</span>, ]</span>
@@ -868,8 +863,8 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <ul>
 <li><p>Treeness test: are populations related in a tree-like fashion (Reich et al.&nbsp;2009)?</p></li>
 <li><p>Admixture test: ss a particular population descended from multiple ancestral populations (Reich et al.&nbsp;2009)?</p></li>
-<li><p>Admixture proportions: what are the contributions from different populations to a focal population (Green et al.&nbsp;2010; Haak et al. 2015)?</p></li>
-<li><p>Number of founders: how many founder populations are there for a certain region (Reich et al.&nbsp;2012; Lazaridis et al.&nbsp;2014)?</p></li>
+<li><p>Admixture proportions: what are the contributions from different populations to a focal population (Green et al. 2010; Haak et al.&nbsp;2015)?</p></li>
+<li><p>Number of founders: how many founder populations are there for a certain region (Reich et al.&nbsp;2012; Lazaridis et al. 2014)?</p></li>
 <li><p>Complex demography: how can mixtures and splits of population explain demography (Patterson et al.&nbsp;2012; Lipson et al.&nbsp;2013)?</p></li>
 <li><p>Closest relative: what is the closest relative to a contemporary or ancient population (Raghavan et al.&nbsp;2014)?</p></li>
 </ul>
@@ -967,7 +962,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <h2>Example of D-statistic computation from 1000G project</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>We will use ANGSD <span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span> and compute D-statistic in irder to test potential Neanderthal introgression to European (CEU) and African (YRI) populations from the 1000G project.</p>
+<p>We will use ANGSD <span class="citation" data-cites="Korneliussen_2014">(<a href="" role="doc-biblioref" onclick="return false;">Korneliussen T, 2014</a>)</span> and compute D-statistic in order to test for potential Neanderthal introgression to European (CEU) and African (YRI) populations from the 1000G project.</p>
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">echo</span> Neandertal.bam <span class="op">&gt;</span> bams</span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="fu">find</span> <span class="va">$PWD</span> <span class="at">-name</span> <span class="st">'*YRI*.bam'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span> <span class="op">&gt;&gt;</span> bams</span>
@@ -975,9 +970,9 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <span id="cb28-4"><a href="#cb28-4"></a><span class="ex">angsd</span> <span class="at">-out</span> out <span class="at">-doAbbababa</span> 1 <span class="at">-bam</span> bams <span class="at">-doCounts</span> 1 <span class="at">-anc</span> anc.fa</span>
 <span id="cb28-5"><a href="#cb28-5"></a><span class="ex">Rscript</span> jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>and, finally, we will display the resulting table of D-statistics and plot the ABBA and BABA counts using custom R scripts:</p>
+<p>and, finally, we will display the resulting table of D-statistics, and plot the ABBA and BABA counts (note the very low, ~100, number of sites):</p>
 <div class="cell my_code_size_abitsmaller">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="fu">file.path</span>(path, <span class="st">"out_abbababa_results.txt"</span>), <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/out_abbababa_results.txt"</span>, <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
 <span id="cb29-2"><a href="#cb29-2"></a>df <span class="ot">&lt;-</span> df[<span class="fu">grepl</span>(<span class="st">"Neandertal"</span>, <span class="fu">as.character</span>(df<span class="sc">$</span>H3)), ]</span>
 <span id="cb29-3"><a href="#cb29-3"></a>df <span class="ot">&lt;-</span> df[<span class="fu">grepl</span>(<span class="st">"CEU"</span>, <span class="fu">as.character</span>(df<span class="sc">$</span>H2)), ]</span>
 <span id="cb29-4"><a href="#cb29-4"></a>df <span class="ot">&lt;-</span> df[<span class="fu">grepl</span>(<span class="st">"YRI"</span>, <span class="fu">as.character</span>(df<span class="sc">$</span>H1)), ]</span>
@@ -1003,7 +998,7 @@ F_{st}=\frac{\pi_{12}-\frac{\pi_{1}+\pi_{2}}{2}}{\pi_{12}} \sim
 <div class="cell my_code_size_abitsmaller">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>nABBA, df<span class="sc">$</span>nBABA, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"ABBA"</span>, <span class="st">"BABA"</span>), <span class="at">ylab =</span> <span class="st">"COUNTS"</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.svg" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.svg" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">wilcox.test</span>(df<span class="sc">$</span>nABBA, df<span class="sc">$</span>nBABA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1015,6 +1010,43 @@ W = 367, p-value = 0.2933
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="d-statistic-computation-for-higher-coverage-samples" class="slide level2 center">
+<h2>D-statistic computation for higher coverage samples</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>D-statistic analysis requires large number of genomic sites, therefore the low-coverage 1000G data are not optimal. Now, we are going to use French and Yoruba samples from the <strong>Draft Neanderthal genome</strong> project where Nenandertal introgression was first detected:</p>
+<div class="cell my_code_size_abitsmaller">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource bash my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1"></a><span class="bu">echo</span> Neandertal.bam <span class="op">&gt;</span> bams</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="bu">echo</span> Yoruba.bam <span class="op">&gt;&gt;</span> bams</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="bu">echo</span> French.bam <span class="op">&gt;&gt;</span> bams</span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="ex">angsd</span> <span class="at">-out</span> out <span class="at">-doAbbababa</span> 1 <span class="at">-bam</span> bams <span class="at">-doCounts</span> 1 <span class="at">-anc</span> anc.fa</span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="ex">Rscript</span> jackKnife.R file=out.abbababa indNames=bams outfile=out_abbababa_highcov</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell my_code_size_abitsmaller">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r my_code_size_abitsmaller number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/out_abbababa_highcov.txt"</span>, <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              H1         H2             H3  nABBA  nBABA      Dstat    jackEst
+1     Yoruba.bam French.bam Neandertal.bam 267387 249721 0.03416308 0.03416308
+2 Neandertal.bam French.bam     Yoruba.bam 732198 249721 0.49136130 0.49136130
+3 Neandertal.bam Yoruba.bam     French.bam 732198 267387 0.46500400 0.46500400
+           SE         Z
+1 0.002764548  12.35756
+2 0.002449853 200.56760
+3 0.002868187 162.12470</code></pre>
+</div>
+</div>
+<p>First line of the output corresponds to the tree displayed on the previous slide, i.e.&nbsp;where we test for potential gene flow from Neanderthals to modern Europeans or Africans. Large number of genomic sites ensures confident positivity of the D-statistic.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell my_code_size_abitsmaller">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.svg" width="960"></p>
+</div>
+</div>
+<p>Positive D-statistic with erors bars not overlapping zero implies a gene flow between Neandertals and modern Europeans.</p>
 </div>
 </div>
 </section>
