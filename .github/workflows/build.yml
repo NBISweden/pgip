@@ -106,7 +106,7 @@ jobs:
           if git show-ref --quiet "refs/heads/archive-${{ github.ref_name }}"; then
              echo "archive-${{ github.ref_name }}" branch exists
           else
-             git branch "archive-${{ github.ref_name }}" gh-pages
+             git branch "archive-${{ github.ref_name }}"
           fi
 
       - name: Render tag and save rendered state in separate branch
