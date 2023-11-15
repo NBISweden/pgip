@@ -100,13 +100,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create archive branch
-        if: startsWith(github.ref, 'refs/tags/v')
+        #if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          if git show-ref --quiet "refs/heads/archive-${{ github.refname }}"; then
-              echo "archive-${{ github.refname }}" branch exists
-          else
-              git branch "archive-${{ github.refname }}" gh-pages
-          fi
+          echo "Creating archive branch archive-${{ github.refname }}"
+          #if git show-ref --quiet "refs/heads/archive-${{ github.refname }}"; then
+          #    echo "archive-${{ github.refname }}" branch exists
+          #else
+          #    git branch "archive-${{ github.refname }}" gh-pages
+          #fi
 
       - name: Render tag and save rendered state in separate branch
         uses: quarto-dev/quarto-actions/publish@v2
