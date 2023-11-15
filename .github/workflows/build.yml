@@ -106,6 +106,7 @@ jobs:
           if git show-ref --quiet "refs/heads/archive-${{ github.ref_name }}"; then
              echo "archive-${{ github.ref_name }}" branch exists
           else
+             echo "Running git branch archive-${{ github.ref_name }}"
              git branch "archive-${{ github.ref_name }}"
           fi
 
