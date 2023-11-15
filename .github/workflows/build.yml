@@ -44,6 +44,10 @@ jobs:
           init-shell: bash
           cache-environment: true
 
+      - name: Test git installation
+        run: |
+          git --help
+
       - name: Install pgip dependencies
         run: |
           python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
