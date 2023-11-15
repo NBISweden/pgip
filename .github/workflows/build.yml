@@ -110,19 +110,25 @@ jobs:
           fi
 
       - name: Render tag and save rendered state in separate branch
-        uses: quarto-dev/quarto-actions/publish@v2
         if: startsWith(github.ref, 'refs/tags/v')
-        with:
-          target: "archive-${{ github.ref_name }}"
-          path: docs
         env:
+          GITHUB_EMAIL: do_not_email@example.com
+          GITHUB_USERNAME: gh_action
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET: "archive-${{ github.ref_name }}"
+          PATH: docs
+        run: |
+          # Add git info
+          git config --global user.email "${{ env.GITHUB_EMAIL }}"
+          git config --global user.name "${{ env.GITHUB_USERNAME }}"
+          git checkout ${{ github.ref_name }}
+          quarto publish ${{ env.TARGET }} ${{ env.PATH }} --no-browser
 
       - name: Checkout archived course versions
         env:
           GITHUB_EMAIL: do_not_email@example.com
           GITHUB_USERNAME: gh_action
-          TARGET: gh_pages
+          TARGET: gh-pages
         run: |
           # Add git info
           git config --global user.email "${{ env.GITHUB_EMAIL }}"
