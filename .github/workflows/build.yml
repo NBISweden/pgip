@@ -143,7 +143,7 @@ jobs:
                   echo "Directory ${tag} already exsists. Removing"
                   git rm -f $tag
               fi
-              git clone --depth 1 --branch $tag "https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" $tag
+              git clone --depth 1 --branch "archive-$tag" "https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" $tag
               git add -f $tag
               contents=$(git tag -n 100 $tag --format "%(contents)")
               echo "<section id=\"$tag\" class=\"level3\">" >> index.html
