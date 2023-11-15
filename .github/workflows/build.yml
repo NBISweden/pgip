@@ -47,6 +47,7 @@ jobs:
       - name: Test git installation
         run: |
           git --help
+          git branch -l
 
       - name: Install pgip dependencies
         run: |
