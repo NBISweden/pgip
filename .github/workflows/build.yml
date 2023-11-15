@@ -44,6 +44,16 @@ jobs:
           init-shell: bash
           cache-environment: true
 
+      - name: Test git installation
+        run: |
+          git --help
+          echo Listing branches
+          git branch -l
+          echo Fetching branches
+          git fetch --all
+          echo Listing branches again
+          git branch --list
+
       - name: Install pgip dependencies
         run: |
           python -m ipykernel install --user --name pgip --display-name "Population Genomics in Practice (Python)"
@@ -106,6 +116,7 @@ jobs:
           if git show-ref --quiet "refs/heads/archive-${{ github.ref_name }}"; then
              echo "archive-${{ github.ref_name }}" branch exists
           else
+             echo "Running git branch archive-${{ github.ref_name }}"
              git branch "archive-${{ github.ref_name }}"
           fi
 
@@ -122,7 +133,7 @@ jobs:
         env:
           GITHUB_EMAIL: do_not_email@example.com
           GITHUB_USERNAME: gh_action
-          TARGET: gh_pages
+          TARGET: gh-pages
         run: |
           # Add git info
           git config --global user.email "${{ env.GITHUB_EMAIL }}"
