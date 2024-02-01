@@ -42,7 +42,8 @@ RUN conda init bash
 COPY env.yaml /tmp/env.yaml
 RUN conda env update -n base -f /tmp/env.yaml
 ENV PATH /miniconda3/envs/base/bin:$PATH
-RUN /bin/bash -c "source activate base"
+RUN conda init && \
+    echo "conda activate base" >> ~/.bashrc
 
 RUN python -m ipykernel install --user --display-name "Population Genomics in Practice (Python)"
 RUN python -m pip install git+https://github.com/NBISweden/pgip-tools
