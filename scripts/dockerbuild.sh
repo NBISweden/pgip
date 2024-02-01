@@ -10,5 +10,5 @@ fi
 ROOT_PATH=$(realpath ${SCRIPT_PATH}/..)
 
 docker build -t "workshop-pgip:latest" ${SCRIPT_PATH}
-docker tag workshop-pgip ghcr.io/nbisweden/workshop-pgip:latest
-docker push ghcr.io/nbisweden/workshop-pgip:latest
+docker tag workshop-pgip ghcr.io/nbisweden/workshop-pgip/workshop-pgip:latest
+docker push ghcr.io/nbisweden/workshop-pgip/workshop-pgip:latest

@@ -17,7 +17,7 @@ env:
   PARTICIPANT_DATA:
   REGISTRY: ghcr.io
   ORG: nbisweden
-  IMAGE: workshop-pgip:latest
+  IMAGE: workshop-pgip/workshop-pgip:latest
 
 jobs:
   build:
