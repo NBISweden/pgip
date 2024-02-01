@@ -12,13 +12,14 @@ dependencies:
   - bwa
   - ca-certificates
   - csvtk
-  - cyvcf2=0.30.16
+  - cyvcf2
   - demesdraw
   - d4tools
   - fastqc
   - gatk4
   - gawk
   - htslib=1.15.1
+  - ipykernel
   - jupyter
   - jupyter-cache
   - mosdepth=0.3.3

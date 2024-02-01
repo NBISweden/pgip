@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Setup data examples for rendering exercises and lectures"""
 import argparse
 import errno
 import logging
@@ -7,28 +8,31 @@ import os
 import yaml
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), os.pardir))
-
-DATAROOT = os.environ.get("DATA_SOURCE", "pgip_data/data")
+DOCROOT = os.path.join(ROOT, "docs")
+DATAROOT = os.path.join(DOCROOT, "pgip_data/data")
 
 
 def abspath(path):
+    """Return absolute path"""
     return os.path.normpath(os.path.abspath(path))
 
 
 def safe_link(src, dst, dir_fd):
-    logging.debug(f"Link {dst} -> {src}")
+    """Create a symlink from src to dst in directory dir_fd"""
+    logging.debug("Link %s -> %s", dst, src)
     if not os.path.exists(src):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), src)
     try:
         os.symlink(src, dst, dir_fd=dir_fd)
     except FileExistsError:
-        logging.debug(f"Path {dst} exists; skipping")
-    except Exception as e:
-        print(e)
+        logging.debug("Path %s exists; skipping", dst)
+    except Exception as exc:
+        print(exc)
         raise
 
 
 def main():
+    """Setup data examples for rendering exercises and lectures"""
     parser = argparse.ArgumentParser(
         prog="setup-data.py",
         description="Setup data examples for rendering exercises and lectures",
@@ -41,15 +45,15 @@ def main():
 
     logging.basicConfig(level=args.loglevel.upper())
 
-    with open(args.config, "r") as fh:
+    with open(args.config, "r", encoding="utf-8") as fh:
         pgip_data = yaml.safe_load(fh)
 
     # Loop through data and link files
     for session, dataset in pgip_data.items():
         if session.startswith("__"):
             continue
-        logging.info(f"Setting up links for {session}")
-        data = dict()
+        logging.info("Setting up links for %s", session)
+        data = {}
         for x in dataset:
             if isinstance(x, dict):
                 data.update(**x)

@@ -108,3 +108,16 @@ repos:
         files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
         exclude: 'renv/activate\.R'
         minimum_pre_commit_version: "2.13.0"
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args:
+          [
+          "-rn", # Only display messages
+          "-sn", # Don't display the score
+          "--disable=fixme",
+          ]

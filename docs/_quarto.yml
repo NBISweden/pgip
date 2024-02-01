@@ -5,7 +5,7 @@ project:
   pre-render:
     - ../scripts/init-site.sh
     - ../scripts/setup-pgip-data.sh
-    - ../scripts/setup-data.py
+    - ../scripts/setup_data.py
   post-render:
     - ../scripts/post-render.py
   render:

@@ -1,30 +1,33 @@
 #!/usr/bin/env python
+"""Perform post rendering tasks"""
 import errno
 import logging
 import os
 import shutil
 
 
-def safe_mkdir(dirname):
-    logging.debug(f"Making directory {dirname}")
-    if not os.path.exists(dirname):
+def safe_mkdir(dname):
+    """Make directory if it doesn't exist"""
+    logging.debug("Making directory %s", dname)
+    if not os.path.exists(dname):
         try:
-            os.mkdir(dirname)
-        except FileNotFoundError as e:
-            print(e)
+            os.mkdir(dname)
+        except FileNotFoundError as exc:
+            print(exc)
             raise
 
 
-def safe_copy(src, dst):
-    logging.debug(f"Copy {dst} -> {src}")
-    if not os.path.exists(src):
-        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), src)
+def safe_copy(source, destination):
+    """Copy source to destination"""
+    logging.debug("Copy %s -> %s", destination, source)
+    if not os.path.exists(source):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), source)
     try:
-        shutil.copy(src, dst)
+        shutil.copy(source, destination)
     except FileExistsError:
-        logging.debug(f"Path {dst} exists; skipping")
-    except Exception as e:
-        print(e)
+        logging.debug("Path %s exists; skipping", destination)
+    except Exception as exc:
+        print(exc)
         raise
 
 
