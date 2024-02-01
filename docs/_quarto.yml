@@ -3,11 +3,11 @@ project:
   title: "DDLS Population genomics in practice"
   output-dir: _site
   pre-render:
-    - ../scripts/init-site.sh
-    - ../scripts/setup-pgip-data.sh
+    - ../scripts/init_site.sh
+    - ../scripts/setup_pgip_data.sh
     - ../scripts/setup_data.py
   post-render:
-    - ../scripts/post-render.py
+    - ../scripts/post_render.py
   render:
     # Root
     - "index.qmd"

@@ -10,6 +10,7 @@ ENV PATH="${PATH}:/miniconda3/bin"
 
 RUN apt-get update -y \
     && apt-get install --no-install-recommends -y \
+    dvisvgm \
     libxml2-dev \
     libssl-dev \
     libcurl4-openssl-dev \
@@ -52,4 +53,5 @@ RUN Rscript -e 'install.packages("dotenv", repos=c(CRAN = "https://cran.rstudio.
 WORKDIR /qmd
 ENV XDG_CACHE_HOME=/tmp/quarto_cache_home
 ENV XDG_DATA_HOME=/tmp/quarto_data_home
-CMD quarto render
+
+CMD ["bash"]

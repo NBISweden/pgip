@@ -73,6 +73,18 @@ jobs:
           printenv
           sed --version
 
+      - name: Render site
+        run: |
+          # Add git info
+          git config --global user.email "do_not_email@example.com"
+          git config --global user.name "gh_action"
+
+          # Render website
+          echo "Rendering qmd files ..."
+          echo "pwd: $(pwd)"
+          echo "PWD: $(PWD)"
+
+          docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v $(pwd)/scripts:/scripts -v $(pwd)/src:/src -v $(pwd)/docs:/qmd --env TEXINPUTS="../src/latex:$TEXINPUTS" ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }}
 
 
       # - name: Install pgip dependencies
