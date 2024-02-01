@@ -84,7 +84,7 @@ jobs:
           echo "pwd: $(pwd)"
           echo "PWD: ${PWD}"
 
-          docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v $(pwd)/scripts:/scripts -v $(pwd)/src:/src -v $(pwd)/docs:/qmd --env TEXINPUTS="../src/latex:$TEXINPUTS" ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} quarto render
+          docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v $(pwd)/scripts:/scripts -v $(pwd)/src:/src -v $(pwd)/docs:/qmd --env PARTICIPANT_DATA=${PARTICIPANT_DATA} --env TEXINPUTS="../src/latex:$TEXINPUTS" ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE }} quarto render
 
 
       # - name: Install pgip dependencies
